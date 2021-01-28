@@ -23,6 +23,12 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner config.testInstrumentationRunner
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.incremental"] = "true"
+            }
+        }
     }
 
     buildTypes {
@@ -40,6 +46,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    configurations.all {
+        resolutionStrategy {
+            exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+        }
+    }
 }
 
 dependencies {
@@ -50,9 +62,15 @@ dependencies {
     implementation androidxDependencies.ktxCore
     implementation androidxDependencies.ktxFragment
 
+    implementation androidxDependencies.room
+    implementation androidxDependencies.roomKtx
+    kapt androidxDependencies.roomCompiler
+
     implementation googleDependencies.material
 
     testImplementation testDependencies.junit
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
+    androidTestImplementation instrumentationTestDependencies.roomTesting
+    androidTestImplementation instrumentationTestDependencies.coroutinesTest
 }
