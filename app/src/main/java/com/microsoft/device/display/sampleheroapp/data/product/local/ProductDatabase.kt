@@ -9,9 +9,9 @@ package com.microsoft.device.display.sampleheroapp.data.product.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.microsoft.device.display.sampleheroapp.data.product.local.model.Product
+import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 
-@Database(entities = [Product::class], version = 1, exportSchema = false)
+@Database(entities = [ProductEntity::class], version = 1, exportSchema = false)
 abstract class ProductDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
 }

@@ -12,25 +12,25 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.microsoft.device.display.sampleheroapp.data.product.local.model.Product
+import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 
 @Dao
 interface ProductDao {
     @Insert(onConflict = REPLACE)
-    suspend fun save(product: Product)
+    suspend fun save(product: ProductEntity)
 
     @Insert(onConflict = REPLACE)
-    suspend fun insertAll(vararg products: Product)
+    suspend fun insertAll(vararg products: ProductEntity)
 
     @Delete
-    suspend fun delete(product: Product)
+    suspend fun delete(product: ProductEntity)
 
     @Query("SELECT * FROM products where id = :productId")
-    suspend fun load(productId: String): Product?
+    suspend fun load(productId: String): ProductEntity?
 
     @Query("SELECT * from products WHERE name LIKE :searchKey")
-    suspend fun findByName(searchKey: String): List<Product>?
+    suspend fun findByName(searchKey: String): List<ProductEntity>?
 
     @Query("SELECT * FROM products")
-    suspend fun getAll(): List<Product>?
+    suspend fun getAll(): List<ProductEntity>?
 }

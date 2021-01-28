@@ -12,7 +12,7 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDatabase
-import com.microsoft.device.display.sampleheroapp.data.product.local.model.Product
+import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -40,7 +40,7 @@ class ProductDatabaseTest {
 
     @Test
     fun insertAndGetProducts() = runBlocking {
-        val product = Product("chair", 30, "Great")
+        val product = ProductEntity("chair", 30, "Great")
         productDao.insertAll(product)
         val result = productDao.getAll()
         assertEquals(result!![0], product)

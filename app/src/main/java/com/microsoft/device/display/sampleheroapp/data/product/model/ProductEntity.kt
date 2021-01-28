@@ -5,13 +5,13 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.data.product.local.model
+package com.microsoft.device.display.sampleheroapp.data.product.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "products")
-data class Product(val name: String, val price: Int, val description: String) {
+data class ProductEntity(val name: String, val price: Int, val description: String) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }

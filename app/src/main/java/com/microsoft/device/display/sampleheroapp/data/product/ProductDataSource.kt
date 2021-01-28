@@ -7,8 +7,8 @@
 
 package com.microsoft.device.display.sampleheroapp.data.product
 
-import com.microsoft.device.display.sampleheroapp.data.product.local.model.Product
+import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 
 interface ProductDataSource {
-    suspend fun getAll(): List<Product>?
+    suspend fun getAll(): List<ProductEntity>?
 }

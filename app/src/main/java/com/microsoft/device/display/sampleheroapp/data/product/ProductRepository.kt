@@ -8,7 +8,7 @@
 package com.microsoft.device.display.sampleheroapp.data.product
 
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductLocalDataSource
-import com.microsoft.device.display.sampleheroapp.data.product.local.model.Product
+import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,5 +17,5 @@ class ProductRepository @Inject constructor(
     private val localDataSource: ProductLocalDataSource
 ) : ProductDataSource {
 
-    override suspend fun getAll(): List<Product>? = localDataSource.getAll()
+    override suspend fun getAll(): List<ProductEntity>? = localDataSource.getAll()
 }
