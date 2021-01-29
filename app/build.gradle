@@ -48,6 +48,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    buildFeatures {
+        dataBinding true
+    }
+
     configurations.all {
         resolutionStrategy {
             exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
@@ -67,6 +71,9 @@ dependencies {
     implementation androidxDependencies.roomKtx
     kapt androidxDependencies.roomCompiler
 
+    implementation androidxDependencies.navigationUi
+    implementation androidxDependencies.navigationFragment
+
     implementation googleDependencies.material
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
@@ -74,6 +81,9 @@ dependencies {
     testImplementation testDependencies.junit
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
+    androidTestImplementation instrumentationTestDependencies.espressoContrib
+    androidTestImplementation instrumentationTestDependencies.testRules
+    androidTestImplementation instrumentationTestDependencies.testRunner
     androidTestImplementation instrumentationTestDependencies.roomTesting
     androidTestImplementation instrumentationTestDependencies.coroutinesTest
     androidTestImplementation instrumentationTestDependencies.hiltTesting
