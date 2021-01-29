@@ -16,7 +16,7 @@ ext {
     config = [
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
-            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner",
+            testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.CustomTestRunner",
             dualScreenSdkVersion     : "1.0.0-beta1"
     ]
 

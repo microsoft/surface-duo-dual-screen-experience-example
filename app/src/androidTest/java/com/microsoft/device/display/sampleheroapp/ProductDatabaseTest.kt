@@ -40,7 +40,7 @@ class ProductDatabaseTest {
 
     @Test
     fun insertAndGetProducts() = runBlocking {
-        val product = ProductEntity("chair", 30, "Great")
+        val product = ProductEntity("chair", 30, "Great", 4f)
         productDao.insertAll(product)
         val result = productDao.getAll()
         assertEquals(result!![0], product)

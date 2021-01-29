@@ -22,15 +22,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideDatabase(@ApplicationContext appContext: Context): ProductDatabase =
         Room.databaseBuilder(
             appContext,
             ProductDatabase::class.java,
             "products_db"
-        ).fallbackToDestructiveMigration().build()
+        )
+            .createFromAsset("database/products_db")
+            .fallbackToDestructiveMigration()
+            .build()
 
+    @Singleton
     @Provides
     fun provideProductDao(database: ProductDatabase): ProductDao = database.productDao()
 }

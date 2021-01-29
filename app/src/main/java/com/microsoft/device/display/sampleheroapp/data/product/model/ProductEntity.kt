@@ -11,7 +11,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "products")
-data class ProductEntity(val name: String, val price: Int, val description: String) {
+data class ProductEntity(
+    val name: String,
+    val price: Int,
+    val description: String,
+    val rating: Float
+) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
 }

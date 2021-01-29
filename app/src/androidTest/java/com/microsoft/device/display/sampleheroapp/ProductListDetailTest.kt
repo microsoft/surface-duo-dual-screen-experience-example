@@ -14,16 +14,13 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductAdapter
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
 @HiltAndroidTest
 class ProductListDetailTest {
 
@@ -34,8 +31,7 @@ class ProductListDetailTest {
     fun happyFirstTest() {
         ActivityScenario.launch(MainActivity::class.java)
 
-        onView(withId(R.id.product_name)).check(matches(isDisplayed()))
-        onView(withId(R.id.product_price)).check(matches(isDisplayed()))
+        onView(withId(R.id.product_list)).check(matches(isDisplayed()))
 
         onView(withId(R.id.product_list)).perform(
             actionOnItemAtPosition<ProductAdapter.DummyViewHolder>(0, click())
