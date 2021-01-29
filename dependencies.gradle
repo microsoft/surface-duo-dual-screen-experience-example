@@ -43,9 +43,12 @@ ext {
 
     //Google dependencies
     materialVersion = '1.2.1'
+    hiltVersion = '2.31.2-alpha'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
+            hilt                : "com.google.dagger:hilt-android:$hiltVersion",
+            hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
     ]
 
     //Microsoft dependencies version
@@ -85,6 +88,8 @@ ext {
             testRules           : "androidx.test:rules:$testRulesVersion",
             uiAutomator         : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",
             roomTesting         : "androidx.room:room-testing:$roomVersion",
-            coroutinesTest      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"
+            coroutinesTest      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion",
+            hiltTesting         : "com.google.dagger:hilt-android-testing:$hiltVersion",
+            hiltTestingCompiler : "com.google.dagger:hilt-android-compiler:$hiltVersion",
     ]
 }

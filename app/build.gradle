@@ -9,6 +9,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -67,10 +68,14 @@ dependencies {
     kapt androidxDependencies.roomCompiler
 
     implementation googleDependencies.material
+    implementation googleDependencies.hilt
+    kapt googleDependencies.hiltCompiler
 
     testImplementation testDependencies.junit
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
     androidTestImplementation instrumentationTestDependencies.roomTesting
     androidTestImplementation instrumentationTestDependencies.coroutinesTest
+    androidTestImplementation instrumentationTestDependencies.hiltTesting
+    kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
 }

@@ -9,8 +9,9 @@ package com.microsoft.device.display.sampleheroapp.data.product.local
 
 import com.microsoft.device.display.sampleheroapp.data.product.ProductDataSource
 import com.microsoft.device.display.sampleheroapp.data.product.local.model.Product
+import javax.inject.Inject
 
-class ProductLocalDataSource(
+class ProductLocalDataSource @Inject constructor(
     private val productDao: ProductDao
 ) : ProductDataSource {
 
