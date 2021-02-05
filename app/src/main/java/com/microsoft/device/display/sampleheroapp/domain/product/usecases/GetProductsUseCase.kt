@@ -12,5 +12,5 @@ import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
 import javax.inject.Inject
 
 class GetProductsUseCase @Inject constructor(private val productRepository: ProductDataSource) {
-    suspend fun getAll(): List<Product>? = productRepository.getAll()?.map { Product(it) }
+    suspend fun getAll(): List<Product> = productRepository.getAll().map { Product(it) }
 }

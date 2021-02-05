@@ -15,5 +15,5 @@ class ProductLocalDataSource @Inject constructor(
     private val productDao: ProductDao
 ) : ProductDataSource {
 
-    override suspend fun getAll(): List<ProductEntity>? = productDao.getAll()
+    override suspend fun getAll(): List<ProductEntity> = productDao.getAll()
 }

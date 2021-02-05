@@ -26,11 +26,8 @@ interface ProductDao {
     suspend fun delete(product: ProductEntity)
 
     @Query("SELECT * FROM products where id = :productId")
-    suspend fun load(productId: String): ProductEntity?
-
-    @Query("SELECT * from products WHERE name LIKE :searchKey")
-    suspend fun findByName(searchKey: String): List<ProductEntity>?
+    suspend fun load(productId: Long): ProductEntity?
 
     @Query("SELECT * FROM products")
-    suspend fun getAll(): List<ProductEntity>?
+    suspend fun getAll(): List<ProductEntity>
 }

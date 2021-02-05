@@ -10,5 +10,5 @@ package com.microsoft.device.display.sampleheroapp.data.product
 import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 
 interface ProductDataSource {
-    suspend fun getAll(): List<ProductEntity>?
+    suspend fun getAll(): List<ProductEntity>
 }

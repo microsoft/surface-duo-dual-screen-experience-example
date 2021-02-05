@@ -9,8 +9,8 @@ package com.microsoft.device.display.sampleheroapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.microsoft.device.display.sampleheroapp.data.AppDatabase
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
-import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,10 +24,10 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext appContext: Context): ProductDatabase =
+    fun provideDatabase(@ApplicationContext appContext: Context): AppDatabase =
         Room.databaseBuilder(
             appContext,
-            ProductDatabase::class.java,
+            AppDatabase::class.java,
             "products_db"
         )
             .createFromAsset("database/products_db")
@@ -36,5 +36,5 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideProductDao(database: ProductDatabase): ProductDao = database.productDao()
+    fun provideProductDao(database: AppDatabase): ProductDao = database.productDao()
 }

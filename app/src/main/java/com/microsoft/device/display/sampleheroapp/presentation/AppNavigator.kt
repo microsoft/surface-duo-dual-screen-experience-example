@@ -7,12 +7,11 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation
 
-import android.content.Context
 import androidx.navigation.NavController
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 
-class AppNavigator constructor(private val appContext: Context) : ProductNavigator {
+class AppNavigator : ProductNavigator {
     private var navController: NavController? = null
 
     fun bind(navController: NavController) {

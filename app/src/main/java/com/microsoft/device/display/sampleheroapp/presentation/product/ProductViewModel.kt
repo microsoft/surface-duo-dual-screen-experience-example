@@ -32,7 +32,7 @@ class ProductViewModel @Inject constructor(
     }
 
     override fun onClick(model: Product?) {
-        this.selectedProduct.value = model
+        selectedProduct.value = model
         navigator.navigateToDetails()
     }
 }
