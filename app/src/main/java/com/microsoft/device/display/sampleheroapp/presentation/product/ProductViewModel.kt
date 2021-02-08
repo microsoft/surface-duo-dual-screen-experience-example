@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
 import com.microsoft.device.display.sampleheroapp.domain.product.usecases.GetProductsUseCase
-import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
+import com.microsoft.device.display.sampleheroapp.presentation.util.DataListHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
     private val navigator: ProductNavigator
-) : ViewModel(), ItemClickListener<Product> {
+) : ViewModel(), DataListHandler<Product> {
     var productList = MutableLiveData<List<Product>?>(null)
     val selectedProduct = MutableLiveData<Product?>(null)
 
@@ -30,6 +30,8 @@ class ProductViewModel @Inject constructor(
             productList.value = getProductsUseCase.getAll()
         }
     }
+
+    override fun getDataList(): List<Product>? = productList.value
 
     override fun onClick(model: Product?) {
         selectedProduct.value = model

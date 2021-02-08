@@ -7,6 +7,7 @@
 
 package com.microsoft.device.display.sampleheroapp
 
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -15,7 +16,6 @@ import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
-import com.microsoft.device.display.sampleheroapp.presentation.product.ProductAdapter
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
@@ -34,7 +34,7 @@ class ProductListDetailTest {
         onView(withId(R.id.product_list)).check(matches(isDisplayed()))
 
         onView(withId(R.id.product_list)).perform(
-            actionOnItemAtPosition<ProductAdapter.DummyViewHolder>(0, click())
+            actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click())
         )
 
         onView(withId(R.id.detail_product_name)).check(matches(isDisplayed()))

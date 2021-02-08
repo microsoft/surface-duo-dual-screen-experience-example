@@ -12,11 +12,14 @@ ext {
     buildToolsVersion = '30.0.2'
     targetSdkVersion = compileSdkVersion
     minSdkVersion = 21
+    versionCode = 1
+    versionName = "1.0"
+    applicationId = "com.microsoft.device.display.sampleheroapp"
 
     config = [
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
-            testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.CustomTestRunner",
+            testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.HiltJUnitRunner",
             dualScreenSdkVersion     : "1.0.0-beta1"
     ]
 

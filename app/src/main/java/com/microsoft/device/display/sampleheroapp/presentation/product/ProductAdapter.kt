@@ -13,10 +13,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.microsoft.device.display.sampleheroapp.databinding.ItemProductBinding
 import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
+import com.microsoft.device.display.sampleheroapp.presentation.util.DataListHandler
+import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
 
 class ProductAdapter(
     context: Context,
-    private val viewModel: ProductViewModel
+    private val dataHandler: DataListHandler<Product>
 ) : RecyclerView.Adapter<ProductAdapter.DummyViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
@@ -24,16 +26,16 @@ class ProductAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         DummyViewHolder(
             ItemProductBinding.inflate(layoutInflater, parent, false),
-            viewModel
+            dataHandler
         )
 
     override fun onBindViewHolder(holder: DummyViewHolder, position: Int) {
-        viewModel.productList.value?.get(position)?.let {
+        dataHandler.getDataList()?.get(position)?.let {
             holder.bind(it)
         }
     }
 
-    override fun getItemCount(): Int = viewModel.productList.value?.size ?: 0
+    override fun getItemCount(): Int = dataHandler.getDataList()?.size ?: 0
 
     fun refreshData() {
         notifyDataSetChanged()
@@ -41,12 +43,12 @@ class ProductAdapter(
 
     class DummyViewHolder(
         private val binding: ItemProductBinding,
-        private val viewModel: ProductViewModel
+        private val itemClickListener: ItemClickListener<Product>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
             binding.product = product
-            binding.itemListener = viewModel
+            binding.itemListener = itemClickListener
             binding.executePendingBindings()
         }
     }

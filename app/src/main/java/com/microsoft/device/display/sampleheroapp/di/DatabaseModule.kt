@@ -9,6 +9,8 @@ package com.microsoft.device.display.sampleheroapp.di
 
 import android.content.Context
 import androidx.room.Room
+import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig.DB_ASSET_PATH
+import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig.DB_NAME
 import com.microsoft.device.display.sampleheroapp.data.AppDatabase
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
 import dagger.Module
@@ -28,9 +30,9 @@ object DatabaseModule {
         Room.databaseBuilder(
             appContext,
             AppDatabase::class.java,
-            "products_db"
+            DB_NAME
         )
-            .createFromAsset("database/products_db")
+            .createFromAsset(DB_ASSET_PATH)
             .fallbackToDestructiveMigration()
             .build()
 

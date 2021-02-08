@@ -21,5 +21,5 @@ abstract class UseCasesModule {
 
     @Singleton
     @Binds
-    abstract fun provideRepo(repository: ProductRepository): ProductDataSource
+    abstract fun provideProductRepo(repository: ProductRepository): ProductDataSource
 }
