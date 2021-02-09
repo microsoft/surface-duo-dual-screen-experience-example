@@ -1,0 +1,101 @@
+/*
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
+ */
+
+ext {
+    gradlePluginVersion = "4.1.2"
+    kotlinVersion = "1.4.21"
+    compileSdkVersion = 30
+    buildToolsVersion = '30.0.2'
+    targetSdkVersion = compileSdkVersion
+    minSdkVersion = 21
+    versionCode = 1
+    versionName = "1.0"
+    applicationId = "com.microsoft.device.display.sampleheroapp"
+
+    config = [
+            gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
+            kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
+            testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.HiltJUnitRunner",
+            dualScreenSdkVersion     : "1.0.0-beta1"
+    ]
+
+    kotlinDependencies = [
+            kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    ]
+
+    //AndroidX versions
+    appCompatVersion = '1.2.0'
+    constraintLayoutVersion = "2.0.4"
+    ktxCoreVersion = '1.3.2'
+    ktxFragmentVersion = '1.2.5'
+    roomVersion = '2.2.6'
+    navigationVersion = '2.3.2'
+
+    androidxDependencies = [
+            appCompat           : "androidx.appcompat:appcompat:$appCompatVersion",
+            constraintLayout    : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            ktxCore             : "androidx.core:core-ktx:$ktxCoreVersion",
+            ktxFragment         : "androidx.fragment:fragment-ktx:$ktxFragmentVersion",
+            room                : "androidx.room:room-runtime:$roomVersion",
+            roomCompiler        : "androidx.room:room-compiler:$roomVersion",
+            roomKtx             : "androidx.room:room-ktx:$roomVersion",
+            navigationUi        : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+            navigationFragment  : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+    ]
+
+    //Google dependencies
+    materialVersion = '1.2.1'
+    hiltVersion = '2.31.2-alpha'
+
+    googleDependencies = [
+            material            : "com.google.android.material:material:$materialVersion",
+            hilt                : "com.google.dagger:hilt-android:$hiltVersion",
+            hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
+    ]
+
+    //Microsoft dependencies version
+    screenManagerWindowManagerVersion = config.dualScreenSdkVersion
+    screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
+    fragmentsHandlerVersion = config.dualScreenSdkVersion
+    layoutsVersion = config.dualScreenSdkVersion
+
+    microsoftDependencies = [
+            screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
+            screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
+            fragmentsHandler          : "com.microsoft.device.dualscreen:fragmentshandler:$fragmentsHandlerVersion",
+            layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
+    ]
+    microsoftDependencies["screenManager"] = microsoftDependencies.screenManagerWindowManager
+
+    //Test dependencies version
+    junitVersion = "4.13.1"
+
+    testDependencies = [
+            junit: "junit:junit:$junitVersion"
+    ]
+
+    //Android test dependencies version
+    junitInstrumentationVersion = "1.1.2"
+    espressoCoreVersion = "3.3.0"
+    testRulesVersion = "1.3.0"
+    testRunnerVersion = "1.3.0"
+    uiAutomatorVersion = "2.2.0"
+    coroutinesTestVersion = "1.4.2"
+
+    instrumentationTestDependencies = [
+            junit               : "androidx.test.ext:junit:$junitInstrumentationVersion",
+            espressoCore        : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            espressoContrib     : "androidx.test.espresso:espresso-contrib:$espressoCoreVersion",
+            testRunner          : "androidx.test:runner:$testRunnerVersion",
+            testRules           : "androidx.test:rules:$testRulesVersion",
+            uiAutomator         : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",
+            roomTesting         : "androidx.room:room-testing:$roomVersion",
+            coroutinesTest      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion",
+            hiltTesting         : "com.google.dagger:hilt-android-testing:$hiltVersion",
+            hiltTestingCompiler : "com.google.dagger:hilt-android-compiler:$hiltVersion",
+    ]
+}

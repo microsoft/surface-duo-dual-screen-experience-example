@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+
+        <variable
+            name="product"
+            type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+
+        <variable
+            name="itemListener"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Product&gt;" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:onClick="@{() -> itemListener.onClick(product)}">
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{product.name}"/>
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(product.price)}"/>
+
+    </LinearLayout>
+
+</layout>
