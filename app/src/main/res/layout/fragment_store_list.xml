@@ -9,17 +9,77 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.store.StoreListFragment">
+    tools:context=".presentation.store.list.StoreListFragment">
 
-    <FrameLayout
+    <data>
+        <variable
+            name="cityName"
+            type="String" />
+
+        <variable
+            name="isListEmpty"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/medium_padding">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_list_title"
+            style="@style/Store.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is Store List fragment"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:text="@{cityName}"
+            app:visibleIf="@{!isListEmpty}"
+            app:layout_constraintBottom_toTopOf="@id/store_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Redmond"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:visibleIf="@{!isListEmpty}"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_list_title"
+            tools:listitem="@layout/item_store"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/store_list_empty_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_empty_store"
+            app:visibleIf="@{isListEmpty}"
+            app:layout_constraintBottom_toTopOf="@id/store_list_empty_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_list_empty_message"
+            style="@style/Store.Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:text="@string/store_list_empty_message"
+            android:textAlignment="center"
+            app:visibleIf="@{isListEmpty}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_list_empty_image"
+            tools:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

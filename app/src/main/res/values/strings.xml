@@ -10,4 +10,17 @@
     <string name="nav_stores_title">Stores</string>
     <string name="nav_catalog_title">Catalog</string>
     <string name="nav_cart_title">Cart</string>
+
+    <!-- Stores -->
+
+    <plurals name="review_count">
+        <item quantity="one">1 Review</item>
+        <item quantity="other">%d Reviews</item>
+    </plurals>
+
+    <string name="store_title">%s Guitar Store</string>
+    <string name="item_store_button_text">View</string>
+    <string name="toolbar_stores_title">Stores</string>
+    <string name="store_list_empty_message">There are no stores in the area you are looking at. Please go back to your current location.</string>
+
 </resources>

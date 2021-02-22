@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/fragment_store_list"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.StoreListFragment"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.list.StoreListFragment"
         android:label="StoreListFragment"
         tools:layout="@layout/fragment_store_list">
 
