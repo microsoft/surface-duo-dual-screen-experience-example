@@ -23,4 +23,11 @@
     <string name="toolbar_stores_title">Stores</string>
     <string name="store_list_empty_message">There are no stores in the area you are looking at. Please go back to your current location.</string>
 
+    <string name="store_details_about_tab">About</string>
+    <string name="store_details_contact_tab">Contact</string>
+    <string name="store_details_about">%1$s Music is family owned and operated and has been in business since 1931. After all these years, we are still passionate about helping others make music. Whether you\'re picking up the guitar for the very first time or a first-chair virtuoso, %1$s Music gives musicians the tools they need to pursue their passion. Our educational services representatives work with local school districts to help support and grow their music programs, offering free instrument pickup and delivery from schools all over the state of Washington and providing complimentary services at many school music events.</string>
+    <string name="store_details_title">Guitar Store</string>
+    <string name="address_label">Address:</string>
+    <string name="contact_info_label">Owner Contact Info:</string>
+
 </resources>

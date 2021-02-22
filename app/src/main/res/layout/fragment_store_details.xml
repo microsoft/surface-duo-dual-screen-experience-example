@@ -8,17 +8,74 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.store.StoreDetailsFragment">
+    tools:context=".presentation.store.details.StoreDetailsFragment">
 
-    <FrameLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:paddingStart="@dimen/medium_padding"
+        android:paddingEnd="@dimen/medium_padding">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_details_type"
+            style="@style/GoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is Store List fragment"
-            android:layout_gravity="center"/>
-    </FrameLayout>
+            android:text="@string/store_details_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_details_name"
+            style="@style/Store.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@{viewModel.selectedStore.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_details_type"
+            tools:text="Joy's"/>
+
+        <include
+            android:id="@+id/store_details_review_ratings"
+            layout="@layout/store_rating_reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_details_name"
+            app:store="@{viewModel.selectedStore}" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/store_details_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_details_review_ratings"
+            app:tabGravity="center"
+            app:tabIndicator="@drawable/tab_selected_indicator"
+            app:tabIndicatorColor="@color/orange"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="@dimen/tab_indicator_height"
+            app:tabTextAppearance="@style/Store.TabText" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/store_details_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_details_tabs" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -32,4 +32,6 @@
     <dimen name="card_elevation">8dp</dimen>
 
     <dimen name="tab_indicator_height">3dp</dimen>
+    <dimen name="tab_indicator_radius">5dp</dimen>
+    <dimen name="tab_indicator_margin">10dp</dimen>
 </resources>
