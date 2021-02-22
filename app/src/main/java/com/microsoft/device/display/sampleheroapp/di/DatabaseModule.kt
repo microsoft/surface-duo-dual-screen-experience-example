@@ -13,6 +13,7 @@ import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig.DB_A
 import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig.DB_NAME
 import com.microsoft.device.display.sampleheroapp.data.AppDatabase
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
+import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,11 +28,12 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext appContext: Context): AppDatabase =
-        Room.databaseBuilder(
-            appContext,
-            AppDatabase::class.java,
-            DB_NAME
-        )
+        Room
+            .databaseBuilder(
+                appContext,
+                AppDatabase::class.java,
+                DB_NAME
+            )
             .createFromAsset(DB_ASSET_PATH)
             .fallbackToDestructiveMigration()
             .build()
@@ -39,4 +41,8 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideProductDao(database: AppDatabase): ProductDao = database.productDao()
+
+    @Singleton
+    @Provides
+    fun provideStoreDao(database: AppDatabase): StoreDao = database.storeDao()
 }
