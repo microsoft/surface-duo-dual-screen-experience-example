@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navigation_stores_graph"
+        android:icon="@drawable/ic_store"
+        android:title="@string/nav_stores_title" />
+
+    <item android:id="@+id/navigation_products_graph"
+        android:icon="@drawable/ic_catalog"
+        android:title="@string/nav_catalog_title" />
+
+    <item android:id="@+id/navigation_orders_graph"
+        android:icon="@drawable/ic_cart"
+        android:title="@string/nav_cart_title" />
+</menu>

@@ -6,5 +6,8 @@
   -->
 
 <resources>
-    <string name="app_name">SampleHeroApp</string>
+    <string name="app_name">Dealer’s Delight - A Dual Screen Experience</string>
+    <string name="nav_stores_title">Stores</string>
+    <string name="nav_catalog_title">Catalog</string>
+    <string name="nav_cart_title">Cart</string>
 </resources>

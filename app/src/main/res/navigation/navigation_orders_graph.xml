@@ -9,11 +9,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_app_graph.xml"
-    app:startDestination="@id/navigation_stores_graph">
+    android:id="@+id/navigation_orders_graph"
+    app:startDestination="@id/fragment_cart">
 
-    <include app:graph="@navigation/navigation_products_graph" />
-    <include app:graph="@navigation/navigation_stores_graph" />
-    <include app:graph="@navigation/navigation_orders_graph" />
+    <fragment
+        android:id="@+id/fragment_cart"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.order.CartFragment"
+        android:label="CartFragment"
+        tools:layout="@layout/fragment_cart" />
 
 </navigation>

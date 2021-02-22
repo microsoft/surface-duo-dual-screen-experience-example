@@ -28,6 +28,16 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven {
+            url  "https://microsoft-maps.bintray.com/Maven"
+        }
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            url config.duoSdkUrl
+        }
     }
     apply from: "$rootDir/ktlint.gradle"
 }

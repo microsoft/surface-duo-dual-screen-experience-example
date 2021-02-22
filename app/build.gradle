@@ -33,8 +33,13 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -60,6 +65,8 @@ android {
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+
     implementation kotlinDependencies.kotlinStdlib
 
     implementation androidxDependencies.appCompat
@@ -71,17 +78,24 @@ dependencies {
     implementation androidxDependencies.roomKtx
     kapt androidxDependencies.roomCompiler
 
-    implementation androidxDependencies.navigationUi
-    implementation androidxDependencies.navigationFragment
+    implementation navigationDependencies.runtimeKtx
+    implementation navigationDependencies.fragmentKtx
+    implementation navigationDependencies.uiKtx
 
     implementation googleDependencies.material
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
 
+    implementation microsoftDependencies.bingMaps
+    implementation microsoftDependencies.bottomNavBar
+    implementation microsoftDependencies.layouts
+    //implementation microsoftDependencies.screenManager
+
     testImplementation testDependencies.junit
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
     androidTestImplementation instrumentationTestDependencies.espressoContrib
+    androidTestImplementation instrumentationTestDependencies.uiAutomator
     androidTestImplementation instrumentationTestDependencies.testRules
     androidTestImplementation instrumentationTestDependencies.testRunner
     androidTestImplementation instrumentationTestDependencies.roomTesting

@@ -7,14 +7,14 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation
 
-import androidx.navigation.NavController
+import androidx.navigation.DuoNavController
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 
 class AppNavigator : ProductNavigator {
-    private var navController: NavController? = null
+    private var navController: DuoNavController? = null
 
-    fun bind(navController: NavController) {
+    fun bind(navController: DuoNavController) {
         this.navController = navController
     }
 
@@ -24,5 +24,9 @@ class AppNavigator : ProductNavigator {
 
     override fun navigateToDetails() {
         navController?.navigate(R.id.action_product_list_to_detail)
+    }
+
+    fun navigateUp() {
+        navController?.navigateUp()
     }
 }
