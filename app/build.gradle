@@ -12,6 +12,8 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+apply from: 'secrets.gradle'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -41,6 +43,9 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        buildTypes.each {
+            it.buildConfigField "String", "BING_MAPS_KEY", "\"$bingMapsKey\""
         }
     }
 

@@ -6,16 +6,25 @@
   ~
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mapContainer"
+    android:id="@+id/store_map_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.store.StoreMapFragment">
+    android:orientation="vertical"
+    tools:context=".presentation.store.map.StoreMapFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <FrameLayout
+        android:id="@+id/mapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/reset_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is Store Map fragment"
-        android:layout_gravity="center"/>
-</FrameLayout>
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/large_margin"
+        android:src="@drawable/ic_location"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
