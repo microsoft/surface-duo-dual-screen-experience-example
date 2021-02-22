@@ -8,7 +8,6 @@
 package com.microsoft.device.display.sampleheroapp.domain.store.testutil
 
 import com.microsoft.device.display.sampleheroapp.data.store.model.CityEntity
-import com.microsoft.device.display.sampleheroapp.data.store.model.CityWithStoresEntity
 import com.microsoft.device.display.sampleheroapp.data.store.model.StoreEntity
 import com.microsoft.device.display.sampleheroapp.domain.store.model.City
 import com.microsoft.device.display.sampleheroapp.domain.store.model.MapMarkerModel
