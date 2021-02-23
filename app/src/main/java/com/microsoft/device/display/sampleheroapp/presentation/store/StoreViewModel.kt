@@ -43,7 +43,9 @@ class StoreViewModel @Inject constructor(
     }
 
     private fun resetMap() {
-        selectedCity.value = null
+        if (selectedCity.value != null) {
+            selectedCity.value = null
+        }
         markersList.value?.takeIf { it.isNotEmpty() }?.let {
             markersCenter.value = buildCenterMarker(markersList.value!!)
         }

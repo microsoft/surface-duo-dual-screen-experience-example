@@ -48,7 +48,7 @@ class StoreMapFragment : Fragment() {
 
     private val mapLayer: MapElementLayer = MapElementLayer()
 
-    var markerList: HashMap<String, MapIconSelectable> = HashMap()
+    var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
 
     private var markerFactory: MapMarkerFactory? = null
 
@@ -106,7 +106,7 @@ class StoreMapFragment : Fragment() {
     private fun setupFab() {
         activity?.findViewById<FloatingActionButton>(R.id.reset_fab)?.setOnClickListener {
             viewModel.markersCenter.value?.let { center ->
-                resetMap(center, selectZoomLevel())
+                returnMapToCenter(center)
             }
         }
     }
@@ -146,19 +146,19 @@ class StoreMapFragment : Fragment() {
         viewModel.selectedCity.value != null && ScreenHelper.isDualMode(requireContext())
 
     private fun unSelectAllMarkers() {
-        markerList.keys
-            .filter { markerList[it]?.isSelected ?: false }
+        selectableMarkerMap.keys
+            .filter { selectableMarkerMap[it]?.isSelected ?: false }
             .forEach {
-                markerList[it]?.image = MapImage(markerFactory?.createBitmapWithText(it))
-                markerList[it]?.isSelected = false
+                selectableMarkerMap[it]?.image = MapImage(markerFactory?.createBitmapWithText(it))
+                selectableMarkerMap[it]?.isSelected = false
             }
     }
 
     private fun selectMarker(store: Store?) {
         store?.let {
-            markerList[it.name]?.image =
+            selectableMarkerMap[it.name]?.image =
                 MapImage(markerFactory?.createBitmapWithText(it.name, true))
-            markerList[it.name]?.isSelected = true
+            selectableMarkerMap[it.name]?.isSelected = true
         }
     }
 
@@ -176,6 +176,10 @@ class StoreMapFragment : Fragment() {
         )
     }
 
+    private fun returnMapToCenter(center: MapMarkerModel) {
+        mapView.panTo(center.toGeopoint())
+    }
+
     private fun getAnimations() =
         if (TEST_MODE_ENABLED) {
             MapAnimationKind.NONE
@@ -188,7 +192,7 @@ class StoreMapFragment : Fragment() {
         markers.forEach { markerModel ->
             val marker: MapIcon? = when (markerModel.type) {
                 MarkerType.PIN -> buildBalloonMarker(markerModel).also {
-                    markerList[markerModel.name] = it
+                    selectableMarkerMap[markerModel.name] = it
                 }
                 MarkerType.CIRCLE -> buildCircleMarker(markerModel)
                 else -> null
@@ -206,7 +210,7 @@ class StoreMapFragment : Fragment() {
                     .let { viewModel.updateStoreList(it) }
             }
 
-            false
+            true
         }
 
         mapView.addOnMapTappedListener { args ->
@@ -227,7 +231,7 @@ class StoreMapFragment : Fragment() {
                         else -> false
                     }
                 }
-            false
+            true
         }
     }
 
