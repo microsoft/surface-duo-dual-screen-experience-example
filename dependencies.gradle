@@ -76,7 +76,7 @@ ext {
     layoutsVersion = "1.0.0-alpha02"
     bottomNavBarVersion = "1.0.0-alpha03"
 
-    bingMapsVersion = "1.1.4"
+    bingMapsVersion = "1.2.0"
 
     microsoftDependencies = [
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",

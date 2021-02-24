@@ -21,9 +21,10 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.By.descContains
+import androidx.test.uiautomator.By.textContains
 import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject
-import androidx.test.uiautomator.UiSelector
+import androidx.test.uiautomator.Until
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.data.store.cityEntityRedmond
 import com.microsoft.device.display.sampleheroapp.data.store.storeEntityJoy
@@ -200,13 +201,11 @@ fun checkToolbar(@StringRes titleRes: Int, titleParam: String? = null) {
 
 fun clickOnMapMarker(markerTitle: String) {
     val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-    var marker: UiObject? = null
-    var tries = MARKER_CLICK_TRIES
-    while (marker == null && tries != 0) {
-        marker = device.findObject(UiSelector().descriptionContains(markerTitle))
-        tries--
-    }
-    marker?.click()
+    val bySelectorMarker = descContains(markerTitle)
+    val bySelectorMarkerClicked = textContains(markerTitle)
+    device.wait(Until.hasObject(bySelectorMarker), MAX_TIMEOUT)
+    device.findObject(bySelectorMarker).click()
+    device.wait(Until.hasObject(bySelectorMarkerClicked), MAX_TIMEOUT)
 }
 
 fun navigateUp() {
@@ -222,7 +221,7 @@ fun clickOnListItemAtPosition(position: Int) {
     )
 }
 
-const val MARKER_CLICK_TRIES = 5
+const val MAX_TIMEOUT = 5000L
 const val STORE_JOY_POSITION = 0
 
 val storeJoy = Store(storeEntityJoy)

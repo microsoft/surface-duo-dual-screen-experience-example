@@ -43,16 +43,13 @@ import com.microsoft.maps.MapView
 class StoreMapFragment : Fragment() {
 
     private val viewModel: StoreViewModel by activityViewModels()
+    private var fragmentToolbarHandler: FragmentToolbarHandler? = null
 
     private lateinit var mapView: MapView
-
     private val mapLayer: MapElementLayer = MapElementLayer()
 
-    var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
-
+    private var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
     private var markerFactory: MapMarkerFactory? = null
-
-    private var fragmentToolbarHandler: FragmentToolbarHandler? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -96,7 +93,7 @@ class StoreMapFragment : Fragment() {
 
     private fun setupMap() {
         mapView.mapProjection = MapProjection.WEB_MERCATOR
-        mapView.setMapStyleSheet(MapStyleSheets.roadDark())
+        mapView.mapStyleSheet = MapStyleSheets.roadDark()
         mapView.userInterfaceOptions.isZoomButtonsVisible = false
         mapView.userInterfaceOptions.isZoomGestureEnabled = false
         mapView.userInterfaceOptions.isCompassButtonVisible = false
@@ -148,16 +145,20 @@ class StoreMapFragment : Fragment() {
     private fun unSelectAllMarkers() {
         selectableMarkerMap.keys
             .filter { selectableMarkerMap[it]?.isSelected ?: false }
-            .forEach {
-                selectableMarkerMap[it]?.image = MapImage(markerFactory?.createBitmapWithText(it))
-                selectableMarkerMap[it]?.isSelected = false
+            .forEach { key ->
+                markerFactory?.let { factory ->
+                    selectableMarkerMap[key]?.image = MapImage(factory.createBitmapWithText(key))
+                    selectableMarkerMap[key]?.isSelected = false
+                }
             }
     }
 
     private fun selectMarker(store: Store?) {
         store?.let {
             selectableMarkerMap[it.name]?.image =
-                MapImage(markerFactory?.createBitmapWithText(it.name, true))
+                markerFactory?.let { factory ->
+                    MapImage(factory.createBitmapWithText(it.name, true))
+                }
             selectableMarkerMap[it.name]?.isSelected = true
         }
     }
@@ -239,8 +240,10 @@ class StoreMapFragment : Fragment() {
         MapIconSelectable().apply {
             location = marker.toGeopoint()
             tag = marker.name
-            if (TEST_MODE_ENABLED) { title = marker.name }
-            image = MapImage(markerFactory?.createBitmapWithText(marker.name))
+            contentDescription = marker.name
+            image = markerFactory?.let { factory ->
+                MapImage(factory.createBitmapWithText(marker.name))
+            }
             desiredCollisionBehavior = MapElementCollisionBehavior.HIDE
         }
 
@@ -248,15 +251,11 @@ class StoreMapFragment : Fragment() {
         MapIcon().apply {
             location = marker.toGeopoint()
             tag = marker.name
-            if (TEST_MODE_ENABLED) { title = marker.name }
+            contentDescription = marker.name
             image =
-                MapImage(
-                    ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.ic_circle_marker,
-                        null
-                    )?.toBitmap()
-                )
+                ResourcesCompat
+                    .getDrawable(resources, R.drawable.ic_circle_marker, null)
+                    ?.let { MapImage(it.toBitmap()) }
         }
 
     override fun onStart() {

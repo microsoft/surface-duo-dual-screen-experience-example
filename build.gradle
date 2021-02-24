@@ -30,7 +30,7 @@ allprojects {
         jcenter()
         mavenCentral()
         maven {
-            url  "https://microsoft-maps.bintray.com/Maven"
+            url "https://microsoftmaps.jfrog.io/artifactory/Maven/"
         }
         flatDir {
             dirs 'libs'
