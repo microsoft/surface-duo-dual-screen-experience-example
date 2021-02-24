@@ -26,6 +26,7 @@ val DUAL_SCREEN_HINGE_RECT = Rect(1350, 0, 1434, 1800)
  */
 fun switchFromSingleToDualScreen() {
     val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    device.waitForIdle()
     when (device.displayRotation) {
         Surface.ROTATION_0 -> device.swipe(675, 1780, 1350, 900, 400)
         Surface.ROTATION_270 -> device.swipe(1780, 675, 900, 1350, 400)

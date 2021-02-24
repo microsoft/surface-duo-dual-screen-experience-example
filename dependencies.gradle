@@ -20,9 +20,7 @@ ext {
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
             testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.HiltJUnitRunner",
-            dualScreenSdkVersion     : "1.0.0-beta1",
-            duoSdkUrl                :
-                    "https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1",
+            dualScreenSdkVersion     : "1.0.0-beta2",
     ]
 
     kotlinDependencies = [
@@ -70,23 +68,23 @@ ext {
     ]
 
     //Microsoft dependencies version
-    //screenManagerWindowManagerVersion = config.dualScreenSdkVersion
-    //screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
-    //fragmentsHandlerVersion = config.dualScreenSdkVersion
-    layoutsVersion = "1.0.0-alpha02"
-    bottomNavBarVersion = "1.0.0-alpha03"
+    screenManagerWindowManagerVersion = config.dualScreenSdkVersion
+    screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
+    fragmentsHandlerVersion = "1.0.0-beta1"
+    layoutsVersion = config.dualScreenSdkVersion
+    bottomNavBarVersion = "1.0.0-beta1"
 
     bingMapsVersion = "1.2.0"
 
     microsoftDependencies = [
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
-            //screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
-            //screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
+            screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
+            screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
             //fragmentsHandler          : "com.microsoft.device.dualscreen:fragmentshandler:$fragmentsHandlerVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
     ]
-    //microsoftDependencies["screenManager"] = microsoftDependencies.screenManagerWindowManager
+    microsoftDependencies["screenManager"] = microsoftDependencies.screenManagerWindowManager
 
     //Test dependencies version
     junitVersion = "4.13.1"

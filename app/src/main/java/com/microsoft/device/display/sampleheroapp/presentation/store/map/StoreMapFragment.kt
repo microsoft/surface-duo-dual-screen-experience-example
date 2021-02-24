@@ -28,7 +28,6 @@ import com.microsoft.device.display.sampleheroapp.domain.store.model.MarkerType
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.FragmentToolbarHandler
-import com.microsoft.device.dualscreen.core.ScreenHelper
 import com.microsoft.maps.MapAnimationKind
 import com.microsoft.maps.MapElementCollisionBehavior
 import com.microsoft.maps.MapElementLayer
@@ -128,10 +127,8 @@ class StoreMapFragment : Fragment() {
             viewLifecycleOwner,
             {
                 changeActionBarTitle(viewModel.selectedCity.value, it)
-                if (ScreenHelper.isDualMode(requireContext())) {
-                    unSelectAllMarkers()
-                    selectMarker(it)
-                }
+                unSelectAllMarkers()
+                selectMarker(it)
             }
         )
     }
@@ -139,8 +136,7 @@ class StoreMapFragment : Fragment() {
     private fun selectZoomLevel(): Double =
         if (shouldZoomIn()) ZOOM_LEVEL_STORES else ZOOM_LEVEL_CITY
 
-    private fun shouldZoomIn(): Boolean =
-        viewModel.selectedCity.value != null && ScreenHelper.isDualMode(requireContext())
+    private fun shouldZoomIn(): Boolean = viewModel.selectedCity.value != null
 
     private fun unSelectAllMarkers() {
         selectableMarkerMap.keys
@@ -204,12 +200,10 @@ class StoreMapFragment : Fragment() {
         }
 
         mapView.addOnMapCameraChangedListener {
-            if (context != null && ScreenHelper.isDualMode(requireContext())) {
-                markers
-                    .filter { mapView.bounds.isInBounds(it) && it.type == MarkerType.PIN }
-                    .map { it.id }
-                    .let { viewModel.updateStoreList(it) }
-            }
+            markers
+                .filter { mapView.bounds.isInBounds(it) && it.type == MarkerType.PIN }
+                .map { it.id }
+                .let { viewModel.updateStoreList(it) }
 
             true
         }

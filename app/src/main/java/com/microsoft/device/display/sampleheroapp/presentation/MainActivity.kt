@@ -37,9 +37,8 @@ class MainActivity : AppCompatActivity(), FragmentToolbarHandler {
         navigator.bind(DuoNavigation.findNavController(this, R.id.nav_host_fragment))
 
         val bottomNavBar = findViewById<SurfaceDuoBottomNavigationView>(R.id.bottomNavView)
-/*        bottomNavBar.setupWithNavController(findNavController(this, R.id.nav_host_fragment))
+        // bottomNavBar.setupWithNavController(findNavController(this, R.id.nav_host_fragment))
         bottomNavBar.arrangeButtons(3, 0)
-        bottomNavBar.useTransparentBackground = true*/
     }
 
     override fun onPause() {

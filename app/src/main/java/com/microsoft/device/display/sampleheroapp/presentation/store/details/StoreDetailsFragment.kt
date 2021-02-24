@@ -62,6 +62,7 @@ class StoreDetailsFragment : Fragment() {
 
         val storeDetailsAdapter = StoreDetailsAdapter(this)
         viewPager.adapter = storeDetailsAdapter
+        viewPager.isSaveEnabled = false
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             val textId = when (position) {
                 0 -> R.string.store_details_about_tab

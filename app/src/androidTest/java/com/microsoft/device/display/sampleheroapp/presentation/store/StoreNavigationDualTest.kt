@@ -14,6 +14,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -37,6 +38,7 @@ class StoreNavigationDualTest : BaseStoreNavigationTest() {
     @After
     fun resetOrientation() {
         unfreezeRotation()
+        ScreenManagerProvider.getScreenManager().clear()
     }
 
     @Test

@@ -1,6 +1,7 @@
 # Built application files
 *.apk
-*.aar
+# Uncomment the following line after integration with public navigation component
+#*.aar
 *.ap_
 *.aab
 
