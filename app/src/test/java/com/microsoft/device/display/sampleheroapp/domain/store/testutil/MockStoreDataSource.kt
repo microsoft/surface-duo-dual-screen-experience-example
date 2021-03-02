@@ -24,8 +24,8 @@ class MockStoreDataSource : StoreDataSource {
     override suspend fun getCitiesWithStores(): List<CityWithStoresEntity> =
         cityWithStoreEntityMap.values.toList()
 
-    override suspend fun insertAll(vararg stores: StoreEntity) {
-        stores.forEach { store ->
+    override suspend fun insert(vararg store: StoreEntity) {
+        store.forEach { store ->
             storeEntityMap[store.storeId] = store
             store.cityLocatorId?.let { cityId ->
                 cityWithStoreEntityMap[cityId]?.stores?.add(store)
@@ -33,8 +33,8 @@ class MockStoreDataSource : StoreDataSource {
         }
     }
 
-    override suspend fun insertAllCities(vararg cities: CityEntity) {
-        cities.forEach { city ->
+    override suspend fun insertCity(vararg city: CityEntity) {
+        city.forEach { city ->
             cityEntityMap[city.cityId] = city
             cityWithStoreEntityMap[city.cityId] =
                 CityWithStoresEntity(

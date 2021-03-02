@@ -26,11 +26,11 @@ class StoreRepository @Inject constructor(
     override suspend fun getCitiesWithStores(): List<CityWithStoresEntity> =
         localDataSource.getCitiesWithStores()
 
-    override suspend fun insertAll(vararg stores: StoreEntity) {
-        localDataSource.insertAll(*stores)
+    override suspend fun insert(vararg store: StoreEntity) {
+        localDataSource.insert(*store)
     }
 
-    override suspend fun insertAllCities(vararg cities: CityEntity) {
-        localDataSource.insertAllCities(*cities)
+    override suspend fun insertCity(vararg city: CityEntity) {
+        localDataSource.insertCity(*city)
     }
 }

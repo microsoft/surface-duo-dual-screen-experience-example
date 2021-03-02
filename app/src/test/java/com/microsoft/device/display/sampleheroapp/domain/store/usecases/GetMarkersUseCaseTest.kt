@@ -37,27 +37,27 @@ class GetMarkersUseCaseTest {
 
     @Test
     fun testGetAll_whenRepoHasNoCities() = runBlocking {
-        mockRepo.insertAll(storeEntity)
+        mockRepo.insert(storeEntity)
         assertThat(listOf(storeMarkerModel), iz(getMarkersUseCase.getAll()))
     }
 
     @Test
     fun testGetAll_whenRepoHasNoStores() = runBlocking {
-        mockRepo.insertAllCities(cityEntity, hiddenCityEntity)
+        mockRepo.insertCity(cityEntity, hiddenCityEntity)
         assertThat(emptyList(), iz(getMarkersUseCase.getAll()))
     }
 
     @Test
     fun testGetAll_whenRepoHasACityAndAStore() = runBlocking {
-        mockRepo.insertAll(storeEntity)
-        mockRepo.insertAllCities(cityEntity)
+        mockRepo.insert(storeEntity)
+        mockRepo.insertCity(cityEntity)
         assertThat(listOf(cityMarkerModel, storeMarkerModel), iz(getMarkersUseCase.getAll()))
     }
 
     @Test
     fun testGetAll_whenRepoHasMultipleCitiesAndAStore() = runBlocking {
-        mockRepo.insertAll(storeEntity)
-        mockRepo.insertAllCities(cityEntity, hiddenCityEntity)
+        mockRepo.insert(storeEntity)
+        mockRepo.insertCity(cityEntity, hiddenCityEntity)
         assertThat(listOf(cityMarkerModel, storeMarkerModel), iz(getMarkersUseCase.getAll()))
     }
 }

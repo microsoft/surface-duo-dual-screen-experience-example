@@ -36,27 +36,27 @@ class GetStoresByCityUseCaseTest {
 
     @Test
     fun testGetAll_whenRepoHasNoStores() = runBlocking {
-        mockRepo.insertAllCities(cityEntity)
+        mockRepo.insertCity(cityEntity)
         assertThat(emptyList(), iz(getStoresByCityUseCase.getAll(cityEntity.name)))
     }
 
     @Test
     fun testGetAll_whenRepoHasNoCities() = runBlocking {
-        mockRepo.insertAll(storeEntity)
+        mockRepo.insert(storeEntity)
         assertThat(emptyList(), iz(getStoresByCityUseCase.getAll(cityEntity.name)))
     }
 
     @Test
     fun testGetAll_whenRepoHasStoresAndCitiesUnlinked() = runBlocking {
-        mockRepo.insertAll(storeEntity)
-        mockRepo.insertAllCities(hiddenCityEntity)
+        mockRepo.insert(storeEntity)
+        mockRepo.insertCity(hiddenCityEntity)
         assertThat(emptyList(), iz(getStoresByCityUseCase.getAll(cityEntity.name)))
     }
 
     @Test
     fun testGetAll_whenRepoHasStoresAndCitiesLinked() = runBlocking {
-        mockRepo.insertAll(storeEntity)
-        mockRepo.insertAllCities(cityEntity, hiddenCityEntity)
+        mockRepo.insert(storeEntity)
+        mockRepo.insertCity(cityEntity, hiddenCityEntity)
         assertThat(listOf(store), iz(getStoresByCityUseCase.getAll(cityEntity.name)))
     }
 }

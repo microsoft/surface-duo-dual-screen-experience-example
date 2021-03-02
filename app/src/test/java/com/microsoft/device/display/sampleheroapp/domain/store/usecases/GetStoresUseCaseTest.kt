@@ -34,7 +34,7 @@ class GetStoresUseCaseTest {
 
     @Test
     fun testGetAll_whenRepoHasAStore() = runBlocking {
-        mockRepo.insertAll(storeEntity)
+        mockRepo.insert(storeEntity)
         assertThat(listOf(store), iz(getStoresUseCase.getAll()))
     }
 
@@ -45,7 +45,7 @@ class GetStoresUseCaseTest {
 
     @Test
     fun testGetById_whenRepoHasStoreId() = runBlocking {
-        mockRepo.insertAll(storeEntity)
+        mockRepo.insert(storeEntity)
         assertThat(listOf(store), iz(getStoresUseCase.getAll()))
     }
 }

@@ -22,7 +22,7 @@ interface StoreDao {
     suspend fun save(store: StoreEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg stores: StoreEntity)
+    suspend fun insert(vararg store: StoreEntity)
 
     @Query("SELECT * FROM stores")
     suspend fun getAll(): List<StoreEntity>
@@ -35,5 +35,5 @@ interface StoreDao {
     suspend fun getCityWithStores(): List<CityWithStoresEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllCities(vararg city: CityEntity)
+    suspend fun insertCity(vararg city: CityEntity)
 }

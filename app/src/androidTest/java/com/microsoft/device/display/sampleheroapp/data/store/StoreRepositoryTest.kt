@@ -50,7 +50,7 @@ class StoreRepositoryTest {
         assertThat(storesRepo.getAll(), iz(emptyList()))
         assertNull(storesRepo.getById(storeEntityJoy.storeId))
 
-        storesRepo.insertAll(storeEntityJoy)
+        storesRepo.insert(storeEntityJoy)
         val result = storesRepo.getAll()
 
         assertThat(result, iz(not(Matchers.empty())))
@@ -62,8 +62,8 @@ class StoreRepositoryTest {
     fun insertCityAndGetStores() = runBlocking {
         assertThat(storesRepo.getCitiesWithStores(), iz(emptyList()))
 
-        storesRepo.insertAll(storeEntityJoy)
-        storesRepo.insertAllCities(cityEntityRedmond)
+        storesRepo.insert(storeEntityJoy)
+        storesRepo.insertCity(cityEntityRedmond)
         val result = storesRepo.getCitiesWithStores()
 
         assertThat(result, iz(not(Matchers.empty())))
