@@ -7,7 +7,6 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.store.list
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,19 +16,12 @@ import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentStoreListBinding
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
-import com.microsoft.device.display.sampleheroapp.presentation.util.FragmentToolbarHandler
+import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
+import com.microsoft.device.display.sampleheroapp.presentation.util.showToolbar
 
 class StoreListFragment : Fragment() {
 
     private val viewModel: StoreViewModel by activityViewModels()
-    private var fragmentToolbarHandler: FragmentToolbarHandler? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is FragmentToolbarHandler) {
-            fragmentToolbarHandler = context
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +30,7 @@ class StoreListFragment : Fragment() {
     ): View {
         val binding = FragmentStoreListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        binding.cityName = viewModel.selectedCity.value?.name ?: ""
+        binding.viewModel = viewModel
         val recyclerView = binding.storeList
         val storeAdapter = StoreAdapter(requireContext(), viewModel)
         recyclerView.adapter = storeAdapter
@@ -66,7 +58,7 @@ class StoreListFragment : Fragment() {
             }
         )
 
-        fragmentToolbarHandler?.showToolbar(true, viewLifecycleOwner) {
+        activity?.showToolbar(true, viewLifecycleOwner) {
             viewModel.navigateUp()
         }
     }
@@ -76,12 +68,7 @@ class StoreListFragment : Fragment() {
         changeActionBarTitle()
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        fragmentToolbarHandler = null
-    }
-
     private fun changeActionBarTitle() {
-        fragmentToolbarHandler?.changeToolbarTitle(getString(R.string.toolbar_stores_title))
+        activity?.changeToolbarTitle(getString(R.string.toolbar_stores_title))
     }
 }

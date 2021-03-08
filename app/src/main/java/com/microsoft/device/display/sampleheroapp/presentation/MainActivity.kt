@@ -8,20 +8,16 @@
 package com.microsoft.device.display.sampleheroapp.presentation
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.DuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
-import com.microsoft.device.display.sampleheroapp.presentation.util.FragmentToolbarHandler
 import com.microsoft.device.dualscreen.bottomnavigation.SurfaceDuoBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), FragmentToolbarHandler {
+class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var navigator: AppNavigator
     private var toolbar: Toolbar? = null
@@ -54,28 +50,5 @@ class MainActivity : AppCompatActivity(), FragmentToolbarHandler {
     override fun onSupportNavigateUp(): Boolean {
         super.onBackPressed()
         return true
-    }
-
-    override fun changeToolbarTitle(name: String?) {
-        toolbar?.title = name
-    }
-
-    override fun showToolbar(
-        isBackButtonEnabled: Boolean,
-        owner: LifecycleOwner?,
-        onBackPressedListener: (() -> Unit)?
-    ) {
-        toolbar?.visibility = View.VISIBLE
-        if (isBackButtonEnabled) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeButtonEnabled(true)
-            onBackPressedListener?.let {
-                val lifecycleOwner = owner ?: this
-                onBackPressedDispatcher.addCallback(lifecycleOwner) { it.invoke() }
-            }
-        } else {
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            supportActionBar?.setHomeButtonEnabled(false)
-        }
     }
 }

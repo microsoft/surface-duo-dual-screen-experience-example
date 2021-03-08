@@ -7,7 +7,6 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.store.map
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +26,8 @@ import com.microsoft.device.display.sampleheroapp.domain.store.model.MapMarkerMo
 import com.microsoft.device.display.sampleheroapp.domain.store.model.MarkerType
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
-import com.microsoft.device.display.sampleheroapp.presentation.util.FragmentToolbarHandler
+import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
+import com.microsoft.device.display.sampleheroapp.presentation.util.showToolbar
 import com.microsoft.maps.MapAnimationKind
 import com.microsoft.maps.MapElementCollisionBehavior
 import com.microsoft.maps.MapElementLayer
@@ -42,7 +42,6 @@ import com.microsoft.maps.MapView
 class StoreMapFragment : Fragment() {
 
     private val viewModel: StoreViewModel by activityViewModels()
-    private var fragmentToolbarHandler: FragmentToolbarHandler? = null
 
     private lateinit var mapView: MapView
     private val mapLayer: MapElementLayer = MapElementLayer()
@@ -50,43 +49,35 @@ class StoreMapFragment : Fragment() {
     private var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
     private var markerFactory: MapMarkerFactory? = null
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is FragmentToolbarHandler) {
-            fragmentToolbarHandler = context
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        fragmentToolbarHandler = null
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val layout = inflater.inflate(R.layout.fragment_store_map, container, false)
-
-        mapView = MapView(requireContext(), MapRenderMode.RASTER)
-        mapView.onCreate(savedInstanceState)
-        mapView.setCredentialsKey(BuildConfig.BING_MAPS_KEY)
         val mapContainer = layout.findViewById<FrameLayout>(R.id.mapContainer)
-        mapContainer.addView(mapView)
 
-        mapView.layers.add(mapLayer)
+        setupMapView(savedInstanceState)
+        mapContainer?.addView(mapView)
 
         markerFactory = MapMarkerFactory(requireContext())
 
         return layout
     }
 
+    private fun setupMapView(savedInstanceState: Bundle?) {
+        mapView = MapView(requireContext(), MapRenderMode.RASTER)
+        mapView.onCreate(savedInstanceState)
+        mapView.setCredentialsKey(BuildConfig.BING_MAPS_KEY)
+
+        mapView.layers.add(mapLayer)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupMap()
-        setupFab()
+        setupRecenterButton()
         setupObservers()
     }
 
@@ -99,7 +90,7 @@ class StoreMapFragment : Fragment() {
         mapView.userInterfaceOptions.isTiltButtonVisible = false
     }
 
-    private fun setupFab() {
+    private fun setupRecenterButton() {
         activity?.findViewById<FloatingActionButton>(R.id.reset_fab)?.setOnClickListener {
             viewModel.markersCenter.value?.let { center ->
                 returnMapToCenter(center)
@@ -161,15 +152,15 @@ class StoreMapFragment : Fragment() {
 
     private fun changeActionBarTitle(city: MapMarkerModel?, store: Store?) {
         if (city == null && store == null) {
-            fragmentToolbarHandler?.showToolbar(false)
-            fragmentToolbarHandler?.changeToolbarTitle(getString(R.string.app_name))
+            activity?.showToolbar(false)
+            activity?.changeToolbarTitle(getString(R.string.app_name))
         }
     }
 
     private fun resetMap(center: MapMarkerModel, zoomLevel: Double) {
         mapView.setScene(
             MapScene.createFromLocationAndZoomLevel(center.toGeopoint(), zoomLevel),
-            getAnimations()
+            getMapAnimations()
         )
     }
 
@@ -177,7 +168,7 @@ class StoreMapFragment : Fragment() {
         mapView.panTo(center.toGeopoint())
     }
 
-    private fun getAnimations() =
+    private fun getMapAnimations() =
         if (TEST_MODE_ENABLED) {
             MapAnimationKind.NONE
         } else {

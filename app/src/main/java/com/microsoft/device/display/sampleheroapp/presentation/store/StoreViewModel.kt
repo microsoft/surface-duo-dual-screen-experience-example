@@ -91,11 +91,11 @@ class StoreViewModel @Inject constructor(
     }
 
     fun navigateUp() {
+        navigator.navigateUp()
         if (selectedStore.value != null) {
             selectedStore.value = null
         } else {
             resetMap()
         }
-        navigator.navigateUp()
     }
 }

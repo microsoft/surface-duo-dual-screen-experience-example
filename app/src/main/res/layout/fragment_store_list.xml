@@ -13,8 +13,8 @@
 
     <data>
         <variable
-            name="cityName"
-            type="String" />
+            name="viewModel"
+            type="com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel" />
 
         <variable
             name="isListEmpty"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/medium_margin"
-            android:text="@{cityName}"
+            android:text="@{viewModel.selectedCity.name}"
             app:visibleIf="@{!isListEmpty}"
             app:layout_constraintBottom_toTopOf="@id/store_list"
             app:layout_constraintStart_toStartOf="parent"
