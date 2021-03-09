@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -152,8 +153,8 @@ class StoreMapFragment : Fragment() {
 
     private fun changeActionBarTitle(city: MapMarkerModel?, store: Store?) {
         if (city == null && store == null) {
-            activity?.setupToolbar(isBackButtonEnabled = false)
-            activity?.changeToolbarTitle(getString(R.string.app_name))
+            (activity as? AppCompatActivity)?.setupToolbar(isBackButtonEnabled = false)
+            (activity as? AppCompatActivity)?.changeToolbarTitle(getString(R.string.app_name))
         }
     }
 

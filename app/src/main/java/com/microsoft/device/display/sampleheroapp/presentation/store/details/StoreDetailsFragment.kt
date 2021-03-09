@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -41,7 +42,7 @@ class StoreDetailsFragment : Fragment() {
     private fun setupObservers() {
         viewModel.selectedStore.observe(viewLifecycleOwner, { changeActionBarTitle(it?.name) })
 
-        activity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
+        (activity as? AppCompatActivity)?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
             viewModel.navigateUp()
         }
     }
@@ -77,7 +78,7 @@ class StoreDetailsFragment : Fragment() {
 
     private fun changeActionBarTitle(name: String?) {
         name?.let {
-            activity?.changeToolbarTitle(getString(R.string.store_title, it))
+            (activity as? AppCompatActivity)?.changeToolbarTitle(getString(R.string.store_title, it))
         }
     }
 }

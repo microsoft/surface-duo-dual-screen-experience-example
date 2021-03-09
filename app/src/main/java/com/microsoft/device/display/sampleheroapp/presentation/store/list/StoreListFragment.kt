@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
@@ -58,7 +59,7 @@ class StoreListFragment : Fragment() {
             }
         )
 
-        activity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
+        (activity as? AppCompatActivity)?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
             viewModel.navigateUp()
         }
     }
@@ -69,6 +70,6 @@ class StoreListFragment : Fragment() {
     }
 
     private fun changeActionBarTitle() {
-        activity?.changeToolbarTitle(getString(R.string.toolbar_stores_title))
+        (activity as? AppCompatActivity)?.changeToolbarTitle(getString(R.string.toolbar_stores_title))
     }
 }
