@@ -42,29 +42,29 @@ class StoreNavigationDualTest : BaseStoreNavigationTest() {
     }
 
     @Test
-    fun openMap_inDualLandscapeMode() {
+    fun openMapInDualLandscapeMode() {
         switchFromSingleToDualScreen()
 
-        openMap_inSingleMode()
+        openMapInSingleMode()
     }
 
     @Test
-    fun openMap_inDualPortraitMode() {
+    fun openMapInDualPortraitMode() {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
-        openMap_inSingleMode()
+        openMapInSingleMode()
     }
 
     @Test
-    fun openDetailsFromMap_inDualLandscapeMode() {
-        openDetailsFromMap_inDualMode()
+    fun openDetailsFromMapInDualLandscapeMode() {
+        openDetailsFromMapInDualMode()
     }
 
     @Test
-    fun openDetailsFromMap_inDualPortraitMode() {
+    fun openDetailsFromMapInDualPortraitMode() {
         setOrientationRight()
-        openDetailsFromMap_inDualMode()
+        openDetailsFromMapInDualMode()
     }
 
     @Test
@@ -81,14 +81,14 @@ class StoreNavigationDualTest : BaseStoreNavigationTest() {
     }
 
     @Test
-    fun openListFromMap_inDualLandscapeMode() {
-        openListFromMap_inDualMode()
+    fun openListFromMapInDualLandscapeMode() {
+        openListFromMapInDualMode()
     }
 
     @Test
-    fun openListFromMap_inDualPortraitMode() {
+    fun openListFromMapInDualPortraitMode() {
         setOrientationRight()
-        openListFromMap_inDualMode()
+        openListFromMapInDualMode()
     }
 
     @Test
@@ -106,14 +106,14 @@ class StoreNavigationDualTest : BaseStoreNavigationTest() {
     }
 
     @Test
-    fun openDetailsFromList_inDualLandscapeMode() {
-        openDetailsFromList_inDualMode()
+    fun openDetailsFromListInDualLandscapeMode() {
+        openDetailsFromListInDualMode()
     }
 
     @Test
-    fun openDetailsFromList_inDualPortraitMode() {
+    fun openDetailsFromListInDualPortraitMode() {
         setOrientationRight()
-        openDetailsFromList_inDualMode()
+        openDetailsFromListInDualMode()
     }
 
     @Test

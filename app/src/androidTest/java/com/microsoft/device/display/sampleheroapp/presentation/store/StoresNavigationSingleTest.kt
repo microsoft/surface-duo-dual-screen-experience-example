@@ -38,50 +38,50 @@ class StoresNavigationSingleTest : BaseStoreNavigationTest() {
     }
 
     @Test
-    fun openMap_inPortraitMode() {
-        openMap_inSingleMode()
+    fun openMapInPortraitMode() {
+        openMapInSingleMode()
     }
 
     @Test
-    fun openMap_inLandscapeMode() {
+    fun openMapInLandscapeMode() {
         setOrientationRight()
 
-        openMap_inSingleMode()
+        openMapInSingleMode()
     }
 
     @Test
-    fun openDetailsFromMap_inPortraitMode() {
-        openDetailsFromMap_inSingleMode()
+    fun openDetailsFromMapInPortraitMode() {
+        openDetailsFromMapInSingleMode()
     }
 
     @Test
-    fun openDetailsFromMap_inLandscapeMode() {
+    fun openDetailsFromMapInLandscapeMode() {
         setOrientationRight()
 
-        openDetailsFromMap_inSingleMode()
+        openDetailsFromMapInSingleMode()
     }
 
     @Test
-    fun openListFromMap_inPortraitMode() {
-        openListFromMap_inSingleMode()
+    fun openListFromMapInPortraitMode() {
+        openListFromMapInSingleMode()
     }
 
     @Test
-    fun openListFromMap_inLandscapeMode() {
+    fun openListFromMapInLandscapeMode() {
         setOrientationRight()
 
-        openListFromMap_inSingleMode()
+        openListFromMapInSingleMode()
     }
 
     @Test
-    fun openDetailsFromList_inPortraitMode() {
-        openDetailsFromList_inSingleMode()
+    fun openDetailsFromListInPortraitMode() {
+        openDetailsFromListInSingleMode()
     }
 
     @Test
-    fun openDetailsFromList_inLandscapeMode() {
+    fun openDetailsFromListInLandscapeMode() {
         setOrientationRight()
 
-        openDetailsFromList_inSingleMode()
+        openDetailsFromListInSingleMode()
     }
 }

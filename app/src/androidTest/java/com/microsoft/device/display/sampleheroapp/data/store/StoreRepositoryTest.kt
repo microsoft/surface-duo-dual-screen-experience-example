@@ -30,12 +30,12 @@ class StoreRepositoryTest {
     private val cityWithStoreEntityList =
         listOf(CityWithStoresEntity(cityEntityRedmond, mutableListOf(storeEntityJoy)))
 
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
     private lateinit var database: AppDatabase
     private lateinit var storesRepo: StoreRepository
 
     @Before
     fun createDatabase() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         storesRepo = StoreRepository(StoreLocalDataSource(database.storeDao()))
     }
@@ -63,7 +63,7 @@ class StoreRepositoryTest {
         assertThat(storesRepo.getCitiesWithStores(), iz(emptyList()))
 
         storesRepo.insert(storeEntityJoy)
-        storesRepo.insertCity(cityEntityRedmond)
+        storesRepo.insertCities(cityEntityRedmond)
         val result = storesRepo.getCitiesWithStores()
 
         assertThat(result, iz(not(Matchers.empty())))

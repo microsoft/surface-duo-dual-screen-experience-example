@@ -17,12 +17,12 @@ import org.hamcrest.core.Is.`is` as iz
 class CityTest {
 
     @Test
-    fun testBuildFromCityEntity() {
+    fun buildFromCityEntity() {
         assertThat(city, iz(City(cityEntity)))
     }
 
     @Test
-    fun testToMapMarkerModel() {
+    fun toMapMarkerModel() {
         assertThat(cityMarkerModel, iz(city.toMapMarkerModel()))
     }
 }

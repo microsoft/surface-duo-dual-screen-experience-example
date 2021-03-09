@@ -12,12 +12,12 @@ import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScr
 
 open class BaseStoreNavigationTest {
 
-    fun openMap_inSingleMode() {
+    fun openMapInSingleMode() {
         checkMapFragment()
         checkToolbar(R.string.app_name)
     }
 
-    fun openDetailsFromMap_inSingleMode() {
+    fun openDetailsFromMapInSingleMode() {
         clickOnMapMarker(storeMehul.name)
         checkDetailsFragment(storeMehul)
 
@@ -26,7 +26,7 @@ open class BaseStoreNavigationTest {
         checkToolbar(R.string.app_name)
     }
 
-    fun openDetailsFromMap_inDualMode() {
+    fun openDetailsFromMapInDualMode() {
         switchFromSingleToDualScreen()
 
         clickOnMapMarker(storeMehul.name)
@@ -38,7 +38,7 @@ open class BaseStoreNavigationTest {
         checkToolbar(R.string.app_name)
     }
 
-    fun openListFromMap_inSingleMode() {
+    fun openListFromMapInSingleMode() {
         clickOnMapMarker(cityRedmond.name)
         checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
 
@@ -47,7 +47,7 @@ open class BaseStoreNavigationTest {
         checkToolbar(R.string.app_name)
     }
 
-    fun openListFromMap_inDualMode() {
+    fun openListFromMapInDualMode() {
         switchFromSingleToDualScreen()
 
         clickOnMapMarker(cityRedmond.name)
@@ -60,7 +60,7 @@ open class BaseStoreNavigationTest {
         checkToolbar(R.string.app_name)
     }
 
-    fun openDetailsFromList_inSingleMode() {
+    fun openDetailsFromListInSingleMode() {
         clickOnMapMarker(cityRedmond.name)
         clickOnListItemAtPosition(STORE_JOY_POSITION)
         checkDetailsFragment(storeJoy)
@@ -72,7 +72,7 @@ open class BaseStoreNavigationTest {
         checkToolbar(R.string.app_name)
     }
 
-    fun openDetailsFromList_inDualMode() {
+    fun openDetailsFromListInDualMode() {
         switchFromSingleToDualScreen()
 
         clickOnMapMarker(cityRedmond.name)

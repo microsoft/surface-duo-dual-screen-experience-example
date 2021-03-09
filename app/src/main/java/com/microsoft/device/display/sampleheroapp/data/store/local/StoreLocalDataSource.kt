@@ -24,11 +24,11 @@ class StoreLocalDataSource @Inject constructor(
     override suspend fun getCitiesWithStores(): List<CityWithStoresEntity> =
         storeDao.getCityWithStores()
 
-    override suspend fun insert(vararg store: StoreEntity) {
-        storeDao.insert(*store)
+    override suspend fun insert(vararg stores: StoreEntity) {
+        storeDao.insert(*stores)
     }
 
-    override suspend fun insertCity(vararg city: CityEntity) {
-        storeDao.insertCity(*city)
+    override suspend fun insertCities(vararg cities: CityEntity) {
+        storeDao.insertCities(*cities)
     }
 }

@@ -28,23 +28,23 @@ class GetStoresUseCaseTest {
     }
 
     @Test
-    fun testGetAll_whenRepoHasNoStores() = runBlocking {
+    fun getAllWhenRepoHasNoStores() = runBlocking {
         assertThat(emptyList(), iz(getStoresUseCase.getAll()))
     }
 
     @Test
-    fun testGetAll_whenRepoHasAStore() = runBlocking {
+    fun getAllWhenRepoHasAStore() = runBlocking {
         mockRepo.insert(storeEntity)
         assertThat(listOf(store), iz(getStoresUseCase.getAll()))
     }
 
     @Test
-    fun testGetById_whenRepoHasNoStores() = runBlocking {
+    fun getByIdWhenRepoHasNoStores() = runBlocking {
         assertThat(null, iz(getStoresUseCase.getById(storeEntity.storeId)))
     }
 
     @Test
-    fun testGetById_whenRepoHasStoreId() = runBlocking {
+    fun getByIdWhenRepoHasStoreId() = runBlocking {
         mockRepo.insert(storeEntity)
         assertThat(listOf(store), iz(getStoresUseCase.getAll()))
     }

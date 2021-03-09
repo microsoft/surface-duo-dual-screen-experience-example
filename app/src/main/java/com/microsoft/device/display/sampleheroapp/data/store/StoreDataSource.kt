@@ -15,6 +15,6 @@ interface StoreDataSource {
     suspend fun getAll(): List<StoreEntity>
     suspend fun getById(storeId: Long): StoreEntity?
     suspend fun getCitiesWithStores(): List<CityWithStoresEntity>
-    suspend fun insert(vararg store: StoreEntity)
-    suspend fun insertCity(vararg city: CityEntity)
+    suspend fun insert(vararg stores: StoreEntity)
+    suspend fun insertCities(vararg cities: CityEntity)
 }

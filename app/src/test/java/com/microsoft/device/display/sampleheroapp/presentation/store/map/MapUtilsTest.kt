@@ -25,13 +25,13 @@ import org.hamcrest.core.Is.`is` as iz
 class MapUtilsTest {
 
     @Test
-    fun testToGeopoint() {
+    fun toGeopoint() {
         assertThat(cityGeopoint.position.latitude, iz(cityMarkerModel.toGeopoint().position.latitude))
         assertThat(cityGeopoint.position.longitude, iz(cityMarkerModel.toGeopoint().position.longitude))
     }
 
     @Test
-    fun testIsInBounds_whenLatDoesNotFit() {
+    fun isInBoundsWhenLatDoesNotFit() {
         val box = GeoboundingBox(
             Geoposition(48.685, -122.129),
             Geoposition(47.647, -122.120)
@@ -40,7 +40,7 @@ class MapUtilsTest {
     }
 
     @Test
-    fun testIsInBounds_whenLngDoesNotFit() {
+    fun isInBoundsWhenLngDoesNotFit() {
         val box = GeoboundingBox(
             Geoposition(47.638, -123.432),
             Geoposition(47.637, -124.543)
@@ -49,7 +49,7 @@ class MapUtilsTest {
     }
 
     @Test
-    fun testIsInBounds_whenBothLatLngFit() {
+    fun isInBoundsWhenBothLatLngFit() {
         val box = GeoboundingBox(
             Geoposition(47.638, -122.129),
             Geoposition(47.637, -122.120)
@@ -58,18 +58,18 @@ class MapUtilsTest {
     }
 
     @Test
-    fun testBuildCenterMarker_whenNoMarker() {
+    fun buildCenterMarkerWhenNoMarker() {
         val centerMarker = MapMarkerModel("", MarkerType.CENTER, 0.0, 0.0)
         assertThat(centerMarker, iz(buildCenterMarker(listOf())))
     }
 
     @Test
-    fun testBuildCenterMarker_whenOnlyOneMarker() {
+    fun buildCenterMarkerWhenOnlyOneMarker() {
         assertThat(storeCenterMarkerModel, iz(buildCenterMarker(listOf(storeMarkerModel))))
     }
 
     @Test
-    fun testBuildCenterMarker_whenMultipleMarkers() {
+    fun buildCenterMarkerWhenMultipleMarkers() {
         assertThat(
             storeCityCenterMarkerModel,
             iz(buildCenterMarker(listOf(storeMarkerModel, cityMarkerModel)))

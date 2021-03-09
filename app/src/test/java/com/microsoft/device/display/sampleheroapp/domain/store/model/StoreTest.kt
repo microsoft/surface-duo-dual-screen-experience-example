@@ -24,17 +24,17 @@ import org.hamcrest.core.Is.`is` as iz
 class StoreTest {
 
     @Test
-    fun testBuildFromStoreEntity() {
+    fun buildFromStoreEntity() {
         assertThat(store, iz(Store(storeEntity)))
     }
 
     @Test
-    fun testToMapMarkerModel() {
+    fun toMapMarkerModel() {
         assertThat(storeMarkerModel, iz(store.toMapMarkerModel()))
     }
 
     @Test
-    fun testGetStoreImageEnumKey() {
+    fun getStoreImageEnumKey() {
         assertThat(StoreImage.JOY, iz(StoreImage.getEnumKey(JOY_KEY)))
         assertThat(StoreImage.CESAR, iz(StoreImage.getEnumKey(CESAR_KEY)))
         assertThat(StoreImage.HAKON, iz(StoreImage.getEnumKey(HAKON_KEY)))
