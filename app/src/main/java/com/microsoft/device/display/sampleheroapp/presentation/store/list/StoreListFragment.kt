@@ -17,7 +17,7 @@ import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentStoreListBinding
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
-import com.microsoft.device.display.sampleheroapp.presentation.util.showToolbar
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 
 class StoreListFragment : Fragment() {
 
@@ -58,7 +58,7 @@ class StoreListFragment : Fragment() {
             }
         )
 
-        activity?.showToolbar(true, viewLifecycleOwner) {
+        activity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
             viewModel.navigateUp()
         }
     }

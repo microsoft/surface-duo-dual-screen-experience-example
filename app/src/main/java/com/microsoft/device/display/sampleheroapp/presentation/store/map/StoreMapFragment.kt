@@ -27,7 +27,7 @@ import com.microsoft.device.display.sampleheroapp.domain.store.model.MarkerType
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
-import com.microsoft.device.display.sampleheroapp.presentation.util.showToolbar
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import com.microsoft.maps.MapAnimationKind
 import com.microsoft.maps.MapElementCollisionBehavior
 import com.microsoft.maps.MapElementLayer
@@ -152,7 +152,7 @@ class StoreMapFragment : Fragment() {
 
     private fun changeActionBarTitle(city: MapMarkerModel?, store: Store?) {
         if (city == null && store == null) {
-            activity?.showToolbar(false)
+            activity?.setupToolbar(isBackButtonEnabled = false)
             activity?.changeToolbarTitle(getString(R.string.app_name))
         }
     }

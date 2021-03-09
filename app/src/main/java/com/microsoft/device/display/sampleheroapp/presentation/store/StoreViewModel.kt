@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.display.sampleheroapp.domain.store.model.MapMarkerModel
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
-import com.microsoft.device.display.sampleheroapp.domain.store.usecases.GetMarkersUseCase
+import com.microsoft.device.display.sampleheroapp.domain.store.usecases.GetMapMarkersUseCase
 import com.microsoft.device.display.sampleheroapp.domain.store.usecases.GetStoresByCityUseCase
 import com.microsoft.device.display.sampleheroapp.domain.store.usecases.GetStoresUseCase
 import com.microsoft.device.display.sampleheroapp.presentation.store.map.buildCenterMarker
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StoreViewModel @Inject constructor(
-    private val getMarkersUseCase: GetMarkersUseCase,
+    private val getMapMarkersUseCase: GetMapMarkersUseCase,
     private val getStoresByCityUseCase: GetStoresByCityUseCase,
     private val getStoresUseCase: GetStoresUseCase,
     private val navigator: StoreNavigator
@@ -37,7 +37,7 @@ class StoreViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            markersList.value = getMarkersUseCase.getAll()
+            markersList.value = getMapMarkersUseCase.getAll()
             resetMap()
         }
     }

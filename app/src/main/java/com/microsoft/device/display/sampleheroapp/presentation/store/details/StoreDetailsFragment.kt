@@ -20,7 +20,7 @@ import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentStoreDetailsBinding
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
-import com.microsoft.device.display.sampleheroapp.presentation.util.showToolbar
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 
 class StoreDetailsFragment : Fragment() {
 
@@ -41,19 +41,19 @@ class StoreDetailsFragment : Fragment() {
     private fun setupObservers() {
         viewModel.selectedStore.observe(viewLifecycleOwner, { changeActionBarTitle(it?.name) })
 
-        activity?.showToolbar(true, viewLifecycleOwner) {
+        activity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
             viewModel.navigateUp()
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupTabViewPager()
+        setupTabViewPager(view)
     }
 
-    private fun setupTabViewPager() {
-        val tabLayout = view?.findViewById<TabLayout>(R.id.store_details_tabs)
-        val viewPager = view?.findViewById<ViewPager2>(R.id.store_details_pager)
+    private fun setupTabViewPager(view: View) {
+        val tabLayout = view.findViewById<TabLayout>(R.id.store_details_tabs)
+        val viewPager = view.findViewById<ViewPager2>(R.id.store_details_pager)
 
         val storeDetailsAdapter = StoreDetailsAdapter(this)
         viewPager?.adapter = storeDetailsAdapter

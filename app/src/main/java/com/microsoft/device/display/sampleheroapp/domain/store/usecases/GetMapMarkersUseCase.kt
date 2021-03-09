@@ -13,7 +13,7 @@ import com.microsoft.device.display.sampleheroapp.domain.store.model.MapMarkerMo
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
 import javax.inject.Inject
 
-class GetMarkersUseCase @Inject constructor(private val storeRepository: StoreDataSource) {
+class GetMapMarkersUseCase @Inject constructor(private val storeRepository: StoreDataSource) {
     suspend fun getAll(): List<MapMarkerModel> {
         val cityWithStores = storeRepository.getCitiesWithStores()
         val stores = storeRepository.getAll().map { Store(it).toMapMarkerModel() }

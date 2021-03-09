@@ -19,45 +19,45 @@ import org.junit.Before
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz
 
-class GetMarkersUseCaseTest {
+class GetMapMarkersUseCaseTest {
 
-    private lateinit var getMarkersUseCase: GetMarkersUseCase
+    private lateinit var getMapMarkersUseCase: GetMapMarkersUseCase
     private lateinit var mockRepo: MockStoreDataSource
 
     @Before
     fun setup() {
         mockRepo = MockStoreDataSource()
-        getMarkersUseCase = GetMarkersUseCase(mockRepo)
+        getMapMarkersUseCase = GetMapMarkersUseCase(mockRepo)
     }
 
     @Test
     fun getAllWhenRepoHasNoData() = runBlocking {
-        assertThat(emptyList(), iz(getMarkersUseCase.getAll()))
+        assertThat(emptyList(), iz(getMapMarkersUseCase.getAll()))
     }
 
     @Test
     fun getAllWhenRepoHasNoCities() = runBlocking {
         mockRepo.insert(storeEntity)
-        assertThat(listOf(storeMarkerModel), iz(getMarkersUseCase.getAll()))
+        assertThat(listOf(storeMarkerModel), iz(getMapMarkersUseCase.getAll()))
     }
 
     @Test
     fun getAllWhenRepoHasNoStores() = runBlocking {
         mockRepo.insertCities(cityEntity, hiddenCityEntity)
-        assertThat(emptyList(), iz(getMarkersUseCase.getAll()))
+        assertThat(emptyList(), iz(getMapMarkersUseCase.getAll()))
     }
 
     @Test
     fun getAllWhenRepoHasACityAndAStore() = runBlocking {
         mockRepo.insert(storeEntity)
         mockRepo.insertCities(cityEntity)
-        assertThat(listOf(cityMarkerModel, storeMarkerModel), iz(getMarkersUseCase.getAll()))
+        assertThat(listOf(cityMarkerModel, storeMarkerModel), iz(getMapMarkersUseCase.getAll()))
     }
 
     @Test
     fun getAllWhenRepoHasMultipleCitiesAndAStore() = runBlocking {
         mockRepo.insert(storeEntity)
         mockRepo.insertCities(cityEntity, hiddenCityEntity)
-        assertThat(listOf(cityMarkerModel, storeMarkerModel), iz(getMarkersUseCase.getAll()))
+        assertThat(listOf(cityMarkerModel, storeMarkerModel), iz(getMapMarkersUseCase.getAll()))
     }
 }

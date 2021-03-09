@@ -34,13 +34,13 @@ class StoreTest {
     }
 
     @Test
-    fun getStoreImageEnumKey() {
-        assertThat(StoreImage.JOY, iz(StoreImage.getEnumKey(JOY_KEY)))
-        assertThat(StoreImage.CESAR, iz(StoreImage.getEnumKey(CESAR_KEY)))
-        assertThat(StoreImage.HAKON, iz(StoreImage.getEnumKey(HAKON_KEY)))
-        assertThat(StoreImage.BIANCA, iz(StoreImage.getEnumKey(BIANCA_KEY)))
-        assertThat(StoreImage.GUY, iz(StoreImage.getEnumKey(GUY_KEY)))
-        assertThat(StoreImage.CRISTIAN, iz(StoreImage.getEnumKey(CRISTIAN_KEY)))
-        assertThat(StoreImage.MEHUL, iz(StoreImage.getEnumKey(MEHUL_KEY)))
+    fun getStoreImageUsingKey() {
+        assertThat(StoreImage.JOY, iz(StoreImage.get(JOY_KEY)))
+        assertThat(StoreImage.CESAR, iz(StoreImage.get(CESAR_KEY)))
+        assertThat(StoreImage.HAKON, iz(StoreImage.get(HAKON_KEY)))
+        assertThat(StoreImage.BIANCA, iz(StoreImage.get(BIANCA_KEY)))
+        assertThat(StoreImage.GUY, iz(StoreImage.get(GUY_KEY)))
+        assertThat(StoreImage.CRISTIAN, iz(StoreImage.get(CRISTIAN_KEY)))
+        assertThat(StoreImage.MEHUL, iz(StoreImage.get(MEHUL_KEY)))
     }
 }

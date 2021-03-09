@@ -21,7 +21,7 @@ fun Activity.changeToolbarTitle(name: String?) {
     }
 }
 
-fun Activity.showToolbar(
+fun Activity.setupToolbar(
     isBackButtonEnabled: Boolean,
     owner: LifecycleOwner? = null,
     onBackPressedListener: (() -> Unit)? = null

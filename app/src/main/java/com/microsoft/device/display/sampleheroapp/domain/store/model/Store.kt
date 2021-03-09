@@ -36,7 +36,7 @@ data class Store(
             entity.lng,
             entity.rating,
             entity.reviewCount,
-            StoreImage.getEnumKey(entity.imageId)
+            StoreImage.get(entity.imageId)
         )
 
     fun toMapMarkerModel(): MapMarkerModel = MapMarkerModel(name, MarkerType.PIN, lat, lng, storeId)
@@ -52,6 +52,6 @@ enum class StoreImage(var imageId: Int) {
     MEHUL(7);
 
     companion object {
-        fun getEnumKey(imageId: Int): StoreImage? = values().firstOrNull { it.imageId == imageId }
+        fun get(imageId: Int): StoreImage? = values().firstOrNull { it.imageId == imageId }
     }
 }
