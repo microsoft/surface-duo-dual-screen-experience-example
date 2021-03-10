@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <dimen name="button_height">40dp</dimen>
+    <dimen name="button_radius">4dp</dimen>
+
+    <dimen name="icon_size">10dp</dimen>
+    <dimen name="store_image_height">172dp</dimen>
+    <dimen name="store_image_width">197dp</dimen>
+
+    <dimen name="large_padding">36dp</dimen>
+    <dimen name="medium_padding">24dp</dimen>
+    <dimen name="normal_padding">16dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="micro_padding">4dp</dimen>
+    <dimen name="nano_padding">2dp</dimen>
+
+    <dimen name="large_margin">36dp</dimen>
+    <dimen name="medium_margin">24dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="micro_margin">4dp</dimen>
+
+    <dimen name="card_height">300dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+
+    <dimen name="tab_indicator_height">3dp</dimen>
+    <dimen name="tab_indicator_radius">5dp</dimen>
+    <dimen name="tab_indicator_margin">10dp</dimen>
+</resources>

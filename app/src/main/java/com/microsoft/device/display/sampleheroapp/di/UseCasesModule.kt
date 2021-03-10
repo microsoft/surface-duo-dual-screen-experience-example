@@ -9,6 +9,8 @@ package com.microsoft.device.display.sampleheroapp.di
 
 import com.microsoft.device.display.sampleheroapp.data.product.ProductDataSource
 import com.microsoft.device.display.sampleheroapp.data.product.ProductRepository
+import com.microsoft.device.display.sampleheroapp.data.store.StoreDataSource
+import com.microsoft.device.display.sampleheroapp.data.store.StoreRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,4 +24,8 @@ abstract class UseCasesModule {
     @Singleton
     @Binds
     abstract fun provideProductRepo(repository: ProductRepository): ProductDataSource
+
+    @Singleton
+    @Binds
+    abstract fun provideStoreRepo(repository: StoreRepository): StoreDataSource
 }

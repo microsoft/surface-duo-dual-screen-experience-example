@@ -11,8 +11,16 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
 import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
+import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
+import com.microsoft.device.display.sampleheroapp.data.store.model.CityEntity
+import com.microsoft.device.display.sampleheroapp.data.store.model.StoreEntity
 
-@Database(entities = [ProductEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [ProductEntity::class, StoreEntity::class, CityEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
+    abstract fun storeDao(): StoreDao
 }

@@ -20,11 +20,24 @@ ext {
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
             testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.HiltJUnitRunner",
-            dualScreenSdkVersion     : "1.0.0-beta1"
+            dualScreenSdkVersion     : "1.0.0-beta2",
     ]
 
     kotlinDependencies = [
             kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    ]
+
+    navigationVersion = "2.3.0"
+
+    navigationDependencies = [
+            runtime       : "androidx.navigation:navigation-runtime:$navigationVersion",
+            runtimeKtx    : "androidx.navigation:navigation-runtime-ktx:$navigationVersion",
+            fragment      : "androidx.navigation:navigation-fragment:$navigationVersion",
+            fragmentKtx   : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            testing       : "androidx.navigation:navigation-testing:$navigationVersion",
+            ui            : "androidx.navigation:navigation-ui:$navigationVersion",
+            uiKtx         : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+            safeArgsPlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     ]
 
     //AndroidX versions
@@ -33,7 +46,6 @@ ext {
     ktxCoreVersion = '1.3.2'
     ktxFragmentVersion = '1.2.5'
     roomVersion = '2.2.6'
-    navigationVersion = '2.3.2'
 
     androidxDependencies = [
             appCompat           : "androidx.appcompat:appcompat:$appCompatVersion",
@@ -43,13 +55,11 @@ ext {
             room                : "androidx.room:room-runtime:$roomVersion",
             roomCompiler        : "androidx.room:room-compiler:$roomVersion",
             roomKtx             : "androidx.room:room-ktx:$roomVersion",
-            navigationUi        : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
-            navigationFragment  : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
     ]
 
     //Google dependencies
     materialVersion = '1.2.1'
-    hiltVersion = '2.31.2-alpha'
+    hiltVersion = '2.32-alpha'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
@@ -60,14 +70,19 @@ ext {
     //Microsoft dependencies version
     screenManagerWindowManagerVersion = config.dualScreenSdkVersion
     screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
-    fragmentsHandlerVersion = config.dualScreenSdkVersion
+    fragmentsHandlerVersion = "1.0.0-beta1"
     layoutsVersion = config.dualScreenSdkVersion
+    bottomNavBarVersion = "1.0.0-beta1"
+
+    bingMapsVersion = "1.2.0"
 
     microsoftDependencies = [
+            bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
             screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
             screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
-            fragmentsHandler          : "com.microsoft.device.dualscreen:fragmentshandler:$fragmentsHandlerVersion",
+            //fragmentsHandler          : "com.microsoft.device.dualscreen:fragmentshandler:$fragmentsHandlerVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
+            bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
     ]
     microsoftDependencies["screenManager"] = microsoftDependencies.screenManagerWindowManager
 

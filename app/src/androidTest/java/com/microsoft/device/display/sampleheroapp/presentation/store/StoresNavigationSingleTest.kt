@@ -1,0 +1,87 @@
+/*
+ *
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
+ *
+ */
+
+package com.microsoft.device.display.sampleheroapp.presentation.store
+
+import androidx.test.rule.ActivityTestRule
+import com.microsoft.device.display.sampleheroapp.config.MapConfig.TEST_MODE_ENABLED
+import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
+import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import org.junit.After
+import org.junit.Rule
+import org.junit.Test
+import org.junit.rules.RuleChain
+
+@HiltAndroidTest
+class StoresNavigationSingleTest : BaseStoreNavigationTest() {
+
+    private val activityRule = ActivityTestRule(MainActivity::class.java)
+
+    @get:Rule
+    var ruleChain: RuleChain =
+        RuleChain.outerRule(HiltAndroidRule(this)).around(activityRule)
+
+    init {
+        TEST_MODE_ENABLED = true
+    }
+
+    @After
+    fun resetOrientation() {
+        unfreezeRotation()
+    }
+
+    @Test
+    fun openMapInPortraitMode() {
+        openMapInSingleMode()
+    }
+
+    @Test
+    fun openMapInLandscapeMode() {
+        setOrientationRight()
+
+        openMapInSingleMode()
+    }
+
+    @Test
+    fun openDetailsFromMapInPortraitMode() {
+        openDetailsFromMapInSingleMode()
+    }
+
+    @Test
+    fun openDetailsFromMapInLandscapeMode() {
+        setOrientationRight()
+
+        openDetailsFromMapInSingleMode()
+    }
+
+    @Test
+    fun openListFromMapInPortraitMode() {
+        openListFromMapInSingleMode()
+    }
+
+    @Test
+    fun openListFromMapInLandscapeMode() {
+        setOrientationRight()
+
+        openListFromMapInSingleMode()
+    }
+
+    @Test
+    fun openDetailsFromListInPortraitMode() {
+        openDetailsFromListInSingleMode()
+    }
+
+    @Test
+    fun openDetailsFromListInLandscapeMode() {
+        setOrientationRight()
+
+        openDetailsFromListInSingleMode()
+    }
+}

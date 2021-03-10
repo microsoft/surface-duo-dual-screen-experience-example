@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_stores_graph"
+    app:startDestination="@id/fragment_store_map">
+
+    <fragment
+        android:id="@+id/fragment_store_map"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.map.StoreMapFragment"
+        android:label="StoreMapFragment"
+        tools:layout="@layout/fragment_store_map">
+
+        <action android:id="@+id/action_store_map_to_list"
+            app:destination="@id/fragment_store_list"
+            app:launchScreen="end" />
+
+        <action android:id="@+id/action_store_map_to_details"
+            app:destination="@id/fragment_store_details"
+            app:launchScreen="end" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_store_list"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.list.StoreListFragment"
+        android:label="StoreListFragment"
+        tools:layout="@layout/fragment_store_list">
+
+        <action android:id="@+id/action_store_list_to_details"
+            app:destination="@id/fragment_store_details"
+            app:launchScreen="end" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_store_details"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.details.StoreDetailsFragment"
+        android:label="StoreDetailsFragment"
+        tools:layout="@layout/fragment_store_details" />
+
+</navigation>

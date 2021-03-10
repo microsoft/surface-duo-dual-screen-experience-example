@@ -8,7 +8,14 @@
 package com.microsoft.device.display.sampleheroapp
 
 import android.app.Application
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-open class HeroApplication : Application()
+open class HeroApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        ScreenManagerProvider.init(this)
+    }
+}

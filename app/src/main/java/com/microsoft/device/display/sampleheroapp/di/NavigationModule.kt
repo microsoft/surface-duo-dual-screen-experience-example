@@ -9,6 +9,7 @@ package com.microsoft.device.display.sampleheroapp.di
 
 import com.microsoft.device.display.sampleheroapp.presentation.AppNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
+import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +26,7 @@ object NavigationModule {
 
     @Provides
     fun provideProductNavigator(navigator: AppNavigator): ProductNavigator = navigator
+
+    @Provides
+    fun provideStoreNavigator(navigator: AppNavigator): StoreNavigator = navigator
 }

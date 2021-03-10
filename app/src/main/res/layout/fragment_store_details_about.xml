@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.store.details.StoreDetailsAboutFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingTop="@dimen/large_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:paddingBottom="@dimen/small_padding">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/store_details_about_image_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:src="@drawable/mehul_store"
+            app:layout_constraintBottom_toTopOf="@id/store_details_about_description"
+            app:layout_constraintEnd_toStartOf="@id/store_details_about_image_2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/store_details_about_image_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/about_store"
+            app:layout_constraintBottom_toTopOf="@id/store_details_about_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/store_details_about_image_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/store_details_about_description"
+            style="@style/Paragraph.Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/store_details_about(viewModel.selectedStore.name)}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_details_about_image_1"
+            tools:text="@string/store_details_about" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
