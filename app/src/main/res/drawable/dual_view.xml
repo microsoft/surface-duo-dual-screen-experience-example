@@ -1,0 +1,39 @@
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="149dp"
+    android:height="100dp"
+    android:viewportWidth="149"
+    android:viewportHeight="100">
+  <path
+      android:pathData="M10,1.5L138.936,1.5A8.5,8.5 0,0 1,147.436 10L147.436,90A8.5,8.5 0,0 1,138.936 98.5L10,98.5A8.5,8.5 0,0 1,1.5 90L1.5,10A8.5,8.5 0,0 1,10 1.5z"
+      android:strokeWidth="3"
+      android:fillColor="#00000000"
+      android:strokeColor="#786B5A"/>
+  <path
+      android:pathData="M73.181,0V100"
+      android:strokeWidth="3"
+      android:fillColor="#00000000"
+      android:strokeColor="#786B5A"/>
+  <path
+      android:pathData="M107.346,76L87,67.711V40.908M107.346,76L128,67.711V40.908M107.346,76V48.921M128,40.908L107.346,34L87,40.908M128,40.908L107.346,48.921M87,40.908L107.346,48.921"
+      android:strokeWidth="3"
+      android:fillColor="#00000000"
+      android:strokeColor="#2A3037"/>
+  <path
+      android:pathData="M92.467,57.8V53.6L100.083,56.712V58.112V60.912L98.814,60.394L96.275,59.356L92.467,57.8Z"
+      android:fillColor="#2A3037"/>
+  <path
+      android:pathData="M19.5,36.5h36v36h-36z"
+      android:strokeWidth="3"
+      android:fillColor="#00000000"
+      android:strokeColor="#2A3037"/>
+  <path
+      android:pathData="M31,57V52H44V53.667V57H41.833H37.5H31Z"
+      android:fillColor="#2A3037"/>
+</vector>

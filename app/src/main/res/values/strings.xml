@@ -7,9 +7,12 @@
 
 <resources>
     <string name="app_name">Dealer’s Delight - A Dual Screen Experience</string>
+    <string name="app_short_name">Dealer’s Delight</string>
 
     <!-- Launcher -->
 
+    <string name="launch_description">A mock application experience that showcases the benefits of various design patterns for dual-screen foldable devices in a mobile, on-the-go scenario. Developers and designers can use this app as a conversation starter for their own explorations. To see the benefits of foldables in this use case, please span/maximize the application.</string>
+    <string name="launch_button">Launch</string>
     <string name="tutorial_launch_text">Drag the app across the hinge to span the app</string>
 
     <!-- Main -->
