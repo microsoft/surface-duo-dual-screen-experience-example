@@ -7,6 +7,13 @@
 
 <resources>
     <string name="app_name">Dealer’s Delight - A Dual Screen Experience</string>
+
+    <!-- Launcher -->
+
+    <string name="tutorial_launch_text">Drag the app across the hinge to span the app</string>
+
+    <!-- Main -->
+
     <string name="nav_stores_title">Stores</string>
     <string name="nav_catalog_title">Catalog</string>
     <string name="nav_cart_title">Cart</string>
