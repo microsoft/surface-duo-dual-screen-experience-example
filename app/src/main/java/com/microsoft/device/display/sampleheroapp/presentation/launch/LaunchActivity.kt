@@ -16,6 +16,9 @@ import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchDescriptionFragment
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchTitleFragment
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.SingleLaunchFragment
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialType
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
@@ -25,6 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class LaunchActivity : FragmentActivity(), ScreenInfoListener {
 
     private val viewModel: LaunchViewModel by viewModels()
+    private val tutorialViewModel: TutorialViewModel by viewModels()
+    private var tutorial: TutorialBalloon? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,16 +47,20 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
                 }
             }
         )
+
+        viewModel.shouldShowTutorial.observe(this, { handleTutorial(it) })
     }
 
     override fun onResume() {
         super.onResume()
+        initTutorial()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
     }
 
     override fun onPause() {
         super.onPause()
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+        destroyTutorial()
     }
 
     private fun navigateToMainActivity() {
@@ -62,9 +71,40 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
         viewModel.isDualMode.value = screenInfo.isDualMode()
         if (screenInfo.isDualMode()) {
             setupDualScreenFragments()
+            tutorialViewModel.onDualMode()
+            dismissTutorial()
         } else {
+            viewModel.triggerShouldShowTutorial(screenInfo.getScreenRotation())
             setupSingleScreenFragments()
         }
+    }
+
+    private fun initTutorial() {
+        tutorial = TutorialBalloon(applicationContext)
+    }
+
+    private fun destroyTutorial() {
+        tutorial?.hide()
+        tutorial = null
+    }
+
+    private fun handleTutorial(typeOrdinal: Int?) {
+        typeOrdinal?.let {
+            if (it == -1) {
+                dismissTutorial()
+            } else {
+                showTutorial(it)
+            }
+        }
+    }
+
+    private fun showTutorial(ordinal: Int) {
+        tutorial?.show(window.decorView, TutorialType.values()[ordinal])
+    }
+
+    private fun dismissTutorial() {
+        tutorial?.hide()
+        viewModel.dismissTutorial()
     }
 
     private fun setupSingleScreenFragments() {

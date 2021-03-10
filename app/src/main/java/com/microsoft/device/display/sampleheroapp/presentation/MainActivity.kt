@@ -8,19 +8,26 @@
 package com.microsoft.device.display.sampleheroapp.presentation
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.DuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
+import com.microsoft.device.dualscreen.ScreenInfo
+import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.dualscreen.bottomnavigation.SurfaceDuoBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     @Inject lateinit var navigator: AppNavigator
     private var toolbar: Toolbar? = null
+
+    private val tutorialViewModel: TutorialViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
         navigator.bind(DuoNavigation.findNavController(this, R.id.nav_host_fragment))
 
         val bottomNavBar = findViewById<SurfaceDuoBottomNavigationView>(R.id.bottomNavView)
@@ -39,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         navigator.unbind()
     }
 
@@ -50,5 +59,18 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         super.onBackPressed()
         return true
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.size == 1) {
+            finish()
+        }
+        super.onBackPressed()
+    }
+
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        if (screenInfo.isDualMode()) {
+            tutorialViewModel.onDualMode()
+        }
     }
 }
