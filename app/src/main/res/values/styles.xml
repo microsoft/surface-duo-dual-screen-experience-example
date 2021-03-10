@@ -108,4 +108,11 @@
         <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 
+    <style name="CircleIndicators">
+        <item name="tabBackground">@drawable/circle_tab_selector</item>
+        <item name="tabGravity">center</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabPaddingStart">@dimen/small_padding</item>
+        <item name="tabPaddingEnd">@dimen/small_padding</item>
+    </style>
 </resources>

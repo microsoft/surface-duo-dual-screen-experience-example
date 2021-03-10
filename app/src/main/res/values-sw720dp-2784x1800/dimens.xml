@@ -45,12 +45,7 @@
     <dimen name="tab_indicator_radius">5dp</dimen>
     <dimen name="tab_indicator_margin">10dp</dimen>
 
-    <!-- Portrait dimens -->
+    <!-- Dual-mode dimens -->
 
-    <dimen name="launch_single_button_top_margin">24dp</dimen>
-    <dimen name="launch_single_button_bottom_margin">72dp</dimen>
-
-    <!-- Single-mode dimens -->
-
-    <dimen name="launch_image_bottom_margin">0dp</dimen>
+    <dimen name="launch_image_bottom_margin">48dp</dimen>
 </resources>

@@ -94,6 +94,7 @@ dependencies {
     implementation microsoftDependencies.bingMaps
     implementation microsoftDependencies.bottomNavBar
     implementation microsoftDependencies.layouts
+    implementation microsoftDependencies.fragmentsHandler
     implementation microsoftDependencies.screenManager
 
     testImplementation testDependencies.junit
