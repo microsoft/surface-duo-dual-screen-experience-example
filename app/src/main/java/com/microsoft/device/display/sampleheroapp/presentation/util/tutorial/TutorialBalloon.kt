@@ -123,7 +123,7 @@ class TutorialBalloon(private val context: Context) {
             }
             TutorialType.LAUNCH_RIGHT -> {
                 xOffset = width
-                yOffset = height / 2 + ((tutorialContainer?.height ?: 0) / 2)
+                yOffset = height / 2 + ((tutorialContainer?.height ?: 0) / 2) + tipHorizontalMargin
             }
         }
         return Pair(xOffset, yOffset)
