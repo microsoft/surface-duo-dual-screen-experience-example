@@ -62,11 +62,17 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.fragments.size == 1) {
+        if (isNavigationAtStart()) {
             finish()
         }
         super.onBackPressed()
     }
+
+    private fun isNavigationAtStart() =
+        DuoNavigation.findNavController(
+            this,
+            R.id.nav_host_fragment
+        ).currentDestination?.id == R.id.fragment_store_map
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         if (screenInfo.isDualMode()) {
