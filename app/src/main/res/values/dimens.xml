@@ -8,7 +8,7 @@
 
 <resources>
     <dimen name="button_height">40dp</dimen>
-    <dimen name="button_radius">4dp</dimen>
+    <dimen name="button_radius">50dp</dimen>
 
     <dimen name="icon_size">10dp</dimen>
     <dimen name="store_image_height">172dp</dimen>

@@ -38,7 +38,7 @@ import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.core.AllOf.allOf
 
 fun checkMapFragment() {
-    onView(withId(R.id.mapContainer)).check(matches(isDisplayed()))
+    onView(withId(R.id.map_container)).check(matches(isDisplayed()))
     onView(withId(R.id.reset_fab)).check(matches(isDisplayed()))
 }
 

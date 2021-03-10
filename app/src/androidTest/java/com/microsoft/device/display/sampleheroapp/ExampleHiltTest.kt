@@ -28,6 +28,6 @@ class ExampleHiltTest {
     fun happyFirstTest() {
         ActivityScenario.launch(MainActivity::class.java)
 
-        onView(withId(R.id.mapContainer)).check(matches(isDisplayed()))
+        onView(withId(R.id.map_container)).check(matches(isDisplayed()))
     }
 }

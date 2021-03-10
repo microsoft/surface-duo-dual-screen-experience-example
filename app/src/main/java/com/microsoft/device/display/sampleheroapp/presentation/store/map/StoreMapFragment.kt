@@ -56,7 +56,7 @@ class StoreMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val layout = inflater.inflate(R.layout.fragment_store_map, container, false)
-        val mapContainer = layout.findViewById<FrameLayout>(R.id.mapContainer)
+        val mapContainer = layout.findViewById<FrameLayout>(R.id.map_container)
 
         setupMapView(savedInstanceState)
         mapContainer?.addView(mapView)
