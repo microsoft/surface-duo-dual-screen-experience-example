@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
@@ -20,6 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentStoreDetailsBinding
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 
@@ -42,7 +42,7 @@ class StoreDetailsFragment : Fragment() {
     private fun setupObservers() {
         viewModel.selectedStore.observe(viewLifecycleOwner, { changeActionBarTitle(it?.name) })
 
-        (activity as? AppCompatActivity)?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
+        appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
             viewModel.navigateUp()
         }
     }
@@ -78,7 +78,7 @@ class StoreDetailsFragment : Fragment() {
 
     private fun changeActionBarTitle(name: String?) {
         name?.let {
-            (activity as? AppCompatActivity)?.changeToolbarTitle(getString(R.string.store_title, it))
+            appCompatActivity?.changeToolbarTitle(getString(R.string.store_title, it))
         }
     }
 }

@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -27,6 +26,7 @@ import com.microsoft.device.display.sampleheroapp.domain.store.model.MapMarkerMo
 import com.microsoft.device.display.sampleheroapp.domain.store.model.MarkerType
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import com.microsoft.maps.MapAnimationKind
@@ -153,8 +153,8 @@ class StoreMapFragment : Fragment() {
 
     private fun changeActionBarTitle(city: MapMarkerModel?, store: Store?) {
         if (city == null && store == null) {
-            (activity as? AppCompatActivity)?.setupToolbar(isBackButtonEnabled = false)
-            (activity as? AppCompatActivity)?.changeToolbarTitle(getString(R.string.app_name))
+            appCompatActivity?.setupToolbar(isBackButtonEnabled = false)
+            appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
         }
     }
 
