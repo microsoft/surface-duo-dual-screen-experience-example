@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.FragmentActivity
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchDescriptionFragment
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchTitleFragment
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.SingleLaunchFragment
@@ -90,7 +91,7 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
 
     private fun handleTutorial(typeOrdinal: Int?) {
         typeOrdinal?.let {
-            if (it == -1) {
+            if (it == SHOULD_NOT_SHOW) {
                 dismissTutorial()
             } else {
                 showTutorial(it)

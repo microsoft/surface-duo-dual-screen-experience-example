@@ -36,14 +36,14 @@ class LaunchViewModel @Inject constructor(
                 if (launchTutorialUseCase.shouldShowTutorialUseCase()) {
                     getTutorialType(rotation)?.ordinal
                 } else {
-                    -1
+                    SHOULD_NOT_SHOW
                 }
         }
     }
 
     fun dismissTutorial() {
-        if (shouldShowTutorial.value != -1) {
-            shouldShowTutorial.value = -1
+        if (shouldShowTutorial.value != SHOULD_NOT_SHOW) {
+            shouldShowTutorial.value = SHOULD_NOT_SHOW
         }
     }
 
@@ -53,4 +53,8 @@ class LaunchViewModel @Inject constructor(
             Surface.ROTATION_90, Surface.ROTATION_270 -> TutorialType.LAUNCH_RIGHT
             else -> null
         }
+
+    companion object {
+        const val SHOULD_NOT_SHOW = -1
+    }
 }
