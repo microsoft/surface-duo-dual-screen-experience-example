@@ -10,14 +10,13 @@ package com.microsoft.device.display.sampleheroapp.presentation
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.DuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
-import com.microsoft.device.dualscreen.bottomnavigation.SurfaceDuoBottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,13 +24,15 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     @Inject lateinit var navigator: AppNavigator
-    private var toolbar: Toolbar? = null
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupToolbar()
     }
 
@@ -40,9 +41,8 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
         navigator.bind(DuoNavigation.findNavController(this, R.id.nav_host_fragment))
 
-        val bottomNavBar = findViewById<SurfaceDuoBottomNavigationView>(R.id.bottomNavView)
-        // bottomNavBar.setupWithNavController(findNavController(this, R.id.nav_host_fragment))
-        bottomNavBar.arrangeButtons(3, 0)
+        // binding.bottomNavView.setupWithNavController(findNavController(this, R.id.nav_host_fragment))
+        binding.bottomNavView.arrangeButtons(3, 0)
     }
 
     override fun onPause() {
@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun setupToolbar() {
-        toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
     }
 
     override fun onSupportNavigateUp(): Boolean {

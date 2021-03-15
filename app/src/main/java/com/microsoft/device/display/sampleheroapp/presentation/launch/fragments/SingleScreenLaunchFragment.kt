@@ -13,25 +13,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.microsoft.device.display.sampleheroapp.R
-import com.microsoft.device.display.sampleheroapp.databinding.FragmentSingleLaunchBinding
+import com.microsoft.device.display.sampleheroapp.databinding.FragmentSingleScreenLaunchBinding
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel
 
 class SingleScreenLaunchFragment : Fragment() {
 
     private val viewModel: LaunchViewModel by activityViewModels()
 
+    private var binding: FragmentSingleScreenLaunchBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentSingleLaunchBinding.inflate(inflater, container, false)
-        binding.launchListener = viewModel
-        return binding.root
+    ): View? {
+        binding = FragmentSingleScreenLaunchBinding.inflate(inflater, container, false)
+        binding?.launchListener = viewModel
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,12 +39,16 @@ class SingleScreenLaunchFragment : Fragment() {
     }
 
     private fun setupViewPager(view: View) {
-        val tabLayout = view.findViewById<TabLayout>(R.id.launch_tabs)
-        val viewPager = view.findViewById<ViewPager2>(R.id.launch_viewpager)
-
         val storeDetailsAdapter = LaunchFragmentAdapter(this)
-        viewPager.isSaveEnabled = false
-        viewPager.adapter = storeDetailsAdapter
-        TabLayoutMediator(tabLayout, viewPager) { _, _ -> }.attach()
+        binding?.let {
+            it.launchViewPager.isSaveEnabled = false
+            it.launchViewPager.adapter = storeDetailsAdapter
+            TabLayoutMediator(it.launchTabLayout, it.launchViewPager) { _, _ -> }.attach()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

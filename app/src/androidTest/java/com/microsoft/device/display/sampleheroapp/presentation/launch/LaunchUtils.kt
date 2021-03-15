@@ -55,7 +55,7 @@ fun checkTitleFragment() {
 }
 
 fun checkDescriptionFragment() {
-    onView(withId(R.id.launch_description)).check(
+    onView(withId(R.id.launch_description_text_view)).check(
         matches(
             allOf(
                 isDisplayed(),
@@ -63,11 +63,11 @@ fun checkDescriptionFragment() {
             )
         )
     )
-    onView(withId(R.id.launch_pattern_showcase)).check(matches(isDisplayed()))
+    onView(withId(R.id.launch_description_image_view)).check(matches(isDisplayed()))
 }
 
 fun checkCircleIndicators() {
-    onView(withId(R.id.launch_tabs)).check(matches(isDisplayed()))
+    onView(withId(R.id.launch_tab_layout)).check(matches(isDisplayed()))
 }
 
 fun checkSingleLaunchButton() {
@@ -120,7 +120,7 @@ fun clickDualLaunchButton() {
 }
 
 fun moveToDescriptionTab() {
-    onView(withId(R.id.launch_viewpager)).perform(ViewActions.swipeLeft())
+    onView(withId(R.id.launch_view_pager)).perform(ViewActions.swipeLeft())
 }
 
 fun goBack() {

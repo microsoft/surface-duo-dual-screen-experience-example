@@ -55,7 +55,7 @@
             app:store="@{viewModel.selectedStore}" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/store_details_tabs"
+            android:id="@+id/store_details_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,13 +69,13 @@
             app:tabTextAppearance="@style/Store.TabText" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/store_details_pager"
+            android:id="@+id/store_details_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/store_details_tabs" />
+            app:layout_constraintTop_toBottomOf="@id/store_details_tab_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

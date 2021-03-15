@@ -31,25 +31,25 @@
         tools:context=".presentation.launch.fragments.LaunchDescriptionFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/launch_description"
+            android:id="@+id/launch_description_text_view"
             style="@style/Paragraph.Gold.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/launch_description"
-            app:layout_constraintBottom_toTopOf="@id/launch_pattern_showcase"
+            app:layout_constraintBottom_toTopOf="@id/launch_description_image_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/launch_pattern_showcase"
+            android:id="@+id/launch_description_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/dual_launch_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_description"
+            app:layout_constraintTop_toBottomOf="@id/launch_description_text_view"
             tools:src="@drawable/extended_canvas"/>
 
         <androidx.appcompat.widget.AppCompatButton

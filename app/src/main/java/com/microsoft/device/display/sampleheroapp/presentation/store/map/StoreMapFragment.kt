@@ -11,17 +11,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.microsoft.device.display.sampleheroapp.BuildConfig
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.display.sampleheroapp.config.MapConfig.ZOOM_LEVEL_CITY
 import com.microsoft.device.display.sampleheroapp.config.MapConfig.ZOOM_LEVEL_STORES
+import com.microsoft.device.display.sampleheroapp.databinding.FragmentStoreMapBinding
 import com.microsoft.device.display.sampleheroapp.domain.store.model.MapMarkerModel
 import com.microsoft.device.display.sampleheroapp.domain.store.model.MarkerType
 import com.microsoft.device.display.sampleheroapp.domain.store.model.Store
@@ -49,21 +48,21 @@ class StoreMapFragment : Fragment() {
 
     private var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
     private var markerFactory: MapMarkerFactory? = null
+    private var binding: FragmentStoreMapBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val layout = inflater.inflate(R.layout.fragment_store_map, container, false)
-        val mapContainer = layout.findViewById<FrameLayout>(R.id.map_container)
+        binding = FragmentStoreMapBinding.inflate(inflater, container, false)
 
         setupMapView(savedInstanceState)
-        mapContainer?.addView(mapView)
+        binding?.mapContainer?.addView(mapView)
 
         markerFactory = MapMarkerFactory(requireContext())
 
-        return layout
+        return binding?.root
     }
 
     private fun setupMapView(savedInstanceState: Bundle?) {
@@ -92,7 +91,7 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupRecenterButton() {
-        activity?.findViewById<FloatingActionButton>(R.id.reset_fab)?.setOnClickListener {
+        binding?.resetFab?.setOnClickListener {
             viewModel.markersCenter.value?.let { center ->
                 returnMapToCenter(center)
             }
@@ -269,10 +268,11 @@ class StoreMapFragment : Fragment() {
         mapView.onStop()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         mapView.onDestroy()
         markerFactory = null
+        binding = null
     }
 
     override fun onLowMemory() {

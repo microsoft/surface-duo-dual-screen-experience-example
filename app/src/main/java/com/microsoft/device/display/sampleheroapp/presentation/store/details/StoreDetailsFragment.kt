@@ -13,8 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentStoreDetailsBinding
@@ -27,16 +25,18 @@ class StoreDetailsFragment : Fragment() {
 
     private val viewModel: StoreViewModel by activityViewModels()
 
+    private var binding: FragmentStoreDetailsBinding? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentStoreDetailsBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+    ): View? {
+        binding = FragmentStoreDetailsBinding.inflate(inflater, container, false)
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         setupObservers()
-        return binding.root
+        return binding?.root
     }
 
     private fun setupObservers() {
@@ -49,18 +49,18 @@ class StoreDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupTabViewPager(view)
+        setupTabViewPager()
     }
 
-    private fun setupTabViewPager(view: View) {
-        val tabLayout = view.findViewById<TabLayout>(R.id.store_details_tabs)
-        val viewPager = view.findViewById<ViewPager2>(R.id.store_details_pager)
-
+    private fun setupTabViewPager() {
         val storeDetailsAdapter = StoreDetailsAdapter(this)
-        viewPager?.adapter = storeDetailsAdapter
-        viewPager?.isSaveEnabled = false
-        if (tabLayout != null && viewPager != null) {
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        binding?.let {
+            it.storeDetailsViewPager.adapter = storeDetailsAdapter
+            it.storeDetailsViewPager.isSaveEnabled = false
+            TabLayoutMediator(
+                it.storeDetailsTabLayout,
+                it.storeDetailsViewPager
+            ) { tab, position ->
                 val textId = when (position) {
                     0 -> R.string.store_details_about_tab
                     1 -> R.string.store_details_contact_tab
@@ -80,5 +80,10 @@ class StoreDetailsFragment : Fragment() {
         name?.let {
             appCompatActivity?.changeToolbarTitle(getString(R.string.store_title, it))
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

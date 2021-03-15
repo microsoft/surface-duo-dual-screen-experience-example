@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
@@ -23,22 +22,23 @@ class LaunchDescriptionFragment : Fragment() {
 
     private val viewModel: LaunchViewModel by activityViewModels()
 
-    private lateinit var dualPatternsAnimation: AnimationDrawable
+    private var dualPatternsAnimation: AnimationDrawable? = null
+    private var binding: FragmentLaunchDescriptionBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentLaunchDescriptionBinding.inflate(inflater, container, false)
-        binding.launchListener = viewModel
-        viewModel.isDualMode.observe(viewLifecycleOwner, { binding.shouldDisplayButton = it })
-        return binding.root
+    ): View? {
+        binding = FragmentLaunchDescriptionBinding.inflate(inflater, container, false)
+        binding?.launchListener = viewModel
+        viewModel.isDualMode.observe(viewLifecycleOwner, { binding?.shouldDisplayButton = it })
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<AppCompatImageView>(R.id.launch_pattern_showcase).apply {
+        binding?.launchDescriptionImageView?.apply {
             setBackgroundResource(R.drawable.dual_screen_patterns_animation)
             dualPatternsAnimation = background as AnimationDrawable
         }
@@ -46,11 +46,17 @@ class LaunchDescriptionFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        dualPatternsAnimation.start()
+        dualPatternsAnimation?.start()
     }
 
     override fun onPause() {
         super.onPause()
-        dualPatternsAnimation.stop()
+        dualPatternsAnimation?.stop()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dualPatternsAnimation = null
+        binding = null
     }
 }

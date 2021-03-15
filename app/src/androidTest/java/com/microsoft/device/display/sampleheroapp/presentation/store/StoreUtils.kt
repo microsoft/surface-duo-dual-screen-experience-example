@@ -156,7 +156,7 @@ fun checkDetailsAbout(store: Store) {
 }
 
 fun moveToContactTab() {
-    onView(withId(R.id.store_details_pager)).perform(swipeLeft())
+    onView(withId(R.id.store_details_view_pager)).perform(swipeLeft())
 }
 
 fun checkDetailsContact(store: Store) {
