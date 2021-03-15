@@ -9,7 +9,9 @@ package com.microsoft.device.display.sampleheroapp.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig
+import com.microsoft.device.display.sampleheroapp.common.prefs.PreferenceManager
+import com.microsoft.device.display.sampleheroapp.common.prefs.TutorialPreferences
+import com.microsoft.device.display.sampleheroapp.config.SharedPrefConfig.PREF_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,10 +21,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class SharedPrefModule {
+object SharedPrefModule {
 
     @Singleton
     @Provides
     fun provideSharedPref(@ApplicationContext appContext: Context): SharedPreferences =
-        appContext.getSharedPreferences(LocalStorageConfig.PREF_NAME, Context.MODE_PRIVATE)
+        appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+
+    @Singleton
+    @Provides
+    fun provideTutorialPreferences(prefManager: PreferenceManager): TutorialPreferences = prefManager
 }

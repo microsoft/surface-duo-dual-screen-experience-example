@@ -11,8 +11,6 @@ import com.microsoft.device.display.sampleheroapp.data.product.ProductDataSource
 import com.microsoft.device.display.sampleheroapp.data.product.ProductRepository
 import com.microsoft.device.display.sampleheroapp.data.store.StoreDataSource
 import com.microsoft.device.display.sampleheroapp.data.store.StoreRepository
-import com.microsoft.device.display.sampleheroapp.data.tutorial.TutorialDataSource
-import com.microsoft.device.display.sampleheroapp.data.tutorial.TutorialRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,10 +20,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class UseCasesModule {
-
-    @Singleton
-    @Binds
-    abstract fun provideTutorialRepo(repository: TutorialRepository): TutorialDataSource
 
     @Singleton
     @Binds

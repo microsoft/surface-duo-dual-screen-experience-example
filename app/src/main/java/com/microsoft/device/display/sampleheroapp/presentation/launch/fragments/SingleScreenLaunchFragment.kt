@@ -20,7 +20,7 @@ import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentSingleLaunchBinding
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel
 
-class SingleLaunchFragment : Fragment() {
+class SingleScreenLaunchFragment : Fragment() {
 
     private val viewModel: LaunchViewModel by activityViewModels()
 

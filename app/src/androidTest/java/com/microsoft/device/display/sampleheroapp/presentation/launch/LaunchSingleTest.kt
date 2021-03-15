@@ -10,7 +10,7 @@ package com.microsoft.device.display.sampleheroapp.presentation.launch
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig
+import com.microsoft.device.display.sampleheroapp.config.SharedPrefConfig.PREF_NAME
 import com.microsoft.device.display.sampleheroapp.presentation.store.checkMapFragment
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -37,10 +37,7 @@ class LaunchSingleTest {
 
     private fun resetSharedPrefs() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val sharedPref = context.getSharedPreferences(
-            LocalStorageConfig.PREF_NAME,
-            Context.MODE_PRIVATE
-        )
+        val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         sharedPref.edit().clear().commit()
     }
 

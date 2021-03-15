@@ -37,13 +37,13 @@ class TutorialBalloon(private val context: Context) {
     private val halfTipPadding = context.resources.getDimension(R.dimen.regular_padding).toInt() / 2
     private val microPadding = context.resources.getDimension(R.dimen.micro_padding).toInt()
 
-    fun show(parent: View, type: TutorialType) {
+    fun show(parent: View, balloonType: TutorialBalloonType) {
         if (canShow()) {
-            initContainer(buildTutorialModel(type))
+            initContainer(buildTutorialModel(balloonType))
             initWindow()
             measureAndLayout()
             parent.post {
-                val (xOffset, yOffset) = generateOffsets(type, parent.width, parent.height)
+                val (xOffset, yOffset) = generateOffsets(balloonType, parent.width, parent.height)
                 tutorialWindow?.showAsDropDown(parent, xOffset, yOffset)
             }
         }
@@ -60,14 +60,14 @@ class TutorialBalloon(private val context: Context) {
             }
     }
 
-    private fun buildTutorialModel(type: TutorialType) =
-        TutorialModel(type).apply {
-            when (type) {
-                TutorialType.LAUNCH_BOTTOM -> {
+    private fun buildTutorialModel(balloonType: TutorialBalloonType) =
+        TutorialModel(balloonType).apply {
+            when (balloonType) {
+                TutorialBalloonType.LAUNCH_BOTTOM -> {
                     backgroundDrawableIdRes = R.drawable.bottom_tutorial_balloon
                     stringRes = R.string.tutorial_launch_text
                 }
-                TutorialType.LAUNCH_RIGHT -> {
+                TutorialBalloonType.LAUNCH_RIGHT -> {
                     backgroundDrawableIdRes = R.drawable.right_tutorial_balloon
                     stringRes = R.string.tutorial_launch_text
                 }
@@ -87,10 +87,10 @@ class TutorialBalloon(private val context: Context) {
                     model.backgroundDrawableIdRes.takeIf { it != 0 }?.let {
                         background = ContextCompat.getDrawable(context, it)
                     }
-                    when (model.type) {
-                        TutorialType.LAUNCH_BOTTOM ->
+                    when (model.balloonType) {
+                        TutorialBalloonType.LAUNCH_BOTTOM ->
                             setPadding(halfTipPadding, microPadding, halfTipPadding, tipPadding)
-                        TutorialType.LAUNCH_RIGHT ->
+                        TutorialBalloonType.LAUNCH_RIGHT ->
                             setPadding(halfTipPadding, halfTipPadding, tipPadding, halfTipPadding)
                     }
                 },
@@ -113,15 +113,15 @@ class TutorialBalloon(private val context: Context) {
         tutorialWindow?.height = measuredHeight
     }
 
-    private fun generateOffsets(type: TutorialType, width: Int, height: Int): Pair<Int, Int> {
+    private fun generateOffsets(balloonType: TutorialBalloonType, width: Int, height: Int): Pair<Int, Int> {
         var xOffset = 0
         var yOffset = 0
 
-        when (type) {
-            TutorialType.LAUNCH_BOTTOM -> {
+        when (balloonType) {
+            TutorialBalloonType.LAUNCH_BOTTOM -> {
                 xOffset = width / 2 - (tipHorizontalMargin + tipHeight / 2)
             }
-            TutorialType.LAUNCH_RIGHT -> {
+            TutorialBalloonType.LAUNCH_RIGHT -> {
                 xOffset = width
                 yOffset = height / 2 + ((tutorialContainer?.height ?: 0) / 2) + tipHorizontalMargin
             }
@@ -146,13 +146,13 @@ class TutorialBalloon(private val context: Context) {
 
 const val TUTORIAL_TEST_ID = "Tutorial"
 
-data class TutorialModel(
-    val type: TutorialType,
+private data class TutorialModel(
+    val balloonType: TutorialBalloonType,
     @StringRes var stringRes: Int = 0,
     @DrawableRes var backgroundDrawableIdRes: Int = 0
 )
 
-enum class TutorialType {
+enum class TutorialBalloonType {
     LAUNCH_BOTTOM,
     LAUNCH_RIGHT
 }

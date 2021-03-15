@@ -10,20 +10,19 @@ package com.microsoft.device.display.sampleheroapp.presentation.launch
 import android.view.Surface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.microsoft.device.display.sampleheroapp.domain.tutorial.LaunchTutorialUseCase
+import com.microsoft.device.display.sampleheroapp.common.prefs.TutorialPreferences
 import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
-import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialType
+import com.microsoft.device.display.sampleheroapp.presentation.util.SingleLiveEvent
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloonType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LaunchViewModel @Inject constructor(
-    private val launchTutorialUseCase: LaunchTutorialUseCase
+    private val tutorialPrefs: TutorialPreferences,
 ) : ViewModel(), ItemClickListener<Boolean> {
     val isDualMode = MutableLiveData(false)
-    val isLaunchButtonClicked = MutableLiveData(false)
+    val isLaunchButtonClicked = SingleLiveEvent<Boolean>()
     val shouldShowTutorial = MutableLiveData<Int?>(null)
 
     override fun onClick(model: Boolean?) {
@@ -31,14 +30,12 @@ class LaunchViewModel @Inject constructor(
     }
 
     fun triggerShouldShowTutorial(rotation: Int) {
-        viewModelScope.launch {
-            shouldShowTutorial.value =
-                if (launchTutorialUseCase.shouldShowTutorialUseCase()) {
-                    getTutorialType(rotation)?.ordinal
-                } else {
-                    SHOULD_NOT_SHOW
-                }
-        }
+        shouldShowTutorial.value =
+            if (tutorialPrefs.shouldShowLaunchTutorial()) {
+                getTutorialType(rotation)?.ordinal
+            } else {
+                SHOULD_NOT_SHOW
+            }
     }
 
     fun dismissTutorial() {
@@ -49,8 +46,8 @@ class LaunchViewModel @Inject constructor(
 
     private fun getTutorialType(surfaceRotation: Int) =
         when (surfaceRotation) {
-            Surface.ROTATION_0, Surface.ROTATION_180 -> TutorialType.LAUNCH_BOTTOM
-            Surface.ROTATION_90, Surface.ROTATION_270 -> TutorialType.LAUNCH_RIGHT
+            Surface.ROTATION_0, Surface.ROTATION_180 -> TutorialBalloonType.LAUNCH_BOTTOM
+            Surface.ROTATION_90, Surface.ROTATION_270 -> TutorialBalloonType.LAUNCH_RIGHT
             else -> null
         }
 

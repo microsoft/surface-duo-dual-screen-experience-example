@@ -16,9 +16,9 @@ import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchDescriptionFragment
 import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchTitleFragment
-import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.SingleLaunchFragment
+import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.SingleScreenLaunchFragment
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
-import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialType
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloonType
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
@@ -39,16 +39,7 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
     }
 
     private fun setupObservers() {
-        viewModel.isLaunchButtonClicked.observe(
-            this,
-            {
-                if (it) {
-                    navigateToMainActivity()
-                    viewModel.isLaunchButtonClicked.value = false
-                }
-            }
-        )
-
+        viewModel.isLaunchButtonClicked.observe(this, { navigateToMainActivity() })
         viewModel.shouldShowTutorial.observe(this, { handleTutorial(it) })
     }
 
@@ -100,7 +91,7 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
     }
 
     private fun showTutorial(ordinal: Int) {
-        tutorial?.show(window.decorView, TutorialType.values()[ordinal])
+        tutorial?.show(window.decorView, TutorialBalloonType.values()[ordinal])
     }
 
     private fun dismissTutorial() {
@@ -109,31 +100,31 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
     }
 
     private fun setupSingleScreenFragments() {
-        if (supportFragmentManager.findFragmentByTag(FRAGMENT_SINGLE_SCREEN) == null) {
+        if (supportFragmentManager.findFragmentByTag(LAUNCH_FRAGMENT_SINGLE_SCREEN) == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, SingleLaunchFragment(), FRAGMENT_SINGLE_SCREEN)
+                .replace(R.id.first_container_id, SingleScreenLaunchFragment(), LAUNCH_FRAGMENT_SINGLE_SCREEN)
                 .commit()
         }
     }
 
     private fun setupDualScreenFragments() {
-        if (supportFragmentManager.findFragmentByTag(FRAGMENT_DUAL_START) == null &&
-            supportFragmentManager.findFragmentByTag(FRAGMENT_DUAL_END) == null
+        if (supportFragmentManager.findFragmentByTag(LAUNCH_FRAGMENT_TITLE) == null &&
+            supportFragmentManager.findFragmentByTag(LAUNCH_FRAGMENT_DESCRIPTION) == null
         ) {
 
             supportFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, LaunchTitleFragment(), FRAGMENT_DUAL_START)
+                .replace(R.id.first_container_id, LaunchTitleFragment(), LAUNCH_FRAGMENT_TITLE)
                 .commit()
 
             supportFragmentManager.beginTransaction()
-                .replace(R.id.second_container_id, LaunchDescriptionFragment(), FRAGMENT_DUAL_END)
+                .replace(R.id.second_container_id, LaunchDescriptionFragment(), LAUNCH_FRAGMENT_DESCRIPTION)
                 .commit()
         }
     }
 
     companion object {
-        private const val FRAGMENT_DUAL_START = "FragmentDualStart"
-        private const val FRAGMENT_DUAL_END = "FragmentDualEnd"
-        private const val FRAGMENT_SINGLE_SCREEN = "FragmentSingleScreen"
+        private const val LAUNCH_FRAGMENT_TITLE = "LaunchFragmentTitle"
+        private const val LAUNCH_FRAGMENT_DESCRIPTION = "LaunchFragmentDescription"
+        private const val LAUNCH_FRAGMENT_SINGLE_SCREEN = "LaunchFragmentSingleScreen"
     }
 }

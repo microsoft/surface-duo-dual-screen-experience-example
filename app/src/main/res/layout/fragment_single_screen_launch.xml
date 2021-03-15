@@ -23,23 +23,23 @@
         tools:context=".presentation.launch.LaunchActivity">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/launch_viewpager"
+            android:id="@+id/launch_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/launch_tabs"
+            app:layout_constraintBottom_toTopOf="@id/launch_tab_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/launch_tabs"
+            android:id="@+id/launch_tab_layout"
             style="@style/CircleIndicators"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/single_launch_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_viewpager"
+            app:layout_constraintTop_toBottomOf="@id/launch_view_pager"
             app:layout_constraintVertical_chainStyle="spread" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -53,7 +53,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_tabs"/>
+            app:layout_constraintTop_toBottomOf="@id/launch_tab_layout"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
