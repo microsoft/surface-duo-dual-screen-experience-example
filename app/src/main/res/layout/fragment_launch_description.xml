@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout>
+    <data>
+
+        <variable
+            name="launchListener"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Boolean&gt;" />
+
+        <variable
+            name="shouldDisplayButton"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingTop="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding"
+        tools:background="@color/gray"
+        tools:context=".presentation.launch.fragments.LaunchDescriptionFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/launch_description_text_view"
+            style="@style/Paragraph.Gold.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/launch_description"
+            app:layout_constraintBottom_toTopOf="@id/launch_description_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/launch_description_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/dual_launch_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/launch_description_text_view"
+            tools:src="@drawable/extended_canvas"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dual_launch_button"
+            style="@style/Launch.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/xxl_margin"
+            android:onClick="@{() -> launchListener.onClick(true)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:visibleIf="@{shouldDisplayButton}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

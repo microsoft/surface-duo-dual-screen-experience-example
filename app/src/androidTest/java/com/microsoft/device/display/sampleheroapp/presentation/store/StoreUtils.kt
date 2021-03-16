@@ -38,7 +38,7 @@ import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.core.AllOf.allOf
 
 fun checkMapFragment() {
-    onView(withId(R.id.mapContainer)).check(matches(isDisplayed()))
+    onView(withId(R.id.map_container)).check(matches(isDisplayed()))
     onView(withId(R.id.reset_fab)).check(matches(isDisplayed()))
 }
 
@@ -156,7 +156,7 @@ fun checkDetailsAbout(store: Store) {
 }
 
 fun moveToContactTab() {
-    onView(withId(R.id.store_details_pager)).perform(swipeLeft())
+    onView(withId(R.id.store_details_view_pager)).perform(swipeLeft())
 }
 
 fun checkDetailsContact(store: Store) {

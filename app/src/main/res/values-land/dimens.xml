@@ -45,10 +45,10 @@
     <dimen name="tab_indicator_radius">5dp</dimen>
     <dimen name="tab_indicator_margin">10dp</dimen>
 
-    <!-- Portrait dimens -->
+    <!-- Landscape dimens -->
 
-    <dimen name="launch_single_button_top_margin">24dp</dimen>
-    <dimen name="launch_single_button_bottom_margin">72dp</dimen>
+    <dimen name="launch_single_button_top_margin">0dp</dimen>
+    <dimen name="launch_single_button_bottom_margin">24dp</dimen>
 
     <!-- Single-mode dimens -->
 
