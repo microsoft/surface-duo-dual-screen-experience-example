@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.DuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
+import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     @Inject lateinit var navigator: AppNavigator
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
+    private val rotationViewModel: RotationViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -74,6 +76,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         ).currentDestination?.id == R.id.fragment_store_map
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
         if (screenInfo.isDualMode()) {
             tutorialViewModel.onDualMode()
         }
