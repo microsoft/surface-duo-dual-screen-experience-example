@@ -86,6 +86,13 @@ ext {
     ]
     microsoftDependencies["screenManager"] = microsoftDependencies.screenManagerWindowManager
 
+    //UI dependencies
+    lottieVersion = "3.6.1"
+
+    uiDependencies = [
+            lottie: "com.airbnb.android:lottie:$lottieVersion"
+    ]
+
     //Test dependencies version
     junitVersion = "4.13.1"
 

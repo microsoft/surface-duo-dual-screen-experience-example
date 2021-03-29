@@ -52,5 +52,10 @@
     <string name="product_details_type_description">%1$s is the pinnacle of craftsmanship, quality, and sound excellence.</string>
 
     <string name="product_details_customize_button">Customize</string>
+    <string name="product_details_place_order_button">Place order</string>
+
+    <string name="product_customize_color_title">Color</string>
+    <string name="product_customize_body_title">Body</string>
+    <string name="cancel_button">Cancel</string>
 
 </resources>

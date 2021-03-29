@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.product.customize.ProductCustomizeFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeViewModel" />
+
+        <variable
+            name="rotationViewModel"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:paddingTop="@dimen/medium_padding"
+        android:paddingBottom="@dimen/medium_padding">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/product_customize_cancel_button"
+            style="@style/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_customize_image"
+            android:layout_width="@dimen/product_image_height"
+            android:layout_height="@dimen/product_image_width"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_cancel_button"
+            app:visibleIf="@{!rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            tools:visibility="visible"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_customize_image_landscape"
+            android:layout_width="@dimen/product_image_width"
+            android:layout_height="@dimen/product_image_height"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/product_customize_body_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            tools:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_customize_color_title"
+            style="@style/GoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:text="@string/product_customize_color_title"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_color_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_image"/>
+
+        <LinearLayout
+            android:id="@+id/product_customize_color_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/normal_padding"
+            android:paddingTop="@dimen/normal_padding"
+            android:paddingEnd="@dimen/normal_padding"
+            android:paddingBottom="@dimen/normal_padding"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_body_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_color_title"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_customize_body_title"
+            style="@style/GoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:text="@string/product_customize_body_title"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_body_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_color_container"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/product_customize_body_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/normal_margin"
+            android:paddingTop="@dimen/normal_padding"
+            android:paddingEnd="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_body_title">
+
+            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_body_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="1"/>
+
+            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_body_3"
+                app:layout_constraintStart_toEndOf="@id/product_customize_body_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="2" />
+
+            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_body_4"
+                app:layout_constraintStart_toEndOf="@id/product_customize_body_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="3" />
+
+            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/product_customize_body_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

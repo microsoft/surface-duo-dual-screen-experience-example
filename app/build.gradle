@@ -98,6 +98,8 @@ dependencies {
     implementation microsoftDependencies.fragmentsHandler
     implementation microsoftDependencies.screenManager
 
+    implementation uiDependencies.lottie
+
     testImplementation testDependencies.junit
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
