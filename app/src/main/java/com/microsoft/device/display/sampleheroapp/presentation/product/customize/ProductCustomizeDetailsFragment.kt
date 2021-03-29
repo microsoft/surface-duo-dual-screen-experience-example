@@ -57,8 +57,9 @@ class ProductCustomizeDetailsFragment : Fragment() {
         viewModel.selectedProduct.observe(
             viewLifecycleOwner,
             {
+                val fretsNumber = it?.fretsNumber ?: 0
                 binding?.productDetailsFrets?.titleString =
-                    getString(R.string.product_details_frets_title, it?.fretsNumber ?: 0)
+                    getString(R.string.product_details_frets_title, fretsNumber)
             }
         )
 
