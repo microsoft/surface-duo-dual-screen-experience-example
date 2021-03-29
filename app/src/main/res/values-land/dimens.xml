@@ -43,6 +43,10 @@
     <dimen name="card_radius">8dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
 
+    <dimen name="star_rating_height">4dp</dimen>
+    <dimen name="customize_card_elevation">8dp</dimen>
+    <dimen name="customize_circle_size">30dp</dimen>
+
     <dimen name="tab_indicator_height">3dp</dimen>
     <dimen name="tab_indicator_radius">5dp</dimen>
     <dimen name="tab_indicator_margin">10dp</dimen>
