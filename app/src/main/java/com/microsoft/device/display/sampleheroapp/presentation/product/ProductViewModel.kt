@@ -34,7 +34,21 @@ class ProductViewModel @Inject constructor(
     override fun getDataList(): List<Product>? = productList.value
 
     override fun onClick(model: Product?) {
-        selectedProduct.value = model
-        navigator.navigateToDetails()
+        navigateToDetails()
+        selectProduct(model)
+    }
+
+    fun navigateToDetails() {
+        navigator.navigateToProductDetails()
+    }
+
+    fun selectFirstProduct() {
+        productList.value?.takeIf { selectedProduct.value == null }?.let { list ->
+            selectProduct(list[0])
+        }
+    }
+
+    private fun selectProduct(product: Product?) {
+        selectedProduct.value = product
     }
 }

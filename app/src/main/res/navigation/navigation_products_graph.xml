@@ -10,28 +10,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_products_graph"
-    app:startDestination="@id/fragment_list">
+    app:startDestination="@id/fragment_product_list">
 
     <fragment
-        android:id="@+id/fragment_list"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.ListFragment"
-        android:label="ListFragment"
-        tools:layout="@layout/fragment_list">
+        android:id="@+id/fragment_product_list"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.list.ProductListFragment"
+        android:label="ProductListFragment"
+        tools:layout="@layout/fragment_product_list">
 
-        <action android:id="@+id/action_product_list_to_detail"
-            app:destination="@id/fragment_detail" />
+        <action android:id="@+id/action_product_list_to_details"
+            app:destination="@id/fragment_product_details"
+            app:launchScreen="end"/>
 
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_detail"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.DetailFragment"
-        android:label="DetailFragment"
-        tools:layout="@layout/fragment_detail">
-
-        <action android:id="@+id/action_product_detail_to_list"
-            app:destination="@id/fragment_list" />
-
-    </fragment>
+        android:id="@+id/fragment_product_details"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.details.ProductDetailsFragment"
+        android:label="ProductDetailsFragment"
+        tools:layout="@layout/fragment_product_details"/>
 
 </navigation>

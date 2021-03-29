@@ -40,4 +40,17 @@
     <string name="address_label">Address:</string>
     <string name="contact_info_label">Owner Contact Info:</string>
 
+    <!-- Products -->
+
+    <string name="product_details_pickup_title">Custom Alnico III</string>
+    <string name="product_details_pickup_description">Pickups</string>
+
+    <string name="product_details_frets_title">%1$d Frets</string>
+    <string name="product_details_frets_description">Medium-Jumbo</string>
+
+    <string name="product_details_type_title">Electric Guitar</string>
+    <string name="product_details_type_description">%1$s is the pinnacle of craftsmanship, quality, and sound excellence.</string>
+
+    <string name="product_details_customize_button">Customize</string>
+
 </resources>
