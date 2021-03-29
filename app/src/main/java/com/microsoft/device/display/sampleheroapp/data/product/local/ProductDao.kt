@@ -20,13 +20,13 @@ interface ProductDao {
     suspend fun save(product: ProductEntity)
 
     @Insert(onConflict = REPLACE)
-    suspend fun insertAll(vararg products: ProductEntity)
+    suspend fun insert(vararg products: ProductEntity)
 
     @Delete
     suspend fun delete(product: ProductEntity)
 
-    @Query("SELECT * FROM products where id = :productId")
-    suspend fun load(productId: Long): ProductEntity?
+    @Query("SELECT * FROM products where productId = :productId")
+    suspend fun getById(productId: Long): ProductEntity?
 
     @Query("SELECT * FROM products")
     suspend fun getAll(): List<ProductEntity>

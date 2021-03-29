@@ -12,11 +12,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "products")
 data class ProductEntity(
+    @PrimaryKey val productId: Long,
     val name: String,
     val price: Int,
     val description: String,
-    val rating: Float
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
-}
+    val rating: Float,
+    val fretsNumber: Int,
+    val typeId: Int,
+    val colorId: Int
+)

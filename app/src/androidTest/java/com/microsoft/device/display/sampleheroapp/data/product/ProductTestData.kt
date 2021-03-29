@@ -9,8 +9,15 @@ package com.microsoft.device.display.sampleheroapp.data.product
 
 import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 
-interface ProductDataSource {
-    suspend fun getAll(): List<ProductEntity>
-    suspend fun getById(productId: Long): ProductEntity?
-    suspend fun insert(vararg products: ProductEntity)
-}
+val productEntity = ProductEntity(
+    1,
+    "EG - 29387 Wood",
+    6495,
+    "Wood body with gloss finish, Three Player Series pickups," +
+        "9.5\"-radius fingerboard," +
+        "2-point tremolo bridge",
+    3.1f,
+    21,
+    2,
+    5
+)
