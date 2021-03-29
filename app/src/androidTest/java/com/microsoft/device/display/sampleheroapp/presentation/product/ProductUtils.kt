@@ -7,6 +7,7 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.product
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
@@ -14,6 +15,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isSelected
+import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.microsoft.device.display.sampleheroapp.R
@@ -24,6 +27,7 @@ import com.microsoft.device.display.sampleheroapp.util.atRecyclerAdapterPosition
 import com.microsoft.device.display.sampleheroapp.util.clickChildViewWithId
 import com.microsoft.device.display.sampleheroapp.util.forceClick
 import org.hamcrest.CoreMatchers.containsString
+import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 
@@ -116,6 +120,13 @@ fun checkCustomizeControl() {
     onView(withId(R.id.product_customize_body_container)).check(matches(isDisplayed()))
 }
 
+fun checkCustomizeShapes() {
+    onView(withId(R.id.product_customize_body_1)).check(matches(isDisplayed()))
+    onView(withId(R.id.product_customize_body_2)).check(matches(isDisplayed()))
+    onView(withId(R.id.product_customize_body_3)).check(matches(isDisplayed()))
+    onView(withId(R.id.product_customize_body_4)).check(matches(isDisplayed()))
+}
+
 fun checkCustomizeImagePortrait() {
     onView(withId(R.id.product_customize_image)).check(matches(isDisplayed()))
 }
@@ -139,6 +150,46 @@ fun checkCustomizeDetailsImagePortrait() {
 
 fun checkCustomizeDetailsImageLandscape() {
     onView(withId(R.id.product_details_image)).check(matches(not(isDisplayed())))
+}
+
+fun checkShapeSelected(shape: ProductType?) {
+    onView(withContentDescription(shape?.toString())).check(matches(isSelected()))
+}
+
+fun selectShape(shape: ProductType?) {
+    onView(withContentDescription(shape?.toString())).perform(forceClick())
+}
+
+fun checkColorSelected(color: ProductColor?) {
+    onView(withContentDescription(color?.toString())).check(matches(isSelected()))
+}
+
+fun selectColor(color: ProductColor?) {
+    onView(withContentDescription(color?.toString())).perform(forceClick())
+}
+
+fun checkCustomizeImagePortraitContent(color: ProductColor?, shape: ProductType?) {
+    checkCustomizeImageContent(withId(R.id.product_customize_image), color, shape)
+}
+
+fun checkCustomizeImageLandscapeContent(color: ProductColor?, shape: ProductType?) {
+    checkCustomizeImageContent(withId(R.id.product_customize_image_landscape), color, shape)
+}
+
+fun checkCustomizeDetailsImageContent(color: ProductColor?, shape: ProductType?) {
+    checkCustomizeImageContent(withId(R.id.product_details_image), color, shape)
+}
+
+fun checkCustomizeImageContent(parentMatcher: Matcher<View>, color: ProductColor?, shape: ProductType?) {
+    onView(parentMatcher).check(
+        matches(
+            allOf(
+                isDisplayed(),
+                withContentDescription(containsString(shape?.toString()?.replace('_', ' ')?.toLowerCase())),
+                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.toLowerCase()))
+            )
+        )
+    )
 }
 
 fun goBack() {

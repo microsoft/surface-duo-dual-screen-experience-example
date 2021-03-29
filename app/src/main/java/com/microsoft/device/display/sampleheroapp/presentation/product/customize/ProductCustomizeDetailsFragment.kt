@@ -17,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductCustomizeDetailsBinding
+import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductContentDescription
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductDrawable
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,6 +74,8 @@ class ProductCustomizeDetailsFragment : Fragment() {
                     binding?.productDetailsImage?.setImageDrawable(
                         ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape))
                     )
+                    binding?.productDetailsImage?.contentDescription =
+                        context?.getString(getProductContentDescription(it, shape))
                 }
             }
         )

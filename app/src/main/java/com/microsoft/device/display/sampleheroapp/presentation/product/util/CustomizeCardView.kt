@@ -78,6 +78,7 @@ class CustomizeCardView @JvmOverloads constructor(
                     (it as GradientDrawable).setColor(ContextCompat.getColor(context, getColorRes(color)))
                 }
             }
+            contentDescription = productColor.toString()
         }
         unselect()
     }
@@ -87,6 +88,7 @@ class CustomizeCardView @JvmOverloads constructor(
             findViewById<ImageView>(R.id.customize_card_item).apply {
                 setImageDrawable(ContextCompat.getDrawable(context, getTypeDrawable(it)))
             }
+            contentDescription = productType.toString()
         }
         unselect()
     }

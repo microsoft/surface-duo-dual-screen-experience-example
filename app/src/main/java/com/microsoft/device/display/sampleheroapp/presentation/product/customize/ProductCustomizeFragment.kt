@@ -19,6 +19,7 @@ import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductCus
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductContentDescription
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductDrawable
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel.Companion.ROTATE_HORIZONTALLY
@@ -116,12 +117,18 @@ class ProductCustomizeFragment : Fragment() {
                 getProductDrawable(color, shape)
             )?.toBitmap()?.rotate(ROTATE_HORIZONTALLY)
         )
+        binding?.productCustomizeImage?.contentDescription =
+            context?.getString(getProductContentDescription(color, shape))
+
         binding?.productCustomizeImageLandscape?.setImageDrawable(
             ContextCompat.getDrawable(
                 requireContext(),
                 getProductDrawable(color, shape)
             )
         )
+
+        binding?.productCustomizeImageLandscape?.contentDescription =
+            context?.getString(getProductContentDescription(color, shape))
     }
 
     private fun addColorViews(parentView: ViewGroup?, colorList: List<ProductColor>, defaultSelected: ProductColor) {

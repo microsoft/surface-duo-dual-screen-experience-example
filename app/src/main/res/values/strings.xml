@@ -57,5 +57,16 @@
     <string name="product_customize_color_title">Color</string>
     <string name="product_customize_body_title">Body</string>
     <string name="cancel_button">Cancel</string>
+    
+    <string name="product_warlock_dark_red">Guitar of warlock shape and dark red color</string>
+    <string name="product_warlock_gray">Guitar of warlock shape and gray color</string>
+    <string name="product_classic_blue">Guitar of classic shape and blue color</string>
+    <string name="product_classic_white">Guitar of classic shape and white color</string>
+    <string name="product_classic_orange">Guitar of classic shape and orange color</string>
+    <string name="product_classic_aqua">Guitar of classic shape and aqua color</string>
+    <string name="product_explorer_black">Guitar of explorer shape and black color</string>
+    <string name="product_explorer_mustard">Guitar of explorer shape and mustard color</string>
+    <string name="product_explorer_white">Guitar of explorer shape and white color</string>
+    <string name="product_musiclander_red">Guitar of musiclander shape and red color</string>
 
 </resources>
