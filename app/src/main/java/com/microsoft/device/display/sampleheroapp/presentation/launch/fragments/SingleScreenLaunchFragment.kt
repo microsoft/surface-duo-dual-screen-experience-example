@@ -35,10 +35,10 @@ class SingleScreenLaunchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewPager(view)
+        setupViewPager()
     }
 
-    private fun setupViewPager(view: View) {
+    private fun setupViewPager() {
         val storeDetailsAdapter = LaunchFragmentAdapter(this)
         binding?.let {
             it.launchViewPager.isSaveEnabled = false

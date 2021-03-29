@@ -20,6 +20,7 @@
     <dimen name="store_image_width">197dp</dimen>
 
     <dimen name="largest_padding">80dp</dimen>
+    <dimen name="xxl_padding">72dp</dimen>
     <dimen name="xl_padding">48dp</dimen>
     <dimen name="large_padding">36dp</dimen>
     <dimen name="medium_padding">24dp</dimen>
@@ -36,6 +37,7 @@
     <dimen name="normal_margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="micro_margin">4dp</dimen>
+    <dimen name="nano_margin">2dp</dimen>
 
     <dimen name="card_height">300dp</dimen>
     <dimen name="card_radius">8dp</dimen>
@@ -44,6 +46,9 @@
     <dimen name="tab_indicator_height">3dp</dimen>
     <dimen name="tab_indicator_radius">5dp</dimen>
     <dimen name="tab_indicator_margin">10dp</dimen>
+
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
 
     <!-- Portrait dimens -->
 
