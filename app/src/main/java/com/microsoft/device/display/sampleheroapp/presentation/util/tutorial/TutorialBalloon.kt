@@ -10,7 +10,6 @@ package com.microsoft.device.display.sampleheroapp.presentation.util.tutorial
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.TypedValue
 import android.view.View
 import android.view.View.MeasureSpec
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -22,6 +21,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.presentation.util.dpToPx
 
 class TutorialBalloon(private val context: Context) {
 
@@ -101,7 +101,7 @@ class TutorialBalloon(private val context: Context) {
     }
 
     private fun measureAndLayout() {
-        val measureSpec = MeasureSpec.makeMeasureSpec(dpToPixel(tutorialWidth), MeasureSpec.AT_MOST)
+        val measureSpec = MeasureSpec.makeMeasureSpec(tutorialWidth.dpToPx(context), MeasureSpec.AT_MOST)
         tutorialContainer?.measure(measureSpec, measureSpec)
 
         val measuredWidth = tutorialContainer?.measuredWidth ?: 0
@@ -135,13 +135,6 @@ class TutorialBalloon(private val context: Context) {
         tutorialWindow?.takeIf { it.isShowing }?.dismiss()
         tutorialWindow = null
     }
-
-    private fun dpToPixel(dp: Float) =
-        TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            context.resources.displayMetrics
-        ).toInt()
 }
 
 const val TUTORIAL_TEST_ID = "Tutorial"

@@ -18,4 +18,10 @@ class ProductRepository @Inject constructor(
 ) : ProductDataSource {
 
     override suspend fun getAll(): List<ProductEntity> = localDataSource.getAll()
+
+    override suspend fun getById(productId: Long): ProductEntity? = localDataSource.getById(productId)
+
+    override suspend fun insert(vararg products: ProductEntity) {
+        localDataSource.insert(*products)
+    }
 }

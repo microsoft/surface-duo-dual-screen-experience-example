@@ -10,11 +10,77 @@ package com.microsoft.device.display.sampleheroapp.domain.product.model
 import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
 
 data class Product(
+    val productId: Long,
     val name: String,
     val price: Int,
     val description: String,
-    val rating: Float
+    val rating: Float,
+    val fretsNumber: Int,
+    val bodyShape: ProductType?,
+    val colorId: ProductColor?
 ) {
     constructor(entity: ProductEntity) :
-        this(entity.name, entity.price, entity.description, entity.rating)
+        this(
+            entity.productId,
+            entity.name,
+            entity.price,
+            entity.description,
+            entity.rating,
+            entity.fretsNumber,
+            ProductType.get(entity.typeId),
+            ProductColor.get(entity.colorId)
+        )
+}
+
+enum class ProductType(var bodyShapeId: Int, var colorList: List<ProductColor>) {
+    WARLOCK(
+        1,
+        listOf(
+            ProductColor.DARK_RED,
+            ProductColor.GRAY
+        )
+    ),
+    CLASSIC(
+        2,
+        listOf(
+            ProductColor.BLUE,
+            ProductColor.WHITE,
+            ProductColor.ORANGE,
+            ProductColor.AQUA
+        )
+    ),
+    EXPLORER(
+        3,
+        listOf(
+            ProductColor.BLACK,
+            ProductColor.MUSTARD,
+            ProductColor.WHITE
+        )
+    ),
+    MUSICLANDER(
+        4,
+        listOf(
+            ProductColor.RED
+        )
+    );
+
+    companion object {
+        fun get(bodyShapeId: Int?) = values().firstOrNull { it.bodyShapeId == bodyShapeId }
+    }
+}
+
+enum class ProductColor(var colorId: Int) {
+    DARK_RED(1),
+    GRAY(2),
+    BLUE(3),
+    WHITE(4),
+    ORANGE(5),
+    AQUA(6),
+    BLACK(7),
+    MUSTARD(8),
+    RED(9);
+
+    companion object {
+        fun get(colorId: Int?) = values().firstOrNull { it.colorId == colorId }
+    }
 }

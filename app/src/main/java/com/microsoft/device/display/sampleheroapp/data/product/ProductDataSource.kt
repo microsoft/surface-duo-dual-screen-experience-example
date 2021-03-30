@@ -11,4 +11,6 @@ import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEnti
 
 interface ProductDataSource {
     suspend fun getAll(): List<ProductEntity>
+    suspend fun getById(productId: Long): ProductEntity?
+    suspend fun insert(vararg products: ProductEntity)
 }

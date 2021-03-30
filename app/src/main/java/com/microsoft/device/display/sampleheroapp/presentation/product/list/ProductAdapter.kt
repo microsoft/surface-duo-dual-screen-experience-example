@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.presentation.product
+package com.microsoft.device.display.sampleheroapp.presentation.product.list
 
 import android.content.Context
 import android.view.LayoutInflater

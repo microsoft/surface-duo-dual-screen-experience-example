@@ -5,14 +5,13 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp
+package com.microsoft.device.display.sampleheroapp.data.product
 
 import androidx.room.Room
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import com.microsoft.device.display.sampleheroapp.data.AppDatabase
-import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
-import com.microsoft.device.display.sampleheroapp.data.product.model.ProductEntity
+import com.microsoft.device.display.sampleheroapp.data.product.local.ProductLocalDataSource
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.empty
 import org.hamcrest.core.IsNot.not
@@ -25,16 +24,16 @@ import org.junit.runner.RunWith
 import org.hamcrest.core.Is.`is` as iz
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class AppDatabaseTest {
+class ProductRepositoryTest {
 
-    private lateinit var productDao: ProductDao
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+    private lateinit var productRepo: ProductRepository
     private lateinit var db: AppDatabase
 
     @Before
     fun createDb() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        productDao = db.productDao()
+        productRepo = ProductRepository(ProductLocalDataSource(db.productDao()))
     }
 
     @After
@@ -44,15 +43,14 @@ class AppDatabaseTest {
 
     @Test
     fun insertAndGetProducts() = runBlocking {
-        assertThat(productDao.getAll(), iz(emptyList()))
-        assertNull(productDao.load(5))
+        assertThat(productRepo.getAll(), iz(emptyList()))
+        assertNull(productRepo.getById(productEntity.productId))
 
-        val product = ProductEntity("guitar", 30, "Great", 4f)
-        product.id = 3
-        productDao.insertAll(product)
-        val result = productDao.getAll()
+        productRepo.insert(productEntity)
+        val result = productRepo.getAll()
+
         assertThat(result, iz(not(empty())))
-        assertThat(result[0], iz(product))
-        assertThat(productDao.load(3), iz(product))
+        assertThat(result, iz(listOf(productEntity)))
+        assertThat(productRepo.getById(productEntity.productId), iz(productEntity))
     }
 }

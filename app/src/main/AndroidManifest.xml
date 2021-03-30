@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.MainActivity"/>
+        <activity android:name=".presentation.MainActivity" />
+        <activity android:name=".presentation.product.customize.ProductCustomizeActivity"/>
     </application>
 
 </manifest>

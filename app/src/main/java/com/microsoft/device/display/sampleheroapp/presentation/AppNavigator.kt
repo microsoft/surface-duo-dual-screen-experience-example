@@ -23,8 +23,10 @@ class AppNavigator : ProductNavigator, StoreNavigator {
         this.navController = null
     }
 
-    override fun navigateToDetails() {
-        navController?.navigate(R.id.action_product_list_to_detail)
+    override fun navigateToProductDetails() {
+        if (navController?.currentDestination?.id != R.id.fragment_product_details) {
+            navController?.navigate(R.id.action_product_list_to_details)
+        }
     }
 
     override fun navigateToMap() {

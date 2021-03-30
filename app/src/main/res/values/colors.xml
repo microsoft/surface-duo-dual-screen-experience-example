@@ -7,13 +7,24 @@
   -->
 
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="dark_white">#E7DFE8</color>
     <color name="light_gray">#C4C4C4</color>
     <color name="gray">#1F2228</color>
+
+    <color name="bright_orange">#FFA500</color>
     <color name="orange">#F6B63D</color>
     <color name="dark_orange">#B58937</color>
+
     <color name="gold">#DDCAB3</color>
     <color name="dark_blue">#2A3037</color>
+
+    <color name="guitar_red_color">#D92D2A</color>
+    <color name="guitar_blue_color">#1873B5</color>
+    <color name="guitar_gray_color">#575347</color>
+    <color name="guitar_orange_color">#D66C01</color>
+    <color name="guitar_mustard_color">#D6B44A</color>
+    <color name="guitar_aqua_color">#87E2DD</color>
+    <color name="guitar_dark_red_color">#BC0101</color>
 </resources>

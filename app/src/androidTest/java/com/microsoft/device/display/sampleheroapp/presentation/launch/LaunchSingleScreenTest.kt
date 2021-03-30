@@ -7,29 +7,39 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.launch
 
+import android.content.Context
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.microsoft.device.display.sampleheroapp.config.SharedPrefConfig.PREF_NAME
 import com.microsoft.device.display.sampleheroapp.presentation.store.checkMapFragment
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
-import com.microsoft.device.display.sampleheroapp.util.switchFromDualToSingleScreen
-import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 
 @HiltAndroidTest
-class LaunchDualTest {
+class LaunchSingleScreenTest {
 
     private val activityRule = ActivityTestRule(LaunchActivity::class.java)
 
     @get:Rule
     var ruleChain: RuleChain =
         RuleChain.outerRule(HiltAndroidRule(this)).around(activityRule)
+
+    init {
+        resetSharedPrefs()
+    }
+
+    private fun resetSharedPrefs() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPref.edit().clear().commit()
+    }
 
     @After
     fun resetOrientation() {
@@ -38,64 +48,38 @@ class LaunchDualTest {
     }
 
     @Test
-    fun openLaunchInDualPortraitMode() {
-        switchFromSingleToDualScreen()
-
-        checkLaunchInDualMode()
-
-        switchFromDualToSingleScreen()
-        checkTutorialNotShowing()
+    fun openLaunchInPortraitMode() {
+        checkLaunchInSingleMode()
     }
 
     @Test
-    fun openLaunchInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
+    fun openLaunchInLandscapeMode() {
         setOrientationRight()
 
-        checkLaunchInDualMode()
-
-        switchFromDualToSingleScreen()
-        checkTutorialNotShowing()
+        checkLaunchInSingleMode()
     }
 
     @Test
-    fun openMainInDualPortraitMode() {
-        switchFromSingleToDualScreen()
-
-        checkDualLaunchButton()
-        clickDualLaunchButton()
-
-        checkMapFragment()
-        goBack()
-
-        checkLaunchInDualMode()
-    }
-
-    @Test
-    fun openMainInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
-
-        checkDualLaunchButton()
-        clickDualLaunchButton()
-
-        checkMapFragment()
-        goBack()
-
-        checkLaunchInDualMode()
-    }
-
-    // This test fails now because of an issue from the SDK
-    @Ignore
-    @Test
-    fun spanMain() {
+    fun openMainInPortraitMode() {
         checkSingleLaunchButton()
         clickSingleLaunchButton()
 
         checkMapFragment()
-        switchFromSingleToDualScreen()
         goBack()
 
-        checkLaunchInDualMode()
+        checkLaunchInSingleMode()
+    }
+
+    @Test
+    fun openMainInLandscapeMode() {
+        setOrientationRight()
+
+        checkSingleLaunchButton()
+        clickSingleLaunchButton()
+
+        checkMapFragment()
+        goBack()
+
+        checkLaunchInSingleMode()
     }
 }

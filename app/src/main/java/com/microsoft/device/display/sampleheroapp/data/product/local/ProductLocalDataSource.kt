@@ -16,4 +16,10 @@ class ProductLocalDataSource @Inject constructor(
 ) : ProductDataSource {
 
     override suspend fun getAll(): List<ProductEntity> = productDao.getAll()
+
+    override suspend fun getById(productId: Long) = productDao.getById(productId)
+
+    override suspend fun insert(vararg products: ProductEntity) {
+        productDao.insert(*products)
+    }
 }

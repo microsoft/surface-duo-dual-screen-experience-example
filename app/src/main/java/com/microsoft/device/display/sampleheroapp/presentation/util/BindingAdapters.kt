@@ -9,15 +9,19 @@ package com.microsoft.device.display.sampleheroapp.presentation.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
 import com.microsoft.device.display.sampleheroapp.domain.store.model.StoreImage
+import com.microsoft.device.display.sampleheroapp.presentation.product.util.StarRatingView
+import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductDrawable
 
 @BindingAdapter("storeImage")
-fun imageRes(view: ImageView, image: StoreImage?) {
+fun getStoreImageRes(view: ImageView, image: StoreImage?) {
     image?.let {
-        val resId = when (image) {
+        val resId = when (it) {
             StoreImage.JOY -> R.drawable.joy_store
             StoreImage.CESAR -> R.drawable.cesar_store
             StoreImage.HAKON -> R.drawable.hakon_store
@@ -30,7 +34,26 @@ fun imageRes(view: ImageView, image: StoreImage?) {
     }
 }
 
+@BindingAdapter("productImage")
+fun getProductImageRes(view: ImageView, product: Product?) {
+    if (product?.bodyShape != null && product.colorId != null) {
+        val resId = getProductDrawable(product.colorId, product.bodyShape)
+        view.setImageDrawable(ResourcesCompat.getDrawable(view.resources, resId, null))
+    }
+}
+
 @BindingAdapter("visibleIf")
 fun showHide(view: View, shouldBeVisible: Boolean) {
     view.visibility = if (shouldBeVisible) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("price")
+fun formatPrice(view: TextView, value: Float) {
+    val priceString = "$" + value.addThousandsSeparator()
+    view.text = priceString
+}
+
+@BindingAdapter("ratingValue")
+fun setValueToStarRatingView(view: StarRatingView, value: Float) {
+    view.setValue(value)
 }
