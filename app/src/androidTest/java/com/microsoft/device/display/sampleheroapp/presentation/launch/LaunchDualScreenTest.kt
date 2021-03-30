@@ -7,39 +7,29 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.launch
 
-import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.microsoft.device.display.sampleheroapp.config.SharedPrefConfig.PREF_NAME
 import com.microsoft.device.display.sampleheroapp.presentation.store.checkMapFragment
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
+import com.microsoft.device.display.sampleheroapp.util.switchFromDualToSingleScreen
+import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 
 @HiltAndroidTest
-class LaunchSingleTest {
+class LaunchDualScreenTest {
 
     private val activityRule = ActivityTestRule(LaunchActivity::class.java)
 
     @get:Rule
     var ruleChain: RuleChain =
         RuleChain.outerRule(HiltAndroidRule(this)).around(activityRule)
-
-    init {
-        resetSharedPrefs()
-    }
-
-    private fun resetSharedPrefs() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        sharedPref.edit().clear().commit()
-    }
 
     @After
     fun resetOrientation() {
@@ -48,38 +38,64 @@ class LaunchSingleTest {
     }
 
     @Test
-    fun openLaunchInPortraitMode() {
-        checkLaunchInSingleMode()
+    fun openLaunchInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        checkLaunchInDualMode()
+
+        switchFromDualToSingleScreen()
+        checkTutorialNotShowing()
     }
 
     @Test
-    fun openLaunchInLandscapeMode() {
+    fun openLaunchInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
         setOrientationRight()
 
-        checkLaunchInSingleMode()
+        checkLaunchInDualMode()
+
+        switchFromDualToSingleScreen()
+        checkTutorialNotShowing()
     }
 
     @Test
-    fun openMainInPortraitMode() {
-        checkSingleLaunchButton()
-        clickSingleLaunchButton()
+    fun openMainInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        checkDualLaunchButton()
+        clickDualLaunchButton()
 
         checkMapFragment()
         goBack()
 
-        checkLaunchInSingleMode()
+        checkLaunchInDualMode()
     }
 
     @Test
-    fun openMainInLandscapeMode() {
+    fun openMainInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
         setOrientationRight()
 
-        checkSingleLaunchButton()
-        clickSingleLaunchButton()
+        checkDualLaunchButton()
+        clickDualLaunchButton()
 
         checkMapFragment()
         goBack()
 
-        checkLaunchInSingleMode()
+        checkLaunchInDualMode()
+    }
+
+    // This test fails now because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
+    @Ignore
+    @Test
+    fun spanMain() {
+        checkSingleLaunchButton()
+        clickSingleLaunchButton()
+
+        checkMapFragment()
+        switchFromSingleToDualScreen()
+        goBack()
+
+        checkLaunchInDualMode()
     }
 }

@@ -14,25 +14,19 @@ import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductCo
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
-import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetails
-import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetailsImageContent
-import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetailsImageLandscape
-import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetailsImagePortrait
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImageLandscape
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImageLandscapeContent
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImagePortrait
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImagePortraitContent
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeShapes
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkShapeSelected
+import com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeViewModel.Companion.SELECTED_PRODUCT_ID
 import com.microsoft.device.display.sampleheroapp.presentation.product.product
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectColor
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectShape
 import com.microsoft.device.display.sampleheroapp.util.setOrientationNatural
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
-import com.microsoft.device.display.sampleheroapp.util.switchFromDualToSingleScreen
-import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
-import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -41,7 +35,7 @@ import org.junit.Test
 import org.junit.rules.RuleChain
 
 @HiltAndroidTest
-class ProductCustomizeDualTest {
+class ProductCustomizeSingleScreenTest {
 
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
@@ -49,7 +43,7 @@ class ProductCustomizeDualTest {
         object : ActivityTestRule<ProductCustomizeActivity>(ProductCustomizeActivity::class.java) {
             override fun getActivityIntent() =
                 Intent(context, ProductCustomizeActivity::class.java).apply {
-                    putExtra(ProductCustomizeViewModel.SELECTED_PRODUCT_ID, product.productId)
+                    putExtra(SELECTED_PRODUCT_ID, product.productId)
                 }
         }
 
@@ -60,37 +54,26 @@ class ProductCustomizeDualTest {
     @After
     fun resetOrientation() {
         unfreezeRotation()
-        ScreenManagerProvider.getScreenManager().clear()
     }
 
     @Test
     fun checkCustomizeInPortraitMode() {
-        switchFromSingleToDualScreen()
-
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImagePortrait()
 
-        checkCustomizeDetails(product)
-        checkCustomizeDetailsImagePortrait()
-
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.colorId)
         checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
-        checkCustomizeDetailsImageContent(product.colorId, product.bodyShape)
     }
 
     @Test
     fun checkCustomizeInLandscapeMode() {
-        switchFromSingleToDualScreen()
         setOrientationRight()
 
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImageLandscape()
-
-        checkCustomizeDetails(product)
-        checkCustomizeDetailsImageLandscape()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.colorId)
@@ -103,25 +86,11 @@ class ProductCustomizeDualTest {
         checkColorSelected(product.colorId)
         checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
 
-        selectColor(ProductColor.BLUE)
-
-        checkShapeSelected(product.bodyShape)
-        checkColorSelected(ProductColor.BLUE)
-        checkCustomizeImagePortraitContent(ProductColor.BLUE, product.bodyShape)
-
-        switchFromSingleToDualScreen()
-
-        checkShapeSelected(product.bodyShape)
-        checkColorSelected(ProductColor.BLUE)
-        checkCustomizeImagePortraitContent(ProductColor.BLUE, product.bodyShape)
-        checkCustomizeDetailsImageContent(ProductColor.BLUE, product.bodyShape)
-
         selectColor(ProductColor.AQUA)
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.AQUA)
         checkCustomizeImagePortraitContent(ProductColor.AQUA, product.bodyShape)
-        checkCustomizeDetailsImageContent(ProductColor.AQUA, product.bodyShape)
 
         setOrientationRight()
 
@@ -140,13 +109,6 @@ class ProductCustomizeDualTest {
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.WHITE)
         checkCustomizeImagePortraitContent(ProductColor.WHITE, product.bodyShape)
-        checkCustomizeDetailsImageContent(ProductColor.WHITE, product.bodyShape)
-
-        switchFromDualToSingleScreen()
-
-        checkShapeSelected(product.bodyShape)
-        checkColorSelected(ProductColor.WHITE)
-        checkCustomizeImagePortraitContent(ProductColor.WHITE, product.bodyShape)
     }
 
     @Test
@@ -155,25 +117,11 @@ class ProductCustomizeDualTest {
         checkColorSelected(product.colorId)
         checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
 
-        selectShape(ProductType.MUSICLANDER)
-
-        checkShapeSelected(ProductType.MUSICLANDER)
-        checkColorSelected(ProductColor.RED)
-        checkCustomizeImagePortraitContent(ProductColor.RED, ProductType.MUSICLANDER)
-
-        switchFromSingleToDualScreen()
-
-        checkShapeSelected(ProductType.MUSICLANDER)
-        checkColorSelected(ProductColor.RED)
-        checkCustomizeImagePortraitContent(ProductColor.RED, ProductType.MUSICLANDER)
-        checkCustomizeDetailsImageContent(ProductColor.RED, ProductType.MUSICLANDER)
-
         selectShape(ProductType.EXPLORER)
 
         checkShapeSelected(ProductType.EXPLORER)
         checkColorSelected(ProductColor.BLACK)
         checkCustomizeImagePortraitContent(ProductColor.BLACK, ProductType.EXPLORER)
-        checkCustomizeDetailsImageContent(ProductColor.BLACK, ProductType.EXPLORER)
 
         setOrientationRight()
 
@@ -188,13 +136,6 @@ class ProductCustomizeDualTest {
         checkCustomizeImageLandscapeContent(ProductColor.DARK_RED, ProductType.WARLOCK)
 
         setOrientationNatural()
-
-        checkShapeSelected(ProductType.WARLOCK)
-        checkColorSelected(ProductColor.DARK_RED)
-        checkCustomizeImagePortraitContent(ProductColor.DARK_RED, ProductType.WARLOCK)
-        checkCustomizeDetailsImageContent(ProductColor.DARK_RED, ProductType.WARLOCK)
-
-        switchFromDualToSingleScreen()
 
         checkShapeSelected(ProductType.WARLOCK)
         checkColorSelected(ProductColor.DARK_RED)

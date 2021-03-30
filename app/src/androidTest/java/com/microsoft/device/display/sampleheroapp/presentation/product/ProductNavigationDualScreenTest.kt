@@ -21,7 +21,7 @@ import org.junit.Test
 import org.junit.rules.RuleChain
 
 @HiltAndroidTest
-class ProductNavigationDualTest {
+class ProductNavigationDualScreenTest {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
 
@@ -58,6 +58,7 @@ class ProductNavigationDualTest {
         checkCustomizeButton()
     }
 
+    // The commented checks fail because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
     @Test
     fun openCustomizeInDualPortraitMode() {
         switchFromSingleToDualScreen()
@@ -81,6 +82,7 @@ class ProductNavigationDualTest {
         checkProductDetails(product)
     }
 
+    // The commented checks fail because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
     @Test
     fun openCustomizeInDualLandscapeMode() {
         switchFromSingleToDualScreen()
