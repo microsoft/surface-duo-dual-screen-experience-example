@@ -9,12 +9,12 @@ package com.microsoft.device.display.sampleheroapp.presentation.product.util
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.presentation.util.dpToPx
 import kotlin.math.roundToInt
 
 class StarRatingView @JvmOverloads constructor(
@@ -46,8 +46,8 @@ class StarRatingView @JvmOverloads constructor(
                     setImageResource(R.drawable.ic_star_empty)
                     gravity = Gravity.CENTER_VERTICAL
                 },
-                LayoutParams(dpToPixel(heightView), dpToPixel(heightView)).apply {
-                    marginEnd = dpToPixel(starMargin)
+                LayoutParams(heightView.dpToPx(context), heightView.dpToPx(context)).apply {
+                    marginEnd = starMargin.dpToPx(context)
                 }
             )
         }
@@ -58,7 +58,7 @@ class StarRatingView @JvmOverloads constructor(
                 textSize = heightView
             },
             LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                marginStart = dpToPixel(starMargin)
+                marginStart = starMargin.dpToPx(context)
             }
         )
     }
@@ -98,13 +98,6 @@ class StarRatingView @JvmOverloads constructor(
             throw IllegalStateException("Rating should be a float value between $MIN_STARS and $STAR_COUNT")
         }
     }
-
-    private fun dpToPixel(dp: Float) =
-        TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            dp,
-            context.resources.displayMetrics
-        ).toInt()
 
     companion object {
         const val STAR_COUNT = 5

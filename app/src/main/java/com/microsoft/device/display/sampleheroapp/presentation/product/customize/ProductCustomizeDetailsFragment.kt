@@ -45,6 +45,12 @@ class ProductCustomizeDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initBindingFields()
+        setupObservers()
+        setupListeners()
+    }
+
+    private fun initBindingFields() {
         binding?.productDetailsFrets?.descriptionString =
             getString(R.string.product_details_frets_description)
 
@@ -53,7 +59,9 @@ class ProductCustomizeDetailsFragment : Fragment() {
 
         binding?.productDetailsPickup?.descriptionString =
             getString(R.string.product_details_pickup_description)
+    }
 
+    private fun setupObservers() {
         viewModel.selectedProduct.observe(
             viewLifecycleOwner,
             {
@@ -62,10 +70,6 @@ class ProductCustomizeDetailsFragment : Fragment() {
                     getString(R.string.product_details_frets_title, fretsNumber)
             }
         )
-
-        binding?.productDetailsCustomizePlaceOrder?.setOnClickListener {
-            (it as LottieAnimationView).playAnimation()
-        }
 
         viewModel.selectedBodyColor.observe(
             viewLifecycleOwner,
@@ -80,6 +84,12 @@ class ProductCustomizeDetailsFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun setupListeners() {
+        binding?.productDetailsCustomizePlaceOrder?.setOnClickListener {
+            (it as LottieAnimationView).playAnimation()
+        }
     }
 
     override fun onDestroyView() {

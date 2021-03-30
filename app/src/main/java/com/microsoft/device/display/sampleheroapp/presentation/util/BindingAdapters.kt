@@ -17,9 +17,6 @@ import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
 import com.microsoft.device.display.sampleheroapp.domain.store.model.StoreImage
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.StarRatingView
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductDrawable
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.Locale
 
 @BindingAdapter("storeImage")
 fun getStoreImageRes(view: ImageView, image: StoreImage?) {
@@ -52,9 +49,7 @@ fun showHide(view: View, shouldBeVisible: Boolean) {
 
 @BindingAdapter("price")
 fun formatPrice(view: TextView, value: Float) {
-    val priceString = "$" + (NumberFormat.getInstance(Locale.US) as DecimalFormat).apply {
-        applyPattern("#,###")
-    }.format(value)
+    val priceString = "$" + value.addThousandsSeparator()
     view.text = priceString
 }
 

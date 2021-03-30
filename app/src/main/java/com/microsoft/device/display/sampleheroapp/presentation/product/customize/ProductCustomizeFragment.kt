@@ -51,15 +51,11 @@ class ProductCustomizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.productCustomizeBody1?.setOnClickListener(::onBodyShapeClicked)
-        binding?.productCustomizeBody2?.setOnClickListener(::onBodyShapeClicked)
-        binding?.productCustomizeBody3?.setOnClickListener(::onBodyShapeClicked)
-        binding?.productCustomizeBody4?.setOnClickListener(::onBodyShapeClicked)
+        setupObservers()
+        setupListeners()
+    }
 
-        binding?.productCustomizeCancelButton?.setOnClickListener {
-            activity?.finish()
-        }
-
+    private fun setupObservers() {
         viewModel.selectedProduct.observe(
             viewLifecycleOwner,
             { product ->
@@ -108,6 +104,17 @@ class ProductCustomizeFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun setupListeners() {
+        binding?.productCustomizeBody1?.setOnClickListener(::onBodyShapeClicked)
+        binding?.productCustomizeBody2?.setOnClickListener(::onBodyShapeClicked)
+        binding?.productCustomizeBody3?.setOnClickListener(::onBodyShapeClicked)
+        binding?.productCustomizeBody4?.setOnClickListener(::onBodyShapeClicked)
+
+        binding?.productCustomizeCancelButton?.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     private fun setCustomizeImageDrawable(color: ProductColor, shape: ProductType) {

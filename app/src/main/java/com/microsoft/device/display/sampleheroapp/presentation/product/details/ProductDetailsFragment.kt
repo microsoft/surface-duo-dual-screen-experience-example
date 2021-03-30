@@ -46,7 +46,12 @@ class ProductDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initBindingFields()
+        setupObservers()
+        setupListeners()
+    }
 
+    private fun initBindingFields() {
         binding?.productDetailsFrets?.descriptionString =
             getString(R.string.product_details_frets_description)
 
@@ -55,15 +60,6 @@ class ProductDetailsFragment : Fragment() {
 
         binding?.productDetailsPickup?.descriptionString =
             getString(R.string.product_details_pickup_description)
-
-        viewModel.selectedProduct.observe(
-            viewLifecycleOwner,
-            {
-                val fretsNumber = it?.fretsNumber ?: 0
-                binding?.productDetailsFrets?.titleString =
-                    getString(R.string.product_details_frets_title, fretsNumber)
-            }
-        )
 
         binding?.productDetailsImage?.apply {
             viewModel.selectedProduct.value?.let {
@@ -77,9 +73,9 @@ class ProductDetailsFragment : Fragment() {
                 }
             }
         }
+    }
 
-        viewModel.productList.observe(viewLifecycleOwner, { viewModel.selectFirstProduct() })
-
+    private fun setupListeners() {
         binding?.productDetailsCustomizeButton?.setOnClickListener {
             startActivity(
                 Intent(requireContext(), ProductCustomizeActivity::class.java).apply {
@@ -89,6 +85,19 @@ class ProductDetailsFragment : Fragment() {
                 }
             )
         }
+    }
+
+    private fun setupObservers() {
+        viewModel.selectedProduct.observe(
+            viewLifecycleOwner,
+            {
+                val fretsNumber = it?.fretsNumber ?: 0
+                binding?.productDetailsFrets?.titleString =
+                    getString(R.string.product_details_frets_title, fretsNumber)
+            }
+        )
+
+        viewModel.productList.observe(viewLifecycleOwner, { viewModel.selectFirstProduct() })
     }
 
     override fun onDestroyView() {
