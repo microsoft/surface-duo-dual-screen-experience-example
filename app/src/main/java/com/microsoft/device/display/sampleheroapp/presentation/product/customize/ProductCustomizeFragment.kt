@@ -60,13 +60,11 @@ class ProductCustomizeFragment : Fragment() {
             viewLifecycleOwner,
             { product ->
                 product?.let {
-                    if (it.bodyShape != null) {
-                        if (viewModel.selectedBodyShape.value == null) {
-                            viewModel.selectedBodyShape.value = it.bodyShape
-                        }
-                        viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
-                            getBodyShape(updatedBodyShape)?.select()
-                        }
+                    if (viewModel.selectedBodyShape.value == null) {
+                        viewModel.selectedBodyShape.value = it.bodyShape
+                    }
+                    viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
+                        getBodyShape(updatedBodyShape)?.select()
                     }
                 }
             }
@@ -78,10 +76,10 @@ class ProductCustomizeFragment : Fragment() {
                 val selectedItem = viewModel.selectedProduct.value
                 if (it != null && selectedItem != null) {
                     if (it == selectedItem.bodyShape) {
-                        selectedItem.colorId
+                        selectedItem.color
                     } else {
                         it.colorList[0]
-                    }?.let { newColor ->
+                    }.let { newColor ->
                         viewModel.selectedBodyColor.value = newColor
                         addColorViews(binding?.productCustomizeColorContainer, it.colorList, newColor)
                     }

@@ -63,14 +63,12 @@ class ProductDetailsFragment : Fragment() {
 
         binding?.productDetailsImage?.apply {
             viewModel.selectedProduct.value?.let {
-                if (it.colorId != null && it.bodyShape != null) {
-                    setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            getProductDrawable(it.colorId, it.bodyShape)
-                        )
+                setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        getProductDrawable(it.color, it.bodyShape)
                     )
-                }
+                )
             }
         }
     }

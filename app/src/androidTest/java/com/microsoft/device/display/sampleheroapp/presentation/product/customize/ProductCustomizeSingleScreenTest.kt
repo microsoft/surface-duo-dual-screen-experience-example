@@ -63,8 +63,8 @@ class ProductCustomizeSingleScreenTest {
         checkCustomizeImagePortrait()
 
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
     }
 
     @Test
@@ -76,15 +76,15 @@ class ProductCustomizeSingleScreenTest {
         checkCustomizeImageLandscape()
 
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImageLandscapeContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImageLandscapeContent(product.color, product.bodyShape)
     }
 
     @Test
     fun checkNewColorSelection() {
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
         selectColor(ProductColor.AQUA)
 
@@ -114,8 +114,8 @@ class ProductCustomizeSingleScreenTest {
     @Test
     fun checkNewShapeSelection() {
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
         selectShape(ProductType.EXPLORER)
 

@@ -19,6 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/marker_background"
+        android:gravity="center"
+        android:textAlignment="center"
         android:paddingStart="@dimen/small_padding"
         android:paddingTop="@dimen/nano_padding"
         android:paddingEnd="@dimen/small_padding"

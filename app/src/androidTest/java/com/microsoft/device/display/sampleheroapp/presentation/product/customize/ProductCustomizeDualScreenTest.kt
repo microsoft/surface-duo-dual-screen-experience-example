@@ -75,9 +75,9 @@ class ProductCustomizeDualScreenTest {
         checkCustomizeDetailsImagePortrait()
 
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
-        checkCustomizeDetailsImageContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
+        checkCustomizeDetailsImageContent(product.color, product.bodyShape)
     }
 
     @Test
@@ -93,15 +93,15 @@ class ProductCustomizeDualScreenTest {
         checkCustomizeDetailsImageLandscape()
 
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImageLandscapeContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImageLandscapeContent(product.color, product.bodyShape)
     }
 
     @Test
     fun checkNewColorSelection() {
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
         selectColor(ProductColor.BLUE)
 
@@ -152,8 +152,8 @@ class ProductCustomizeDualScreenTest {
     @Test
     fun checkNewShapeSelection() {
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
         selectShape(ProductType.MUSICLANDER)
 

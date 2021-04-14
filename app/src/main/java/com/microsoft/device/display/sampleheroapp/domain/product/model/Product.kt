@@ -16,8 +16,8 @@ data class Product(
     val description: String,
     val rating: Float,
     val fretsNumber: Int,
-    val bodyShape: ProductType?,
-    val colorId: ProductColor?
+    var bodyShape: ProductType,
+    var color: ProductColor
 ) {
     constructor(entity: ProductEntity) :
         this(
@@ -65,7 +65,7 @@ enum class ProductType(var bodyShapeId: Int, var colorList: List<ProductColor>) 
     );
 
     companion object {
-        fun get(bodyShapeId: Int?) = values().firstOrNull { it.bodyShapeId == bodyShapeId }
+        fun get(bodyShapeId: Int?) = values().first { it.bodyShapeId == bodyShapeId }
     }
 }
 
@@ -81,6 +81,6 @@ enum class ProductColor(var colorId: Int) {
     RED(9);
 
     companion object {
-        fun get(colorId: Int?) = values().firstOrNull { it.colorId == colorId }
+        fun get(colorId: Int?) = values().first { it.colorId == colorId }
     }
 }

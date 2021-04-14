@@ -10,6 +10,7 @@ package com.microsoft.device.display.sampleheroapp.presentation.util
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.microsoft.device.display.sampleheroapp.R
@@ -36,15 +37,16 @@ fun getStoreImageRes(view: ImageView, image: StoreImage?) {
 
 @BindingAdapter("productImage")
 fun getProductImageRes(view: ImageView, product: Product?) {
-    if (product?.bodyShape != null && product.colorId != null) {
-        val resId = getProductDrawable(product.colorId, product.bodyShape)
-        view.setImageDrawable(ResourcesCompat.getDrawable(view.resources, resId, null))
+    product?.let {
+        getProductDrawable(it.color, it.bodyShape).let { resId ->
+            view.setImageDrawable(ContextCompat.getDrawable(view.context, resId))
+        }
     }
 }
 
 @BindingAdapter("visibleIf")
-fun showHide(view: View, shouldBeVisible: Boolean) {
-    view.visibility = if (shouldBeVisible) View.VISIBLE else View.GONE
+fun showHide(view: View, shouldBeVisible: Boolean?) {
+    view.visibility = if (shouldBeVisible == true) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter("price")
