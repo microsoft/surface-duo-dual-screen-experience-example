@@ -97,6 +97,7 @@ dependencies {
     implementation microsoftDependencies.layouts
     implementation microsoftDependencies.fragmentsHandler
     implementation microsoftDependencies.screenManager
+    implementation microsoftDependencies.recyclerView
 
     implementation uiDependencies.lottie
 
