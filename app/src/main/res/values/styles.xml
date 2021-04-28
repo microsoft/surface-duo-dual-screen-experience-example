@@ -124,7 +124,6 @@
     </style>
 
     <style name="CancelButton" parent="Store.Button">
-        <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/rectangle_button</item>
         <item name="android:text">@string/cancel_button</item>
     </style>

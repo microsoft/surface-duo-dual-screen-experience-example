@@ -19,17 +19,17 @@ import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickLis
 class ProductAdapter(
     context: Context,
     private val dataHandler: DataListHandler<Product>
-) : RecyclerView.Adapter<ProductAdapter.DummyViewHolder>() {
+) : RecyclerView.Adapter<ProductAdapter.ProductItemViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        DummyViewHolder(
+        ProductItemViewHolder(
             ItemProductBinding.inflate(layoutInflater, parent, false),
             dataHandler
         )
 
-    override fun onBindViewHolder(holder: DummyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductItemViewHolder, position: Int) {
         dataHandler.getDataList()?.get(position)?.let {
             holder.bind(it)
         }
@@ -41,7 +41,7 @@ class ProductAdapter(
         notifyDataSetChanged()
     }
 
-    class DummyViewHolder(
+    class ProductItemViewHolder(
         private val binding: ItemProductBinding,
         private val itemClickListener: ItemClickListener<Product>
     ) : RecyclerView.ViewHolder(binding.root) {
