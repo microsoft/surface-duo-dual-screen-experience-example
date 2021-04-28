@@ -23,7 +23,7 @@ class LaunchViewModel @Inject constructor(
 ) : ViewModel(), ItemClickListener<Boolean> {
     val isDualMode = MutableLiveData(false)
     val isLaunchButtonClicked = SingleLiveEvent(false)
-    val shouldShowTutorial = MutableLiveData<Int?>(null)
+    val shouldShowTutorial = SingleLiveEvent<Int?>(null)
 
     override fun onClick(model: Boolean?) {
         isLaunchButtonClicked.value = true
