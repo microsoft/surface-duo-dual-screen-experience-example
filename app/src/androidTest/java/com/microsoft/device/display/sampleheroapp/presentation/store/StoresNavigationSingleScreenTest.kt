@@ -8,7 +8,6 @@
 package com.microsoft.device.display.sampleheroapp.presentation.store
 
 import androidx.test.rule.ActivityTestRule
-import com.microsoft.device.display.sampleheroapp.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -27,10 +26,6 @@ class StoresNavigationSingleScreenTest : BaseStoreNavigationTest() {
     @get:Rule
     var ruleChain: RuleChain =
         RuleChain.outerRule(HiltAndroidRule(this)).around(activityRule)
-
-    init {
-        TEST_MODE_ENABLED = true
-    }
 
     @After
     fun resetOrientation() {

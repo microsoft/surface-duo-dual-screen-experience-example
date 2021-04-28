@@ -32,7 +32,7 @@ import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 
 fun openProductsTab() {
-    // To be implemented
+    onView(withId(R.id.navigation_products_graph)).perform(forceClick())
 }
 
 fun checkProductList(position: Int, product: Product) {

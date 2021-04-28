@@ -47,6 +47,7 @@ class ProductNavigationSingleScreenTest {
 
     @Test
     fun openDetailsInPortraitMode() {
+        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
 
         checkProductDetails(product)
@@ -57,6 +58,7 @@ class ProductNavigationSingleScreenTest {
     fun openDetailsInLandscapeMode() {
         setOrientationRight()
 
+        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
 
         checkProductDetails(product)

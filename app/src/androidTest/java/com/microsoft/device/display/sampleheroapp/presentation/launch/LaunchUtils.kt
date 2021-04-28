@@ -21,6 +21,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TUTORIAL_TEST_ID
+import com.microsoft.device.display.sampleheroapp.util.forceClick
 import org.hamcrest.core.AllOf.allOf
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -112,7 +113,7 @@ fun checkTutorialNotShowing() {
 }
 
 fun clickSingleLaunchButton() {
-    onView(withId(R.id.single_launch_button)).perform(click())
+    onView(withId(R.id.single_launch_button)).perform(forceClick())
 }
 
 fun clickDualLaunchButton() {
