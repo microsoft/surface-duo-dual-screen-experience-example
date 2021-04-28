@@ -42,6 +42,7 @@ class ProductCustomizeActivity : AppCompatActivity(), ScreenInfoListener {
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
+        rotationViewModel.isDualMode.value = screenInfo.isDualMode()
 
         if (screenInfo.isDualMode()) {
             setupDualScreenFragments()

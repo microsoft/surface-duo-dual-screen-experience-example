@@ -70,7 +70,22 @@
     <string name="product_musiclander_red">Guitar of musiclander shape and red color</string>
 
     <!-- Orders -->
+
     <string name="toolbar_orders_title">Orders</string>
     <string name="toolbar_orders_receipt_title">Order receipt</string>
+
+    <string name="order_empty_message">There are no guitars in your cart. Please head to catalog and select the items to view them in your cart.</string>
+    <string name="order_recommendations_title">Recommendations</string>
+    <string name="order_recommendations_button">Add</string>
+
+    <string name="order_total_title">Total %d items</string>
+    <string name="order_submit">Submit Order</string>
+    <string name="order_date">Order Date: %s</string>
+    <string name="order_id">Order ID: %s</string>
+    <string name="order_amount">Amount: %s</string>
+    
+    <string name="order_quantity">Qty %s</string>
+    <string name="order_quantity_plus">+</string>
+    <string name="order_quantity_minus">-</string>
 
 </resources>

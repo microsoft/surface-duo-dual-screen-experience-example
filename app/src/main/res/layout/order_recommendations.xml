@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="shouldShowMoreItems"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="@dimen/normal_padding">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/order_recommendations_title"
+            style="@style/GoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/xl_padding"
+            android:text="@string/order_recommendations_title"
+            app:layout_constraintBottom_toTopOf="@id/order_recommendations_item_first"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <include
+            android:id="@+id/order_recommendations_item_first"
+            layout="@layout/item_product_recommendations"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/xl_padding"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/xl_padding"
+            android:layout_marginBottom="@dimen/normal_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_recommendations_title" />
+
+        <include
+            android:id="@+id/order_recommendations_item_second"
+            layout="@layout/item_product_recommendations"
+            visibleIf="@{shouldShowMoreItems}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/xl_padding"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/xl_padding"
+            android:layout_marginBottom="@dimen/normal_margin"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_recommendations_item_first"
+            tools:visibility="visible"/>
+
+        <include
+            android:id="@+id/order_recommendations_item_third"
+            layout="@layout/item_product_recommendations"
+            visibleIf="@{shouldShowMoreItems}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/xl_padding"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/xl_padding"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_recommendations_item_second"
+            tools:visibility="visible"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,10 +12,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class RotationViewModel : ViewModel() {
+    var isDualMode = MutableLiveData(false)
     var currentRotation = MutableLiveData(Surface.ROTATION_0)
 
-    fun isRotated(rotation: Int) =
+    fun isRotated(rotation: Int?) =
         (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270)
+
+    fun isDualPortraitMode(rotation: Int?) =
+        (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) && isDualMode.value == true
 
     companion object {
         const val ROTATE_HORIZONTALLY = 90f

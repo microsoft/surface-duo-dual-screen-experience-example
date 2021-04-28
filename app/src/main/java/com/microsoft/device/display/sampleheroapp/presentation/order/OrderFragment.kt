@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentOrderBinding
 import com.microsoft.device.display.sampleheroapp.domain.order.model.Order
+import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
@@ -28,6 +30,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OrderFragment : Fragment(), ScreenInfoListener {
 
+    private val orderViewModel: OrderViewModel by activityViewModels()
+    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
+
+    var orderAdapter: OrderListAdapter? = null
+
     private var binding: FragmentOrderBinding? = null
 
     override fun onCreateView(
@@ -37,6 +45,81 @@ class OrderFragment : Fragment(), ScreenInfoListener {
     ): View? {
         binding = FragmentOrderBinding.inflate(inflater, container, false)
         return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        orderViewModel.resetItemList()
+
+        setupListObservers()
+        setupConfirmationObservers()
+    }
+
+    private fun setupListObservers() {
+        orderViewModel.itemList.observe(
+            viewLifecycleOwner,
+            {
+                if (orderAdapter == null) {
+                    setupAdapter()
+                } else {
+                    updateAdapter(
+                        rotationViewModel.isDualMode.value == true,
+                        rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value)
+                    )
+                }
+            }
+        )
+
+        recommendationViewModel.productList.observe(
+            viewLifecycleOwner,
+            {
+                recommendationViewModel.refreshRecommendationList()
+                orderAdapter?.refreshRecommendations()
+            }
+        )
+    }
+
+    private fun setupConfirmationObservers() {
+        orderViewModel.submittedOrder.observe(
+            viewLifecycleOwner,
+            {
+                it?.let {
+                    disableEditing()
+                }
+                changeToolbarTitle(it)
+            }
+        )
+    }
+
+    private fun setupRecyclerView(screenInfo: ScreenInfo) {
+        binding?.orderItems?.apply {
+            layoutManager = SurfaceDuoLayoutManager(context, screenInfo).get()
+            addItemDecoration(SurfaceDuoItemDecoration(screenInfo))
+        }
+    }
+
+    private fun setupAdapter() {
+        orderAdapter = OrderListAdapter(
+            requireContext(),
+            orderViewModel,
+            recommendationViewModel,
+            rotationViewModel.isDualMode.value == true,
+            rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value)
+        )
+
+        binding?.orderItems?.adapter = orderAdapter
+    }
+
+    private fun disableEditing() {
+        orderAdapter?.disableEditing()
+    }
+
+    private fun updateAdapter(dualMode: Boolean, dualPortrait: Boolean) {
+        orderAdapter?.apply {
+            isDualMode = dualMode
+            isDualPortrait = dualPortrait
+            refreshItems()
+        }
     }
 
     override fun onResume() {
@@ -49,6 +132,16 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
     }
 
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        setupRecyclerView(screenInfo)
+
+        recommendationViewModel.refreshRecommendationList()
+        updateAdapter(
+            screenInfo.isDualMode(),
+            rotationViewModel.isDualPortraitMode(screenInfo.getScreenRotation())
+        )
+    }
+
     private fun changeToolbarTitle(submittedOrder: Order?) {
         appCompatActivity?.setupToolbar(isBackButtonEnabled = false)
         if (submittedOrder == null) {
@@ -58,15 +151,9 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         }
     }
 
-    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        binding?.orderItems?.apply {
-            layoutManager = SurfaceDuoLayoutManager(context, screenInfo).get()
-            addItemDecoration(SurfaceDuoItemDecoration(screenInfo))
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+        orderAdapter = null
     }
 }
