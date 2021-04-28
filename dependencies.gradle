@@ -95,9 +95,11 @@ ext {
 
     //Test dependencies version
     junitVersion = "4.13.1"
+    archCoreTestingVersion = "2.1.0"
 
     testDependencies = [
-            junit: "junit:junit:$junitVersion"
+            junit       : "junit:junit:$junitVersion",
+            archTesting : "androidx.arch.core:core-testing:$archCoreTestingVersion"
     ]
 
     //Android test dependencies version
@@ -119,5 +121,6 @@ ext {
             coroutinesTest      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion",
             hiltTesting         : "com.google.dagger:hilt-android-testing:$hiltVersion",
             hiltTestingCompiler : "com.google.dagger:hilt-android-compiler:$hiltVersion",
+            archTesting         : "androidx.arch.core:core-testing:$archCoreTestingVersion"
     ]
 }

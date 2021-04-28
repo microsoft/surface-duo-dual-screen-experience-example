@@ -101,6 +101,7 @@ dependencies {
     implementation uiDependencies.lottie
 
     testImplementation testDependencies.junit
+    testImplementation testDependencies.archTesting
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
     androidTestImplementation instrumentationTestDependencies.espressoContrib
@@ -110,5 +111,7 @@ dependencies {
     androidTestImplementation instrumentationTestDependencies.roomTesting
     androidTestImplementation instrumentationTestDependencies.coroutinesTest
     androidTestImplementation instrumentationTestDependencies.hiltTesting
+    androidTestImplementation instrumentationTestDependencies.archTesting
+
     kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
 }
