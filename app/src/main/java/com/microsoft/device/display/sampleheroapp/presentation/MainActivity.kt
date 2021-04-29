@@ -9,11 +9,13 @@ package com.microsoft.device.display.sampleheroapp.presentation
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.DuoNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloonType
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
     private val rotationViewModel: RotationViewModel by viewModels()
+
+    @VisibleForTesting
+    private val orderViewModel: OrderViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -117,4 +122,10 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             else -> {}
         }
     }
+
+    @VisibleForTesting
+    fun getItemListLiveData() = orderViewModel.itemList
+
+    @VisibleForTesting
+    fun getSubmittedOrderLiveData() = orderViewModel.submittedOrder
 }

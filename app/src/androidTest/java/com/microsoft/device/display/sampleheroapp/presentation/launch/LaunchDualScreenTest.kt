@@ -85,8 +85,7 @@ class LaunchDualScreenTest {
         checkLaunchInDualMode()
     }
 
-    // This test fails now because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
-    @Ignore
+    @Ignore("Fails now because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7")
     @Test
     fun spanMain() {
         checkSingleLaunchButton()
