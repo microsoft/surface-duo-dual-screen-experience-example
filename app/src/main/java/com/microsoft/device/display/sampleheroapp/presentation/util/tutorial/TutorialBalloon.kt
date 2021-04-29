@@ -77,6 +77,10 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                     backgroundDrawableIdRes = R.drawable.right_tutorial_balloon
                     stringRes = R.string.tutorial_launch_text
                 }
+                TutorialBalloonType.STORES -> {
+                    backgroundDrawableIdRes = R.drawable.bottom_tutorial_balloon
+                    stringRes = R.string.tutorial_order_text
+                }
             }
         }
 
@@ -98,6 +102,8 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                             setPadding(halfTipPadding, microPadding, halfTipPadding, tipPadding)
                         TutorialBalloonType.LAUNCH_RIGHT ->
                             setPadding(halfTipPadding, halfTipPadding, tipPadding, halfTipPadding)
+                        TutorialBalloonType.STORES ->
+                            setPadding(halfTipPadding, microPadding, halfTipPadding, tipPadding)
                     }
                 },
                 LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
@@ -131,6 +137,12 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                 xOffset = parent.width
                 yOffset = parent.height / 2 + ((tutorialContainer?.height ?: 0) / 2)
             }
+            TutorialBalloonType.STORES -> {
+                val location = IntArray(2)
+                parent.getLocationInWindow(location)
+                xOffset = location[0] + parent.width / 2 - (tipHorizontalMargin + tipHeight / 2)
+                yOffset = location[1]
+            }
         }
         return Pair(xOffset, yOffset)
     }
@@ -154,5 +166,6 @@ private data class TutorialModel(
 
 enum class TutorialBalloonType {
     LAUNCH_BOTTOM,
-    LAUNCH_RIGHT
+    LAUNCH_RIGHT,
+    STORES
 }

@@ -11,6 +11,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
@@ -20,6 +22,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.util.RotationView
 import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
@@ -32,6 +35,7 @@ class OrderFragment : Fragment(), ScreenInfoListener {
 
     private val orderViewModel: OrderViewModel by activityViewModels()
     private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val tutorialViewModel: TutorialViewModel by activityViewModels()
     private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
 
     var orderAdapter: OrderListAdapter? = null
@@ -87,6 +91,15 @@ class OrderFragment : Fragment(), ScreenInfoListener {
                     disableEditing()
                 }
                 changeToolbarTitle(it)
+            }
+        )
+        orderViewModel.showSuccessMessage.observe(
+            viewLifecycleOwner,
+            {
+                if (it == true) {
+                    showSuccessMessage()
+                    showTutorialIfNeeded()
+                }
             }
         )
     }
@@ -149,6 +162,23 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         } else {
             appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_orders_receipt_title))
         }
+    }
+
+    private fun showSuccessMessage() {
+        activity?.let {
+            Toast(it).apply {
+                view = layoutInflater.inflate(
+                    R.layout.toast_layout,
+                    it.findViewById(R.id.toast_container)
+                )
+                duration = Toast.LENGTH_LONG
+                show()
+            }
+        }
+    }
+
+    private fun showTutorialIfNeeded() {
+        tutorialViewModel.updateTutorial()
     }
 
     override fun onDestroyView() {

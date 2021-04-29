@@ -88,4 +88,7 @@
     <string name="order_quantity_plus">+</string>
     <string name="order_quantity_minus">-</string>
 
+    <string name="order_success_message">Your order has been placed successfully!</string>
+    <string name="tutorial_order_text">Check out more stores around you</string>
+
 </resources>

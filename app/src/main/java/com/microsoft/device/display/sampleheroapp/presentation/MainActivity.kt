@@ -11,9 +11,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.DuoNavigation
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
+import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloonType
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
@@ -25,6 +28,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     @Inject lateinit var navigator: AppNavigator
+    @Inject lateinit var tutorial: TutorialBalloon
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
     private val rotationViewModel: RotationViewModel by viewModels()
@@ -36,14 +40,23 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
+        setupObservers()
     }
 
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
-        navigator.bind(DuoNavigation.findNavController(this, R.id.nav_host_fragment))
 
-        // binding.bottomNavView.setupWithNavController(findNavController(this, R.id.nav_host_fragment))
+        DuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
+            // binding.bottomNavView.setupWithNavController(it)
+            navigator.bind(it)
+            it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, _ ->
+                if (surfaceDuoNavDestination.id != R.id.fragment_order) {
+                    tutorialViewModel.onStoresOpen()
+                    tutorial.hide()
+                }
+            }
+        }
         binding.bottomNavView.arrangeButtons(3, 0)
     }
 
@@ -51,6 +64,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         super.onPause()
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         navigator.unbind()
+        tutorial.hide()
     }
 
     private fun setupToolbar() {
@@ -77,8 +91,30 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
+        rotationViewModel.isDualMode.value = screenInfo.isDualMode()
         if (screenInfo.isDualMode()) {
             tutorialViewModel.onDualMode()
+        }
+    }
+
+    private fun setupObservers() {
+        tutorialViewModel.showStoresTutorial.observe(
+            this,
+            {
+                if (it == true) {
+                    showTutorial(TutorialBalloonType.STORES)
+                }
+            }
+        )
+    }
+
+    private fun showTutorial(type: TutorialBalloonType) {
+        when (type) {
+            TutorialBalloonType.STORES -> {
+                val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_stores_graph)
+                tutorial.show(window.decorView, TutorialBalloonType.STORES, storeItem)
+            }
+            else -> {}
         }
     }
 }
