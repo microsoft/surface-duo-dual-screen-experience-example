@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductCustomizeBinding
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
@@ -112,6 +113,15 @@ class ProductCustomizeFragment : Fragment() {
 
         binding?.productCustomizeCancelButton?.setOnClickListener {
             activity?.finish()
+        }
+
+        binding?.productCustomizePlaceOrderButton?.setOnClickListener {
+            (it as LottieAnimationView).apply {
+                if (!isAnimating) {
+                    playAnimation()
+                    viewModel.updateOrder()
+                }
+            }
         }
     }
 

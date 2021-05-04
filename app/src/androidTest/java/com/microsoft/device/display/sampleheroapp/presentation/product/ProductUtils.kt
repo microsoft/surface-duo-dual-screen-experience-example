@@ -113,7 +113,6 @@ fun clickOnCustomizeButton() {
 }
 
 fun checkCustomizeControl() {
-    onView(withId(R.id.product_customize_cancel_button)).check(matches(isDisplayed()))
     onView(withId(R.id.product_customize_color_title)).check(matches(isDisplayed()))
     onView(withId(R.id.product_customize_color_container)).check(matches(isDisplayed()))
     onView(withId(R.id.product_customize_body_title)).check(matches(isDisplayed()))
@@ -138,6 +137,14 @@ fun checkCustomizeImageLandscape() {
 fun checkCustomizeDetails(product: Product) {
     checkProductDetails(product)
     checkPlaceOrderButton()
+}
+
+fun checkCancelButton() {
+    onView(withId(R.id.product_customize_cancel_button)).check(matches(isDisplayed()))
+}
+
+fun checkSingleModePlaceOrderButton() {
+    onView(withId(R.id.product_customize_place_order_button)).check(matches(isDisplayed()))
 }
 
 fun checkPlaceOrderButton() {

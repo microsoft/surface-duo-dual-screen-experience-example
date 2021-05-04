@@ -12,6 +12,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
+import com.microsoft.device.display.sampleheroapp.presentation.product.checkCancelButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetails
@@ -67,6 +68,7 @@ class ProductCustomizeDualScreenTest {
     fun checkCustomizeInPortraitMode() {
         switchFromSingleToDualScreen()
 
+        checkCancelButton()
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImagePortrait()
@@ -85,6 +87,7 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        checkCancelButton()
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImageLandscape()
