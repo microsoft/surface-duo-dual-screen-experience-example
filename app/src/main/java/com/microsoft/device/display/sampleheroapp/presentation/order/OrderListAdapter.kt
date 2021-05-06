@@ -210,7 +210,7 @@ class OrderListAdapter(
     private fun shouldShowDetails() = !getOrderItemList().isNullOrEmpty() && isEditEnabled
 
     private fun shouldShowDetailsSpace() =
-        shouldShowDetails() && isDualPortrait && getOrderItemList().hasSizeEven()
+        shouldShowDetails() && isDualPortrait && (getOrderItemList().hasSizeEven() || getOrderItemList().hasSingleItem())
 
     private fun shouldShowDetailsSubmitted() = !isEditEnabled
 
