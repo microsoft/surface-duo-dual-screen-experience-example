@@ -58,6 +58,7 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         orderViewModel.itemList.observe(
             viewLifecycleOwner,
             {
+                recommendationViewModel.refreshRecommendationList()
                 orderAdapter?.refreshItems()
             }
         )
