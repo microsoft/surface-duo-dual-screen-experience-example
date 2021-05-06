@@ -16,26 +16,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentOrderBinding
-import com.microsoft.device.display.sampleheroapp.domain.order.model.Order
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.StaggeredSurfaceDuoLayoutManager
 import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
-import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.dualscreen.recyclerview.SurfaceDuoItemDecoration
-import com.microsoft.device.dualscreen.recyclerview.SurfaceDuoLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class OrderFragment : Fragment(), ScreenInfoListener {
 
     private val orderViewModel: OrderViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
-    private val tutorialViewModel: TutorialViewModel by activityViewModels()
     private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
+    private val rotationViewModel: RotationViewModel by activityViewModels()
 
     var orderAdapter: OrderListAdapter? = null
 
@@ -52,24 +49,16 @@ class OrderFragment : Fragment(), ScreenInfoListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        orderViewModel.resetItemList()
 
+        setupAdapter()
         setupListObservers()
-        setupConfirmationObservers()
     }
 
     private fun setupListObservers() {
         orderViewModel.itemList.observe(
             viewLifecycleOwner,
             {
-                if (orderAdapter == null) {
-                    setupAdapter()
-                } else {
-                    updateAdapter(
-                        rotationViewModel.isDualMode.value == true,
-                        rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value)
-                    )
-                }
+                orderAdapter?.refreshItems()
             }
         )
 
@@ -87,9 +76,8 @@ class OrderFragment : Fragment(), ScreenInfoListener {
             viewLifecycleOwner,
             {
                 it?.let {
-                    disableEditing()
+                    changeToolbarTitle()
                 }
-                changeToolbarTitle(it)
             }
         )
         orderViewModel.showSuccessMessage.observe(
@@ -97,7 +85,6 @@ class OrderFragment : Fragment(), ScreenInfoListener {
             {
                 if (it == true) {
                     showSuccessMessage()
-                    showTutorialIfNeeded()
                 }
             }
         )
@@ -105,25 +92,22 @@ class OrderFragment : Fragment(), ScreenInfoListener {
 
     private fun setupRecyclerView(screenInfo: ScreenInfo) {
         binding?.orderItems?.apply {
-            layoutManager = SurfaceDuoLayoutManager(context, screenInfo).get()
+            layoutManager = StaggeredSurfaceDuoLayoutManager(context, screenInfo).get()
             addItemDecoration(SurfaceDuoItemDecoration(screenInfo))
         }
     }
 
     private fun setupAdapter() {
         orderAdapter = OrderListAdapter(
-            requireContext(),
-            orderViewModel,
-            recommendationViewModel,
-            rotationViewModel.isDualMode.value == true,
-            rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value)
+            context = requireContext(),
+            orderClickListener = orderViewModel,
+            quantityDataListHandler = orderViewModel.quantityDataListHandler,
+            recommendationsHandler = recommendationViewModel.orderDataHandler,
+            isDualMode = rotationViewModel.isDualMode.value == true,
+            isDualPortrait = rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value)
         )
 
         binding?.orderItems?.adapter = orderAdapter
-    }
-
-    private fun disableEditing() {
-        orderAdapter?.disableEditing()
     }
 
     private fun updateAdapter(dualMode: Boolean, dualPortrait: Boolean) {
@@ -137,6 +121,8 @@ class OrderFragment : Fragment(), ScreenInfoListener {
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+        setupConfirmationObservers()
+        changeToolbarTitle()
     }
 
     override fun onPause() {
@@ -154,13 +140,9 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         )
     }
 
-    private fun changeToolbarTitle(submittedOrder: Order?) {
+    private fun changeToolbarTitle() {
         appCompatActivity?.setupToolbar(isBackButtonEnabled = false)
-        if (submittedOrder == null) {
-            appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_orders_title))
-        } else {
-            appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_orders_receipt_title))
-        }
+        appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_orders_title))
     }
 
     private fun showSuccessMessage() {
@@ -174,10 +156,6 @@ class OrderFragment : Fragment(), ScreenInfoListener {
                 show()
             }
         }
-    }
-
-    private fun showTutorialIfNeeded() {
-        tutorialViewModel.updateTutorial()
     }
 
     override fun onDestroyView() {

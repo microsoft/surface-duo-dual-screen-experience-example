@@ -11,8 +11,8 @@
 
     <data>
         <variable
-            name="shouldShowMoreItems"
-            type="Boolean" />
+            name="itemsToShow"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +21,7 @@
         android:background="@color/gray"
         android:clickable="true"
         android:focusable="true"
+        android:paddingTop="@dimen/normal_padding"
         android:paddingBottom="@dimen/normal_padding">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -50,7 +51,7 @@
         <include
             android:id="@+id/order_recommendations_item_second"
             layout="@layout/item_product_recommendations"
-            visibleIf="@{shouldShowMoreItems}"
+            visibleIf="@{itemsToShow >= 2}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/xl_padding"
@@ -66,7 +67,7 @@
         <include
             android:id="@+id/order_recommendations_item_third"
             layout="@layout/item_product_recommendations"
-            visibleIf="@{shouldShowMoreItems}"
+            visibleIf="@{itemsToShow >= 3}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/xl_padding"

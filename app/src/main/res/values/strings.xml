@@ -78,6 +78,7 @@
     <string name="order_recommendations_title">Recommendations</string>
     <string name="order_recommendations_button">Add</string>
 
+    <string name="order_header">Guitars</string>
     <string name="order_total_title">Total %d items</string>
     <string name="order_submit">Submit Order</string>
     <string name="order_date">Order Date: %s</string>

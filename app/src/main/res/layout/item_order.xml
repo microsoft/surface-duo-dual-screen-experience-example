@@ -23,8 +23,8 @@
             type="Boolean" />
 
         <variable
-            name="viewModel"
-            type="com.microsoft.device.display.sampleheroapp.presentation.order.OrderViewModel" />
+            name="quantityDataHandler"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.QuantityDataListHandler&lt;OrderItem&gt;" />
     </data>
 
     <FrameLayout
@@ -99,7 +99,7 @@
                 android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginBottom="@dimen/normal_padding"
                 android:background="@drawable/rounded_rectangle_text"
-                android:onClick="@{(v) -> ViewKt.isVisible(v) ? viewModel.updateItemQuantity(item.itemId, item.quantity + 1) : void}"
+                android:onClick="@{(v) -> ViewKt.isVisible(v) ? quantityDataHandler.updateQuantity(item, item.quantity + 1) : void}"
                 android:paddingStart="@dimen/normal_padding"
                 android:paddingEnd="@dimen/normal_padding"
                 android:text="@string/order_quantity_plus"
@@ -116,7 +116,7 @@
                 android:layout_marginStart="@dimen/micro_margin"
                 android:layout_marginBottom="@dimen/normal_padding"
                 android:background="@drawable/rounded_rectangle_text"
-                android:onClick="@{(v) -> ViewKt.isVisible(v) ? viewModel.updateItemQuantity(item.itemId, item.quantity - 1) : void}"
+                android:onClick="@{(v) -> ViewKt.isVisible(v) ? quantityDataHandler.updateQuantity(item, item.quantity - 1) : void}"
                 android:paddingStart="@dimen/normal_padding"
                 android:paddingEnd="@dimen/normal_padding"
                 android:text="@string/order_quantity_minus"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/large_margin"
                 android:layout_marginBottom="@dimen/normal_padding"
-                android:onClick="@{(v) -> ViewKt.isVisible(v) ? viewModel.updateItemQuantity(item.itemId, 0) : void}"
+                android:onClick="@{(v) -> ViewKt.isVisible(v) ? quantityDataHandler.updateQuantity(item, 0) : void}"
                 android:src="@drawable/ic_trash"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

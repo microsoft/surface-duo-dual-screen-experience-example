@@ -17,6 +17,8 @@ import com.microsoft.device.display.sampleheroapp.domain.order.usecases.GetCurre
 import com.microsoft.device.display.sampleheroapp.domain.order.usecases.GetOrderByIdUseCase
 import com.microsoft.device.display.sampleheroapp.domain.order.usecases.SubmitOrderUseCase
 import com.microsoft.device.display.sampleheroapp.domain.order.usecases.UpdateItemQuantityUseCase
+import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
+import com.microsoft.device.display.sampleheroapp.presentation.util.QuantityDataListHandler
 import com.microsoft.device.display.sampleheroapp.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,19 +26,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderViewModel @Inject constructor(
-    private val getOrderUseCase: GetCurrentOrderUseCase,
+    getOrderUseCase: GetCurrentOrderUseCase,
     private val updateItemQuantityUseCase: UpdateItemQuantityUseCase,
     private val submitOrderUseCase: SubmitOrderUseCase,
     private val getOrderByIdUseCase: GetOrderByIdUseCase
-) : ViewModel() {
+) : ViewModel(), ItemClickListener<Boolean> {
 
-    lateinit var itemList: LiveData<List<OrderItem>>
+    var itemList: LiveData<List<OrderItem>> = getOrderUseCase.get()
     var submittedOrder = MutableLiveData<Order?>(null)
     var showSuccessMessage = SingleLiveEvent<Boolean?>(null)
 
-    fun resetItemList() {
-        itemList = getOrderUseCase.get()
-        submittedOrder.value = null
+    val quantityDataListHandler = object : QuantityDataListHandler<OrderItem> {
+        override fun getDataList(): List<OrderItem>? = getOrderItemDataList()
+
+        override fun updateQuantity(model: OrderItem?, newValue: Int) =
+            updateItemQuantity(model?.itemId, newValue)
     }
 
     fun updateItemQuantity(itemId: Long?, newValue: Int) {
@@ -47,21 +51,19 @@ class OrderViewModel @Inject constructor(
         }
     }
 
-    fun submitOrder() {
+    override fun onClick(model: Boolean?) {
+        if (model == true) {
+            submitOrder()
+        }
+    }
+
+    private fun submitOrder() {
         showSuccessMessage.value = true
         viewModelScope.launch {
-            itemList = MutableLiveData(itemList.value)
             submitOrderUseCase.submit()?.let {
                 submittedOrder.value = getOrderByIdUseCase.get(it)
             }
         }
     }
-
-    fun getDataList(): List<OrderItem>? = itemList.value
-
-    fun getCount(orderItemList: List<OrderItem>?) =
-        orderItemList?.sumOf { it.quantity } ?: 0
-
-    fun getTotalPrice(orderItemList: List<OrderItem>?) =
-        orderItemList?.sumOf { it.price * it.quantity }?.toFloat() ?: 0f
+    fun getOrderItemDataList(): List<OrderItem>? = itemList.value
 }

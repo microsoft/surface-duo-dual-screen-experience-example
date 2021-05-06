@@ -25,9 +25,15 @@ import kotlin.random.Random
 class OrderRecommendationsViewModel @Inject constructor(
     private val getProductsUseCase: GetProductsUseCase,
     private val addItemUseCase: AddItemToOrderUseCase
-) : ViewModel(), DataListHandler<Product> {
+) : ViewModel() {
     var productList = MutableLiveData<List<Product>?>(null)
     private var recommendationsList = MutableLiveData<List<Product>?>(null)
+
+    val orderDataHandler = object : DataListHandler<Product> {
+        override fun getDataList(): List<Product>? = getRecommendationsList()
+
+        override fun onClick(model: Product?) = onItemClick(model)
+    }
 
     init {
         viewModelScope.launch {
@@ -61,9 +67,9 @@ class OrderRecommendationsViewModel @Inject constructor(
             }
         }
 
-    override fun getDataList(): List<Product>? = recommendationsList.value
+    fun getRecommendationsList(): List<Product>? = recommendationsList.value
 
-    override fun onClick(model: Product?) {
+    fun onItemClick(model: Product?) {
         model?.let { updateOrder(it) }
     }
 
