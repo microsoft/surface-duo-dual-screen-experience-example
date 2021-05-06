@@ -18,6 +18,9 @@ import com.microsoft.device.display.sampleheroapp.data.product.productEntity
 import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
 import com.microsoft.device.display.sampleheroapp.di.DatabaseModule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_ONE
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import dagger.Module
@@ -87,21 +90,24 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun openEmptyOrderInPortraitMode() {
-        openEmptyOrders(recommendationsSize = SINGLE_MODE_RECOMMENDATIONS_SIZE)
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
     }
 
     @Test
     fun openEmptyOrderInLandscapeMode() {
         setOrientationRight()
 
-        openEmptyOrders(recommendationsSize = SINGLE_MODE_RECOMMENDATIONS_SIZE)
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
     }
 
     @Test
     fun addItemToOrderAndRemoveInPortraitMode() {
         addItemToOrderAndRemove(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
-            recommendationsSize = SINGLE_MODE_RECOMMENDATIONS_SIZE,
+            orderDetailsPosition = ORDER_DETAILS_POS,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM,
+            emptyRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
+            oneItemRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
             itemLiveData = activityRule.activity.getItemListLiveData()
         )
     }
@@ -112,7 +118,10 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
         addItemToOrderAndRemove(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
-            recommendationsSize = SINGLE_MODE_RECOMMENDATIONS_SIZE,
+            orderDetailsPosition = ORDER_DETAILS_POS,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM,
+            emptyRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
+            oneItemRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
             itemLiveData = activityRule.activity.getItemListLiveData()
         )
     }
@@ -121,6 +130,9 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
     fun addItemToOrderAndSubmitInPortraitMode() {
         addItemToOrderAndSubmit(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
+            orderDetailsPosition = ORDER_DETAILS_POS,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED,
+            emptyRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
             submittedOrderLiveData = activityRule.activity.getSubmittedOrderLiveData()
         )
@@ -132,6 +144,9 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
         addItemToOrderAndSubmit(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
+            orderDetailsPosition = ORDER_DETAILS_POS,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED,
+            emptyRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
             submittedOrderLiveData = activityRule.activity.getSubmittedOrderLiveData()
         )
@@ -141,6 +156,9 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
     fun addItemWithDifferentQuantitiesAndSubmitInPortraitMode() {
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
+            orderDetailsPosition = ORDER_DETAILS_POS,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED,
+            emptyRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
             submittedOrderLiveData = activityRule.activity.getSubmittedOrderLiveData()
         )
@@ -152,6 +170,9 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
+            orderDetailsPosition = ORDER_DETAILS_POS,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED,
+            emptyRecommendationsSize = RECOMMENDATIONS_SIZE_ONE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
             submittedOrderLiveData = activityRule.activity.getSubmittedOrderLiveData()
         )

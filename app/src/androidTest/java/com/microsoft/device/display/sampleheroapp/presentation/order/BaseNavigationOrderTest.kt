@@ -10,6 +10,8 @@ package com.microsoft.device.display.sampleheroapp.presentation.order
 import androidx.lifecycle.LiveData
 import com.microsoft.device.display.sampleheroapp.domain.order.model.Order
 import com.microsoft.device.display.sampleheroapp.domain.order.model.OrderItem
+import com.microsoft.device.display.sampleheroapp.domain.order.model.OrderItem.Companion.DEFAULT_QUANTITY
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS
 import com.microsoft.device.display.sampleheroapp.util.blockingValue
 
 open class BaseNavigationOrderTest {
@@ -18,51 +20,72 @@ open class BaseNavigationOrderTest {
         openOrdersTab()
         checkEmptyPage()
 
-        scrollOrdersToEnd(2)
-        checkRecommendationsPage(recommendationsSize)
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(recommendationsSize, POSITION_RECOMMENDATIONS)
     }
 
-    fun addItemToOrderAndRemove(itemPosition: Int, recommendationsSize: Int, itemLiveData: LiveData<List<OrderItem>>) {
+    fun addItemToOrderAndRemove(
+        itemPosition: Int,
+        orderDetailsPosition: Int,
+        recommendationsPosition: Int,
+        emptyRecommendationsSize: Int,
+        oneItemRecommendationsSize: Int,
+        itemLiveData: LiveData<List<OrderItem>>
+    ) {
         openOrdersTab()
 
         clickOnAddFirstRecommendationItem()
 
         itemLiveData.blockingValue
 
-        checkOrderDetails()
-        checkOrderItemList(itemPosition, true)
-        checkItemQuantity(itemPosition, 1)
+        checkOrderHeader()
+        checkOrderItemList(itemPosition)
+        checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
+        scrollOrderToEnd()
+        checkOrderDetails(orderDetailsPosition)
+        checkOrderRecommendationsPage(oneItemRecommendationsSize, recommendationsPosition)
 
         clickOnItemRemove(itemPosition)
 
         checkEmptyPage()
-        scrollOrdersToEnd(2)
-        checkRecommendationsPage(recommendationsSize)
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(emptyRecommendationsSize, POSITION_RECOMMENDATIONS)
     }
 
     fun addItemToOrderAndSubmit(
         itemPosition: Int,
+        orderDetailsPosition: Int,
+        recommendationsPosition: Int,
+        emptyRecommendationsSize: Int,
         itemLiveData: LiveData<List<OrderItem>>,
         submittedOrderLiveData: LiveData<Order?>
     ) {
         openOrdersTab()
+
         clickOnAddFirstRecommendationItem()
 
         itemLiveData.blockingValue
 
-        checkOrderDetails()
-        checkOrderItemList(itemPosition, true)
-        checkItemQuantity(itemPosition, 1)
+        checkOrderHeader()
+        checkOrderDetails(orderDetailsPosition)
+        checkOrderItemList(itemPosition)
+        checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
 
-        clickOnSubmitOrderButton()
+        clickOnSubmitOrderButton(orderDetailsPosition)
 
         submittedOrderLiveData.blockingValue
 
         checkOrderSubmittedDetails()
+        checkOrderReceiptItems(itemPosition)
+        scrollOrderReceiptToEnd()
+        checkOrderReceiptRecommendationsPage(emptyRecommendationsSize, recommendationsPosition)
     }
 
     fun addItemWithDifferentQuantitiesAndSubmit(
         itemPosition: Int,
+        orderDetailsPosition: Int,
+        recommendationsPosition: Int,
+        emptyRecommendationsSize: Int,
         itemLiveData: LiveData<List<OrderItem>>,
         submittedOrderLiveData: LiveData<Order?>
     ) {
@@ -72,26 +95,31 @@ open class BaseNavigationOrderTest {
 
         itemLiveData.blockingValue
 
-        checkOrderDetails()
-        checkOrderItemList(itemPosition, true)
-        checkItemQuantity(itemPosition, 1)
+        checkOrderHeader()
+        checkOrderItemList(itemPosition)
+        checkOrderDetails(orderDetailsPosition)
+
+        checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
 
         clickOnItemQuantityPlus(itemPosition)
 
-        checkItemQuantity(itemPosition, 2)
+        checkItemQuantity(itemPosition, DEFAULT_QUANTITY + 1)
 
         clickOnItemQuantityPlus(itemPosition)
-        checkItemQuantity(itemPosition, 3)
+        checkItemQuantity(itemPosition, DEFAULT_QUANTITY + 2)
 
         clickOnItemQuantityMinus(itemPosition)
-        checkItemQuantity(itemPosition, 2)
+        checkItemQuantity(itemPosition, DEFAULT_QUANTITY + 1)
 
-        checkOrderItemList(itemPosition, true)
+        checkOrderItemList(itemPosition)
 
-        clickOnSubmitOrderButton()
+        clickOnSubmitOrderButton(orderDetailsPosition)
 
         submittedOrderLiveData.blockingValue
 
         checkOrderSubmittedDetails()
+        checkOrderReceiptItems(itemPosition)
+        scrollOrderReceiptToEnd()
+        checkOrderReceiptRecommendationsPage(emptyRecommendationsSize, recommendationsPosition)
     }
 }
