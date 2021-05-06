@@ -29,7 +29,8 @@ class OrderViewModel @Inject constructor(
     getOrderUseCase: GetCurrentOrderUseCase,
     private val updateItemQuantityUseCase: UpdateItemQuantityUseCase,
     private val submitOrderUseCase: SubmitOrderUseCase,
-    private val getOrderByIdUseCase: GetOrderByIdUseCase
+    private val getOrderByIdUseCase: GetOrderByIdUseCase,
+    private val orderNavigator: OrderNavigator
 ) : ViewModel(), ItemClickListener<Boolean> {
 
     var itemList: LiveData<List<OrderItem>> = getOrderUseCase.get()
@@ -41,6 +42,12 @@ class OrderViewModel @Inject constructor(
 
         override fun updateQuantity(model: OrderItem?, newValue: Int) =
             updateItemQuantity(model?.itemId, newValue)
+    }
+
+    val submittedDataListHandler = object : QuantityDataListHandler<OrderItem> {
+        override fun getDataList(): List<OrderItem>? = submittedOrder.value?.items
+
+        override fun updateQuantity(model: OrderItem?, newValue: Int) {}
     }
 
     fun updateItemQuantity(itemId: Long?, newValue: Int) {
@@ -65,5 +72,15 @@ class OrderViewModel @Inject constructor(
             }
         }
     }
+
+    fun navigateToReceipt() {
+        orderNavigator.navigateToReceipt()
+    }
+
+    fun navigateToOrder() {
+        orderNavigator.navigateToOrder()
+        submittedOrder.value = null
+    }
+
     fun getOrderItemDataList(): List<OrderItem>? = itemList.value
 }

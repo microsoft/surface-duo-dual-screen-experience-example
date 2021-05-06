@@ -56,7 +56,10 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             // binding.bottomNavView.setupWithNavController(it)
             navigator.bind(it)
             it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, _ ->
-                if (surfaceDuoNavDestination.id != R.id.fragment_order) {
+                if (
+                    surfaceDuoNavDestination.id != R.id.fragment_order &&
+                    surfaceDuoNavDestination.id != R.id.fragment_order_receipt
+                ) {
                     tutorialViewModel.onStoresOpen()
                     tutorial.hide()
                 }

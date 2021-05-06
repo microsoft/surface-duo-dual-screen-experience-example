@@ -9,10 +9,11 @@ package com.microsoft.device.display.sampleheroapp.presentation
 
 import androidx.navigation.DuoNavController
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator
 
-class AppNavigator : ProductNavigator, StoreNavigator {
+class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     private var navController: DuoNavController? = null
 
     fun bind(navController: DuoNavController) {
@@ -46,6 +47,16 @@ class AppNavigator : ProductNavigator, StoreNavigator {
     }
 
     override fun navigateUp() {
+        navController?.navigateUp()
+    }
+
+    override fun navigateToReceipt() {
+        if (navController?.currentDestination?.id != R.id.fragment_order_receipt) {
+            navController?.navigate(R.id.action_order_to_receipt)
+        }
+    }
+
+    override fun navigateToOrder() {
         navController?.navigateUp()
     }
 }
