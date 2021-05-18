@@ -135,7 +135,7 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
                         R.layout.toast_layout,
                         it.findViewById(R.id.toast_container)
                     )
-                    duration = Toast.LENGTH_LONG
+                    duration = Toast.LENGTH_SHORT
                     show()
                     orderViewModel.showSuccessMessage = false
                 }
