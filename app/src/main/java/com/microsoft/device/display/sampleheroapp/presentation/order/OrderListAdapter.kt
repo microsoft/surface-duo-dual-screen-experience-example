@@ -9,11 +9,11 @@ package com.microsoft.device.display.sampleheroapp.presentation.order
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.microsoft.device.display.sampleheroapp.databinding.ItemOrderBinding
 import com.microsoft.device.display.sampleheroapp.databinding.ItemOrderDetailsBinding
@@ -289,11 +289,7 @@ class OrderListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(shouldShow: Boolean) {
-            if (shouldShow) {
-                binding.root.visibility = View.VISIBLE
-            } else {
-                binding.root.visibility = View.INVISIBLE
-            }
+            binding.root.isInvisible = !shouldShow
         }
     }
 
@@ -307,10 +303,8 @@ class OrderListAdapter(
                 binding.itemListener = itemClickListener
                 binding.itemCount = itemCount
                 binding.price = totalPrice
-                binding.root.visibility = View.VISIBLE
-            } else {
-                binding.root.visibility = View.INVISIBLE
             }
+            binding.root.isInvisible = !shouldShow
             binding.shouldDisplaySpace = shouldDisplaySpace
         }
     }
@@ -325,10 +319,8 @@ class OrderListAdapter(
                 binding.timestamp = submittedOrder?.orderTimestamp
                 binding.id = submittedOrder?.orderId
                 binding.price = submittedOrder?.totalPrice
-                binding.root.visibility = View.VISIBLE
-            } else {
-                binding.root.visibility = View.INVISIBLE
             }
+            binding.root.isInvisible = !shouldShow
         }
     }
 
