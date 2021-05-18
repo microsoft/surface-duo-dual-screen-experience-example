@@ -20,6 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
+        android:focusable="true"
+        android:clickable="true"
         android:paddingStart="@dimen/medium_padding"
         android:paddingEnd="@dimen/medium_padding">
 

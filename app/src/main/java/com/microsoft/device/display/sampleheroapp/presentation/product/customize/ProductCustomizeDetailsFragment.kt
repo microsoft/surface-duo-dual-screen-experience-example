@@ -88,7 +88,12 @@ class ProductCustomizeDetailsFragment : Fragment() {
 
     private fun setupListeners() {
         binding?.productDetailsCustomizePlaceOrder?.setOnClickListener {
-            (it as LottieAnimationView).playAnimation()
+            (it as LottieAnimationView).apply {
+                if (!isAnimating) {
+                    playAnimation()
+                    viewModel.updateOrder()
+                }
+            }
         }
     }
 

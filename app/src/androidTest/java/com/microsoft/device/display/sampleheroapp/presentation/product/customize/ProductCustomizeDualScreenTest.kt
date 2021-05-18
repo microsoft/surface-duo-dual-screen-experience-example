@@ -12,6 +12,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
+import com.microsoft.device.display.sampleheroapp.presentation.product.checkCancelButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetails
@@ -67,6 +68,7 @@ class ProductCustomizeDualScreenTest {
     fun checkCustomizeInPortraitMode() {
         switchFromSingleToDualScreen()
 
+        checkCancelButton()
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImagePortrait()
@@ -75,9 +77,9 @@ class ProductCustomizeDualScreenTest {
         checkCustomizeDetailsImagePortrait()
 
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
-        checkCustomizeDetailsImageContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
+        checkCustomizeDetailsImageContent(product.color, product.bodyShape)
     }
 
     @Test
@@ -85,6 +87,7 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        checkCancelButton()
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImageLandscape()
@@ -93,15 +96,15 @@ class ProductCustomizeDualScreenTest {
         checkCustomizeDetailsImageLandscape()
 
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImageLandscapeContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImageLandscapeContent(product.color, product.bodyShape)
     }
 
     @Test
     fun checkNewColorSelection() {
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
         selectColor(ProductColor.BLUE)
 
@@ -152,8 +155,8 @@ class ProductCustomizeDualScreenTest {
     @Test
     fun checkNewShapeSelection() {
         checkShapeSelected(product.bodyShape)
-        checkColorSelected(product.colorId)
-        checkCustomizeImagePortraitContent(product.colorId, product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
         selectShape(ProductType.MUSICLANDER)
 

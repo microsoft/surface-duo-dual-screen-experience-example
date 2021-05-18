@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+
+        <variable
+            name="product"
+            type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+
+        <variable
+            name="itemListener"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Product&gt;" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/micro_margin"
+        android:layout_marginBottom="@dimen/normal_margin"
+        app:cardBackgroundColor="@color/dark_blue"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/large_padding">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product_name"
+                style="@style/GoldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:text="@{product.name}"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toTopOf="@id/product_image"
+                app:layout_constraintStart_toStartOf="@id/product_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="EG - 29387 Wood" />
+
+            <com.microsoft.device.display.sampleheroapp.presentation.product.util.StarRatingView
+                android:id="@+id/product_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_margin"
+                app:layout_constraintBottom_toBottomOf="@id/product_name"
+                app:layout_constraintStart_toEndOf="@id/product_name"
+                app:layout_constraintTop_toTopOf="@id/product_name"
+                app:ratingValue="@{product.rating}"
+                tools:ratingValue="3.5" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/product_image"
+                android:layout_width="230dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="@dimen/micro_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_name"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/product_add_button"
+                style="@style/AddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/normal_margin"
+                android:onClick="@{() -> itemListener.onClick(product)}"
+                android:text="@string/order_recommendations_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/product_image"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

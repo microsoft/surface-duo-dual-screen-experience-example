@@ -10,12 +10,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_orders_graph"
-    app:startDestination="@id/fragment_cart">
+    app:startDestination="@id/fragment_order">
 
     <fragment
-        android:id="@+id/fragment_cart"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.order.CartFragment"
-        android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" />
+        android:id="@+id/fragment_order"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.order.OrderFragment"
+        android:label="OrderFragment"
+        tools:layout="@layout/fragment_order">
 
+        <action android:id="@+id/action_order_to_receipt"
+            app:destination="@id/fragment_order_receipt"
+            app:launchScreen="start"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_order_receipt"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.order.OrderReceiptFragment"
+        android:label="OrderReceiptFragment"
+        tools:layout="@layout/fragment_order"/>
 </navigation>

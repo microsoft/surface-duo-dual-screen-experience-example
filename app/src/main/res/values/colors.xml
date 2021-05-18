@@ -27,4 +27,6 @@
     <color name="guitar_mustard_color">#D6B44A</color>
     <color name="guitar_aqua_color">#87E2DD</color>
     <color name="guitar_dark_red_color">#BC0101</color>
+
+    <color name="toast_color">#141414</color>
 </resources>

@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductCustomizeBinding
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
@@ -60,13 +61,11 @@ class ProductCustomizeFragment : Fragment() {
             viewLifecycleOwner,
             { product ->
                 product?.let {
-                    if (it.bodyShape != null) {
-                        if (viewModel.selectedBodyShape.value == null) {
-                            viewModel.selectedBodyShape.value = it.bodyShape
-                        }
-                        viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
-                            getBodyShape(updatedBodyShape)?.select()
-                        }
+                    if (viewModel.selectedBodyShape.value == null) {
+                        viewModel.selectedBodyShape.value = it.bodyShape
+                    }
+                    viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
+                        getBodyShape(updatedBodyShape)?.select()
                     }
                 }
             }
@@ -78,10 +77,10 @@ class ProductCustomizeFragment : Fragment() {
                 val selectedItem = viewModel.selectedProduct.value
                 if (it != null && selectedItem != null) {
                     if (it == selectedItem.bodyShape) {
-                        selectedItem.colorId
+                        selectedItem.color
                     } else {
                         it.colorList[0]
-                    }?.let { newColor ->
+                    }.let { newColor ->
                         viewModel.selectedBodyColor.value = newColor
                         addColorViews(binding?.productCustomizeColorContainer, it.colorList, newColor)
                     }
@@ -114,6 +113,15 @@ class ProductCustomizeFragment : Fragment() {
 
         binding?.productCustomizeCancelButton?.setOnClickListener {
             activity?.finish()
+        }
+
+        binding?.productCustomizePlaceOrderButton?.setOnClickListener {
+            (it as LottieAnimationView).apply {
+                if (!isAnimating) {
+                    playAnimation()
+                    viewModel.updateOrder()
+                }
+            }
         }
     }
 

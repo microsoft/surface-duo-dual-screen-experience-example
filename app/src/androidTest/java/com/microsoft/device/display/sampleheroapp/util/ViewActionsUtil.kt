@@ -8,14 +8,18 @@
 package com.microsoft.device.display.sampleheroapp.util
 
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.isClickable
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers
+import org.hamcrest.core.AllOf.allOf
 
 fun clickChildViewWithId(childId: Int) = object : ViewAction {
-    override fun getConstraints(): Matcher<View>? = null
+    override fun getConstraints(): Matcher<View> = allOf(isClickable(), isEnabled())
 
     override fun getDescription(): String = "Click action for a child view with specified id"
 
@@ -30,13 +34,27 @@ fun clickChildViewWithId(childId: Int) = object : ViewAction {
  * Seems that changing the screen rotations affects these coordinates and ViewActions.click() throws exceptions.
  */
 fun forceClick() = object : ViewAction {
-    override fun getConstraints(): Matcher<View> =
-        Matchers.allOf(ViewMatchers.isClickable(), ViewMatchers.isEnabled())
+    override fun getConstraints(): Matcher<View> = allOf(isClickable(), isEnabled())
 
     override fun getDescription(): String = "force click"
 
     override fun perform(uiController: UiController?, view: View?) {
         view?.performClick()
+        uiController?.loopMainThreadUntilIdle()
+    }
+}
+
+fun scrollRecyclerViewToEnd() = object : ViewAction {
+    override fun getConstraints(): Matcher<View>? =
+        allOf(isAssignableFrom(RecyclerView::class.java), isDisplayed())
+
+    override fun getDescription(): String = "Scroll RecyclerView to last position"
+
+    override fun perform(uiController: UiController?, view: View?) {
+        val recyclerView = view as RecyclerView
+        val itemCount = recyclerView.adapter?.itemCount
+        val position = itemCount?.minus(1) ?: 0
+        recyclerView.scrollToPosition(position)
         uiController?.loopMainThreadUntilIdle()
     }
 }

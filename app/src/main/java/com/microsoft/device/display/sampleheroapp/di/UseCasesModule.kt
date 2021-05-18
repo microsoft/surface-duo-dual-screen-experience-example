@@ -7,6 +7,8 @@
 
 package com.microsoft.device.display.sampleheroapp.di
 
+import com.microsoft.device.display.sampleheroapp.data.order.OrderDataSource
+import com.microsoft.device.display.sampleheroapp.data.order.OrderRepository
 import com.microsoft.device.display.sampleheroapp.data.product.ProductDataSource
 import com.microsoft.device.display.sampleheroapp.data.product.ProductRepository
 import com.microsoft.device.display.sampleheroapp.data.store.StoreDataSource
@@ -28,4 +30,8 @@ abstract class UseCasesModule {
     @Singleton
     @Binds
     abstract fun provideStoreRepo(repository: StoreRepository): StoreDataSource
+
+    @Singleton
+    @Binds
+    abstract fun provideOrderRepo(repository: OrderRepository): OrderDataSource
 }

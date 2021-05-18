@@ -25,6 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
+        android:focusable="true"
+        android:clickable="true"
         android:paddingStart="@dimen/large_padding"
         android:paddingEnd="@dimen/medium_padding">
 
@@ -72,8 +74,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
             android:text="@string/store_list_empty_message"
             android:textAlignment="center"
+            android:gravity="center"
             app:visibleIf="@{isListEmpty}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

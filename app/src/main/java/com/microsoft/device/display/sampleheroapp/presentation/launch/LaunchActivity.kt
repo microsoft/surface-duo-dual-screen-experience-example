@@ -24,13 +24,15 @@ import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LaunchActivity : FragmentActivity(), ScreenInfoListener {
 
     private val viewModel: LaunchViewModel by viewModels()
     private val tutorialViewModel: TutorialViewModel by viewModels()
-    private var tutorial: TutorialBalloon? = null
+
+    @Inject lateinit var tutorial: TutorialBalloon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +47,13 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
 
     override fun onResume() {
         super.onResume()
-        initTutorial()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
     }
 
     override fun onPause() {
         super.onPause()
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
-        destroyTutorial()
+        dismissTutorialBalloon()
     }
 
     private fun navigateToMainActivity() {
@@ -71,13 +72,8 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
         }
     }
 
-    private fun initTutorial() {
-        tutorial = TutorialBalloon(applicationContext)
-    }
-
-    private fun destroyTutorial() {
-        tutorial?.hide()
-        tutorial = null
+    private fun dismissTutorialBalloon() {
+        tutorial.hide()
     }
 
     private fun handleTutorial(typeOrdinal: Int?) {
@@ -91,11 +87,11 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
     }
 
     private fun showTutorial(ordinal: Int) {
-        tutorial?.show(window.decorView, TutorialBalloonType.values()[ordinal])
+        tutorial.show(window.decorView, TutorialBalloonType.values()[ordinal])
     }
 
     private fun dismissTutorial() {
-        tutorial?.hide()
+        dismissTutorialBalloon()
         viewModel.dismissTutorial()
     }
 

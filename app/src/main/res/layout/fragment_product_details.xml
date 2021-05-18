@@ -27,7 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:paddingTop="?attr/actionBarSize">
+        android:focusable="true"
+        android:clickable="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_details_image"

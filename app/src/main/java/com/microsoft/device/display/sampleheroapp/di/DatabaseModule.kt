@@ -12,6 +12,7 @@ import androidx.room.Room
 import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig.DB_ASSET_PATH
 import com.microsoft.device.display.sampleheroapp.config.LocalStorageConfig.DB_NAME
 import com.microsoft.device.display.sampleheroapp.data.AppDatabase
+import com.microsoft.device.display.sampleheroapp.data.order.local.OrderDao
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
 import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
 import dagger.Module
@@ -45,4 +46,8 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideStoreDao(database: AppDatabase): StoreDao = database.storeDao()
+
+    @Singleton
+    @Provides
+    fun provideOrderDao(database: AppDatabase): OrderDao = database.orderDao()
 }

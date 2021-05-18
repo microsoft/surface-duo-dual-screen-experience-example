@@ -21,6 +21,6 @@ fun Float.dpToPx(context: Context) =
     ).toInt()
 
 fun Float.addThousandsSeparator(): String =
-    (NumberFormat.getInstance(Locale.US) as DecimalFormat).apply {
+    (NumberFormat.getInstance(Locale.getDefault()) as DecimalFormat).apply {
         applyPattern("#,###")
     }.format(this)
