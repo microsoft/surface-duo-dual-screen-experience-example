@@ -72,6 +72,6 @@
 
     <dimen name="launch_image_bottom_margin">0dp</dimen>
 
-    <dimen name="order_empty_image_height">240dp</dimen>
+    <dimen name="order_empty_image_height">192dp</dimen>
     <dimen name="order_empty_message_size">18sp</dimen>
 </resources>
