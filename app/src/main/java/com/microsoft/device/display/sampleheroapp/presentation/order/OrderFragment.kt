@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
@@ -83,14 +82,6 @@ class OrderFragment : Fragment(), ScreenInfoListener {
                 }
             }
         )
-        orderViewModel.showSuccessMessage.observe(
-            viewLifecycleOwner,
-            {
-                if (it == true) {
-                    showSuccessMessage()
-                }
-            }
-        )
     }
 
     private fun setupRecyclerView(screenInfo: ScreenInfo) {
@@ -146,19 +137,6 @@ class OrderFragment : Fragment(), ScreenInfoListener {
     private fun changeToolbarTitle() {
         appCompatActivity?.setupToolbar(isBackButtonEnabled = false)
         appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_orders_title))
-    }
-
-    private fun showSuccessMessage() {
-        activity?.let {
-            Toast(it).apply {
-                view = layoutInflater.inflate(
-                    R.layout.toast_layout,
-                    it.findViewById(R.id.toast_container)
-                )
-                duration = Toast.LENGTH_LONG
-                show()
-            }
-        }
     }
 
     override fun onDestroyView() {
