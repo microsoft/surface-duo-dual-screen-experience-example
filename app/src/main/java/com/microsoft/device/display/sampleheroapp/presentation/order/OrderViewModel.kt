@@ -19,7 +19,6 @@ import com.microsoft.device.display.sampleheroapp.domain.order.usecases.SubmitOr
 import com.microsoft.device.display.sampleheroapp.domain.order.usecases.UpdateItemQuantityUseCase
 import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
 import com.microsoft.device.display.sampleheroapp.presentation.util.QuantityDataListHandler
-import com.microsoft.device.display.sampleheroapp.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,7 +34,7 @@ class OrderViewModel @Inject constructor(
 
     var itemList: LiveData<List<OrderItem>> = getOrderUseCase.get()
     var submittedOrder = MutableLiveData<Order?>(null)
-    var showSuccessMessage = SingleLiveEvent<Boolean?>(null)
+    var showSuccessMessage = false
 
     val quantityDataListHandler = object : QuantityDataListHandler<OrderItem> {
         override fun getDataList(): List<OrderItem>? = getOrderItemDataList()
@@ -65,10 +64,10 @@ class OrderViewModel @Inject constructor(
     }
 
     private fun submitOrder() {
-        showSuccessMessage.value = true
         viewModelScope.launch {
             submitOrderUseCase.submit()?.let {
                 submittedOrder.value = getOrderByIdUseCase.get(it)
+                showSuccessMessage = true
             }
         }
     }

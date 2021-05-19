@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
@@ -55,6 +56,7 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
 
         setupAdapter()
         showTutorialIfNeeded()
+        showSuccessMessageIfNeeded()
     }
 
     private fun setupRecyclerView(screenInfo: ScreenInfo) {
@@ -123,6 +125,22 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
 
     private fun showTutorialIfNeeded() {
         tutorialViewModel.updateTutorial()
+    }
+
+    private fun showSuccessMessageIfNeeded() {
+        if (orderViewModel.showSuccessMessage) {
+            activity?.let {
+                Toast(it).apply {
+                    view = layoutInflater.inflate(
+                        R.layout.toast_layout,
+                        it.findViewById(R.id.toast_container)
+                    )
+                    duration = Toast.LENGTH_SHORT
+                    show()
+                    orderViewModel.showSuccessMessage = false
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
