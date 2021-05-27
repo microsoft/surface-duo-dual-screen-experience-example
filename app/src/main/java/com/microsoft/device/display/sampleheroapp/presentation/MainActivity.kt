@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        super.onBackPressed()
+        onBackPressed()
         return true
     }
 

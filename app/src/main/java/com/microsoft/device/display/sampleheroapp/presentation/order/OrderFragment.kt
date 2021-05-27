@@ -33,7 +33,7 @@ class OrderFragment : Fragment(), ScreenInfoListener {
     private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
     private val rotationViewModel: RotationViewModel by activityViewModels()
 
-    var orderAdapter: OrderListAdapter? = null
+    private var orderAdapter: OrderListAdapter? = null
 
     private var binding: FragmentOrderBinding? = null
 
@@ -87,6 +87,9 @@ class OrderFragment : Fragment(), ScreenInfoListener {
     private fun setupRecyclerView(screenInfo: ScreenInfo) {
         binding?.orderItems?.apply {
             layoutManager = StaggeredSurfaceDuoLayoutManager(context, screenInfo).get()
+            if (itemDecorationCount > 0) {
+                removeItemDecorationAt(0)
+            }
             addItemDecoration(SurfaceDuoItemDecoration(screenInfo))
         }
     }
@@ -116,7 +119,6 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
         setupConfirmationObservers()
-        changeToolbarTitle()
     }
 
     override fun onPause() {

@@ -123,11 +123,6 @@
         <item name="tabPaddingEnd">@dimen/small_padding</item>
     </style>
 
-    <style name="CancelButton" parent="Store.Button">
-        <item name="android:background">@drawable/rectangle_button</item>
-        <item name="android:text">@string/cancel_button</item>
-    </style>
-
     <style name="AddButton" parent="Store.Button">
         <item name="android:background">@drawable/rectangle_button</item>
         <item name="android:text">@string/order_recommendations_button</item>

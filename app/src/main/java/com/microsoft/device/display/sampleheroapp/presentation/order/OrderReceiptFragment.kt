@@ -38,7 +38,7 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
     private val rotationViewModel: RotationViewModel by activityViewModels()
     private val tutorialViewModel: TutorialViewModel by activityViewModels()
 
-    var orderAdapter: OrderListAdapter? = null
+    private var orderAdapter: OrderListAdapter? = null
 
     private var binding: FragmentOrderReceiptBinding? = null
 
@@ -62,6 +62,9 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
     private fun setupRecyclerView(screenInfo: ScreenInfo) {
         binding?.orderReceiptItems?.apply {
             layoutManager = StaggeredSurfaceDuoLayoutManager(context, screenInfo).get()
+            if (itemDecorationCount > 0) {
+                removeItemDecorationAt(0)
+            }
             addItemDecoration(SurfaceDuoItemDecoration(screenInfo))
         }
     }
