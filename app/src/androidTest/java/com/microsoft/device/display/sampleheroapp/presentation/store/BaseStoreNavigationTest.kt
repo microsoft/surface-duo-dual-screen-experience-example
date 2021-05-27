@@ -8,6 +8,7 @@
 package com.microsoft.device.display.sampleheroapp.presentation.store
 
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.navigateUp
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 
 open class BaseStoreNavigationTest {

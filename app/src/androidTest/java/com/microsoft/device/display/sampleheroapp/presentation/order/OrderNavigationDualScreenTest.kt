@@ -11,6 +11,7 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.rule.ActivityTestRule
+import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.data.AppDatabase
 import com.microsoft.device.display.sampleheroapp.data.order.local.OrderDao
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
@@ -18,11 +19,16 @@ import com.microsoft.device.display.sampleheroapp.data.product.productEntity
 import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
 import com.microsoft.device.display.sampleheroapp.di.DatabaseModule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_THREE
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
+import com.microsoft.device.display.sampleheroapp.presentation.store.checkToolbar
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -106,6 +112,45 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
         setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
+    }
+
+    @Test
+    fun openDevModeInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkEmptyPage()
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(RECOMMENDATIONS_SIZE_THREE, POSITION_RECOMMENDATIONS)
+
+        checkToolbar(R.string.toolbar_orders_title)
+        checkToolbarDevItem()
+    }
+
+    @Test
+    fun openDevModeInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkEmptyPage()
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(RECOMMENDATIONS_SIZE_THREE, POSITION_RECOMMENDATIONS)
+
+        checkToolbar(R.string.toolbar_orders_title)
+        checkToolbarDevItem()
     }
 
     @Test

@@ -10,6 +10,11 @@ package com.microsoft.device.display.sampleheroapp.presentation.store
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.navigateUp
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -44,22 +49,61 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
     }
 
     @Test
+    fun openDevModeInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        openMapInSingleMode()
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+        checkToolbarDevItem()
+    }
+
+    @Test
+    fun openDevModeInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openMapInSingleMode()
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+        checkToolbarDevItem()
+    }
+
+    @Test
     fun openMapInDualPortraitMode() {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
         openMapInSingleMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
     fun openDetailsFromMapInDualLandscapeMode() {
         openDetailsFromMapInDualMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
     fun openDetailsFromMapInDualPortraitMode() {
         setOrientationRight()
         openDetailsFromMapInDualMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
@@ -73,17 +117,22 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
         navigateUp()
         checkMapFragment()
         checkToolbar(R.string.app_name)
+        checkToolbarDevItem()
     }
 
     @Test
     fun openListFromMapInDualLandscapeMode() {
         openListFromMapInDualMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
     fun openListFromMapInDualPortraitMode() {
         setOrientationRight()
         openListFromMapInDualMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
@@ -98,17 +147,22 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
         navigateUp()
         checkMapFragment()
         checkToolbar(R.string.app_name)
+        checkToolbarDevItem()
     }
 
     @Test
     fun openDetailsFromListInDualLandscapeMode() {
         openDetailsFromListInDualMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
     fun openDetailsFromListInDualPortraitMode() {
         setOrientationRight()
         openDetailsFromListInDualMode()
+
+        checkToolbarDevItem()
     }
 
     @Test
@@ -126,5 +180,6 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
         navigateUp()
         checkMapFragment()
         checkToolbar(R.string.app_name)
+        checkToolbarDevItem()
     }
 }

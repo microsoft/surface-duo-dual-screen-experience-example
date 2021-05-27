@@ -9,6 +9,10 @@ package com.microsoft.device.display.sampleheroapp.presentation.product
 
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -58,6 +62,51 @@ class ProductNavigationDualScreenTest {
         checkCustomizeButton()
     }
 
+    @Test
+    fun openDevModeInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        openProductsTab()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        checkToolbarDevItem()
+    }
+
+    @Test
+    fun openDevModeInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openProductsTab()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        checkToolbarDevItem()
+    }
+
     // The commented checks fail because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
     @Test
     fun openCustomizeInDualPortraitMode() {
@@ -73,8 +122,8 @@ class ProductNavigationDualScreenTest {
 
         checkCustomizeControl()
         checkCustomizeImagePortrait()
-        // checkCustomizeDetails(product)
-        // checkCustomizeDetailsImagePortrait()
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImagePortrait()
 
         goBack()
 
@@ -98,8 +147,8 @@ class ProductNavigationDualScreenTest {
 
         checkCustomizeControl()
         checkCustomizeImageLandscape()
-        // checkCustomizeDetails(product)
-        // checkCustomizeDetailsImageLandscape()
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImageLandscape()
 
         goBack()
 

@@ -68,6 +68,10 @@ android {
             exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
         }
     }
+
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
