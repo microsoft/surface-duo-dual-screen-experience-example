@@ -35,7 +35,7 @@ class DevModeViewModel : ViewModel() {
         DUAL_VIEW("dual-view"),
         TWO_PAGE("two-page"),
         COMPANION_PANE("companion-pane"),
-        NONE("");
+        NONE("introduction#dual-screen-app-patterns");
 
         fun buildUrl() = "$DESIGN_PATTERN_BASE_URL/$path"
 

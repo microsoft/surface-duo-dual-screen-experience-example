@@ -122,8 +122,8 @@ class ProductNavigationDualScreenTest {
 
         checkCustomizeControl()
         checkCustomizeImagePortrait()
-        checkCustomizeDetails(product)
-        checkCustomizeDetailsImagePortrait()
+        // checkCustomizeDetails(product)
+        // checkCustomizeDetailsImagePortrait()
 
         goBack()
 
@@ -147,8 +147,8 @@ class ProductNavigationDualScreenTest {
 
         checkCustomizeControl()
         checkCustomizeImageLandscape()
-        checkCustomizeDetails(product)
-        checkCustomizeDetailsImageLandscape()
+        // checkCustomizeDetails(product)
+        // checkCustomizeDetailsImageLandscape()
 
         goBack()
 

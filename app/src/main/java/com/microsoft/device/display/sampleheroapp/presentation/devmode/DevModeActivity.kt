@@ -11,7 +11,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
@@ -164,7 +163,6 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
         } else {
             setupSingleScreenFragments()
         }
-        Log.e("TAG", "DevMode - " + screenInfo.isDualMode().toString())
     }
 
     private fun setupSingleScreenFragments() {
