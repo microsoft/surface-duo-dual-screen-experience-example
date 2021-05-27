@@ -56,8 +56,7 @@
 
     <string name="product_customize_color_title">Color</string>
     <string name="product_customize_body_title">Body</string>
-    <string name="cancel_button">Cancel</string>
-    
+
     <string name="product_warlock_dark_red">Guitar of warlock shape and dark red color</string>
     <string name="product_warlock_gray">Guitar of warlock shape and gray color</string>
     <string name="product_classic_blue">Guitar of classic shape and blue color</string>
@@ -91,5 +90,15 @@
 
     <string name="order_success_message">Your order has been placed successfully!</string>
     <string name="tutorial_order_text">Check out more stores around you</string>
+
+    <!-- Developer Mode -->
+
+    <string name="tutorial_developer_mode_text">Learn more about the design patterns and code</string>
+    <string name="toolbar_dev_mode">Dev Mode</string>
+    <string name="toolbar_user_mode">User Mode</string>
+    <string name="dev_mode_sdk_components">Dual-screen SDKs used in this screen</string>
+    <string name="dev_mode_code">Code used to achieve this screen</string>
+    <string name="dev_mode_design_pattern">Design Pattern used on this screen</string>
+    <string name="dev_mode_title">Developer Mode</string>
 
 </resources>

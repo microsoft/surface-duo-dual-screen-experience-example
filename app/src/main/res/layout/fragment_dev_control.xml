@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="isDesignPaternPresent"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:padding="@dimen/large_padding">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dev_control_title"
+            style="@style/Store.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dev_mode_title"
+            app:layout_constraintBottom_toTopOf="@id/dev_control_design_patterns"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dev_control_design_patterns"
+            style="@style/Store.Title"
+            visibleIf="@{isDesignPaternPresent}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_rectangle_gray_text"
+            android:paddingStart="@dimen/large_padding"
+            android:paddingTop="@dimen/large_padding"
+            android:paddingEnd="@dimen/xxl_padding"
+            android:paddingBottom="@dimen/large_padding"
+            android:text="@string/dev_mode_design_pattern"
+            android:textSize="@dimen/text_size_18"
+            app:layout_constraintBottom_toTopOf="@id/dev_control_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dev_control_title"
+            app:layout_constraintVertical_chainStyle="spread_inside"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dev_control_code"
+            style="@style/Store.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_rectangle_gray_text"
+            android:paddingStart="@dimen/large_padding"
+            android:paddingTop="@dimen/large_padding"
+            android:paddingEnd="@dimen/xxl_padding"
+            android:paddingBottom="@dimen/large_padding"
+            android:text="@string/dev_mode_code"
+            android:textSize="@dimen/text_size_18"
+            app:layout_constraintBottom_toTopOf="@id/dev_control_sdk"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dev_control_design_patterns"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dev_control_sdk"
+            style="@style/Store.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:background="@drawable/rounded_rectangle_gray_text"
+            android:paddingStart="@dimen/large_padding"
+            android:paddingTop="@dimen/large_padding"
+            android:paddingEnd="@dimen/xxl_padding"
+            android:paddingBottom="@dimen/large_padding"
+            android:text="@string/dev_mode_sdk_components"
+            android:textSize="@dimen/text_size_18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dev_control_code"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

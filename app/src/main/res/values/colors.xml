@@ -12,6 +12,8 @@
     <color name="dark_white">#E7DFE8</color>
     <color name="light_gray">#C4C4C4</color>
     <color name="gray">#1F2228</color>
+    <color name="dark_gray">#303030</color>
+    <color name="medium_gray">#333333</color>
 
     <color name="bright_orange">#FFA500</color>
     <color name="orange">#F6B63D</color>

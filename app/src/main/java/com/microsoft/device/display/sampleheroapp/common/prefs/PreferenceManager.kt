@@ -23,12 +23,12 @@ class PreferenceManager @Inject constructor(
         }
     }
 
-    override fun shouldShowViewCodeTutorial() =
-        sharedPref.getBoolean(TutorialPrefType.VIEW_CODE.toString(), true)
+    override fun shouldShowDevModeTutorial() =
+        sharedPref.getBoolean(TutorialPrefType.DEV_MODE.toString(), true)
 
-    override fun setShowViewCodeTutorial(value: Boolean) {
-        if (shouldShowViewCodeTutorial()) {
-            sharedPref.setValue(TutorialPrefType.VIEW_CODE.toString(), value)
+    override fun setShowDevModeTutorial(value: Boolean) {
+        if (shouldShowDevModeTutorial()) {
+            sharedPref.setValue(TutorialPrefType.DEV_MODE.toString(), value)
         }
     }
 

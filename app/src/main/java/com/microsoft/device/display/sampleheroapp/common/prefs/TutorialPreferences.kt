@@ -10,10 +10,10 @@ package com.microsoft.device.display.sampleheroapp.common.prefs
 interface TutorialPreferences {
     fun shouldShowLaunchTutorial(): Boolean
     fun setShowLaunchTutorial(value: Boolean)
-    fun shouldShowViewCodeTutorial(): Boolean
-    fun setShowViewCodeTutorial(value: Boolean)
+    fun shouldShowDevModeTutorial(): Boolean
+    fun setShowDevModeTutorial(value: Boolean)
     fun shouldShowStoresTutorial(): Boolean
     fun setShowStoresTutorial(value: Boolean)
 }
 
-enum class TutorialPrefType { LAUNCH, VIEW_CODE, STORES }
+enum class TutorialPrefType { LAUNCH, DEV_MODE, STORES }
