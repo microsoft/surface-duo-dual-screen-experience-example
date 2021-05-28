@@ -9,10 +9,18 @@ package com.microsoft.device.display.sampleheroapp.presentation.util
 
 import android.graphics.Point
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 fun View.getTopCenterPoint(): Point {
     val point = IntArray(2)
     getLocationOnScreen(point)
     point[0] += width / 2
     return Point(point[0], point[1])
+}
+
+fun RecyclerView.addOrReplaceItemDecoration(itemDecoration: RecyclerView.ItemDecoration) {
+    if (itemDecorationCount == 1) {
+        removeItemDecorationAt(0)
+    }
+    addItemDecoration(itemDecoration)
 }
