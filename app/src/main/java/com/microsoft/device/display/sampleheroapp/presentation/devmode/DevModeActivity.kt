@@ -15,9 +15,9 @@ import android.view.Menu
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewAnimationUtils.createCircularReveal
-import android.view.ViewTreeObserver
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.doOnNextLayout
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityDevModeBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
@@ -49,7 +49,9 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
         if (savedInstanceState == null && extractIntentAnimationExtras(intent)) {
             binding.devRootLayout.visibility = INVISIBLE
 
-            revealActivityWhenViewCreated()
+            binding.devRootLayout.doOnNextLayout {
+                revealActivity(revealX, revealY)
+            }
         }
     }
 
@@ -74,18 +76,6 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
             return true
         }
         return false
-    }
-
-    private fun revealActivityWhenViewCreated() {
-        val viewTreeObserver = binding.devRootLayout.viewTreeObserver
-        if (viewTreeObserver.isAlive) {
-            viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    revealActivity(revealX, revealY)
-                    binding.devRootLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                }
-            })
-        }
     }
 
     private fun setupToolbar() {

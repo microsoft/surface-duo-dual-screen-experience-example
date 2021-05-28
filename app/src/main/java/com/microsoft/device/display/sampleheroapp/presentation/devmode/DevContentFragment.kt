@@ -34,23 +34,14 @@ class DevContentFragment : Fragment() {
         return binding?.root
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.devContentWebView?.apply {
-            settings.javaScriptEnabled = true
-            setBackgroundColor(Color.TRANSPARENT)
-            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
-                WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
-            }
-        }
 
-        if (viewModel.designPattern != DevModeViewModel.DesignPattern.NONE) {
-            viewModel.loadDesignPatternPage()
-        } else {
-            viewModel.loadAppScreenPage()
-        }
+        setupWebView()
+        setupObservers()
+    }
 
+    private fun setupObservers() {
         viewModel.webViewUrl.observe(
             viewLifecycleOwner,
             {
@@ -59,5 +50,31 @@ class DevContentFragment : Fragment() {
                 }
             }
         )
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun setupWebView() {
+        binding?.devContentWebView?.apply {
+            settings.javaScriptEnabled = true
+            setBackgroundColor(Color.TRANSPARENT)
+            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+                WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
+            }
+        }
+
+        selectFirstPage()
+    }
+
+    private fun selectFirstPage() {
+        if (viewModel.designPattern != DevModeViewModel.DesignPattern.NONE) {
+            viewModel.loadDesignPatternPage()
+        } else {
+            viewModel.loadAppScreenPage()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

@@ -59,4 +59,9 @@ class DevControlFragment : Fragment() {
                 .commit()
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
