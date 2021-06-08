@@ -20,6 +20,7 @@ import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
 import com.microsoft.device.display.sampleheroapp.presentation.util.DataListHandler
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.StaggeredSurfaceDuoLayoutManager
+import com.microsoft.device.display.sampleheroapp.presentation.util.addOrReplaceItemDecoration
 import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
@@ -38,7 +39,7 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
     private val rotationViewModel: RotationViewModel by activityViewModels()
     private val tutorialViewModel: TutorialViewModel by activityViewModels()
 
-    var orderAdapter: OrderListAdapter? = null
+    private var orderAdapter: OrderListAdapter? = null
 
     private var binding: FragmentOrderReceiptBinding? = null
 
@@ -62,7 +63,7 @@ class OrderReceiptFragment : Fragment(), ScreenInfoListener {
     private fun setupRecyclerView(screenInfo: ScreenInfo) {
         binding?.orderReceiptItems?.apply {
             layoutManager = StaggeredSurfaceDuoLayoutManager(context, screenInfo).get()
-            addItemDecoration(SurfaceDuoItemDecoration(screenInfo))
+            addOrReplaceItemDecoration(SurfaceDuoItemDecoration(screenInfo))
         }
     }
 

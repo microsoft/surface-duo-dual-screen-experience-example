@@ -111,10 +111,6 @@ class ProductCustomizeFragment : Fragment() {
         binding?.productCustomizeBody3?.setOnClickListener(::onBodyShapeClicked)
         binding?.productCustomizeBody4?.setOnClickListener(::onBodyShapeClicked)
 
-        binding?.productCustomizeCancelButton?.setOnClickListener {
-            activity?.finish()
-        }
-
         binding?.productCustomizePlaceOrderButton?.setOnClickListener {
             (it as LottieAnimationView).apply {
                 if (!isAnimating) {

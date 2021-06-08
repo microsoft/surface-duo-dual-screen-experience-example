@@ -68,6 +68,10 @@ android {
             exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
         }
     }
+
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -79,6 +83,7 @@ dependencies {
     implementation androidxDependencies.constraintLayout
     implementation androidxDependencies.ktxCore
     implementation androidxDependencies.ktxFragment
+    implementation androidxDependencies.webkit
 
     implementation androidxDependencies.room
     implementation androidxDependencies.roomKtx

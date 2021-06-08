@@ -139,10 +139,6 @@ fun checkCustomizeDetails(product: Product) {
     checkPlaceOrderButton()
 }
 
-fun checkCancelButton() {
-    onView(withId(R.id.product_customize_cancel_button)).check(matches(isDisplayed()))
-}
-
 fun checkSingleModePlaceOrderButton() {
     onView(withId(R.id.product_customize_place_order_button)).check(matches(isDisplayed()))
 }

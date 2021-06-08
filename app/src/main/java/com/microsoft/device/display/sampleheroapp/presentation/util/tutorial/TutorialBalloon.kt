@@ -38,19 +38,18 @@ class TutorialBalloon @Inject constructor(val context: Context) {
     private val halfTipPadding = context.resources.getDimension(R.dimen.regular_padding).toInt() / 2
     private val microPadding = context.resources.getDimension(R.dimen.micro_padding).toInt()
 
-    fun show(parent: View, balloonType: TutorialBalloonType, anchorView: View? = null) {
+    var currentBalloonType: TutorialBalloonType? = null
+
+    fun show(anchorView: View, balloonType: TutorialBalloonType) {
         if (canShow()) {
+            currentBalloonType = balloonType
             initContainer(buildTutorialModel(balloonType))
             initWindow()
             measureAndLayout()
-            parent.post {
-                val (xOffset, yOffset) =
-                    if (anchorView != null) {
-                        generateOffsets(balloonType, anchorView)
-                    } else {
-                        generateOffsets(balloonType, parent)
-                    }
-                tutorialWindow?.showAsDropDown(parent, xOffset, yOffset)
+
+            anchorView.post {
+                val (xOffset, yOffset) = generateOffsets(balloonType, anchorView)
+                tutorialWindow?.showAsDropDown(anchorView, xOffset, yOffset)
             }
         }
     }
@@ -81,6 +80,10 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                     backgroundDrawableIdRes = R.drawable.bottom_tutorial_balloon
                     stringRes = R.string.tutorial_order_text
                 }
+                TutorialBalloonType.DEVELOPER_MODE -> {
+                    backgroundDrawableIdRes = R.drawable.top_tutorial_balloon
+                    stringRes = R.string.tutorial_developer_mode_text
+                }
             }
         }
 
@@ -104,6 +107,8 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                             setPadding(halfTipPadding, halfTipPadding, tipPadding, halfTipPadding)
                         TutorialBalloonType.STORES ->
                             setPadding(halfTipPadding, microPadding, halfTipPadding, tipPadding)
+                        TutorialBalloonType.DEVELOPER_MODE ->
+                            setPadding(halfTipPadding, tipPadding, halfTipPadding, halfTipPadding)
                     }
                 },
                 LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
@@ -138,10 +143,11 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                 yOffset = parent.height / 2 + ((tutorialContainer?.height ?: 0) / 2)
             }
             TutorialBalloonType.STORES -> {
-                val location = IntArray(2)
-                parent.getLocationInWindow(location)
-                xOffset = location[0] + parent.width / 2 - (tipHorizontalMargin + tipHeight / 2)
-                yOffset = location[1]
+                xOffset = parent.width / 2 - (tipHorizontalMargin + tipHeight / 2)
+            }
+            TutorialBalloonType.DEVELOPER_MODE -> {
+                xOffset -= parent.width + (tipHeight / 2)
+                yOffset -= parent.height / 2 - tipHeight
             }
         }
         return Pair(xOffset, yOffset)
@@ -153,6 +159,7 @@ class TutorialBalloon @Inject constructor(val context: Context) {
         tutorialWindow?.takeIf { it.isShowing }?.dismiss()
         tutorialWindow = null
         tutorialContainer = null
+        currentBalloonType = null
     }
 }
 
@@ -167,5 +174,6 @@ private data class TutorialModel(
 enum class TutorialBalloonType {
     LAUNCH_BOTTOM,
     LAUNCH_RIGHT,
-    STORES
+    STORES,
+    DEVELOPER_MODE
 }

@@ -7,12 +7,9 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.util
 
-import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LifecycleOwner
-import com.microsoft.device.display.sampleheroapp.R
 
 fun AppCompatActivity.changeToolbarTitle(name: String?) {
     supportActionBar?.title = name
@@ -23,7 +20,6 @@ fun AppCompatActivity.setupToolbar(
     owner: LifecycleOwner? = null,
     onBackPressedListener: (() -> Unit)? = null
 ) {
-    findViewById<Toolbar>(R.id.toolbar)?.visibility = View.VISIBLE
     if (isBackButtonEnabled) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)

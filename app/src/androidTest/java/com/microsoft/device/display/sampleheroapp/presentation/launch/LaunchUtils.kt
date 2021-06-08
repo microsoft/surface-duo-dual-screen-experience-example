@@ -33,7 +33,7 @@ fun checkLaunchInSingleMode() {
     moveToDescriptionTab()
     checkDescriptionFragment()
     checkSingleLaunchButton()
-    checkTutorialShowing()
+    checkLaunchTutorialShowing()
 }
 
 fun checkLaunchInDualMode() {
@@ -93,7 +93,7 @@ fun checkDualLaunchButton() {
     )
 }
 
-fun checkTutorialShowing() {
+fun checkLaunchTutorialShowing() {
     val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     assertTrue(device.hasObject(By.descContains(TUTORIAL_TEST_ID)))
 

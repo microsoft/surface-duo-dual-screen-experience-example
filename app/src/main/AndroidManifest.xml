@@ -9,6 +9,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.microsoft.device.display.sampleheroapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".HeroApplication"
         android:allowBackup="true"
@@ -25,6 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.MainActivity" />
+        <activity android:name=".presentation.devmode.DevModeActivity"
+            android:theme="@style/Theme.App.Transparent"/>
         <activity android:name=".presentation.product.customize.ProductCustomizeActivity" />
     </application>
 

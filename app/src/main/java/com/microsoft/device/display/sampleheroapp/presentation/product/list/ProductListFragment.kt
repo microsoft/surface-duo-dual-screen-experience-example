@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductListBinding
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
@@ -47,6 +49,11 @@ class ProductListFragment : Fragment(), ScreenInfoListener {
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        appCompatActivity?.setupToolbar(isBackButtonEnabled = false)
     }
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {

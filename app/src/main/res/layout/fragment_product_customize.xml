@@ -25,60 +25,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:paddingTop="@dimen/medium_padding"
-        android:paddingBottom="@dimen/medium_padding">
+        android:paddingBottom="@dimen/small_padding">
 
-        <FrameLayout
-            android:id="@+id/product_customize_button_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/product_customize_place_order_button"
+            visibleIf="@{!rotationViewModel.isDualMode()}"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="@dimen/medium_margin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/product_customize_cancel_button"
-                style="@style/CancelButton"
-                visibleIf="@{rotationViewModel.isDualMode()}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/medium_margin"
-                android:visibility="visible"/>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/product_customize_place_order_button"
-                visibleIf="@{!rotationViewModel.isDualMode()}"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/normal_margin"
-                app:lottie_autoPlay="false"
-                app:lottie_rawRes="@raw/place_order_animation"
-                tools:background="@drawable/rounded_rectangle_button"/>
-
-        </FrameLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="false"
+            app:lottie_rawRes="@raw/place_order_animation"
+            tools:background="@drawable/rounded_rectangle_button"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_customize_image"
-            android:layout_width="@dimen/product_image_height"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/product_image_width"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_customize_button_container"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_place_order_button"
             app:visibleIf="@{!rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
-            tools:visibility="visible"/>
+            tools:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_customize_image_landscape"
             android:layout_width="@dimen/product_image_width"
-            android:layout_height="@dimen/product_image_height"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_customize_body_container"
             app:layout_constraintTop_toTopOf="parent"
             app:visibleIf="@{rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
-            tools:visibility="gone"/>
+            tools:visibility="visible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/product_customize_color_title"

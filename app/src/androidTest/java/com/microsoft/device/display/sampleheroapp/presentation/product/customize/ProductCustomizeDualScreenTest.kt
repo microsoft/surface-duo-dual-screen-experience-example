@@ -12,7 +12,10 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
-import com.microsoft.device.display.sampleheroapp.presentation.product.checkCancelButton
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
+import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetails
@@ -68,7 +71,6 @@ class ProductCustomizeDualScreenTest {
     fun checkCustomizeInPortraitMode() {
         switchFromSingleToDualScreen()
 
-        checkCancelButton()
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImagePortrait()
@@ -87,7 +89,6 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
-        checkCancelButton()
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImageLandscape()
@@ -98,6 +99,77 @@ class ProductCustomizeDualScreenTest {
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.color)
         checkCustomizeImageLandscapeContent(product.color, product.bodyShape)
+    }
+
+    @Test
+    fun openDevModeInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        checkCustomizeControl()
+        checkCustomizeShapes()
+        checkCustomizeImagePortrait()
+
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImagePortrait()
+
+        checkShapeSelected(product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
+        checkCustomizeDetailsImageContent(product.color, product.bodyShape)
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkCustomizeControl()
+        checkCustomizeShapes()
+        checkCustomizeImagePortrait()
+
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImagePortrait()
+
+        checkShapeSelected(product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImagePortraitContent(product.color, product.bodyShape)
+        checkCustomizeDetailsImageContent(product.color, product.bodyShape)
+
+        checkToolbarDevItem()
+    }
+
+    @Test
+    fun openDevModeInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        checkCustomizeControl()
+        checkCustomizeShapes()
+        checkCustomizeImageLandscape()
+
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImageLandscape()
+
+        checkShapeSelected(product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImageLandscapeContent(product.color, product.bodyShape)
+
+        openDevModeInDualMode()
+        checkToolbarUserItem()
+
+        openUserMode()
+
+        checkCustomizeControl()
+        checkCustomizeShapes()
+        checkCustomizeImageLandscape()
+
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImageLandscape()
+
+        checkShapeSelected(product.bodyShape)
+        checkColorSelected(product.color)
+        checkCustomizeImageLandscapeContent(product.color, product.bodyShape)
+
+        checkToolbarDevItem()
     }
 
     @Test

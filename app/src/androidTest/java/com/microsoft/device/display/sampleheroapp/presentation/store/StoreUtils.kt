@@ -17,7 +17,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
@@ -206,10 +205,6 @@ fun clickOnMapMarker(markerTitle: String) {
     device.wait(Until.hasObject(bySelectorMarker), MAX_TIMEOUT)
     device.findObject(bySelectorMarker).click()
     device.wait(Until.hasObject(bySelectorMarkerClicked), MAX_TIMEOUT)
-}
-
-fun navigateUp() {
-    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
 }
 
 fun clickOnListItemAtPosition(position: Int) {
