@@ -7,16 +7,17 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation
 
-import androidx.navigation.DuoNavController
+import android.os.Handler
+import android.os.Looper
+import androidx.navigation.SurfaceDuoNavController
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator
 
 class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
-    private var navController: DuoNavController? = null
-
-    fun bind(navController: DuoNavController) {
+    private var navController: SurfaceDuoNavController? = null
+    fun bind(navController: SurfaceDuoNavController) {
         this.navController = navController
     }
 
@@ -26,12 +27,12 @@ class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
 
     override fun navigateToProductDetails() {
         if (navController?.currentDestination?.id != R.id.fragment_product_details) {
-            navController?.navigate(R.id.action_product_list_to_details)
+            Looper.myLooper()?.let {
+                Handler(it).post {
+                    navController?.navigate(R.id.action_product_list_to_details)
+                }
+            }
         }
-    }
-
-    override fun navigateToMap() {
-        navController?.navigate(R.id.fragment_store_map)
     }
 
     override fun navigateToStoreList() {

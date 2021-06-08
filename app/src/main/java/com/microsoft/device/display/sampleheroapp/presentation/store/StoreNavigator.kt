@@ -8,7 +8,6 @@
 package com.microsoft.device.display.sampleheroapp.presentation.store
 
 interface StoreNavigator {
-    fun navigateToMap()
     fun navigateToStoreList()
     fun navigateToStoreDetailsFromList()
     fun navigateToStoreDetailsFromMap()

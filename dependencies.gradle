@@ -27,7 +27,7 @@ ext {
             kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     ]
 
-    navigationVersion = "2.3.0"
+    navigationVersion = "2.3.4"
 
     navigationDependencies = [
             runtime       : "androidx.navigation:navigation-runtime:$navigationVersion",

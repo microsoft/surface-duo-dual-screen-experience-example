@@ -15,8 +15,9 @@ import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation
-import androidx.navigation.DuoNavDestination
-import androidx.navigation.DuoNavigation
+import androidx.navigation.SurfaceDuoNavDestination
+import androidx.navigation.SurfaceDuoNavigation
+import androidx.navigation.ui.SurfaceDuoNavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
@@ -63,13 +64,15 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
+        setupTutorialObserver()
+        setupBottomNavigation()
     }
 
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
-        DuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
+        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
             navigator.bind(it)
             it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, _ ->
                 if (
@@ -98,6 +101,12 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         setSupportActionBar(binding.toolbar)
     }
 
+    private fun setupBottomNavigation() {
+        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
+            SurfaceDuoNavigationUI.setupWithSurfaceDuoNavController(binding.bottomNavView, it)
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
@@ -111,7 +120,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun isNavigationAtStart() =
-        DuoNavigation.findNavController(
+        SurfaceDuoNavigation.findNavController(
             this,
             R.id.nav_host_fragment
         ).currentDestination?.id == R.id.fragment_store_map
@@ -146,7 +155,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         }
     }
 
-    private fun setupDevModeByDestination(destination: DuoNavDestination) {
+    private fun setupDevModeByDestination(destination: SurfaceDuoNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
