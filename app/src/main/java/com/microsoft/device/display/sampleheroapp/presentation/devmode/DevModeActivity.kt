@@ -18,6 +18,7 @@ import android.view.ViewAnimationUtils.createCircularReveal
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnNextLayout
+import androidx.navigation.SurfaceDuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityDevModeBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
@@ -25,6 +26,7 @@ import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.math.max
 
 @AndroidEntryPoint
@@ -33,6 +35,7 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
     private val rotationViewModel: RotationViewModel by viewModels()
     private val viewModel: DevModeViewModel by viewModels()
 
+    @Inject lateinit var navigator: DevModeNavigator
     private lateinit var binding: ActivityDevModeBinding
 
     private var revealX: Int = 0
@@ -125,7 +128,11 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
         if (rotationViewModel.isDualMode.value == true) {
             supportFinishAfterTransition()
         } else {
-            super.onBackPressed()
+            if (navigator.isNavigationAtStart()) {
+                supportFinishAfterTransition()
+            } else {
+                super.onBackPressed()
+            }
             overridePendingTransition(0, 0)
         }
     }
@@ -138,43 +145,22 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+
+        SurfaceDuoNavigation.findNavController(this, R.id.devmode_nav_host_fragment).let {
+            navigator.bind(it)
+        }
     }
 
     override fun onPause() {
         super.onPause()
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+
+        navigator.unbind()
     }
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         rotationViewModel.isDualMode.value = screenInfo.isDualMode()
         rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
-        if (screenInfo.isDualMode()) {
-            setupDualScreenFragments()
-        } else {
-            setupSingleScreenFragments()
-        }
-    }
-
-    private fun setupSingleScreenFragments() {
-        if (supportFragmentManager.findFragmentByTag(DEV_CONTROL_FRAGMENT_SINGLE) == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, DevControlFragment(), DEV_CONTROL_FRAGMENT_SINGLE)
-                .commit()
-        }
-    }
-
-    private fun setupDualScreenFragments() {
-        if (supportFragmentManager.findFragmentByTag(DEV_CONTROL_FRAGMENT_START) == null &&
-            supportFragmentManager.findFragmentByTag(DEV_CONTROL_FRAGMENT_END) == null
-        ) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, DevControlFragment(), DEV_CONTROL_FRAGMENT_START)
-                .commit()
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.second_container_id, DevContentFragment(), DEV_CONTROL_FRAGMENT_END)
-                .commit()
-        }
     }
 
     companion object {
@@ -189,9 +175,5 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
         const val START_RADIUS = 0f
 
         const val SHARED_ELEMENT_NAME = "transition"
-
-        private const val DEV_CONTROL_FRAGMENT_SINGLE = "SingleDevControlFragment"
-        private const val DEV_CONTROL_FRAGMENT_START = "DevControlFragment"
-        private const val DEV_CONTROL_FRAGMENT_END = "DevContentFragment"
     }
 }

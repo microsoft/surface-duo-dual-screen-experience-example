@@ -10,13 +10,11 @@ package com.microsoft.device.display.sampleheroapp.presentation.launch
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.SurfaceDuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
-import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchDescriptionFragment
-import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchTitleFragment
-import com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.SingleScreenLaunchFragment
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloonType
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialViewModel
@@ -27,11 +25,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LaunchActivity : FragmentActivity(), ScreenInfoListener {
+class LaunchActivity : AppCompatActivity(), ScreenInfoListener {
 
     private val viewModel: LaunchViewModel by viewModels()
     private val tutorialViewModel: TutorialViewModel by viewModels()
 
+    @Inject lateinit var navigator: LaunchNavigator
     @Inject lateinit var tutorial: TutorialBalloon
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,12 +47,17 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+
+        SurfaceDuoNavigation.findNavController(this, R.id.launch_nav_host_fragment).let {
+            navigator.bind(it)
+        }
     }
 
     override fun onPause() {
         super.onPause()
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         dismissTutorialBalloon()
+        navigator.unbind()
     }
 
     private fun navigateToMainActivity() {
@@ -63,12 +67,10 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         viewModel.isDualMode.value = screenInfo.isDualMode()
         if (screenInfo.isDualMode()) {
-            setupDualScreenFragments()
             tutorialViewModel.onDualMode()
             dismissTutorial()
         } else {
             viewModel.triggerShouldShowTutorial(screenInfo.getScreenRotation())
-            setupSingleScreenFragments()
         }
     }
 
@@ -95,32 +97,12 @@ class LaunchActivity : FragmentActivity(), ScreenInfoListener {
         viewModel.dismissTutorial()
     }
 
-    private fun setupSingleScreenFragments() {
-        if (supportFragmentManager.findFragmentByTag(LAUNCH_FRAGMENT_SINGLE_SCREEN) == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, SingleScreenLaunchFragment(), LAUNCH_FRAGMENT_SINGLE_SCREEN)
-                .commit()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
-    private fun setupDualScreenFragments() {
-        if (supportFragmentManager.findFragmentByTag(LAUNCH_FRAGMENT_TITLE) == null &&
-            supportFragmentManager.findFragmentByTag(LAUNCH_FRAGMENT_DESCRIPTION) == null
-        ) {
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, LaunchTitleFragment(), LAUNCH_FRAGMENT_TITLE)
-                .commit()
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.second_container_id, LaunchDescriptionFragment(), LAUNCH_FRAGMENT_DESCRIPTION)
-                .commit()
-        }
-    }
-
-    companion object {
-        private const val LAUNCH_FRAGMENT_TITLE = "LaunchFragmentTitle"
-        private const val LAUNCH_FRAGMENT_DESCRIPTION = "LaunchFragmentDescription"
-        private const val LAUNCH_FRAGMENT_SINGLE_SCREEN = "LaunchFragmentSingleScreen"
+    override fun onBackPressed() {
+        finish()
     }
 }

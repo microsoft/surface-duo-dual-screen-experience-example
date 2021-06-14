@@ -8,6 +8,7 @@
 package com.microsoft.device.display.sampleheroapp.presentation.order
 
 interface OrderNavigator {
-    fun navigateToReceipt()
-    fun navigateToOrder()
+    fun navigateToOrders()
+    fun navigateToOrderReceipt()
+    fun navigateUp()
 }

@@ -7,11 +7,10 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.product.customize
 
-import android.content.Intent
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
+import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
@@ -47,15 +46,7 @@ import org.junit.rules.RuleChain
 @HiltAndroidTest
 class ProductCustomizeDualScreenTest {
 
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
-
-    private val activityRule =
-        object : ActivityTestRule<ProductCustomizeActivity>(ProductCustomizeActivity::class.java) {
-            override fun getActivityIntent() =
-                Intent(context, ProductCustomizeActivity::class.java).apply {
-                    putExtra(ProductCustomizeViewModel.SELECTED_PRODUCT_ID, product.productId)
-                }
-        }
+    private val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @get:Rule
     var ruleChain: RuleChain =

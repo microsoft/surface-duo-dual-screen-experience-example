@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_devmode_graph.xml"
+    app:startDestination="@id/fragment_dev_control">
+
+    <fragment
+        android:id="@+id/fragment_dev_control"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.devmode.DevControlFragment"
+        android:label="DevControlFragment"
+        tools:layout="@layout/fragment_dev_control">
+
+        <action android:id="@+id/action_dev_control_to_content"
+            app:destination="@id/fragment_dev_content"
+            app:launchScreen="end" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_dev_content"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.devmode.DevContentFragment"
+        android:label="DevContentFragment"
+        tools:layout="@layout/fragment_dev_content" />
+
+</navigation>

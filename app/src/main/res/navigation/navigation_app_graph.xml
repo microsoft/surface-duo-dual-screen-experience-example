@@ -12,8 +12,8 @@
     android:id="@+id/navigation_app_graph.xml"
     app:startDestination="@id/navigation_stores_graph">
 
-    <include app:graph="@navigation/navigation_products_graph" />
     <include app:graph="@navigation/navigation_stores_graph" />
+    <include app:graph="@navigation/navigation_products_graph" />
     <include app:graph="@navigation/navigation_orders_graph" />
 
 </navigation>

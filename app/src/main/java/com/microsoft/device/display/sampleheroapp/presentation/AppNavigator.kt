@@ -7,16 +7,17 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation
 
-import android.os.Handler
-import android.os.Looper
 import androidx.navigation.SurfaceDuoNavController
+import androidx.navigation.SurfaceDuoNavOptions
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator
+import com.microsoft.device.dualscreen.navigation.LaunchScreen
 
 class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     private var navController: SurfaceDuoNavController? = null
+
     fun bind(navController: SurfaceDuoNavController) {
         this.navController = navController
     }
@@ -25,14 +26,16 @@ class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
         this.navController = null
     }
 
-    override fun navigateToProductDetails() {
-        if (navController?.currentDestination?.id != R.id.fragment_product_details) {
-            Looper.myLooper()?.let {
-                Handler(it).post {
-                    navController?.navigate(R.id.action_product_list_to_details)
-                }
-            }
-        }
+    fun isNavigationAtStart() =
+        navController?.currentDestination?.id == R.id.fragment_store_map
+
+    override fun navigateUp() {
+        navController?.navigateUp()
+    }
+
+    override fun navigateToStores() {
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        navController?.navigate(R.id.navigation_stores_graph, null, navOptions)
     }
 
     override fun navigateToStoreList() {
@@ -47,17 +50,25 @@ class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
         navController?.navigate(R.id.action_store_map_to_details)
     }
 
-    override fun navigateUp() {
-        navController?.navigateUp()
+    override fun navigateToProducts() {
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        navController?.navigate(R.id.navigation_products_graph, null, navOptions)
     }
 
-    override fun navigateToReceipt() {
-        if (navController?.currentDestination?.id != R.id.fragment_order_receipt) {
-            navController?.navigate(R.id.action_order_to_receipt)
-        }
+    override fun navigateToProductDetails() {
+        navController?.navigate(R.id.action_product_list_to_details)
     }
 
-    override fun navigateToOrder() {
-        navController?.navigateUp()
+    override fun navigateToProductCustomize() {
+        navController?.navigate(R.id.action_product_details_to_customize)
+    }
+
+    override fun navigateToOrders() {
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        navController?.navigate(R.id.navigation_orders_graph, null, navOptions)
+    }
+
+    override fun navigateToOrderReceipt() {
+        navController?.navigate(R.id.action_order_to_receipt)
     }
 }

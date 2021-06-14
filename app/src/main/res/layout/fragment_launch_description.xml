@@ -24,10 +24,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/gray"
         android:paddingStart="@dimen/large_padding"
         android:paddingTop="@dimen/large_padding"
         android:paddingEnd="@dimen/large_padding"
-        tools:background="@color/gray"
         tools:context=".presentation.launch.fragments.LaunchDescriptionFragment">
 
         <androidx.appcompat.widget.AppCompatTextView

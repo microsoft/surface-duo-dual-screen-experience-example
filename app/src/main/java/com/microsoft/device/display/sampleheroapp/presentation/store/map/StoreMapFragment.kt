@@ -251,6 +251,7 @@ class StoreMapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        changeActionBarTitle(viewModel.selectedCity.value, viewModel.selectedStore.value)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

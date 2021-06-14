@@ -72,7 +72,6 @@ ext {
     //Microsoft dependencies version
     screenManagerWindowManagerVersion = config.dualScreenSdkVersion
     screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
-    fragmentsHandlerVersion = "1.0.0-beta1"
     layoutsVersion = config.dualScreenSdkVersion
     bottomNavBarVersion = "1.0.0-beta1"
     recyclerViewVersion = config.dualScreenSdkVersion
@@ -83,7 +82,6 @@ ext {
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
             screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
             screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
-            fragmentsHandler          : "com.microsoft.device.dualscreen:fragmentshandler:$fragmentsHandlerVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",

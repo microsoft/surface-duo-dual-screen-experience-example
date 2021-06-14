@@ -16,8 +16,11 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentSingleScreenLaunchBinding
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel
+import com.microsoft.device.dualscreen.ScreenInfo
+import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 
-class SingleScreenLaunchFragment : Fragment() {
+class SingleScreenLaunchFragment : Fragment(), ScreenInfoListener {
 
     private val viewModel: LaunchViewModel by activityViewModels()
 
@@ -44,6 +47,30 @@ class SingleScreenLaunchFragment : Fragment() {
             it.launchViewPager.isSaveEnabled = false
             it.launchViewPager.adapter = storeDetailsAdapter
             TabLayoutMediator(it.launchTabLayout, it.launchViewPager) { _, _ -> }.attach()
+        }
+
+        viewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualScreen = it })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+    }
+
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        if (screenInfo.isDualMode()) {
+            if (!viewModel.isNavigationAtDescription()) {
+                viewModel.navigateToDescription()
+            }
+        } else {
+            if (viewModel.isNavigationAtDescription()) {
+                viewModel.navigateUp()
+            }
         }
     }
 

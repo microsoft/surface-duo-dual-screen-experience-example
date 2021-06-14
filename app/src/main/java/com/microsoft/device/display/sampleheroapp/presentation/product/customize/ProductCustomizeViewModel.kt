@@ -26,21 +26,21 @@ class ProductCustomizeViewModel @Inject constructor(
     private val getProductByIdUseCase: GetProductByIdUseCase,
     private val addItemUseCase: AddItemToOrderUseCase
 ) : ViewModel() {
-    val selectedProduct = MutableLiveData<Product?>()
+    val customizedProduct = MutableLiveData<Product?>()
     val selectedBodyShape = SingleLiveEvent<ProductType?>(null)
     val selectedBodyColor = MutableLiveData<ProductColor?>(null)
 
-    fun initSelectedProduct(selectedId: Long) {
+    fun initCustomizedProduct(productId: Long) {
         viewModelScope.launch {
-            getProductByIdUseCase.getById(selectedId)?.let {
-                selectedProduct.value = it
+            getProductByIdUseCase.getById(productId)?.let {
+                customizedProduct.value = it
             }
         }
     }
 
     fun updateOrder() {
         viewModelScope.launch {
-            selectedProduct.value?.apply {
+            customizedProduct.value?.apply {
                 selectedBodyShape.value?.let { bodyShape = it }
                 selectedBodyColor.value?.let { color = it }
             }?.let { customizedProduct ->
@@ -49,8 +49,9 @@ class ProductCustomizeViewModel @Inject constructor(
         }
     }
 
-    companion object {
-        const val SELECTED_PRODUCT_ID = "selected_product_id"
-        const val SELECTED_DEFAULT_VALUE = 0L
+    fun reset() {
+        customizedProduct.value = null
+        selectedBodyShape.value = null
+        selectedBodyColor.value = null
     }
 }

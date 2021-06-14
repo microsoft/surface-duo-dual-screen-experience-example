@@ -53,7 +53,7 @@ class StoreListFragment : Fragment() {
         viewModel.selectedStore.observe(
             viewLifecycleOwner,
             {
-                if (it == null) {
+                if (it == null && viewModel.selectedCity.value != null) {
                     changeActionBarTitle()
                 }
             }

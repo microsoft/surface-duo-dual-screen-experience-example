@@ -33,6 +33,8 @@ import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeVi
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeViewModel.DesignPattern
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeViewModel.SdkComponent
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.getTopCenterPoint
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
@@ -54,6 +56,9 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     private val rotationViewModel: RotationViewModel by viewModels()
     private val devViewModel: DevModeViewModel by viewModels()
 
+    private val productViewModel: ProductViewModel by viewModels()
+    private val storeViewModel: StoreViewModel by viewModels()
+
     @VisibleForTesting
     private val orderViewModel: OrderViewModel by viewModels()
 
@@ -64,7 +69,6 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
-        setupTutorialObserver()
         setupBottomNavigation()
     }
 
@@ -75,19 +79,19 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
             navigator.bind(it)
             it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, _ ->
-                if (
-                    surfaceDuoNavDestination.id != R.id.fragment_order &&
-                    surfaceDuoNavDestination.id != R.id.fragment_order_receipt
-                ) {
-                    tutorialViewModel.onStoresOpen()
-                    if (tutorial.currentBalloonType == TutorialBalloonType.STORES) {
-                        tutorial.hide()
-                    }
-                }
+                resetDestinations(surfaceDuoNavDestination)
                 setupDevModeByDestination(surfaceDuoNavDestination)
             }
         }
         binding.bottomNavView.arrangeButtons(3, 0)
+    }
+
+    private fun resetDestinations(destination: SurfaceDuoNavDestination) {
+        when (destination.id) {
+            R.id.fragment_store_map -> storeViewModel.reset()
+            R.id.fragment_product_list -> productViewModel.reset()
+            R.id.fragment_order -> orderViewModel.reset()
+        }
     }
 
     override fun onPause() {
@@ -95,6 +99,14 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         navigator.unbind()
         tutorial.hide()
+    }
+
+    fun hideBottomNavBar() {
+        binding.bottomNavView.visibility = View.GONE
+    }
+
+    fun showBottomNavBar() {
+        binding.bottomNavView.visibility = View.VISIBLE
     }
 
     private fun setupToolbar() {
@@ -105,6 +117,27 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
             SurfaceDuoNavigationUI.setupWithSurfaceDuoNavController(binding.bottomNavView, it)
         }
+
+        binding.bottomNavView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_stores_graph -> {
+                    navigator.navigateToStores()
+                    hideStoresTutorial()
+                }
+                R.id.navigation_products_graph -> {
+                    navigator.navigateToProducts()
+                    hideStoresTutorial()
+                }
+                R.id.navigation_orders_graph -> {
+                    navigator.navigateToOrders()
+                }
+            }
+            true
+        }
+
+        binding.bottomNavView.setOnNavigationItemReselectedListener {
+            // do nothing
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -113,21 +146,16 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     override fun onBackPressed() {
-        if (isNavigationAtStart()) {
+        if (navigator.isNavigationAtStart()) {
             finish()
         }
         super.onBackPressed()
     }
 
-    private fun isNavigationAtStart() =
-        SurfaceDuoNavigation.findNavController(
-            this,
-            R.id.nav_host_fragment
-        ).currentDestination?.id == R.id.fragment_store_map
-
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
         rotationViewModel.isDualMode.value = screenInfo.isDualMode()
+        rotationViewModel.screenInfo.value = screenInfo
         if (screenInfo.isDualMode()) {
             tutorialViewModel.onDualMode()
         }
@@ -137,7 +165,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         tutorialViewModel.showStoresTutorial.observe(
             this,
             {
-                if (it == true) {
+                if (it == true && tutorialViewModel.shouldShowStoresTutorial()) {
                     showStoresTutorial()
                 }
             }
@@ -149,9 +177,18 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         tutorial.show(storeItem, TutorialBalloonType.STORES)
     }
 
+    private fun hideStoresTutorial() {
+        tutorialViewModel.onStoresOpen()
+        if (tutorial.currentBalloonType == TutorialBalloonType.STORES) {
+            tutorial.hide()
+        }
+    }
+
     private fun showDeveloperModeTutorial(anchorView: View) {
         if (tutorialViewModel.shouldShowDeveloperModeTutorial()) {
             tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+        } else {
+            setupTutorialObserver()
         }
     }
 
@@ -161,6 +198,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
             R.id.fragment_store_details -> setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_list -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
+            R.id.fragment_product_customize -> setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE)
             R.id.fragment_order -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
             R.id.fragment_order_receipt -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
         }

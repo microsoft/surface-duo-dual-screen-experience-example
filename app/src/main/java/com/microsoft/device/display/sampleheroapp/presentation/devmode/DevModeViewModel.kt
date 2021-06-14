@@ -9,13 +9,28 @@ package com.microsoft.device.display.sampleheroapp.presentation.devmode
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DevModeViewModel : ViewModel() {
+@HiltViewModel
+class DevModeViewModel @Inject constructor(
+    private val navigator: DevModeNavigator
+) : ViewModel() {
     val webViewUrl = MutableLiveData(DESIGN_PATTERN_BASE_URL)
 
     var designPattern = DesignPattern.EXTENDED_CANVAS
     var sdkComponent = SdkComponent.BOTTOM_NAVIGATION_VIEW
     var appScreen = AppScreen.STORES_MAP
+
+    fun navigateToContent() {
+        navigator.navigateToContent()
+    }
+
+    fun isNavigationAtContent() = navigator.isNavigationAtContent()
+
+    fun navigateUp() {
+        navigator.navigateUp()
+    }
 
     fun loadDesignPatternPage() {
         webViewUrl.value = designPattern.buildUrl()
@@ -46,7 +61,6 @@ class DevModeViewModel : ViewModel() {
 
     enum class SdkComponent(var path: String) {
         BOTTOM_NAVIGATION_VIEW("bottomnavigation/surfaceduo-bottomnavigationview"),
-        FRAGMENTS_HANDLER("fragment-handler/fragment-manager-state-handler"),
         SURFACE_DUO_LAYOUT("layouts/surfaceduo-layout"),
         TAB_LAYOUT("tabs/surfaceduo-tablayout"),
         RECYCLER_VIEW("recyclerview/");

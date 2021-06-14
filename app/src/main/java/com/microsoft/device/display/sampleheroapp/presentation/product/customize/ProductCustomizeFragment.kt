@@ -16,26 +16,33 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.airbnb.lottie.LottieAnimationView
+import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductCustomizeBinding
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
+import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductContentDescription
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductDrawable
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel.Companion.ROTATE_HORIZONTALLY
+import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
+import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.rotate
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductCustomizeFragment : Fragment() {
 
+    private val productViewModel: ProductViewModel by activityViewModels()
     private val viewModel: ProductCustomizeViewModel by activityViewModels()
     private val rotationViewModel: RotationViewModel by activityViewModels()
 
     private var binding: FragmentProductCustomizeBinding? = null
 
-    private var colorViewList: ArrayList<CustomizeCardView>? = arrayListOf()
+    private var colorViewList: ArrayList<CustomizeCardView>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,12 +59,33 @@ class ProductCustomizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initColorViewList()
+
         setupObservers()
         setupListeners()
     }
 
+    private fun initColorViewList() {
+        colorViewList = arrayListOf()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        (activity as? MainActivity)?.hideBottomNavBar()
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
+        appCompatActivity?.setupToolbar(isBackButtonEnabled = true) {
+            viewModel.reset()
+            productViewModel.navigateUp()
+        }
+    }
+
     private fun setupObservers() {
-        viewModel.selectedProduct.observe(
+        viewModel.customizedProduct.observe(
             viewLifecycleOwner,
             { product ->
                 product?.let {
@@ -74,7 +102,7 @@ class ProductCustomizeFragment : Fragment() {
         viewModel.selectedBodyShape.observe(
             viewLifecycleOwner,
             {
-                val selectedItem = viewModel.selectedProduct.value
+                val selectedItem = viewModel.customizedProduct.value
                 if (it != null && selectedItem != null) {
                     if (it == selectedItem.bodyShape) {
                         selectedItem.color
@@ -184,6 +212,7 @@ class ProductCustomizeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        (activity as? MainActivity)?.showBottomNavBar()
         binding = null
         colorViewList = null
     }

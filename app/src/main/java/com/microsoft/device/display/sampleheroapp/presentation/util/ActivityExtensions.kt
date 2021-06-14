@@ -23,12 +23,13 @@ fun AppCompatActivity.setupToolbar(
     if (isBackButtonEnabled) {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-        onBackPressedListener?.let {
-            val lifecycleOwner = owner ?: this
-            onBackPressedDispatcher.addCallback(lifecycleOwner) { it.invoke() }
-        }
     } else {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         supportActionBar?.setHomeButtonEnabled(false)
+    }
+
+    onBackPressedListener?.let {
+        val lifecycleOwner = owner ?: this
+        onBackPressedDispatcher.addCallback(lifecycleOwner) { it.invoke() }
     }
 }

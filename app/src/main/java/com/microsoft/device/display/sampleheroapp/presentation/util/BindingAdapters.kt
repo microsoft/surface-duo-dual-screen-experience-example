@@ -58,8 +58,13 @@ fun getOrderImageRes(view: ImageView, orderItem: OrderItem?) {
 }
 
 @BindingAdapter("visibleIf")
-fun showHide(view: View, shouldBeVisible: Boolean?) {
+fun showRemove(view: View, shouldBeVisible: Boolean?) {
     view.visibility = if (shouldBeVisible == true) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("invisibleIf")
+fun showHide(view: View, shouldBeInvisible: Boolean?) {
+    view.visibility = if (shouldBeInvisible == true) View.INVISIBLE else View.VISIBLE
 }
 
 @BindingAdapter("price")

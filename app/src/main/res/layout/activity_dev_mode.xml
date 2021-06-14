@@ -20,20 +20,24 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintBottom_toTopOf="@+id/dev_dual_layout"
+        app:layout_constraintBottom_toTopOf="@+id/devmode_nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
         app:theme="@style/Theme.App.ActionBar"/>
 
-    <com.microsoft.device.dualscreen.layouts.SurfaceDuoLayout
-        android:id="@+id/dev_dual_layout"
+    <fragment
+        android:id="@+id/devmode_nav_host_fragment"
+        android:name="androidx.navigation.fragment.SurfaceDuoNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/gray"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:navGraph="@navigation/navigation_devmode_graph"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
