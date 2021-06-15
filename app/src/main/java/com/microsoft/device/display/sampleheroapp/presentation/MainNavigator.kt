@@ -15,7 +15,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNa
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator
 import com.microsoft.device.dualscreen.navigation.LaunchScreen
 
-class AppNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
+class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     private var navController: SurfaceDuoNavController? = null
 
     fun bind(navController: SurfaceDuoNavController) {

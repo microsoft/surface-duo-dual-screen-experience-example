@@ -50,7 +50,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
-    @Inject lateinit var navigator: AppNavigator
+    @Inject lateinit var navigator: MainNavigator
     @Inject lateinit var tutorial: TutorialBalloon
 
     private val tutorialViewModel: TutorialViewModel by viewModels()

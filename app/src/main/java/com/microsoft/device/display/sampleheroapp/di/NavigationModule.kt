@@ -7,7 +7,7 @@
 
 package com.microsoft.device.display.sampleheroapp.di
 
-import com.microsoft.device.display.sampleheroapp.presentation.AppNavigator
+import com.microsoft.device.display.sampleheroapp.presentation.MainNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
@@ -29,16 +29,16 @@ object NavigationModule {
 
     @Provides
     @Singleton
-    fun provideMainNavigator(): AppNavigator = AppNavigator()
+    fun provideMainNavigator(): MainNavigator = MainNavigator()
 
     @Provides
-    fun provideStoreNavigator(navigator: AppNavigator): StoreNavigator = navigator
+    fun provideStoreNavigator(navigator: MainNavigator): StoreNavigator = navigator
 
     @Provides
-    fun provideProductNavigator(navigator: AppNavigator): ProductNavigator = navigator
+    fun provideProductNavigator(navigator: MainNavigator): ProductNavigator = navigator
 
     @Provides
-    fun provideOrderNavigator(navigator: AppNavigator): OrderNavigator = navigator
+    fun provideOrderNavigator(navigator: MainNavigator): OrderNavigator = navigator
 
     @Provides
     @Singleton
