@@ -15,6 +15,7 @@ import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation
+import androidx.core.view.isGone
 import androidx.navigation.SurfaceDuoNavDestination
 import androidx.navigation.SurfaceDuoNavigation
 import androidx.navigation.ui.SurfaceDuoNavigationUI
@@ -78,12 +79,18 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
         SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
             navigator.bind(it)
-            it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, _ ->
+            it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, arguments ->
+                showHideBottomNav(arguments?.getBoolean(HIDE_BOTTOM_BAR_KEY, false))
+
                 resetDestinations(surfaceDuoNavDestination)
                 setupDevModeByDestination(surfaceDuoNavDestination)
             }
         }
-        binding.bottomNavView.arrangeButtons(3, 0)
+        binding.bottomNavView.arrangeButtons(BOTTOM_NAV_ITEM_COUNT, 0)
+    }
+
+    private fun showHideBottomNav(shouldHide: Boolean?) {
+        binding.bottomNavView.isGone = (shouldHide == true)
     }
 
     private fun resetDestinations(destination: SurfaceDuoNavDestination) {
@@ -99,14 +106,6 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         navigator.unbind()
         tutorial.hide()
-    }
-
-    fun hideBottomNavBar() {
-        binding.bottomNavView.visibility = View.GONE
-    }
-
-    fun showBottomNavBar() {
-        binding.bottomNavView.visibility = View.VISIBLE
     }
 
     private fun setupToolbar() {
@@ -198,6 +197,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
             R.id.fragment_store_details -> setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_list -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
+            R.id.fragment_product_details -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_customize -> setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE)
             R.id.fragment_order -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
             R.id.fragment_order_receipt -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
@@ -249,4 +249,9 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     @VisibleForTesting
     fun getSubmittedOrderLiveData() = orderViewModel.submittedOrder
+
+    companion object {
+        const val HIDE_BOTTOM_BAR_KEY = "hideBottomNav"
+        const val BOTTOM_NAV_ITEM_COUNT = 3
+    }
 }

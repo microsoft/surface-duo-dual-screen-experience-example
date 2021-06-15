@@ -38,6 +38,11 @@
         android:id="@+id/fragment_product_customize"
         android:name="com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeFragment"
         android:label="ProductCustomizeFragment"
-        tools:layout="@layout/fragment_product_customize"/>
+        tools:layout="@layout/fragment_product_customize">
+
+        <argument android:name="hideBottomNav"
+            android:defaultValue="true" />
+
+    </fragment>
 
 </navigation>

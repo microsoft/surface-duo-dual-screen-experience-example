@@ -12,6 +12,7 @@ import android.animation.AnimatorListenerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewAnimationUtils.createCircularReveal
@@ -22,6 +23,7 @@ import androidx.navigation.SurfaceDuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityDevModeBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.getTopCenterPoint
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
@@ -98,8 +100,10 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
         circularReveal.start()
     }
 
-    private fun unRevealActivity() {
-        createCircularReveal(binding.devRootLayout, revealX, revealY, getFinalRadius(), START_RADIUS)?.apply {
+    private fun unRevealActivity(view: View) {
+        val viewCenter = view.getTopCenterPoint()
+
+        createCircularReveal(binding.devRootLayout, viewCenter.x, viewCenter.y, getFinalRadius(), START_RADIUS)?.apply {
             duration = ANIMATION_DURATION
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
@@ -118,7 +122,7 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
         if (rotationViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.dev_mode_menu, menu)
             menu?.findItem(R.id.menu_main_user_mode)?.actionView?.setOnClickListener {
-                unRevealActivity()
+                unRevealActivity(it)
             }
         }
         return true

@@ -20,12 +20,26 @@
         <action android:id="@+id/action_launch_title_to_description"
             app:destination="@id/fragment_launch_description"
             app:launchScreen="end"/>
+
+        <action android:id="@+id/action_launch_single_to_main_activity"
+            app:destination="@id/main_activity"/>
     </fragment>
 
     <fragment
         android:id="@+id/fragment_launch_description"
         android:name="com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchDescriptionFragment"
         android:label="LaunchDescriptionFragment"
-        tools:layout="@layout/fragment_launch_description" />
+        tools:layout="@layout/fragment_launch_description">
+
+        <action android:id="@+id/action_launch_description_to_main_activity"
+            app:destination="@id/main_activity"/>
+
+    </fragment>
+
+    <activity
+        android:id="@+id/main_activity"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.MainActivity"
+        android:label="MainActivity"
+        tools:layout="@layout/activity_main" />
 
 </navigation>

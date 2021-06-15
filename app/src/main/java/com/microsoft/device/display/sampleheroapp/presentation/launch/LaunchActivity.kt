@@ -7,13 +7,11 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.launch
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.SurfaceDuoNavigation
 import com.microsoft.device.display.sampleheroapp.R
-import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloonType
@@ -40,7 +38,6 @@ class LaunchActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun setupObservers() {
-        viewModel.isLaunchButtonClicked.observe(this, { navigateToMainActivity() })
         viewModel.shouldShowTutorial.observe(this, { handleTutorial(it) })
     }
 
@@ -58,10 +55,6 @@ class LaunchActivity : AppCompatActivity(), ScreenInfoListener {
         ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         dismissTutorialBalloon()
         navigator.unbind()
-    }
-
-    private fun navigateToMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {

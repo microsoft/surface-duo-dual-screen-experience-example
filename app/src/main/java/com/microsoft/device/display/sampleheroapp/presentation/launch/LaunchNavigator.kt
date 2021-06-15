@@ -28,6 +28,14 @@ class LaunchNavigator {
     fun isNavigationAtDescription() =
         navController?.currentDestination?.id == R.id.fragment_launch_description
 
+    fun navigateToMainFromSingle() {
+        navController?.navigate(R.id.action_launch_single_to_main_activity)
+    }
+
+    fun navigateToMainFromDescription() {
+        navController?.navigate(R.id.action_launch_description_to_main_activity)
+    }
+
     fun navigateUp() {
         navController?.navigateUp()
     }

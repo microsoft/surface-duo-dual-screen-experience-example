@@ -20,7 +20,6 @@ import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductCustomizeBinding
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
-import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
 import com.microsoft.device.display.sampleheroapp.presentation.product.util.getProductContentDescription
@@ -71,8 +70,6 @@ class ProductCustomizeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        (activity as? MainActivity)?.hideBottomNavBar()
         setupToolbar()
     }
 
@@ -212,7 +209,6 @@ class ProductCustomizeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        (activity as? MainActivity)?.showBottomNavBar()
         binding = null
         colorViewList = null
     }

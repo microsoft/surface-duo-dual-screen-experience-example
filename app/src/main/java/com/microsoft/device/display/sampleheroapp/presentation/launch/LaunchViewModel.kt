@@ -23,11 +23,16 @@ class LaunchViewModel @Inject constructor(
     private val navigator: LaunchNavigator
 ) : ViewModel(), ItemClickListener<Boolean> {
     val isDualMode = MutableLiveData(false)
-    val isLaunchButtonClicked = SingleLiveEvent(false)
     val shouldShowTutorial = SingleLiveEvent<Int?>(null)
 
     override fun onClick(model: Boolean?) {
-        isLaunchButtonClicked.value = true
+        model?.let {
+            if (model) {
+                navigator.navigateToMainFromDescription()
+            } else {
+                navigator.navigateToMainFromSingle()
+            }
+        }
     }
 
     fun navigateToDescription() {
