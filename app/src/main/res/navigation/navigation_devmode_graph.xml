@@ -8,7 +8,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_devmode_graph.xml"
+    android:id="@+id/navigation_devmode_graph"
     app:startDestination="@id/fragment_dev_control">
 
     <fragment
