@@ -12,8 +12,8 @@ import com.microsoft.device.display.sampleheroapp.domain.order.testutil.MockOrde
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderEntity
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItemEntity
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertNull
-import org.junit.Assert.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
@@ -36,10 +36,11 @@ class SubmitOrderUseCaseTest {
 
     @Test
     fun submitOrderIfThereIsACurrentOne() = runBlocking {
+        val copyFirstOrderItemEntity = firstOrderItemEntity.copy()
         val copyFirstOrderEntity = firstOrderEntity.copy()
 
         mockRepo.insert(copyFirstOrderEntity)
-        mockRepo.insertItems(firstOrderItemEntity)
+        mockRepo.insertItems(copyFirstOrderItemEntity)
 
         val submittedOrderId = submitOrderUseCase.submit()
         assertThat(submittedOrderId, iz(copyFirstOrderEntity.orderId))

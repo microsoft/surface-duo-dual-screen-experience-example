@@ -8,6 +8,11 @@
 
 <layout>
     <data>
+
+        <variable
+            name="isDualScreen"
+            type="Boolean" />
+
         <variable
             name="launchListener"
             type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Boolean&gt;" />
@@ -17,10 +22,18 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/single_launch_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
         tools:context=".presentation.launch.LaunchActivity">
+
+        <include
+            android:id="@+id/launch_dual_screen"
+            layout="@layout/fragment_launch_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visibleIf="@{isDualScreen}" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/launch_view_pager"
@@ -29,7 +42,8 @@
             app:layout_constraintBottom_toTopOf="@id/launch_tab_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{!isDualScreen}"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/launch_tab_layout"
@@ -40,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/launch_view_pager"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:visibleIf="@{!isDualScreen}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/single_launch_button"
@@ -53,7 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_tab_layout"/>
+            app:visibleIf="@{!isDualScreen}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

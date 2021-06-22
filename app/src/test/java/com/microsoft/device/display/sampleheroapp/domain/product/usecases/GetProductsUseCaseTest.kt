@@ -13,7 +13,7 @@ import com.microsoft.device.display.sampleheroapp.domain.product.testutil.produc
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.secondProduct
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.secondProductEntity
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz

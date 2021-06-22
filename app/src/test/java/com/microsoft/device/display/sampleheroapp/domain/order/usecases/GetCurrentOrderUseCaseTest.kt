@@ -14,8 +14,8 @@ import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrd
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItem
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItemEntity
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertNull
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -43,7 +43,9 @@ class GetCurrentOrderUseCaseTest {
 
     @Test
     fun getEmptyListWhenOrderIdExists() = runBlocking {
-        mockRepo.insert(firstOrderEntity)
+        val copyFirstOrderEntity = firstOrderEntity.copy()
+
+        mockRepo.insert(copyFirstOrderEntity)
 
         val resultValue = getCurrentOrderUseCase.get().blockingValue
 
@@ -52,11 +54,14 @@ class GetCurrentOrderUseCaseTest {
 
     @Test
     fun getItemWhenOrderIdExists() = runBlocking {
-        mockRepo.insert(firstOrderEntity)
-        mockRepo.insertItems(firstOrderItemEntity)
+        val copyFirstOrderItemEntity = firstOrderItemEntity.copy()
+        val copyFirstOrderEntity = firstOrderEntity.copy()
+
+        mockRepo.insert(copyFirstOrderEntity)
+        mockRepo.insertItems(copyFirstOrderItemEntity)
 
         val resultValue = getCurrentOrderUseCase.get().blockingValue
-        val expectedItem = firstOrderItem.copy(itemId = firstOrderItemEntity.itemId)
+        val expectedItem = firstOrderItem.copy(itemId = copyFirstOrderItemEntity.itemId)
 
         assertThat(resultValue, iz(listOf(expectedItem)))
     }

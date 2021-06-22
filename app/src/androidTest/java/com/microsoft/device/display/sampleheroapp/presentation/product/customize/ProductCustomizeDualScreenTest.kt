@@ -7,15 +7,15 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.product.customize
 
-import android.content.Intent
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
+import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
+import com.microsoft.device.display.sampleheroapp.presentation.product.PRODUCT_FIRST_POSITION
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetails
@@ -28,6 +28,9 @@ import com.microsoft.device.display.sampleheroapp.presentation.product.checkCust
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImagePortraitContent
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeShapes
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkShapeSelected
+import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnCustomizeButton
+import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnListItemAtPosition
+import com.microsoft.device.display.sampleheroapp.presentation.product.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.product
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectColor
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectShape
@@ -47,15 +50,7 @@ import org.junit.rules.RuleChain
 @HiltAndroidTest
 class ProductCustomizeDualScreenTest {
 
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
-
-    private val activityRule =
-        object : ActivityTestRule<ProductCustomizeActivity>(ProductCustomizeActivity::class.java) {
-            override fun getActivityIntent() =
-                Intent(context, ProductCustomizeActivity::class.java).apply {
-                    putExtra(ProductCustomizeViewModel.SELECTED_PRODUCT_ID, product.productId)
-                }
-        }
+    private val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -70,6 +65,9 @@ class ProductCustomizeDualScreenTest {
     @Test
     fun checkCustomizeInPortraitMode() {
         switchFromSingleToDualScreen()
+
+        openProductsTab()
+        clickOnCustomizeButton()
 
         checkCustomizeControl()
         checkCustomizeShapes()
@@ -89,6 +87,9 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        openProductsTab()
+        clickOnCustomizeButton()
+
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImageLandscape()
@@ -104,6 +105,9 @@ class ProductCustomizeDualScreenTest {
     @Test
     fun openDevModeInDualPortraitMode() {
         switchFromSingleToDualScreen()
+
+        openProductsTab()
+        clickOnCustomizeButton()
 
         checkCustomizeControl()
         checkCustomizeShapes()
@@ -142,6 +146,9 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        openProductsTab()
+        clickOnCustomizeButton()
+
         checkCustomizeControl()
         checkCustomizeShapes()
         checkCustomizeImageLandscape()
@@ -174,6 +181,10 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun checkNewColorSelection() {
+        openProductsTab()
+        clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
+        clickOnCustomizeButton()
+
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.color)
         checkCustomizeImagePortraitContent(product.color, product.bodyShape)
@@ -226,6 +237,10 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun checkNewShapeSelection() {
+        openProductsTab()
+        clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
+        clickOnCustomizeButton()
+
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.color)
         checkCustomizeImagePortraitContent(product.color, product.bodyShape)

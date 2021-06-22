@@ -20,13 +20,27 @@ import javax.inject.Inject
 @HiltViewModel
 class LaunchViewModel @Inject constructor(
     private val tutorialPrefs: TutorialPreferences,
+    private val navigator: LaunchNavigator
 ) : ViewModel(), ItemClickListener<Boolean> {
     val isDualMode = MutableLiveData(false)
-    val isLaunchButtonClicked = SingleLiveEvent(false)
     val shouldShowTutorial = SingleLiveEvent<Int?>(null)
 
     override fun onClick(model: Boolean?) {
-        isLaunchButtonClicked.value = true
+        if (model == true) {
+            navigator.navigateToMainFromDescription()
+        } else {
+            navigator.navigateToMainFromSingle()
+        }
+    }
+
+    fun navigateToDescription() {
+        navigator.navigateToDescription()
+    }
+
+    fun isNavigationAtDescription() = navigator.isNavigationAtDescription()
+
+    fun navigateUp() {
+        navigator.navigateUp()
     }
 
     fun triggerShouldShowTutorial(rotation: Int) {

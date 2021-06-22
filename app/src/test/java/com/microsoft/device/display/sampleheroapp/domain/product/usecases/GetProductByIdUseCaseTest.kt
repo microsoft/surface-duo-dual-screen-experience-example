@@ -11,8 +11,8 @@ import com.microsoft.device.display.sampleheroapp.domain.product.testutil.MockPr
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.product
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.productEntity
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertNull
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz

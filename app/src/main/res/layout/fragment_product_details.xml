@@ -15,6 +15,10 @@
         <import type="android.widget.LinearLayout" />
 
         <variable
+            name="isInCustomizeMode"
+            type="Boolean" />
+
+        <variable
             name="viewModel"
             type="com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel" />
 
@@ -27,20 +31,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:focusable="true"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_details_image"
             android:layout_width="@dimen/product_image_width"
             android:layout_height="@dimen/product_image_height"
             android:layout_marginEnd="@dimen/large_margin"
-            app:layout_constraintBottom_toTopOf="@id/product_details_customize_button"
+            app:invisibleIf="@{rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            app:layout_constraintBottom_toTopOf="@id/product_details_button_barrier_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_details_type_description"
             app:layout_constraintTop_toTopOf="parent"
             app:productImage="@{viewModel.selectedProduct}"
-            app:visibleIf="@{!rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
             tools:src="@drawable/orange_classic_guitar"
             tools:visibility="visible"/>
 
@@ -122,12 +126,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_margin"
-            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
             android:layout_marginBottom="@dimen/normal_margin"
             android:text="@{@string/product_details_type_description(viewModel.selectedProduct.name)}"
             android:textSize="@dimen/text_size_14"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/product_details_customize_button"
+            app:layout_constraintEnd_toStartOf="@id/product_details_button_barrier_horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_details_type_title"
             tools:text="@string/product_details_type_description"/>
@@ -135,6 +139,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/product_details_customize_button"
             style="@style/Customize.Button"
+            visibleIf="@{!isInCustomizeMode}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/normal_margin"
@@ -143,7 +148,38 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/product_details_image"
             app:layout_constraintStart_toStartOf="@id/product_details_image"
-            app:layout_constraintTop_toTopOf="@id/product_details_type_title"/>
+            app:layout_constraintTop_toBottomOf="@id/product_details_type_title"
+            tools:visibility="visible" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/product_details_customize_place_order"
+            visibleIf="@{isInCustomizeMode}"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/product_details_image"
+            app:layout_constraintStart_toStartOf="@id/product_details_image"
+            app:layout_constraintTop_toBottomOf="@id/product_details_type_title"
+            app:lottie_autoPlay="false"
+            app:lottie_rawRes="@raw/place_order_animation"
+            tools:background="@drawable/rounded_rectangle_button"
+            tools:visibility="gone"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/product_details_button_barrier_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="top"
+            app:constraint_referenced_ids="product_details_customize_button, product_details_customize_place_order" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/product_details_button_barrier_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="product_details_customize_button, product_details_customize_place_order" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

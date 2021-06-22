@@ -7,11 +7,11 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.product.customize
 
-import android.content.Intent
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductColor
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
+import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.product.PRODUCT_FIRST_POSITION
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImageLandscape
@@ -21,7 +21,9 @@ import com.microsoft.device.display.sampleheroapp.presentation.product.checkCust
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeShapes
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkShapeSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkSingleModePlaceOrderButton
-import com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeViewModel.Companion.SELECTED_PRODUCT_ID
+import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnCustomizeButton
+import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnListItemAtPosition
+import com.microsoft.device.display.sampleheroapp.presentation.product.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.product
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectColor
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectShape
@@ -38,15 +40,7 @@ import org.junit.rules.RuleChain
 @HiltAndroidTest
 class ProductCustomizeSingleScreenTest {
 
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
-
-    private val activityRule =
-        object : ActivityTestRule<ProductCustomizeActivity>(ProductCustomizeActivity::class.java) {
-            override fun getActivityIntent() =
-                Intent(context, ProductCustomizeActivity::class.java).apply {
-                    putExtra(SELECTED_PRODUCT_ID, product.productId)
-                }
-        }
+    private val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -59,6 +53,10 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkCustomizeInPortraitMode() {
+        openProductsTab()
+        clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
+        clickOnCustomizeButton()
+
         checkSingleModePlaceOrderButton()
         checkCustomizeControl()
         checkCustomizeShapes()
@@ -73,6 +71,10 @@ class ProductCustomizeSingleScreenTest {
     fun checkCustomizeInLandscapeMode() {
         setOrientationRight()
 
+        openProductsTab()
+        clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
+        clickOnCustomizeButton()
+
         checkSingleModePlaceOrderButton()
         checkCustomizeControl()
         checkCustomizeShapes()
@@ -85,6 +87,10 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkNewColorSelection() {
+        openProductsTab()
+        clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
+        clickOnCustomizeButton()
+
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.color)
         checkCustomizeImagePortraitContent(product.color, product.bodyShape)
@@ -116,6 +122,10 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkNewShapeSelection() {
+        openProductsTab()
+        clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
+        clickOnCustomizeButton()
+
         checkShapeSelected(product.bodyShape)
         checkColorSelected(product.color)
         checkCustomizeImagePortraitContent(product.color, product.bodyShape)

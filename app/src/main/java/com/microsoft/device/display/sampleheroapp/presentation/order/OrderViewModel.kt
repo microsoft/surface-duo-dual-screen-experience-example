@@ -8,7 +8,6 @@
 package com.microsoft.device.display.sampleheroapp.presentation.order
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.display.sampleheroapp.domain.order.model.Order
@@ -19,6 +18,7 @@ import com.microsoft.device.display.sampleheroapp.domain.order.usecases.SubmitOr
 import com.microsoft.device.display.sampleheroapp.domain.order.usecases.UpdateItemQuantityUseCase
 import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
 import com.microsoft.device.display.sampleheroapp.presentation.util.QuantityDataListHandler
+import com.microsoft.device.display.sampleheroapp.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,7 +33,7 @@ class OrderViewModel @Inject constructor(
 ) : ViewModel(), ItemClickListener<Boolean> {
 
     var itemList: LiveData<List<OrderItem>> = getOrderUseCase.get()
-    var submittedOrder = MutableLiveData<Order?>(null)
+    var submittedOrder = SingleLiveEvent<Order?>(null)
     var showSuccessMessage = false
 
     val quantityDataListHandler = object : QuantityDataListHandler<OrderItem> {
@@ -73,11 +73,15 @@ class OrderViewModel @Inject constructor(
     }
 
     fun navigateToReceipt() {
-        orderNavigator.navigateToReceipt()
+        orderNavigator.navigateToOrderReceipt()
     }
 
     fun navigateToOrder() {
-        orderNavigator.navigateToOrder()
+        orderNavigator.navigateUp()
+        submittedOrder.value = null
+    }
+
+    fun reset() {
         submittedOrder.value = null
     }
 

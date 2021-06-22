@@ -37,6 +37,8 @@ class TutorialViewModel @Inject constructor(
 
     fun shouldShowDeveloperModeTutorial() = tutorialPrefs.shouldShowDevModeTutorial()
 
+    fun shouldShowStoresTutorial() = tutorialPrefs.shouldShowStoresTutorial()
+
     fun onDeveloperModeOpen() {
         tutorialPrefs.setShowDevModeTutorial(false)
     }

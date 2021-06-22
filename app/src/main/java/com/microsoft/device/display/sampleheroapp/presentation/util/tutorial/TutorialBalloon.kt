@@ -153,7 +153,7 @@ class TutorialBalloon @Inject constructor(val context: Context) {
         return Pair(xOffset, yOffset)
     }
 
-    private fun canShow() = tutorialWindow?.isShowing != true
+    private fun canShow() = tutorialWindow == null
 
     fun hide() {
         tutorialWindow?.takeIf { it.isShowing }?.dismiss()

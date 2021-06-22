@@ -12,6 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.domain.order.model.OrderItem
@@ -58,8 +60,13 @@ fun getOrderImageRes(view: ImageView, orderItem: OrderItem?) {
 }
 
 @BindingAdapter("visibleIf")
-fun showHide(view: View, shouldBeVisible: Boolean?) {
-    view.visibility = if (shouldBeVisible == true) View.VISIBLE else View.GONE
+fun visibleIf(view: View, shouldBeVisible: Boolean?) {
+    view.isVisible = shouldBeVisible == true
+}
+
+@BindingAdapter("invisibleIf")
+fun invisibleIf(view: View, shouldBeInvisible: Boolean?) {
+    view.isInvisible = shouldBeInvisible == true
 }
 
 @BindingAdapter("price")

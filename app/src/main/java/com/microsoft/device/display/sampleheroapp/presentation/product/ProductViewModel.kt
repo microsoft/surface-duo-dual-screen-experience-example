@@ -31,6 +31,10 @@ class ProductViewModel @Inject constructor(
         }
     }
 
+    fun reset() {
+        selectedProduct.value = null
+    }
+
     override fun getDataList(): List<Product>? = productList.value
 
     override fun onClick(model: Product?) {
@@ -38,8 +42,16 @@ class ProductViewModel @Inject constructor(
         selectProduct(model)
     }
 
+    fun navigateUp() {
+        navigator.navigateUp()
+    }
+
     fun navigateToDetails() {
         navigator.navigateToProductDetails()
+    }
+
+    fun navigateToCustomize() {
+        navigator.navigateToProductCustomize()
     }
 
     fun selectFirstProduct() {

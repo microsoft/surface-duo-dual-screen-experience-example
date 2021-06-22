@@ -10,7 +10,7 @@ package com.microsoft.device.display.sampleheroapp.domain.order.model
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrder
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItem
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.orderWithItems
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz
 
@@ -18,8 +18,11 @@ class OrderTest {
 
     @Test
     fun buildFromOrderEntity() {
-        firstOrder.items.add(firstOrderItem)
-        assertThat(firstOrder, iz(Order(orderWithItems)))
-        firstOrder.items.clear()
+        val copyFirstOrder = firstOrder.copy()
+        val copyFirstOrderItem = firstOrderItem.copy()
+
+        copyFirstOrder.items.add(copyFirstOrderItem)
+        assertThat(copyFirstOrder, iz(Order(orderWithItems)))
+        copyFirstOrder.items.clear()
     }
 }

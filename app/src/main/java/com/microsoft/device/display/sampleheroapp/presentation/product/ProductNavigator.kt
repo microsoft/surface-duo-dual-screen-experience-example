@@ -8,5 +8,8 @@
 package com.microsoft.device.display.sampleheroapp.presentation.product
 
 interface ProductNavigator {
+    fun navigateToProducts()
     fun navigateToProductDetails()
+    fun navigateToProductCustomize()
+    fun navigateUp()
 }

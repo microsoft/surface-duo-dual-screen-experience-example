@@ -14,6 +14,7 @@
     <color name="gray">#1F2228</color>
     <color name="dark_gray">#303030</color>
     <color name="medium_gray">#333333</color>
+    <color name="item_tint_gray">#6E6E6E</color>
 
     <color name="bright_orange">#FFA500</color>
     <color name="orange">#F6B63D</color>

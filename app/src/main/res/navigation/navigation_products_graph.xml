@@ -19,8 +19,7 @@
         tools:layout="@layout/fragment_product_list">
 
         <action android:id="@+id/action_product_list_to_details"
-            app:destination="@id/fragment_product_details"
-            app:launchScreen="end"/>
+            app:destination="@id/fragment_product_details"/>
 
     </fragment>
 
@@ -28,6 +27,22 @@
         android:id="@+id/fragment_product_details"
         android:name="com.microsoft.device.display.sampleheroapp.presentation.product.details.ProductDetailsFragment"
         android:label="ProductDetailsFragment"
-        tools:layout="@layout/fragment_product_details"/>
+        tools:layout="@layout/fragment_product_details">
+
+        <action android:id="@+id/action_product_details_to_customize"
+            app:destination="@id/fragment_product_customize"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_product_customize"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeFragment"
+        android:label="ProductCustomizeFragment"
+        tools:layout="@layout/fragment_product_customize">
+
+        <argument android:name="hideBottomNav"
+            android:defaultValue="true" />
+
+    </fragment>
 
 </navigation>

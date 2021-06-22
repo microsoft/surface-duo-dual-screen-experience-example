@@ -40,7 +40,7 @@ import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 
 fun openOrdersTab() {
-    // onView(withId(R.id.navigation_orders_graph)).perform(forceClick())
+    onView(withId(R.id.navigation_orders_graph)).perform(forceClick())
 }
 
 fun checkEmptyPage() {

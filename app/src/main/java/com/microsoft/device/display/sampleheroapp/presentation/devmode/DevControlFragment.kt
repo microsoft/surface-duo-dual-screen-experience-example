@@ -13,11 +13,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentDevControlBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
+import com.microsoft.device.dualscreen.ScreenInfo
+import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 
-class DevControlFragment : Fragment() {
+class DevControlFragment : Fragment(), ScreenInfoListener {
     private var binding: FragmentDevControlBinding? = null
 
     private val viewModel: DevModeViewModel by activityViewModels()
@@ -51,12 +53,30 @@ class DevControlFragment : Fragment() {
     }
 
     private fun openContentFragmentIfSingleScreenMode() {
-        if (rotationViewModel.isDualMode.value != true) {
-            val contentFragment = DevContentFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.first_container_id, contentFragment, contentFragment.tag)
-                .addToBackStack(null)
-                .commit()
+        if (rotationViewModel.isDualMode.value != true && !viewModel.isNavigationAtContent()) {
+            viewModel.navigateToContent()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+    }
+
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        if (screenInfo.isDualMode()) {
+            if (!viewModel.isNavigationAtContent()) {
+                viewModel.navigateToContent()
+            }
+        } else {
+            if (viewModel.isNavigationAtContent()) {
+                viewModel.navigateUp()
+            }
         }
     }
 

@@ -15,8 +15,9 @@ import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation
-import androidx.navigation.DuoNavDestination
-import androidx.navigation.DuoNavigation
+import androidx.core.view.isGone
+import androidx.navigation.SurfaceDuoNavDestination
+import androidx.navigation.SurfaceDuoNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
@@ -32,6 +33,8 @@ import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeVi
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeViewModel.DesignPattern
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeViewModel.SdkComponent
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.getTopCenterPoint
 import com.microsoft.device.display.sampleheroapp.presentation.util.tutorial.TutorialBalloon
@@ -46,12 +49,15 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
-    @Inject lateinit var navigator: AppNavigator
+    @Inject lateinit var navigator: MainNavigator
     @Inject lateinit var tutorial: TutorialBalloon
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
     private val rotationViewModel: RotationViewModel by viewModels()
     private val devViewModel: DevModeViewModel by viewModels()
+
+    private val productViewModel: ProductViewModel by viewModels()
+    private val storeViewModel: StoreViewModel by viewModels()
 
     @VisibleForTesting
     private val orderViewModel: OrderViewModel by viewModels()
@@ -63,28 +69,35 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
+        setupBottomNavigation()
     }
 
     override fun onResume() {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
-        DuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
+        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
             navigator.bind(it)
-            it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, _ ->
-                if (
-                    surfaceDuoNavDestination.id != R.id.fragment_order &&
-                    surfaceDuoNavDestination.id != R.id.fragment_order_receipt
-                ) {
-                    tutorialViewModel.onStoresOpen()
-                    if (tutorial.currentBalloonType == TutorialBalloonType.STORES) {
-                        tutorial.hide()
-                    }
-                }
+            it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, arguments ->
+                showHideBottomNav(arguments?.getBoolean(HIDE_BOTTOM_BAR_KEY, false))
+
+                resetDestinations(surfaceDuoNavDestination)
                 setupDevModeByDestination(surfaceDuoNavDestination)
             }
         }
-        binding.bottomNavView.arrangeButtons(3, 0)
+        binding.bottomNavView.arrangeButtons(BOTTOM_NAV_ITEM_COUNT, 0)
+    }
+
+    private fun showHideBottomNav(shouldHide: Boolean?) {
+        binding.bottomNavView.isGone = (shouldHide == true)
+    }
+
+    private fun resetDestinations(destination: SurfaceDuoNavDestination) {
+        when (destination.id) {
+            R.id.fragment_store_map -> storeViewModel.reset()
+            R.id.fragment_product_list -> productViewModel.reset()
+            R.id.fragment_order -> orderViewModel.reset()
+        }
     }
 
     override fun onPause() {
@@ -98,27 +111,45 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         setSupportActionBar(binding.toolbar)
     }
 
+    private fun setupBottomNavigation() {
+        binding.bottomNavView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_stores_graph -> {
+                    navigator.navigateToStores()
+                    hideStoresTutorial()
+                }
+                R.id.navigation_products_graph -> {
+                    navigator.navigateToProducts()
+                    hideStoresTutorial()
+                }
+                R.id.navigation_orders_graph -> {
+                    navigator.navigateToOrders()
+                }
+            }
+            true
+        }
+
+        binding.bottomNavView.setOnNavigationItemReselectedListener {
+            // do nothing to prevent reset to start destination
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
 
     override fun onBackPressed() {
-        if (isNavigationAtStart()) {
+        if (navigator.isNavigationAtStart()) {
             finish()
         }
         super.onBackPressed()
     }
 
-    private fun isNavigationAtStart() =
-        DuoNavigation.findNavController(
-            this,
-            R.id.nav_host_fragment
-        ).currentDestination?.id == R.id.fragment_store_map
-
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
         rotationViewModel.isDualMode.value = screenInfo.isDualMode()
+        rotationViewModel.screenInfo.value = screenInfo
         if (screenInfo.isDualMode()) {
             tutorialViewModel.onDualMode()
         }
@@ -128,7 +159,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         tutorialViewModel.showStoresTutorial.observe(
             this,
             {
-                if (it == true) {
+                if (it == true && tutorialViewModel.shouldShowStoresTutorial()) {
                     showStoresTutorial()
                 }
             }
@@ -140,18 +171,29 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         tutorial.show(storeItem, TutorialBalloonType.STORES)
     }
 
-    private fun showDeveloperModeTutorial(anchorView: View) {
-        if (tutorialViewModel.shouldShowDeveloperModeTutorial()) {
-            tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+    private fun hideStoresTutorial() {
+        tutorialViewModel.onStoresOpen()
+        if (tutorial.currentBalloonType == TutorialBalloonType.STORES) {
+            tutorial.hide()
         }
     }
 
-    private fun setupDevModeByDestination(destination: DuoNavDestination) {
+    private fun showDeveloperModeTutorial(anchorView: View) {
+        if (tutorialViewModel.shouldShowDeveloperModeTutorial()) {
+            tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+        } else {
+            setupTutorialObserver()
+        }
+    }
+
+    private fun setupDevModeByDestination(destination: SurfaceDuoNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
             R.id.fragment_store_details -> setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_list -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
+            R.id.fragment_product_details -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
+            R.id.fragment_product_customize -> setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE)
             R.id.fragment_order -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
             R.id.fragment_order_receipt -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
         }
@@ -202,4 +244,9 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     @VisibleForTesting
     fun getSubmittedOrderLiveData() = orderViewModel.submittedOrder
+
+    companion object {
+        const val HIDE_BOTTOM_BAR_KEY = "hideBottomNav"
+        const val BOTTOM_NAV_ITEM_COUNT = 3
+    }
 }

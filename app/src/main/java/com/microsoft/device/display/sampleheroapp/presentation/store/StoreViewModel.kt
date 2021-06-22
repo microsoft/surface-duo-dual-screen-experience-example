@@ -98,4 +98,9 @@ class StoreViewModel @Inject constructor(
             resetMap()
         }
     }
+
+    fun reset() {
+        resetMap()
+        selectedStore.value = null
+    }
 }

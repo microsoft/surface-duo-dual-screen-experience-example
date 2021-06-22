@@ -13,6 +13,7 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers.isPlatformPopup
+import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -27,7 +28,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 
 fun checkLaunchInSingleMode() {
-    checkTitleFragment()
+    checkTitleFragmentInSingleMode()
     checkSingleLaunchButton()
     checkCircleIndicators()
     moveToDescriptionTab()
@@ -38,12 +39,24 @@ fun checkLaunchInSingleMode() {
 
 fun checkLaunchInDualMode() {
     checkTutorialNotShowing()
-    checkTitleFragment()
+    checkTitleFragmentInDualMode()
     checkDescriptionFragment()
     checkDualLaunchButton()
 }
 
-fun checkTitleFragment() {
+fun checkTitleFragmentInSingleMode() {
+    onView(withId(R.id.launch_view_pager)).check(
+        matches(
+            allOf(
+                isDisplayed(),
+                hasDescendant(allOf(withText(R.string.app_short_name), isDisplayed())),
+                hasDescendant(allOf(withId(R.id.launch_image), isDisplayed()))
+            )
+        )
+    )
+}
+
+fun checkTitleFragmentInDualMode() {
     onView(withId(R.id.launch_title)).check(
         matches(
             allOf(
