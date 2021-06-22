@@ -12,8 +12,8 @@ import com.microsoft.device.display.sampleheroapp.domain.order.testutil.MockOrde
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrder
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderEntity
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertNull
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

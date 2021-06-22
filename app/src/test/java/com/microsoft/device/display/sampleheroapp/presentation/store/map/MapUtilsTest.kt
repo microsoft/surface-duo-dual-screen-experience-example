@@ -16,8 +16,8 @@ import com.microsoft.device.display.sampleheroapp.domain.store.testutil.storeCit
 import com.microsoft.device.display.sampleheroapp.domain.store.testutil.storeMarkerModel
 import com.microsoft.maps.GeoboundingBox
 import com.microsoft.maps.Geoposition
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz

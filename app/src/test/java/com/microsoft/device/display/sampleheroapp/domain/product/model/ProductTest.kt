@@ -22,7 +22,7 @@ import com.microsoft.device.display.sampleheroapp.domain.product.testutil.WARLOC
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.WHITE_KEY
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.product
 import com.microsoft.device.display.sampleheroapp.domain.product.testutil.productEntity
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz
 

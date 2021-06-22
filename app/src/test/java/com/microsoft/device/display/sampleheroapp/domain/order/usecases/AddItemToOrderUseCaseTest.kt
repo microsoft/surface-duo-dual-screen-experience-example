@@ -13,7 +13,7 @@ import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrd
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItem
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItemEntity
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

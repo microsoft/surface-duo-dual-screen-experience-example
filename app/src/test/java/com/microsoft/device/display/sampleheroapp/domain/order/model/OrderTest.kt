@@ -10,7 +10,7 @@ package com.microsoft.device.display.sampleheroapp.domain.order.model
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrder
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.firstOrderItem
 import com.microsoft.device.display.sampleheroapp.domain.order.testutil.orderWithItems
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.hamcrest.core.Is.`is` as iz
 
