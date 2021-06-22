@@ -40,7 +40,9 @@ class GetOrderByIdUseCaseTest {
 
     @Test
     fun getOrderWhenIdExists() = runBlocking {
-        mockRepo.insert(firstOrderEntity)
-        assertThat(firstOrder, iz(getOrderByIdUseCase.get(firstOrderEntity.orderId!!)))
+        val copyFirstOrderEntity = firstOrderEntity.copy()
+
+        mockRepo.insert(copyFirstOrderEntity)
+        assertThat(firstOrder, iz(getOrderByIdUseCase.get(copyFirstOrderEntity.orderId!!)))
     }
 }

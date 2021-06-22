@@ -36,10 +36,11 @@ class SubmitOrderUseCaseTest {
 
     @Test
     fun submitOrderIfThereIsACurrentOne() = runBlocking {
+        val copyFirstOrderItemEntity = firstOrderItemEntity.copy()
         val copyFirstOrderEntity = firstOrderEntity.copy()
 
         mockRepo.insert(copyFirstOrderEntity)
-        mockRepo.insertItems(firstOrderItemEntity)
+        mockRepo.insertItems(copyFirstOrderItemEntity)
 
         val submittedOrderId = submitOrderUseCase.submit()
         assertThat(submittedOrderId, iz(copyFirstOrderEntity.orderId))

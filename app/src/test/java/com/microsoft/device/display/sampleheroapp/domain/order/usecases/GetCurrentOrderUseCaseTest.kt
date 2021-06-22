@@ -43,7 +43,9 @@ class GetCurrentOrderUseCaseTest {
 
     @Test
     fun getEmptyListWhenOrderIdExists() = runBlocking {
-        mockRepo.insert(firstOrderEntity)
+        val copyFirstOrderEntity = firstOrderEntity.copy()
+
+        mockRepo.insert(copyFirstOrderEntity)
 
         val resultValue = getCurrentOrderUseCase.get().blockingValue
 
@@ -52,11 +54,14 @@ class GetCurrentOrderUseCaseTest {
 
     @Test
     fun getItemWhenOrderIdExists() = runBlocking {
-        mockRepo.insert(firstOrderEntity)
-        mockRepo.insertItems(firstOrderItemEntity)
+        val copyFirstOrderItemEntity = firstOrderItemEntity.copy()
+        val copyFirstOrderEntity = firstOrderEntity.copy()
+
+        mockRepo.insert(copyFirstOrderEntity)
+        mockRepo.insertItems(copyFirstOrderItemEntity)
 
         val resultValue = getCurrentOrderUseCase.get().blockingValue
-        val expectedItem = firstOrderItem.copy(itemId = firstOrderItemEntity.itemId)
+        val expectedItem = firstOrderItem.copy(itemId = copyFirstOrderItemEntity.itemId)
 
         assertThat(resultValue, iz(listOf(expectedItem)))
     }

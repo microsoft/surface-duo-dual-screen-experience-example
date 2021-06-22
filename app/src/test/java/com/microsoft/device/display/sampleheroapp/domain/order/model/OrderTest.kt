@@ -18,8 +18,11 @@ class OrderTest {
 
     @Test
     fun buildFromOrderEntity() {
-        firstOrder.items.add(firstOrderItem)
-        assertThat(firstOrder, iz(Order(orderWithItems)))
-        firstOrder.items.clear()
+        val copyFirstOrder = firstOrder.copy()
+        val copyFirstOrderItem = firstOrderItem.copy()
+
+        copyFirstOrder.items.add(copyFirstOrderItem)
+        assertThat(copyFirstOrder, iz(Order(orderWithItems)))
+        copyFirstOrder.items.clear()
     }
 }
