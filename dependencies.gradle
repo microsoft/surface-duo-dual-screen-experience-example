@@ -96,7 +96,7 @@ ext {
     ]
 
     //Test dependencies version
-    junitVersion = "4.13.1"
+    junitVersion = '4.13.2'
     archCoreTestingVersion = "2.1.0"
 
     testDependencies = [
