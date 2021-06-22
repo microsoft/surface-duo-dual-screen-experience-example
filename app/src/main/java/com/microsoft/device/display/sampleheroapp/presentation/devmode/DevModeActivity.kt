@@ -129,16 +129,12 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     override fun onBackPressed() {
-        if (rotationViewModel.isDualMode.value == true) {
-            supportFinishAfterTransition()
-        } else {
-            if (navigator.isNavigationAtStart()) {
-                supportFinishAfterTransition()
-            } else {
-                super.onBackPressed()
-            }
-            overridePendingTransition(0, 0)
+        when {
+            rotationViewModel.isDualMode.value == true -> supportFinishAfterTransition()
+            navigator.isNavigationAtStart() -> supportFinishAfterTransition()
+            else -> super.onBackPressed()
         }
+        overridePendingTransition(0, 0)
     }
 
     override fun onSupportNavigateUp(): Boolean {

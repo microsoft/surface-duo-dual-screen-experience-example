@@ -26,12 +26,10 @@ class LaunchViewModel @Inject constructor(
     val shouldShowTutorial = SingleLiveEvent<Int?>(null)
 
     override fun onClick(model: Boolean?) {
-        model?.let {
-            if (model) {
-                navigator.navigateToMainFromDescription()
-            } else {
-                navigator.navigateToMainFromSingle()
-            }
+        if (model == true) {
+            navigator.navigateToMainFromDescription()
+        } else {
+            navigator.navigateToMainFromSingle()
         }
     }
 

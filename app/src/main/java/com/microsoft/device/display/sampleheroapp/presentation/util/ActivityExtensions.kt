@@ -28,6 +28,7 @@ fun AppCompatActivity.setupToolbar(
         supportActionBar?.setHomeButtonEnabled(false)
     }
 
+    // TODO: investigate a better way to override onBackPressed
     onBackPressedListener?.let {
         val lifecycleOwner = owner ?: this
         onBackPressedDispatcher.addCallback(lifecycleOwner) { it.invoke() }

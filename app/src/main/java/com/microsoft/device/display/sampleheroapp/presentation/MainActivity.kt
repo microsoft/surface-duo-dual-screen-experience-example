@@ -18,7 +18,6 @@ import androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation
 import androidx.core.view.isGone
 import androidx.navigation.SurfaceDuoNavDestination
 import androidx.navigation.SurfaceDuoNavigation
-import androidx.navigation.ui.SurfaceDuoNavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
@@ -113,10 +112,6 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun setupBottomNavigation() {
-        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
-            SurfaceDuoNavigationUI.setupWithSurfaceDuoNavController(binding.bottomNavView, it)
-        }
-
         binding.bottomNavView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_stores_graph -> {
@@ -135,7 +130,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         }
 
         binding.bottomNavView.setOnNavigationItemReselectedListener {
-            // do nothing
+            // do nothing to prevent reset to start destination
         }
     }
 
