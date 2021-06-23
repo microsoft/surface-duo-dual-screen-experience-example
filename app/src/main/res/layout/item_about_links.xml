@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout>
+    <data>
+        <variable
+            name="itemClickListener"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;String&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@color/black">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="link_docs, link_github, link_blog, link_twitch, link_figma, link_learn, link_twitter, link_youtube"
+            app:flow_maxElementsWrap="4"
+            app:flow_verticalGap="@dimen/medium_margin"
+            app:flow_wrapMode="chain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_docs"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/docs_url)}"
+            android:src="@drawable/ic_ms_docs" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_github"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/github_url)}"
+            android:src="@drawable/ic_github"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_blog"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/blog_url)}"
+            android:src="@drawable/ic_blog"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_twitch"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/twitch_url)}"
+            android:src="@drawable/ic_twitch"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_figma"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/figma_url)}"
+            android:src="@drawable/ic_figma"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_learn"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/learn_url)}"
+            android:src="@drawable/ic_ms_learn"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_twitter"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/twitter_url)}"
+            android:src="@drawable/ic_twitter"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/link_youtube"
+            android:layout_width="@dimen/team_link_button_width"
+            android:layout_height="@dimen/team_link_button_height"
+            android:background="@drawable/rounded_rectangle_gray_icon"
+            android:onClick="@{() -> itemClickListener.onClick(@string/youtube_url)}"
+            android:src="@drawable/ic_youtube"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

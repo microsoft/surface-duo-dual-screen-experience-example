@@ -65,6 +65,9 @@
 
     <dimen name="info_container_size">150dp</dimen>
 
+    <dimen name="team_link_button_width">84dp</dimen>
+    <dimen name="team_link_button_height">78dp</dimen>
+
     <!-- Portrait dimens -->
 
     <dimen name="launch_single_button_top_margin">24dp</dimen>
