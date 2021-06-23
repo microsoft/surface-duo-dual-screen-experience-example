@@ -28,7 +28,8 @@
         </activity>
         <activity android:name=".presentation.MainActivity" />
         <activity android:name=".presentation.devmode.DevModeActivity"
-            android:theme="@style/Theme.App.Transparent"/>
+            android:theme="@style/Theme.App.Transparent" />
+        <activity android:name=".presentation.about.AboutActivity" />
     </application>
 
 </manifest>

@@ -16,8 +16,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AboutViewModel @Inject constructor() : ViewModel() {
+class AboutViewModel @Inject constructor(
+    private val navigator: AboutNavigator
+) : ViewModel() {
     var linkToOpen = SingleLiveEvent("")
+
+    fun navigateToLicenses() {
+        navigator.navigateToLicenses()
+    }
+
+    fun isNavigationAtLicenses() = navigator.isNavigationAtLicenses()
+
+    fun navigateUp() {
+        navigator.navigateUp()
+    }
 
     val licenseTermsListHandler = object : DataListHandler<License> {
         override fun getDataList(): List<License> = licenseTermsList

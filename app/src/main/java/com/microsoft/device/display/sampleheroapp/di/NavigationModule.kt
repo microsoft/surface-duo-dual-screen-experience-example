@@ -8,6 +8,7 @@
 package com.microsoft.device.display.sampleheroapp.di
 
 import com.microsoft.device.display.sampleheroapp.presentation.MainNavigator
+import com.microsoft.device.display.sampleheroapp.presentation.about.AboutNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.launch.LaunchNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
@@ -43,4 +44,8 @@ object NavigationModule {
     @Provides
     @Singleton
     fun provideDevModeNavigator(): DevModeNavigator = DevModeNavigator()
+
+    @Provides
+    @Singleton
+    fun provideAboutNavigator(): AboutNavigator = AboutNavigator()
 }
