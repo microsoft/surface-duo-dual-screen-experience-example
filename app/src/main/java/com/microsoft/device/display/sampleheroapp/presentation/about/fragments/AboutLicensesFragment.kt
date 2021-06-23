@@ -76,7 +76,7 @@ class AboutLicensesFragment : Fragment() {
     }
 
     private fun openIntroductionDialog() {
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog)
             .setTitle(R.string.introduction_to_third_party_notice_title)
             .setMessage(R.string.introduction_to_third_party_notice_message)
             .setPositiveButton(R.string.introduction_to_third_party_notice_button) { dialog, _ ->
