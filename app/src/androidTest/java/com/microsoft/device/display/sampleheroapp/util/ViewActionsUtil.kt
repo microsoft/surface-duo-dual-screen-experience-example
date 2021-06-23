@@ -8,6 +8,7 @@
 package com.microsoft.device.display.sampleheroapp.util
 
 import android.view.View
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -55,6 +56,20 @@ fun scrollRecyclerViewToEnd() = object : ViewAction {
         val itemCount = recyclerView.adapter?.itemCount
         val position = itemCount?.minus(1) ?: 0
         recyclerView.scrollToPosition(position)
+        uiController?.loopMainThreadUntilIdle()
+    }
+}
+
+fun scrollNestedScrollViewTo(viewId: Int) = object : ViewAction {
+    override fun getConstraints(): Matcher<View>? =
+        allOf(isAssignableFrom(NestedScrollView::class.java), isDisplayed())
+
+    override fun getDescription(): String = "Scroll NestedScrollView to specific view with ID"
+
+    override fun perform(uiController: UiController?, view: View?) {
+        val scrollView = view as NestedScrollView
+        val viewToReach = view.findViewById<View>(viewId)
+        scrollView.scrollTo(0, viewToReach.top)
         uiController?.loopMainThreadUntilIdle()
     }
 }

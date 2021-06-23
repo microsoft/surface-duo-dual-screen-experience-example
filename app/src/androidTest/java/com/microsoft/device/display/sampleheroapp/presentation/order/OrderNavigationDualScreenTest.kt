@@ -19,6 +19,9 @@ import com.microsoft.device.display.sampleheroapp.data.product.productEntity
 import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
 import com.microsoft.device.display.sampleheroapp.di.DatabaseModule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInDualScreenMode
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
+import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
@@ -28,6 +31,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAd
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_THREE
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
+import com.microsoft.device.display.sampleheroapp.presentation.product.goBack
 import com.microsoft.device.display.sampleheroapp.presentation.store.checkToolbar
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
@@ -112,6 +116,47 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
         setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
+    }
+
+    @Test
+    fun openAboutInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInDualScreenMode()
+
+        goBack()
+
+        checkEmptyPage()
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(RECOMMENDATIONS_SIZE_THREE, POSITION_RECOMMENDATIONS)
+
+        checkToolbar(R.string.toolbar_orders_title)
+        checkToolbarAbout()
+    }
+
+    @Test
+    fun openAboutInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInDualScreenMode()
+
+        goBack()
+
+        checkEmptyPage()
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(RECOMMENDATIONS_SIZE_THREE, POSITION_RECOMMENDATIONS)
+
+        checkToolbar(R.string.toolbar_orders_title)
+        checkToolbarAbout()
     }
 
     @Test

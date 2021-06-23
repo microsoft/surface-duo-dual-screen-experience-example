@@ -8,7 +8,12 @@
 package com.microsoft.device.display.sampleheroapp.presentation.store
 
 import androidx.test.rule.ActivityTestRule
+import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInSingleScreenMode
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
+import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
+import com.microsoft.device.display.sampleheroapp.presentation.launch.goBack
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -42,6 +47,38 @@ class StoresNavigationSingleScreenTest : BaseStoreNavigationTest() {
         setOrientationRight()
 
         openMapInSingleMode()
+    }
+
+    @Test
+    fun openAboutInPortraitMode() {
+        openMapInSingleMode()
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInSingleScreenMode()
+
+        goBack()
+
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+        checkToolbarAbout()
+    }
+
+    @Test
+    fun openAboutInLandscapeMode() {
+        setOrientationRight()
+
+        openMapInSingleMode()
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInSingleScreenMode()
+
+        goBack()
+
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+        checkToolbarAbout()
     }
 
     @Test
