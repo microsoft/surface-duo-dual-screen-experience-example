@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout>
+
+    <data>
+        <import type="com.microsoft.device.display.sampleheroapp.presentation.about.util.License" />
+
+        <variable
+            name="item"
+            type="com.microsoft.device.display.sampleheroapp.presentation.about.util.License" />
+
+        <variable
+            name="itemClickListener"
+            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;License&gt;" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> itemClickListener.onClick(item)}"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/medium_padding"
+        tools:background="@color/black">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/License.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.name}"
+            android:textSize="@dimen/text_size_14"
+            tools:text="Kotlin"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/License.Subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.license}"
+            tools:text="Apache License v2 (c) JetBrains" />
+
+    </LinearLayout>
+</layout>

@@ -15,6 +15,7 @@
     <color name="dark_gray">#303030</color>
     <color name="medium_gray">#333333</color>
     <color name="item_tint_gray">#6E6E6E</color>
+    <color name="license_gray">#9A9A9A</color>
     <color name="resource_background">#222222</color>
 
     <color name="bright_orange">#FFA500</color>
