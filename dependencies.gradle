@@ -61,10 +61,12 @@ ext {
 
     //Google dependencies
     materialVersion = '1.2.1'
+    gsonVersion = '2.8.7'
     hiltVersion = '2.32-alpha'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
+            gson                : "com.google.code.gson:gson:$gsonVersion",
             hilt                : "com.google.dagger:hilt-android:$hiltVersion",
             hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
     ]

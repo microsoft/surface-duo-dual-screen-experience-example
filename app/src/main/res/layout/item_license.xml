@@ -8,11 +8,11 @@
 <layout>
 
     <data>
-        <import type="com.microsoft.device.display.sampleheroapp.presentation.about.util.License" />
+        <import type="com.microsoft.device.display.sampleheroapp.domain.about.model.License" />
 
         <variable
             name="item"
-            type="com.microsoft.device.display.sampleheroapp.presentation.about.util.License" />
+            type="com.microsoft.device.display.sampleheroapp.domain.about.model.License" />
 
         <variable
             name="itemClickListener"

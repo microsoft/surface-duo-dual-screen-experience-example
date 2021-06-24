@@ -12,14 +12,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.microsoft.device.display.sampleheroapp.databinding.ItemLicenseBinding
-import com.microsoft.device.display.sampleheroapp.presentation.about.util.License
+import com.microsoft.device.display.sampleheroapp.domain.about.model.License
 import com.microsoft.device.display.sampleheroapp.presentation.util.DataListHandler
 import com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener
 import com.microsoft.device.display.sampleheroapp.presentation.util.sizeOrZero
 
 class LicenseListAdapter(
     context: Context,
-    private val licensesHandler: DataListHandler<License>
+    private val licensesHandler: DataListHandler<License?>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
@@ -38,7 +38,7 @@ class LicenseListAdapter(
 
     class LicenseViewHolder(
         private val binding: ItemLicenseBinding,
-        private val itemClickListener: ItemClickListener<License>
+        private val itemClickListener: ItemClickListener<License?>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: License?) {
