@@ -55,4 +55,10 @@
         <item name="android:fontFamily">@font/dmsans_regular</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="Theme.App.Dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/orange</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/gray</item>
+    </style>
 </resources>

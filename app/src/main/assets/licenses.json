@@ -1,0 +1,49 @@
+{
+  "licenses": [
+    {
+      "name": "Android Open Source Project",
+      "license": "Apache License v2 (c) Google, Inc. and Open Handset Alliance",
+      "url": "https://source.android.com/"
+    },
+    {
+      "name": "Android Jetpack",
+      "license": "Apache License Version 2.0, January 2004",
+      "url": "https://android.googlesource.com/platform/frameworks/support/+/androidx-main"
+    },
+    {
+      "name": "Kotlin",
+      "license": "Apache License v2 (c) JetBrains",
+      "url": "https://github.com/JetBrains/kotlin"
+    },
+    {
+      "name": "Microsoft Surface Duo SDK",
+      "license": "MIT License (c) Microsoft Corporation",
+      "url": "https://github.com/microsoft/surface-duo-sdk"
+    },
+    {
+      "name": "Material Components for Android",
+      "license": "Apache License Version 2.0, January 2004",
+      "url": "https://github.com/material-components/material-components-android"
+    },
+    {
+      "name": "Dagger2 - Hilt",
+      "license": "Apache License v2 (c) The Dagger Authors",
+      "url": "https://github.com/google/dagger"
+    },
+    {
+      "name": "Lottie Android",
+      "license": "Apache License v2 (c) Airbnb",
+      "url": "https://github.com/airbnb/lottie-android"
+    },
+    {
+      "name": "Gson",
+      "license": "Apache License Version 2.0, January 2004",
+      "url": "https://github.com/google/gson"
+    },
+    {
+      "name": "android/architecture-samples",
+      "license": "Apache License v2 (c) Google Inc. and The Android Open Source Project",
+      "url": "https://github.com/android/architecture-samples"
+    }
+  ]
+}

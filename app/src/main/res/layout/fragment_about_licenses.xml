@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout>
+    <data>
+        <variable
+            name="isDualMode"
+            type="Boolean" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/licenses_scroll_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/about_single_screen_title"
+                style="@style/Store.Title"
+                visibleIf="@{!isDualMode}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/about_team_title"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/about_single_screen_description"
+                style="@style/Store.Title"
+                visibleIf="@{!isDualMode}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/about_team_description"
+                android:textSize="@dimen/text_size_12"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/links_title"
+                style="@style/Store.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:text="@string/about_resources_title"
+                android:textSize="@dimen/text_size_18"/>
+
+            <View
+                visibleIf="@{isDualMode}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normal_margin" />
+
+            <include
+                android:id="@+id/links_items"
+                layout="@layout/item_about_links"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"/>
+
+            <View
+                visibleIf="@{isDualMode}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/large_margin" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/licenses_title"
+                style="@style/Store.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:text="@string/about_licenses_title"
+                android:textSize="@dimen/text_size_18"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/license_terms_title"
+                style="@style/License.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:text="@string/about_licenses_terms_title"
+                android:textAllCaps="true"
+                android:textColor="@color/white"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/license_terms_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_license"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/delimiter_size"
+                android:background="@color/license_gray" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/licenses_list_title"
+                style="@style/License.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="@string/about_licenses_libraries_title"
+                android:textAllCaps="true"
+                android:textColor="@color/white" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/license_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_license"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feedback_single_screen_title"
+                style="@style/Store.Title"
+                visibleIf="@{!isDualMode}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@string/about_feedback_title"
+                android:textSize="@dimen/text_size_18"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/feedback_single_screen_description"
+                style="@style/Store.Title"
+                visibleIf="@{!isDualMode}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginBottom="@dimen/normal_margin"
+                android:lineSpacingMultiplier="1.6"
+                android:text="@string/about_feedback_description"
+                android:textSize="@dimen/text_size_12"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

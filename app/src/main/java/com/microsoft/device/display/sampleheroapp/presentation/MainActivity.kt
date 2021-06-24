@@ -10,6 +10,7 @@ package com.microsoft.device.display.sampleheroapp.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
@@ -21,6 +22,7 @@ import androidx.navigation.SurfaceDuoNavigation
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.ActivityMainBinding
+import com.microsoft.device.display.sampleheroapp.presentation.about.AboutActivity
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeActivity
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeActivity.Companion.EXTRA_ANIMATION_X
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.DevModeActivity.Companion.EXTRA_ANIMATION_Y
@@ -217,9 +219,22 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
                 }
             }
         } else {
+            menuInflater.inflate(R.menu.main_single_menu, menu)
             setupTutorialObserver()
         }
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_main_about) {
+            onAboutClicked()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun onAboutClicked() {
+        startActivity(Intent(this, AboutActivity::class.java))
     }
 
     private fun onDevModeClicked(view: View) {

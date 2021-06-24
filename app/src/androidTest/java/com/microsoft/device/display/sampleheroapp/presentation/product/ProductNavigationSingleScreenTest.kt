@@ -9,6 +9,9 @@ package com.microsoft.device.display.sampleheroapp.presentation.product
 
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInSingleScreenMode
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
+import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -43,6 +46,42 @@ class ProductNavigationSingleScreenTest {
 
         openProductsTab()
         checkProductList(PRODUCT_FIRST_POSITION, product)
+    }
+
+    @Test
+    fun openAboutInPortraitMode() {
+        openProductsTab()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInSingleScreenMode()
+
+        goBack()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+
+        checkToolbarAbout()
+    }
+
+    @Test
+    fun openAboutInLandscapeMode() {
+        setOrientationRight()
+
+        openProductsTab()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInSingleScreenMode()
+
+        goBack()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+
+        checkToolbarAbout()
     }
 
     @Test

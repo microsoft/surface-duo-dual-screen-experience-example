@@ -53,6 +53,7 @@
     <dimen name="tab_indicator_margin">10dp</dimen>
 
     <dimen name="bottom_nav_border_size">1dp</dimen>
+    <dimen name="delimiter_size">1dp</dimen>
 
     <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
@@ -64,6 +65,9 @@
     <dimen name="product_image_width">200dp</dimen>
 
     <dimen name="info_container_size">150dp</dimen>
+
+    <dimen name="team_link_button_width">84dp</dimen>
+    <dimen name="team_link_button_height">78dp</dimen>
 
     <!-- Portrait dimens -->
 

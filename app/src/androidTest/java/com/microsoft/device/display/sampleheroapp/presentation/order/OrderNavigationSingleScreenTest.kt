@@ -11,6 +11,7 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.rule.ActivityTestRule
+import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.data.AppDatabase
 import com.microsoft.device.display.sampleheroapp.data.order.local.OrderDao
 import com.microsoft.device.display.sampleheroapp.data.product.local.ProductDao
@@ -18,9 +19,15 @@ import com.microsoft.device.display.sampleheroapp.data.product.productEntity
 import com.microsoft.device.display.sampleheroapp.data.store.local.StoreDao
 import com.microsoft.device.display.sampleheroapp.di.DatabaseModule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInSingleScreenMode
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
+import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
+import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_ONE
+import com.microsoft.device.display.sampleheroapp.presentation.product.goBack
+import com.microsoft.device.display.sampleheroapp.presentation.store.checkToolbar
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import dagger.Module
@@ -98,6 +105,44 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
         setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
+    }
+
+    @Test
+    fun openAboutInPortraitMode() {
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInSingleScreenMode()
+
+        goBack()
+
+        checkEmptyPage()
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(RECOMMENDATIONS_SIZE_ONE, POSITION_RECOMMENDATIONS)
+
+        checkToolbar(R.string.toolbar_orders_title)
+        checkToolbarAbout()
+    }
+
+    @Test
+    fun openAboutInLandscapeMode() {
+        setOrientationRight()
+
+        openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInSingleScreenMode()
+
+        goBack()
+
+        checkEmptyPage()
+        scrollOrderToEnd()
+        checkOrderRecommendationsPage(RECOMMENDATIONS_SIZE_ONE, POSITION_RECOMMENDATIONS)
+
+        checkToolbar(R.string.toolbar_orders_title)
+        checkToolbarAbout()
     }
 
     @Test

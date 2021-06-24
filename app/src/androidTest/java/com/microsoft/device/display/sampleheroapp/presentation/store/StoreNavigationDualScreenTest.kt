@@ -10,11 +10,15 @@ package com.microsoft.device.display.sampleheroapp.presentation.store
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInDualScreenMode
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
+import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.navigateUp
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
+import com.microsoft.device.display.sampleheroapp.presentation.launch.goBack
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -49,6 +53,51 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
     }
 
     @Test
+    fun openMapInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openMapInSingleMode()
+
+        checkToolbarDevItem()
+    }
+
+    @Test
+    fun openAboutInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        openMapInSingleMode()
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInDualScreenMode()
+
+        goBack()
+
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+        checkToolbarAbout()
+    }
+
+    @Test
+    fun openAboutInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openMapInSingleMode()
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInDualScreenMode()
+
+        goBack()
+
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+        checkToolbarAbout()
+    }
+
+    @Test
     fun openDevModeInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
@@ -78,16 +127,6 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
         checkMapFragment()
         checkToolbar(R.string.app_name)
-        checkToolbarDevItem()
-    }
-
-    @Test
-    fun openMapInDualPortraitMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
-
-        openMapInSingleMode()
-
         checkToolbarDevItem()
     }
 

@@ -9,6 +9,9 @@ package com.microsoft.device.display.sampleheroapp.presentation.product
 
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInDualScreenMode
+import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
+import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarDevItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
@@ -60,6 +63,53 @@ class ProductNavigationDualScreenTest {
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
         checkCustomizeButton()
+    }
+
+    @Test
+    fun openAboutInDualPortraitMode() {
+        switchFromSingleToDualScreen()
+
+        openProductsTab()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInDualScreenMode()
+
+        goBack()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        checkToolbarAbout()
+    }
+
+    @Test
+    fun openAboutInDualLandscapeMode() {
+        switchFromSingleToDualScreen()
+        setOrientationRight()
+
+        openProductsTab()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        checkToolbarAbout()
+        openAbout()
+        checkAboutInDualScreenMode()
+
+        goBack()
+
+        checkProductList(PRODUCT_FIRST_POSITION, product)
+        checkProductDetails(product)
+        checkCustomizeButton()
+
+        checkToolbarAbout()
     }
 
     @Test

@@ -128,4 +128,16 @@
         <item name="android:text">@string/order_recommendations_button</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
     </style>
+
+    <style name="License.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/license_gray</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="License.Subtitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/license_gray</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
 </resources>
