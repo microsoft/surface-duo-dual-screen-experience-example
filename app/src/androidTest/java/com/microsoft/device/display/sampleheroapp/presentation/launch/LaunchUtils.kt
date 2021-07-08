@@ -49,7 +49,7 @@ fun checkTitleFragmentInSingleMode() {
         matches(
             allOf(
                 isDisplayed(),
-                hasDescendant(allOf(withText(R.string.app_short_name), isDisplayed())),
+                hasDescendant(allOf(withText(R.string.app_name), isDisplayed())),
                 hasDescendant(allOf(withId(R.id.launch_image), isDisplayed()))
             )
         )
@@ -61,7 +61,7 @@ fun checkTitleFragmentInDualMode() {
         matches(
             allOf(
                 isDisplayed(),
-                withText(R.string.app_short_name)
+                withText(R.string.app_name)
             )
         )
     )
