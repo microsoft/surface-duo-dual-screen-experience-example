@@ -15,7 +15,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.microsoft.device.display.sampleheroapp.BuildConfig
+import androidx.lifecycle.lifecycleScope
+import com.microsoft.device.display.sampleheroapp.ITokenProvider
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.display.sampleheroapp.config.MapConfig.ZOOM_LEVEL_CITY
@@ -38,8 +39,14 @@ import com.microsoft.maps.MapRenderMode
 import com.microsoft.maps.MapScene
 import com.microsoft.maps.MapStyleSheets
 import com.microsoft.maps.MapView
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class StoreMapFragment : Fragment() {
+
+    @Inject lateinit var tokenProvider: ITokenProvider
 
     private val viewModel: StoreViewModel by activityViewModels()
 
@@ -70,9 +77,15 @@ class StoreMapFragment : Fragment() {
     private fun setupMapView(savedInstanceState: Bundle?) {
         mapView = MapView(requireContext(), MapRenderMode.RASTER)
         mapView.onCreate(savedInstanceState)
-        mapView.setCredentialsKey(BuildConfig.BING_MAPS_KEY)
+        setupMapKey()
 
         mapView.layers.add(mapLayer)
+    }
+
+    private fun setupMapKey() {
+        lifecycleScope.launch {
+            mapView.setCredentialsKey(tokenProvider.getMapToken())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

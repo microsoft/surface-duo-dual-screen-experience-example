@@ -23,8 +23,11 @@ ext {
             dualScreenSdkVersion     : "1.0.0-beta2",
     ]
 
+    playCoroutinesVersion = "1.1.1"
+
     kotlinDependencies = [
-            kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+            kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            playCoroutines  : "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$playCoroutinesVersion",
     ]
 
     navigationVersion = "2.3.4"
@@ -63,12 +66,14 @@ ext {
     materialVersion = '1.2.1'
     gsonVersion = '2.8.7'
     hiltVersion = '2.32-alpha'
+    firestoreVersion = '23.0.1'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
             gson                : "com.google.code.gson:gson:$gsonVersion",
             hilt                : "com.google.dagger:hilt-android:$hiltVersion",
             hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
+            firestore           : "com.google.firebase:firebase-firestore-ktx:$firestoreVersion",
     ]
 
     //Microsoft dependencies version

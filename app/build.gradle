@@ -98,6 +98,8 @@ dependencies {
 
     implementation googleDependencies.material
     implementation googleDependencies.gson
+    implementation googleDependencies.firestore
+    implementation kotlinDependencies.playCoroutines
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
 
