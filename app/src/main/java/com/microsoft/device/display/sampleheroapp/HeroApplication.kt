@@ -16,6 +16,10 @@ open class HeroApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        startDualScreenSDK()
+    }
+
+    private fun startDualScreenSDK() {
         ScreenManagerProvider.init(this)
     }
 }

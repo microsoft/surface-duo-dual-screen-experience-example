@@ -50,6 +50,8 @@ class StoreMapFragment : Fragment() {
     private var markerFactory: MapMarkerFactory? = null
     private var binding: FragmentStoreMapBinding? = null
 
+    private var animationsEnabled = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -162,6 +164,7 @@ class StoreMapFragment : Fragment() {
             MapScene.createFromLocationAndZoomLevel(center.toGeopoint(), zoomLevel),
             getMapAnimations()
         )
+        animationsEnabled = true
     }
 
     private fun returnMapToCenter(center: MapMarkerModel) {
@@ -169,7 +172,7 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun getMapAnimations() =
-        if (TEST_MODE_ENABLED) {
+        if (TEST_MODE_ENABLED || !animationsEnabled) {
             MapAnimationKind.NONE
         } else {
             MapAnimationKind.DEFAULT
