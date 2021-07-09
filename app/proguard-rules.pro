@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# WindowManager alpha01 has currently a bug that removes more classes than needed
+# Will be removed when Microsoft Surface Duo SDK will be updated to latest WM version
+-keep class androidx.window.** { *; }
+
+# Bing Maps files
+# Will be updated when we get more restrictive rules from the Bing Maps team
+-keep class com.microsoft.maps.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.microsoft.device.display.sampleheroapp.data.about.model.** { <fields>; }

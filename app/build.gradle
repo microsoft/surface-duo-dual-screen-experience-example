@@ -37,15 +37,18 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
+            shrinkResources false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BING_MAPS_KEY", "\"$bingMapsKey\""
         }
 
         release {
             minifyEnabled true
+            shrinkResources true
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        buildTypes.each {
-            it.buildConfigField "String", "BING_MAPS_KEY", "\"$bingMapsKey\""
         }
     }
 
@@ -95,6 +98,8 @@ dependencies {
 
     implementation googleDependencies.material
     implementation googleDependencies.gson
+    implementation googleDependencies.firestore
+    implementation kotlinDependencies.playCoroutines
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
 

@@ -6,8 +6,7 @@
   -->
 
 <resources>
-    <string name="app_name">Dealer’s Delight - A Dual Screen Experience</string>
-    <string name="app_short_name">Dealer’s Delight</string>
+    <string name="app_name">Dual Screen Experience</string>
 
     <!-- Launcher -->
 

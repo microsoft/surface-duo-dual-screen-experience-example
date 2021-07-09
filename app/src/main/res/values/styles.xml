@@ -9,11 +9,11 @@
 <resources>
 
     <style name="App.Name" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">56sp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:textColor">@color/gold</item>
         <item name="android:fontFamily">@font/dmsans_bold</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:text">@string/app_short_name</item>
+        <item name="android:text">@string/app_name</item>
     </style>
 
     <style name="Launch.Button" parent="Customize.Button">

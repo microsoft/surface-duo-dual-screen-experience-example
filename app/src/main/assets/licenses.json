@@ -44,6 +44,16 @@
       "name": "android/architecture-samples",
       "license": "Apache License v2 (c) Google Inc. and The Android Open Source Project",
       "url": "https://github.com/android/architecture-samples"
+    },
+    {
+      "name": "Firebase Android SDK",
+      "license": "Apache License v2 (c) Google Inc. and The Android Open Source Project",
+      "url": "https://github.com/firebase/firebase-android-sdk"
+    },
+    {
+      "name": "KotlinX Coroutines",
+      "license": "Apache License v2 (c) JetBrains",
+      "url": "https://github.com/Kotlin/kotlinx.coroutines"
     }
   ]
 }
