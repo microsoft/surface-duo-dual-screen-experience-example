@@ -9,6 +9,8 @@ package com.microsoft.device.display.sampleheroapp.di
 
 import com.microsoft.device.display.sampleheroapp.data.about.LicenseDataSource
 import com.microsoft.device.display.sampleheroapp.data.about.LicenseRepository
+import com.microsoft.device.display.sampleheroapp.data.catalog.CatalogItemDataSource
+import com.microsoft.device.display.sampleheroapp.data.catalog.CatalogItemRepository
 import com.microsoft.device.display.sampleheroapp.data.order.OrderDataSource
 import com.microsoft.device.display.sampleheroapp.data.order.OrderRepository
 import com.microsoft.device.display.sampleheroapp.data.product.ProductDataSource
@@ -40,4 +42,8 @@ abstract class UseCasesModule {
     @Singleton
     @Binds
     abstract fun provideLicenseRepository(provider: LicenseRepository): LicenseDataSource
+
+    @Singleton
+    @Binds
+    abstract fun provideCatalogItemRepository(provider: CatalogItemRepository): CatalogItemDataSource
 }

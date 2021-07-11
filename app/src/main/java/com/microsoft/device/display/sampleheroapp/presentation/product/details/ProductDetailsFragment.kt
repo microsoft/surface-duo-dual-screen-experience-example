@@ -65,6 +65,7 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun setupToolbar() {
+        appCompatActivity?.supportActionBar?.show()
         appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
         appCompatActivity?.setupToolbar(isBackButtonEnabled = true) {
             viewModel.navigateUp()

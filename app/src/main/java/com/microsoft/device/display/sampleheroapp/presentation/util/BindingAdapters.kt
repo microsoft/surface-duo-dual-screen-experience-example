@@ -7,6 +7,7 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.util
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.domain.order.model.OrderItem
 import com.microsoft.device.display.sampleheroapp.domain.product.model.Product
@@ -46,6 +48,17 @@ fun getProductImageRes(view: ImageView, product: Product?) {
     product?.let {
         getProductDrawable(it.color, it.bodyShape).let { resId ->
             view.setImageDrawable(ContextCompat.getDrawable(view.context, resId))
+        }
+    }
+}
+
+@BindingAdapter("assetImage")
+fun getAssetImage(view: ImageView, imagePath: String?) {
+    imagePath?.let {
+        Uri.parse("file:///android_asset/$imagePath")?.let { imageUri ->
+            Glide.with(view.context)
+                .load(imageUri)
+                .into(view)
         }
     }
 }
