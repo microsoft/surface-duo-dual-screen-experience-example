@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentHostProductsBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
@@ -48,7 +49,9 @@ class HostProductsFragment : Fragment() {
             it.catalogViewPager.isSaveEnabled = false
             TabLayoutMediator(
                 it.catalogTabLayout,
-                it.catalogViewPager
+                it.catalogViewPager,
+                true,
+                shouldUseAnimations()
             ) { tab, position ->
                 val textId = when (position) {
                     0 -> R.string.main_products_tab_catalog
@@ -74,6 +77,8 @@ class HostProductsFragment : Fragment() {
             it.catalogViewPager.isUserInputEnabled = false
         }
     }
+
+    private fun shouldUseAnimations(): Boolean = !TEST_MODE_ENABLED
 
     override fun onResume() {
         super.onResume()
