@@ -12,11 +12,7 @@ import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogIt
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.ViewType
 
 class MockCatalogItemDataSource : CatalogItemDataSource {
-    override suspend fun getAll(): List<CatalogItem> {
-        return listOf(
-            catalogItem
-        )
-    }
+    override suspend fun getAll(): List<CatalogItem> = listOf(catalogItem)
 }
 
 val catalogItem = CatalogItem(

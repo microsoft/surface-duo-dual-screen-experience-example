@@ -54,6 +54,11 @@
       "name": "KotlinX Coroutines",
       "license": "Apache License v2 (c) JetBrains",
       "url": "https://github.com/Kotlin/kotlinx.coroutines"
+    },
+    {
+      "name": "Glide",
+      "license": "Simplified BSD License (c) 2014 Google, Inc.",
+      "url": "https://github.com/bumptech/glide"
     }
   ]
 }

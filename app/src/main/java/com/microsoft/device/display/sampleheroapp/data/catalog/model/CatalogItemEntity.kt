@@ -21,7 +21,7 @@ data class CatalogItemEntity(
     val thirdPicture: String?
 )
 
-fun CatalogItemEntity.toDto() =
+fun CatalogItemEntity.toCatalogItem() =
     CatalogItem(
         itemId = this.itemId,
         name = this.name,

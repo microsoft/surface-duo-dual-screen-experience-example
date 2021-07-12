@@ -74,7 +74,6 @@ class ProductCustomizeFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        appCompatActivity?.supportActionBar?.show()
         appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
         appCompatActivity?.setupToolbar(isBackButtonEnabled = true) {
             viewModel.reset()

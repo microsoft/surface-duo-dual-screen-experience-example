@@ -37,8 +37,11 @@ class CatalogListFragment : Fragment(), ScreenInfoListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val catalogAdapter =
-            CatalogListAdapter(requireActivity().supportFragmentManager, listViewModel)
+        setupAdapter()
+    }
+
+    private fun setupAdapter() {
+        val catalogAdapter = CatalogListAdapter(childFragmentManager, listViewModel)
         binding?.pager?.adapter = catalogAdapter
         listViewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter.refreshData() })
     }

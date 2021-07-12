@@ -16,19 +16,19 @@ import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.i
 import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.item.CatalogItemType3Fragment
 import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.item.CatalogItemType4Fragment
 import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.item.CatalogItemType5Fragment
-import com.microsoft.device.display.sampleheroapp.presentation.util.DataListHandler
+import com.microsoft.device.display.sampleheroapp.presentation.util.DataListProvider
 
 internal class CatalogListAdapter(
     fragmentManager: FragmentManager,
-    private val dataHandler: DataListHandler<CatalogItem>
+    private val dataProvider: DataListProvider<CatalogItem>
 ) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     var showTwoPages = false
 
-    override fun getCount(): Int = dataHandler.getDataList()?.size ?: 0
+    override fun getCount(): Int = dataProvider.getDataList()?.size ?: 0
 
     override fun getItem(position: Int): Fragment {
-        val size = dataHandler.getDataList()?.size ?: 0
-        dataHandler.getDataList()?.get(position)?.let { item ->
+        val size = dataProvider.getDataList()?.size ?: 0
+        dataProvider.getDataList()?.get(position)?.let { item ->
             return when (item.viewType) {
                 ViewType.Layout1 -> CatalogItemType1Fragment.createInstance(
                     item,

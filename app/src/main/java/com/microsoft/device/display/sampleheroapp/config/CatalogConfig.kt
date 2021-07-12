@@ -8,5 +8,5 @@
 package com.microsoft.device.display.sampleheroapp.config
 
 object CatalogConfig {
-    const val catalogItems = "catalog/catalog.json"
+    const val catalogItemsFileName = "catalog/catalog.json"
 }

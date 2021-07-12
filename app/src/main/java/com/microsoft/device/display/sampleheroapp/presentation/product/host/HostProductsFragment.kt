@@ -17,6 +17,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentHostProductsBinding
 import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
+import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,7 +81,8 @@ class HostProductsFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        appCompatActivity?.supportActionBar?.hide()
+        appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
+        appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
     }
 
     override fun onDestroyView() {

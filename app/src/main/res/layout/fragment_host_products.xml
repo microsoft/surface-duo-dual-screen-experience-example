@@ -28,7 +28,7 @@
             app:tabIndicatorHeight="@dimen/main_products_tab_indicator_height"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed"
-            app:tabTextAppearance="@style/Store.TabText.MainProducts" />
+            app:tabTextAppearance="@style/Product.TabText" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/catalog_view_pager"

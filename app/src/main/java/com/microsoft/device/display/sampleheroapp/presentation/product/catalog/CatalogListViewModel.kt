@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
 import com.microsoft.device.display.sampleheroapp.domain.catalog.usecases.GetCatalogListUseCase
-import com.microsoft.device.display.sampleheroapp.presentation.util.DataListHandler
+import com.microsoft.device.display.sampleheroapp.presentation.util.DataListProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,19 +20,14 @@ import javax.inject.Inject
 @HiltViewModel
 class CatalogListViewModel @Inject constructor(
     private val getCatalogListUseCase: GetCatalogListUseCase
-) : ViewModel(), DataListHandler<CatalogItem> {
+) : ViewModel(), DataListProvider<CatalogItem> {
     var catalogItemList = MutableLiveData<List<CatalogItem>?>(null)
 
     init {
         viewModelScope.launch {
-            val a = getCatalogListUseCase.getAll()
-            catalogItemList.value = a
+            catalogItemList.value = getCatalogListUseCase.getAll()
         }
     }
 
     override fun getDataList(): List<CatalogItem>? = catalogItemList.value
-
-    override fun onClick(model: CatalogItem?) {
-        // Do Nothing
-    }
 }

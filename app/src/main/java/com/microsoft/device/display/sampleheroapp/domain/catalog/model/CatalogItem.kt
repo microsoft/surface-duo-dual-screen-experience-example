@@ -8,7 +8,7 @@
 package com.microsoft.device.display.sampleheroapp.domain.catalog.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CatalogItem(

@@ -48,28 +48,26 @@ class ProductNavigationDualScreenTest {
 
         checkCatalogPageIsDisplayed(1)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(2)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(3)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(4)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(5)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(6)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(7)
 
-        swipeViewPagerToTheLeft()
+        swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(8)
-
-        Thread.sleep(1000)
     }
 
     @Test
@@ -102,7 +100,7 @@ class ProductNavigationDualScreenTest {
             )
         ).perform(click())
 
-        swipeViewPagerToTheRight()
+        swipeHostViewPagerToTheRight()
         checkCatalogPageIsDisplayed(1)
     }
 
@@ -112,7 +110,6 @@ class ProductNavigationDualScreenTest {
         setOrientationRight()
 
         checkAllCatalogItems()
-        Thread.sleep(5000)
     }
 
     @Test
