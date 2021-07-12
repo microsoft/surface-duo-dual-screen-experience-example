@@ -12,6 +12,7 @@ import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductCo
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.product.PRODUCT_FIRST_POSITION
+import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImageLandscape
@@ -23,7 +24,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.product.checkShap
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkSingleModePlaceOrderButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnCustomizeButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnListItemAtPosition
-import com.microsoft.device.display.sampleheroapp.presentation.product.openProductsTab
+import com.microsoft.device.display.sampleheroapp.presentation.product.navigateToProductsSection
 import com.microsoft.device.display.sampleheroapp.presentation.product.product
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectColor
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectShape
@@ -53,6 +54,7 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkCustomizeInPortraitMode() {
+        navigateToProductsSection()
         openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
@@ -71,6 +73,7 @@ class ProductCustomizeSingleScreenTest {
     fun checkCustomizeInLandscapeMode() {
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
@@ -87,6 +90,7 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkNewColorSelection() {
+        navigateToProductsSection()
         openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
@@ -122,6 +126,7 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkNewShapeSelection() {
+        navigateToProductsSection()
         openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()

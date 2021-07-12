@@ -31,7 +31,7 @@ import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 
-fun openProductsTab() {
+fun navigateToProductsSection() {
     onView(withId(R.id.navigation_products_graph)).perform(forceClick())
 }
 

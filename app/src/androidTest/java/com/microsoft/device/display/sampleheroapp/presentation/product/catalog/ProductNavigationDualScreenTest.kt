@@ -15,7 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
-import com.microsoft.device.display.sampleheroapp.presentation.product.openProductsTab
+import com.microsoft.device.display.sampleheroapp.presentation.product.navigateToProductsSection
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import com.microsoft.device.dualscreen.ScreenManagerProvider
@@ -44,7 +44,7 @@ class ProductNavigationDualScreenTest {
 
     @Test
     fun checkAllCatalogItems() {
-        openProductsTab()
+        navigateToProductsSection()
 
         checkCatalogPageIsDisplayed(1)
 
@@ -72,26 +72,15 @@ class ProductNavigationDualScreenTest {
 
     @Test
     fun checkTabs() {
+        navigateToProductsSection()
+
         openProductsTab()
-
-        onView(
-            allOf(
-                withText(R.string.main_products_tab_products),
-                isDescendantOfA(withId(R.id.catalog_tab_layout))
-            )
-        ).perform(click())
-
-        onView(
-            allOf(
-                withText(R.string.main_products_tab_catalog),
-                isDescendantOfA(withId(R.id.catalog_tab_layout))
-            )
-        ).perform(click())
+        openCatalogTab()
     }
 
     @Test
     fun checkSwipeFromProductsTakesToCatalog() {
-        openProductsTab()
+        navigateToProductsSection()
 
         onView(
             allOf(
@@ -106,7 +95,7 @@ class ProductNavigationDualScreenTest {
 
     @Test
     fun checkAllCatalogItemsAfterRotation() {
-        openProductsTab()
+        navigateToProductsSection()
         setOrientationRight()
 
         checkAllCatalogItems()
@@ -114,7 +103,7 @@ class ProductNavigationDualScreenTest {
 
     @Test
     fun checkTabsAfterRotation() {
-        openProductsTab()
+        navigateToProductsSection()
         setOrientationRight()
 
         checkTabs()
@@ -122,7 +111,7 @@ class ProductNavigationDualScreenTest {
 
     @Test
     fun checkSwipeFromProductsTakesToCatalogAfterRotate() {
-        openProductsTab()
+        navigateToProductsSection()
         setOrientationRight()
 
         checkSwipeFromProductsTakesToCatalog()

@@ -16,6 +16,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkTool
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
+import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -46,6 +47,7 @@ class ProductNavigationDualScreenTest {
     fun openProductsInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -58,6 +60,7 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -69,6 +72,7 @@ class ProductNavigationDualScreenTest {
     fun openAboutInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -93,6 +97,7 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -116,6 +121,7 @@ class ProductNavigationDualScreenTest {
     fun openDevModeInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -139,6 +145,7 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -162,6 +169,7 @@ class ProductNavigationDualScreenTest {
     fun openCustomizeInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
@@ -187,6 +195,7 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
