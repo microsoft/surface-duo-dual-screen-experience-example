@@ -23,10 +23,20 @@ data class CatalogItem(
 ) : Parcelable
 
 enum class ViewType(var typeId: Int) {
+
+    // Layout with one long text above, 3 images, another long text below
     Layout1(1),
+
+    // Layout with image-text, long text, two images
     Layout2(2),
+
+    // Layout with two groups of image-text, mirrored
     Layout3(3),
+
+    // Layout with two images, long text, image-text
     Layout4(4),
+
+    // Layout with one image and one long text
     Layout5(5);
 
     companion object {
