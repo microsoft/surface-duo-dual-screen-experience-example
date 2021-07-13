@@ -7,8 +7,8 @@
 
 package com.microsoft.device.display.sampleheroapp.data.catalog
 
-import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
+import com.microsoft.device.display.sampleheroapp.data.catalog.model.CatalogItemEntity
 
 interface CatalogItemDataSource {
-    suspend fun getAll(): List<CatalogItem>
+    suspend fun getAll(): List<CatalogItemEntity>
 }

@@ -9,10 +9,12 @@ package com.microsoft.device.display.sampleheroapp.domain.catalog.usecases
 
 import com.microsoft.device.display.sampleheroapp.data.catalog.CatalogItemDataSource
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
+import com.microsoft.device.display.sampleheroapp.domain.catalog.model.toCatalogItem
 import javax.inject.Inject
 
 class GetCatalogListUseCase @Inject constructor(
     private val catalogItemRepository: CatalogItemDataSource
 ) {
-    suspend fun getAll(): List<CatalogItem> = catalogItemRepository.getAll()
+    suspend fun getAll(): List<CatalogItem> =
+        catalogItemRepository.getAll().map { it.toCatalogItem() }
 }

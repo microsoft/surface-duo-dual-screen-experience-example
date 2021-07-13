@@ -7,9 +7,6 @@
 
 package com.microsoft.device.display.sampleheroapp.data.catalog.model
 
-import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
-import com.microsoft.device.display.sampleheroapp.domain.catalog.model.ViewType
-
 data class CatalogItemEntity(
     val itemId: Long,
     val name: String,
@@ -20,15 +17,3 @@ data class CatalogItemEntity(
     val secondPicture: String,
     val thirdPicture: String?
 )
-
-fun CatalogItemEntity.toCatalogItem() =
-    CatalogItem(
-        itemId = this.itemId,
-        name = this.name,
-        viewType = ViewType.get(this.viewType),
-        primaryDescription = this.primaryDescription,
-        secondaryDescription = this.secondaryDescription,
-        firstPicture = this.firstPicture,
-        secondPicture = this.secondPicture,
-        thirdPicture = this.thirdPicture
-    )

@@ -8,13 +8,14 @@
 package com.microsoft.device.display.sampleheroapp.domain.catalog.model
 
 import android.os.Parcelable
+import com.microsoft.device.display.sampleheroapp.data.catalog.model.CatalogItemEntity
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CatalogItem(
     val itemId: Long,
     val name: String,
-    val viewType: ViewType,
+    val viewType: CatalogViewType,
     val primaryDescription: String,
     val secondaryDescription: String?,
     val firstPicture: String,
@@ -22,7 +23,19 @@ data class CatalogItem(
     val thirdPicture: String?
 ) : Parcelable
 
-enum class ViewType(var typeId: Int) {
+fun CatalogItemEntity.toCatalogItem() =
+    CatalogItem(
+        itemId = this.itemId,
+        name = this.name,
+        viewType = CatalogViewType.get(this.viewType),
+        primaryDescription = this.primaryDescription,
+        secondaryDescription = this.secondaryDescription,
+        firstPicture = this.firstPicture,
+        secondPicture = this.secondPicture,
+        thirdPicture = this.thirdPicture
+    )
+
+enum class CatalogViewType(var typeId: Int) {
 
     // Layout with one long text above, 3 images, another long text below
     Layout1(1),
