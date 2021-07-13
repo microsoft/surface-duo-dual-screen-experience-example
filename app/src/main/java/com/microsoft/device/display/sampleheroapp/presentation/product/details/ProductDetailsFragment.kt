@@ -61,6 +61,8 @@ class ProductDetailsFragment : Fragment() {
         super.onResume()
         if (rotationViewModel.isDualMode.value == false) {
             setupToolbar()
+        } else {
+            appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
         }
     }
 

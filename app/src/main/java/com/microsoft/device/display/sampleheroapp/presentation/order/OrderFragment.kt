@@ -22,11 +22,13 @@ import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatAct
 import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
 import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import com.microsoft.device.dualscreen.ScreenInfo
+import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.dualscreen.recyclerview.SurfaceDuoItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderFragment : Fragment() {
+class OrderFragment : Fragment(), ScreenInfoListener {
 
     private val orderViewModel: OrderViewModel by activityViewModels()
     private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
@@ -50,21 +52,6 @@ class OrderFragment : Fragment() {
 
         setupAdapter()
         setupListObservers()
-
-        rotationViewModel.screenInfo.observe(
-            viewLifecycleOwner,
-            {
-                it?.let {
-                    setupRecyclerView(it)
-
-                    recommendationViewModel.refreshRecommendationList()
-                    updateAdapter(
-                        it.isDualMode(),
-                        rotationViewModel.isDualPortraitMode(it.getScreenRotation())
-                    )
-                }
-            }
-        )
     }
 
     private fun setupListObservers() {
@@ -128,8 +115,24 @@ class OrderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
         setupConfirmationObservers()
         changeToolbarTitle()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+    }
+
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        setupRecyclerView(screenInfo)
+
+        recommendationViewModel.refreshRecommendationList()
+        updateAdapter(
+            screenInfo.isDualMode(),
+            rotationViewModel.isDualPortraitMode(screenInfo.getScreenRotation())
+        )
     }
 
     private fun changeToolbarTitle() {

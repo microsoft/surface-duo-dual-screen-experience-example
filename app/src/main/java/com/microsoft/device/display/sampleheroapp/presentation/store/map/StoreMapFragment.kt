@@ -75,7 +75,7 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupMapView(savedInstanceState: Bundle?) {
-        mapView = MapView(requireContext(), MapRenderMode.RASTER)
+        mapView = MapView(requireActivity(), MapRenderMode.RASTER)
         mapView.onCreate(savedInstanceState)
         setupMapKey()
 
@@ -267,7 +267,6 @@ class StoreMapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
-        changeActionBarTitle(viewModel.selectedCity.value, viewModel.selectedStore.value)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
