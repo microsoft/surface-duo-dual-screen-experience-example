@@ -12,5 +12,6 @@ interface StoreNavigator {
     fun navigateToStoreList()
     fun navigateToStoreDetailsFromList()
     fun navigateToStoreDetailsFromMap()
+    fun navigateToStoreListFromDetails()
     fun navigateUp()
 }

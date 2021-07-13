@@ -146,6 +146,21 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
     }
 
     @Test
+    fun openListFromDetailsInDualLandscapeMode() {
+        openListFromDetailsInDualMode()
+
+        checkToolbarDevItem()
+    }
+
+    @Test
+    fun openListFromDetailsInDualPortraitMode() {
+        setOrientationRight()
+        openListFromDetailsInDualMode()
+
+        checkToolbarDevItem()
+    }
+
+    @Test
     fun spanDetailsFromMap() {
         clickOnMapMarker(storeMehul.name)
 

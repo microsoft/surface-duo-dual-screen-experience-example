@@ -51,6 +51,8 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
 
         extractIntentUrlExtras(intent)
 
+        setupNavigationGraph()
+
         if (savedInstanceState == null && extractIntentAnimationExtras(intent)) {
             binding.devRootLayout.visibility = INVISIBLE
 
@@ -71,6 +73,12 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
 
         intent.getStringExtra(EXTRA_SDK_COMPONENT)?.let {
             viewModel.sdkComponent = DevModeViewModel.SdkComponent.get(it)
+        }
+    }
+
+    private fun setupNavigationGraph() {
+        SurfaceDuoNavigation.findNavController(this, R.id.devmode_nav_host_fragment).apply {
+            graph = navInflater.inflate(R.navigation.navigation_devmode_graph)
         }
     }
 

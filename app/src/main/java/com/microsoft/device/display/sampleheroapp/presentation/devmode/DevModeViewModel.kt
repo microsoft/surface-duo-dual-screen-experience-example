@@ -73,11 +73,11 @@ class DevModeViewModel @Inject constructor(
     enum class AppScreen(var path: String) {
         STORES_MAP("ExtendCanvas/src/main/java/com/microsoft/device/display/samples/extendcanvas/ExtendedCanvasActivity.kt"),
         STORES_LIST("DualView/src/main/java/com/microsoft/device/display/samples/dualview/DualViewActivity.kt"),
-        STORES_DETAILS("ListDetail/src/main/java/com/microsoft/device/display/samples/listdetail/ListDetailsActivity.kt"),
+        STORES_DETAILS("IntentToSecondScreen/src/main/java/com/microsoft/device/display/samples/intentsecondscreen/IntentToSecondScreenFirstActivity.kt"),
         PRODUCTS_CATALOG("TwoPage/src/main/java/com/microsoft/device/display/samples/twopage/TwoPageActivity.kt"),
         PRODUCTS_LIST_DETAILS("ListDetail/src/main/java/com/microsoft/device/display/samples/listdetail/ListDetailsActivity.kt"),
         PRODUCTS_CUSTOMIZE("CompanionPane/src/main/java/com/microsoft/device/display/samples/companionpane/CompanionPaneActivity.kt"),
-        ORDERS("TwoPage/src/main/java/com/microsoft/device/display/samples/twopage/TwoPageActivity.kt");
+        ORDERS("Qualifiers/src/main/java/com/microsoft/device/display/samples/qualifiers/QualifiersActivity.kt");
 
         fun buildUrl() = "$APP_BASE_URL/$path"
 
