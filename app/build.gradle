@@ -10,6 +10,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 
 apply from: 'secrets.gradle'
@@ -110,6 +111,9 @@ dependencies {
     implementation microsoftDependencies.recyclerView
 
     implementation uiDependencies.lottie
+
+    implementation uiDependencies.glide
+    annotationProcessor uiDependencies.glideAnnotationProcesor
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.archTesting

@@ -34,4 +34,6 @@
     <color name="guitar_dark_red_color">#BC0101</color>
 
     <color name="toast_color">#141414</color>
+
+    <color name="catalog_tools_image_background">@color/guitar_aqua_color</color>
 </resources>

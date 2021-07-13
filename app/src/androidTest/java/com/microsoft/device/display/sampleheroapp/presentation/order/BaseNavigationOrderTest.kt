@@ -17,7 +17,7 @@ import com.microsoft.device.display.sampleheroapp.util.blockingValue
 open class BaseNavigationOrderTest {
 
     fun openEmptyOrders(recommendationsSize: Int) {
-        openOrdersTab()
+        navigateToOrdersSection()
         checkEmptyPage()
 
         scrollOrderToEnd()
@@ -32,7 +32,7 @@ open class BaseNavigationOrderTest {
         oneItemRecommendationsSize: Int,
         itemLiveData: LiveData<List<OrderItem>>
     ) {
-        openOrdersTab()
+        navigateToOrdersSection()
 
         clickOnAddFirstRecommendationItem()
 
@@ -60,7 +60,7 @@ open class BaseNavigationOrderTest {
         itemLiveData: LiveData<List<OrderItem>>,
         submittedOrderLiveData: LiveData<Order?>
     ) {
-        openOrdersTab()
+        navigateToOrdersSection()
 
         clickOnAddFirstRecommendationItem()
 
@@ -89,7 +89,7 @@ open class BaseNavigationOrderTest {
         itemLiveData: LiveData<List<OrderItem>>,
         submittedOrderLiveData: LiveData<Order?>
     ) {
-        openOrdersTab()
+        navigateToOrdersSection()
 
         clickOnAddFirstRecommendationItem()
 

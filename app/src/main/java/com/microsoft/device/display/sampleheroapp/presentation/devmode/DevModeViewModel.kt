@@ -61,8 +61,6 @@ class DevModeViewModel @Inject constructor(
 
     enum class SdkComponent(var path: String) {
         BOTTOM_NAVIGATION_VIEW("bottomnavigation/surfaceduo-bottomnavigationview"),
-        SURFACE_DUO_LAYOUT("layouts/surfaceduo-layout"),
-        TAB_LAYOUT("tabs/surfaceduo-tablayout"),
         RECYCLER_VIEW("recyclerview/");
 
         fun buildUrl() = "$SDK_BASE_URL/$path$LANGUAGE_TAB"

@@ -7,7 +7,7 @@
 
 package com.microsoft.device.display.sampleheroapp.presentation.util
 
-interface DataListHandler<Model> : ItemClickListener<Model> {
-    fun getDataList(): List<Model>?
+interface DataListHandler<Model> : DataListProvider<Model>, ItemClickListener<Model> {
+    override fun getDataList(): List<Model>?
     override fun onClick(model: Model?)
 }

@@ -25,9 +25,10 @@ import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAd
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_ONE
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_THREE
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
+import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnCustomizeButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnListItemAtPosition
-import com.microsoft.device.display.sampleheroapp.presentation.product.openProductsTab
+import com.microsoft.device.display.sampleheroapp.presentation.product.navigateToProductsSection
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectColor
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectShape
 import com.microsoft.device.display.sampleheroapp.util.atRecyclerAdapterPosition
@@ -39,7 +40,7 @@ import org.hamcrest.CoreMatchers.not
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 
-fun openOrdersTab() {
+fun navigateToOrdersSection() {
     onView(withId(R.id.navigation_orders_graph)).perform(forceClick())
 }
 
@@ -172,6 +173,7 @@ fun clickOnPlaceOrderButton() {
 }
 
 fun addProductToOrder(itemPosition: Int = 0, bodyShape: ProductType?, color: ProductColor?) {
+    navigateToProductsSection()
     openProductsTab()
     clickOnListItemAtPosition(itemPosition)
 

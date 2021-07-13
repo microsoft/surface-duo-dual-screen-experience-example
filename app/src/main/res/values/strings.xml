@@ -39,6 +39,11 @@
     <string name="address_label">Address:</string>
     <string name="contact_info_label">Owner Contact Info:</string>
 
+    <!-- Main Products -->
+
+    <string name="main_products_tab_catalog">Catalog</string>
+    <string name="main_products_tab_products">Products</string>
+
     <!-- Products -->
 
     <string name="product_details_pickup_title">Custom Alnico III</string>
@@ -67,6 +72,10 @@
     <string name="product_explorer_white">Guitar of explorer shape and white color</string>
     <string name="product_musiclander_red">Guitar of musiclander shape and red color</string>
 
+    <!-- Catalog -->
+
+    <string name="catalog_page_no">Page %d of %d</string>
+
     <!-- Orders -->
 
     <string name="toolbar_orders_title">Orders</string>
@@ -82,7 +91,7 @@
     <string name="order_date">Order Date: %s</string>
     <string name="order_id">Order ID: %s</string>
     <string name="order_amount">Amount: %s</string>
-    
+
     <string name="order_quantity">Qty %s</string>
     <string name="order_quantity_plus">+</string>
     <string name="order_quantity_minus">-</string>
@@ -114,5 +123,4 @@
     <string name="introduction_to_third_party_notice_title">Introduction to Third Party Notices</string>
     <string name="introduction_to_third_party_notice_message">This file is based on or incorporates material from the projects listed below (collectively, Third Party Code). Microsoft is not the original author of the Third Party Code. The original copyright notice and the license under which Microsoft received such Third Party Code, are set forth below. Such licenses and notices are provided for informational purposes only. Microsoft licenses the Third Party Code to you under the terms set forth in the EULA for the Microsoft Product. Microsoft reserves all other rights not expressly granted under this agreement, whether by implication, estoppel or otherwise.</string>
     <string name="introduction_to_third_party_notice_button">OK</string>
-
 </resources>

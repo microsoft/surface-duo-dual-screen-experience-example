@@ -91,6 +91,22 @@ fun horizontalSwipeToLeft() {
 }
 
 /**
+ * Horizontal swipe from right to left on Left Screen
+ */
+fun horizontalSwipeToLeftOnLeftScreen() {
+    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    device.swipe(1000, 1000, 200, 1000, 10)
+}
+
+/**
+ * Horizontal swipe from left to right on Left Screen
+ */
+fun horizontalSwipeToRightOnLeftScreen() {
+    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    device.swipe(200, 1000, 1000, 1000, 10)
+}
+
+/**
  * Vertical swipe from bottom to top
  */
 fun verticalSwipeToTop() {

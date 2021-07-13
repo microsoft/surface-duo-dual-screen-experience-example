@@ -30,3 +30,4 @@
 
 # Application classes that will be serialized/deserialized over Gson
 -keep class com.microsoft.device.display.sampleheroapp.data.about.model.** { <fields>; }
+-keep class com.microsoft.device.display.sampleheroapp.data.catalog.model.** { <fields>; }

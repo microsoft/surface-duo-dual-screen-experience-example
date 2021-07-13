@@ -32,7 +32,11 @@ fun withToolbarTitle(@StringRes titleRes: Int, titleParam: String? = null): Matc
         }
     }
 
-fun atRecyclerAdapterPosition(position: Int, @IdRes childId: Int, itemMatcher: Matcher<View?>): Matcher<View?> =
+fun atRecyclerAdapterPosition(
+    position: Int,
+    @IdRes childId: Int,
+    itemMatcher: Matcher<View?>
+): Matcher<View?> =
     object : BoundedMatcher<View?, RecyclerView>(RecyclerView::class.java) {
         override fun describeTo(description: Description) {
             description.appendText("has item at position $position: ")

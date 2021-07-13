@@ -7,42 +7,30 @@
 
 package com.microsoft.device.display.sampleheroapp.data.about
 
-import android.content.Context
+import android.content.res.AssetManager
 import com.google.gson.Gson
 import com.microsoft.device.display.sampleheroapp.config.LicensesConfig
 import com.microsoft.device.display.sampleheroapp.data.about.model.LicenseTermsList
 import com.microsoft.device.display.sampleheroapp.data.about.model.LicensesList
-import dagger.hilt.android.qualifiers.ApplicationContext
-import java.io.IOException
+import com.microsoft.device.display.sampleheroapp.data.getJsonDataFromAsset
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class LicenseRepository @Inject constructor(
-    @ApplicationContext private val appContext: Context,
+    private val assetManager: AssetManager,
     private val gson: Gson
 ) : LicenseDataSource {
 
     override fun getLicenseTermsList(): LicenseTermsList? =
         gson.fromJson(
-            getJsonDataFromAsset(LicensesConfig.licenseTermsFileName),
+            getJsonDataFromAsset(assetManager, LicensesConfig.licenseTermsFileName),
             LicenseTermsList::class.java
         )
 
     override fun getLicensesList(): LicensesList? =
         gson.fromJson(
-            getJsonDataFromAsset(LicensesConfig.licensesFileName),
+            getJsonDataFromAsset(assetManager, LicensesConfig.licensesFileName),
             LicensesList::class.java
         )
-
-    private fun getJsonDataFromAsset(fileName: String): String? {
-        val jsonString: String
-        try {
-            jsonString = appContext.assets.open(fileName).bufferedReader().use { it.readText() }
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
-            return null
-        }
-        return jsonString
-    }
 }

@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     private fun resetDestinations(destination: SurfaceDuoNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> storeViewModel.reset()
-            R.id.fragment_product_list -> productViewModel.reset()
+            R.id.fragment_product_host -> productViewModel.reset()
             R.id.fragment_order -> orderViewModel.reset()
         }
     }
@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
             R.id.fragment_store_details -> setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL)
-            R.id.fragment_product_list -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
+            R.id.fragment_product_host -> setupDevMode(AppScreen.PRODUCTS_CATALOG, DesignPattern.TWO_PAGE)
             R.id.fragment_product_details -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_customize -> setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE)
             R.id.fragment_order -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)

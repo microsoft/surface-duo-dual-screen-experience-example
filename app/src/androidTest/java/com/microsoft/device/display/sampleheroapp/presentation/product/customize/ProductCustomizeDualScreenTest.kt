@@ -16,6 +16,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkTool
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
 import com.microsoft.device.display.sampleheroapp.presentation.product.PRODUCT_FIRST_POSITION
+import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeDetails
@@ -30,7 +31,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.product.checkCust
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkShapeSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnCustomizeButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnListItemAtPosition
-import com.microsoft.device.display.sampleheroapp.presentation.product.openProductsTab
+import com.microsoft.device.display.sampleheroapp.presentation.product.navigateToProductsSection
 import com.microsoft.device.display.sampleheroapp.presentation.product.product
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectColor
 import com.microsoft.device.display.sampleheroapp.presentation.product.selectShape
@@ -66,6 +67,7 @@ class ProductCustomizeDualScreenTest {
     fun checkCustomizeInPortraitMode() {
         switchFromSingleToDualScreen()
 
+        navigateToProductsSection()
         openProductsTab()
         clickOnCustomizeButton()
 
@@ -87,6 +89,7 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
         clickOnCustomizeButton()
 
@@ -106,6 +109,7 @@ class ProductCustomizeDualScreenTest {
     fun openDevModeInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
+        navigateToProductsSection()
         openProductsTab()
         clickOnCustomizeButton()
 
@@ -146,6 +150,7 @@ class ProductCustomizeDualScreenTest {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
+        navigateToProductsSection()
         openProductsTab()
         clickOnCustomizeButton()
 
@@ -181,6 +186,7 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun checkNewColorSelection() {
+        navigateToProductsSection()
         openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
@@ -237,6 +243,7 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun checkNewShapeSelection() {
+        navigateToProductsSection()
         openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
