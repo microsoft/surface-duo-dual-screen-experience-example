@@ -88,6 +88,7 @@
     <dimen name="catalog_margin_large">20dp</dimen>
     <dimen name="catalog_margin_very_large">40dp</dimen>
     <dimen name="catalog_horizontal_margin">24dp</dimen>
-    <dimen name="catalog_top_margin">32dp</dimen>
+    <dimen name="catalog_top_margin">20dp</dimen>
+    <dimen name="catalog_bottom_margin">32dp</dimen>
     <dimen name="catalog_max_image_height">200dp</dimen>
 </resources>
