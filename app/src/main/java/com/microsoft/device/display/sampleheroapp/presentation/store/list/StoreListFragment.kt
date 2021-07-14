@@ -54,22 +54,21 @@ class StoreListFragment : Fragment() {
             viewLifecycleOwner,
             {
                 if (it == null && viewModel.selectedCity.value != null) {
-                    changeActionBarTitle()
+                    setupToolbar()
                 }
             }
         )
-
-        appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
-            viewModel.navigateUp()
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        changeActionBarTitle()
+        setupToolbar()
     }
 
-    private fun changeActionBarTitle() {
+    private fun setupToolbar() {
+        appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
+            viewModel.navigateUp()
+        }
         appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_stores_title))
     }
 }

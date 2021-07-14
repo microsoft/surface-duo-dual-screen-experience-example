@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeLeft
+import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
@@ -139,6 +140,32 @@ fun checkDetailsFragment(store: Store) {
     checkToolbar(R.string.store_title, store.name)
 }
 
+fun checkSelectedBeforeListStoreDetailsFragment(store: Store) {
+    onView(withId(R.id.store_details_name)).check(
+        matches(
+            allOf(
+                isDisplayed(),
+                withText(store.name)
+            )
+        )
+    )
+    onView(withId(R.id.store_details_review_ratings)).check(
+        matches(
+            allOf(
+                isDisplayed(),
+                hasDescendant(withText(store.rating.toString())),
+                hasDescendant(withText(containsString(store.reviewCount.toString())))
+            )
+        )
+    )
+
+    checkDetailsContact(store)
+    moveToAboutTab()
+    checkDetailsAbout(store)
+
+    checkToolbar(R.string.store_title, store.name)
+}
+
 fun checkDetailsAbout(store: Store) {
     onView(withId(R.id.store_details_about_description)).check(
         matches(
@@ -156,6 +183,10 @@ fun checkDetailsAbout(store: Store) {
 
 fun moveToContactTab() {
     onView(withId(R.id.store_details_view_pager)).perform(swipeLeft())
+}
+
+fun moveToAboutTab() {
+    onView(withId(R.id.store_details_view_pager)).perform(swipeRight())
 }
 
 fun checkDetailsContact(store: Store) {

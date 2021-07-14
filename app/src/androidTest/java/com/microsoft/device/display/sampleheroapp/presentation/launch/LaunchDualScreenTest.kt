@@ -17,7 +17,6 @@ import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -85,7 +84,6 @@ class LaunchDualScreenTest {
         checkLaunchInDualMode()
     }
 
-    @Ignore("Fails now because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7")
     @Test
     fun spanMain() {
         checkSingleLaunchButton()

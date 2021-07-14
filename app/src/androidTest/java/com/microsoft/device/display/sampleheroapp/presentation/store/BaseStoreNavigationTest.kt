@@ -61,6 +61,27 @@ open class BaseStoreNavigationTest {
         checkToolbar(R.string.app_name)
     }
 
+    fun openListFromDetailsInDualMode() {
+        switchFromSingleToDualScreen()
+
+        clickOnMapMarker(storeMehul.name)
+        checkMapFragment()
+        checkDetailsFragment(storeMehul)
+
+        clickOnMapMarker(cityRedmond.name)
+        checkMapFragment()
+        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragmentInEmptyState()
+
+        navigateUp()
+        checkMapFragment()
+        checkSelectedBeforeListStoreDetailsFragment(storeMehul)
+
+        navigateUp()
+        checkMapFragment()
+        checkToolbar(R.string.app_name)
+    }
+
     fun openDetailsFromListInSingleMode() {
         clickOnMapMarker(cityRedmond.name)
         clickOnListItemAtPosition(STORE_JOY_POSITION)

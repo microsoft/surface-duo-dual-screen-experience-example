@@ -149,6 +149,9 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        if (screenInfo.isDualMode() != rotationViewModel.isDualMode.value) {
+            invalidateOptionsMenu()
+        }
         rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
         rotationViewModel.isDualMode.value = screenInfo.isDualMode()
         rotationViewModel.screenInfo.value = screenInfo

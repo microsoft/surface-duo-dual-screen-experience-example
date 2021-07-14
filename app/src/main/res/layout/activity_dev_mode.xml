@@ -14,6 +14,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".presentation.devmode.DevModeActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -37,7 +39,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:navGraph="@navigation/navigation_devmode_graph"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

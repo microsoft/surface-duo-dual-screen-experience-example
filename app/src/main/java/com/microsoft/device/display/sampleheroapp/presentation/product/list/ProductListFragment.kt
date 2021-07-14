@@ -13,20 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentProductListBinding
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel
-import com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel
-import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
-import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
-import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
+import com.microsoft.device.dualscreen.ScreenInfo
+import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductListFragment : Fragment() {
+class ProductListFragment : Fragment(), ScreenInfoListener {
 
     private val viewModel: ProductViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
     private var binding: FragmentProductListBinding? = null
 
     override fun onCreateView(
@@ -45,24 +42,22 @@ class ProductListFragment : Fragment() {
         binding?.productList?.adapter = productAdapter
 
         viewModel.productList.observe(viewLifecycleOwner, { productAdapter.refreshData() })
-        rotationViewModel.isDualMode.observe(
-            viewLifecycleOwner,
-            {
-                if (it == true && viewModel.selectedProduct.value == null) {
-                    viewModel.navigateToDetails()
-                }
-            }
-        )
     }
 
     override fun onResume() {
         super.onResume()
-        setupToolbar()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
     }
 
-    private fun setupToolbar() {
-        appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
-        appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
+    override fun onPause() {
+        super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+    }
+
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
+        if (screenInfo.isDualMode() && viewModel.selectedProduct.value == null) {
+            viewModel.navigateToDetails()
+        }
     }
 
     override fun onDestroyView() {

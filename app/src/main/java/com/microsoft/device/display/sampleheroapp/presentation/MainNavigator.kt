@@ -50,6 +50,10 @@ class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
         navController?.navigate(R.id.action_store_map_to_details)
     }
 
+    override fun navigateToStoreListFromDetails() {
+        navController?.navigate(R.id.action_store_details_to_list)
+    }
+
     override fun navigateToProducts() {
         val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
         navController?.navigate(R.id.navigation_products_graph, null, navOptions)

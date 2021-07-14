@@ -35,6 +35,8 @@ class StoreViewModel @Inject constructor(
     val selectedStore = MutableLiveData<Store?>(null)
     val selectedCity = MutableLiveData<MapMarkerModel?>(null)
 
+    var selectedBeforeListStore: Store? = null
+
     init {
         viewModelScope.launch {
             markersList.value = getMapMarkersUseCase.getAll()
@@ -81,7 +83,13 @@ class StoreViewModel @Inject constructor(
                 markersCenter.value = buildCenterMarker(cityStores.map { it.toMapMarkerModel() })
             }
         }
-        navigator.navigateToStoreList()
+        if (selectedStore.value != null) {
+            selectedBeforeListStore = selectedStore.value
+            selectedStore.value = null
+            navigator.navigateToStoreListFromDetails()
+        } else {
+            navigator.navigateToStoreList()
+        }
     }
 
     fun updateStoreList(storeIds: List<Long>) {
@@ -96,11 +104,16 @@ class StoreViewModel @Inject constructor(
             selectedStore.value = null
         } else {
             resetMap()
+            if (selectedBeforeListStore != null && selectedCity.value == null) {
+                selectedStore.value = selectedBeforeListStore
+                selectedBeforeListStore = null
+            }
         }
     }
 
     fun reset() {
         resetMap()
         selectedStore.value = null
+        selectedBeforeListStore = null
     }
 }

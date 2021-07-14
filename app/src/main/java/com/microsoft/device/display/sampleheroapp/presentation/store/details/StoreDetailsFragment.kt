@@ -40,11 +40,7 @@ class StoreDetailsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedStore.observe(viewLifecycleOwner, { changeActionBarTitle(it?.name) })
-
-        appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
-            viewModel.navigateUp()
-        }
+        viewModel.selectedStore.observe(viewLifecycleOwner, { setupToolbar(it?.name) })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,12 +69,15 @@ class StoreDetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        changeActionBarTitle(viewModel.selectedStore.value?.name)
+        setupToolbar(viewModel.selectedStore.value?.name)
     }
 
-    private fun changeActionBarTitle(name: String?) {
+    private fun setupToolbar(name: String?) {
         name?.let {
             appCompatActivity?.changeToolbarTitle(getString(R.string.store_title, it))
+            appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
+                viewModel.navigateUp()
+            }
         }
     }
 
