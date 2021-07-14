@@ -46,7 +46,7 @@ class HostProductsFragment : Fragment() {
         val pageAdapter = HostProductsFragmentAdapter(this)
         binding?.let {
             it.catalogViewPager.adapter = pageAdapter
-            it.catalogViewPager.isSaveEnabled = false
+            it.catalogViewPager.isSaveEnabled = true
             TabLayoutMediator(
                 it.catalogTabLayout,
                 it.catalogViewPager,
