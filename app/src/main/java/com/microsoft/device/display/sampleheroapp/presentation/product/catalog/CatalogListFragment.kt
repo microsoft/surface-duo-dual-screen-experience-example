@@ -46,6 +46,17 @@ class CatalogListFragment : Fragment(), ScreenInfoListener {
         listViewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter.refreshData() })
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        appCompatActivity?.changeToolbarTitle(getString(R.string.nav_catalog_title))
+        appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
+    }
+
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         (binding?.pager?.adapter as CatalogListAdapter).showTwoPages =
             screenInfo.isDualMode() && screenInfo.isDeviceInLandscape()

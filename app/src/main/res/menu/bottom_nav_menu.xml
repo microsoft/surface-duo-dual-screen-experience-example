@@ -11,9 +11,13 @@
         android:icon="@drawable/ic_store"
         android:title="@string/nav_stores_title" />
 
-    <item android:id="@+id/navigation_products_graph"
+    <item android:id="@+id/navigation_catalog_graph"
         android:icon="@drawable/ic_catalog"
         android:title="@string/nav_catalog_title" />
+
+    <item android:id="@+id/navigation_products_graph"
+        android:icon="@drawable/ic_guitar"
+        android:title="@string/nav_products_title" />
 
     <item android:id="@+id/navigation_orders_graph"
         android:icon="@drawable/ic_cart"
