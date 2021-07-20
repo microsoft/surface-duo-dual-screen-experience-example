@@ -35,7 +35,7 @@ class StoreViewModel @Inject constructor(
     val selectedStore = MutableLiveData<Store?>(null)
     val selectedCity = MutableLiveData<MapMarkerModel?>(null)
 
-    var selectedBeforeListStore: Store? = null
+    private var selectedBeforeListStore: Store? = null
 
     init {
         viewModelScope.launch {

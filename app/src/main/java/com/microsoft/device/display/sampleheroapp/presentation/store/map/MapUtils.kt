@@ -18,12 +18,17 @@ fun MapMarkerModel.toGeopoint(): Geopoint = Geopoint(lat, lng)
 fun GeoboundingBox.isInBounds(marker: MapMarkerModel): Boolean =
     (marker.lng in west..east && marker.lat in south..north)
 
-fun buildCenterMarker(markers: List<MapMarkerModel>) =
-    MapMarkerModel(
+fun buildCenterMarker(markers: List<MapMarkerModel>): MapMarkerModel {
+    val latList = markers.takeIf { it.isNotEmpty() }?.map { it.lat }
+    val lngList = markers.takeIf { it.isNotEmpty() }?.map { it.lng }
+    val maxMinLatList = listOf(latList?.maxOrNull() ?: 0.0, latList?.minOrNull() ?: 0.0)
+    val maxMinLngList = listOf(lngList?.maxOrNull() ?: 0.0, lngList?.minOrNull() ?: 0.0)
+    return MapMarkerModel(
         "",
         MarkerType.CENTER,
-        markers.takeIf { it.isNotEmpty() }?.map { it.lat }?.average() ?: 0.0,
-        markers.takeIf { it.isNotEmpty() }?.map { it.lng }?.average() ?: 0.0
+        maxMinLatList.average(),
+        maxMinLngList.average()
     )
+}
 
 class MapIconSelectable(var isSelected: Boolean = false) : MapIcon()
