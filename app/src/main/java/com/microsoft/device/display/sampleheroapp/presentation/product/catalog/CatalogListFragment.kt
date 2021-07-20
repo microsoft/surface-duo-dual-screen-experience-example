@@ -13,17 +13,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.viewpager.widget.ViewPager
+import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogBinding
+import com.microsoft.device.display.sampleheroapp.presentation.util.appCompatActivity
+import com.microsoft.device.display.sampleheroapp.presentation.util.changeToolbarTitle
+import com.microsoft.device.display.sampleheroapp.presentation.util.setupToolbar
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.dualscreen.recyclerview.isDeviceInLandscape
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CatalogListFragment : Fragment(), ScreenInfoListener {
+class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener, ScreenInfoListener {
 
-    private val listViewModel: CatalogListViewModel by activityViewModels()
+    private val viewModel: CatalogListViewModel by activityViewModels()
+
     private var binding: FragmentCatalogBinding? = null
+    private var catalogAdapter: CatalogListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,16 +46,34 @@ class CatalogListFragment : Fragment(), ScreenInfoListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
+        setupObservers()
     }
 
     private fun setupAdapter() {
-        val catalogAdapter = CatalogListAdapter(childFragmentManager, listViewModel)
-        binding?.pager?.adapter = catalogAdapter
-        listViewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter.refreshData() })
+        catalogAdapter = CatalogListAdapter(childFragmentManager, viewModel)
+    }
+
+    private fun setupViewPager() {
+        binding?.pager?.apply {
+            adapter = catalogAdapter
+            currentItem = viewModel.catalogItemPosition
+            addOnPageChangeListener(this@CatalogListFragment)
+        }
+
+        binding?.verticalPager?.apply {
+            adapter = catalogAdapter
+            currentItem = viewModel.catalogItemPosition
+            addOnPageChangeListener(this@CatalogListFragment)
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter?.refreshData() })
     }
 
     override fun onResume() {
         super.onResume()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
         setupToolbar()
     }
@@ -57,8 +83,34 @@ class CatalogListFragment : Fragment(), ScreenInfoListener {
         appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
     }
 
+    override fun onPause() {
+        super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+    }
+
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        (binding?.pager?.adapter as CatalogListAdapter).showTwoPages =
-            screenInfo.isDualMode() && screenInfo.isDeviceInLandscape()
+        binding?.isDualPortrait = screenInfo.isDualMode() && !screenInfo.isDeviceInLandscape()
+        catalogAdapter?.showTwoPages = screenInfo.isDualMode() && screenInfo.isDeviceInLandscape()
+        viewModel.isScrollingEnabled.value = !screenInfo.isDualMode() && !screenInfo.isDeviceInLandscape()
+
+        setupViewPager()
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        // do nothing
+    }
+
+    override fun onPageSelected(position: Int) {
+        viewModel.catalogItemPosition = position
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+        // do nothing
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+        catalogAdapter = null
     }
 }

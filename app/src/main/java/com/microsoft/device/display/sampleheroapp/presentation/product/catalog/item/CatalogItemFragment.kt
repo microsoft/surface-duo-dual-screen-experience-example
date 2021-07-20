@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogItemType1Binding
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogItemType2Binding
@@ -22,6 +23,8 @@ import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogIte
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogItemType5Binding
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogViewType
+import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.CatalogListViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.util.LockableNestedScrollView
 
 class CatalogItemFragment : Fragment() {
 
@@ -43,6 +46,8 @@ class CatalogItemFragment : Fragment() {
                 arguments?.getInt(KEY_TOTAL_PAGES)
             )
         }
+
+    private val viewModel: CatalogListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,6 +98,21 @@ class CatalogItemFragment : Fragment() {
                         pageNumber = this@CatalogItemFragment.pageNumber
                     }
         }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupScroll(view)
+    }
+
+    private fun setupScroll(view: View) {
+        viewModel.isScrollingEnabled.observe(
+            viewLifecycleOwner,
+            { isScrollingEnabled ->
+                view.findViewById<LockableNestedScrollView>(R.id.catalog_item_scroll_view)
+                    ?.isScrollingEnabled = isScrollingEnabled
+            }
+        )
+    }
 
     companion object {
         const val KEY_ITEM_ID = "key_item_id"
