@@ -12,7 +12,6 @@ import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.about.checkAboutInSingleScreenMode
 import com.microsoft.device.display.sampleheroapp.presentation.about.checkToolbarAbout
 import com.microsoft.device.display.sampleheroapp.presentation.about.openAbout
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -38,7 +37,6 @@ class ProductNavigationSingleScreenTest {
     @Test
     fun openProductsInPortraitMode() {
         navigateToProductsSection()
-        openProductsTab()
         checkProductList(PRODUCT_FIRST_POSITION, product)
     }
 
@@ -47,14 +45,12 @@ class ProductNavigationSingleScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
         checkProductList(PRODUCT_FIRST_POSITION, product)
     }
 
     @Test
     fun openAboutInPortraitMode() {
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
 
@@ -74,7 +70,6 @@ class ProductNavigationSingleScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
 
@@ -92,7 +87,6 @@ class ProductNavigationSingleScreenTest {
     @Test
     fun openDetailsInPortraitMode() {
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
 
         checkProductDetails(product)
@@ -104,7 +98,6 @@ class ProductNavigationSingleScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
 
         checkProductDetails(product)
@@ -114,7 +107,6 @@ class ProductNavigationSingleScreenTest {
     @Test
     fun openCustomizeInPortraitMode() {
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
 
         checkCustomizeButton()
@@ -133,7 +125,6 @@ class ProductNavigationSingleScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
 
         checkCustomizeButton()

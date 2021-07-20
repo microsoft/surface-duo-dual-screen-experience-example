@@ -25,7 +25,6 @@ import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAd
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_ONE
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_THREE
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnCustomizeButton
 import com.microsoft.device.display.sampleheroapp.presentation.product.clickOnListItemAtPosition
 import com.microsoft.device.display.sampleheroapp.presentation.product.navigateToProductsSection
@@ -174,7 +173,6 @@ fun clickOnPlaceOrderButton() {
 
 fun addProductToOrder(itemPosition: Int = 0, bodyShape: ProductType?, color: ProductColor?) {
     navigateToProductsSection()
-    openProductsTab()
     clickOnListItemAtPosition(itemPosition)
 
     clickOnCustomizeButton()
@@ -458,7 +456,7 @@ fun checkOrderSubmittedDetails() {
 }
 
 const val ORDER_DETAILS_POS = 2
-const val DUAL_PORTRAIT_ORDER_DETAILS_POS = 3
+const val DUAL_PORTRAIT_ORDER_DETAILS_POS = 4
 
 const val SINGLE_MODE_ORDER_ITEM_POS = 1
 const val DUAL_PORTRAIT_ORDER_ITEM_POS = 2
