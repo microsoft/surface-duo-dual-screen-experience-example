@@ -16,7 +16,8 @@
         android:id="@+id/fragment_store_map"
         android:name="com.microsoft.device.display.sampleheroapp.presentation.store.map.StoreMapFragment"
         android:label="StoreMapFragment"
-        tools:layout="@layout/fragment_store_map">
+        tools:layout="@layout/fragment_store_map"
+        app:launchScreen="both">
 
         <action android:id="@+id/action_store_map_to_list"
             app:destination="@id/fragment_store_list"

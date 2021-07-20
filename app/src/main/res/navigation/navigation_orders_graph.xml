@@ -20,7 +20,7 @@
 
         <action android:id="@+id/action_order_to_receipt"
             app:destination="@id/fragment_order_receipt"
-            app:launchScreen="start"/>
+            app:launchScreen="both"/>
 
     </fragment>
 

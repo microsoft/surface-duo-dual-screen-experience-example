@@ -34,7 +34,7 @@ class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     }
 
     override fun navigateToStores() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_stores_graph, null, navOptions)
     }
 
@@ -68,7 +68,7 @@ class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     }
 
     override fun navigateToOrders() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_orders_graph, null, navOptions)
     }
 
