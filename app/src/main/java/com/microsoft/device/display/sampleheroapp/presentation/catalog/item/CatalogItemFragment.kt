@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.presentation.product.catalog.item
+package com.microsoft.device.display.sampleheroapp.presentation.catalog.item
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +23,7 @@ import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogIte
 import com.microsoft.device.display.sampleheroapp.databinding.FragmentCatalogItemType5Binding
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogViewType
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.CatalogListViewModel
+import com.microsoft.device.display.sampleheroapp.presentation.catalog.CatalogListViewModel
 import com.microsoft.device.display.sampleheroapp.presentation.util.LockableNestedScrollView
 
 class CatalogItemFragment : Fragment() {

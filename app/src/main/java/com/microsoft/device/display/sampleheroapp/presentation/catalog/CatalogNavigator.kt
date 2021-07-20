@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.presentation.product.catalog
+package com.microsoft.device.display.sampleheroapp.presentation.catalog
 
 interface CatalogNavigator {
     fun navigateToCatalog()

@@ -7,7 +7,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.product.catalog.CatalogListFragment">
+    tools:context=".presentation.catalog.CatalogListFragment">
 
     <data>
         <variable

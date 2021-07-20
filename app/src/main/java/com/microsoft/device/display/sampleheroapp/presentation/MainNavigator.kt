@@ -10,7 +10,7 @@ package com.microsoft.device.display.sampleheroapp.presentation
 import androidx.navigation.SurfaceDuoNavController
 import androidx.navigation.SurfaceDuoNavOptions
 import com.microsoft.device.display.sampleheroapp.R
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.CatalogNavigator
+import com.microsoft.device.display.sampleheroapp.presentation.catalog.CatalogNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator

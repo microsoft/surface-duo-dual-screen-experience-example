@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/fragment_catalog"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.catalog.CatalogListFragment"
+        android:name="com.microsoft.device.display.sampleheroapp.presentation.catalog.CatalogListFragment"
         android:label="CatalogListFragment"
         tools:layout="@layout/fragment_catalog"/>
 

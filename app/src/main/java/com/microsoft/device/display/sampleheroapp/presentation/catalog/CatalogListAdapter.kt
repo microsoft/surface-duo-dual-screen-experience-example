@@ -4,13 +4,13 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.presentation.product.catalog
+package com.microsoft.device.display.sampleheroapp.presentation.catalog
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.microsoft.device.display.sampleheroapp.domain.catalog.model.CatalogItem
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.item.CatalogItemFragment
+import com.microsoft.device.display.sampleheroapp.presentation.catalog.item.CatalogItemFragment
 import com.microsoft.device.display.sampleheroapp.presentation.util.DataListProvider
 
 internal class CatalogListAdapter(
