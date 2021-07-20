@@ -1,6 +1,16 @@
 {
   "licenses": [
     {
+      "name": "Bing Maps",
+      "license": "Terms of Use",
+      "url": "https://www.microsoft.com/en-us/maps/product/terms-april-2011"
+    },
+    {
+      "name": "Bing Maps",
+      "license": "Privacy Statement",
+      "url": "https://privacy.microsoft.com/en-US/privacystatement"
+    },
+    {
       "name": "Android Open Source Project",
       "license": "Apache License v2 (c) Google, Inc. and Open Handset Alliance",
       "url": "https://source.android.com/"
