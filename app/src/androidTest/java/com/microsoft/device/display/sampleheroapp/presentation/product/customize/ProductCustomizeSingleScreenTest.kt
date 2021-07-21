@@ -12,7 +12,6 @@ import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductCo
 import com.microsoft.device.display.sampleheroapp.domain.product.model.ProductType
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
 import com.microsoft.device.display.sampleheroapp.presentation.product.PRODUCT_FIRST_POSITION
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkColorSelected
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeControl
 import com.microsoft.device.display.sampleheroapp.presentation.product.checkCustomizeImageLandscape
@@ -55,7 +54,6 @@ class ProductCustomizeSingleScreenTest {
     @Test
     fun checkCustomizeInPortraitMode() {
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
 
@@ -74,7 +72,6 @@ class ProductCustomizeSingleScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
 
@@ -91,7 +88,6 @@ class ProductCustomizeSingleScreenTest {
     @Test
     fun checkNewColorSelection() {
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
 
@@ -127,7 +123,6 @@ class ProductCustomizeSingleScreenTest {
     @Test
     fun checkNewShapeSelection() {
         navigateToProductsSection()
-        openProductsTab()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
         clickOnCustomizeButton()
 

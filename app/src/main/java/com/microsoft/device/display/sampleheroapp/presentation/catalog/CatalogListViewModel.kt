@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.presentation.product.catalog
+package com.microsoft.device.display.sampleheroapp.presentation.catalog
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +22,8 @@ class CatalogListViewModel @Inject constructor(
     private val getCatalogListUseCase: GetCatalogListUseCase
 ) : ViewModel(), DataListProvider<CatalogItem> {
     var catalogItemList = MutableLiveData<List<CatalogItem>?>(null)
+    var isScrollingEnabled = MutableLiveData(false)
+    var catalogItemPosition = 0
 
     init {
         viewModelScope.launch {

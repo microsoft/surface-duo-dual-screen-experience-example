@@ -188,8 +188,8 @@ fun checkCustomizeImageContent(parentMatcher: Matcher<View>, color: ProductColor
         matches(
             allOf(
                 isDisplayed(),
-                withContentDescription(containsString(shape?.toString()?.replace('_', ' ')?.toLowerCase())),
-                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.toLowerCase()))
+                withContentDescription(containsString(shape?.toString()?.replace('_', ' ')?.lowercase())),
+                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.lowercase()))
             )
         )
     )

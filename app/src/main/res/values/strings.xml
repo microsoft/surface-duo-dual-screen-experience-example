@@ -18,6 +18,7 @@
 
     <string name="nav_stores_title">Stores</string>
     <string name="nav_catalog_title">Catalog</string>
+    <string name="nav_products_title">Products</string>
     <string name="nav_order_title">Order</string>
 
     <!-- Stores -->
@@ -39,11 +40,6 @@
     <string name="address_label">Address:</string>
     <string name="contact_info_label">Owner Contact Info:</string>
 
-    <!-- Main Products -->
-
-    <string name="main_products_tab_catalog">Catalog</string>
-    <string name="main_products_tab_products">Products</string>
-
     <!-- Products -->
 
     <string name="product_details_pickup_title">Custom Alnico III</string>
@@ -56,7 +52,6 @@
     <string name="product_details_type_description">%1$s is the pinnacle of craftsmanship, quality, and sound excellence.</string>
 
     <string name="product_details_customize_button">Customize</string>
-    <string name="product_details_place_order_button">Place order</string>
 
     <string name="product_customize_color_title">Color</string>
     <string name="product_customize_body_title">Body</string>
@@ -74,7 +69,7 @@
 
     <!-- Catalog -->
 
-    <string name="catalog_page_no">Page %d of %d</string>
+    <string name="catalog_page_no">Page %1$d of %2$d</string>
 
     <!-- Orders -->
 

@@ -5,30 +5,24 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp.presentation.product.catalog
+package com.microsoft.device.display.sampleheroapp.presentation.catalog
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.MainActivity
-import com.microsoft.device.display.sampleheroapp.presentation.product.navigateToProductsSection
+import com.microsoft.device.display.sampleheroapp.presentation.store.checkToolbar
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
 import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 
 @HiltAndroidTest
-class ProductNavigationDualScreenTest {
+class CatalogNavigationDualScreenTest {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
 
@@ -44,7 +38,9 @@ class ProductNavigationDualScreenTest {
 
     @Test
     fun checkAllCatalogItems() {
-        navigateToProductsSection()
+        navigateToCatalogSection()
+
+        checkToolbar(R.string.nav_catalog_title)
 
         checkCatalogPageIsDisplayed(1)
 
@@ -68,52 +64,15 @@ class ProductNavigationDualScreenTest {
 
         swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(8)
-    }
 
-    @Test
-    fun checkTabs() {
-        navigateToProductsSection()
-
-        openProductsTab()
-        openCatalogTab()
-    }
-
-    @Test
-    fun checkSwipeFromProductsTakesToCatalog() {
-        navigateToProductsSection()
-
-        onView(
-            allOf(
-                withText(R.string.main_products_tab_products),
-                isDescendantOfA(withId(R.id.catalog_tab_layout))
-            )
-        ).perform(click())
-
-        swipeHostViewPagerToTheRight()
-        checkCatalogPageIsDisplayed(1)
+        checkToolbar(R.string.nav_catalog_title)
     }
 
     @Test
     fun checkAllCatalogItemsAfterRotation() {
-        navigateToProductsSection()
+        navigateToCatalogSection()
         setOrientationRight()
 
         checkAllCatalogItems()
-    }
-
-    @Test
-    fun checkTabsAfterRotation() {
-        navigateToProductsSection()
-        setOrientationRight()
-
-        checkTabs()
-    }
-
-    @Test
-    fun checkSwipeFromProductsTakesToCatalogAfterRotate() {
-        navigateToProductsSection()
-        setOrientationRight()
-
-        checkSwipeFromProductsTakesToCatalog()
     }
 }

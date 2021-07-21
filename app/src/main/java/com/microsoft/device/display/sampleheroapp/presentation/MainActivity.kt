@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     private fun resetDestinations(destination: SurfaceDuoNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> storeViewModel.reset()
-            R.id.fragment_product_host -> productViewModel.reset()
+            R.id.fragment_product_list -> productViewModel.reset()
             R.id.fragment_order -> orderViewModel.reset()
         }
     }
@@ -114,10 +114,14 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun setupBottomNavigation() {
-        binding.bottomNavView.setOnNavigationItemSelectedListener { item ->
+        binding.bottomNavView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_stores_graph -> {
                     navigator.navigateToStores()
+                    hideStoresTutorial()
+                }
+                R.id.navigation_catalog_graph -> {
+                    navigator.navigateToCatalog()
                     hideStoresTutorial()
                 }
                 R.id.navigation_products_graph -> {
@@ -131,7 +135,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             true
         }
 
-        binding.bottomNavView.setOnNavigationItemReselectedListener {
+        binding.bottomNavView.setOnItemReselectedListener {
             // do nothing to prevent reset to start destination
         }
     }
@@ -196,7 +200,8 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
             R.id.fragment_store_details -> setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL)
-            R.id.fragment_product_host -> setupDevMode(AppScreen.PRODUCTS_CATALOG, DesignPattern.TWO_PAGE)
+            R.id.fragment_catalog -> setupDevMode(AppScreen.PRODUCTS_CATALOG, DesignPattern.TWO_PAGE)
+            R.id.fragment_product_list -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_details -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
             R.id.fragment_product_customize -> setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE)
             R.id.fragment_order -> setupDevMode(AppScreen.ORDERS, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
@@ -265,6 +270,6 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     companion object {
         const val HIDE_BOTTOM_BAR_KEY = "hideBottomNav"
-        const val BOTTOM_NAV_ITEM_COUNT = 3
+        const val BOTTOM_NAV_ITEM_COUNT = 4
     }
 }

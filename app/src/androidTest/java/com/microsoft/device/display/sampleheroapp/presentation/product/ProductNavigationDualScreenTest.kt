@@ -16,7 +16,6 @@ import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkTool
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.checkToolbarUserItem
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openDevModeInDualMode
 import com.microsoft.device.display.sampleheroapp.presentation.devmode.openUserMode
-import com.microsoft.device.display.sampleheroapp.presentation.product.catalog.openProductsTab
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
@@ -48,7 +47,6 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -61,7 +59,6 @@ class ProductNavigationDualScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -73,7 +70,6 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -98,7 +94,6 @@ class ProductNavigationDualScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -122,7 +117,6 @@ class ProductNavigationDualScreenTest {
         switchFromSingleToDualScreen()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -146,7 +140,6 @@ class ProductNavigationDualScreenTest {
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -164,13 +157,11 @@ class ProductNavigationDualScreenTest {
         checkToolbarDevItem()
     }
 
-    // The commented checks fail because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
     @Test
     fun openCustomizeInDualPortraitMode() {
         switchFromSingleToDualScreen()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -180,8 +171,8 @@ class ProductNavigationDualScreenTest {
 
         checkCustomizeControl()
         checkCustomizeImagePortrait()
-        // checkCustomizeDetails(product)
-        // checkCustomizeDetailsImagePortrait()
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImagePortrait()
 
         goBack()
 
@@ -189,14 +180,12 @@ class ProductNavigationDualScreenTest {
         checkProductDetails(product)
     }
 
-    // The commented checks fail because of an SDK issue - see https://github.com/microsoft/surface-duo-hero-app-sample/issues/7
     @Test
     fun openCustomizeInDualLandscapeMode() {
         switchFromSingleToDualScreen()
         setOrientationRight()
 
         navigateToProductsSection()
-        openProductsTab()
 
         checkProductList(PRODUCT_FIRST_POSITION, product)
         checkProductDetails(product)
@@ -206,8 +195,8 @@ class ProductNavigationDualScreenTest {
 
         checkCustomizeControl()
         checkCustomizeImageLandscape()
-        // checkCustomizeDetails(product)
-        // checkCustomizeDetailsImageLandscape()
+        checkCustomizeDetails(product)
+        checkCustomizeDetailsImageLandscape()
 
         goBack()
 

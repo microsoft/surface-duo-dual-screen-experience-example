@@ -260,8 +260,8 @@ val storeMehul = Store(
     "Seattle, WA 98105",
     "(206)-473-3864",
     "musicals@mehul.com",
-    47.6103596,
-    -122.3283307,
+    47.6240333,
+    -122.3418189,
     4.8f,
     59,
     StoreImage.MEHUL

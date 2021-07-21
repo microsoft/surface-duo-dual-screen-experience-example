@@ -11,13 +11,25 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.display.sampleheroapp.R
 import com.microsoft.device.display.sampleheroapp.presentation.about.AboutViewModel
+import com.microsoft.device.dualscreen.ScreenInfo
+import com.microsoft.device.dualscreen.ScreenInfoListener
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 
-class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
+class AboutTeamFragment : Fragment(R.layout.fragment_about_team), ScreenInfoListener {
 
     private val viewModel: AboutViewModel by activityViewModels()
 
     override fun onResume() {
         super.onResume()
+        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
+    }
+
+    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
         if (!viewModel.isNavigationAtLicenses()) {
             viewModel.navigateToLicenses()
         }

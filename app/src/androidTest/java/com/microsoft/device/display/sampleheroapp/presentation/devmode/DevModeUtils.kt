@@ -51,17 +51,19 @@ fun openUserMode() {
     onView(withId(R.id.menu_main_user_mode)).perform(forceClick())
 }
 
-fun openDevModeInDualMode() {
+fun openDevModeInDualMode(hasDesignPattern: Boolean = true) {
     checkToolbarDevItem()
 
     openDevMode()
-    checkDevModeControl()
+    checkDevModeControl(hasDesignPattern)
     checkDevModeContent()
 }
 
-fun checkDevModeControl() {
+fun checkDevModeControl(hasDesignPattern: Boolean) {
     onView(withId(R.id.dev_control_title)).check(matches(isDisplayed()))
-    onView(withId(R.id.dev_control_design_patterns)).check(matches(isDisplayed()))
+    if (hasDesignPattern) {
+        onView(withId(R.id.dev_control_design_patterns)).check(matches(isDisplayed()))
+    }
     onView(withId(R.id.dev_control_code)).check(matches(isDisplayed()))
     onView(withId(R.id.dev_control_sdk)).check(matches(isDisplayed()))
 }

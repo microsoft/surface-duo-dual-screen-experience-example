@@ -10,12 +10,13 @@ package com.microsoft.device.display.sampleheroapp.presentation
 import androidx.navigation.SurfaceDuoNavController
 import androidx.navigation.SurfaceDuoNavOptions
 import com.microsoft.device.display.sampleheroapp.R
+import com.microsoft.device.display.sampleheroapp.presentation.catalog.CatalogNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.order.OrderNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.product.ProductNavigator
 import com.microsoft.device.display.sampleheroapp.presentation.store.StoreNavigator
 import com.microsoft.device.dualscreen.navigation.LaunchScreen
 
-class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
+class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderNavigator {
     private var navController: SurfaceDuoNavController? = null
 
     fun bind(navController: SurfaceDuoNavController) {
@@ -34,7 +35,7 @@ class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     }
 
     override fun navigateToStores() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_stores_graph, null, navOptions)
     }
 
@@ -54,6 +55,11 @@ class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
         navController?.navigate(R.id.action_store_details_to_list)
     }
 
+    override fun navigateToCatalog() {
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
+        navController?.navigate(R.id.navigation_catalog_graph, null, navOptions)
+    }
+
     override fun navigateToProducts() {
         val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
         navController?.navigate(R.id.navigation_products_graph, null, navOptions)
@@ -68,7 +74,7 @@ class MainNavigator : ProductNavigator, StoreNavigator, OrderNavigator {
     }
 
     override fun navigateToOrders() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_orders_graph, null, navOptions)
     }
 

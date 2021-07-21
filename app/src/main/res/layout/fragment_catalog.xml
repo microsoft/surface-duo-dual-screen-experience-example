@@ -7,11 +7,33 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.product.catalog.CatalogListFragment">
+    tools:context=".presentation.catalog.CatalogListFragment">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
+    <data>
+        <variable
+            name="isDualPortrait"
+            type="Boolean" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:focusable="true"
+        android:clickable="true">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            visibleIf="@{!isDualPortrait}" />
+
+        <com.microsoft.device.display.sampleheroapp.presentation.util.VerticalViewPager
+            android:id="@+id/vertical_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            visibleIf="@{isDualPortrait}"/>
+
+    </FrameLayout>
 
 </layout>

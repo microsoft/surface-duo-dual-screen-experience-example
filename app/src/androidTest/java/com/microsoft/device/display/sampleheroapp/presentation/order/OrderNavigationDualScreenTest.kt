@@ -36,6 +36,7 @@ import com.microsoft.device.display.sampleheroapp.presentation.store.checkToolba
 import com.microsoft.device.display.sampleheroapp.util.setOrientationRight
 import com.microsoft.device.display.sampleheroapp.util.switchFromSingleToDualScreen
 import com.microsoft.device.display.sampleheroapp.util.unfreezeRotation
+import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +47,6 @@ import dagger.hilt.android.testing.UninstallModules
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -54,7 +54,6 @@ import javax.inject.Singleton
 
 @UninstallModules(DatabaseModule::class)
 @HiltAndroidTest
-@Ignore("Needs Navigation Component support")
 class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
     private val activityRule = ActivityTestRule(MainActivity::class.java)
 
@@ -101,6 +100,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
     @After
     fun resetOrientation() {
         unfreezeRotation()
+        ScreenManagerProvider.getScreenManager().clear()
     }
 
     @Test
@@ -165,7 +165,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
 
-        openDevModeInDualMode()
+        openDevModeInDualMode(hasDesignPattern = false)
         checkToolbarUserItem()
 
         openUserMode()
@@ -185,7 +185,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
 
-        openDevModeInDualMode()
+        openDevModeInDualMode(hasDesignPattern = false)
         checkToolbarUserItem()
 
         openUserMode()
