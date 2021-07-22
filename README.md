@@ -1,8 +1,8 @@
-# Surface Duo App Sample
+# Dual Screen Experience
 
 This repo contains a sample Android application for Microsoft Surface Duo. It demonstrates [dual-screen controls](https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library/) and [user interface patterns](https://docs.microsoft.com/dual-screen/introduction#dual-screen-app-patterns).
 
-![Hero app sample build](https://github.com/microsoft/surface-duo-hero-app-sample/workflows/Hero%20app%20sample%20build/badge.svg)
+![Dual Screen Experience build](https://github.com/microsoft/surface-duo-dual-screen-experience/workflows/Dual%20Screen%20Experience%20build/badge.svg)
 
 ## Getting Started
 

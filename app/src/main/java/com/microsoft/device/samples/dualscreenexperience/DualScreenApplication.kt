@@ -12,7 +12,7 @@ import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-open class HeroApplication : Application() {
+open class DualScreenApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
