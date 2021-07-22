@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.device.display.sampleheroapp
+package com.microsoft.device.samples.dualscreenexperience
 
 import android.content.Context
 import com.google.firebase.FirebaseApp

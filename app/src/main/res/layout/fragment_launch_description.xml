@@ -11,7 +11,7 @@
 
         <variable
             name="launchListener"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Boolean&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
 
         <variable
             name="shouldDisplayButton"

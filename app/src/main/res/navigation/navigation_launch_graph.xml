@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/fragment_launch_single"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.SingleScreenLaunchFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.launch.fragments.SingleScreenLaunchFragment"
         android:label="SingleScreenLaunchFragment"
         tools:layout="@layout/fragment_single_screen_launch">
 
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/fragment_launch_description"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.launch.fragments.LaunchDescriptionFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.launch.fragments.LaunchDescriptionFragment"
         android:label="LaunchDescriptionFragment"
         tools:layout="@layout/fragment_launch_description">
 
@@ -38,7 +38,7 @@
 
     <activity
         android:id="@+id/main_activity"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.MainActivity"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity"
         android:label="MainActivity"
         tools:layout="@layout/activity_main" />
 

@@ -11,14 +11,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.microsoft.device.display.sampleheroapp.domain.store.model.Store" />
+        <import type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
 
         <variable name="store"
-            type="com.microsoft.device.display.sampleheroapp.domain.store.model.Store" />
+            type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
 
         <variable
             name="itemListener"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Store&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Store&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

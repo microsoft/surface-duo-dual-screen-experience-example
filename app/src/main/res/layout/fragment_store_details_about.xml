@@ -13,7 +13,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.microsoft.device.display.sampleheroapp.presentation.store.StoreViewModel" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

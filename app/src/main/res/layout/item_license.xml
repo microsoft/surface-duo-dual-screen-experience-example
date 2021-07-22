@@ -8,15 +8,15 @@
 <layout>
 
     <data>
-        <import type="com.microsoft.device.display.sampleheroapp.domain.about.model.License" />
+        <import type="com.microsoft.device.samples.dualscreenexperience.domain.about.model.License" />
 
         <variable
             name="item"
-            type="com.microsoft.device.display.sampleheroapp.domain.about.model.License" />
+            type="com.microsoft.device.samples.dualscreenexperience.domain.about.model.License" />
 
         <variable
             name="itemClickListener"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;License&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;License&gt;" />
     </data>
 
     <LinearLayout

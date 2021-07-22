@@ -14,11 +14,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeViewModel" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.product.customize.ProductCustomizeViewModel" />
 
         <variable
             name="rotationViewModel"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,7 +108,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_customize_body_title">
 
-            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:productType="1"/>
 
-            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:productType="2" />
 
-            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:productType="3" />
 
-            <com.microsoft.device.display.sampleheroapp.presentation.product.util.CustomizeCardView
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

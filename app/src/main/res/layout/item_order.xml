@@ -11,12 +11,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.microsoft.device.display.sampleheroapp.domain.order.model.OrderItem" />
+        <import type="com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem" />
         <import type="androidx.core.view.ViewKt" />
 
         <variable
             name="item"
-            type="com.microsoft.device.display.sampleheroapp.domain.order.model.OrderItem" />
+            type="com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem" />
 
         <variable
             name="isEditEnabled"
@@ -24,7 +24,7 @@
 
         <variable
             name="quantityDataHandler"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.QuantityDataListHandler&lt;OrderItem&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.QuantityDataListHandler&lt;OrderItem&gt;" />
     </data>
 
     <FrameLayout

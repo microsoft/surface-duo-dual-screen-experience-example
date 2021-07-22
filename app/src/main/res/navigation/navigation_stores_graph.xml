@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/fragment_store_map"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.map.StoreMapFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.store.map.StoreMapFragment"
         android:label="StoreMapFragment"
         tools:layout="@layout/fragment_store_map"
         app:launchScreen="both">
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/fragment_store_list"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.list.StoreListFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.store.list.StoreListFragment"
         android:label="StoreListFragment"
         tools:layout="@layout/fragment_store_list">
 
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/fragment_store_details"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.store.details.StoreDetailsFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.store.details.StoreDetailsFragment"
         android:label="StoreDetailsFragment"
         tools:layout="@layout/fragment_store_details">
 

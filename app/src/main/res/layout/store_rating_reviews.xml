@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="store"
-            type="com.microsoft.device.display.sampleheroapp.domain.store.model.Store" />
+            type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

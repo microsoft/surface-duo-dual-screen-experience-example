@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/fragment_about_team"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.about.fragments.AboutTeamFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutTeamFragment"
         android:label="AboutTeamFragment"
         tools:layout="@layout/fragment_about_team">
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/fragment_about_licenses"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.about.fragments.AboutLicensesFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutLicensesFragment"
         android:label="AboutLicensesFragment"
         tools:layout="@layout/fragment_about_licenses" />
 

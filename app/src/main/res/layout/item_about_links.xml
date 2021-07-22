@@ -9,7 +9,7 @@
     <data>
         <variable
             name="itemClickListener"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;String&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;String&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
