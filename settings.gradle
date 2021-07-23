@@ -6,4 +6,4 @@
  */
 
 include ':app'
-rootProject.name = "SampleHeroApp"
+rootProject.name = "DualScreenExperience"

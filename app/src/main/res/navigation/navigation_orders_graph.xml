@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/fragment_order"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.order.OrderFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderFragment"
         android:label="OrderFragment"
         tools:layout="@layout/fragment_order">
 
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/fragment_order_receipt"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.order.OrderReceiptFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderReceiptFragment"
         android:label="OrderReceiptFragment"
         tools:layout="@layout/fragment_order"/>
 </navigation>

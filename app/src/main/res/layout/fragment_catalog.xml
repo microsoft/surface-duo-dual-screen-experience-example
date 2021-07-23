@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             visibleIf="@{!isDualPortrait}" />
 
-        <com.microsoft.device.display.sampleheroapp.presentation.util.VerticalViewPager
+        <com.microsoft.device.samples.dualscreenexperience.presentation.util.VerticalViewPager
             android:id="@+id/vertical_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

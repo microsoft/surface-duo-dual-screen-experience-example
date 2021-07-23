@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/fragment_product_list"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.list.ProductListFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.product.list.ProductListFragment"
         android:label="ProductListFragment"
         tools:layout="@layout/fragment_product_list">
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/fragment_product_details"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.details.ProductDetailsFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.product.details.ProductDetailsFragment"
         android:label="ProductDetailsFragment"
         tools:layout="@layout/fragment_product_details">
 
@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/fragment_product_customize"
-        android:name="com.microsoft.device.display.sampleheroapp.presentation.product.customize.ProductCustomizeFragment"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.product.customize.ProductCustomizeFragment"
         android:label="ProductCustomizeFragment"
         tools:layout="@layout/fragment_product_customize">
 

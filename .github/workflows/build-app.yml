@@ -1,4 +1,4 @@
-name: Hero app sample build
+name: Dual Screen Experience build
 
 on:
   pull_request:

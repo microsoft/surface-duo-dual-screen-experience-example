@@ -7,12 +7,12 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.microsoft.device.display.sampleheroapp">
+    package="com.microsoft.device.samples.dualscreenexperience">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".HeroApplication"
+        android:name=".DualScreenApplication"
         android:allowBackup="false"
         android:installLocation="internalOnly"
         android:icon="@mipmap/ic_launcher"

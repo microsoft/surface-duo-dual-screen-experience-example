@@ -11,15 +11,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+        <import type="com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product" />
 
         <variable
             name="product"
-            type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+            type="com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product" />
 
         <variable
             name="itemListener"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Product&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Product&gt;" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="EG - 29387 Wood" />
 
-            <com.microsoft.device.display.sampleheroapp.presentation.product.util.StarRatingView
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
                 android:id="@+id/product_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

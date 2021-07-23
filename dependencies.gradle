@@ -14,12 +14,12 @@ ext {
     minSdkVersion = 21
     versionCode = 1
     versionName = "1.0"
-    applicationId = "com.microsoft.device.display.sampleheroapp"
+    applicationId = "com.microsoft.device.samples.dualscreenexperience"
 
     config = [
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
-            testInstrumentationRunner: "com.microsoft.device.display.sampleheroapp.HiltJUnitRunner",
+            testInstrumentationRunner: "com.microsoft.device.samples.dualscreenexperience.HiltJUnitRunner",
             dualScreenSdkVersion     : "1.0.0-beta4",
     ]
 

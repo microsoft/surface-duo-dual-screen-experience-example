@@ -20,11 +20,11 @@
 
         <variable
             name="viewModel"
-            type="com.microsoft.device.display.sampleheroapp.presentation.product.ProductViewModel" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel" />
 
         <variable
             name="rotationViewModel"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.RotationViewModel" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="EG - 29387 Wood"/>
 
-        <com.microsoft.device.display.sampleheroapp.presentation.product.util.StarRatingView
+        <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
             android:id="@+id/product_details_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
