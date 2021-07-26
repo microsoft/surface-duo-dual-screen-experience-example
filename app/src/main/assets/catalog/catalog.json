@@ -4,8 +4,8 @@
       "itemId": 1,
       "name": "American ultra",
       "viewType": 1,
-      "primaryDescription": "American ultra is our most advance series of guitars and basses for discerning players who demand the ultimate in precision,performance and tone.",
-      "secondaryDescription": "The American Ultra Stratocaster HSS features a unique \"Modern D\" neck profile with Ultra rolled fingerboard edges for hours of playing comfort, and the tapered neck helll allows easy access to the highest register.",
+      "primaryDescription": "One of the first solid-body guitars was invented by Les Paul. Gibson did not present their Gibson Les Paul guitar prototypes to the public.",
+      "secondaryDescription": "Another early solid-body Spanish style guitar, resembling what would become Gibson's Les Paul guitar a decade later, was developed in 1941 by O.W. Appleton, of Nogales, Arizona",
       "firstPicture": "catalog/catalog1/image1.png",
       "secondPicture": "catalog/catalog1/image2.png",
       "thirdPicture": "catalog/catalog1/image3.png"
@@ -14,8 +14,8 @@
       "itemId": 2,
       "name": "Catalog2",
       "viewType": 2,
-      "primaryDescription": "Other features include sealed locking tuning machines, chrome hardware and bone nut. Includes premium molded hardshell case.  Slim with wide shoulders, the modern D neck profile works for any style of playing. Ultra rolled fingerboard edges and a silky, smmoth ultra satin finish make the neck effortless to play.",
-      "secondaryDescription": "Built for speed and easy bending, the 10\"-14\" compound-radius fingerboard is rounded near the nut for chording ease, becoming increasingly flatter as it nears the upper register for easy scoring. The tapered neck heel allows unparallel access to the upper registers of the fingerboard, while the sculpted read body contour is designed for comfort.",
+      "primaryDescription": "Appleton made contact with both Gibson and Fender but was unable to sell the idea behind his \"App\" guitar to either company. In 1946, Merle Travis commissioned steel guitar builder Paul Bigsby to build him a solid-body Spanish-style electric. Bigsby delivered the guitar in 1948. ",
+      "secondaryDescription": "The first mass-produced solid-body guitar was Fender Esquire and Fender Broadcaster (later to become the Fender Telecaster), first made in 1948, five years after Les Paul made his prototype. The Gibson Les Paul appeared soon after to compete with the Broadcaster.",
       "firstPicture": "catalog/catalog2/image1.png",
       "secondPicture": "catalog/catalog2/image2.png",
       "thirdPicture": "catalog/catalog2/image3.png"
@@ -24,8 +24,8 @@
       "itemId": 3,
       "name": "Ultra Noiseless Hot",
       "viewType": 3,
-      "primaryDescription": "The Ultra Noiseless Hot single-coil pickups offer modern Fender tone without hum. In conjution with the Ultra Double Tap humbucking bridge pickup this calibrated set is supremely versatile and offers dynamic Fender tone that is second to none.",
-      "secondaryDescription": "The volume knob's S-1 switch splits the Ultra Double tap humbucking pickup inot a full throated single-coil, perfectly calibrated with the neck and middle pickups, thansk to patented Double tap technology. A high performance feature, locking tuning machines offers increased tuning stability while making strings changes fast and easy.",
+      "primaryDescription": "Another notable solid-body design is the Fender Stratocaster, which was introduced in 1954 and became extremely popular among musicians in the 1960s and 1970s for its wide tonal capabilities and more comfortable ergonomics than other models.",
+      "secondaryDescription": "The history of Electric Guitars is summarized by Guitar World magazine, and the earliest electric guitar on their top 10 list is the Ro-Pat-In Electro A-25 \"Frying Pan\" described as 'The first-fully functioning solid-body electric guitar to be manufactured and sold'. The most recent electric guitar on this list is the Ibanez Jem (1987) which featured '24 frets'.",
       "firstPicture": "catalog/catalog3/image1.png",
       "secondPicture": "catalog/catalog3/image2.png"
     },
@@ -33,8 +33,8 @@
       "itemId": 4,
       "name": "Catalog4",
       "viewType": 4,
-      "primaryDescription": "Some solid-bodied guitars, such as the Gibson Les Paul Supreme, the PRS Singlecut, and the Fender Telecaster Thinline, are built with hollow chambers in the body. These chambers are designed to not interfere with the critical bridge and string anchor point on the solid body.",
-      "secondaryDescription": "The bridge and tailpiece, while serving separate purposes, work closely together to affect playing style and tone. There are four basic types of bridge and tailpiece systems on electric guitars. Within these four types are many variants. A hard-tail guitar bridge anchors the strings at or directly behind the bridge and is fastened securely to the top of the instrument.",
+      "primaryDescription": "Numerous other important electric guitars are on the list including Gibson ES-150 (1936), Fender Telecaster (1951), Gibson Les Paul (1952), Gretsch 6128 Duo Jet (1953), Van Halen Frankenstrat (1975), Paul Reed Smith Custom (1985) many of these guitars were 'successors' to earlier designs.",
+      "secondaryDescription": "Some solid-bodied guitars, such as the Gibson Les Paul Supreme, the PRS Singlecut, and the Fender Telecaster Thinline, are built with hollow chambers in the body. In the case of Gibson and PRS, these are called chambered bodies. The motivation for this may be to reduce weight, to achieve a semi-acoustic tone or both.",
       "firstPicture": "catalog/catalog4/image1.png",
       "secondPicture": "catalog/catalog4/image2.png",
       "thirdPicture": "catalog/catalog4/image3.png"
@@ -43,8 +43,8 @@
       "itemId": 5,
       "name": "Catalog5",
       "viewType": 1,
-      "primaryDescription": "The most recent electric guitar on this list is the Ibanez Jem (1987) which featured '24 frets', 'an impossibly thin neck' and was 'designed to be the ultimate shredder machine'.",
-      "secondaryDescription": "Another notable solid-body design is the Fender Stratocaster, which was introduced in 1954 & became  popular among musicians in the 1960s - 1970s for its wide tonal capabilities & more comfortable ergonomics than other models.",
+      "primaryDescription": "Full hollow-body guitars have large, deep bodies made of glued-together sheets, or \"plates\", of wood.",
+      "secondaryDescription": "They can often be played at the same volume as an acoustic guitar and therefore can be used unplugged at intimate gigs. They qualify as electric guitars inasmuch as they have fitted pickups.",
       "firstPicture": "catalog/catalog5/image1.png",
       "secondPicture": "catalog/catalog5/image2.png",
       "thirdPicture": "catalog/catalog5/image3.png"
@@ -53,8 +53,8 @@
       "itemId": 6,
       "name": "Catalog6",
       "viewType": 3,
-      "primaryDescription": "Frets are positioned proportionally to scale length—the shorter the scale length, the closer the fret spacing. Opinions vary regarding the effect of scale length on tone and feel.   Popular opinion holds that longer scale length contributes to greater amplitude..",
-      "secondaryDescription": "Reports of playing feel are greatly complicated by the many factors involved in this perception. String gauge and design, neck construction and relief, guitar setup, playing style, and other factors contribute to the subjective impression of playability or feel. Aside from possible engineering advantages, some feel that with the rising cost of rare tonewoods, man-made materials may be economically preferable and more ecologically sensitive.",
+      "primaryDescription": "Historically, archtop guitars with retrofitted pickups were among the very earliest electric guitars. The instrument originated during the Jazz Age, like semi-acoustic guitars, they often have f-shaped sound holes.",
+      "secondaryDescription": "Having humbucker pickups are usually strung heavily, jazz boxes are noted for their warm, rich tone. A variation with single-coil pickups, and sometimes with a Bigsby tremolo, has long been popular in country and rockabilly; it has a distinctly more twangy, biting tone than the classic jazzbox. The term archtop refers to a method of construction subtly different from the typical acoustic.",
       "firstPicture": "catalog/catalog6/image1.png",
       "secondPicture": "catalog/catalog6/image2.png"
     },
@@ -62,8 +62,8 @@
       "itemId": 7,
       "name": "Catalog7",
       "viewType": 3,
-      "primaryDescription": "The Ultra Noiseless Hot single-coil pickups offer modern Fender tone without hum. In conjution with the Ultra Double Tap humbucking bridge pickup this calibrated set is supremely versatile and offers dynamic Fender tone that is second to none.",
-      "secondaryDescription": "The volume knob's S-1 switch splits the Ultra Double tap humbucking pickup inot a full throated single-coil, perfectly calibrated with the neck and middle pickups, thansk to patented Double tap technology. A high performance feature, locking tuning machines offers increased tuning stability while making strings changes fast and easy.",
+      "primaryDescription": "Some steel-string acoustic guitars are fitted with pickups purely as an alternative to using a separate microphone. They may also be fitted with a piezoelectric pickup under the bridge, attached to the bridge mounting plate, or with a ",
+      "secondaryDescription": "low-mass microphone (usually a condenser mic) inside the body of the guitar that converts the vibrations in the body into electronic signals. Combinations of these types of pickups may be used, with an integral mixer/preamp/graphic equalizer. Such instruments are called electric acoustic guitars.",
       "firstPicture": "catalog/catalog7/image1.png",
       "secondPicture": "catalog/catalog7/image2.png"
     },
@@ -71,7 +71,7 @@
       "itemId": 8,
       "name": "Catalog8",
       "viewType": 5,
-      "primaryDescription": "Electric guitars are used in many styles of music including rock, blues, country, jazz, funk, and more. Electric guitars feature pickups and electronics that turn the vibration of the strings into an electrical signal that is then sent to a guitar amplifier. Some popular electric guitars include the Fender Stratocaster and Telecaster, and the Gibson Les Paul and SG. Electric guitars come in many forms like solidbody, semi-hollowbody, or hollowbody guitars. Each guitar body offers sonic differences that should be considered before you buy.",
+      "primaryDescription": "They are regarded as acoustic guitars rather than electric guitars because the pickups do not produce a signal directly from the vibration of the strings, but rather from the vibration of the guitar top or body.\n\nElectric acoustic guitars should not be confused with semi-acoustic guitars, which have pickups of the type found on solid-body electric guitars, or solid-body hybrid guitars with piezoelectric pickups.",
       "firstPicture": "catalog/catalog8/image1.png"
     }
   ]
