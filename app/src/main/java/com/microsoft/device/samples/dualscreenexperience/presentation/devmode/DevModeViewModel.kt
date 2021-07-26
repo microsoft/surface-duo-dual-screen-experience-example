@@ -22,6 +22,8 @@ class DevModeViewModel @Inject constructor(
     var sdkComponent = SdkComponent.BOTTOM_NAVIGATION_VIEW
     var appScreen = AppScreen.STORES_MAP
 
+    var acceptedHosts = listOf("docs.microsoft.com")
+
     fun navigateToContent() {
         navigator.navigateToContent()
     }
@@ -87,8 +89,8 @@ class DevModeViewModel @Inject constructor(
     }
 
     companion object {
-        const val DESIGN_PATTERN_BASE_URL = "https://docs.microsoft.com/en-us/dual-screen/design"
-        const val SDK_BASE_URL = "https://docs.microsoft.com/en-us/dual-screen/android/api-reference/dualscreen-library"
+        const val DESIGN_PATTERN_BASE_URL = "https://docs.microsoft.com/dual-screen/design"
+        const val SDK_BASE_URL = "https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library"
         const val LANGUAGE_TAB = "?tabs=kotlin"
         const val APP_BASE_URL = "https://github.com/microsoft/surface-duo-sdk-samples-kotlin/blob/main"
     }

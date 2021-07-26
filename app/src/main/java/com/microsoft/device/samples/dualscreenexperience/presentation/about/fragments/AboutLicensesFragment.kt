@@ -71,7 +71,10 @@ class AboutLicensesFragment : Fragment() {
         if (url == OPEN_DIALOG) {
             openIntroductionDialog()
         } else {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
         }
     }
 
