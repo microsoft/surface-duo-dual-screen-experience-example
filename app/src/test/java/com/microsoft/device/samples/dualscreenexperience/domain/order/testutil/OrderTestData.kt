@@ -14,6 +14,8 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Orde
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.productEntity
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.secondProduct
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.secondProductEntity
 
 val firstOrderItem = OrderItem(
     orderParentId = 1L,
@@ -24,12 +26,30 @@ val firstOrderItem = OrderItem(
     quantity = 1
 )
 
+val secondOrderItem = OrderItem(
+    orderParentId = 1L,
+    name = secondProduct.name,
+    price = secondProduct.price,
+    bodyShape = secondProduct.bodyShape,
+    color = secondProduct.color,
+    quantity = 1
+)
+
 val firstOrderItemEntity = OrderItemEntity(
     orderParentId = 1L,
     name = productEntity.name,
     price = productEntity.price,
     typeId = productEntity.typeId,
     colorId = productEntity.colorId,
+    quantity = 1
+)
+
+val secondOrderItemEntity = OrderItemEntity(
+    orderParentId = 1L,
+    name = secondProductEntity.name,
+    price = secondProductEntity.price,
+    typeId = secondProductEntity.typeId,
+    colorId = secondProductEntity.colorId,
     quantity = 1
 )
 

@@ -27,6 +27,14 @@ class AddItemToOrderUseCase @Inject constructor(private val orderRepository: Ord
             openOrder.order.orderId
         }
         item.orderParentId = orderId
-        orderRepository.insertItems(item.toEntity())
+
+        val sameItemInOrder = openOrder?.items?.firstOrNull { OrderItem(it).isTheSameAs(item) }
+        if (sameItemInOrder != null) {
+            sameItemInOrder.itemId?.let {
+                orderRepository.updateItem(it, sameItemInOrder.quantity + 1)
+            }
+        } else {
+            orderRepository.insertItems(item.toEntity())
+        }
     }
 }

@@ -51,6 +51,13 @@ data class OrderItem(
             quantity = quantity
         )
 
+    fun isTheSameAs(secondItem: OrderItem): Boolean =
+        orderParentId == secondItem.orderParentId &&
+            name == secondItem.name &&
+            price == secondItem.price &&
+            bodyShape == secondItem.bodyShape &&
+            color == secondItem.color
+
     companion object {
         const val DEFAULT_QUANTITY = 1
     }
