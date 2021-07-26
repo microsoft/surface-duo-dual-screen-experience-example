@@ -22,6 +22,7 @@
         android:background="@color/gray"
         android:focusable="true"
         android:clickable="true"
+        android:paddingTop="@dimen/normal_padding"
         android:paddingStart="@dimen/medium_padding"
         android:paddingEnd="@dimen/medium_padding">
 

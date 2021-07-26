@@ -9,8 +9,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/small_button_radius" />
-            <solid android:color="@color/bright_orange" />
+            <corners android:radius="@dimen/medium_button_radius" />
+            <solid android:color="@color/orange" />
         </shape>
     </item>
 </selector>
