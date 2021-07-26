@@ -88,6 +88,8 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             }
         }
         binding.bottomNavView.arrangeButtons(BOTTOM_NAV_ITEM_COUNT, 0)
+        binding.bottomNavView.allowFlingGesture = false
+        binding.bottomNavView.useAnimation = false
     }
 
     private fun showHideBottomNav(shouldHide: Boolean?) {
