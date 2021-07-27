@@ -218,21 +218,33 @@ class StoreMapFragment : Fragment() {
         mapView.addOnMapTappedListener { args ->
             val mapIcon =
                 mapView.findMapElementsAtOffset(args.position).takeIf { it.isNotEmpty() }?.first()
-            markers
-                .firstOrNull { it.name == mapIcon?.tag }
-                ?.let {
-                    when (it.type) {
-                        MarkerType.PIN -> {
-                            viewModel.navigateToDetails(it)
-                            true
+            val possibleMarker = markers.firstOrNull { it.name == mapIcon?.tag }
+            if (possibleMarker != null) {
+                when (possibleMarker.type) {
+                    MarkerType.PIN -> {
+                        val isAlreadySelected = selectableMarkerMap.values
+                            .firstOrNull { mapIcon?.tag == it.tag }?.isSelected ?: false
+                        if (isAlreadySelected) {
+                            viewModel.navigateUp()
+                        } else {
+                            viewModel.navigateToDetails(possibleMarker)
                         }
-                        MarkerType.CIRCLE -> {
-                            viewModel.navigateToList(it)
-                            true
-                        }
-                        else -> false
+                    }
+                    MarkerType.CIRCLE -> {
+                        viewModel.navigateToList(possibleMarker)
+                    }
+                    else -> {
+                        // do nothing
                     }
                 }
+            } else {
+                val selectedMarkerName = selectableMarkerMap.keys
+                    .firstOrNull { selectableMarkerMap[it]?.isSelected ?: false }
+                val isStore = markers.firstOrNull { it.name == selectedMarkerName } != null
+                if (isStore) {
+                    viewModel.navigateUp()
+                }
+            }
             true
         }
     }
