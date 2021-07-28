@@ -35,7 +35,7 @@ class OrderItemTest {
         assertThat(copyFirstOrderItem, iz(OrderItem(product)))
 
         copyFirstOrderItem.quantity = 0
-        assertThat(copyFirstOrderItem, iz(not(OrderItem(product))))
+        assertThat(copyFirstOrderItem, iz(OrderItem(product)))
     }
 
     @Test
