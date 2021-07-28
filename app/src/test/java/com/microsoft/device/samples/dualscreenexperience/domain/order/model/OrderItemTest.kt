@@ -44,29 +44,29 @@ class OrderItemTest {
     }
 
     @Test
-    fun checkIsTheSameAs() {
+    fun checkEquals() {
         val copyFirstOrderItem = firstOrderItem.copy()
 
-        assertTrue(copyFirstOrderItem.isTheSameAs(copyFirstOrderItem))
+        assertTrue(copyFirstOrderItem == copyFirstOrderItem)
 
-        val copyIdOrderItem = firstOrderItem.copy(itemId = copyFirstOrderItem.itemId?.plus(1))
+        val copyIdOrderItem = firstOrderItem.copy(itemId = copyFirstOrderItem.itemId?.inc())
 
-        assertTrue(copyIdOrderItem.isTheSameAs(copyFirstOrderItem))
+        assertTrue(copyIdOrderItem == copyFirstOrderItem)
 
         val copyBodyOrderItem = firstOrderItem.copy(bodyShape = secondProduct.bodyShape)
 
-        assertFalse(copyBodyOrderItem.isTheSameAs(copyFirstOrderItem))
+        assertFalse(copyBodyOrderItem == copyFirstOrderItem)
 
         val copyColorOrderItem = firstOrderItem.copy(color = secondProduct.color)
 
-        assertFalse(copyColorOrderItem.isTheSameAs(copyFirstOrderItem))
+        assertFalse(copyColorOrderItem == copyFirstOrderItem)
 
         val copyNameOrderItem = firstOrderItem.copy(name = secondProduct.name)
 
-        assertFalse(copyNameOrderItem.isTheSameAs(copyFirstOrderItem))
+        assertFalse(copyNameOrderItem == copyFirstOrderItem)
 
         val copyPriceOrderItem = firstOrderItem.copy(price = secondProduct.price)
 
-        assertFalse(copyPriceOrderItem.isTheSameAs(copyFirstOrderItem))
+        assertFalse(copyPriceOrderItem == copyFirstOrderItem)
     }
 }

@@ -26,14 +26,12 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusableInTouchMode="true"
             visibleIf="@{!isDualPortrait}" />
 
         <com.microsoft.device.samples.dualscreenexperience.presentation.util.VerticalViewPager
             android:id="@+id/vertical_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:focusableInTouchMode="true"
             visibleIf="@{isDualPortrait}"/>
 
     </FrameLayout>
