@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
                     android:layout_marginTop="@dimen/catalog_margin_large"
-                    android:layout_marginEnd="@dimen/catalog_margin_small"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:lineSpacingExtra="1dp"
                     android:text="@{catalogItem.secondaryDescription}"
                     app:layout_constraintEnd_toEndOf="parent"

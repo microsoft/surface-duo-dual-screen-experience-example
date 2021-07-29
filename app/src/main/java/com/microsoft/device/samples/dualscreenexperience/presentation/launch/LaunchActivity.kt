@@ -14,6 +14,7 @@ import androidx.navigation.SurfaceDuoNavigation
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
+import com.microsoft.device.dualscreen.isSurfaceDuoDevice
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
@@ -62,7 +63,7 @@ class LaunchActivity : AppCompatActivity(), ScreenInfoListener {
         if (screenInfo.isDualMode()) {
             tutorialViewModel.onDualMode()
             dismissTutorial()
-        } else {
+        } else if (isSurfaceDuoDevice()) {
             viewModel.triggerShouldShowTutorial(screenInfo.getScreenRotation())
         }
     }

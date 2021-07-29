@@ -77,7 +77,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submit_button"
-            style="@style/Store.Button"
+            style="@style/Order.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="@{itemListener != null}"

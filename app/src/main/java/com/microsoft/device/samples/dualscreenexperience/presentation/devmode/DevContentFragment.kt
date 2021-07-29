@@ -8,7 +8,9 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.devmode
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentDevContentBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.RestrictedWebViewClient
 
 class DevContentFragment : Fragment() {
 
@@ -60,6 +63,7 @@ class DevContentFragment : Fragment() {
             if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
             }
+            webViewClient = RestrictedWebViewClient(viewModel.acceptedHosts, ::openUrl)
         }
 
         selectFirstPage()
@@ -71,6 +75,13 @@ class DevContentFragment : Fragment() {
         } else {
             viewModel.loadAppScreenPage()
         }
+    }
+
+    private fun openUrl(url: String?) {
+        startActivity(
+            Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        )
     }
 
     override fun onDestroyView() {

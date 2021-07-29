@@ -69,6 +69,11 @@
       "name": "Glide",
       "license": "Simplified BSD License (c) 2014 Google, Inc.",
       "url": "https://github.com/bumptech/glide"
+    },
+    {
+      "name": "Wikipedia for Catalog Content",
+      "license": "Creative Commons Attribution-ShareAlike 3.0",
+      "url": "https://en.wikipedia.org/wiki/Electric_guitar"
     }
   ]
 }
