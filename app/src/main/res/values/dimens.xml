@@ -82,7 +82,10 @@
     <dimen name="order_empty_image_height">192dp</dimen>
     <dimen name="order_empty_message_size">18sp</dimen>
 
+    <dimen name="no_internet_image_size">260dp</dimen>
+
     <!--Catalog -->
+
     <dimen name="catalog_margin_small">8dp</dimen>
     <dimen name="catalog_margin_large">20dp</dimen>
     <dimen name="catalog_margin_very_large">40dp</dimen>
