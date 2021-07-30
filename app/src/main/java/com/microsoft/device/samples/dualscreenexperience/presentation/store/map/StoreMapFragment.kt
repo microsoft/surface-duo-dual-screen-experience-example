@@ -36,6 +36,7 @@ import com.microsoft.maps.MapElementCollisionBehavior
 import com.microsoft.maps.MapElementLayer
 import com.microsoft.maps.MapIcon
 import com.microsoft.maps.MapImage
+import com.microsoft.maps.MapLoadingStatus
 import com.microsoft.maps.MapProjection
 import com.microsoft.maps.MapRenderMode
 import com.microsoft.maps.MapScene
@@ -60,7 +61,7 @@ class StoreMapFragment : Fragment() {
     private var markerFactory: MapMarkerFactory? = null
     private var binding: FragmentStoreMapBinding? = null
 
-    private var animationsEnabled = false
+    private var hasClickedMarker = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,10 +114,18 @@ class StoreMapFragment : Fragment() {
     private fun setupMap() {
         mapView.mapProjection = MapProjection.WEB_MERCATOR
         mapView.mapStyleSheet = MapStyleSheets.roadDark()
-        mapView.userInterfaceOptions.isZoomButtonsVisible = false
-        mapView.userInterfaceOptions.isZoomGestureEnabled = false
-        mapView.userInterfaceOptions.isCompassButtonVisible = false
-        mapView.userInterfaceOptions.isTiltButtonVisible = false
+        mapView.userInterfaceOptions.apply {
+            isZoomButtonsVisible = false
+            isZoomGestureEnabled = false
+            isCompassButtonVisible = false
+            isTiltButtonVisible = false
+            isTiltGestureEnabled = false
+            isRotateGestureEnabled = false
+            isUserLocationButtonVisible = false
+            isDirectionsButtonVisible = false
+            isSaveMapUserPreferencesEnabled = false
+            isStylePickerButtonVisible = false
+        }
     }
 
     private fun setupRecenterButton() {
@@ -187,11 +196,23 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun resetMap(center: MapMarkerModel, zoomLevel: Double) {
+        if (!hasClickedMarker) {
+            hasClickedMarker =
+                viewModel.selectedCity.value != null || viewModel.selectedStore.value != null
+        }
         mapView.setScene(
             MapScene.createFromLocationAndZoomLevel(center.toGeopoint(), zoomLevel),
             getMapAnimations()
         )
-        animationsEnabled = true
+    }
+
+    private fun resetMapWithoutAnimations() {
+        viewModel.markersCenter.value?.toGeopoint()?.let {
+            mapView.setScene(
+                MapScene.createFromLocationAndZoomLevel(it, selectZoomLevel()),
+                MapAnimationKind.NONE
+            )
+        }
     }
 
     private fun returnMapToCenter(center: MapMarkerModel) {
@@ -199,11 +220,14 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun getMapAnimations() =
-        if (TEST_MODE_ENABLED || !animationsEnabled) {
-            MapAnimationKind.NONE
-        } else {
+        if (shouldEnableAnimations()) {
             MapAnimationKind.DEFAULT
+        } else {
+            MapAnimationKind.NONE
         }
+
+    private fun shouldEnableAnimations() =
+        !TEST_MODE_ENABLED && rotationViewModel.isDualMode.value == true && hasClickedMarker
 
     private fun addMarkersToMap(markers: List<MapMarkerModel>) {
         mapLayer.elements.clear()
@@ -230,38 +254,48 @@ class StoreMapFragment : Fragment() {
         }
 
         mapView.addOnMapTappedListener { args ->
-            val mapIcon =
-                mapView.findMapElementsAtOffset(args.position).takeIf { it.isNotEmpty() }?.first()
-            val possibleMarker = markers.firstOrNull { it.name == mapIcon?.tag }
-            if (possibleMarker != null) {
-                when (possibleMarker.type) {
-                    MarkerType.PIN -> {
-                        val isAlreadySelected = selectableMarkerMap.values
-                            .firstOrNull { mapIcon?.tag == it.tag }?.isSelected ?: false
-                        if (isAlreadySelected) {
-                            viewModel.navigateUp()
-                        } else {
-                            viewModel.navigateToDetails(possibleMarker)
+            if (!isMapLoading()) {
+                val mapIcon =
+                    mapView.findMapElementsAtOffset(args.position).takeIf { it.isNotEmpty() }
+                        ?.first()
+                val possibleMarker = markers.firstOrNull { it.name == mapIcon?.tag }
+                if (possibleMarker != null) {
+                    when (possibleMarker.type) {
+                        MarkerType.PIN -> {
+                            val isAlreadySelected = selectableMarkerMap.values
+                                .firstOrNull { mapIcon?.tag == it.tag }?.isSelected ?: false
+                            if (isAlreadySelected) {
+                                viewModel.navigateUp()
+                            } else {
+                                viewModel.navigateToDetails(possibleMarker)
+                            }
+                        }
+                        MarkerType.CIRCLE -> {
+                            viewModel.navigateToList(possibleMarker)
+                        }
+                        else -> {
+                            // do nothing
                         }
                     }
-                    MarkerType.CIRCLE -> {
-                        viewModel.navigateToList(possibleMarker)
-                    }
-                    else -> {
-                        // do nothing
+                } else {
+                    val selectedMarkerName = selectableMarkerMap.keys
+                        .firstOrNull { selectableMarkerMap[it]?.isSelected ?: false }
+                    val isStore = markers.firstOrNull { it.name == selectedMarkerName } != null
+                    if (isStore) {
+                        viewModel.navigateUp()
                     }
                 }
+                true
             } else {
-                val selectedMarkerName = selectableMarkerMap.keys
-                    .firstOrNull { selectableMarkerMap[it]?.isSelected ?: false }
-                val isStore = markers.firstOrNull { it.name == selectedMarkerName } != null
-                if (isStore) {
-                    viewModel.navigateUp()
-                }
+                resetMapWithoutAnimations()
+                false
             }
-            true
         }
     }
+
+    private fun isMapLoading() =
+        mapView.loadingStatus == MapLoadingStatus.UPDATING ||
+            mapView.loadingStatus == MapLoadingStatus.UPDATING_WITH_BASICS_COMPLETE
 
     private fun buildBalloonMarker(marker: MapMarkerModel) =
         MapIconSelectable().apply {
