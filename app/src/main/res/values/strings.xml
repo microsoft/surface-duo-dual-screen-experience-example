@@ -119,4 +119,10 @@
     <string name="introduction_to_third_party_notice_title">Introduction to Third Party Notices</string>
     <string name="introduction_to_third_party_notice_message">This file is based on or incorporates material from the projects listed below (collectively, Third Party Code). Microsoft is not the original author of the Third Party Code. The original copyright notice and the license under which Microsoft received such Third Party Code, are set forth below. Such licenses and notices are provided for informational purposes only. Microsoft licenses the Third Party Code to you under the terms set forth in the EULA for the Microsoft Product. Microsoft reserves all other rights not expressly granted under this agreement, whether by implication, estoppel or otherwise.</string>
     <string name="introduction_to_third_party_notice_button">OK</string>
+
+    <!-- No Internet Connection -->
+
+    <string name="no_internet_connection_title">No Internet Connection</string>
+    <string name="no_internet_connection_description">Try checking the network cables, modem, router or try re-connecting to WiFi and restarting the app.</string>
+
 </resources>

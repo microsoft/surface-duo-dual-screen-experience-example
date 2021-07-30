@@ -26,6 +26,8 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapM
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MarkerType
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.NetworkConnectionLiveData
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
@@ -49,6 +51,7 @@ class StoreMapFragment : Fragment() {
     @Inject lateinit var tokenProvider: ITokenProvider
 
     private val viewModel: StoreViewModel by activityViewModels()
+    private val rotationViewModel: RotationViewModel by activityViewModels()
 
     private lateinit var mapView: MapView
     private val mapLayer: MapElementLayer = MapElementLayer()
@@ -65,6 +68,7 @@ class StoreMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
+        binding?.rotationViewModel = rotationViewModel
 
         setupMapView(savedInstanceState)
         binding?.mapContainer?.addView(mapView)
@@ -91,9 +95,19 @@ class StoreMapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupNetworkObserver()
         setupMap()
         setupRecenterButton()
         setupObservers()
+    }
+
+    private fun setupNetworkObserver() {
+        NetworkConnectionLiveData(context).observe(
+            viewLifecycleOwner,
+            { isConnected ->
+                binding?.isConnected = isConnected
+            }
+        )
     }
 
     private fun setupMap() {

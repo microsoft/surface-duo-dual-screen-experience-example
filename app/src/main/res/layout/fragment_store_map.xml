@@ -6,27 +6,60 @@
   ~
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/store_map_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/gray"
-    tools:context=".presentation.store.map.StoreMapFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="isConnected"
+            type="Boolean" />
+
+        <variable
+            name="rotationViewModel"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
+    </data>
 
     <FrameLayout
-        android:id="@+id/map_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray" />
+        android:background="@color/gray">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/reset_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/large_margin"
-        android:src="@drawable/ic_location"/>
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isDualPortraitMode="@{rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            layout="@layout/no_internet_connection_single_mode" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isDualPortraitMode="@{rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            layout="@layout/no_internet_connection_dual_mode" />
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/store_map_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            invisibleIf="@{!isConnected}">
+
+            <FrameLayout
+                android:id="@+id/map_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gray" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/reset_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="@dimen/large_margin"
+                android:contentDescription="@string/store_map_recenter"
+                android:src="@drawable/ic_location" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+</layout>

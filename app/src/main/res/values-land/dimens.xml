@@ -76,4 +76,6 @@
     <dimen name="order_empty_image_height">164dp</dimen>
     <dimen name="order_empty_message_size">16sp</dimen>
 
+    <dimen name="no_internet_image_size">200dp</dimen>
+
 </resources>
