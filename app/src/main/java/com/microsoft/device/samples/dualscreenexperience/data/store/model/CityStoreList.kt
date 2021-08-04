@@ -7,7 +7,4 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.store.model
 
-data class CityWithStoresEntity(
-    val city: CityEntity,
-    val stores: MutableList<StoreEntity>
-)
+data class CityStoreList(val cityItems: List<CityEntity>, val storeItems: List<StoreEntity>)

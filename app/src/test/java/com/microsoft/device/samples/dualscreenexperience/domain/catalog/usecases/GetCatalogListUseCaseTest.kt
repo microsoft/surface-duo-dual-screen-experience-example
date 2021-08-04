@@ -7,7 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.domain.catalog.usecases
 
-import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogItemDataSource
+import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogDataSource
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -16,11 +16,11 @@ import org.hamcrest.core.Is.`is` as iz
 
 class GetCatalogListUseCaseTest {
     private lateinit var getCatalogListUseCase: GetCatalogListUseCase
-    private lateinit var mockRepo: CatalogItemDataSource
+    private lateinit var mockRepo: CatalogDataSource
 
     @Before
     fun setup() {
-        mockRepo = MockCatalogItemDataSource()
+        mockRepo = MockCatalogDataSource()
         getCatalogListUseCase = GetCatalogListUseCase(mockRepo)
     }
 

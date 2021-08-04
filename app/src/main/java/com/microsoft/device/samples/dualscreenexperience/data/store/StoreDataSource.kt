@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.store
 
-import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityWithStoresEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.StoreEntity
 
@@ -15,6 +14,4 @@ interface StoreDataSource {
     suspend fun getAll(): List<StoreEntity>
     suspend fun getById(storeId: Long): StoreEntity?
     suspend fun getCitiesWithStores(): List<CityWithStoresEntity>
-    suspend fun insert(vararg stores: StoreEntity)
-    suspend fun insertCities(vararg cities: CityEntity)
 }

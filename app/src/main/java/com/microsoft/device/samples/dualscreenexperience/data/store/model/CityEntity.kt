@@ -7,12 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.store.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "cities")
 data class CityEntity(
-    @PrimaryKey var cityId: Long,
+    var cityId: Long,
     val name: String,
     val isDisplayed: Boolean,
     val lat: Double,

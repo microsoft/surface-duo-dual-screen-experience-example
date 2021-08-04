@@ -7,12 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.product.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "products")
 data class ProductEntity(
-    @PrimaryKey val productId: Long,
+    val productId: Long,
     val name: String,
     val price: Int,
     val description: String,

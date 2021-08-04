@@ -7,12 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.store.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "stores")
 data class StoreEntity(
-    @PrimaryKey val storeId: Long,
+    val storeId: Long,
     val name: String,
     val address: String,
     val cityLocatorId: Long?,

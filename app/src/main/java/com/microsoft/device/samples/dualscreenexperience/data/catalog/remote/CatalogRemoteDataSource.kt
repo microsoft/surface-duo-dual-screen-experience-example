@@ -5,26 +5,25 @@
  *
  */
 
-package com.microsoft.device.samples.dualscreenexperience.data.catalog
+package com.microsoft.device.samples.dualscreenexperience.data.catalog.remote
 
 import android.content.res.AssetManager
 import com.google.gson.Gson
-import com.microsoft.device.samples.dualscreenexperience.config.CatalogConfig
+import com.microsoft.device.samples.dualscreenexperience.config.RemoteDataSourceConfig
+import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.model.CatalogItemEntity
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.model.CatalogItemList
 import com.microsoft.device.samples.dualscreenexperience.data.getJsonDataFromAsset
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CatalogItemRepository @Inject constructor(
+class CatalogRemoteDataSource @Inject constructor(
     private val assetManager: AssetManager,
     private val gson: Gson
-) : CatalogItemDataSource {
+) : CatalogDataSource {
 
     override suspend fun getAll(): List<CatalogItemEntity> =
         gson.fromJson(
-            getJsonDataFromAsset(assetManager, CatalogConfig.catalogItemsFileName),
+            getJsonDataFromAsset(assetManager, RemoteDataSourceConfig.catalogItemsFileName),
             CatalogItemList::class.java
         ).catalogItems
 }

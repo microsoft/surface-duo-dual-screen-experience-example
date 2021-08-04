@@ -1,0 +1,111 @@
+{
+  "cityItems": [
+    {
+      "cityId": 10,
+      "name": "Redmond",
+      "isDisplayed": true,
+      "lat": 47.672122955322266,
+      "lng": -122.13571166992188
+    }
+  ],
+  "storeItems": [
+    {
+      "storeId": 101,
+      "name": "Mehul's",
+      "address": "1201 NE 52nd St",
+      "cityLocatorId": null,
+      "cityStateCode": "Seattle, WA 98105",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@mehul.com",
+      "lat": 47.6240333,
+      "lng": -122.3418189,
+      "rating": 4.8,
+      "reviewCount": 59,
+      "imageId": 1
+    },
+    {
+      "storeId": 102,
+      "name": "Joy's",
+      "address": "1204 NE 36th St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98134",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@joy.com",
+      "lat": 47.640923,
+      "lng": -122.138567,
+      "rating": 4.6,
+      "reviewCount": 86,
+      "imageId": 1
+    },
+    {
+      "storeId": 103,
+      "name": "Cesar's",
+      "address": "601 NE 52nd St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98135",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@cesar.com",
+      "lat": 47.637923,
+      "lng": -122.138396,
+      "rating": 4.5,
+      "reviewCount": 196,
+      "imageId": 2
+    },
+    {
+      "storeId": 104,
+      "name": "Hakon's",
+      "address": "316 NE 43rd St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98136",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@hakon.com",
+      "lat": 47.637951,
+      "lng": -122.146560,
+      "rating": 4.6,
+      "reviewCount": 106,
+      "imageId": 3
+    },
+    {
+      "storeId": 105,
+      "name": "Bianca's",
+      "address": "1201 NE 52nd St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98137",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@bianca.com",
+      "lat": 47.6397736,
+      "lng": -122.1448007,
+      "rating": 4.9,
+      "reviewCount": 120,
+      "imageId": 4
+    },
+    {
+      "storeId": 106,
+      "name": "Guy's",
+      "address": "1535 Bellevue Ave",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98138",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@guy.com",
+      "lat": 47.6387362,
+      "lng": -122.1433255,
+      "rating": 4.9,
+      "reviewCount": 166,
+      "imageId": 5
+    },
+    {
+      "storeId": 107,
+      "name": "Cristian's",
+      "address": "922 West 22nd Ave",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98139",
+      "phoneNumber": "(206)-473-3864",
+      "emailAddress": "musicals@cristian.com",
+      "lat": 47.640988,
+      "lng": -122.141730,
+      "rating": 4.2,
+      "reviewCount": 86,
+      "imageId": 6
+    }
+  ]
+}

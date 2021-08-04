@@ -1,0 +1,44 @@
+{
+  "productItems": [
+    {
+      "productId": 1,
+      "name": "EG - 29387 Wood",
+      "price": 6495,
+      "description": "Wood body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
+      "rating": 3.1,
+      "fretsNumber": 21,
+      "typeId": 2,
+      "colorId": 5
+    },
+    {
+      "productId": 2,
+      "name": "EG - 18275 Metal",
+      "price": 4323,
+      "description": "Metal body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
+      "rating": 4.0,
+      "fretsNumber": 18,
+      "typeId": 1,
+      "colorId": 1
+    },
+    {
+      "productId": 3,
+      "name": "EG - 67564 Premium",
+      "price": 7857,
+      "description": "Premium with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
+      "rating": 2.2,
+      "fretsNumber": 22,
+      "typeId": 3,
+      "colorId": 8
+    },
+    {
+      "productId": 4,
+      "name": "EG - 85453 Standard",
+      "price": 5873,
+      "description": "Standard with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
+      "rating": 5.0,
+      "fretsNumber": 19,
+      "typeId": 4,
+      "colorId": 9
+    }
+  ]
+}

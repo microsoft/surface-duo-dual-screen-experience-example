@@ -15,9 +15,6 @@ import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.data.AppDatabase
 import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderDao
-import com.microsoft.device.samples.dualscreenexperience.data.product.local.ProductDao
-import com.microsoft.device.samples.dualscreenexperience.data.product.productEntity
-import com.microsoft.device.samples.dualscreenexperience.data.store.local.StoreDao
 import com.microsoft.device.samples.dualscreenexperience.di.DatabaseModule
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.checkAboutInDualScreenMode
@@ -45,7 +42,6 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -78,19 +74,6 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
                 )
                 .allowMainThreadQueries()
                 .build()
-                .also {
-                    runBlocking {
-                        it.productDao().insert(productEntity, productEntity, productEntity)
-                    }
-                }
-
-        @Singleton
-        @Provides
-        fun provideProductDao(database: AppDatabase): ProductDao = database.productDao()
-
-        @Singleton
-        @Provides
-        fun provideStoreDao(database: AppDatabase): StoreDao = database.storeDao()
 
         @Singleton
         @Provides
