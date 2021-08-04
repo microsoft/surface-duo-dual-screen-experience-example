@@ -29,21 +29,21 @@ abstract class UseCasesModule {
 
     @Singleton
     @Binds
-    abstract fun provideStoreRepo(repository: StoreRepository): StoreDataSource
+    abstract fun provideStoreRepository(repository: StoreRepository): StoreDataSource
 
     @Singleton
     @Binds
-    abstract fun provideCatalogRepository(provider: CatalogRepository): CatalogDataSource
+    abstract fun provideCatalogRepository(repository: CatalogRepository): CatalogDataSource
 
     @Singleton
     @Binds
-    abstract fun provideProductRepo(repository: ProductRepository): ProductDataSource
+    abstract fun provideProductRepository(repository: ProductRepository): ProductDataSource
 
     @Singleton
     @Binds
-    abstract fun provideOrderRepo(repository: OrderRepository): OrderDataSource
+    abstract fun provideOrderRepository(repository: OrderRepository): OrderDataSource
 
     @Singleton
     @Binds
-    abstract fun provideLicenseRepository(provider: LicenseRepository): LicenseDataSource
+    abstract fun provideLicenseRepository(repository: LicenseRepository): LicenseDataSource
 }
