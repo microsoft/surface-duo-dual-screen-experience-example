@@ -10,25 +10,25 @@ package com.microsoft.device.samples.dualscreenexperience.data.store
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.StoreEntity
 
-val storeEntityJoy = StoreEntity(
+val storeEntity = StoreEntity(
     102,
-    "Joy's",
-    "1204 NE 36th St",
+    "Ana's",
+    "4568 Main St",
     10,
-    "Redmond, WA 98134",
-    "(206)-473-3864",
-    "musicals@joy.com",
-    47.640923,
-    -122.138567,
+    "Redmond, WA 98053",
+    "(206)-555-0101",
+    "ana@fabrikam.com",
+    47.64304736313635,
+    -122.13130676286585,
     4.6f,
     86,
-    1
+    "stores/ana_store.png"
 )
 
-val cityEntityRedmond = CityEntity(
+val cityEntity = CityEntity(
     10,
     "Redmond",
     true,
-    47.6377438,
-    -122.1224222
+    47.672122955322266,
+    -122.13571166992188
 )

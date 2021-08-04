@@ -26,11 +26,10 @@ import androidx.test.uiautomator.By.textContains
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import com.microsoft.device.samples.dualscreenexperience.R
-import com.microsoft.device.samples.dualscreenexperience.data.store.cityEntityRedmond
-import com.microsoft.device.samples.dualscreenexperience.data.store.storeEntityJoy
+import com.microsoft.device.samples.dualscreenexperience.data.store.cityEntity
+import com.microsoft.device.samples.dualscreenexperience.data.store.storeEntity
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.City
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
-import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.util.atRecyclerAdapterPosition
 import com.microsoft.device.samples.dualscreenexperience.util.clickChildViewWithId
 import com.microsoft.device.samples.dualscreenexperience.util.withToolbarTitle
@@ -248,23 +247,23 @@ fun clickOnListItemAtPosition(position: Int) {
 }
 
 const val MAX_TIMEOUT = 5000L
-const val STORE_JOY_POSITION = 0
+const val STORE_FIRST_POSITION = 0
 
-val storeJoy = Store(storeEntityJoy)
+val firstStore = Store(storeEntity)
 
-val storeMehul = Store(
+val storeWithoutCity = Store(
     101,
-    "Mehul's",
-    "1201 NE 52nd St",
+    "Quinn's",
+    "4567 Main St",
     null,
-    "Seattle, WA 98105",
-    "(206)-473-3864",
-    "musicals@mehul.com",
-    47.6240333,
-    -122.3418189,
+    "Seattle, WA 98052",
+    "(206)-555-0100",
+    "quinn@fabrikam.com",
+    47.57486513608924,
+    -122.31074501155426,
     4.8f,
     59,
-    StoreImage.MEHUL
+    "stores/quinn_store.png"
 )
 
-val cityRedmond = City(cityEntityRedmond)
+val cityRedmond = City(cityEntity)

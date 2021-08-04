@@ -162,11 +162,11 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun spanDetailsFromMap() {
-        clickOnMapMarker(storeMehul.name)
+        clickOnMapMarker(storeWithoutCity.name)
 
         switchFromSingleToDualScreen()
         checkMapFragment()
-        checkDetailsFragment(storeMehul)
+        checkDetailsFragment(storeWithoutCity)
 
         navigateUp()
         checkMapFragment()
@@ -195,7 +195,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
         switchFromSingleToDualScreen()
         checkMapFragment()
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
         checkListFragmentInEmptyState()
 
         navigateUp()
@@ -222,15 +222,15 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
     @Test
     fun spanDetailsFromList() {
         clickOnMapMarker(cityRedmond.name)
-        clickOnListItemAtPosition(STORE_JOY_POSITION)
+        clickOnListItemAtPosition(STORE_FIRST_POSITION)
 
         switchFromSingleToDualScreen()
         checkMapFragment()
-        checkDetailsFragment(storeJoy)
+        checkDetailsFragment(firstStore)
 
         navigateUp()
         checkMapFragment()
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
         navigateUp()
         checkMapFragment()
         checkToolbar(R.string.app_name)

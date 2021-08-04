@@ -13,30 +13,29 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.City
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapMarkerModel
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MarkerType
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
-import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.maps.Geopoint
 
 val storeEntity = StoreEntity(
     102,
-    "Joy's",
-    "1204 NE 36th St",
+    "Ana's",
+    "4568 Main St",
     10,
-    "Redmond, WA 98134",
-    "(206)-473-3864",
-    "musicals@joy.com",
-    47.640923,
-    -122.138567,
+    "Redmond, WA 98053",
+    "(206)-555-0101",
+    "ana@fabrikam.com",
+    47.64304736313635,
+    -122.13130676286585,
     4.6f,
     86,
-    1
+    "stores/ana_store.png"
 )
 
 val cityEntity = CityEntity(
     10,
     "Redmond",
     true,
-    47.6377438,
-    -122.1224222
+    47.672122955322266,
+    -122.13571166992188
 )
 
 val hiddenCityEntity = CityEntity(
@@ -49,64 +48,56 @@ val hiddenCityEntity = CityEntity(
 
 val store = Store(
     102,
-    "Joy's",
-    "1204 NE 36th St",
+    "Ana's",
+    "4568 Main St",
     10,
-    "Redmond, WA 98134",
-    "(206)-473-3864",
-    "musicals@joy.com",
-    47.640923,
-    -122.138567,
+    "Redmond, WA 98053",
+    "(206)-555-0101",
+    "ana@fabrikam.com",
+    47.64304736313635,
+    -122.13130676286585,
     4.6f,
     86,
-    StoreImage.JOY
+    "stores/ana_store.png"
 )
 
 val city = City(
     "Redmond",
     true,
-    47.6377438,
-    -122.1224222
+    47.672122955322266,
+    -122.13571166992188
 )
 
 val storeMarkerModel = MapMarkerModel(
-    "Joy's",
+    "Ana's",
     MarkerType.PIN,
-    47.640923,
-    -122.138567,
+    47.64304736313635,
+    -122.13130676286585,
     102
 )
 
 val storeCenterMarkerModel = MapMarkerModel(
     "",
     MarkerType.CENTER,
-    47.640923,
-    -122.138567
+    47.64304736313635,
+    -122.13130676286585,
 )
 
 val cityMarkerModel = MapMarkerModel(
     "Redmond",
     MarkerType.CIRCLE,
-    47.6377438,
-    -122.1224222
+    47.672122955322266,
+    -122.13571166992188
 )
 
 val storeCityCenterMarkerModel = MapMarkerModel(
     "",
     MarkerType.CENTER,
-    47.6393334,
-    -122.13049459999999
+    47.657585159229308,
+    -122.133509216393865
 )
 
 val cityGeopoint = Geopoint(
-    47.6377438,
-    -122.1224222
+    47.672122955322266,
+    -122.13571166992188
 )
-
-const val JOY_KEY = 1
-const val CESAR_KEY = 2
-const val HAKON_KEY = 3
-const val BIANCA_KEY = 4
-const val GUY_KEY = 5
-const val CRISTIAN_KEY = 6
-const val MEHUL_KEY = 7
