@@ -30,4 +30,6 @@
 
 # Application classes that will be serialized/deserialized over Gson
 -keep class com.microsoft.device.samples.dualscreenexperience.data.about.model.** { <fields>; }
+-keep class com.microsoft.device.samples.dualscreenexperience.data.store.model.** { <fields>; }
+-keep class com.microsoft.device.samples.dualscreenexperience.data.product.model.** { <fields>; }
 -keep class com.microsoft.device.samples.dualscreenexperience.data.catalog.model.** { <fields>; }
