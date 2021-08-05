@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -20,28 +19,11 @@ import com.bumptech.glide.Glide
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
-import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
-@BindingAdapter("storeImage")
-fun getStoreImageRes(view: ImageView, image: StoreImage?) {
-    image?.let {
-        val resId = when (it) {
-            StoreImage.JOY -> R.drawable.joy_store
-            StoreImage.CESAR -> R.drawable.cesar_store
-            StoreImage.HAKON -> R.drawable.hakon_store
-            StoreImage.BIANCA -> R.drawable.bianca_store
-            StoreImage.GUY -> R.drawable.guy_store
-            StoreImage.CRISTIAN -> R.drawable.cristian_store
-            StoreImage.MEHUL -> R.drawable.mehul_store
-        }
-        view.setImageDrawable(ResourcesCompat.getDrawable(view.resources, resId, null))
-    }
-}
 
 @BindingAdapter("productImage")
 fun getProductImageRes(view: ImageView, product: Product?) {

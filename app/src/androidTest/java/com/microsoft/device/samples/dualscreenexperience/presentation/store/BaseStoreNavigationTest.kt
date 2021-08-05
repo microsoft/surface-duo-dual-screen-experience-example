@@ -19,8 +19,8 @@ open class BaseStoreNavigationTest {
     }
 
     fun openDetailsFromMapInSingleMode() {
-        clickOnMapMarker(storeMehul.name)
-        checkDetailsFragment(storeMehul)
+        clickOnMapMarker(storeWithoutCity.name)
+        checkDetailsFragment(storeWithoutCity)
 
         navigateUp()
         checkMapFragment()
@@ -30,9 +30,9 @@ open class BaseStoreNavigationTest {
     fun openDetailsFromMapInDualMode() {
         switchFromSingleToDualScreen()
 
-        clickOnMapMarker(storeMehul.name)
+        clickOnMapMarker(storeWithoutCity.name)
         checkMapFragment()
-        checkDetailsFragment(storeMehul)
+        checkDetailsFragment(storeWithoutCity)
 
         navigateUp()
         checkMapFragment()
@@ -41,7 +41,7 @@ open class BaseStoreNavigationTest {
 
     fun openListFromMapInSingleMode() {
         clickOnMapMarker(cityRedmond.name)
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
 
         navigateUp()
         checkMapFragment()
@@ -53,7 +53,7 @@ open class BaseStoreNavigationTest {
 
         clickOnMapMarker(cityRedmond.name)
         checkMapFragment()
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
         checkListFragmentInEmptyState()
 
         navigateUp()
@@ -64,18 +64,18 @@ open class BaseStoreNavigationTest {
     fun openListFromDetailsInDualMode() {
         switchFromSingleToDualScreen()
 
-        clickOnMapMarker(storeMehul.name)
+        clickOnMapMarker(storeWithoutCity.name)
         checkMapFragment()
-        checkDetailsFragment(storeMehul)
+        checkDetailsFragment(storeWithoutCity)
 
         clickOnMapMarker(cityRedmond.name)
         checkMapFragment()
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
         checkListFragmentInEmptyState()
 
         navigateUp()
         checkMapFragment()
-        checkSelectedBeforeListStoreDetailsFragment(storeMehul)
+        checkSelectedBeforeListStoreDetailsFragment(storeWithoutCity)
 
         navigateUp()
         checkMapFragment()
@@ -84,11 +84,11 @@ open class BaseStoreNavigationTest {
 
     fun openDetailsFromListInSingleMode() {
         clickOnMapMarker(cityRedmond.name)
-        clickOnListItemAtPosition(STORE_JOY_POSITION)
-        checkDetailsFragment(storeJoy)
+        clickOnListItemAtPosition(STORE_FIRST_POSITION)
+        checkDetailsFragment(firstStore)
 
         navigateUp()
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
         navigateUp()
         checkMapFragment()
         checkToolbar(R.string.app_name)
@@ -98,13 +98,13 @@ open class BaseStoreNavigationTest {
         switchFromSingleToDualScreen()
 
         clickOnMapMarker(cityRedmond.name)
-        clickOnListItemAtPosition(STORE_JOY_POSITION)
+        clickOnListItemAtPosition(STORE_FIRST_POSITION)
         checkMapFragment()
-        checkDetailsFragment(storeJoy)
+        checkDetailsFragment(firstStore)
 
         navigateUp()
         checkMapFragment()
-        checkListFragment(cityRedmond.name, STORE_JOY_POSITION, storeJoy)
+        checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
         navigateUp()
         checkMapFragment()
         checkToolbar(R.string.app_name)

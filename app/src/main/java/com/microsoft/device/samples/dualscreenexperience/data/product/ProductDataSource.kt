@@ -12,5 +12,4 @@ import com.microsoft.device.samples.dualscreenexperience.data.product.model.Prod
 interface ProductDataSource {
     suspend fun getAll(): List<ProductEntity>
     suspend fun getById(productId: Long): ProductEntity?
-    suspend fun insert(vararg products: ProductEntity)
 }

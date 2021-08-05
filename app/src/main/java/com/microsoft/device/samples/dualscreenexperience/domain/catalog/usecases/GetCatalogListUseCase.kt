@@ -7,14 +7,13 @@
 
 package com.microsoft.device.samples.dualscreenexperience.domain.catalog.usecases
 
-import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogItemDataSource
+import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogDataSource
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.toCatalogItem
 import javax.inject.Inject
 
 class GetCatalogListUseCase @Inject constructor(
-    private val catalogItemRepository: CatalogItemDataSource
+    private val catalogRepository: CatalogDataSource
 ) {
-    suspend fun getAll(): List<CatalogItem> =
-        catalogItemRepository.getAll().map { it.toCatalogItem() }
+    suspend fun getAll(): List<CatalogItem> = catalogRepository.getAll().map { it.toCatalogItem() }
 }

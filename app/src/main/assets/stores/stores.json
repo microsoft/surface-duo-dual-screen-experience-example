@@ -1,0 +1,111 @@
+{
+  "cityItems": [
+    {
+      "cityId": 10,
+      "name": "Redmond",
+      "isDisplayed": true,
+      "lat": 47.672122955322266,
+      "lng": -122.13571166992188
+    }
+  ],
+  "storeItems": [
+    {
+      "storeId": 101,
+      "name": "Quinn's",
+      "address": "4567 Main St",
+      "cityLocatorId": null,
+      "cityStateCode": "Seattle, WA 98052",
+      "phoneNumber": "(206)-555-0100",
+      "emailAddress": "quinn@fabrikam.com",
+      "lat": 47.57486513608924,
+      "lng": -122.31074501155426,
+      "rating": 4.8,
+      "reviewCount": 59,
+      "imagePath": "stores/quinn_store.png"
+    },
+    {
+      "storeId": 102,
+      "name": "Ana's",
+      "address": "4568 Main St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0101",
+      "emailAddress": "ana@fabrikam.com",
+      "lat": 47.64304736313635,
+      "lng": -122.13130676286585,
+      "rating": 4.6,
+      "reviewCount": 86,
+      "imagePath": "stores/ana_store.png"
+    },
+    {
+      "storeId": 103,
+      "name": "Sergio's",
+      "address": "4569 Main St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0102",
+      "emailAddress": "sergio@fabrikam.com",
+      "lat": 47.64404871535674,
+      "lng": -122.12942481397931,
+      "rating": 4.5,
+      "reviewCount": 196,
+      "imagePath": "stores/sergio_store.png"
+    },
+    {
+      "storeId": 104,
+      "name": "Ove's",
+      "address": "4570 Main St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0103",
+      "emailAddress": "ove@fabrikam.com",
+      "lat": 47.643242433256106,
+      "lng": -122.12895191400267,
+      "rating": 4.6,
+      "reviewCount": 106,
+      "imagePath": "stores/ove_store.png"
+    },
+    {
+      "storeId": 105,
+      "name": "Natasha's",
+      "address": "4571 Main St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0104",
+      "emailAddress": "natasha@fabrikam.com",
+      "lat": 47.64292619164706,
+      "lng":  -122.12552136937201,
+      "rating": 4.9,
+      "reviewCount": 120,
+      "imagePath": "stores/natasha_store.png"
+    },
+    {
+      "storeId": 106,
+      "name": "Ben's",
+      "address": "4572 Main St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0105",
+      "emailAddress": "ben@fabrikam.com",
+      "lat": 47.645137400574036,
+      "lng": -122.12602133269898,
+      "rating": 4.9,
+      "reviewCount": 166,
+      "imagePath": "stores/ben_store.png"
+    },
+    {
+      "storeId": 107,
+      "name": "Kristian's",
+      "address": "4573 Main St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0106",
+      "emailAddress": "kristian@fabrikam.com",
+      "lat": 47.644425694891815,
+      "lng": -122.12454563448577,
+      "rating": 4.2,
+      "reviewCount": 86,
+      "imagePath": "stores/kristian_store.png"
+    }
+  ]
+}

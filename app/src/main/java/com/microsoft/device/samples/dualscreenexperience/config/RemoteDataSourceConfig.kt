@@ -7,6 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.config
 
-object CatalogConfig {
+object RemoteDataSourceConfig {
     const val catalogItemsFileName = "catalog/catalog.json"
+    const val cityStoreItemsFileName = "stores/stores.json"
+    const val productItemsFileName = "products/products.json"
 }

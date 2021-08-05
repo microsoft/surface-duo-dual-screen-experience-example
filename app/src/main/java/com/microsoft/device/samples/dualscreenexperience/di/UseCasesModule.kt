@@ -9,8 +9,8 @@ package com.microsoft.device.samples.dualscreenexperience.di
 
 import com.microsoft.device.samples.dualscreenexperience.data.about.LicenseDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.about.LicenseRepository
-import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogItemDataSource
-import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogItemRepository
+import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogDataSource
+import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogRepository
 import com.microsoft.device.samples.dualscreenexperience.data.order.OrderDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.order.OrderRepository
 import com.microsoft.device.samples.dualscreenexperience.data.product.ProductDataSource
@@ -29,21 +29,21 @@ abstract class UseCasesModule {
 
     @Singleton
     @Binds
-    abstract fun provideProductRepo(repository: ProductRepository): ProductDataSource
+    abstract fun provideStoreRepository(repository: StoreRepository): StoreDataSource
 
     @Singleton
     @Binds
-    abstract fun provideStoreRepo(repository: StoreRepository): StoreDataSource
+    abstract fun provideCatalogRepository(repository: CatalogRepository): CatalogDataSource
 
     @Singleton
     @Binds
-    abstract fun provideOrderRepo(repository: OrderRepository): OrderDataSource
+    abstract fun provideProductRepository(repository: ProductRepository): ProductDataSource
 
     @Singleton
     @Binds
-    abstract fun provideLicenseRepository(provider: LicenseRepository): LicenseDataSource
+    abstract fun provideOrderRepository(repository: OrderRepository): OrderDataSource
 
     @Singleton
     @Binds
-    abstract fun provideCatalogItemRepository(provider: CatalogItemRepository): CatalogItemDataSource
+    abstract fun provideLicenseRepository(repository: LicenseRepository): LicenseDataSource
 }

@@ -9,6 +9,6 @@ package com.microsoft.device.samples.dualscreenexperience.data.catalog
 
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.model.CatalogItemEntity
 
-interface CatalogItemDataSource {
+interface CatalogDataSource {
     suspend fun getAll(): List<CatalogItemEntity>
 }

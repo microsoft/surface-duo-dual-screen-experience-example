@@ -7,30 +7,21 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.store
 
-import com.microsoft.device.samples.dualscreenexperience.data.store.local.StoreLocalDataSource
-import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityWithStoresEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.StoreEntity
+import com.microsoft.device.samples.dualscreenexperience.data.store.remote.StoreRemoteDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class StoreRepository @Inject constructor(
-    private val localDataSource: StoreLocalDataSource
+    private val remoteDataSource: StoreRemoteDataSource
 ) : StoreDataSource {
 
-    override suspend fun getAll(): List<StoreEntity> = localDataSource.getAll()
+    override suspend fun getAll(): List<StoreEntity> = remoteDataSource.getAll()
 
-    override suspend fun getById(storeId: Long): StoreEntity? = localDataSource.getById(storeId)
+    override suspend fun getById(storeId: Long): StoreEntity? = remoteDataSource.getById(storeId)
 
     override suspend fun getCitiesWithStores(): List<CityWithStoresEntity> =
-        localDataSource.getCitiesWithStores()
-
-    override suspend fun insert(vararg stores: StoreEntity) {
-        localDataSource.insert(*stores)
-    }
-
-    override suspend fun insertCities(vararg cities: CityEntity) {
-        localDataSource.insertCities(*cities)
-    }
+        remoteDataSource.getCitiesWithStores()
 }

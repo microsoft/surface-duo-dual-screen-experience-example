@@ -16,11 +16,11 @@ import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderL
 import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderWithItems
 import com.microsoft.device.samples.dualscreenexperience.util.blockingValue
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.hamcrest.core.IsNot.not
 import org.junit.After
 import org.junit.Assert.assertNull
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

@@ -113,7 +113,7 @@ dependencies {
     implementation uiDependencies.lottie
 
     implementation uiDependencies.glide
-    annotationProcessor uiDependencies.glideAnnotationProcesor
+    kapt uiDependencies.glideAnnotationProcesor
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.archTesting

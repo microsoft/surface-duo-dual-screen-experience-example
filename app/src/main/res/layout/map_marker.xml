@@ -25,6 +25,6 @@
         android:paddingTop="@dimen/nano_padding"
         android:paddingEnd="@dimen/small_padding"
         android:paddingBottom="@dimen/small_padding"
-        tools:text="Bianca's" />
+        tools:text="Someone's" />
 
 </FrameLayout>

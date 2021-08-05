@@ -17,7 +17,7 @@ class MockProductDataSource : ProductDataSource {
 
     override suspend fun getById(productId: Long): ProductEntity? = productEntityMap[productId]
 
-    override suspend fun insert(vararg products: ProductEntity) {
+    fun insert(vararg products: ProductEntity) {
         products.forEach { product ->
             productEntityMap[product.productId] = product
         }
