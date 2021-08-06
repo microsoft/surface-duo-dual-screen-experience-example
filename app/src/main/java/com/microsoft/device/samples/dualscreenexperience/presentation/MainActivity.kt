@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
@@ -66,6 +67,8 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     private lateinit var binding: ActivityMainBinding
 
+    private var devModeTextView: TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -78,7 +81,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         super.onResume()
         ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
-        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment).let {
+        getMainNavController().let {
             navigator.bind(it)
             it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, arguments ->
                 showHideBottomNav(arguments?.getBoolean(HIDE_BOTTOM_BAR_KEY, false))
@@ -91,6 +94,9 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         binding.bottomNavView.allowFlingGesture = false
         binding.bottomNavView.useAnimation = false
     }
+
+    private fun getMainNavController() =
+        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment)
 
     private fun showHideBottomNav(shouldHide: Boolean?) {
         binding.bottomNavView.isGone = (shouldHide == true)
@@ -217,6 +223,12 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         sdkComponent?.let {
             devViewModel.sdkComponent = it
         }
+
+        if (designPattern != DesignPattern.NONE) {
+            devModeTextView?.text = getString(R.string.toolbar_dev_mode_design_pattern, getString(designPattern.stringResId))
+        } else {
+            devModeTextView?.text = getString(R.string.toolbar_dev_mode)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -226,6 +238,10 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
                 showDeveloperModeTutorial(this)
                 setOnClickListener {
                     onDevModeClicked(it)
+                }
+                devModeTextView = findViewById(R.id.dev_mode_label)
+                getMainNavController().currentDestination?.let {
+                    setupDevModeByDestination(it)
                 }
             }
         } else {
@@ -262,6 +278,11 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
             startActivity(this, options.toBundle())
         }
         tutorialViewModel.onDeveloperModeOpen()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        devModeTextView = null
     }
 
     @VisibleForTesting
