@@ -14,7 +14,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.microsoft.device.samples.dualscreenexperience.data.AppDatabase
 import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderLocalDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderWithItems
-import com.microsoft.device.samples.dualscreenexperience.util.blockingValue
+import com.microsoft.device.samples.dualscreenexperience.util.getOrAwaitValue
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
@@ -78,17 +78,17 @@ class OrderRepositoryTest {
 
     @Test
     fun getCurrentOrder() = runBlocking {
-        var result = orderRepo.getOrderBySubmitted(false).blockingValue
+        var result = orderRepo.getOrderBySubmitted(false).getOrAwaitValue()
 
         assertNull(result)
 
         orderRepo.insert(firstOrderEntity)
-        result = orderRepo.getOrderBySubmitted(false).blockingValue
+        result = orderRepo.getOrderBySubmitted(false).getOrAwaitValue()
 
         assertThat(result, iz(orderWithoutItems))
 
         orderRepo.insertItems(firstOrderItemEntity)
-        result = orderRepo.getOrderBySubmitted(false).blockingValue
+        result = orderRepo.getOrderBySubmitted(false).getOrAwaitValue()
 
         assertThat(result, iz(orderWithItems))
     }
