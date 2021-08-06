@@ -35,6 +35,10 @@ class AboutViewModel @Inject constructor(
         navigator.navigateUp()
     }
 
+    fun navigateToNotices() {
+        navigator.navigateToNotices()
+    }
+
     val licenseTermsListHandler = object : DataListHandler<License?> {
         override fun getDataList(): List<License>? = getLicenseTermsUseCase.get()
 
@@ -58,6 +62,6 @@ class AboutViewModel @Inject constructor(
     }
 
     companion object {
-        const val OPEN_DIALOG = "OPEN_DIALOG"
+        const val OPEN_IN_APP = "OPEN_IN_APP"
     }
 }

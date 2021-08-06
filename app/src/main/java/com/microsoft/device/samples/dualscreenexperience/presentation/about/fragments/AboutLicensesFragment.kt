@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -16,10 +15,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutLicensesBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.OPEN_DIALOG
+import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.OPEN_IN_APP
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 
 class AboutLicensesFragment : Fragment() {
@@ -68,24 +66,14 @@ class AboutLicensesFragment : Fragment() {
     }
 
     private fun openUrl(url: String) {
-        if (url == OPEN_DIALOG) {
-            openIntroductionDialog()
+        if (url == OPEN_IN_APP) {
+            viewModel.navigateToNotices()
         } else {
             startActivity(
                 Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             )
         }
-    }
-
-    private fun openIntroductionDialog() {
-        AlertDialog.Builder(requireContext(), R.style.Theme_App_Dialog)
-            .setTitle(R.string.introduction_to_third_party_notice_title)
-            .setMessage(R.string.introduction_to_third_party_notice_message)
-            .setPositiveButton(R.string.introduction_to_third_party_notice_button) { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
     }
 
     override fun onDestroyView() {

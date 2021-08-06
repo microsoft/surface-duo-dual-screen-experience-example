@@ -25,6 +25,13 @@ class AboutNavigator {
         navController?.navigate(R.id.action_about_team_to_licenses)
     }
 
+    fun navigateToNotices() {
+        navController?.navigate(R.id.action_about_licenses_to_notices)
+    }
+
+    fun isNavigationAtNotices() =
+        navController?.currentDestination?.id == R.id.fragment_about_notices
+
     fun isNavigationAtLicenses() =
         navController?.currentDestination?.id == R.id.fragment_about_licenses
 

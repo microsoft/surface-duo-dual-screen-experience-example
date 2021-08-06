@@ -65,7 +65,11 @@ class AboutActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     override fun onBackPressed() {
-        finish()
+        if (navigator.isNavigationAtNotices()) {
+            navigator.navigateUp()
+        } else {
+            finish()
+        }
     }
 
     override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
