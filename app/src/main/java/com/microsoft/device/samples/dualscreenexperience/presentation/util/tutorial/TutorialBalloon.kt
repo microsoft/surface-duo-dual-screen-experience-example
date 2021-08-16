@@ -146,7 +146,7 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                 xOffset = parent.width / 2 - (tipHorizontalMargin + tipHeight / 2)
             }
             TutorialBalloonType.DEVELOPER_MODE -> {
-                xOffset -= parent.width + (tipHeight / 2)
+                xOffset -= parent.width / 2 + (tipHorizontalMargin + tipHeight / 2)
                 yOffset -= parent.height / 2 - tipHeight
             }
         }

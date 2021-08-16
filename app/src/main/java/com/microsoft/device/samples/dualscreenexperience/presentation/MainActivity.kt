@@ -197,6 +197,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     private fun showDeveloperModeTutorial(anchorView: View) {
         if (tutorialViewModel.shouldShowDeveloperModeTutorial()) {
+            tutorial.hide()
             tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
         } else {
             setupTutorialObserver()
@@ -229,13 +230,15 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         } else {
             devModeTextView?.text = getString(R.string.toolbar_dev_mode)
         }
+        devModeTextView?.let {
+            showDeveloperModeTutorial(it)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (rotationViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.main_menu, menu)
             menu?.findItem(R.id.menu_main_dev_mode)?.actionView?.apply {
-                showDeveloperModeTutorial(this)
                 setOnClickListener {
                     onDevModeClicked(it)
                 }
