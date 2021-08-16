@@ -9,16 +9,17 @@ package com.microsoft.device.samples.dualscreenexperience.domain.order.usecases
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.MockOrderDataSource
-import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.blockingValue
 import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.firstOrderEntity
 import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.firstOrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.firstOrderItemEntity
+import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.getOrAwaitValue
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.util.concurrent.TimeoutException
 import org.hamcrest.core.Is.`is` as iz
 
 class GetCurrentOrderUseCaseTest {
@@ -34,9 +35,9 @@ class GetCurrentOrderUseCaseTest {
         getCurrentOrderUseCase = GetCurrentOrderUseCase(mockRepo)
     }
 
-    @Test
+    @Test(expected = TimeoutException::class)
     fun getNullWhenOrderIdDoesNotExist() = runBlocking {
-        val result = getCurrentOrderUseCase.get().blockingValue
+        val result = getCurrentOrderUseCase.get().getOrAwaitValue()
 
         assertNull(result)
     }
@@ -47,7 +48,7 @@ class GetCurrentOrderUseCaseTest {
 
         mockRepo.insert(copyFirstOrderEntity)
 
-        val resultValue = getCurrentOrderUseCase.get().blockingValue
+        val resultValue = getCurrentOrderUseCase.get().getOrAwaitValue()
 
         assertThat(resultValue, iz(emptyList()))
     }
@@ -60,7 +61,7 @@ class GetCurrentOrderUseCaseTest {
         mockRepo.insert(copyFirstOrderEntity)
         mockRepo.insertItems(copyFirstOrderItemEntity)
 
-        val resultValue = getCurrentOrderUseCase.get().blockingValue
+        val resultValue = getCurrentOrderUseCase.get().getOrAwaitValue()
         val expectedItem = firstOrderItem.copy(itemId = copyFirstOrderItemEntity.itemId)
 
         assertThat(resultValue, iz(listOf(expectedItem)))

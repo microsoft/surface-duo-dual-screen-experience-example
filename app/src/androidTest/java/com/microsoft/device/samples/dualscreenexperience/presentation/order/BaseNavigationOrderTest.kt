@@ -12,7 +12,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Orde
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem.Companion.DEFAULT_QUANTITY
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS
-import com.microsoft.device.samples.dualscreenexperience.util.blockingValue
+import com.microsoft.device.samples.dualscreenexperience.util.getOrAwaitValue
 
 open class BaseNavigationOrderTest {
 
@@ -36,7 +36,7 @@ open class BaseNavigationOrderTest {
 
         clickOnAddFirstRecommendationItem()
 
-        itemLiveData.blockingValue
+        itemLiveData.getOrAwaitValue()
 
         checkOrderHeader()
         checkOrderItemList(itemPosition)
@@ -64,7 +64,7 @@ open class BaseNavigationOrderTest {
 
         clickOnAddFirstRecommendationItem()
 
-        itemLiveData.blockingValue
+        itemLiveData.getOrAwaitValue()
 
         checkOrderHeader()
         checkOrderDetails(orderDetailsPosition)
@@ -73,7 +73,7 @@ open class BaseNavigationOrderTest {
 
         clickOnSubmitOrderButton(orderDetailsPosition)
 
-        submittedOrderLiveData.blockingValue
+        submittedOrderLiveData.getOrAwaitValue()
 
         checkOrderSubmittedDetails()
         checkOrderReceiptItems(itemPosition)
@@ -93,7 +93,7 @@ open class BaseNavigationOrderTest {
 
         clickOnAddFirstRecommendationItem()
 
-        itemLiveData.blockingValue
+        itemLiveData.getOrAwaitValue()
 
         checkOrderHeader()
         checkOrderItemList(itemPosition)
@@ -115,7 +115,7 @@ open class BaseNavigationOrderTest {
 
         clickOnSubmitOrderButton(orderDetailsPosition)
 
-        submittedOrderLiveData.blockingValue
+        submittedOrderLiveData.getOrAwaitValue()
 
         checkOrderSubmittedDetails()
         checkOrderReceiptItems(itemPosition)

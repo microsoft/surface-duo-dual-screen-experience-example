@@ -7,8 +7,10 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.devmode
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.microsoft.device.samples.dualscreenexperience.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -46,13 +48,13 @@ class DevModeViewModel @Inject constructor(
         webViewUrl.value = appScreen.buildUrl()
     }
 
-    enum class DesignPattern(var path: String) {
-        EXTENDED_CANVAS("extended-canvas"),
-        LIST_DETAIL("list-detail"),
-        DUAL_VIEW("dual-view"),
-        TWO_PAGE("two-page"),
-        COMPANION_PANE("companion-pane"),
-        NONE("introduction#dual-screen-app-patterns");
+    enum class DesignPattern(var path: String, @StringRes var stringResId: Int) {
+        EXTENDED_CANVAS("extended-canvas", R.string.dev_mode_extended_canvas),
+        LIST_DETAIL("list-detail", R.string.dev_mode_list_detail),
+        DUAL_VIEW("dual-view", R.string.dev_mode_dual_view),
+        TWO_PAGE("two-page", R.string.dev_mode_two_page),
+        COMPANION_PANE("companion-pane", R.string.dev_mode_companion_pane),
+        NONE("introduction#dual-screen-app-patterns", 0);
 
         fun buildUrl() = "$DESIGN_PATTERN_BASE_URL/$path"
 

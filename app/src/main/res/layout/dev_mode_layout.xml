@@ -14,7 +14,8 @@
     android:gravity="center"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/micro_padding"
-    tools:background="@color/black">
+    tools:background="@color/black"
+    tools:layout_height="?attr/actionBarSize">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/dev_mode_action"

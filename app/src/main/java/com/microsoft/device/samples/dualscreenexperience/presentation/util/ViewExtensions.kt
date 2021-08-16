@@ -7,6 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.util
 
+import android.content.Context
 import android.graphics.Point
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -24,3 +25,6 @@ fun RecyclerView.addOrReplaceItemDecoration(itemDecoration: RecyclerView.ItemDec
     }
     addItemDecoration(itemDecoration)
 }
+
+fun Context.readTextFromAsset(fileName: String): String =
+    assets.open(fileName).bufferedReader().use { it.readText() }

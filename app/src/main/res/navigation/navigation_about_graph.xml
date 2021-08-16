@@ -18,8 +18,7 @@
         tools:layout="@layout/fragment_about_team">
 
         <action android:id="@+id/action_about_team_to_licenses"
-            app:destination="@id/fragment_about_licenses"
-            app:launchScreen="end" />
+            app:destination="@id/fragment_about_licenses" />
 
     </fragment>
 
@@ -27,6 +26,17 @@
         android:id="@+id/fragment_about_licenses"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutLicensesFragment"
         android:label="AboutLicensesFragment"
-        tools:layout="@layout/fragment_about_licenses" />
+        tools:layout="@layout/fragment_about_licenses">
+
+        <action android:id="@+id/action_about_licenses_to_notices"
+            app:destination="@id/fragment_about_notices"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_about_notices"
+        android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutNoticesFragment"
+        android:label="AboutNoticesFragment"
+        tools:layout="@layout/fragment_about_notices" />
 
 </navigation>

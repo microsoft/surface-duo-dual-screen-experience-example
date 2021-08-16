@@ -1,0 +1,19 @@
+{
+  "licenses": [
+    {
+      "name": "Bing Maps",
+      "license": "Terms of Use",
+      "url": "https://www.microsoft.com/en-us/maps/product/terms-april-2011"
+    },
+    {
+      "name": "Bing Maps",
+      "license": "Privacy Statement",
+      "url": "https://privacy.microsoft.com/privacystatement"
+    },
+    {
+      "name": "Wikipedia for Catalog Content",
+      "license": "Creative Commons Attribution-ShareAlike 3.0",
+      "url": "https://en.wikipedia.org/wiki/Electric_guitar"
+    }
+  ]
+}

@@ -8,6 +8,7 @@
 package com.microsoft.device.samples.dualscreenexperience.config
 
 object LicensesConfig {
-    const val licensesFileName = "licenses.json"
-    const val licenseTermsFileName = "license_terms.json"
+    const val licensesFileName = "licenses/licenses.json"
+    const val licenseTermsFileName = "licenses/license_terms.json"
+    const val softwareNoticesFileName = "licenses/Third Party Notices.txt"
 }
