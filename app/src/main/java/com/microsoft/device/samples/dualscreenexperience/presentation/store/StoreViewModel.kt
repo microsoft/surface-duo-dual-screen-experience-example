@@ -10,6 +10,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.store
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.microsoft.device.samples.dualscreenexperience.common.prefs.TutorialPreferences
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapMarkerModel
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
 import com.microsoft.device.samples.dualscreenexperience.domain.store.usecases.GetMapMarkersUseCase
@@ -26,7 +27,8 @@ class StoreViewModel @Inject constructor(
     private val getMapMarkersUseCase: GetMapMarkersUseCase,
     private val getStoresByCityUseCase: GetStoresByCityUseCase,
     private val getStoresUseCase: GetStoresUseCase,
-    private val navigator: StoreNavigator
+    private val navigator: StoreNavigator,
+    private val tutorialPrefs: TutorialPreferences
 ) : ViewModel(), DataListHandler<Store> {
 
     val visibleStoresList = MutableLiveData<List<Store>?>(null)
@@ -96,6 +98,12 @@ class StoreViewModel @Inject constructor(
         viewModelScope.launch {
             visibleStoresList.value = getStoresUseCase.getAll().filter { it.storeId in storeIds }
         }
+    }
+
+    fun shouldShowTouchCity() = tutorialPrefs.shouldShowTouchCityTutorial()
+
+    fun disableShowTouchCity() {
+        tutorialPrefs.setShowTouchCityTutorial(false)
     }
 
     fun navigateUp() {
