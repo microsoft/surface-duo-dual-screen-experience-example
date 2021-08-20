@@ -34,6 +34,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.setup
 import com.microsoft.maps.MapAnimationKind
 import com.microsoft.maps.MapElementCollisionBehavior
 import com.microsoft.maps.MapElementLayer
+import com.microsoft.maps.MapFlyout
 import com.microsoft.maps.MapIcon
 import com.microsoft.maps.MapImage
 import com.microsoft.maps.MapLoadingStatus
@@ -55,7 +56,7 @@ class StoreMapFragment : Fragment() {
     private val rotationViewModel: RotationViewModel by activityViewModels()
 
     private lateinit var mapView: MapView
-    private val mapLayer: MapElementLayer = MapElementLayer()
+    private var mapLayer: MapElementLayer? = null
 
     private var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
     private var markerFactory: MapMarkerFactory? = null
@@ -80,11 +81,14 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupMapView(savedInstanceState: Bundle?) {
+        mapLayer = MapElementLayer()
         mapView = MapView(requireActivity(), MapRenderMode.RASTER)
         mapView.onCreate(savedInstanceState)
         setupMapKey()
 
-        mapView.layers.add(mapLayer)
+        mapLayer?.let {
+            mapView.layers.add(it)
+        }
     }
 
     private fun setupMapKey() {
@@ -230,7 +234,7 @@ class StoreMapFragment : Fragment() {
         !TEST_MODE_ENABLED && rotationViewModel.isDualMode.value == true && hasClickedMarker
 
     private fun addMarkersToMap(markers: List<MapMarkerModel>) {
-        mapLayer.elements.clear()
+        mapLayer?.elements?.clear()
         markers.forEach { markerModel ->
             val marker: MapIcon? = when (markerModel.type) {
                 MarkerType.PIN -> buildBalloonMarker(markerModel).also {
@@ -240,7 +244,7 @@ class StoreMapFragment : Fragment() {
                 else -> null
             }
             marker?.let { icon ->
-                mapLayer.elements.add(icon)
+                mapLayer?.elements?.add(icon)
             }
         }
 
@@ -250,6 +254,17 @@ class StoreMapFragment : Fragment() {
                 .map { it.id }
                 .let { viewModel.updateStoreList(it) }
 
+            true
+        }
+
+        mapView.addOnMapLoadingStatusChangedListener {
+            if (!isMapLoading()) {
+                mapLayer?.elements?.forEach { element ->
+                    (element as? MapIcon?)?.flyout?.let { iconFlyout ->
+                        showFlyout(iconFlyout)
+                    }
+                }
+            }
             true
         }
 
@@ -271,6 +286,12 @@ class StoreMapFragment : Fragment() {
                             }
                         }
                         MarkerType.CIRCLE -> {
+                            if (viewModel.shouldShowTouchCity()) {
+                                viewModel.disableShowTouchCity()
+                                viewModel.markersList.value?.let {
+                                    addMarkersToMap(it)
+                                }
+                            }
                             viewModel.navigateToList(possibleMarker)
                         }
                         else -> {
@@ -313,11 +334,32 @@ class StoreMapFragment : Fragment() {
             location = marker.toGeopoint()
             tag = marker.name
             contentDescription = marker.name
+            val imageDrawable = if (viewModel.shouldShowTouchCity()) {
+                R.drawable.ic_circle_marker_touch
+            } else {
+                R.drawable.ic_circle_marker
+            }
             image =
                 ResourcesCompat
-                    .getDrawable(resources, R.drawable.ic_circle_marker, null)
+                    .getDrawable(resources, imageDrawable, null)
                     ?.let { MapImage(it.toBitmap()) }
+            if (viewModel.shouldShowTouchCity()) {
+                flyout = MapFlyout().apply {
+                    isLightDismissEnabled = false
+                }
+            }
         }
+
+    private fun showFlyout(flyout: MapFlyout) {
+        flyout.apply {
+            title = getString(R.string.store_map_circle_touch_tutorial)
+            styleDefaultView(
+                ResourcesCompat.getColor(resources, R.color.medium_gray, null),
+                ResourcesCompat.getColor(resources, R.color.white, null)
+            )
+            show()
+        }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -346,6 +388,7 @@ class StoreMapFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        mapLayer = null
         mapView.onDestroy()
         markerFactory = null
         binding = null

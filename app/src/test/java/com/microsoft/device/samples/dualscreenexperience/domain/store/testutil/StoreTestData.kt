@@ -34,8 +34,8 @@ val cityEntity = CityEntity(
     10,
     "Redmond",
     true,
-    47.672122955322266,
-    -122.13571166992188
+    47.6305503608924,
+    -122.13073501155426
 )
 
 val hiddenCityEntity = CityEntity(
@@ -64,8 +64,8 @@ val store = Store(
 val city = City(
     "Redmond",
     true,
-    47.672122955322266,
-    -122.13571166992188
+    47.6305503608924,
+    -122.13073501155426
 )
 
 val storeMarkerModel = MapMarkerModel(
@@ -86,18 +86,18 @@ val storeCenterMarkerModel = MapMarkerModel(
 val cityMarkerModel = MapMarkerModel(
     "Redmond",
     MarkerType.CIRCLE,
-    47.672122955322266,
-    -122.13571166992188
+    47.6305503608924,
+    -122.13073501155426
 )
 
 val storeCityCenterMarkerModel = MapMarkerModel(
     "",
     MarkerType.CENTER,
-    47.657585159229308,
-    -122.133509216393865
+    47.636798862014375,
+    -122.131020887210055
 )
 
 val cityGeopoint = Geopoint(
-    47.672122955322266,
-    -122.13571166992188
+    47.6305503608924,
+    -122.13073501155426
 )

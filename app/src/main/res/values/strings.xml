@@ -40,6 +40,7 @@
     <string name="address_label">Address:</string>
     <string name="contact_info_label">Owner Contact Info:</string>
     <string name="store_map_recenter">Re-center map</string>
+    <string name="store_map_circle_touch_tutorial">Tap to check other store locations</string>
 
     <!-- Products -->
 

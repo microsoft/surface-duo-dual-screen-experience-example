@@ -51,8 +51,8 @@ class MapUtilsTest {
     @Test
     fun isInBoundsWhenBothLatLngFit() {
         val box = GeoboundingBox(
-            Geoposition(47.673, -122.136),
-            Geoposition(47.672, -122.135)
+            Geoposition(47.631, -122.131),
+            Geoposition(47.630, -122.130)
         )
         assertTrue(box.isInBounds(cityMarkerModel))
     }

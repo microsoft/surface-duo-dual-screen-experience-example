@@ -14,6 +14,8 @@ interface TutorialPreferences {
     fun setShowDevModeTutorial(value: Boolean)
     fun shouldShowStoresTutorial(): Boolean
     fun setShowStoresTutorial(value: Boolean)
+    fun shouldShowTouchCityTutorial(): Boolean
+    fun setShowTouchCityTutorial(value: Boolean)
 }
 
-enum class TutorialPrefType { LAUNCH, DEV_MODE, STORES }
+enum class TutorialPrefType { LAUNCH, DEV_MODE, STORES, TOUCH_CITY }
