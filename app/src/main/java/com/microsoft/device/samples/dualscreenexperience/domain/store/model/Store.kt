@@ -21,7 +21,7 @@ data class Store(
     val lng: Double,
     val rating: Float,
     val reviewCount: Int,
-    val imagePath: String
+    val image: StoreImage?
 ) {
     constructor(entity: StoreEntity) :
         this(
@@ -36,8 +36,22 @@ data class Store(
             entity.lng,
             entity.rating,
             entity.reviewCount,
-            entity.imagePath
+            StoreImage.get(entity.imageId)
         )
 
     fun toMapMarkerModel(): MapMarkerModel = MapMarkerModel(name, MarkerType.PIN, lat, lng, storeId)
+}
+
+enum class StoreImage(var imageId: Int) {
+    QUINN(1),
+    ANA(2),
+    SERGIO(3),
+    OVE(4),
+    NATASHA(5),
+    BEN(6),
+    KRISTIAN(7);
+
+    companion object {
+        fun get(imageId: Int): StoreImage? = values().firstOrNull { it.imageId == imageId }
+    }
 }

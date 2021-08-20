@@ -21,7 +21,7 @@
       "lng": -122.31074501155426,
       "rating": 4.8,
       "reviewCount": 59,
-      "imagePath": "stores/quinn_store.png"
+      "imageId": 1
     },
     {
       "storeId": 102,
@@ -35,7 +35,7 @@
       "lng": -122.13130676286585,
       "rating": 4.6,
       "reviewCount": 86,
-      "imagePath": "stores/ana_store.png"
+      "imageId": 2
     },
     {
       "storeId": 103,
@@ -49,7 +49,7 @@
       "lng": -122.12942481397931,
       "rating": 4.5,
       "reviewCount": 196,
-      "imagePath": "stores/sergio_store.png"
+      "imageId": 3
     },
     {
       "storeId": 104,
@@ -63,7 +63,7 @@
       "lng": -122.12895191400267,
       "rating": 4.6,
       "reviewCount": 106,
-      "imagePath": "stores/ove_store.png"
+      "imageId": 4
     },
     {
       "storeId": 105,
@@ -77,7 +77,7 @@
       "lng":  -122.12552136937201,
       "rating": 4.9,
       "reviewCount": 120,
-      "imagePath": "stores/natasha_store.png"
+      "imageId": 5
     },
     {
       "storeId": 106,
@@ -91,7 +91,7 @@
       "lng": -122.12602133269898,
       "rating": 4.9,
       "reviewCount": 166,
-      "imagePath": "stores/ben_store.png"
+      "imageId": 6
     },
     {
       "storeId": 107,
@@ -105,7 +105,7 @@
       "lng": -122.12454563448577,
       "rating": 4.2,
       "reviewCount": 86,
-      "imagePath": "stores/kristian_store.png"
+      "imageId": 7
     }
   ]
 }

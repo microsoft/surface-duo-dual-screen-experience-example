@@ -19,5 +19,5 @@ data class StoreEntity(
     val lng: Double,
     val rating: Float,
     val reviewCount: Int,
-    val imagePath: String
+    val imageId: Int
 )

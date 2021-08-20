@@ -19,11 +19,28 @@ import com.bumptech.glide.Glide
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
+import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+@BindingAdapter("storeImage")
+fun getStoreImageRes(view: ImageView, image: StoreImage?) {
+    image?.let {
+        val resId = when (it) {
+            StoreImage.ANA -> R.drawable.ana_store
+            StoreImage.SERGIO -> R.drawable.sergio_store
+            StoreImage.OVE -> R.drawable.ove_store
+            StoreImage.NATASHA -> R.drawable.natasha_store
+            StoreImage.BEN -> R.drawable.ben_store
+            StoreImage.KRISTIAN -> R.drawable.kristian_store
+            StoreImage.QUINN -> R.drawable.quinn_store
+        }
+        view.setImageDrawable(ContextCompat.getDrawable(view.context, resId))
+    }
+}
 
 @BindingAdapter("productImage")
 fun getProductImageRes(view: ImageView, product: Product?) {

@@ -33,7 +33,7 @@
             android:layout_height="@dimen/store_image_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:assetImage="@{store.imagePath}"
+            app:storeImage="@{store.image}"
             tools:background="@color/catalog_tools_image_background" />
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -13,6 +13,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.City
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapMarkerModel
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MarkerType
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
+import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.maps.Geopoint
 
 val storeEntity = StoreEntity(
@@ -27,7 +28,7 @@ val storeEntity = StoreEntity(
     -122.13130676286585,
     4.6f,
     86,
-    "stores/ana_store.png"
+    2
 )
 
 val cityEntity = CityEntity(
@@ -58,7 +59,7 @@ val store = Store(
     -122.13130676286585,
     4.6f,
     86,
-    "stores/ana_store.png"
+    StoreImage.ANA
 )
 
 val city = City(
@@ -101,3 +102,11 @@ val cityGeopoint = Geopoint(
     47.6305503608924,
     -122.13073501155426
 )
+
+const val QUINN_KEY = 1
+const val ANA_KEY = 2
+const val SERGIO_KEY = 3
+const val OVE_KEY = 4
+const val NATASHA_KEY = 5
+const val BEN_KEY = 6
+const val KRISTIAN_KEY = 7
