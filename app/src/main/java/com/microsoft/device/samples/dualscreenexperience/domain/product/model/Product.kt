@@ -33,7 +33,7 @@ data class Product(
 }
 
 enum class ProductType(var bodyShapeId: Int, var colorList: List<ProductColor>) {
-    WARLOCK(
+    ROCK(
         1,
         listOf(
             ProductColor.DARK_RED,
@@ -44,20 +44,21 @@ enum class ProductType(var bodyShapeId: Int, var colorList: List<ProductColor>) 
         2,
         listOf(
             ProductColor.BLUE,
+            ProductColor.YELLOW,
             ProductColor.WHITE,
             ProductColor.ORANGE,
             ProductColor.AQUA
         )
     ),
-    EXPLORER(
+    ELECTRIC(
         3,
         listOf(
-            ProductColor.BLACK,
+            ProductColor.LIGHT_GRAY,
             ProductColor.MUSTARD,
             ProductColor.WHITE
         )
     ),
-    MUSICLANDER(
+    HARDROCK(
         4,
         listOf(
             ProductColor.RED
@@ -73,12 +74,13 @@ enum class ProductColor(var colorId: Int) {
     DARK_RED(1),
     GRAY(2),
     BLUE(3),
-    WHITE(4),
-    ORANGE(5),
-    AQUA(6),
-    BLACK(7),
-    MUSTARD(8),
-    RED(9);
+    YELLOW(4),
+    WHITE(5),
+    ORANGE(6),
+    AQUA(7),
+    LIGHT_GRAY(8),
+    MUSTARD(9),
+    RED(10);
 
     companion object {
         fun get(colorId: Int?) = values().first { it.colorId == colorId }

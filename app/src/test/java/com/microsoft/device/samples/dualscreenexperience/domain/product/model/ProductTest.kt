@@ -8,18 +8,19 @@
 package com.microsoft.device.samples.dualscreenexperience.domain.product.model
 
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.AQUA_KEY
-import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.BLACK_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.BLUE_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.CLASSIC_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.DARK_RED_KEY
-import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.EXPLORER_KEY
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.ELECTRIC_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.GRAY_KEY
-import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.MUSICLANDER_KEY
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.HARDROCK_KEY
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.LIGHT_GRAY_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.MUSTARD_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.ORANGE_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.RED_KEY
-import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.WARLOCK_KEY
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.ROCK_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.WHITE_KEY
+import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.YELLOW_KEY
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.testutil.productEntity
 import org.hamcrest.MatcherAssert.assertThat
@@ -35,10 +36,10 @@ class ProductTest {
 
     @Test
     fun getProductTypeUsingKey() {
-        assertThat(ProductType.WARLOCK, iz(ProductType.get(WARLOCK_KEY)))
+        assertThat(ProductType.ROCK, iz(ProductType.get(ROCK_KEY)))
         assertThat(ProductType.CLASSIC, iz(ProductType.get(CLASSIC_KEY)))
-        assertThat(ProductType.EXPLORER, iz(ProductType.get(EXPLORER_KEY)))
-        assertThat(ProductType.MUSICLANDER, iz(ProductType.get(MUSICLANDER_KEY)))
+        assertThat(ProductType.ELECTRIC, iz(ProductType.get(ELECTRIC_KEY)))
+        assertThat(ProductType.HARDROCK, iz(ProductType.get(HARDROCK_KEY)))
     }
 
     @Test
@@ -46,10 +47,11 @@ class ProductTest {
         assertThat(ProductColor.DARK_RED, iz(ProductColor.get(DARK_RED_KEY)))
         assertThat(ProductColor.GRAY, iz(ProductColor.get(GRAY_KEY)))
         assertThat(ProductColor.BLUE, iz(ProductColor.get(BLUE_KEY)))
+        assertThat(ProductColor.YELLOW, iz(ProductColor.get(YELLOW_KEY)))
         assertThat(ProductColor.WHITE, iz(ProductColor.get(WHITE_KEY)))
         assertThat(ProductColor.ORANGE, iz(ProductColor.get(ORANGE_KEY)))
         assertThat(ProductColor.AQUA, iz(ProductColor.get(AQUA_KEY)))
-        assertThat(ProductColor.BLACK, iz(ProductColor.get(BLACK_KEY)))
+        assertThat(ProductColor.LIGHT_GRAY, iz(ProductColor.get(LIGHT_GRAY_KEY)))
         assertThat(ProductColor.MUSTARD, iz(ProductColor.get(MUSTARD_KEY)))
         assertThat(ProductColor.RED, iz(ProductColor.get(RED_KEY)))
     }

@@ -22,7 +22,7 @@ val storeEntity = StoreEntity(
     -122.13130676286585,
     4.6f,
     86,
-    "stores/ana_store.png"
+    2
 )
 
 val cityEntity = CityEntity(

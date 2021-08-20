@@ -30,6 +30,7 @@ import com.microsoft.device.samples.dualscreenexperience.data.store.cityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.storeEntity
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.City
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
+import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.util.atRecyclerAdapterPosition
 import com.microsoft.device.samples.dualscreenexperience.util.clickChildViewWithId
 import com.microsoft.device.samples.dualscreenexperience.util.withToolbarTitle
@@ -263,7 +264,7 @@ val storeWithoutCity = Store(
     -122.31074501155426,
     4.8f,
     59,
-    "stores/quinn_store.png"
+    StoreImage.QUINN
 )
 
 val cityRedmond = City(cityEntity)

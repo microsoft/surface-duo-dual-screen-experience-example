@@ -21,31 +21,37 @@
         android:layout_height="match_parent"
         android:background="@color/gray"
         android:paddingStart="@dimen/small_padding"
-        android:paddingTop="@dimen/large_padding"
+        android:paddingTop="@dimen/normal_padding"
         android:paddingEnd="@dimen/small_padding"
-        android:paddingBottom="@dimen/small_padding">
+        android:paddingBottom="@dimen/normal_padding">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/store_details_about_image_1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginEnd="@dimen/normal_margin"
             android:src="@drawable/about_store_1"
-            app:layout_constraintBottom_toTopOf="@id/store_details_about_description"
+            app:layout_constraintBottom_toTopOf="@id/store_details_about_images_barrier"
             app:layout_constraintEnd_toStartOf="@id/store_details_about_image_2"
-            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/store_details_about_image_2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:src="@drawable/about_store_2"
-            app:layout_constraintBottom_toTopOf="@id/store_details_about_description"
+            app:layout_constraintBottom_toTopOf="@id/store_details_about_images_barrier"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/store_details_about_image_1"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/store_details_about_images_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="store_details_about_image_1, store_details_about_image_2" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/store_details_about_description"
@@ -57,7 +63,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/store_details_about_image_1"
+            app:layout_constraintTop_toBottomOf="@id/store_details_about_images_barrier"
             tools:text="@string/store_details_about" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@
 <resources>
 
     <style name="App.Name" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textSize">50sp</item>
+        <item name="android:textSize">40sp</item>
         <item name="android:textColor">@color/gold</item>
         <item name="android:fontFamily">@font/dmsans_bold</item>
         <item name="android:textAlignment">center</item>
