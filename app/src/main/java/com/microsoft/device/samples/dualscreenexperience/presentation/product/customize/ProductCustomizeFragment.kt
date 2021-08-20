@@ -201,10 +201,10 @@ class ProductCustomizeFragment : Fragment() {
 
     private fun getBodyShape(type: ProductType) =
         when (type) {
-            ProductType.WARLOCK -> binding?.productCustomizeBody1
+            ProductType.ROCK -> binding?.productCustomizeBody1
             ProductType.CLASSIC -> binding?.productCustomizeBody2
-            ProductType.EXPLORER -> binding?.productCustomizeBody3
-            ProductType.MUSICLANDER -> binding?.productCustomizeBody4
+            ProductType.ELECTRIC -> binding?.productCustomizeBody3
+            ProductType.HARDROCK -> binding?.productCustomizeBody4
         }
 
     override fun onDestroyView() {

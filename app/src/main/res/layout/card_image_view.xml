@@ -17,5 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/normal_margin"
+        android:adjustViewBounds="true"
+        android:maxHeight="@dimen/product_shape_max_height"
         tools:background="@drawable/circle_color"/>
 </merge>

@@ -130,28 +130,28 @@ class ProductCustomizeSingleScreenTest {
         checkColorSelected(product.color)
         checkCustomizeImagePortraitContent(product.color, product.bodyShape)
 
-        selectShape(ProductType.EXPLORER)
+        selectShape(ProductType.ELECTRIC)
 
-        checkShapeSelected(ProductType.EXPLORER)
-        checkColorSelected(ProductColor.BLACK)
-        checkCustomizeImagePortraitContent(ProductColor.BLACK, ProductType.EXPLORER)
+        checkShapeSelected(ProductType.ELECTRIC)
+        checkColorSelected(ProductColor.LIGHT_GRAY)
+        checkCustomizeImagePortraitContent(ProductColor.LIGHT_GRAY, ProductType.ELECTRIC)
 
         setOrientationRight()
 
-        checkShapeSelected(ProductType.EXPLORER)
-        checkColorSelected(ProductColor.BLACK)
-        checkCustomizeImageLandscapeContent(ProductColor.BLACK, ProductType.EXPLORER)
+        checkShapeSelected(ProductType.ELECTRIC)
+        checkColorSelected(ProductColor.LIGHT_GRAY)
+        checkCustomizeImageLandscapeContent(ProductColor.LIGHT_GRAY, ProductType.ELECTRIC)
 
-        selectShape(ProductType.WARLOCK)
+        selectShape(ProductType.ROCK)
 
-        checkShapeSelected(ProductType.WARLOCK)
+        checkShapeSelected(ProductType.ROCK)
         checkColorSelected(ProductColor.DARK_RED)
-        checkCustomizeImageLandscapeContent(ProductColor.DARK_RED, ProductType.WARLOCK)
+        checkCustomizeImageLandscapeContent(ProductColor.DARK_RED, ProductType.ROCK)
 
         setOrientationNatural()
 
-        checkShapeSelected(ProductType.WARLOCK)
+        checkShapeSelected(ProductType.ROCK)
         checkColorSelected(ProductColor.DARK_RED)
-        checkCustomizeImagePortraitContent(ProductColor.DARK_RED, ProductType.WARLOCK)
+        checkCustomizeImagePortraitContent(ProductColor.DARK_RED, ProductType.ROCK)
     }
 }
