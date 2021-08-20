@@ -1,4 +1,4 @@
-name: Dual Screen Experience build
+name: Dual Screen Experience Example build
 
 on:
   pull_request:

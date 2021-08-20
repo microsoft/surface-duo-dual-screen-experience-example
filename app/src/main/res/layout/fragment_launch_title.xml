@@ -7,41 +7,41 @@
   -->
 
 <layout>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray"
-    android:paddingStart="@dimen/large_padding"
-    android:paddingTop="@dimen/medium_padding"
-    android:paddingEnd="@dimen/large_padding"
-    tools:context=".presentation.launch.fragments.LaunchTitleFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:paddingStart="@dimen/medium_padding"
+        android:paddingTop="@dimen/medium_padding"
+        android:paddingEnd="@dimen/medium_padding"
+        tools:context=".presentation.launch.fragments.LaunchTitleFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/launch_title"
-        style="@style/App.Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/launch_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/launch_title"
+            style="@style/App.Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/launch_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/launch_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/launch_image_bottom_margin"
-        android:src="@drawable/launcher_guitar_shop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/launch_title"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/launch_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/launch_image_bottom_margin"
+            android:src="@drawable/launcher_guitar_shop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/launch_title"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
