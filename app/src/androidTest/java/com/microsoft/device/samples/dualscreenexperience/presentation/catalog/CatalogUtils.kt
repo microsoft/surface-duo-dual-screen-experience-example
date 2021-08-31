@@ -25,7 +25,7 @@ fun checkCatalogPageIsDisplayed(pageNo: Int) {
     onView(
         allOf(
             withId(R.id.pages),
-            withText("Page $pageNo of 8")
+            withText("Page $pageNo of 7")
         )
     ).check(matches(isDisplayed()))
 }
