@@ -88,6 +88,7 @@
     <!--Catalog -->
 
     <dimen name="catalog_margin_small">8dp</dimen>
+    <dimen name="catalog_margin_normal">16dp</dimen>
     <dimen name="catalog_margin_large">20dp</dimen>
     <dimen name="catalog_margin_very_large">40dp</dimen>
     <dimen name="catalog_horizontal_margin">36dp</dimen>

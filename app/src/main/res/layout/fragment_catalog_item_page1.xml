@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pageNumber"
+            type="String" />
+
+        <variable
+            name="catalogItem"
+            type="com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.microsoft.device.samples.dualscreenexperience.presentation.util.LockableNestedScrollView
+            android:id="@+id/catalog_item_scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/catalog_margin_small"
+            app:layout_constraintBottom_toTopOf="@id/pages"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_first"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_margin_very_large"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:text="@{catalogItem.primaryDescription}"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.microsoft.device.samples.dualscreenexperience.presentation.util.LockableNestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pages"
+            style="@style/Catalog.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/catalog_horizontal_margin"
+            android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+            android:layout_marginBottom="@dimen/catalog_margin_small"
+            android:text="@{pageNumber}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -18,7 +18,8 @@ data class CatalogItem(
     val viewType: CatalogViewType,
     val primaryDescription: String,
     val secondaryDescription: String?,
-    val firstPicture: String,
+    val thirdDescription: String?,
+    val firstPicture: String?,
     val secondPicture: String?,
     val thirdPicture: String?
 ) : Parcelable
@@ -30,6 +31,7 @@ fun CatalogItemEntity.toCatalogItem() =
         viewType = CatalogViewType.get(this.viewType),
         primaryDescription = this.primaryDescription,
         secondaryDescription = this.secondaryDescription,
+        thirdDescription = this.thirdDescription,
         firstPicture = this.firstPicture,
         secondPicture = this.secondPicture,
         thirdPicture = this.thirdPicture
@@ -37,7 +39,7 @@ fun CatalogItemEntity.toCatalogItem() =
 
 enum class CatalogViewType(var typeId: Int) {
 
-    // Layout with one long text above, 3 images, another long text below
+    // Layout with one long text
     Layout1(1),
 
     // Layout with image-text, long text, two images
@@ -46,11 +48,17 @@ enum class CatalogViewType(var typeId: Int) {
     // Layout with two groups of image-text, mirrored
     Layout3(3),
 
-    // Layout with two images, long text, image-text
+    // Layout with two images, long text
     Layout4(4),
 
-    // Layout with one image and one long text
-    Layout5(5);
+    // Layout with text, one small image, one large image and another text
+    Layout5(5),
+
+    // Layout with text, one large image and one long text
+    Layout6(6),
+
+    // Layout with two groups of image-text
+    Layout7(7);
 
     companion object {
         fun get(typeId: Int?) = values().first { it.typeId == typeId }
