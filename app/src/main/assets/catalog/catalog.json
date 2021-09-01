@@ -2,30 +2,28 @@
   "catalogItems": [
     {
       "itemId": 1,
-      "name": "American ultra",
+      "name": "Catalog1",
       "viewType": 1,
-      "primaryDescription": "One of the first solid-body guitars was invented by Les Paul. Gibson did not present their Gibson Les Paul guitar prototypes to the public.",
-      "secondaryDescription": "Another early solid-body Spanish style guitar, resembling what would become Gibson's Les Paul guitar a decade later, was developed in 1941 by O.W. Appleton, of Nogales, Arizona",
-      "firstPicture": "catalog/catalog1/image1.png",
-      "secondPicture": "catalog/catalog1/image2.png",
-      "thirdPicture": "catalog/catalog1/image3.png"
+      "primaryDescription": "TABLE OF CONTENTS\n\n \n\nDelphinus Guitar  ........................................................................  2\nPegasus Guitar     ........................................................................  3\nDraco Guitar         ........................................................................  4\nTaurus Guitar        ........................................................................  6"
     },
     {
       "itemId": 2,
       "name": "Catalog2",
       "viewType": 2,
-      "primaryDescription": "Appleton made contact with both Gibson and Fender but was unable to sell the idea behind his \"App\" guitar to either company. In 1946, Merle Travis commissioned steel guitar builder Paul Bigsby to build him a solid-body Spanish-style electric. Bigsby delivered the guitar in 1948. ",
-      "secondaryDescription": "The first mass-produced solid-body guitar was Fender Esquire and Fender Broadcaster (later to become the Fender Telecaster), first made in 1948, five years after Les Paul made his prototype. The Gibson Les Paul appeared soon after to compete with the Broadcaster.",
+      "primaryDescription": "Delphinus Guitar",
+      "secondaryDescription": "A simple and elegant design. Our Delphinus guitar can be the perfect gift for someone who has never tried playing a guitar before. Its purpose is to be light and easy to use. This is one of the first solid-body guitars our engineers have been working on since our first days in the musical industry.",
+      "thirdDescription": "Our first prototype was released to the public in 1995. Over the years we continuously updated the design and brought the latest manufacturing processes to its latest version.",
       "firstPicture": "catalog/catalog2/image1.png",
       "secondPicture": "catalog/catalog2/image2.png",
       "thirdPicture": "catalog/catalog2/image3.png"
     },
     {
       "itemId": 3,
-      "name": "Ultra Noiseless Hot",
+      "name": "Catalog3",
       "viewType": 3,
-      "primaryDescription": "Another notable solid-body design is the Fender Stratocaster, which was introduced in 1954 and became extremely popular among musicians in the 1960s and 1970s for its wide tonal capabilities and more comfortable ergonomics than other models.",
-      "secondaryDescription": "The history of Electric Guitars is summarized by Guitar World magazine, and the earliest electric guitar on their top 10 list is the Ro-Pat-In Electro A-25 \"Frying Pan\" described as 'The first-fully functioning solid-body electric guitar to be manufactured and sold'. The most recent electric guitar on this list is the Ibanez Jem (1987) which featured '24 frets'.",
+      "primaryDescription": "Since a guitar is the extension of the player, it cannot fulfill its purpose to share and amplify the singer’s feelings and emotions with others by itself. It also needs to match the singer’s style. This being one of our most successful models, we included a very colorful design with multiple customization options to it.",
+      "secondaryDescription": "Pegasus Guitar",
+      "thirdDescription": "The Pegasus. The new and refreshed version of our older model, the Leo, has a more vibrant approach to its style. Our engineers intended the Pegasus to be a guitar that gives you energy, once you hold it in your hands. Starting from its colors, design and material choices, it was meant to be a guitar that pushes you and helps you find those amazing creative notes.",
       "firstPicture": "catalog/catalog3/image1.png",
       "secondPicture": "catalog/catalog3/image2.png"
     },
@@ -33,46 +31,37 @@
       "itemId": 4,
       "name": "Catalog4",
       "viewType": 4,
-      "primaryDescription": "Numerous other important electric guitars are on the list including Gibson ES-150 (1936), Fender Telecaster (1951), Gibson Les Paul (1952), Gretsch 6128 Duo Jet (1953), Van Halen Frankenstrat (1975), Paul Reed Smith Custom (1985) many of these guitars were 'successors' to earlier designs.",
-      "secondaryDescription": "Some solid-bodied guitars, such as the Gibson Les Paul Supreme, the PRS Singlecut, and the Fender Telecaster Thinline, are built with hollow chambers in the body. In the case of Gibson and PRS, these are called chambered bodies. The motivation for this may be to reduce weight, to achieve a semi-acoustic tone or both.",
+      "primaryDescription": "Its design was intended to stand out. With its long lines with rounded corners, you can see its resemblance to the Leo. But it extends that legacy with different angles, giving the guitarist a more exciting tool for creating amazing sound waves.",
+      "secondaryDescription": "Draco Guitar",
+      "thirdDescription": "If we had only one word to describe Draco it would be: monumental.\n\nThis guitar is for sure only for professional guitarists whose sole purpose is to mark the music industry with their music. It is more than just a musical instrument; we see the Draco as being a bridge to create the perfect connection with people through sound waves.",
       "firstPicture": "catalog/catalog4/image1.png",
-      "secondPicture": "catalog/catalog4/image2.png",
-      "thirdPicture": "catalog/catalog4/image3.png"
+      "secondPicture": "catalog/catalog4/image2.png"
     },
     {
       "itemId": 5,
       "name": "Catalog5",
-      "viewType": 1,
-      "primaryDescription": "Full hollow-body guitars have large, deep bodies made of glued-together sheets, or \"plates\", of wood.",
-      "secondaryDescription": "They can often be played at the same volume as an acoustic guitar and therefore can be used unplugged at intimate gigs. They qualify as electric guitars inasmuch as they have fitted pickups.",
+      "viewType": 5,
+      "primaryDescription": "Being the best that our company can offer, the Draco is sold only in one color choice: Red.",
+      "secondaryDescription": "It symbolizes the fire we all need to endure to become our best version and it is about our journey to help you achieve more in your path to greatness. It is the guitar for those people who are not afraid to take that unknown jump, the bold, the risk-takers, those people who use their passion to break any barrier in front of them.",
       "firstPicture": "catalog/catalog5/image1.png",
-      "secondPicture": "catalog/catalog5/image2.png",
-      "thirdPicture": "catalog/catalog5/image3.png"
+      "secondPicture": "catalog/catalog5/image2.png"
     },
     {
       "itemId": 6,
       "name": "Catalog6",
-      "viewType": 3,
-      "primaryDescription": "Historically, archtop guitars with retrofitted pickups were among the very earliest electric guitars. The instrument originated during the Jazz Age, like semi-acoustic guitars, they often have f-shaped sound holes.",
-      "secondaryDescription": "Having humbucker pickups are usually strung heavily, jazz boxes are noted for their warm, rich tone. A variation with single-coil pickups, and sometimes with a Bigsby tremolo, has long been popular in country and rockabilly; it has a distinctly more twangy, biting tone than the classic jazzbox. The term archtop refers to a method of construction subtly different from the typical acoustic.",
-      "firstPicture": "catalog/catalog6/image1.png",
-      "secondPicture": "catalog/catalog6/image2.png"
+      "viewType": 6,
+      "primaryDescription": "Taurus Guitar",
+      "secondaryDescription": "The Taurus is the limited-edition tribute guitar we built with multiple professionals from the music industry and with our extremely talented team of engineers.\n\nFrom our collection it is the guitar that stands out the most.\n\nWe are very proud to sell this model to guitar enthusiasts, and every model we deliver includes the same passion as the first one we created.",
+      "firstPicture": "catalog/catalog6/image1.png"
     },
     {
       "itemId": 7,
       "name": "Catalog7",
-      "viewType": 3,
-      "primaryDescription": "Some steel-string acoustic guitars are fitted with pickups purely as an alternative to using a separate microphone. They may also be fitted with a piezoelectric pickup under the bridge, attached to the bridge mounting plate, or with a ",
-      "secondaryDescription": "low-mass microphone (usually a condenser mic) inside the body of the guitar that converts the vibrations in the body into electronic signals. Combinations of these types of pickups may be used, with an integral mixer/preamp/graphic equalizer. Such instruments are called electric acoustic guitars.",
+      "viewType": 7,
+      "primaryDescription": "Built with the most refined materials in the industry, we drew its lines so that it could be the perfect balance between ergonomics and style. We chose the colors, red and grey, as a tribute to two amazing guitarists that we had the pleasure to work with us for multiple years.",
+      "secondaryDescription": "The Taurus is the guitar that is not just telling the story of all the guitars before it, but also the story of all our clients that used our products to express themselves through music.\n\nAfter going through all the guitar types from our Catalog, we would really like to know - which one is your favorite?",
       "firstPicture": "catalog/catalog7/image1.png",
       "secondPicture": "catalog/catalog7/image2.png"
-    },
-    {
-      "itemId": 8,
-      "name": "Catalog8",
-      "viewType": 5,
-      "primaryDescription": "They are regarded as acoustic guitars rather than electric guitars because the pickups do not produce a signal directly from the vibration of the strings, but rather from the vibration of the guitar top or body.\n\nElectric acoustic guitars should not be confused with semi-acoustic guitars, which have pickups of the type found on solid-body electric guitars, or solid-body hybrid guitars with piezoelectric pickups.",
-      "firstPicture": "catalog/catalog8/image1.png"
     }
   ]
 }

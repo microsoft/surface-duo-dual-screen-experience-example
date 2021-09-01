@@ -16,11 +16,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.samples.dualscreenexperience.R
-import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemType1Binding
-import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemType2Binding
-import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemType3Binding
-import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemType4Binding
-import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemType5Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage1Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage2Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage3Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage4Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage5Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage6Binding
+import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogItemPage7Binding
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogViewType
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.CatalogListViewModel
@@ -62,21 +64,21 @@ class CatalogItemFragment : Fragment() {
     private fun inflateByViewType(inflater: LayoutInflater, container: ViewGroup?): ViewDataBinding =
         when (viewType) {
             CatalogViewType.Layout1 ->
-                FragmentCatalogItemType1Binding
+                FragmentCatalogItemPage1Binding
                     .inflate(inflater, container, false)
                     .apply {
                         catalogItem = this@CatalogItemFragment.catalogItem
                         pageNumber = this@CatalogItemFragment.pageNumber
                     }
             CatalogViewType.Layout2 ->
-                FragmentCatalogItemType2Binding
+                FragmentCatalogItemPage2Binding
                     .inflate(inflater, container, false)
                     .apply {
                         catalogItem = this@CatalogItemFragment.catalogItem
                         pageNumber = this@CatalogItemFragment.pageNumber
                     }
             CatalogViewType.Layout3 ->
-                FragmentCatalogItemType3Binding
+                FragmentCatalogItemPage3Binding
                     .inflate(inflater, container, false)
                     .apply {
                         catalogItem = this@CatalogItemFragment.catalogItem
@@ -84,14 +86,28 @@ class CatalogItemFragment : Fragment() {
                     }
 
             CatalogViewType.Layout4 ->
-                FragmentCatalogItemType4Binding
+                FragmentCatalogItemPage4Binding
                     .inflate(inflater, container, false)
                     .apply {
                         catalogItem = this@CatalogItemFragment.catalogItem
                         pageNumber = this@CatalogItemFragment.pageNumber
                     }
             CatalogViewType.Layout5 ->
-                FragmentCatalogItemType5Binding
+                FragmentCatalogItemPage5Binding
+                    .inflate(inflater, container, false)
+                    .apply {
+                        catalogItem = this@CatalogItemFragment.catalogItem
+                        pageNumber = this@CatalogItemFragment.pageNumber
+                    }
+            CatalogViewType.Layout6 ->
+                FragmentCatalogItemPage6Binding
+                    .inflate(inflater, container, false)
+                    .apply {
+                        catalogItem = this@CatalogItemFragment.catalogItem
+                        pageNumber = this@CatalogItemFragment.pageNumber
+                    }
+            CatalogViewType.Layout7 ->
+                FragmentCatalogItemPage7Binding
                     .inflate(inflater, container, false)
                     .apply {
                         catalogItem = this@CatalogItemFragment.catalogItem

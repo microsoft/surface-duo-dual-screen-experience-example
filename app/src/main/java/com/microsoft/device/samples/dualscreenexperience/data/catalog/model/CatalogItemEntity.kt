@@ -12,8 +12,9 @@ data class CatalogItemEntity(
     val name: String,
     val viewType: Int,
     val primaryDescription: String,
-    val secondaryDescription: String,
-    val firstPicture: String,
+    val secondaryDescription: String?,
+    val thirdDescription: String?,
+    val firstPicture: String?,
     val secondPicture: String,
     val thirdPicture: String?
 )

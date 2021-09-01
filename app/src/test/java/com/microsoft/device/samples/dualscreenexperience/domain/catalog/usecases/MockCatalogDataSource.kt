@@ -24,6 +24,7 @@ val catalogItemEntity = CatalogItemEntity(
     CATALOG_VIEW_TYPE_LAYOUT1_KEY,
     "description 1",
     "description 2",
+    "description 3",
     "image 1",
     "image 2",
     "image 3"
@@ -35,6 +36,7 @@ val catalogItem = CatalogItem(
     CatalogViewType.Layout1,
     "description 1",
     "description 2",
+    "description 3",
     "image 1",
     "image 2",
     "image 3"

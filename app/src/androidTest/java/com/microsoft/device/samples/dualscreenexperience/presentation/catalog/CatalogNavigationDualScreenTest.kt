@@ -62,9 +62,6 @@ class CatalogNavigationDualScreenTest {
         swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(7)
 
-        swipeCatalogViewPagerToTheLeft()
-        checkCatalogPageIsDisplayed(8)
-
         checkToolbar(R.string.nav_catalog_title)
     }
 
