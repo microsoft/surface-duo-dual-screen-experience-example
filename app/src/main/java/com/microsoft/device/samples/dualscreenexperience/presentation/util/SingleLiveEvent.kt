@@ -21,6 +21,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.microsoft.device.samples.dualscreenexperience.BuildConfig
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -39,7 +40,7 @@ class SingleLiveEvent<T>(initValue: T) : MutableLiveData<T>(initValue) {
     @MainThread
     override fun observe(holder: LifecycleOwner, observer: Observer<in T>) {
 
-        if (hasActiveObservers()) {
+        if (hasActiveObservers() && BuildConfig.DEBUG) {
             Log.w(
                 SINGLE_LIVE_EVENT_TAG,
                 "Multiple observers registered but only one will be notified of changes."
