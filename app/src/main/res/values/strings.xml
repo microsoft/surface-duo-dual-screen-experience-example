@@ -104,7 +104,7 @@
     <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
     <string name="toolbar_user_mode">User Mode</string>
     <string name="dev_mode_sdk_components">Dual-screen SDKs used in this screen</string>
-    <string name="dev_mode_code">Code used to achieve this screen</string>
+    <string name="dev_mode_code">Code used to achieve this screen\n\n(Actual code is not open-sourced yet)</string>
     <string name="dev_mode_design_pattern">Design Pattern used on this screen</string>
     <string name="dev_mode_title">Developer Mode</string>
 
