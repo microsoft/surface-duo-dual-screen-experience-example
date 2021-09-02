@@ -24,6 +24,8 @@ class MapMarkerFactory(context: Context) {
             findViewById<TextView>(R.id.text_marker).background =
                 ContextCompat.getDrawable(context, R.drawable.selected_marker_background)
         }
+    private var infoWindowContainer: View =
+        LayoutInflater.from(context).inflate(R.layout.info_window_marker, null)
 
     fun createBitmapWithText(text: String, isSelected: Boolean = false): Bitmap {
         val container = if (isSelected) { selectedContainer } else { unselectedContainer }
@@ -42,5 +44,9 @@ class MapMarkerFactory(context: Context) {
         val canvas = Canvas(bitmap)
         container.draw(canvas)
         return bitmap
+    }
+
+    fun createGrayViewWithText(text: String): View = infoWindowContainer.also {
+        it.findViewById<TextView>(R.id.text_marker).text = text
     }
 }

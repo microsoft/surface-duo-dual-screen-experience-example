@@ -15,8 +15,14 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
-import com.microsoft.device.samples.dualscreenexperience.ITokenProvider
+import androidx.lifecycle.coroutineScope
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.ktx.addMarker
+import com.google.maps.android.ktx.awaitMap
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.ZOOM_LEVEL_CITY
@@ -31,38 +37,19 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.Rotat
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
-import com.microsoft.maps.MapAnimationKind
-import com.microsoft.maps.MapElementCollisionBehavior
-import com.microsoft.maps.MapElementLayer
-import com.microsoft.maps.MapFlyout
-import com.microsoft.maps.MapIcon
-import com.microsoft.maps.MapImage
-import com.microsoft.maps.MapLoadingStatus
-import com.microsoft.maps.MapProjection
-import com.microsoft.maps.MapRenderMode
-import com.microsoft.maps.MapScene
-import com.microsoft.maps.MapStyleSheets
-import com.microsoft.maps.MapView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class StoreMapFragment : Fragment() {
 
-    @Inject lateinit var tokenProvider: ITokenProvider
-
     private val viewModel: StoreViewModel by activityViewModels()
     private val rotationViewModel: RotationViewModel by activityViewModels()
 
-    private lateinit var mapView: MapView
-    private var mapLayer: MapElementLayer? = null
+    private var googleMap: GoogleMap? = null
 
-    private var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()
+    private var selectableMarkerMap: HashMap<String, MarkerSelectable> = HashMap()
     private var markerFactory: MapMarkerFactory? = null
     private var binding: FragmentStoreMapBinding? = null
-
-    private var hasClickedMarker = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,39 +58,27 @@ class StoreMapFragment : Fragment() {
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
         binding?.rotationViewModel = rotationViewModel
+        binding?.isConnected = true
 
-        setupMapView(savedInstanceState)
-        binding?.mapContainer?.addView(mapView)
+        binding?.map?.onCreate(savedInstanceState)
+
+        lifecycle.coroutineScope.launchWhenCreated {
+            googleMap = binding?.map?.awaitMap()
+
+            setupMap()
+            setupObservers()
+        }
 
         markerFactory = MapMarkerFactory(requireContext())
 
         return binding?.root
     }
 
-    private fun setupMapView(savedInstanceState: Bundle?) {
-        mapLayer = MapElementLayer()
-        mapView = MapView(requireActivity(), MapRenderMode.RASTER)
-        mapView.onCreate(savedInstanceState)
-        setupMapKey()
-
-        mapLayer?.let {
-            mapView.layers.add(it)
-        }
-    }
-
-    private fun setupMapKey() {
-        lifecycleScope.launch {
-            mapView.setCredentialsKey(tokenProvider.getMapToken())
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupNetworkObserver()
-        setupMap()
         setupRecenterButton()
-        setupObservers()
     }
 
     private fun setupNetworkObserver() {
@@ -116,19 +91,21 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupMap() {
-        mapView.mapProjection = MapProjection.WEB_MERCATOR
-        mapView.mapStyleSheet = MapStyleSheets.roadDark()
-        mapView.userInterfaceOptions.apply {
-            isZoomButtonsVisible = false
-            isZoomGestureEnabled = false
-            isCompassButtonVisible = false
-            isTiltButtonVisible = false
-            isTiltGestureEnabled = false
-            isRotateGestureEnabled = false
-            isUserLocationButtonVisible = false
-            isDirectionsButtonVisible = false
-            isSaveMapUserPreferencesEnabled = false
-            isStylePickerButtonVisible = false
+        setupInfoWindowAdapter()
+        context?.let {
+            googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(it, R.raw.map_style))
+        }
+        googleMap?.uiSettings?.apply {
+            isScrollGesturesEnabled = true
+            isCompassEnabled = false
+            isZoomGesturesEnabled = false
+            isZoomControlsEnabled = false
+            isMapToolbarEnabled = false
+            isTiltGesturesEnabled = false
+            isScrollGesturesEnabledDuringRotateOrZoom = false
+            isRotateGesturesEnabled = false
+            isIndoorLevelPickerEnabled = false
+            isMyLocationButtonEnabled = false
         }
     }
 
@@ -144,13 +121,11 @@ class StoreMapFragment : Fragment() {
         viewModel.selectedCity.observe(
             viewLifecycleOwner,
             {
-                unSelectAllMarkers()
+                viewModel.markersList.value?.let { newData ->
+                    addMarkersToMap(newData)
+                }
                 changeActionBarTitle(it, viewModel.selectedStore.value)
             }
-        )
-        viewModel.markersList.observe(
-            viewLifecycleOwner,
-            { data -> data?.takeIf { it.isNotEmpty() }?.let { addMarkersToMap(it) } }
         )
         viewModel.markersCenter.observe(
             viewLifecycleOwner,
@@ -166,7 +141,7 @@ class StoreMapFragment : Fragment() {
         )
     }
 
-    private fun selectZoomLevel(): Double =
+    private fun selectZoomLevel(): Float =
         if (shouldZoomIn()) ZOOM_LEVEL_STORES else ZOOM_LEVEL_CITY
 
     private fun shouldZoomIn(): Boolean = viewModel.selectedCity.value != null
@@ -176,7 +151,9 @@ class StoreMapFragment : Fragment() {
             .filter { selectableMarkerMap[it]?.isSelected ?: false }
             .forEach { key ->
                 markerFactory?.let { factory ->
-                    selectableMarkerMap[key]?.image = MapImage(factory.createBitmapWithText(key))
+                    selectableMarkerMap[key]?.googleModel?.setIcon(
+                        BitmapDescriptorFactory.fromBitmap(factory.createBitmapWithText(key))
+                    )
                     selectableMarkerMap[key]?.isSelected = false
                 }
             }
@@ -184,218 +161,182 @@ class StoreMapFragment : Fragment() {
 
     private fun selectMarker(store: Store?) {
         store?.let {
-            selectableMarkerMap[it.name]?.image =
+            selectableMarkerMap[it.name]?.googleModel?.setIcon(
                 markerFactory?.let { factory ->
-                    MapImage(factory.createBitmapWithText(it.name, true))
+                    BitmapDescriptorFactory.fromBitmap(factory.createBitmapWithText(it.name, true))
                 }
+            )
             selectableMarkerMap[it.name]?.isSelected = true
         }
     }
 
     private fun changeActionBarTitle(city: MapMarkerModel?, store: Store?) {
-        if (city == null && store == null) {
+        if (viewModel.isNavigationAtStart() && city == null && store == null) {
             appCompatActivity?.setupToolbar(isBackButtonEnabled = false)
             appCompatActivity?.changeToolbarTitle(getString(R.string.app_name))
         }
     }
 
-    private fun resetMap(center: MapMarkerModel, zoomLevel: Double) {
-        if (!hasClickedMarker) {
-            hasClickedMarker =
-                viewModel.selectedCity.value != null || viewModel.selectedStore.value != null
+    private fun resetMap(center: MapMarkerModel, zoomLevel: Float) {
+        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(center.toLatLng(), zoomLevel)
+        if (shouldEnableAnimations()) {
+            googleMap?.animateCamera(cameraUpdate)
+        } else {
+            googleMap?.moveCamera(cameraUpdate)
         }
-        mapView.setScene(
-            MapScene.createFromLocationAndZoomLevel(center.toGeopoint(), zoomLevel),
-            getMapAnimations()
-        )
     }
 
     private fun resetMapWithoutAnimations() {
-        viewModel.markersCenter.value?.toGeopoint()?.let {
-            mapView.setScene(
-                MapScene.createFromLocationAndZoomLevel(it, selectZoomLevel()),
-                MapAnimationKind.NONE
-            )
+        viewModel.markersCenter.value?.toLatLng()?.let {
+            googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(it, selectZoomLevel()))
         }
     }
 
     private fun returnMapToCenter(center: MapMarkerModel) {
-        mapView.panTo(center.toGeopoint())
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(center.toLatLng()))
     }
-
-    private fun getMapAnimations() =
-        if (shouldEnableAnimations()) {
-            MapAnimationKind.DEFAULT
-        } else {
-            MapAnimationKind.NONE
-        }
 
     private fun shouldEnableAnimations() =
-        !TEST_MODE_ENABLED && rotationViewModel.isDualMode.value == true && hasClickedMarker
+        !TEST_MODE_ENABLED &&
+            rotationViewModel.isDualMode.value == true &&
+            googleMap?.cameraPosition?.zoom != selectZoomLevel()
 
     private fun addMarkersToMap(markers: List<MapMarkerModel>) {
-        mapLayer?.elements?.clear()
+        googleMap?.clear()
         markers.forEach { markerModel ->
-            val marker: MapIcon? = when (markerModel.type) {
-                MarkerType.PIN -> buildBalloonMarker(markerModel).also {
-                    selectableMarkerMap[markerModel.name] = it
+            when (markerModel.type) {
+                MarkerType.PIN -> addBalloonMarker(markerModel)?.let {
+                    selectableMarkerMap[markerModel.name] = MarkerSelectable(it, false)
                 }
-                MarkerType.CIRCLE -> buildCircleMarker(markerModel)
-                else -> null
-            }
-            marker?.let { icon ->
-                mapLayer?.elements?.add(icon)
+                MarkerType.CIRCLE -> addCircleMarker(markerModel)
+                else -> {}
             }
         }
 
-        mapView.addOnMapCameraChangedListener {
+        googleMap?.setOnCameraMoveListener {
             markers
-                .filter { mapView.bounds.isInBounds(it) && it.type == MarkerType.PIN }
+                .filter { googleMap?.projection?.isInBounds(it) == true && it.type == MarkerType.PIN }
                 .map { it.id }
                 .let { viewModel.updateStoreList(it) }
-
-            true
         }
 
-        mapView.addOnMapLoadingStatusChangedListener {
-            if (!isMapLoading()) {
-                mapLayer?.elements?.forEach { element ->
-                    (element as? MapIcon?)?.flyout?.let { iconFlyout ->
-                        showFlyout(iconFlyout)
+        googleMap?.setOnMarkerClickListener { clickedMarker ->
+            markers.firstOrNull { it.name == clickedMarker.title }?.let { possibleMarker ->
+                when (possibleMarker.type) {
+                    MarkerType.PIN -> {
+                        val isAlreadySelected = selectableMarkerMap.values
+                            .firstOrNull { clickedMarker.title == it.googleModel.title }?.isSelected ?: false
+                        if (isAlreadySelected) {
+                            viewModel.navigateUp()
+                        } else {
+                            viewModel.navigateToDetails(possibleMarker)
+                        }
+                    }
+                    MarkerType.CIRCLE -> {
+                        if (viewModel.shouldShowTouchCity()) {
+                            viewModel.disableShowTouchCity()
+                        }
+                        viewModel.navigateToList(possibleMarker)
+                    }
+                    else -> {
+                        // do nothing
                     }
                 }
             }
             true
         }
 
-        mapView.addOnMapTappedListener { args ->
-            if (!isMapLoading()) {
-                val mapIcon =
-                    mapView.findMapElementsAtOffset(args.position).takeIf { it.isNotEmpty() }
-                        ?.first()
-                val possibleMarker = markers.firstOrNull { it.name == mapIcon?.tag }
-                if (possibleMarker != null) {
-                    when (possibleMarker.type) {
-                        MarkerType.PIN -> {
-                            val isAlreadySelected = selectableMarkerMap.values
-                                .firstOrNull { mapIcon?.tag == it.tag }?.isSelected ?: false
-                            if (isAlreadySelected) {
-                                viewModel.navigateUp()
-                            } else {
-                                viewModel.navigateToDetails(possibleMarker)
-                            }
-                        }
-                        MarkerType.CIRCLE -> {
-                            if (viewModel.shouldShowTouchCity()) {
-                                viewModel.disableShowTouchCity()
-                                viewModel.markersList.value?.let {
-                                    addMarkersToMap(it)
-                                }
-                            }
-                            viewModel.navigateToList(possibleMarker)
-                        }
-                        else -> {
-                            // do nothing
-                        }
-                    }
-                } else {
-                    val selectedMarkerName = selectableMarkerMap.keys
-                        .firstOrNull { selectableMarkerMap[it]?.isSelected ?: false }
-                    val isStore = markers.firstOrNull { it.name == selectedMarkerName } != null
-                    if (isStore) {
-                        viewModel.navigateUp()
-                    }
-                }
-                true
-            } else {
+        googleMap?.setOnMapClickListener {
+            if (googleMap?.cameraPosition?.target != viewModel.markersCenter.value?.toLatLng()) {
                 resetMapWithoutAnimations()
-                false
+            }
+
+            val selectedMarkerName = selectableMarkerMap.keys
+                .firstOrNull { selectableMarkerMap[it]?.isSelected ?: false }
+            val isStore = markers.firstOrNull { it.name == selectedMarkerName } != null
+            if (isStore) {
+                viewModel.navigateUp()
             }
         }
     }
 
-    private fun isMapLoading() =
-        mapView.loadingStatus == MapLoadingStatus.UPDATING ||
-            mapView.loadingStatus == MapLoadingStatus.UPDATING_WITH_BASICS_COMPLETE
-
-    private fun buildBalloonMarker(marker: MapMarkerModel) =
-        MapIconSelectable().apply {
-            location = marker.toGeopoint()
-            tag = marker.name
-            contentDescription = marker.name
-            image = markerFactory?.let { factory ->
-                MapImage(factory.createBitmapWithText(marker.name))
-            }
-            desiredCollisionBehavior = MapElementCollisionBehavior.HIDE
+    private fun addBalloonMarker(markerModel: MapMarkerModel): Marker? =
+        googleMap?.addMarker {
+            position(markerModel.toLatLng())
+            title(markerModel.name)
+            visible(!(markerModel.hasCity == true && viewModel.selectedCity.value == null))
+            icon(
+                markerFactory?.let { factory ->
+                    BitmapDescriptorFactory.fromBitmap(factory.createBitmapWithText(markerModel.name))
+                }
+            )
         }
 
-    private fun buildCircleMarker(marker: MapMarkerModel) =
-        MapIcon().apply {
-            location = marker.toGeopoint()
-            tag = marker.name
-            contentDescription = marker.name
+    private fun addCircleMarker(markerModel: MapMarkerModel): Marker? =
+        googleMap?.addMarker {
+            position(markerModel.toLatLng())
+            title(markerModel.name)
             val imageDrawable = if (viewModel.shouldShowTouchCity()) {
                 R.drawable.ic_circle_marker_touch
             } else {
                 R.drawable.ic_circle_marker
             }
-            image =
-                ResourcesCompat
-                    .getDrawable(resources, imageDrawable, null)
-                    ?.let { MapImage(it.toBitmap()) }
+            icon(
+                ResourcesCompat.getDrawable(resources, imageDrawable, null)
+                    ?.let { BitmapDescriptorFactory.fromBitmap(it.toBitmap()) }
+            )
+            infoWindowAnchor(0.5f, 1.15f)
+        }.also {
             if (viewModel.shouldShowTouchCity()) {
-                flyout = MapFlyout().apply {
-                    isLightDismissEnabled = false
-                }
+                it?.showInfoWindow()
             }
         }
 
-    private fun showFlyout(flyout: MapFlyout) {
-        flyout.apply {
-            title = getString(R.string.store_map_circle_touch_tutorial)
-            styleDefaultView(
-                ResourcesCompat.getColor(resources, R.color.medium_gray, null),
-                ResourcesCompat.getColor(resources, R.color.white, null)
-            )
-            show()
-        }
+    private fun setupInfoWindowAdapter() {
+        googleMap?.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
+            override fun getInfoWindow(p0: Marker): View? =
+                markerFactory?.createGrayViewWithText(getString(R.string.store_map_circle_touch_tutorial))
+
+            override fun getInfoContents(p0: Marker): View? = null
+        })
     }
 
     override fun onStart() {
         super.onStart()
-        mapView.onStart()
+        binding?.map?.onStart()
     }
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        binding?.map?.onResume()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        binding?.map?.onSaveInstanceState(outState)
     }
 
     override fun onPause() {
         super.onPause()
-        mapView.onPause()
+        binding?.map?.onPause()
     }
 
     override fun onStop() {
         super.onStop()
-        mapView.onStop()
+        binding?.map?.onStop()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mapLayer = null
-        mapView.onDestroy()
         markerFactory = null
+        googleMap = null
+        selectableMarkerMap.clear()
+        binding?.map?.onDestroy()
         binding = null
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapView.onLowMemory()
+        binding?.map?.onLowMemory()
     }
 }

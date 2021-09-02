@@ -106,6 +106,8 @@ class StoreViewModel @Inject constructor(
         tutorialPrefs.setShowTouchCityTutorial(false)
     }
 
+    fun isNavigationAtStart() = navigator.isNavigationAtStart()
+
     fun navigateUp() {
         navigator.navigateUp()
         if (selectedStore.value != null) {

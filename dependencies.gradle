@@ -67,6 +67,8 @@ ext {
     gsonVersion = '2.8.7'
     firestoreVersion = '23.0.2'
     hiltVersion = '2.37'
+    mapsVersion = '17.0.1'
+    mapsKtxVersion = '3.1.0'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
@@ -74,6 +76,8 @@ ext {
             hilt                : "com.google.dagger:hilt-android:$hiltVersion",
             hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
             firestore           : "com.google.firebase:firebase-firestore-ktx:$firestoreVersion",
+            maps                : "com.google.android.gms:play-services-maps:$mapsVersion",
+            mapsKtx             : "com.google.maps.android:maps-ktx:$mapsKtxVersion",
     ]
 
     //Microsoft dependencies version

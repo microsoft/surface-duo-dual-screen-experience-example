@@ -101,6 +101,8 @@ dependencies {
     implementation googleDependencies.gson
     implementation googleDependencies.firestore
     implementation kotlinDependencies.playCoroutines
+    implementation googleDependencies.maps
+    implementation googleDependencies.mapsKtx
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
 

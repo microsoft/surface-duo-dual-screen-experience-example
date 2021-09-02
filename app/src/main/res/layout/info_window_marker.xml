@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_marker"
+        style="@style/MarkerText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/info_window_background"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:paddingStart="@dimen/small_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:paddingEnd="@dimen/small_padding"
+        android:paddingBottom="@dimen/small_padding"
+        android:textColor="@color/white"
+        tools:text="Tap here" />
+
+</FrameLayout>

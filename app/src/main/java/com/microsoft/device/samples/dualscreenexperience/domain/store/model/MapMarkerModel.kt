@@ -12,5 +12,6 @@ data class MapMarkerModel(
     val type: MarkerType,
     val lat: Double,
     val lng: Double,
+    val hasCity: Boolean? = null,
     val id: Long = 0
 )
