@@ -28,9 +28,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url "https://microsoftmaps.jfrog.io/artifactory/Maven/"
-        }
         flatDir {
             dirs 'libs'
         }
