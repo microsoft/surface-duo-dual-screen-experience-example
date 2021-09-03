@@ -74,6 +74,7 @@ class DevModeViewModel @Inject constructor(
         }
     }
 
+    // TODO: Change URLs after repository is open-sourced
     enum class AppScreen(var path: String) {
         STORES_MAP("ExtendCanvas/src/main/java/com/microsoft/device/display/samples/extendcanvas/ExtendedCanvasActivity.kt"),
         STORES_LIST("DualView/src/main/java/com/microsoft/device/display/samples/dualview/DualViewActivity.kt"),

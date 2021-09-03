@@ -27,7 +27,7 @@ class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderN
         this.navController = null
     }
 
-    fun isNavigationAtStart() =
+    override fun isNavigationAtStart() =
         navController?.currentDestination?.id == R.id.fragment_store_map
 
     override fun navigateUp() {

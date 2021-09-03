@@ -8,7 +8,5 @@
 package com.microsoft.device.samples.dualscreenexperience.config
 
 object LicensesConfig {
-    const val licensesFileName = "licenses/licenses.json"
-    const val licenseTermsFileName = "licenses/license_terms.json"
-    const val softwareNoticesFileName = "licenses/NOTICE.txt"
+    const val softwareNoticesFilePath = "https://appassets.androidplatform.net/assets/licenses/NOTICE.html"
 }

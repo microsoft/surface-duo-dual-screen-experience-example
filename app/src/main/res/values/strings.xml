@@ -104,7 +104,7 @@
     <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
     <string name="toolbar_user_mode">User Mode</string>
     <string name="dev_mode_sdk_components">Dual-screen SDKs used in this screen</string>
-    <string name="dev_mode_code">Code used to achieve this screen</string>
+    <string name="dev_mode_code">Code used to achieve this screen\n\n(Actual code is not open-sourced yet)</string>
     <string name="dev_mode_design_pattern">Design Pattern used on this screen</string>
     <string name="dev_mode_title">Developer Mode</string>
 
@@ -123,8 +123,7 @@
     <string name="about_feedback_description">Have Feedback? We’d love to hear it, but please don’t share sensitive information. Please reach out to the developer experience team at Microsoft Surface Duo for any feedback.</string>
     <string name="about_resources_title">Resources &amp; links</string>
     <string name="about_licenses_title">Third Party Notices</string>
-    <string name="about_licenses_terms_title">License Terms</string>
-    <string name="about_licenses_libraries_title">Other Notices</string>
+    <string name="about_licenses_terms_title">Software Notices</string>
 
     <!-- No Internet Connection -->
 

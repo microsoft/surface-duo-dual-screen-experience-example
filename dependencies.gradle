@@ -23,11 +23,8 @@ ext {
             dualScreenSdkVersion     : "1.0.0-beta4",
     ]
 
-    playCoroutinesVersion = "1.1.1"
-
     kotlinDependencies = [
             kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-            playCoroutines  : "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$playCoroutinesVersion",
     ]
 
     navigationVersion = "2.3.4"
@@ -65,15 +62,17 @@ ext {
     //Google dependencies
     materialVersion = '1.4.0'
     gsonVersion = '2.8.7'
-    firestoreVersion = '23.0.2'
     hiltVersion = '2.37'
+    mapsVersion = '17.0.1'
+    mapsKtxVersion = '3.1.0'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
             gson                : "com.google.code.gson:gson:$gsonVersion",
             hilt                : "com.google.dagger:hilt-android:$hiltVersion",
             hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
-            firestore           : "com.google.firebase:firebase-firestore-ktx:$firestoreVersion",
+            maps                : "com.google.android.gms:play-services-maps:$mapsVersion",
+            mapsKtx             : "com.google.maps.android:maps-ktx:$mapsKtxVersion",
     ]
 
     //Microsoft dependencies version
@@ -83,10 +82,7 @@ ext {
     bottomNavBarVersion = "1.0.0-beta2"
     recyclerViewVersion = "1.0.0-beta3"
 
-    bingMapsVersion = "1.2.0"
-
     microsoftDependencies = [
-            bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
             screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
             screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",

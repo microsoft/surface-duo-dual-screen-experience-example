@@ -144,7 +144,7 @@
 
     <style name="License.Title" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/license_gray</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/montserrat_bold</item>
     </style>
 

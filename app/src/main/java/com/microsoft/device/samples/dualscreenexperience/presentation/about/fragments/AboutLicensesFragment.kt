@@ -35,24 +35,14 @@ class AboutLicensesFragment : Fragment() {
         binding = FragmentAboutLicensesBinding.inflate(inflater, container, false)
         binding?.isDualMode = rotationViewModel.isDualMode.value
         binding?.linksItems?.itemClickListener = viewModel.linkClickListener
+        binding?.noticeClickListener = viewModel.noticeClickListener
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdapters()
         setupObservers()
-    }
-
-    private fun setupAdapters() {
-        binding?.licenseTermsRecyclerView?.adapter =
-            LicenseListAdapter(requireContext(), viewModel.licenseTermsListHandler)
-        binding?.licenseTermsRecyclerView?.setHasFixedSize(true)
-
-        binding?.licenseRecyclerView?.adapter =
-            LicenseListAdapter(requireContext(), viewModel.licenseListHandler)
-        binding?.licenseRecyclerView?.setHasFixedSize(true)
     }
 
     private fun setupObservers() {

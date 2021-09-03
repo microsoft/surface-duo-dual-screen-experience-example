@@ -13,5 +13,6 @@ interface StoreNavigator {
     fun navigateToStoreDetailsFromList()
     fun navigateToStoreDetailsFromMap()
     fun navigateToStoreListFromDetails()
+    fun isNavigationAtStart(): Boolean
     fun navigateUp()
 }

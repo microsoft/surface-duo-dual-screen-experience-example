@@ -24,10 +24,6 @@
 # Will be removed when Microsoft Surface Duo SDK will be updated to latest WM version
 -keep class androidx.window.** { *; }
 
-# Bing Maps files
-# Will be updated when we get more restrictive rules from the Bing Maps team
--keep class com.microsoft.maps.** { *; }
-
 # Application classes that will be serialized/deserialized over Gson
 -keep class com.microsoft.device.samples.dualscreenexperience.data.about.model.** { <fields>; }
 -keep class com.microsoft.device.samples.dualscreenexperience.data.store.model.** { <fields>; }

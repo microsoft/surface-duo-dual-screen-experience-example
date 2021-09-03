@@ -39,7 +39,8 @@ data class Store(
             StoreImage.get(entity.imageId)
         )
 
-    fun toMapMarkerModel(): MapMarkerModel = MapMarkerModel(name, MarkerType.PIN, lat, lng, storeId)
+    fun toMapMarkerModel(): MapMarkerModel =
+        MapMarkerModel(name, MarkerType.PIN, lat, lng, cityId != null, storeId)
 }
 
 enum class StoreImage(var imageId: Int) {

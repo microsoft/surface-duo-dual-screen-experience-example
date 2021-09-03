@@ -10,12 +10,14 @@
         <variable
             name="isDualMode"
             type="Boolean" />
+
+        <variable
+            name="noticeClickListener"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/licenses_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,44 +90,12 @@
                 style="@style/License.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/normal_margin"
+                android:onClick="@{() -> noticeClickListener.onClick(true)}"
+                android:paddingTop="@dimen/normal_margin"
+                android:paddingBottom="@dimen/medium_padding"
                 android:text="@string/about_licenses_terms_title"
                 android:textAllCaps="true"
                 android:textColor="@color/white"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/license_terms_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_license"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/delimiter_size"
-                android:background="@color/license_gray" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/licenses_list_title"
-                style="@style/License.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:text="@string/about_licenses_libraries_title"
-                android:textAllCaps="true"
-                android:textColor="@color/white" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/license_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_license"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feedback_single_screen_title"
@@ -133,7 +103,6 @@
                 visibleIf="@{!isDualMode}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
                 android:text="@string/about_feedback_title"
                 android:textSize="@dimen/text_size_18"/>
 

@@ -13,8 +13,6 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-apply from: 'secrets.gradle'
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -41,8 +39,6 @@ android {
             shrinkResources false
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-            buildConfigField "String", "BING_MAPS_KEY", "\"$bingMapsKey\""
         }
 
         release {
@@ -99,12 +95,11 @@ dependencies {
 
     implementation googleDependencies.material
     implementation googleDependencies.gson
-    implementation googleDependencies.firestore
-    implementation kotlinDependencies.playCoroutines
+    implementation googleDependencies.maps
+    implementation googleDependencies.mapsKtx
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
 
-    implementation microsoftDependencies.bingMaps
     implementation microsoftDependencies.bottomNavBar
     implementation microsoftDependencies.layouts
     implementation microsoftDependencies.screenManager

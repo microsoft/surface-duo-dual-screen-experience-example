@@ -44,11 +44,14 @@
             android:orientation="vertical"
             invisibleIf="@{!isConnected}">
 
-            <FrameLayout
-                android:id="@+id/map_container"
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/gray" />
+                android:background="@color/gray"
+                app:cameraTargetLat="47.6305503608924"
+                app:cameraTargetLng="-122.13571166992188"
+                app:cameraZoom="11.5" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/reset_fab"

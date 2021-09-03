@@ -7,6 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.domain.store.testutil
 
+import com.google.android.gms.maps.model.LatLng
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.StoreEntity
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.City
@@ -14,7 +15,6 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapM
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MarkerType
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
-import com.microsoft.maps.Geopoint
 
 val storeEntity = StoreEntity(
     102,
@@ -36,7 +36,7 @@ val cityEntity = CityEntity(
     "Redmond",
     true,
     47.6305503608924,
-    -122.13073501155426
+    -122.13571166992188
 )
 
 val hiddenCityEntity = CityEntity(
@@ -66,7 +66,7 @@ val city = City(
     "Redmond",
     true,
     47.6305503608924,
-    -122.13073501155426
+    -122.13571166992188
 )
 
 val storeMarkerModel = MapMarkerModel(
@@ -74,6 +74,7 @@ val storeMarkerModel = MapMarkerModel(
     MarkerType.PIN,
     47.64304736313635,
     -122.13130676286585,
+    true,
     102
 )
 
@@ -81,26 +82,26 @@ val storeCenterMarkerModel = MapMarkerModel(
     "",
     MarkerType.CENTER,
     47.64304736313635,
-    -122.13130676286585,
+    -122.13130676286585
 )
 
 val cityMarkerModel = MapMarkerModel(
     "Redmond",
     MarkerType.CIRCLE,
     47.6305503608924,
-    -122.13073501155426
+    -122.13571166992188
 )
 
 val storeCityCenterMarkerModel = MapMarkerModel(
     "",
     MarkerType.CENTER,
     47.636798862014375,
-    -122.131020887210055
+    -122.133509216393865
 )
 
-val cityGeopoint = Geopoint(
+val cityGeopoint = LatLng(
     47.6305503608924,
-    -122.13073501155426
+    -122.13571166992188
 )
 
 const val QUINN_KEY = 1
