@@ -92,19 +92,10 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> noticeClickListener.onClick(true)}"
                 android:paddingTop="@dimen/normal_margin"
+                android:paddingBottom="@dimen/medium_padding"
                 android:text="@string/about_licenses_terms_title"
                 android:textAllCaps="true"
                 android:textColor="@color/white"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/licenses_terms_content"
-                style="@style/License.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> noticeClickListener.onClick(true)}"
-                android:paddingTop="@dimen/small_margin"
-                android:text="@string/about_licenses_terms_title"
-                android:textSize="@dimen/text_size_14"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feedback_single_screen_title"
@@ -112,7 +103,6 @@
                 visibleIf="@{!isDualMode}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
                 android:text="@string/about_feedback_title"
                 android:textSize="@dimen/text_size_18"/>
 
