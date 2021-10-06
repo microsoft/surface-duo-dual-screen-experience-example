@@ -19,13 +19,14 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Stor
 val storeEntity = StoreEntity(
     102,
     "Ana's",
-    "4568 Main St",
+    "4568 Second St",
     10,
     "Redmond, WA 98053",
     "(206)-555-0101",
     "ana@fabrikam.com",
     47.64304736313635,
     -122.13130676286585,
+    "Description",
     4.6f,
     86,
     2
@@ -35,7 +36,7 @@ val cityEntity = CityEntity(
     10,
     "Redmond",
     true,
-    47.6305503608924,
+    47.6205503608924,
     -122.13571166992188
 )
 
@@ -50,13 +51,14 @@ val hiddenCityEntity = CityEntity(
 val store = Store(
     102,
     "Ana's",
-    "4568 Main St",
+    "4568 Second St",
     10,
     "Redmond, WA 98053",
     "(206)-555-0101",
     "ana@fabrikam.com",
     47.64304736313635,
     -122.13130676286585,
+    "Description",
     4.6f,
     86,
     StoreImage.ANA
@@ -65,7 +67,7 @@ val store = Store(
 val city = City(
     "Redmond",
     true,
-    47.6305503608924,
+    47.6205503608924,
     -122.13571166992188
 )
 
@@ -88,19 +90,19 @@ val storeCenterMarkerModel = MapMarkerModel(
 val cityMarkerModel = MapMarkerModel(
     "Redmond",
     MarkerType.CIRCLE,
-    47.6305503608924,
+    47.6205503608924,
     -122.13571166992188
 )
 
 val storeCityCenterMarkerModel = MapMarkerModel(
     "",
     MarkerType.CENTER,
-    47.636798862014375,
+    47.631798862014375,
     -122.133509216393865
 )
 
 val cityGeopoint = LatLng(
-    47.6305503608924,
+    47.6205503608924,
     -122.13571166992188
 )
 

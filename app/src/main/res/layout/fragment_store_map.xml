@@ -17,6 +17,10 @@
         <variable
             name="rotationViewModel"
             type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
+
+        <variable
+            name="isScreenDual"
+            type="Boolean" />
     </data>
 
     <FrameLayout
@@ -25,15 +29,17 @@
         android:background="@color/gray">
 
         <include
+            android:id="@+id/no_internet_connection_single_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isDualPortraitMode="@{rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
             layout="@layout/no_internet_connection_single_mode" />
 
         <include
+            android:id="@+id/no_internet_connection_dual_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isDualPortraitMode="@{rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
             layout="@layout/no_internet_connection_dual_mode" />
 
 
@@ -49,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/gray"
-                app:cameraTargetLat="47.6305503608924"
+                app:cameraTargetLat="47.6205503608924"
                 app:cameraTargetLng="-122.13571166992188"
                 app:cameraZoom="11.5" />
 

@@ -17,6 +17,7 @@ data class StoreEntity(
     val emailAddress: String,
     val lat: Double,
     val lng: Double,
+    val description: String,
     val rating: Float,
     val reviewCount: Int,
     val imageId: Int

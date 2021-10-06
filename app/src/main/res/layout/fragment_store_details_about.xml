@@ -58,13 +58,13 @@
             style="@style/Paragraph.Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{@string/store_details_about(viewModel.selectedStore.name)}"
+            android:text="@{viewModel.selectedStore.description}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/store_details_about_images_barrier"
-            tools:text="@string/store_details_about" />
+            tools:text="@string/store_list_empty_message" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

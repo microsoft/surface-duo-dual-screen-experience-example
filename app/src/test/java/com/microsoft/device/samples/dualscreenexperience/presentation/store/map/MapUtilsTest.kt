@@ -51,8 +51,8 @@ class MapUtilsTest {
     @Test
     fun isInBoundsWhenBothLatLngFit() {
         val box = LatLngBounds(
-            LatLng(47.630, -122.136),
-            LatLng(47.631, -122.135)
+            LatLng(47.620, -122.136),
+            LatLng(47.621, -122.135)
         )
         assertTrue(box.isInBounds(cityMarkerModel))
     }

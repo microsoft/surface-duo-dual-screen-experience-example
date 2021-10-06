@@ -19,6 +19,7 @@ data class Store(
     val emailAddress: String,
     val lat: Double,
     val lng: Double,
+    val description: String,
     val rating: Float,
     val reviewCount: Int,
     val image: StoreImage?
@@ -34,6 +35,7 @@ data class Store(
             entity.emailAddress,
             entity.lat,
             entity.lng,
+            entity.description,
             entity.rating,
             entity.reviewCount,
             StoreImage.get(entity.imageId)

@@ -11,11 +11,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -58,7 +58,7 @@ class StoreMapFragment : Fragment() {
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
         binding?.rotationViewModel = rotationViewModel
-        binding?.isConnected = true
+        binding?.isScreenDual = viewModel.isNavigationAtStart()
 
         binding?.map?.onCreate(savedInstanceState)
 
@@ -82,16 +82,34 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupNetworkObserver() {
-        NetworkConnectionLiveData(context).observe(
-            viewLifecycleOwner,
-            { isConnected ->
-                binding?.isConnected = isConnected
+        activity?.applicationContext?.let {
+            if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(it) != ConnectionResult.SUCCESS) {
+                binding?.noInternetConnectionSingleMode?.apply {
+                    noInternetConnectionTitle.setText(R.string.no_google_services_title)
+                    noInternetConnectionDescription.setText(R.string.no_google_services_description)
+                    noInternetConnectionImageSingle.setImageResource(R.drawable.ic_no_google_services)
+                }
+
+                binding?.noInternetConnectionDualMode?.apply {
+                    noInternetConnectionTitle.setText(R.string.no_google_services_title)
+                    noInternetConnectionDescription.setText(R.string.no_google_services_description)
+                    noInternetConnectionImageDual.setImageResource(R.drawable.ic_no_google_services)
+                }
+
+                binding?.isConnected = false
+            } else {
+                NetworkConnectionLiveData(context).observe(
+                    viewLifecycleOwner,
+                    { isConnected ->
+                        binding?.isScreenDual = viewModel.isNavigationAtStart()
+                        binding?.isConnected = isConnected
+                    }
+                )
             }
-        )
+        }
     }
 
     private fun setupMap() {
-        setupInfoWindowAdapter()
         context?.let {
             googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(it, R.raw.map_style))
         }
@@ -121,6 +139,7 @@ class StoreMapFragment : Fragment() {
         viewModel.selectedCity.observe(
             viewLifecycleOwner,
             {
+                binding?.isScreenDual = viewModel.isNavigationAtStart()
                 viewModel.markersList.value?.let { newData ->
                     addMarkersToMap(newData)
                 }
@@ -134,6 +153,7 @@ class StoreMapFragment : Fragment() {
         viewModel.selectedStore.observe(
             viewLifecycleOwner,
             {
+                binding?.isScreenDual = viewModel.isNavigationAtStart()
                 changeActionBarTitle(viewModel.selectedCity.value, it)
                 unSelectAllMarkers()
                 selectMarker(it)
@@ -233,9 +253,6 @@ class StoreMapFragment : Fragment() {
                         }
                     }
                     MarkerType.CIRCLE -> {
-                        if (viewModel.shouldShowTouchCity()) {
-                            viewModel.disableShowTouchCity()
-                        }
                         viewModel.navigateToList(possibleMarker)
                     }
                     else -> {
@@ -276,30 +293,16 @@ class StoreMapFragment : Fragment() {
         googleMap?.addMarker {
             position(markerModel.toLatLng())
             title(markerModel.name)
-            val imageDrawable = if (viewModel.shouldShowTouchCity()) {
-                R.drawable.ic_circle_marker_touch
-            } else {
-                R.drawable.ic_circle_marker
-            }
             icon(
-                ResourcesCompat.getDrawable(resources, imageDrawable, null)
-                    ?.let { BitmapDescriptorFactory.fromBitmap(it.toBitmap()) }
+                markerFactory?.let { factory ->
+                    BitmapDescriptorFactory.fromBitmap(
+                        factory.createCircleBitmapWithText(
+                            getString(R.string.store_map_circle_touch_tutorial)
+                        )
+                    )
+                }
             )
-            infoWindowAnchor(0.5f, 1.15f)
-        }.also {
-            if (viewModel.shouldShowTouchCity()) {
-                it?.showInfoWindow()
-            }
         }
-
-    private fun setupInfoWindowAdapter() {
-        googleMap?.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
-            override fun getInfoWindow(p0: Marker): View? =
-                markerFactory?.createGrayViewWithText(getString(R.string.store_map_circle_touch_tutorial))
-
-            override fun getInfoContents(p0: Marker): View? = null
-        })
-    }
 
     override fun onStart() {
         super.onStart()
