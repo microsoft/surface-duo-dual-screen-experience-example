@@ -10,17 +10,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_main_about"
-        android:orderInCategory="100"
-        android:title="@string/toolbar_about"
-        android:icon="@drawable/ic_info"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/menu_main_dev_mode"
-        android:orderInCategory="200"
+        android:orderInCategory="100"
         android:title="@string/toolbar_dev_mode"
         app:actionLayout="@layout/dev_mode_layout"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_main_about"
+        android:orderInCategory="200"
+        android:title="@string/toolbar_about"
+        android:icon="@drawable/ic_info"
+        app:showAsAction="ifRoom"/>
 
 </menu>
