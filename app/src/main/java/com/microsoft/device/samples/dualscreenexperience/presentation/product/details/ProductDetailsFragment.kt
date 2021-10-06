@@ -8,10 +8,12 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.product.details
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.airbnb.lottie.LottieAnimationView
@@ -91,7 +93,7 @@ class ProductDetailsFragment : Fragment() {
                 setImageDrawable(
                     ContextCompat.getDrawable(
                         requireContext(),
-                        getProductDrawable(it.color, it.bodyShape)
+                        getProductDrawable(it.color, it.bodyShape, it.guitarType)
                     )
                 )
             }
@@ -123,6 +125,11 @@ class ProductDetailsFragment : Fragment() {
                 val fretsNumber = it?.fretsNumber ?: 0
                 binding?.productDetailsFrets?.titleString =
                     getString(R.string.product_details_frets_title, fretsNumber)
+                binding?.productDetailsTypeDescription?.text =
+                    SpannableStringBuilder()
+                        .append(getString(R.string.product_details_type_description, it?.name))
+                        .append(" ")
+                        .bold { append(getString(R.string.product_details_type_description_bold, it?.deliveryDays)) }
             }
         )
 
@@ -152,12 +159,28 @@ class ProductDetailsFragment : Fragment() {
             viewLifecycleOwner,
             {
                 val shape = customizeViewModel.selectedBodyShape.value
-                if (it != null && shape != null) {
+                val guitarType = customizeViewModel.selectedGuitarType.value
+                if (it != null && shape != null && guitarType != null) {
                     binding?.productDetailsImage?.setImageDrawable(
-                        ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape))
+                        ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape, guitarType))
                     )
                     binding?.productDetailsImage?.contentDescription =
-                        context?.getString(getProductContentDescription(it, shape))
+                        context?.getString(getProductContentDescription(it, shape, guitarType))
+                }
+            }
+        )
+
+        customizeViewModel.selectedGuitarType.observe(
+            viewLifecycleOwner,
+            {
+                val color = customizeViewModel.selectedBodyColor.value
+                val shape = customizeViewModel.selectedBodyShape.value
+                if (it != null && color != null && shape != null) {
+                    binding?.productDetailsImage?.setImageDrawable(
+                        ContextCompat.getDrawable(requireContext(), getProductDrawable(color, shape, it))
+                    )
+                    binding?.productDetailsImage?.contentDescription =
+                        context?.getString(getProductContentDescription(color, shape, it))
                 }
             }
         )

@@ -18,6 +18,7 @@ import androidx.fragment.app.activityViewModels
 import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentProductCustomizeBinding
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
@@ -89,6 +90,9 @@ class ProductCustomizeFragment : Fragment() {
                     if (viewModel.selectedBodyShape.value == null) {
                         viewModel.selectedBodyShape.value = it.bodyShape
                     }
+                    if (viewModel.selectedGuitarType.value == null) {
+                        viewModel.selectedGuitarType.value = it.guitarType
+                    }
                     viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
                         getBodyShape(updatedBodyShape)?.select()
                     }
@@ -117,14 +121,26 @@ class ProductCustomizeFragment : Fragment() {
             viewLifecycleOwner,
             {
                 val shape = viewModel.selectedBodyShape.value
-                if (it != null && shape != null) {
-                    setCustomizeImageDrawable(it, shape)
+                val guitarType = viewModel.selectedGuitarType.value
+                if (it != null && shape != null && guitarType != null) {
+                    setCustomizeImageDrawable(it, shape, guitarType)
 
                     colorViewList?.let { colorViews ->
                         if (colorViews.isEmpty()) {
                             addColorViews(binding?.productCustomizeColorContainer, shape.colorList, it)
                         }
                     }
+                }
+            }
+        )
+
+        viewModel.selectedGuitarType.observe(
+            viewLifecycleOwner,
+            {
+                val color = viewModel.selectedBodyColor.value
+                val shape = viewModel.selectedBodyShape.value
+                if (it != null && color != null && shape != null) {
+                    setCustomizeImageDrawable(color, shape, it)
                 }
             }
         )
@@ -144,27 +160,40 @@ class ProductCustomizeFragment : Fragment() {
                 }
             }
         }
+
+        binding?.productCustomizeTypeToggle?.setOnCheckedChangeListener { radioGroup, itemId ->
+            when (itemId) {
+                R.id.product_customize_type_bass ->
+                    if (viewModel.selectedGuitarType.value != GuitarType.BASS) {
+                        viewModel.selectedGuitarType.value = GuitarType.BASS
+                    }
+                R.id.product_customize_type_normal ->
+                    if (viewModel.selectedGuitarType.value != GuitarType.NORMAL) {
+                        viewModel.selectedGuitarType.value = GuitarType.NORMAL
+                    }
+            }
+        }
     }
 
-    private fun setCustomizeImageDrawable(color: ProductColor, shape: ProductType) {
+    private fun setCustomizeImageDrawable(color: ProductColor, shape: ProductType, guitarType: GuitarType) {
         binding?.productCustomizeImage?.setImageBitmap(
             ContextCompat.getDrawable(
                 requireContext(),
-                getProductDrawable(color, shape)
+                getProductDrawable(color, shape, guitarType)
             )?.toBitmap()?.rotate(ROTATE_HORIZONTALLY)
         )
         binding?.productCustomizeImage?.contentDescription =
-            context?.getString(getProductContentDescription(color, shape))
+            context?.getString(getProductContentDescription(color, shape, guitarType))
 
         binding?.productCustomizeImageLandscape?.setImageDrawable(
             ContextCompat.getDrawable(
                 requireContext(),
-                getProductDrawable(color, shape)
+                getProductDrawable(color, shape, guitarType)
             )
         )
 
         binding?.productCustomizeImageLandscape?.contentDescription =
-            context?.getString(getProductContentDescription(color, shape))
+            context?.getString(getProductContentDescription(color, shape, guitarType))
     }
 
     private fun addColorViews(parentView: ViewGroup?, colorList: List<ProductColor>, defaultSelected: ProductColor) {

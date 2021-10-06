@@ -20,6 +20,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.microsoft.device.samples.dualscreenexperience.R
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -206,8 +207,10 @@ val product = Product(
     "Wood body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
     3.1f,
     21,
+    5,
     ProductType.CLASSIC,
-    ProductColor.ORANGE
+    ProductColor.ORANGE,
+    GuitarType.BASS
 )
 
 const val PRODUCT_FIRST_POSITION = 0

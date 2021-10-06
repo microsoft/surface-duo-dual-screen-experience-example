@@ -12,14 +12,15 @@
     <color name="dark_white">#E7DFE8</color>
     <color name="light_gray">#C4C4C4</color>
     <color name="gray">#1F2228</color>
-    <color name="dark_gray">#303030</color>
+    <color name="dark_gray">#222222</color>
     <color name="medium_gray">#333333</color>
     <color name="item_tint_gray">#6E6E6E</color>
     <color name="license_gray">#9A9A9A</color>
-    <color name="resource_background">#222222</color>
+    <color name="toggle_gray">#2A3037</color>
 
     <color name="orange">#F6B63D</color>
     <color name="dark_orange">#B58937</color>
+    <color name="toggle_text_unselected">#ACACAC</color>
 
     <color name="gold">#DDCAB3</color>
     <color name="dark_blue">#2A3037</color>

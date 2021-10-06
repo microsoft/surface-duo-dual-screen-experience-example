@@ -28,6 +28,7 @@
     <dimen name="medium_padding">24dp</dimen>
     <dimen name="regular_padding">20dp</dimen>
     <dimen name="normal_padding">16dp</dimen>
+    <dimen name="half_medium_padding">12dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="micro_padding">4dp</dimen>
     <dimen name="nano_padding">2dp</dimen>

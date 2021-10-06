@@ -8,39 +8,62 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.product.util
 
 import com.microsoft.device.samples.dualscreenexperience.R
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 
-fun getProductDrawable(color: ProductColor, type: ProductType): Int =
+fun getProductDrawable(color: ProductColor, type: ProductType, guitarType: GuitarType): Int =
     when {
-        type == ProductType.ROCK && color == ProductColor.DARK_RED -> R.drawable.red_rock_guitar
-        type == ProductType.ROCK && color == ProductColor.GRAY -> R.drawable.gray_rock_guitar
-        type == ProductType.CLASSIC && color == ProductColor.BLUE -> R.drawable.blue_classic_guitar
-        type == ProductType.CLASSIC && color == ProductColor.YELLOW -> R.drawable.yellow_classic_guitar
-        type == ProductType.CLASSIC && color == ProductColor.WHITE -> R.drawable.white_classic_guitar
-        type == ProductType.CLASSIC && color == ProductColor.ORANGE -> R.drawable.orange_classic_guitar
-        type == ProductType.CLASSIC && color == ProductColor.AQUA -> R.drawable.aqua_classic_guitar
-        type == ProductType.ELECTRIC && color == ProductColor.LIGHT_GRAY -> R.drawable.light_gray_electric_guitar
-        type == ProductType.ELECTRIC && color == ProductColor.MUSTARD -> R.drawable.yellow_electric_guitar
-        type == ProductType.ELECTRIC && color == ProductColor.WHITE -> R.drawable.white_electric_guitar
-        type == ProductType.HARDROCK && color == ProductColor.RED -> R.drawable.red_hardrock_guitar
+        type == ProductType.ROCK && color == ProductColor.DARK_RED && guitarType == GuitarType.BASS -> R.drawable.red_rock_guitar
+        type == ProductType.ROCK && color == ProductColor.DARK_RED && guitarType == GuitarType.NORMAL -> R.drawable.red_rock_guitar_normal
+        type == ProductType.ROCK && color == ProductColor.GRAY && guitarType == GuitarType.BASS -> R.drawable.gray_rock_guitar
+        type == ProductType.ROCK && color == ProductColor.GRAY && guitarType == GuitarType.NORMAL -> R.drawable.gray_rock_guitar_normal
+        type == ProductType.CLASSIC && color == ProductColor.BLUE && guitarType == GuitarType.BASS -> R.drawable.blue_classic_guitar
+        type == ProductType.CLASSIC && color == ProductColor.BLUE && guitarType == GuitarType.NORMAL -> R.drawable.blue_classic_guitar_normal
+        type == ProductType.CLASSIC && color == ProductColor.YELLOW && guitarType == GuitarType.BASS -> R.drawable.yellow_classic_guitar
+        type == ProductType.CLASSIC && color == ProductColor.YELLOW && guitarType == GuitarType.NORMAL -> R.drawable.yellow_classic_guitar_normal
+        type == ProductType.CLASSIC && color == ProductColor.WHITE && guitarType == GuitarType.BASS -> R.drawable.white_classic_guitar
+        type == ProductType.CLASSIC && color == ProductColor.WHITE && guitarType == GuitarType.NORMAL -> R.drawable.white_classic_guitar_normal
+        type == ProductType.CLASSIC && color == ProductColor.ORANGE && guitarType == GuitarType.BASS -> R.drawable.orange_classic_guitar
+        type == ProductType.CLASSIC && color == ProductColor.ORANGE && guitarType == GuitarType.NORMAL -> R.drawable.orange_classic_guitar_normal
+        type == ProductType.CLASSIC && color == ProductColor.AQUA && guitarType == GuitarType.BASS -> R.drawable.aqua_classic_guitar
+        type == ProductType.CLASSIC && color == ProductColor.AQUA && guitarType == GuitarType.NORMAL -> R.drawable.aqua_classic_guitar_normal
+        type == ProductType.ELECTRIC && color == ProductColor.LIGHT_GRAY && guitarType == GuitarType.BASS -> R.drawable.light_gray_electric_guitar
+        type == ProductType.ELECTRIC && color == ProductColor.LIGHT_GRAY && guitarType == GuitarType.NORMAL -> R.drawable.light_gray_electric_guitar_normal
+        type == ProductType.ELECTRIC && color == ProductColor.MUSTARD && guitarType == GuitarType.BASS -> R.drawable.yellow_electric_guitar
+        type == ProductType.ELECTRIC && color == ProductColor.MUSTARD && guitarType == GuitarType.NORMAL -> R.drawable.yellow_electric_guitar_normal
+        type == ProductType.ELECTRIC && color == ProductColor.WHITE && guitarType == GuitarType.BASS -> R.drawable.white_electric_guitar
+        type == ProductType.ELECTRIC && color == ProductColor.WHITE && guitarType == GuitarType.NORMAL -> R.drawable.white_electric_guitar_normal
+        type == ProductType.HARDROCK && color == ProductColor.RED && guitarType == GuitarType.BASS -> R.drawable.red_hardrock_guitar
+        type == ProductType.HARDROCK && color == ProductColor.RED && guitarType == GuitarType.NORMAL -> R.drawable.red_hardrock_guitar_normal
         else -> R.drawable.orange_classic_guitar
     }
 
-fun getProductContentDescription(color: ProductColor, type: ProductType): Int =
+fun getProductContentDescription(color: ProductColor, type: ProductType, guitarType: GuitarType): Int =
     when {
-        type == ProductType.ROCK && color == ProductColor.DARK_RED -> R.string.product_rock_dark_red
-        type == ProductType.ROCK && color == ProductColor.GRAY -> R.string.product_rock_gray
-        type == ProductType.CLASSIC && color == ProductColor.BLUE -> R.string.product_classic_blue
-        type == ProductType.CLASSIC && color == ProductColor.YELLOW -> R.string.product_classic_yellow
-        type == ProductType.CLASSIC && color == ProductColor.WHITE -> R.string.product_classic_white
-        type == ProductType.CLASSIC && color == ProductColor.ORANGE -> R.string.product_classic_orange
-        type == ProductType.CLASSIC && color == ProductColor.AQUA -> R.string.product_classic_aqua
-        type == ProductType.ELECTRIC && color == ProductColor.LIGHT_GRAY -> R.string.product_electric_light_gray
-        type == ProductType.ELECTRIC && color == ProductColor.MUSTARD -> R.string.product_electric_mustard
-        type == ProductType.ELECTRIC && color == ProductColor.WHITE -> R.string.product_electric_white
-        type == ProductType.HARDROCK && color == ProductColor.RED -> R.string.product_hardrock_red
-        else -> R.string.product_classic_orange
+        type == ProductType.ROCK && color == ProductColor.DARK_RED && guitarType == GuitarType.BASS -> R.string.product_rock_dark_red_bass
+        type == ProductType.ROCK && color == ProductColor.DARK_RED && guitarType == GuitarType.NORMAL -> R.string.product_rock_dark_red_normal
+        type == ProductType.ROCK && color == ProductColor.GRAY && guitarType == GuitarType.BASS -> R.string.product_rock_gray_bass
+        type == ProductType.ROCK && color == ProductColor.GRAY && guitarType == GuitarType.NORMAL -> R.string.product_rock_gray_normal
+        type == ProductType.CLASSIC && color == ProductColor.BLUE && guitarType == GuitarType.BASS -> R.string.product_classic_blue_bass
+        type == ProductType.CLASSIC && color == ProductColor.BLUE && guitarType == GuitarType.NORMAL -> R.string.product_classic_blue_normal
+        type == ProductType.CLASSIC && color == ProductColor.YELLOW && guitarType == GuitarType.BASS -> R.string.product_classic_yellow_bass
+        type == ProductType.CLASSIC && color == ProductColor.YELLOW && guitarType == GuitarType.NORMAL -> R.string.product_classic_yellow_normal
+        type == ProductType.CLASSIC && color == ProductColor.WHITE && guitarType == GuitarType.BASS -> R.string.product_classic_white_bass
+        type == ProductType.CLASSIC && color == ProductColor.WHITE && guitarType == GuitarType.NORMAL -> R.string.product_classic_white_normal
+        type == ProductType.CLASSIC && color == ProductColor.ORANGE && guitarType == GuitarType.BASS -> R.string.product_classic_orange_bass
+        type == ProductType.CLASSIC && color == ProductColor.ORANGE && guitarType == GuitarType.NORMAL -> R.string.product_classic_orange_normal
+        type == ProductType.CLASSIC && color == ProductColor.AQUA && guitarType == GuitarType.BASS -> R.string.product_classic_aqua_bass
+        type == ProductType.CLASSIC && color == ProductColor.AQUA && guitarType == GuitarType.NORMAL -> R.string.product_classic_aqua_normal
+        type == ProductType.ELECTRIC && color == ProductColor.LIGHT_GRAY && guitarType == GuitarType.BASS -> R.string.product_electric_light_gray_bass
+        type == ProductType.ELECTRIC && color == ProductColor.LIGHT_GRAY && guitarType == GuitarType.NORMAL -> R.string.product_electric_light_gray_normal
+        type == ProductType.ELECTRIC && color == ProductColor.MUSTARD && guitarType == GuitarType.BASS -> R.string.product_electric_mustard_bass
+        type == ProductType.ELECTRIC && color == ProductColor.MUSTARD && guitarType == GuitarType.NORMAL -> R.string.product_electric_mustard_normal
+        type == ProductType.ELECTRIC && color == ProductColor.WHITE && guitarType == GuitarType.BASS -> R.string.product_electric_white_bass
+        type == ProductType.ELECTRIC && color == ProductColor.WHITE && guitarType == GuitarType.NORMAL -> R.string.product_electric_white_normal
+        type == ProductType.HARDROCK && color == ProductColor.RED && guitarType == GuitarType.BASS -> R.string.product_hardrock_red_bass
+        type == ProductType.HARDROCK && color == ProductColor.RED && guitarType == GuitarType.NORMAL -> R.string.product_hardrock_red_normal
+        else -> R.string.product_classic_orange_bass
     }
 
 fun getColorRes(productColor: ProductColor): Int =

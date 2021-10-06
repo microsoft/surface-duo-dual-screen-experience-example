@@ -128,7 +128,6 @@
             android:layout_marginStart="@dimen/large_margin"
             android:layout_marginEnd="@dimen/normal_margin"
             android:layout_marginBottom="@dimen/normal_margin"
-            android:text="@{@string/product_details_type_description(viewModel.selectedProduct.name)}"
             android:textSize="@dimen/text_size_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/product_details_button_barrier_horizontal"
@@ -143,12 +142,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/small_margin"
             android:text="@string/product_details_customize_button"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/product_details_type_description"
             app:layout_constraintEnd_toEndOf="@id/product_details_image"
             app:layout_constraintStart_toStartOf="@id/product_details_image"
-            app:layout_constraintTop_toBottomOf="@id/product_details_type_title"
+            app:layout_constraintTop_toTopOf="@id/product_details_type_description"
             tools:visibility="visible" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -156,14 +154,12 @@
             visibleIf="@{isInCustomizeMode}"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:layout_marginEnd="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/product_details_type_description"
             app:layout_constraintEnd_toEndOf="@id/product_details_image"
             app:layout_constraintStart_toStartOf="@id/product_details_image"
-            app:layout_constraintTop_toBottomOf="@id/product_details_type_title"
+            app:layout_constraintTop_toTopOf="@id/product_details_type_description"
             app:lottie_autoPlay="false"
-            app:lottie_rawRes="@raw/place_order_animation"
+            app:lottie_rawRes="@raw/add_to_order_animation"
             tools:background="@drawable/rounded_rectangle_button"
             tools:visibility="gone"/>
 

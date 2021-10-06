@@ -18,7 +18,7 @@ import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderI
         OrderEntity::class,
         OrderItemEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

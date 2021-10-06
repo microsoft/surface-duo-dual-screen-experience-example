@@ -45,7 +45,7 @@ fun getStoreImageRes(view: ImageView, image: StoreImage?) {
 @BindingAdapter("productImage")
 fun getProductImageRes(view: ImageView, product: Product?) {
     product?.let {
-        getProductDrawable(it.color, it.bodyShape).let { resId ->
+        getProductDrawable(it.color, it.bodyShape, it.guitarType).let { resId ->
             view.setImageDrawable(ContextCompat.getDrawable(view.context, resId))
         }
     }
@@ -65,7 +65,7 @@ fun getAssetImage(view: ImageView, imagePath: String?) {
 @BindingAdapter("orderItemImage")
 fun getOrderImageRes(view: ImageView, orderItem: OrderItem?) {
     orderItem?.let {
-        getProductDrawable(it.color, it.bodyShape).let { resId ->
+        getProductDrawable(it.color, it.bodyShape, it.guitarType).let { resId ->
             view.setImageDrawable(ContextCompat.getDrawable(view.context, resId))
         }
     }

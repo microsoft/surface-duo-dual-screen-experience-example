@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.AddItemToOrderUseCase
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -29,6 +30,7 @@ class ProductCustomizeViewModel @Inject constructor(
     val customizedProduct = MutableLiveData<Product?>()
     val selectedBodyShape = SingleLiveEvent<ProductType?>(null)
     val selectedBodyColor = MutableLiveData<ProductColor?>(null)
+    val selectedGuitarType = MutableLiveData<GuitarType?>(null)
 
     fun initCustomizedProduct(productId: Long) {
         viewModelScope.launch {
@@ -43,6 +45,7 @@ class ProductCustomizeViewModel @Inject constructor(
             customizedProduct.value?.apply {
                 selectedBodyShape.value?.let { bodyShape = it }
                 selectedBodyColor.value?.let { color = it }
+                selectedGuitarType.value?.let { guitarType = it }
             }?.let { customizedProduct ->
                 addItemUseCase.addToOrder(OrderItem(customizedProduct))
             }
@@ -53,5 +56,6 @@ class ProductCustomizeViewModel @Inject constructor(
         customizedProduct.value = null
         selectedBodyShape.value = null
         selectedBodyColor.value = null
+        selectedGuitarType.value = null
     }
 }
