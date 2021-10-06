@@ -56,19 +56,34 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener, ScreenIn
     private fun setupViewPager() {
         binding?.pager?.apply {
             adapter = catalogAdapter
-            currentItem = viewModel.catalogItemPosition
+            currentItem = viewModel.catalogItemPosition.value ?: 0
             addOnPageChangeListener(this@CatalogListFragment)
         }
 
         binding?.verticalPager?.apply {
             adapter = catalogAdapter
-            currentItem = viewModel.catalogItemPosition
+            currentItem = viewModel.catalogItemPosition.value ?: 0
             addOnPageChangeListener(this@CatalogListFragment)
         }
     }
 
     private fun setupObservers() {
         viewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter?.refreshData() })
+        viewModel.catalogItemPosition.observe(
+            viewLifecycleOwner,
+            { newPageNumber ->
+                binding?.verticalPager?.apply {
+                    if (currentItem != newPageNumber) {
+                        setCurrentItem(newPageNumber, true)
+                    }
+                }
+                binding?.pager?.apply {
+                    if (currentItem != newPageNumber) {
+                        setCurrentItem(newPageNumber, true)
+                    }
+                }
+            }
+        )
     }
 
     override fun onResume() {
@@ -101,7 +116,7 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener, ScreenIn
     }
 
     override fun onPageSelected(position: Int) {
-        viewModel.catalogItemPosition = position
+        viewModel.catalogItemPosition.value = position
     }
 
     override fun onPageScrollStateChanged(state: Int) {

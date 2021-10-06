@@ -23,7 +23,7 @@ class CatalogListViewModel @Inject constructor(
 ) : ViewModel(), DataListProvider<CatalogItem> {
     var catalogItemList = MutableLiveData<List<CatalogItem>?>(null)
     var isScrollingEnabled = MutableLiveData(false)
-    var catalogItemPosition = 0
+    var catalogItemPosition = MutableLiveData(0)
 
     init {
         viewModelScope.launch {

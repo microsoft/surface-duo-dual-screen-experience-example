@@ -69,6 +69,11 @@ class CatalogItemFragment : Fragment() {
                     .apply {
                         catalogItem = this@CatalogItemFragment.catalogItem
                         pageNumber = this@CatalogItemFragment.pageNumber
+
+                        textSecond.setOnClickListener { viewModel.catalogItemPosition.value = 1 }
+                        textThird.setOnClickListener { viewModel.catalogItemPosition.value = 2 }
+                        textFourth.setOnClickListener { viewModel.catalogItemPosition.value = 3 }
+                        textFifth.setOnClickListener { viewModel.catalogItemPosition.value = 5 }
                     }
             CatalogViewType.Layout2 ->
                 FragmentCatalogItemPage2Binding

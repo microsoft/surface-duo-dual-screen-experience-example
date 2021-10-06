@@ -48,10 +48,66 @@
                     android:layout_marginTop="@dimen/catalog_margin_very_large"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:text="@{catalogItem.primaryDescription}"
+                    android:textSize="@dimen/text_size_18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_second"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_top_margin"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:text="@{catalogItem.secondaryDescription}"
                     android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/text_first" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_third"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_top_margin"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:text="@{catalogItem.thirdDescription}"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_second" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_fourth"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_top_margin"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:text="@{catalogItem.fourthDescription}"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_third" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_fifth"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_top_margin"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:text="@{catalogItem.fifthDescription}"
+                    android:textSize="@dimen/text_size_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_fourth" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
