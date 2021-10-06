@@ -11,6 +11,7 @@
     <!-- Dual-mode dimens -->
 
     <dimen name="launch_image_bottom_margin">48dp</dimen>
+    <dimen name="launch_image_height">320dp</dimen>
 
     <dimen name="order_empty_image_height">164dp</dimen>
     <dimen name="order_empty_message_size">16sp</dimen>

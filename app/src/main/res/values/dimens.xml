@@ -12,7 +12,6 @@
     <dimen name="tutorial_tip_horizontal_margin">20dp</dimen>
     <dimen name="tutorial_tip_height">12dp</dimen>
 
-    <dimen name="button_height">40dp</dimen>
     <dimen name="button_radius">50dp</dimen>
     <dimen name="small_button_radius">4dp</dimen>
     <dimen name="medium_button_radius">8dp</dimen>
@@ -55,7 +54,6 @@
     <dimen name="tab_indicator_margin">10dp</dimen>
 
     <dimen name="bottom_nav_border_size">1dp</dimen>
-    <dimen name="delimiter_size">1dp</dimen>
 
     <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
@@ -80,6 +78,7 @@
     <!-- Single-mode dimens -->
 
     <dimen name="launch_image_bottom_margin">0dp</dimen>
+    <dimen name="launch_image_height">220dp</dimen>
 
     <dimen name="order_empty_image_height">192dp</dimen>
     <dimen name="order_empty_message_size">18sp</dimen>
@@ -94,6 +93,5 @@
     <dimen name="catalog_margin_very_large">40dp</dimen>
     <dimen name="catalog_horizontal_margin">36dp</dimen>
     <dimen name="catalog_top_margin">20dp</dimen>
-    <dimen name="catalog_bottom_margin">32dp</dimen>
     <dimen name="catalog_max_image_height">200dp</dimen>
 </resources>
