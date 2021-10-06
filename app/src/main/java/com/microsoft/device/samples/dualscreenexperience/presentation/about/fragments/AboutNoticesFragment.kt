@@ -8,6 +8,8 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +57,18 @@ class AboutNoticesFragment : Fragment() {
                     view: WebView,
                     request: WebResourceRequest
                 ): WebResourceResponse? {
-                    return assetLoader.shouldInterceptRequest(request.url)
+                    if (request.url.toString() == LicensesConfig.softwareNoticesFilePath) {
+                        return assetLoader.shouldInterceptRequest(request.url)
+                    }
+                    return null
+                }
+
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    openUrl(request?.url?.toString())
+                    return true
                 }
             }
 
@@ -68,6 +81,13 @@ class AboutNoticesFragment : Fragment() {
 
             binding?.noticeWebView?.loadUrl(LicensesConfig.softwareNoticesFilePath)
         }
+    }
+
+    private fun openUrl(url: String?) {
+        startActivity(
+            Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        )
     }
 
     override fun onDestroyView() {

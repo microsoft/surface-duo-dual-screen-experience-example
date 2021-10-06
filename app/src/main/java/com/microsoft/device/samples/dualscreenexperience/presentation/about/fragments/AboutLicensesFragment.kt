@@ -10,15 +10,18 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.about.fra
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutLicensesBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.OPEN_IN_APP
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.addClickableLink
 
 class AboutLicensesFragment : Fragment() {
 
@@ -36,6 +39,7 @@ class AboutLicensesFragment : Fragment() {
         binding?.isDualMode = rotationViewModel.isDualMode.value
         binding?.linksItems?.itemClickListener = viewModel.linkClickListener
         binding?.noticeClickListener = viewModel.noticeClickListener
+        binding?.itemClickListener = viewModel.linkClickListener
         return binding?.root
     }
 
@@ -43,6 +47,7 @@ class AboutLicensesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
+        setupDescriptionText()
     }
 
     private fun setupObservers() {
@@ -52,6 +57,19 @@ class AboutLicensesFragment : Fragment() {
             {
                 it?.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
             }
+        )
+    }
+
+    private fun setupDescriptionText() {
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(view: View) {
+                openUrl(getString(R.string.github_issues_url))
+            }
+        }
+
+        binding?.feedbackSingleScreenDescription?.addClickableLink(
+            getString(R.string.about_feedback_description_clickable),
+            clickableSpan
         )
     }
 

@@ -14,6 +14,10 @@
         <variable
             name="noticeClickListener"
             type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
+
+        <variable
+            name="itemClickListener"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;String&gt;" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -59,22 +63,12 @@
                 android:text="@string/about_resources_title"
                 android:textSize="@dimen/text_size_18"/>
 
-            <View
-                visibleIf="@{isDualMode}"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/normal_margin" />
-
             <include
                 android:id="@+id/links_items"
                 layout="@layout/item_about_links"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/large_margin"/>
-
-            <View
-                visibleIf="@{isDualMode}"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/large_margin" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/licenses_title"
@@ -91,11 +85,60 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> noticeClickListener.onClick(true)}"
-                android:paddingTop="@dimen/normal_margin"
-                android:paddingBottom="@dimen/medium_padding"
+                android:paddingTop="@dimen/normal_padding"
+                android:paddingBottom="@dimen/normal_padding"
                 android:text="@string/about_licenses_terms_title"
                 android:textAllCaps="true"
                 android:textColor="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/license_terms_other_title"
+                style="@style/License.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/normal_padding"
+                android:text="@string/about_licenses_terms_other_title"
+                android:textAllCaps="true"
+                android:textColor="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/license_privacy"
+                style="@style/License.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> itemClickListener.onClick(@string/about_licenses_privacy_link)}"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingBottom="@dimen/small_padding"
+                android:text="@string/about_licenses_privacy_title"
+                android:textSize="@dimen/text_size_14" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/license_maps_text"
+                style="@style/License.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_licenses_maps_text"
+                android:textSize="@dimen/text_size_14" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/license_maps_terms"
+                style="@style/License.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> itemClickListener.onClick(@string/about_licenses_maps_terms_link)}"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingBottom="@dimen/small_padding"
+                android:text="@string/about_licenses_maps_terms_title"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/license_maps_privacy"
+                style="@style/License.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> itemClickListener.onClick(@string/about_licenses_maps_privacy_link)}"
+                android:paddingTop="@dimen/small_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:text="@string/about_licenses_maps_privacy_title"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feedback_single_screen_title"
