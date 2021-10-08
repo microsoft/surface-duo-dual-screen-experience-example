@@ -77,11 +77,11 @@ class StoreMapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupNetworkObserver()
+        setupMapAvailabilityMessage()
         setupRecenterButton()
     }
 
-    private fun setupNetworkObserver() {
+    private fun setupMapAvailabilityMessage() {
         activity?.applicationContext?.let {
             if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(it) != ConnectionResult.SUCCESS) {
                 binding?.noInternetConnectionSingleMode?.apply {

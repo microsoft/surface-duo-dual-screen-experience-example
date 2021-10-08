@@ -163,14 +163,8 @@ class ProductCustomizeFragment : Fragment() {
 
         binding?.productCustomizeTypeToggle?.setOnCheckedChangeListener { radioGroup, itemId ->
             when (itemId) {
-                R.id.product_customize_type_bass ->
-                    if (viewModel.selectedGuitarType.value != GuitarType.BASS) {
-                        viewModel.selectedGuitarType.value = GuitarType.BASS
-                    }
-                R.id.product_customize_type_normal ->
-                    if (viewModel.selectedGuitarType.value != GuitarType.NORMAL) {
-                        viewModel.selectedGuitarType.value = GuitarType.NORMAL
-                    }
+                R.id.product_customize_type_bass -> viewModel.selectedGuitarType.value = GuitarType.BASS
+                R.id.product_customize_type_normal -> viewModel.selectedGuitarType.value = GuitarType.NORMAL
             }
         }
     }

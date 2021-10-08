@@ -17,6 +17,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Pr
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.usecases.GetProductByIdUseCase
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.DistinctValueLiveData
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ class ProductCustomizeViewModel @Inject constructor(
     val customizedProduct = MutableLiveData<Product?>()
     val selectedBodyShape = SingleLiveEvent<ProductType?>(null)
     val selectedBodyColor = MutableLiveData<ProductColor?>(null)
-    val selectedGuitarType = MutableLiveData<GuitarType?>(null)
+    val selectedGuitarType = DistinctValueLiveData<GuitarType?>(null)
 
     fun initCustomizedProduct(productId: Long) {
         viewModelScope.launch {
