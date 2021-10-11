@@ -19,6 +19,8 @@ data class CatalogItem(
     val primaryDescription: String,
     val secondaryDescription: String?,
     val thirdDescription: String?,
+    val fourthDescription: String?,
+    val fifthDescription: String?,
     val firstPicture: String?,
     val secondPicture: String?,
     val thirdPicture: String?
@@ -32,6 +34,8 @@ fun CatalogItemEntity.toCatalogItem() =
         primaryDescription = this.primaryDescription,
         secondaryDescription = this.secondaryDescription,
         thirdDescription = this.thirdDescription,
+        fourthDescription = this.fourthDescription,
+        fifthDescription = this.fifthDescription,
         firstPicture = this.firstPicture,
         secondPicture = this.secondPicture,
         thirdPicture = this.thirdPicture
@@ -39,7 +43,7 @@ fun CatalogItemEntity.toCatalogItem() =
 
 enum class CatalogViewType(var typeId: Int) {
 
-    // Layout with one long text
+    // Layout with Table Of Contents
     Layout1(1),
 
     // Layout with image-text, long text, two images

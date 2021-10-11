@@ -16,6 +16,8 @@ val productEntity = ProductEntity(
     "Wood body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
     3.1f,
     21,
+    3,
     2,
-    5
+    5,
+    0
 )

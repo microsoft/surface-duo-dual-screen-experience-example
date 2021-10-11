@@ -32,6 +32,15 @@ class MapMarkerFactory(context: Context) {
         val textView = container.findViewById<TextView>(R.id.text_marker)
         textView.text = text
 
+        return createBitmapFromView(container)
+    }
+
+    fun createCircleBitmapWithText(text: String): Bitmap {
+        infoWindowContainer.findViewById<TextView>(R.id.text_marker).text = text
+        return createBitmapFromView(infoWindowContainer)
+    }
+
+    private fun createBitmapFromView(container: View): Bitmap {
         val measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         container.measure(measureSpec, measureSpec)
 
@@ -44,9 +53,5 @@ class MapMarkerFactory(context: Context) {
         val canvas = Canvas(bitmap)
         container.draw(canvas)
         return bitmap
-    }
-
-    fun createGrayViewWithText(text: String): View = infoWindowContainer.also {
-        it.findViewById<TextView>(R.id.text_marker).text = text
     }
 }

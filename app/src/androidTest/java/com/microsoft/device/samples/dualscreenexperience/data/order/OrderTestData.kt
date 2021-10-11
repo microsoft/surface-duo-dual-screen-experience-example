@@ -18,6 +18,7 @@ val firstOrderItemEntity = OrderItemEntity(
     price = productEntity.price,
     typeId = productEntity.typeId,
     colorId = productEntity.colorId,
+    guitarTypeId = productEntity.guitarTypeId,
     quantity = 1
 )
 

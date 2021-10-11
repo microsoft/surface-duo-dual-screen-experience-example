@@ -10,15 +10,15 @@
 
     <!-- Launcher -->
 
-    <string name="launch_description">A mock application experience that showcases the benefits of various design patterns for dual-screen foldable devices in a mobile, on-the-go scenario. Developers and designers can use this app as a conversation starter for their own explorations. To see the benefits of foldables in this use case, please span/maximize the application.</string>
+    <string name="launch_description">A mock application experience that showcases the benefits of various design patterns for dual-screen foldable devices in a mobile, on-the-go scenario. Developers and designers can use this app as a conversation starter for their own explorations.</string>
     <string name="launch_button">Launch</string>
     <string name="tutorial_launch_text">Drag the app across the hinge to span the app</string>
 
     <!-- Main -->
 
     <string name="nav_stores_title">Stores</string>
-    <string name="nav_catalog_title">Catalog</string>
-    <string name="nav_products_title">Products</string>
+    <string name="nav_catalog_title">New Guitars and Bass Guitars</string>
+    <string name="nav_products_title">Product Details and Customization</string>
     <string name="nav_order_title">Order</string>
 
     <!-- Stores -->
@@ -35,12 +35,11 @@
 
     <string name="store_details_about_tab">About</string>
     <string name="store_details_contact_tab">Contact</string>
-    <string name="store_details_about">%1$s Music is family owned and operated and has been in business since 1931. After all these years, we are still passionate about helping others make music. Whether you\'re picking up the guitar for the very first time or a first-chair virtuoso, %1$s Music gives musicians the tools they need to pursue their passion.</string>
     <string name="store_details_title">Guitar Store</string>
     <string name="address_label">Address:</string>
     <string name="contact_info_label">Owner Contact Info:</string>
     <string name="store_map_recenter">Re-center map</string>
-    <string name="store_map_circle_touch_tutorial">Tap to check other store locations</string>
+    <string name="store_map_circle_touch_tutorial">Visit these stores today</string>
 
     <!-- Products -->
 
@@ -51,24 +50,38 @@
     <string name="product_details_frets_description">Medium-Jumbo</string>
 
     <string name="product_details_type_title">Electric Guitar</string>
-    <string name="product_details_type_description">%1$s is the pinnacle of craftsmanship, quality, and sound excellence.</string>
+    <string name="product_details_type_description">Expect your %1$s Guitar to be delivered in the </string>
+    <string name="product_details_type_description_bold">next %1$d business days.</string>
 
     <string name="product_details_customize_button">Customize</string>
 
+    <string name="product_customize_type_bass">Bass</string>
+    <string name="product_customize_type_normal">Normal</string>
     <string name="product_customize_color_title">Color</string>
     <string name="product_customize_body_title">Body</string>
 
-    <string name="product_rock_dark_red">Guitar of type dark red rock</string>
-    <string name="product_rock_gray">Guitar of type gray rock</string>
-    <string name="product_classic_blue">Guitar of type blue classic</string>
-    <string name="product_classic_yellow">Guitar of type yellow classic</string>
-    <string name="product_classic_white">Guitar of type white classic</string>
-    <string name="product_classic_orange">Guitar of type orange classic</string>
-    <string name="product_classic_aqua">Guitar of type aqua classic</string>
-    <string name="product_electric_light_gray">Guitar of type light gray electric</string>
-    <string name="product_electric_mustard">Guitar of type mustard electric</string>
-    <string name="product_electric_white">Guitar of type white electric</string>
-    <string name="product_hardrock_red">Guitar of type red hardrock</string>
+    <string name="product_rock_dark_red_bass">Guitar of type dark red rock bass</string>
+    <string name="product_rock_dark_red_normal">Guitar of type dark red rock normal</string>
+    <string name="product_rock_gray_bass">Guitar of type gray rock bass</string>
+    <string name="product_rock_gray_normal">Guitar of type gray rock normal</string>
+    <string name="product_classic_blue_bass">Guitar of type blue classic bass</string>
+    <string name="product_classic_blue_normal">Guitar of type blue classic normal</string>
+    <string name="product_classic_yellow_bass">Guitar of type yellow classic bass</string>
+    <string name="product_classic_yellow_normal">Guitar of type yellow classic normal</string>
+    <string name="product_classic_white_bass">Guitar of type white classic bass</string>
+    <string name="product_classic_white_normal">Guitar of type white classic normal</string>
+    <string name="product_classic_orange_bass">Guitar of type orange classic bass</string>
+    <string name="product_classic_orange_normal">Guitar of type orange classic normal</string>
+    <string name="product_classic_aqua_bass">Guitar of type aqua classic bass</string>
+    <string name="product_classic_aqua_normal">Guitar of type aqua classic normal</string>
+    <string name="product_electric_light_gray_bass">Guitar of type light gray electric bass</string>
+    <string name="product_electric_light_gray_normal">Guitar of type light gray electric normal</string>
+    <string name="product_electric_mustard_bass">Guitar of type mustard electric bass</string>
+    <string name="product_electric_mustard_normal">Guitar of type mustard electric normal</string>
+    <string name="product_electric_white_bass">Guitar of type white electric bass</string>
+    <string name="product_electric_white_normal">Guitar of type white electric normal</string>
+    <string name="product_hardrock_red_bass">Guitar of type red hardrock bass</string>
+    <string name="product_hardrock_red_normal">Guitar of type red hardrock normal</string>
 
     <!-- Catalog -->
 
@@ -120,14 +133,25 @@
     <string name="about_team_title">About us</string>
     <string name="about_team_description">An Android application that showcases all the dual screen design patterns, SDKs and code snippets. Created by the Microsoft Foldables Developer Experience Team.</string>
     <string name="about_feedback_title">Feedback</string>
-    <string name="about_feedback_description">Have Feedback? We’d love to hear it, but please don’t share sensitive information. Please reach out to the developer experience team at Microsoft Surface Duo for any feedback.</string>
+    <string name="about_feedback_description">Have Feedback? We’d love to hear it, but please don’t share sensitive information. Please reach out to the developer experience team at Microsoft Surface Duo for any feedback using the Github issue reporting.</string>
+    <string name="about_feedback_description_clickable">Github issue</string>
     <string name="about_resources_title">Resources &amp; links</string>
     <string name="about_licenses_title">Third Party Notices</string>
     <string name="about_licenses_terms_title">Software Notices</string>
+    <string name="about_licenses_terms_other_title">Other Notices</string>
+    <string name="about_licenses_privacy_title">Privacy Statement</string>
+    <string name="about_licenses_privacy_link">https://go.microsoft.com/fwlink/?LinkId=248681</string>
+    <string name="about_licenses_maps_text">This Application includes Google Maps features and content. The use of Google Maps features and content is subject to the then-current versions of the:</string>
+    <string name="about_licenses_maps_terms_title">Google Maps/Google Earth Additional Terms of Service</string>
+    <string name="about_licenses_maps_terms_link">https://maps.google.com/help/terms_maps/</string>
+    <string name="about_licenses_maps_privacy_title">Google Privacy Policy</string>
+    <string name="about_licenses_maps_privacy_link">https://www.google.com/policies/privacy/</string>
 
     <!-- No Internet Connection -->
 
     <string name="no_internet_connection_title">No Internet Connection</string>
     <string name="no_internet_connection_description">Try checking the network cables, modem, router or try re-connecting to WiFi and restarting the app.</string>
+    <string name="no_google_services_title">Google Services unavailable</string>
+    <string name="no_google_services_description">It seems like this application requires Google Services to visualize Maps and it isn’t supported on this device or emulator. Try using a different one to test all features.</string>
 
 </resources>

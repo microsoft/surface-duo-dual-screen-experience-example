@@ -23,6 +23,7 @@ val firstOrderItem = OrderItem(
     price = product.price,
     bodyShape = product.bodyShape,
     color = product.color,
+    guitarType = product.guitarType,
     quantity = 1
 )
 
@@ -32,6 +33,7 @@ val secondOrderItem = OrderItem(
     price = secondProduct.price,
     bodyShape = secondProduct.bodyShape,
     color = secondProduct.color,
+    guitarType = secondProduct.guitarType,
     quantity = 1
 )
 
@@ -41,6 +43,7 @@ val firstOrderItemEntity = OrderItemEntity(
     price = productEntity.price,
     typeId = productEntity.typeId,
     colorId = productEntity.colorId,
+    guitarTypeId = productEntity.guitarTypeId,
     quantity = 1
 )
 
@@ -50,6 +53,7 @@ val secondOrderItemEntity = OrderItemEntity(
     price = secondProductEntity.price,
     typeId = secondProductEntity.typeId,
     colorId = secondProductEntity.colorId,
+    guitarTypeId = secondProductEntity.guitarTypeId,
     quantity = 1
 )
 

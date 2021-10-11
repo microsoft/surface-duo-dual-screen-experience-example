@@ -40,13 +40,4 @@ class PreferenceManager @Inject constructor(
             sharedPref.setValue(TutorialPrefType.STORES.toString(), value)
         }
     }
-
-    override fun shouldShowTouchCityTutorial() =
-        sharedPref.getBoolean(TutorialPrefType.TOUCH_CITY.toString(), true)
-
-    override fun setShowTouchCityTutorial(value: Boolean) {
-        if (shouldShowTouchCityTutorial()) {
-            sharedPref.setValue(TutorialPrefType.TOUCH_CITY.toString(), value)
-        }
-    }
 }

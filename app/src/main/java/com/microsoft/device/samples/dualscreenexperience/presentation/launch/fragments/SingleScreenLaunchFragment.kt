@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.tabs.TabLayoutMediator
 import com.microsoft.device.dualscreen.ScreenInfo
 import com.microsoft.device.dualscreen.ScreenInfoListener
 import com.microsoft.device.dualscreen.ScreenManagerProvider
@@ -38,17 +37,10 @@ class SingleScreenLaunchFragment : Fragment(), ScreenInfoListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViewPager()
+        setupObservers()
     }
 
-    private fun setupViewPager() {
-        val storeDetailsAdapter = LaunchFragmentAdapter(this)
-        binding?.let {
-            it.launchViewPager.isSaveEnabled = false
-            it.launchViewPager.adapter = storeDetailsAdapter
-            TabLayoutMediator(it.launchTabLayout, it.launchViewPager) { _, _ -> }.attach()
-        }
-
+    private fun setupObservers() {
         viewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualScreen = it })
     }
 

@@ -275,7 +275,7 @@ class OrderListAdapter(
             productImage.setImageBitmap(
                 ContextCompat.getDrawable(
                     itemView.context,
-                    getProductDrawable(productModel.color, productModel.bodyShape)
+                    getProductDrawable(productModel.color, productModel.bodyShape, productModel.guitarType)
                 )?.toBitmap()?.rotate(RotationViewModel.ROTATE_HORIZONTALLY)
             )
 

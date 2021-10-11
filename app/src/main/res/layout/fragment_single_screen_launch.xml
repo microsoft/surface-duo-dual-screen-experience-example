@@ -18,55 +18,65 @@
             type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/single_launch_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        tools:context=".presentation.launch.LaunchActivity">
+        android:paddingStart="@dimen/medium_padding"
+        android:paddingTop="@dimen/normal_padding"
+        android:paddingEnd="@dimen/medium_padding"
+        android:paddingBottom="@dimen/normal_padding">
 
-        <include
-            android:id="@+id/launch_dual_screen"
-            layout="@layout/fragment_launch_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:visibleIf="@{isDualScreen}" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/launch_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/launch_tab_layout"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/launch_title"
+            style="@style/App.Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/launch_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibleIf="@{!isDualScreen}"/>
+            app:layout_constraintVertical_chainStyle="spread"/>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/launch_tab_layout"
-            style="@style/CircleIndicators"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/launch_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/launch_image_height"
+            android:src="@drawable/launcher_guitar_shop"
+            app:layout_constraintBottom_toTopOf="@id/single_launch_description_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/launch_title"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/single_launch_description_text_view"
+            style="@style/Paragraph.Gold.Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/launch_description"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_18"
             app:layout_constraintBottom_toTopOf="@id/single_launch_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_view_pager"
-            app:visibleIf="@{!isDualScreen}" />
+            app:layout_constraintTop_toBottomOf="@id/launch_image"
+            app:visibleIf="@{!isDualScreen}"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/single_launch_button"
             style="@style/Launch.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/launch_single_button_top_margin"
-            android:layout_marginBottom="@dimen/launch_single_button_bottom_margin"
             android:onClick="@{() -> launchListener.onClick(false)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/single_launch_description_text_view"
             app:visibleIf="@{!isDualScreen}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

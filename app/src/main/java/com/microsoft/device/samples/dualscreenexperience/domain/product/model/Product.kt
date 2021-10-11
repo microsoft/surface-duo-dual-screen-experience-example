@@ -16,8 +16,10 @@ data class Product(
     val description: String,
     val rating: Float,
     val fretsNumber: Int,
+    val deliveryDays: Int,
     var bodyShape: ProductType,
-    var color: ProductColor
+    var color: ProductColor,
+    var guitarType: GuitarType
 ) {
     constructor(entity: ProductEntity) :
         this(
@@ -27,8 +29,10 @@ data class Product(
             entity.description,
             entity.rating,
             entity.fretsNumber,
+            entity.deliveryDays,
             ProductType.get(entity.typeId),
-            ProductColor.get(entity.colorId)
+            ProductColor.get(entity.colorId),
+            GuitarType.get(entity.guitarTypeId)
         )
 }
 
@@ -84,5 +88,14 @@ enum class ProductColor(var colorId: Int) {
 
     companion object {
         fun get(colorId: Int?) = values().first { it.colorId == colorId }
+    }
+}
+
+enum class GuitarType(var typeId: Int) {
+    BASS(0),
+    NORMAL(1);
+
+    companion object {
+        fun get(typeId: Int?) = values().first { it.typeId == typeId }
     }
 }

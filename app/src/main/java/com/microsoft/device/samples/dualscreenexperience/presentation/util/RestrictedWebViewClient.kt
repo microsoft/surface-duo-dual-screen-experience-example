@@ -8,6 +8,7 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.util
 
 import android.net.Uri
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
@@ -16,7 +17,8 @@ class RestrictedWebViewClient(
     private val onAlienLinkClicked: ((String?) -> Unit),
 ) : WebViewClient() {
 
-    override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+    override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+        val url = request?.url?.toString()
         if (Uri.parse(url).host in acceptedHosts) {
             return false
         }

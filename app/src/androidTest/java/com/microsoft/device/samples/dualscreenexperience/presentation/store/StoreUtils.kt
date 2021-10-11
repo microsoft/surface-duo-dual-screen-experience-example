@@ -262,6 +262,7 @@ val storeWithoutCity = Store(
     "quinn@fabrikam.com",
     47.57486513608924,
     -122.31074501155426,
+    "Description",
     4.8f,
     59,
     StoreImage.QUINN

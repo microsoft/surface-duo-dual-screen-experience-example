@@ -14,4 +14,6 @@
     <string name="learn_url">https://docs.microsoft.com/learn/modules/xamarin-forms-dual-screen/</string>
     <string name="twitter_url">https://twitter.com/surfaceduodev</string>
     <string name="youtube_url">https://www.youtube.com/channel/UClGu9QLtPNz8OdddBfhZXPA</string>
+
+    <string name="github_issues_url">https://github.com/microsoft/surface-duo-dual-screen-experience-example/issues</string>
 </resources>

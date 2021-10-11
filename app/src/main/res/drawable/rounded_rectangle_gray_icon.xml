@@ -4,9 +4,12 @@
   ~ Licensed under the MIT License.
   ~
   -->
-
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners android:radius="@dimen/card_radius" />
-    <solid android:color="@color/resource_background" />
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/black">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/card_radius" />
+            <solid android:color="@color/dark_gray" />
+        </shape>
+    </item>
+</ripple>

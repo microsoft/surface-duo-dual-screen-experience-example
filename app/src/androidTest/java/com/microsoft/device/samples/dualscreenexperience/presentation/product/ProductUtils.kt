@@ -14,12 +14,14 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
+import androidx.test.espresso.matcher.ViewMatchers.isChecked
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isSelected
 import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.microsoft.device.samples.dualscreenexperience.R
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -171,25 +173,62 @@ fun selectColor(color: ProductColor?) {
     onView(withContentDescription(color?.toString())).perform(forceClick())
 }
 
-fun checkCustomizeImagePortraitContent(color: ProductColor?, shape: ProductType?) {
-    checkCustomizeImageContent(withId(R.id.product_customize_image), color, shape)
+fun checkGuitarTypeSelected(guitarType: GuitarType?) {
+    getGuitarTypeViewId(guitarType)?.let {
+        onView(withId(it)).check(matches(isChecked()))
+    }
 }
 
-fun checkCustomizeImageLandscapeContent(color: ProductColor?, shape: ProductType?) {
-    checkCustomizeImageContent(withId(R.id.product_customize_image_landscape), color, shape)
+fun selectGuitarType(guitarType: GuitarType?) {
+    getGuitarTypeViewId(guitarType)?.let {
+        onView(withId(it)).perform(forceClick())
+    }
 }
 
-fun checkCustomizeDetailsImageContent(color: ProductColor?, shape: ProductType?) {
-    checkCustomizeImageContent(withId(R.id.product_details_image), color, shape)
+fun getGuitarTypeViewId(guitarType: GuitarType?) =
+    when (guitarType) {
+        GuitarType.BASS -> R.id.product_customize_type_bass
+        GuitarType.NORMAL -> R.id.product_customize_type_normal
+        else -> null
+    }
+
+fun checkCustomizeImagePortraitContent(
+    color: ProductColor?,
+    shape: ProductType?,
+    guitarType: GuitarType? = GuitarType.BASS
+) {
+    checkCustomizeImageContent(withId(R.id.product_customize_image), color, shape, guitarType)
 }
 
-fun checkCustomizeImageContent(parentMatcher: Matcher<View>, color: ProductColor?, shape: ProductType?) {
+fun checkCustomizeImageLandscapeContent(
+    color: ProductColor?,
+    shape: ProductType?,
+    guitarType: GuitarType? = GuitarType.BASS
+) {
+    checkCustomizeImageContent(withId(R.id.product_customize_image_landscape), color, shape, guitarType)
+}
+
+fun checkCustomizeDetailsImageContent(
+    color: ProductColor?,
+    shape: ProductType?,
+    guitarType: GuitarType? = GuitarType.BASS
+) {
+    checkCustomizeImageContent(withId(R.id.product_details_image), color, shape, guitarType)
+}
+
+fun checkCustomizeImageContent(
+    parentMatcher: Matcher<View>,
+    color: ProductColor?,
+    shape: ProductType?,
+    guitarType: GuitarType?
+) {
     onView(parentMatcher).check(
         matches(
             allOf(
                 isDisplayed(),
                 withContentDescription(containsString(shape?.toString()?.replace('_', ' ')?.lowercase())),
-                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.lowercase()))
+                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.lowercase())),
+                withContentDescription(containsString(guitarType?.toString()?.lowercase()))
             )
         )
     )
@@ -206,8 +245,10 @@ val product = Product(
     "Wood body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
     3.1f,
     21,
+    5,
     ProductType.CLASSIC,
-    ProductColor.ORANGE
+    ProductColor.ORANGE,
+    GuitarType.BASS
 )
 
 const val PRODUCT_FIRST_POSITION = 0

@@ -8,6 +8,7 @@
 package com.microsoft.device.samples.dualscreenexperience.domain.product.testutil
 
 import com.microsoft.device.samples.dualscreenexperience.data.product.model.ProductEntity
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -22,7 +23,9 @@ val productEntity = ProductEntity(
     3.1f,
     21,
     2,
-    6
+    2,
+    6,
+    0
 )
 
 val secondProductEntity = ProductEntity(
@@ -34,6 +37,8 @@ val secondProductEntity = ProductEntity(
         "2-point tremolo bridge",
     4.0f,
     18,
+    1,
+    1,
     1,
     1
 )
@@ -47,8 +52,10 @@ val product = Product(
         "2-point tremolo bridge",
     3.1f,
     21,
+    2,
     ProductType.CLASSIC,
-    ProductColor.ORANGE
+    ProductColor.ORANGE,
+    GuitarType.BASS
 )
 
 val secondProduct = Product(
@@ -60,8 +67,10 @@ val secondProduct = Product(
         "2-point tremolo bridge",
     4.0f,
     18,
+    1,
     ProductType.ROCK,
-    ProductColor.DARK_RED
+    ProductColor.DARK_RED,
+    GuitarType.NORMAL
 )
 
 const val ROCK_KEY = 1
