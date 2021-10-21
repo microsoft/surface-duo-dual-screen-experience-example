@@ -42,7 +42,6 @@
             app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
             layout="@layout/no_internet_connection_dual_mode" />
 
-
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/store_map_layout"
             android:layout_width="match_parent"
@@ -50,14 +49,11 @@
             android:orientation="vertical"
             invisibleIf="@{!isConnected}">
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/map"
+            <FrameLayout
+                android:id="@+id/map_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/gray"
-                app:cameraTargetLat="47.6205503608924"
-                app:cameraTargetLng="-122.13571166992188"
-                app:cameraZoom="11.5" />
+                android:background="@color/gray" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/reset_fab"

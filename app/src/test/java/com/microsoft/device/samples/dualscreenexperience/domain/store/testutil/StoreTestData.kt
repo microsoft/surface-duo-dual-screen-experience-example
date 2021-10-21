@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.domain.store.testutil
 
-import com.google.android.gms.maps.model.LatLng
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.CityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.model.StoreEntity
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.City
@@ -99,11 +98,6 @@ val storeCityCenterMarkerModel = MapMarkerModel(
     MarkerType.CENTER,
     47.631798862014375,
     -122.133509216393865
-)
-
-val cityGeopoint = LatLng(
-    47.6205503608924,
-    -122.13571166992188
 )
 
 const val QUINN_KEY = 1

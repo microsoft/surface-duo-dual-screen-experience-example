@@ -82,7 +82,10 @@ ext {
     bottomNavBarVersion = "1.0.0-beta2"
     recyclerViewVersion = "1.0.0-beta3"
 
+    bingMapsVersion = "1.2.0"
+
     microsoftDependencies = [
+            bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
             screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
             screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
