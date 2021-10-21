@@ -46,8 +46,15 @@ class AboutLicensesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupAdapter()
         setupObservers()
         setupDescriptionText()
+    }
+
+    private fun setupAdapter() {
+        binding?.licenseRecyclerView?.adapter =
+            LicenseListAdapter(requireContext(), viewModel.licenseListHandler)
+        binding?.licenseRecyclerView?.setHasFixedSize(true)
     }
 
     private fun setupObservers() {

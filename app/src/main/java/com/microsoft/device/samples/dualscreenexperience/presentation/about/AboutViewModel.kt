@@ -8,6 +8,9 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.about
 
 import androidx.lifecycle.ViewModel
+import com.microsoft.device.samples.dualscreenexperience.domain.about.model.License
+import com.microsoft.device.samples.dualscreenexperience.domain.about.usecases.GetLicensesUseCase
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.DataListHandler
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AboutViewModel @Inject constructor(
-    private val navigator: AboutNavigator
+    private val navigator: AboutNavigator,
+    private val getLicensesUseCase: GetLicensesUseCase
 ) : ViewModel() {
     var linkToOpen = SingleLiveEvent("")
 
@@ -32,6 +36,14 @@ class AboutViewModel @Inject constructor(
     fun navigateToNotices() {
         if (!navigator.isNavigationAtNotices()) {
             navigator.navigateToNotices()
+        }
+    }
+
+    val licenseListHandler = object : DataListHandler<License?> {
+        override fun getDataList(): List<License>? = getLicensesUseCase.get()
+
+        override fun onClick(model: License?) {
+            linkToOpen.value = model?.url
         }
     }
 

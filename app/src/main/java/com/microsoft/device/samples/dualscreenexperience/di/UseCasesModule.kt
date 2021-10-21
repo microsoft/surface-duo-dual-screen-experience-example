@@ -7,6 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.di
 
+import com.microsoft.device.samples.dualscreenexperience.data.about.LicenseDataSource
+import com.microsoft.device.samples.dualscreenexperience.data.about.LicenseRepository
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogRepository
 import com.microsoft.device.samples.dualscreenexperience.data.order.OrderDataSource
@@ -40,4 +42,8 @@ abstract class UseCasesModule {
     @Singleton
     @Binds
     abstract fun provideOrderRepository(repository: OrderRepository): OrderDataSource
+
+    @Singleton
+    @Binds
+    abstract fun provideLicenseRepository(repository: LicenseRepository): LicenseDataSource
 }
