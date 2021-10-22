@@ -84,6 +84,9 @@ android {
     testOptions {
         animationsDisabled = true
     }
+
+    // This is the default but added it explicitly so we can change it more easily
+    testBuildType "debug"
 }
 
 dependencies {
