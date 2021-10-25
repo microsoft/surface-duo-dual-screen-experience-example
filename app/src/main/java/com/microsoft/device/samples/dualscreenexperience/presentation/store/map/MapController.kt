@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapMarkerModel
 
-interface IMapComponent {
+interface MapController {
 
     fun shouldShowNoGmsMessage(context: Context): Boolean
 

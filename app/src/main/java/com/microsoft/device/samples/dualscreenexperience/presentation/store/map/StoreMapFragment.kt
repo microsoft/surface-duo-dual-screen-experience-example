@@ -35,7 +35,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class StoreMapFragment : Fragment() {
 
-    @Inject lateinit var mapComponent: IMapComponent
+    @Inject lateinit var mapController: MapController
 
     private val viewModel: StoreViewModel by activityViewModels()
     private val rotationViewModel: RotationViewModel by activityViewModels()
@@ -62,15 +62,15 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupMapView(savedInstanceState: Bundle?) {
-        mapView = mapComponent.generateMapView(requireContext())
+        mapView = mapController.generateMapView(requireContext())
         binding?.mapContainer?.addView(mapView)
 
-        mapComponent.onCreate(mapView, savedInstanceState)
+        mapController.onCreate(mapView, savedInstanceState)
 
         lifecycle.coroutineScope.launchWhenCreated {
-            mapComponent.generateController(mapView)
+            mapController.generateController(mapView)
 
-            mapComponent.setupMap(requireContext(), mapView)
+            mapController.setupMap(requireContext(), mapView)
             setupObservers()
         }
     }
@@ -84,7 +84,7 @@ class StoreMapFragment : Fragment() {
 
     private fun setupMapAvailabilityMessage() {
         activity?.applicationContext?.let {
-            if (mapComponent.shouldShowNoGmsMessage(it)) {
+            if (mapController.shouldShowNoGmsMessage(it)) {
                 binding?.noInternetConnectionSingleMode?.apply {
                     noInternetConnectionTitle.setText(R.string.no_google_services_title)
                     noInternetConnectionDescription.setText(R.string.no_google_services_description)
@@ -113,7 +113,7 @@ class StoreMapFragment : Fragment() {
     private fun setupRecenterButton() {
         binding?.resetFab?.setOnClickListener {
             viewModel.markersCenter.value?.let { center ->
-                mapComponent.returnMapToCenter(mapView, center)
+                mapController.returnMapToCenter(mapView, center)
             }
         }
     }
@@ -138,9 +138,9 @@ class StoreMapFragment : Fragment() {
             {
                 binding?.isScreenDual = viewModel.isNavigationAtStart()
                 changeActionBarTitle(viewModel.selectedCity.value, it)
-                mapComponent.unSelectAllMarkers(markerFactory)
+                mapController.unSelectAllMarkers(markerFactory)
                 it?.let { store ->
-                    mapComponent.selectMarker(
+                    mapController.selectMarker(
                         store.name,
                         markerFactory?.createBitmapWithText(store.name, true)
                     )
@@ -163,19 +163,19 @@ class StoreMapFragment : Fragment() {
 
     private fun resetMap(center: MapMarkerModel, zoomLevel: Float) {
         if (shouldEnableAnimations()) {
-            mapComponent.resetMapWithAnimations(mapView, center, zoomLevel)
+            mapController.resetMapWithAnimations(mapView, center, zoomLevel)
         } else {
-            mapComponent.resetMapWithoutAnimations(mapView, center, zoomLevel)
+            mapController.resetMapWithoutAnimations(mapView, center, zoomLevel)
         }
     }
 
     private fun shouldEnableAnimations() =
         !TEST_MODE_ENABLED &&
             rotationViewModel.isDualMode.value == true &&
-            !mapComponent.isZoomEqualTo(mapView, selectZoomLevel())
+            !mapController.isZoomEqualTo(mapView, selectZoomLevel())
 
     private fun addMarkersToMap(markers: List<MapMarkerModel>) {
-        mapComponent.clearMap()
+        mapController.clearMap()
         markers.forEach { markerModel ->
             when (markerModel.type) {
                 MarkerType.PIN -> addBalloonMarker(markerModel)
@@ -184,14 +184,14 @@ class StoreMapFragment : Fragment() {
             }
         }
 
-        mapComponent.setOnCameraMoveListener(mapView) {
+        mapController.setOnCameraMoveListener(mapView) {
             markers
-                .filter { mapComponent.isMarkerVisible(mapView, it) && it.type == MarkerType.PIN }
+                .filter { mapController.isMarkerVisible(mapView, it) && it.type == MarkerType.PIN }
                 .map { it.id }
                 .let { viewModel.updateStoreList(it) }
         }
 
-        mapComponent.setOnMapClickListener(
+        mapController.setOnMapClickListener(
             mapView,
             object : OnMapClickListener {
                 override fun onMarkerClicked(markerName: String?, isAlreadySelected: Boolean) {
@@ -216,12 +216,12 @@ class StoreMapFragment : Fragment() {
 
                 override fun onNoMarkerClicked() {
                     viewModel.markersCenter.value?.let {
-                        if (!mapComponent.isMarkerCenter(mapView, it)) {
-                            mapComponent.resetMapWithoutAnimations(mapView, it, selectZoomLevel())
+                        if (!mapController.isMarkerCenter(mapView, it)) {
+                            mapController.resetMapWithoutAnimations(mapView, it, selectZoomLevel())
                         }
                     }
 
-                    mapComponent.getSelectedMarkerName()?.let { selectedMarkerName ->
+                    mapController.getSelectedMarkerName()?.let { selectedMarkerName ->
                         markers
                             .firstOrNull { it.name == selectedMarkerName }
                             ?.takeIf { it.type == MarkerType.PIN }
@@ -233,7 +233,7 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun addBalloonMarker(markerModel: MapMarkerModel) =
-        mapComponent.addMarker(
+        mapController.addMarker(
             model = markerModel,
             icon = markerFactory?.createBitmapWithText(markerModel.name),
             visible = !(markerModel.hasCity == true && viewModel.selectedCity.value == null),
@@ -242,7 +242,7 @@ class StoreMapFragment : Fragment() {
         )
 
     private fun addCircleMarker(markerModel: MapMarkerModel) =
-        mapComponent.addMarker(
+        mapController.addMarker(
             model = markerModel,
             icon = markerFactory?.createCircleBitmapWithText(
                 getString(R.string.store_map_circle_touch_tutorial)
@@ -253,38 +253,38 @@ class StoreMapFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        mapComponent.onStart(mapView)
+        mapController.onStart(mapView)
     }
 
     override fun onResume() {
         super.onResume()
-        mapComponent.onResume(mapView)
+        mapController.onResume(mapView)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapComponent.onSaveInstanceState(mapView, outState)
+        mapController.onSaveInstanceState(mapView, outState)
     }
 
     override fun onPause() {
         super.onPause()
-        mapComponent.onPause(mapView)
+        mapController.onPause(mapView)
     }
 
     override fun onStop() {
         super.onStop()
-        mapComponent.onStop(mapView)
+        mapController.onStop(mapView)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         markerFactory = null
-        mapComponent.onDestroy(mapView)
+        mapController.onDestroy(mapView)
         binding = null
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapComponent.onLowMemory(mapView)
+        mapController.onLowMemory(mapView)
     }
 }

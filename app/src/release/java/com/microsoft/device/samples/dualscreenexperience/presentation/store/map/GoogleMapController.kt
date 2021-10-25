@@ -32,7 +32,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MapComponent @Inject constructor() : IMapComponent {
+class GoogleMapController @Inject constructor() : MapController {
 
     private var googleMap: GoogleMap? = null
     private var selectableMarkerMap: HashMap<String, MarkerSelectable> = HashMap()

@@ -7,4 +7,4 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.about.model
 
-data class LicenseObject(val title: String, val url: String?)
+data class LicenseData(val title: String, val url: String?)

@@ -7,20 +7,10 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.microsoft.device.samples.dualscreenexperience">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <application
-        android:name=".DualScreenApplication"
-        android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
-        android:installLocation="internalOnly"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
-        android:theme="@style/Theme.App">
+    <application tools:ignore="AllowBackup,MissingApplicationIcon">
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -30,21 +20,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".presentation.launch.LaunchActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".presentation.MainActivity" />
-        <activity
-            android:name=".presentation.devmode.DevModeActivity"
-            android:theme="@style/Theme.App.Transparent" />
-        <activity
-            android:name=".presentation.about.AboutActivity"
-            android:theme="@style/Theme.App.Transparent" />
     </application>
 
 </manifest>

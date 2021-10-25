@@ -32,7 +32,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MapComponent @Inject constructor() : IMapComponent {
+class BingMapController @Inject constructor() : MapController {
 
     private var mapLayer: MapElementLayer? = null
     private var selectableMarkerMap: HashMap<String, MapIconSelectable> = HashMap()

@@ -7,4 +7,4 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.about.model
 
-data class LicenseList(val licenses: List<LicenseObject>)
+data class LicenseList(val licenses: List<LicenseData>)

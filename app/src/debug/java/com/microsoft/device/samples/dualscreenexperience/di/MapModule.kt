@@ -7,8 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.di
 
-import com.microsoft.device.samples.dualscreenexperience.presentation.store.map.IMapComponent
-import com.microsoft.device.samples.dualscreenexperience.presentation.store.map.MapComponent
+import com.microsoft.device.samples.dualscreenexperience.presentation.store.map.GoogleMapController
+import com.microsoft.device.samples.dualscreenexperience.presentation.store.map.MapController
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,5 +21,5 @@ abstract class MapModule {
 
     @Singleton
     @Binds
-    abstract fun provideMapComponent(mapComponent: MapComponent): IMapComponent
+    abstract fun provideMapController(mapController: GoogleMapController): MapController
 }

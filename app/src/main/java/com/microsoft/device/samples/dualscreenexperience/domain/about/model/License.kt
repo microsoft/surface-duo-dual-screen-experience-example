@@ -7,11 +7,11 @@
 
 package com.microsoft.device.samples.dualscreenexperience.domain.about.model
 
-import com.microsoft.device.samples.dualscreenexperience.data.about.model.LicenseObject
+import com.microsoft.device.samples.dualscreenexperience.data.about.model.LicenseData
 
 data class License(
     val title: String,
     val url: String?
 ) {
-    constructor(licenseObject: LicenseObject) : this(licenseObject.title, licenseObject.url)
+    constructor(licenseData: LicenseData) : this(licenseData.title, licenseData.url)
 }
