@@ -139,13 +139,6 @@
     <string name="about_licenses_title">Third Party Notices</string>
     <string name="about_licenses_terms_title">Software Notices</string>
     <string name="about_licenses_terms_other_title">Other Notices</string>
-    <string name="about_licenses_privacy_title">Privacy Statement</string>
-    <string name="about_licenses_privacy_link">https://go.microsoft.com/fwlink/?LinkId=248681</string>
-    <string name="about_licenses_maps_text">This Application includes Google Maps features and content. The use of Google Maps features and content is subject to the then-current versions of the:</string>
-    <string name="about_licenses_maps_terms_title">Google Maps/Google Earth Additional Terms of Service</string>
-    <string name="about_licenses_maps_terms_link">https://maps.google.com/help/terms_maps/</string>
-    <string name="about_licenses_maps_privacy_title">Google Privacy Policy</string>
-    <string name="about_licenses_maps_privacy_link">https://www.google.com/policies/privacy/</string>
 
     <!-- No Internet Connection -->
 

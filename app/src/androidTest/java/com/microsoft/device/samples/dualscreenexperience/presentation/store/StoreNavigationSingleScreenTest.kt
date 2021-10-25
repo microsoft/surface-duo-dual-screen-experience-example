@@ -24,7 +24,7 @@ import org.junit.Test
 import org.junit.rules.RuleChain
 
 @HiltAndroidTest
-class StoresNavigationSingleScreenTest : BaseStoreNavigationTest() {
+class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
 

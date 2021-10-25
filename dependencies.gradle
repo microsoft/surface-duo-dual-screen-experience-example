@@ -6,8 +6,8 @@
  */
 
 ext {
-    gradlePluginVersion = "7.0.2"
-    kotlinVersion = '1.5.21'
+    gradlePluginVersion = "7.0.3"
+    kotlinVersion = '1.5.31'
     compileSdkVersion = 31
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
@@ -27,7 +27,7 @@ ext {
             kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
     ]
 
-    navigationVersion = "2.3.4"
+    navigationVersion = '2.3.5'
 
     navigationDependencies = [
             runtime       : "androidx.navigation:navigation-runtime:$navigationVersion",
@@ -41,10 +41,10 @@ ext {
     ]
 
     //AndroidX versions
-    appCompatVersion = '1.3.0'
-    constraintLayoutVersion = "2.0.4"
+    appCompatVersion = '1.3.1'
+    constraintLayoutVersion = '2.1.1'
     ktxCoreVersion = '1.6.0'
-    ktxFragmentVersion = '1.3.5'
+    ktxFragmentVersion = '1.3.6'
     roomVersion = '2.3.0'
     webkitVersion = '1.4.0'
 
@@ -61,10 +61,10 @@ ext {
 
     //Google dependencies
     materialVersion = '1.4.0'
-    gsonVersion = '2.8.7'
-    hiltVersion = '2.37'
+    gsonVersion = '2.8.8'
+    hiltVersion = '2.39.1'
     mapsVersion = '17.0.1'
-    mapsKtxVersion = '3.1.0'
+    mapsKtxVersion = '3.2.0'
 
     googleDependencies = [
             material            : "com.google.android.material:material:$materialVersion",
@@ -82,7 +82,10 @@ ext {
     bottomNavBarVersion = "1.0.0-beta2"
     recyclerViewVersion = "1.0.0-beta3"
 
+    bingMapsVersion = "1.2.0"
+
     microsoftDependencies = [
+            bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
             screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
             screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
@@ -93,7 +96,7 @@ ext {
 
     //UI dependencies
     glideVersion = "4.12.0"
-    lottieVersion = '3.7.1'
+    lottieVersion = '4.2.0'
 
     uiDependencies = [
             lottie: "com.airbnb.android:lottie:$lottieVersion",

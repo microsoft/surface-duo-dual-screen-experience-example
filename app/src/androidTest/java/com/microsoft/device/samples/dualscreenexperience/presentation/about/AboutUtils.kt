@@ -94,10 +94,7 @@ fun checkTermsLicensesSection() {
 
 fun checkLicensesSection() {
     onView(withId(R.id.license_terms_other_title)).check(matches(isDisplayed()))
-    onView(withId(R.id.license_privacy)).check(matches(isDisplayed()))
-    onView(withId(R.id.license_maps_text)).check(matches(isDisplayed()))
-    onView(withId(R.id.license_maps_terms)).check(matches(isDisplayed()))
-    onView(withId(R.id.license_maps_privacy)).check(matches(isDisplayed()))
+    onView(withId(R.id.license_recycler_view)).check(matches(isDisplayed()))
 }
 
 fun scrollToTerms() {
@@ -105,7 +102,7 @@ fun scrollToTerms() {
 }
 
 fun scrollToLicenses() {
-    onView(withId(R.id.licenses_scroll_container)).perform(scrollNestedScrollViewTo(R.id.license_maps_privacy))
+    onView(withId(R.id.licenses_scroll_container)).perform(scrollNestedScrollViewTo(R.id.license_recycler_view))
 }
 
 fun scrollToFeedbackInSingleScreenMode() {

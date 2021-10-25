@@ -5,7 +5,8 @@
   ~
   -->
 
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="isDualMode"
@@ -101,44 +102,15 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/license_privacy"
-                style="@style/License.Subtitle"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/license_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> itemClickListener.onClick(@string/about_licenses_privacy_link)}"
-                android:paddingTop="@dimen/small_padding"
-                android:paddingBottom="@dimen/small_padding"
-                android:text="@string/about_licenses_privacy_title"
-                android:textSize="@dimen/text_size_14" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/license_maps_text"
-                style="@style/License.Subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/about_licenses_maps_text"
-                android:textSize="@dimen/text_size_14" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/license_maps_terms"
-                style="@style/License.Subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> itemClickListener.onClick(@string/about_licenses_maps_terms_link)}"
-                android:paddingTop="@dimen/small_padding"
-                android:paddingBottom="@dimen/small_padding"
-                android:text="@string/about_licenses_maps_terms_title"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/license_maps_privacy"
-                style="@style/License.Subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> itemClickListener.onClick(@string/about_licenses_maps_privacy_link)}"
-                android:paddingTop="@dimen/small_padding"
-                android:paddingBottom="@dimen/medium_padding"
-                android:text="@string/about_licenses_maps_privacy_title"/>
+                android:layout_marginBottom="@dimen/small_margin"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_license"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/feedback_single_screen_title"
