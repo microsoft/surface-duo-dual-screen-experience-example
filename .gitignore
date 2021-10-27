@@ -1,10 +1,6 @@
-# Firebase file
-firebase.gradle
-
 # Built application files
 *.apk
-# Uncomment the following line after integration with public navigation component
-#*.aar
+*.aar
 *.ap_
 *.aab
 
