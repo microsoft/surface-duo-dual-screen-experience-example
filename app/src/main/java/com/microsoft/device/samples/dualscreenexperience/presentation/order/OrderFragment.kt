@@ -7,28 +7,38 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.order
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.microsoft.device.dualscreen.ScreenInfo
-import com.microsoft.device.dualscreen.ScreenInfoListener
-import com.microsoft.device.dualscreen.ScreenManagerProvider
-import com.microsoft.device.dualscreen.recyclerview.SurfaceDuoItemDecoration
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.recyclerview.FoldableItemDecoration
+import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredLayoutManager
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentOrderBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.StaggeredSurfaceDuoLayoutManager
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.addOrReplaceItemDecoration
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class OrderFragment : Fragment(), ScreenInfoListener {
+class OrderFragment : Fragment() {
 
     private val orderViewModel: OrderViewModel by activityViewModels()
     private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
@@ -37,6 +47,24 @@ class OrderFragment : Fragment(), ScreenInfoListener {
     private var orderAdapter: OrderListAdapter? = null
 
     private var binding: FragmentOrderBinding? = null
+
+    private lateinit var windowInfoRepository: WindowInfoRepository
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        observeWindowLayoutInfo(context as AppCompatActivity)
+    }
+
+    private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
+        windowInfoRepository = activity.windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onScreenInfoChanged(it)
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,10 +113,10 @@ class OrderFragment : Fragment(), ScreenInfoListener {
         )
     }
 
-    private fun setupRecyclerView(screenInfo: ScreenInfo) {
+    private fun setupRecyclerView(windowLayoutInfo: WindowLayoutInfo) {
         binding?.orderItems?.apply {
-            layoutManager = StaggeredSurfaceDuoLayoutManager(context, screenInfo).get()
-            addOrReplaceItemDecoration(SurfaceDuoItemDecoration(screenInfo))
+            layoutManager = FoldableStaggeredLayoutManager(context, windowLayoutInfo).get()
+            addOrReplaceItemDecoration(FoldableItemDecoration(windowLayoutInfo))
         }
     }
 
@@ -115,23 +143,17 @@ class OrderFragment : Fragment(), ScreenInfoListener {
 
     override fun onResume() {
         super.onResume()
-        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
         setupConfirmationObservers()
         changeToolbarTitle()
     }
 
-    override fun onPause() {
-        super.onPause()
-        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
-    }
-
-    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        setupRecyclerView(screenInfo)
+    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        setupRecyclerView(windowLayoutInfo)
 
         recommendationViewModel.refreshRecommendationList()
         updateAdapter(
-            screenInfo.isDualMode(),
-            rotationViewModel.isDualPortraitMode(screenInfo.getScreenRotation())
+            windowLayoutInfo.isInDualMode(),
+            rotationViewModel.isDualPortraitMode(requireContext().getScreenRotation())
         )
     }
 

@@ -10,12 +10,10 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.util
 import android.view.Surface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.microsoft.device.dualscreen.ScreenInfo
 
 class RotationViewModel : ViewModel() {
     var isDualMode = MutableLiveData(false)
     var currentRotation = MutableLiveData(Surface.ROTATION_0)
-    var screenInfo = MutableLiveData<ScreenInfo?>(null)
 
     fun isRotated(rotation: Int?) =
         (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270)
