@@ -10,7 +10,10 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
+
+apply from: 'secrets.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -33,9 +36,28 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            applicationIdSuffix ".debug"
             minifyEnabled false
+            shrinkResources false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        releaseEmulator {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BING_MAPS_KEY", "\"$bingMapsKey\""
         }
     }
 
@@ -50,6 +72,7 @@ android {
 
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
 
     configurations.all {
@@ -57,6 +80,13 @@ android {
             exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
         }
     }
+
+    testOptions {
+        animationsDisabled = true
+    }
+
+    // This is the default but added it explicitly so we can change it more easily
+    testBuildType "debug"
 }
 
 dependencies {
@@ -66,26 +96,49 @@ dependencies {
     implementation androidxDependencies.constraintLayout
     implementation androidxDependencies.ktxCore
     implementation androidxDependencies.ktxFragment
+    implementation androidxDependencies.webkit
 
     implementation androidxDependencies.room
     implementation androidxDependencies.roomKtx
     kapt androidxDependencies.roomCompiler
 
-    implementation androidxDependencies.navigationUi
-    implementation androidxDependencies.navigationFragment
+    implementation navigationDependencies.runtimeKtx
+    implementation navigationDependencies.fragmentKtx
+    implementation navigationDependencies.uiKtx
 
     implementation googleDependencies.material
+    implementation googleDependencies.gson
     implementation googleDependencies.hilt
     kapt googleDependencies.hiltCompiler
 
+    debugImplementation googleDependencies.maps
+    debugImplementation googleDependencies.mapsKtx
+    releaseImplementation googleDependencies.maps
+    releaseImplementation googleDependencies.mapsKtx
+    releaseEmulatorImplementation microsoftDependencies.bingMaps
+
+    implementation microsoftDependencies.bottomNavBar
+    implementation microsoftDependencies.layouts
+    implementation microsoftDependencies.screenManager
+    implementation microsoftDependencies.recyclerView
+
+    implementation uiDependencies.lottie
+
+    implementation uiDependencies.glide
+    kapt uiDependencies.glideAnnotationProcesor
+
     testImplementation testDependencies.junit
+    testImplementation testDependencies.archTesting
     androidTestImplementation instrumentationTestDependencies.junit
     androidTestImplementation instrumentationTestDependencies.espressoCore
     androidTestImplementation instrumentationTestDependencies.espressoContrib
+    androidTestImplementation instrumentationTestDependencies.uiAutomator
     androidTestImplementation instrumentationTestDependencies.testRules
     androidTestImplementation instrumentationTestDependencies.testRunner
     androidTestImplementation instrumentationTestDependencies.roomTesting
     androidTestImplementation instrumentationTestDependencies.coroutinesTest
     androidTestImplementation instrumentationTestDependencies.hiltTesting
+    androidTestImplementation instrumentationTestDependencies.archTesting
+
     kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
 }

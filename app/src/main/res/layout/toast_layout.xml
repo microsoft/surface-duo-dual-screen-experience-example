@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toast_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/toast_color">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/toast_text"
+        style="@style/Store.TabText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/normal_padding"
+        android:paddingBottom="@dimen/normal_padding"
+        android:paddingStart="@dimen/medium_padding"
+        android:paddingEnd="@dimen/medium_padding"
+        android:text="@string/order_success_message" />
+
+</FrameLayout>

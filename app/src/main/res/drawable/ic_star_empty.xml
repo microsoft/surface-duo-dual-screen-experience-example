@@ -1,0 +1,22 @@
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="9dp"
+    android:height="9dp"
+    android:viewportWidth="9"
+    android:viewportHeight="9">
+  <path
+      android:pathData="M4.5,0L5.51031,3.10942H8.77975L6.13472,5.03115L7.14503,8.14058L4.5,6.21885L1.85497,8.14058L2.86528,5.03115L0.22025,3.10942H3.48969L4.5,0Z"
+      android:fillColor="#BABCBE"/>
+  <path
+      android:pathData="M4.5,0.80902L5.27255,3.18668L5.32868,3.35942H5.51031H8.01033L5.98777,4.8289L5.84083,4.93566L5.89696,5.10841L6.66951,7.48607L4.64695,6.01659L4.5,5.90983L4.35305,6.01659L2.33049,7.48607L3.10304,5.10841L3.15917,4.93566L3.01223,4.8289L0.98967,3.35942H3.48969H3.67132L3.72745,3.18668L4.5,0.80902Z"
+      android:strokeAlpha="0.2"
+      android:strokeWidth="0.5"
+      android:fillColor="#00000000"
+      android:strokeColor="#000000"/>
+</vector>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
+
+        <variable name="store"
+            type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
+
+        <variable
+            name="itemListener"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Store&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/normal_margin"
+        tools:background="@color/gray">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_store_image"
+            android:layout_width="@dimen/store_image_width"
+            android:layout_height="@dimen/store_image_height"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:storeImage="@{store.image}"
+            tools:background="@color/catalog_tools_image_background" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_store_name"
+            style="@style/Store.Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:text="@{@string/store_title(store.name)}"
+            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Someone's Guitar Shop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_store_address"
+            style="@style/Store.Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/micro_margin"
+            android:text="@{store.address}"
+            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintTop_toBottomOf="@id/item_store_name"
+            tools:text="1204 NE 36th St" />
+
+        <include
+            android:id="@+id/store_rating_reviews"
+            layout="@layout/store_rating_reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintTop_toBottomOf="@id/item_store_address" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/item_store_view_button"
+            style="@style/Store.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:onClick="@{() -> itemListener.onClick(store)}"
+            android:text="@string/item_store_button_text"
+            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintTop_toBottomOf="@id/store_rating_reviews" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

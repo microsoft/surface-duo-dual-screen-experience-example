@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/micro_padding"
+    tools:background="@color/black"
+    tools:layout_height="?attr/actionBarSize">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/dev_mode_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/micro_margin"
+        android:src="@drawable/ic_dev_mode"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dev_mode_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/small_padding"
+        android:text="@string/toolbar_dev_mode"
+        android:textColor="@color/gold"/>
+
+</LinearLayout>

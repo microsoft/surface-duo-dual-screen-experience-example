@@ -1,0 +1,118 @@
+{
+  "cityItems": [
+    {
+      "cityId": 10,
+      "name": "Redmond",
+      "isDisplayed": true,
+      "lat": 47.6205503608924,
+      "lng": -122.13571166992188
+    }
+  ],
+  "storeItems": [
+    {
+      "storeId": 101,
+      "name": "Quinn's",
+      "address": "4567 Main St",
+      "cityLocatorId": null,
+      "cityStateCode": "Seattle, WA 98052",
+      "phoneNumber": "(206)-555-0100",
+      "emailAddress": "quinn@fabrikam.com",
+      "lat": 47.57486513608924,
+      "lng": -122.31074501155426,
+      "description": "You visited Quinn's Music last time in July '20. The store manager's name is Joseph and the sales rep for the guitar department is Annette. Quinn's Music ordered 11 guitars and 2 drum sets last month and has paid all invoices on time. Their clientele consists mostly of heavy metal bands but also some jazz musicians frequent the place. The new EG-18275 Metal guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.8,
+      "reviewCount": 59,
+      "imageId": 1
+    },
+    {
+      "storeId": 102,
+      "name": "Ana's",
+      "address": "4568 Second St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0101",
+      "emailAddress": "ana@fabrikam.com",
+      "lat": 47.64304736313635,
+      "lng": -122.13130676286585,
+      "description": "You visited Ana's Music last time in May '21. The store manager's name is Camille and the sales rep for the guitar department is Ariane. Ana's Music ordered 28 guitars and 9 drum sets last month and has paid all invoices on time. Their clientele consists mostly of alternative bands but also some rock musicians frequent the place. The new EG-18275 Metal guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.6,
+      "reviewCount": 86,
+      "imageId": 2
+    },
+    {
+      "storeId": 103,
+      "name": "Sergio's",
+      "address": "4569 Third St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0102",
+      "emailAddress": "sergio@fabrikam.com",
+      "lat": 47.64404871535674,
+      "lng": -122.12942481397931,
+      "description": "You visited Sergio's Music last time in March '21. The store manager's name is Kayla and the sales rep for the guitar department is Dylan. Sergio's Music ordered 6 guitars and 10 drum sets last month and has paid all invoices on time. Their clientele consists mostly of indie bands but also some blues musicians frequent the place. The new EG - 67564 Premium guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.5,
+      "reviewCount": 196,
+      "imageId": 3
+    },
+    {
+      "storeId": 104,
+      "name": "Ove's",
+      "address": "4570 Fourth St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0103",
+      "emailAddress": "ove@fabrikam.com",
+      "lat": 47.643242433256106,
+      "lng": -122.12895191400267,
+      "description": "You visited Ove's Music last time in August '20. The store manager's name is Graham and the sales rep for the guitar department is Alin. Ove's Music ordered 30 guitars and no drum sets last month and has paid all invoices on time. Their clientele consists mostly of pop musicians. The new EG - 85453 Standard guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.6,
+      "reviewCount": 106,
+      "imageId": 4
+    },
+    {
+      "storeId": 105,
+      "name": "Natasha's",
+      "address": "4571 Fifth St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0104",
+      "emailAddress": "natasha@fabrikam.com",
+      "lat": 47.64292619164706,
+      "lng":  -122.12552136937201,
+      "description": "You visited Natasha's Music last time in December '20. The store manager's name is Joshua and the sales rep for the guitar department is Stefan. Natasha's Music ordered 17 guitars and 9 drum sets last month and has paid all invoices on time. Their clientele consists mostly of rock bands but also some jazz musicians frequent the place. The new EG - 67564 Premium guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.9,
+      "reviewCount": 120,
+      "imageId": 5
+    },
+    {
+      "storeId": 106,
+      "name": "Ben's",
+      "address": "4572 Sixth St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0105",
+      "emailAddress": "ben@fabrikam.com",
+      "lat": 47.645137400574036,
+      "lng": -122.12602133269898,
+      "description": "You visited Ben's Music last time in February '20. The store manager's name is Hans and the sales rep for the guitar department is Laura. Ben's Music ordered 4 guitars and 2 drum sets last month and has paid all invoices on time. Their clientele consists mostly of country musicians. The new EG - 29387 Wood guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.9,
+      "reviewCount": 166,
+      "imageId": 6
+    },
+    {
+      "storeId": 107,
+      "name": "Kristian's",
+      "address": "4573 Seventh St",
+      "cityLocatorId": 10,
+      "cityStateCode": "Redmond, WA 98053",
+      "phoneNumber": "(206)-555-0106",
+      "emailAddress": "kristian@fabrikam.com",
+      "lat": 47.644425694891815,
+      "lng": -122.12454563448577,
+      "description": "You visited Kristian's Music last time in July '21. The store manager's name is Polina and the sales rep for the guitar department is Ivan. Kristian's Music ordered 3 guitars and 20 drum sets last month and has paid all invoices on time. Their clientele consists mostly of folk bands. The new EG - 29387 Wood guitar line will likely resonate with the sales associates in this store. Make sure to pitch those.",
+      "rating": 4.2,
+      "reviewCount": 86,
+      "imageId": 7
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pageNumber"
+            type="String" />
+
+        <variable
+            name="catalogItem"
+            type="com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.microsoft.device.samples.dualscreenexperience.presentation.util.LockableNestedScrollView
+            android:id="@+id/catalog_item_scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/catalog_margin_small"
+            app:layout_constraintBottom_toTopOf="@id/pages"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_first"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_top_margin"
+                    app:assetImage="@{catalogItem.firstPicture}"
+                    app:layout_constraintEnd_toStartOf="@id/guideline1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:background="@color/catalog_tools_image_background"
+                    tools:minHeight="268dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_first"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_top_margin"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:text="@{catalogItem.primaryDescription}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="image_first,text_first" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.45" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/text_third"
+                    style="@style/Catalog.Description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/catalog_horizontal_margin"
+                    android:layout_marginEnd="@dimen/catalog_margin_small"
+                    android:text="@{catalogItem.secondaryDescription}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrier1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_second"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/catalog_margin_small"
+                    android:layout_marginTop="@dimen/catalog_horizontal_margin"
+                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    app:assetImage="@{catalogItem.secondPicture}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline2"
+                    app:layout_constraintTop_toBottomOf="@id/barrier1"
+                    tools:background="@color/catalog_tools_image_background"
+                    tools:minHeight="250dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.microsoft.device.samples.dualscreenexperience.presentation.util.LockableNestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pages"
+            style="@style/Catalog.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/catalog_horizontal_margin"
+            android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+            android:layout_marginBottom="@dimen/catalog_margin_small"
+            android:text="@{pageNumber}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

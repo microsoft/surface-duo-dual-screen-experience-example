@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="store"
+            type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@color/gray">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_store_star"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginStart="@dimen/micro_margin"
+            android:baselineAlignBottom="true"
+            android:src="@drawable/ic_star"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_store_rating"
+            style="@style/Store.Rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/micro_margin"
+            android:text="@{String.valueOf(store.rating)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_store_star"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4.6" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/item_store_reviews"
+            style="@style/Store.Rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:text="@{@plurals/review_count(store.reviewCount, store.reviewCount)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_store_rating"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="186 Reviews" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

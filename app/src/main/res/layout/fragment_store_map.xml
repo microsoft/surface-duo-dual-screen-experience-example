@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="isConnected"
+            type="Boolean" />
+
+        <variable
+            name="rotationViewModel"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
+
+        <variable
+            name="isScreenDual"
+            type="Boolean" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray">
+
+        <include
+            android:id="@+id/no_internet_connection_single_mode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            layout="@layout/no_internet_connection_single_mode" />
+
+        <include
+            android:id="@+id/no_internet_connection_dual_mode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            layout="@layout/no_internet_connection_dual_mode" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/store_map_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            invisibleIf="@{!isConnected}">
+
+            <FrameLayout
+                android:id="@+id/map_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gray" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/reset_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="@dimen/large_margin"
+                android:contentDescription="@string/store_map_recenter"
+                android:src="@drawable/ic_location" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </FrameLayout>
+</layout>

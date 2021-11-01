@@ -1,0 +1,31 @@
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=91:29:34:CA:01:DD:87:7C:53:EB:DC:3C:8E:92:B5:E0:96:96:11:BB%3Bcom.microsoft.device.samples.dualscreenexperience
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.microsoft.device.samples.dualscreenexperience
+
+    SHA-1 certificate fingerprint:
+    91:29:34:CA:01:DD:87:7C:53:EB:DC:3C:8E:92:B5:E0:96:96:11:BB
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">INSERT YOUR MAPS KEY HERE</string>
+</resources>

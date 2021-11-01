@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <item type="id" name="tutorial_balloon_text" />
+
+    <item type="id" name="star_rating_text" />
+    <item type="id" name="star_rating_1" />
+    <item type="id" name="star_rating_2" />
+    <item type="id" name="star_rating_3" />
+    <item type="id" name="star_rating_4" />
+    <item type="id" name="star_rating_5" />
+</resources>

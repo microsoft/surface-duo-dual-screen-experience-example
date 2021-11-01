@@ -1,0 +1,10 @@
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">INSERT MAPS KEY HERE</string>
+</resources>

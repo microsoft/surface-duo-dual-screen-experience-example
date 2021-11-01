@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.product.customize.ProductCustomizeFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.product.customize.ProductCustomizeViewModel" />
+
+        <variable
+            name="rotationViewModel"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:paddingBottom="@dimen/small_padding">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_customize_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/product_image_width"
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingEnd="@dimen/medium_padding"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_type_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{!rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            tools:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_customize_image_landscape"
+            android:layout_width="@dimen/product_image_width"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/product_customize_body_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleIf="@{rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            tools:visibility="visible"/>
+
+        <RadioGroup
+            android:id="@+id/product_customize_type_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            android:background="@drawable/toggle_default"
+            android:checkedButton="@id/product_customize_type_bass"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_image">
+
+            <RadioButton
+                android:id="@+id/product_customize_type_bass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:paddingStart="@dimen/normal_padding"
+                android:paddingTop="@dimen/half_medium_padding"
+                android:paddingEnd="@dimen/normal_padding"
+                android:paddingBottom="@dimen/half_medium_padding"
+                android:text="@string/product_customize_type_bass"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/product_customize_type_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:paddingStart="@dimen/normal_padding"
+                android:paddingTop="@dimen/half_medium_padding"
+                android:paddingEnd="@dimen/normal_padding"
+                android:paddingBottom="@dimen/half_medium_padding"
+                android:text="@string/product_customize_type_normal"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/product_customize_place_order_button"
+            visibleIf="@{!rotationViewModel.isDualMode()}"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/normal_margin"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
+            app:layout_constraintStart_toEndOf="@id/product_customize_type_toggle"
+            app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_image"
+            app:lottie_autoPlay="false"
+            app:lottie_rawRes="@raw/add_to_order_animation"
+            tools:background="@drawable/rounded_rectangle_button"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_customize_color_title"
+            style="@style/GoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:text="@string/product_customize_color_title"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_color_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_type_toggle"/>
+
+        <LinearLayout
+            android:id="@+id/product_customize_color_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/normal_padding"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingEnd="@dimen/normal_padding"
+            android:paddingBottom="@dimen/normal_padding"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_body_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_color_title"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_customize_body_title"
+            style="@style/GoldText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:text="@string/product_customize_body_title"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_body_container"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_color_container"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/product_customize_body_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/normal_margin"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingEnd="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_body_title">
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_body_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="1"/>
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_body_3"
+                app:layout_constraintStart_toEndOf="@id/product_customize_body_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="2" />
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_body_4"
+                app:layout_constraintStart_toEndOf="@id/product_customize_body_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="3" />
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_body_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/product_customize_body_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:productType="4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

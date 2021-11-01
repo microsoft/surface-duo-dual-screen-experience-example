@@ -6,39 +6,98 @@
   ~
   -->
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+        <import type="com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product" />
 
         <variable
             name="product"
-            type="com.microsoft.device.display.sampleheroapp.domain.product.model.Product" />
+            type="com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product" />
 
         <variable
             name="itemListener"
-            type="com.microsoft.device.display.sampleheroapp.presentation.util.ItemClickListener&lt;Product&gt;" />
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Product&gt;" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/product_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:onClick="@{() -> itemListener.onClick(product)}">
+        android:onClick="@{() -> itemListener.onClick(product)}"
+        android:paddingTop="@dimen/micro_padding"
+        android:paddingBottom="@dimen/normal_padding">
 
-        <TextView
-            android:id="@+id/product_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{product.name}"/>
+            android:layout_height="300dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/rounded_rectangle_text"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/product_image_width"
+            android:paddingTop="@dimen/large_padding"
+            android:paddingEnd="@dimen/largest_padding">
 
-        <TextView
-            android:id="@+id/product_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{Integer.toString(product.price)}"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product_name"
+                style="@style/GoldText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{product.name}"
+                app:layout_constraintBottom_toTopOf="@id/product_rating"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="EG - 29387 Wood" />
 
-    </LinearLayout>
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
+                android:id="@+id/product_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintBottom_toTopOf="@id/product_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_name"
+                app:ratingValue="@{product.rating}"
+                tools:ratingValue="3.5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product_price"
+                style="@style/GoldText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/normal_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_rating"
+                app:price="@{product.price}"
+                tools:text="$6,495" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product_description"
+                style="@style/GoldText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/normal_margin"
+                android:text="@{product.description}"
+                android:textSize="@dimen/text_size_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_price"
+                tools:text="Wood body with gloss finish, Three Player Series pickups, 9.5-radius fingerboard, 2-point tremolo bridge" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/product_image"
+            android:layout_width="150dp"
+            android:layout_height="345dp"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/xl_margin"
+            app:productImage="@{product}"
+            tools:src="@drawable/orange_classic_guitar"/>
+
+    </FrameLayout>
 
 </layout>

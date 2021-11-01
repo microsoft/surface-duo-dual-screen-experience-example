@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout>
+
+    <data>
+        <import type="androidx.core.view.ViewKt" />
+
+        <variable
+            name="shouldDisplaySpace"
+            type="Boolean" />
+
+        <variable
+            name="itemCount"
+            type="Integer" />
+
+        <variable
+            name="price"
+            type="Float" />
+
+        <variable
+            name="itemListener"
+            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingTop="@dimen/medium_padding"
+        android:paddingEnd="@dimen/large_padding"
+        android:paddingBottom="@dimen/small_padding"
+        tools:background="@color/gray">
+
+        <View
+            android:id="@+id/total_space"
+            visibleIf="@{shouldDisplaySpace}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/xxl_padding"
+            app:layout_constraintBottom_toTopOf="@id/total_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/total_title"
+            style="@style/Store.Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.6"
+            android:text="@{@string/order_total_title(itemCount)}"
+            android:textSize="@dimen/text_size_12"
+            app:layout_constraintBottom_toTopOf="@id/total_price"
+            app:layout_constraintStart_toStartOf="@id/total_price"
+            app:layout_constraintTop_toBottomOf="@id/total_space"
+            tools:text="Total 8 items"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/total_price"
+            style="@style/Store.Name"
+            price="@{price}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_16"
+            app:layout_constraintEnd_toStartOf="@id/submit_button"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total_title"
+            tools:text="$30,447"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_button"
+            style="@style/Order.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="@{itemListener != null}"
+            android:onClick="@{(v) -> itemListener.onClick(ViewKt.isVisible(v))}"
+            android:text="@string/order_submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/total_price"
+            app:layout_constraintTop_toBottomOf="@id/total_space" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

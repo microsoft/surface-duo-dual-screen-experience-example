@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.catalog.CatalogListFragment">
+
+    <data>
+        <variable
+            name="isDualPortrait"
+            type="Boolean" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:focusable="true"
+        android:clickable="true">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            visibleIf="@{!isDualPortrait}" />
+
+        <com.microsoft.device.samples.dualscreenexperience.presentation.util.VerticalViewPager
+            android:id="@+id/vertical_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            visibleIf="@{isDualPortrait}"/>
+
+    </FrameLayout>
+
+</layout>
