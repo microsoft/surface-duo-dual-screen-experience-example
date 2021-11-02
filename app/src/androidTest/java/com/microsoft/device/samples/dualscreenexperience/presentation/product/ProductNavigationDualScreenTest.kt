@@ -8,7 +8,6 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.product
 
 import androidx.test.rule.ActivityTestRule
-import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.checkAboutInDualScreenMode
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.checkToolbarAbout
@@ -39,7 +38,6 @@ class ProductNavigationDualScreenTest {
     @After
     fun resetOrientation() {
         unfreezeRotation()
-        ScreenManagerProvider.getScreenManager().clear()
     }
 
     @Test
