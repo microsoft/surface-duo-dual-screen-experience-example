@@ -8,7 +8,6 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 
 import android.view.Surface
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.microsoft.device.samples.dualscreenexperience.common.prefs.TutorialPreferences
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener
@@ -22,7 +21,6 @@ class LaunchViewModel @Inject constructor(
     private val tutorialPrefs: TutorialPreferences,
     private val navigator: LaunchNavigator
 ) : ViewModel(), ItemClickListener<Boolean> {
-    val isDualMode = MutableLiveData(false)
     val shouldShowTutorial = SingleLiveEvent<Int?>(null)
 
     override fun onClick(model: Boolean?) {

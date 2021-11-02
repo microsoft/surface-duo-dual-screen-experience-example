@@ -24,6 +24,7 @@ import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentSingleScreenLaunchBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,6 +32,7 @@ import kotlinx.coroutines.launch
 class SingleScreenLaunchFragment : Fragment() {
 
     private val viewModel: LaunchViewModel by activityViewModels()
+    private val rotationViewModel: RotationViewModel by activityViewModels()
 
     private var binding: FragmentSingleScreenLaunchBinding? = null
 
@@ -68,7 +70,7 @@ class SingleScreenLaunchFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualScreen = it })
+        rotationViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualScreen = it })
     }
 
     private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

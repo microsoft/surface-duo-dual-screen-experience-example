@@ -20,6 +20,7 @@ import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSurfaceDuoDevice
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
@@ -35,6 +36,7 @@ import javax.inject.Inject
 class LaunchActivity : AppCompatActivity() {
 
     private val viewModel: LaunchViewModel by viewModels()
+    private val rotationViewModel: RotationViewModel by viewModels()
     private val tutorialViewModel: TutorialViewModel by viewModels()
 
     @Inject
@@ -58,7 +60,7 @@ class LaunchActivity : AppCompatActivity() {
     private fun observeWindowLayoutInfo() {
         windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onScreenInfoChanged(it)
                 }
@@ -72,6 +74,9 @@ class LaunchActivity : AppCompatActivity() {
         SurfaceDuoNavigation.findNavController(this, R.id.launch_nav_host_fragment).let {
             navigator.bind(it)
         }
+        if (rotationViewModel.isDualMode.value != true && isSurfaceDuoDevice()) {
+            viewModel.triggerShouldShowTutorial(getScreenRotation())
+        }
     }
 
     override fun onPause() {
@@ -81,12 +86,10 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        viewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
         if (windowLayoutInfo.isInDualMode()) {
             tutorialViewModel.onDualMode()
             dismissTutorial()
-        } else if (isSurfaceDuoDevice()) {
-            viewModel.triggerShouldShowTutorial(getScreenRotation())
         }
     }
 
