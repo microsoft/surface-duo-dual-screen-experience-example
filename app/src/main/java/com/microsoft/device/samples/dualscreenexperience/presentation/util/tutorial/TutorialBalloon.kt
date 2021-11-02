@@ -49,7 +49,9 @@ class TutorialBalloon @Inject constructor(val context: Context) {
 
             anchorView.post {
                 val (xOffset, yOffset) = generateOffsets(balloonType, anchorView)
-                tutorialWindow?.showAsDropDown(anchorView, xOffset, yOffset)
+                if (anchorView.isShown) {
+                    tutorialWindow?.showAsDropDown(anchorView, xOffset, yOffset)
+                }
             }
         }
     }
@@ -146,7 +148,7 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                 xOffset = parent.width / 2 - (tipHorizontalMargin + tipHeight / 2)
             }
             TutorialBalloonType.DEVELOPER_MODE -> {
-                xOffset -= parent.width / 2 + (tipHorizontalMargin + tipHeight / 2)
+                xOffset = parent.width / 2 - (tutorialContainer?.width ?: 0) + (tipHorizontalMargin + tipHeight / 2)
                 yOffset -= parent.height / 2 - tipHeight
             }
         }
