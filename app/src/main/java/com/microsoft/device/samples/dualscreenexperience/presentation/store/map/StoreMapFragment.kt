@@ -51,6 +51,7 @@ class StoreMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
+        binding?.isConnected = true
         binding?.rotationViewModel = rotationViewModel
         binding?.isScreenDual = viewModel.isNavigationAtStart()
 
