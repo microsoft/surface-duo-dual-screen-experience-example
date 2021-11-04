@@ -23,14 +23,13 @@ import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepositor
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.recyclerview.FoldableItemDecoration
 import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredLayoutManager
+import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationAt
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentOrderBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.addOrReplaceItemDecoration
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -116,7 +115,7 @@ class OrderFragment : Fragment() {
     private fun setupRecyclerView(windowLayoutInfo: WindowLayoutInfo) {
         binding?.orderItems?.apply {
             layoutManager = FoldableStaggeredLayoutManager(context, windowLayoutInfo).get()
-            addOrReplaceItemDecoration(FoldableItemDecoration(windowLayoutInfo))
+            replaceItemDecorationAt(FoldableItemDecoration(windowLayoutInfo))
         }
     }
 
@@ -127,7 +126,7 @@ class OrderFragment : Fragment() {
             quantityDataListHandler = orderViewModel.quantityDataListHandler,
             recommendationsHandler = recommendationViewModel.orderDataHandler,
             isDualMode = rotationViewModel.isDualMode.value == true,
-            isDualPortrait = rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value)
+            isDualPortrait = rotationViewModel.isDualPortraitMode()
         )
 
         binding?.orderItems?.adapter = orderAdapter
@@ -153,7 +152,7 @@ class OrderFragment : Fragment() {
         recommendationViewModel.refreshRecommendationList()
         updateAdapter(
             windowLayoutInfo.isInDualMode(),
-            rotationViewModel.isDualPortraitMode(requireContext().getScreenRotation())
+            rotationViewModel.isDualPortraitMode()
         )
     }
 

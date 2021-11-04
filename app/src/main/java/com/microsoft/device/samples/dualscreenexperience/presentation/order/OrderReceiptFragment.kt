@@ -24,16 +24,15 @@ import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepositor
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.recyclerview.FoldableItemDecoration
 import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredLayoutManager
+import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationAt
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentOrderReceiptBinding
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.DataListHandler
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.addOrReplaceItemDecoration
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -91,7 +90,7 @@ class OrderReceiptFragment : Fragment() {
     private fun setupRecyclerView(windowLayoutInfo: WindowLayoutInfo) {
         binding?.orderReceiptItems?.apply {
             layoutManager = FoldableStaggeredLayoutManager(context, windowLayoutInfo).get()
-            addOrReplaceItemDecoration(FoldableItemDecoration(windowLayoutInfo))
+            replaceItemDecorationAt(FoldableItemDecoration(windowLayoutInfo))
         }
     }
 
@@ -110,7 +109,7 @@ class OrderReceiptFragment : Fragment() {
             submittedOrder = orderViewModel.submittedOrder.value,
             recommendationsHandler = receiptDataHandler,
             isDualMode = rotationViewModel.isDualMode.value == true,
-            isDualPortrait = rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation.value),
+            isDualPortrait = rotationViewModel.isDualPortraitMode(),
             isEditEnabled = false
         )
 
@@ -135,7 +134,7 @@ class OrderReceiptFragment : Fragment() {
 
         updateAdapter(
             windowLayoutInfo.isInDualMode(),
-            rotationViewModel.isDualPortraitMode(requireContext().getScreenRotation())
+            rotationViewModel.isDualPortraitMode()
         )
     }
 

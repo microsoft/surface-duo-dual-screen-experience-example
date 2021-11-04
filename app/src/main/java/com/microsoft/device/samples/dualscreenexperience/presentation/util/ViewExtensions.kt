@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.util
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.text.SpannableStringBuilder
@@ -16,7 +15,6 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 
 fun View.getTopCenterPoint(): Point {
     val point = IntArray(2)
@@ -24,16 +22,6 @@ fun View.getTopCenterPoint(): Point {
     point[0] += width / 2
     return Point(point[0], point[1])
 }
-
-fun RecyclerView.addOrReplaceItemDecoration(itemDecoration: RecyclerView.ItemDecoration) {
-    if (itemDecorationCount == 1) {
-        removeItemDecorationAt(0)
-    }
-    addItemDecoration(itemDecoration)
-}
-
-fun Context.readTextFromAsset(fileName: String): String =
-    assets.open(fileName).bufferedReader().use { it.readText() }
 
 fun TextView.addClickableLink(textToLink: String, onClickListener: ClickableSpan) {
     val spannableString = SpannableStringBuilder(text)

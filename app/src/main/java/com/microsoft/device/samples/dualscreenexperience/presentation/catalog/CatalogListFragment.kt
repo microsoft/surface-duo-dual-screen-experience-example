@@ -22,12 +22,13 @@ import androidx.viewpager.widget.ViewPager
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.isDeviceInLandscape
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isInLandscape
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -124,9 +125,9 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
     }
 
     private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        binding?.isDualPortrait = windowLayoutInfo.isInDualMode() && !requireContext().isDeviceInLandscape()
-        catalogAdapter?.showTwoPages = windowLayoutInfo.isInDualMode() && requireContext().isDeviceInLandscape()
-        viewModel.isScrollingEnabled.value = !windowLayoutInfo.isInDualMode() && !requireContext().isDeviceInLandscape()
+        binding?.isDualLandscape = windowLayoutInfo.isInDualMode() && windowLayoutInfo.isFoldingFeatureVertical() == false
+        catalogAdapter?.showTwoPages = windowLayoutInfo.isInDualMode() && windowLayoutInfo.isFoldingFeatureVertical() == true
+        viewModel.isScrollingEnabled.value = !windowLayoutInfo.isInDualMode() && !requireActivity().isInLandscape()
 
         setupViewPager()
     }

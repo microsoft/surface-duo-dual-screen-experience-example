@@ -7,14 +7,21 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.store.map
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.ZOOM_LEVEL_CITY
@@ -30,6 +37,9 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCo
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,14 +55,15 @@ class StoreMapFragment : Fragment() {
     private var markerFactory: MapMarkerFactory? = null
     private var binding: FragmentStoreMapBinding? = null
 
+    private lateinit var windowInfoRepository: WindowInfoRepository
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
-        binding?.rotationViewModel = rotationViewModel
-        binding?.isScreenDual = viewModel.isNavigationAtStart()
+        onWindowLayoutInfoChanged()
 
         setupMapView(savedInstanceState)
 
@@ -82,6 +93,27 @@ class StoreMapFragment : Fragment() {
         setupRecenterButton()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        observeWindowLayoutInfo(context as AppCompatActivity)
+    }
+
+    private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
+        windowInfoRepository = activity.windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onWindowLayoutInfoChanged()
+                }
+            }
+        }
+    }
+
+    private fun onWindowLayoutInfoChanged() {
+        binding?.isDualPortrait =
+            rotationViewModel.isDualPortraitMode() && viewModel.isNavigationAtStart()
+    }
+
     private fun setupMapAvailabilityMessage() {
         activity?.applicationContext?.let {
             if (mapController.shouldShowNoGmsMessage(it)) {
@@ -102,7 +134,7 @@ class StoreMapFragment : Fragment() {
                 NetworkConnectionLiveData(context).observe(
                     viewLifecycleOwner,
                     { isConnected ->
-                        binding?.isScreenDual = viewModel.isNavigationAtStart()
+                        onWindowLayoutInfoChanged()
                         binding?.isConnected = isConnected
                     }
                 )
@@ -122,7 +154,7 @@ class StoreMapFragment : Fragment() {
         viewModel.selectedCity.observe(
             viewLifecycleOwner,
             {
-                binding?.isScreenDual = viewModel.isNavigationAtStart()
+                onWindowLayoutInfoChanged()
                 viewModel.markersList.value?.let { newData ->
                     addMarkersToMap(newData)
                 }
@@ -136,7 +168,7 @@ class StoreMapFragment : Fragment() {
         viewModel.selectedStore.observe(
             viewLifecycleOwner,
             {
-                binding?.isScreenDual = viewModel.isNavigationAtStart()
+                onWindowLayoutInfoChanged()
                 changeActionBarTitle(viewModel.selectedCity.value, it)
                 mapController.unSelectAllMarkers(markerFactory)
                 it?.let { store ->

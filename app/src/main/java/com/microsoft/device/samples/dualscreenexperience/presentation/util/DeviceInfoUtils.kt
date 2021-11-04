@@ -5,9 +5,15 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.util
 
+import android.app.Activity
 import android.content.Context
-import android.view.Surface
-import android.view.WindowManager
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.extractFoldingFeatureRect
+import com.microsoft.device.dualscreen.utils.wm.getScreenRectangles
+import com.microsoft.device.dualscreen.utils.wm.getWindowRect
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
+import com.microsoft.device.dualscreen.utils.wm.normalizeWindowRect
 
 /**
  * Check if the device is SurfaceDuo
@@ -18,21 +24,22 @@ fun Context.isSurfaceDuoDevice(): Boolean {
     return packageManager.hasSystemFeature(feature)
 }
 
-/**
- * Returns a constant int for the rotation of the screen
- * according to the rotation the function will return:
- * [Surface.ROTATION_0], [Surface.ROTATION_90], [Surface.ROTATION_180], [Surface.ROTATION_270]
- * @return the screen rotation
- */
-fun Context.getScreenRotation(): Int {
-    return try {
-        val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.rotation
-    } catch (e: IllegalStateException) {
-        Surface.ROTATION_0
-    }
-}
+fun Activity.isInLandscape() =
+    resources.configuration.orientation == ORIENTATION_LANDSCAPE
 
-fun Context.isDeviceInLandscape(): Boolean =
-    getScreenRotation() == Surface.ROTATION_0 ||
-        getScreenRotation() == Surface.ROTATION_180
+fun Activity.isFragmentInLandscape(windowLayoutInfo: WindowLayoutInfo): Boolean {
+    if (!windowLayoutInfo.isInDualMode()) {
+        return isInLandscape()
+    }
+    val windowRect = normalizeWindowRect(
+        windowLayoutInfo.extractFoldingFeatureRect(),
+        getWindowRect(),
+        resources.configuration.orientation
+    )
+    val fragmentRect =
+        getScreenRectangles(windowLayoutInfo.extractFoldingFeatureRect(), windowRect)?.firstOrNull()
+
+    return fragmentRect?.let {
+        it.width() - it.height() > 0
+    } ?: false
+}

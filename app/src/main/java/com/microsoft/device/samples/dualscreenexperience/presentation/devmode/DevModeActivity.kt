@@ -26,11 +26,11 @@ import androidx.navigation.SurfaceDuoNavigation
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityDevModeBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -189,7 +189,7 @@ class DevModeActivity : AppCompatActivity() {
 
     private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
-        rotationViewModel.currentRotation.value = getScreenRotation()
+        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
     }
 
     companion object {

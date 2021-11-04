@@ -21,7 +21,7 @@ import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isInLandscape
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSurfaceDuoDevice
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloonType
@@ -75,7 +75,7 @@ class LaunchActivity : AppCompatActivity() {
             navigator.bind(it)
         }
         if (rotationViewModel.isDualMode.value != true && isSurfaceDuoDevice()) {
-            viewModel.triggerShouldShowTutorial(getScreenRotation())
+            viewModel.triggerShouldShowTutorial(isInLandscape())
         }
     }
 

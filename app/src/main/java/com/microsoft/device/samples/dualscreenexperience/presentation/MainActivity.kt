@@ -27,6 +27,7 @@ import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityMainBinding
@@ -46,7 +47,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.order.Orde
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.getScreenRotation
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloonType
@@ -187,8 +187,8 @@ class MainActivity : AppCompatActivity() {
         if (windowLayoutInfo.isInDualMode() != rotationViewModel.isDualMode.value) {
             invalidateOptionsMenu()
         }
-        rotationViewModel.currentRotation.value = getScreenRotation()
         rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
         if (windowLayoutInfo.isInDualMode()) {
             tutorialViewModel.onDualMode()
         }

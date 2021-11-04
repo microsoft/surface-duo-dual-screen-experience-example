@@ -17,8 +17,12 @@
             type="com.microsoft.device.samples.dualscreenexperience.presentation.product.customize.ProductCustomizeViewModel" />
 
         <variable
-            name="rotationViewModel"
-            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
+            name="isScreenInLandscape"
+            type="Boolean" />
+
+        <variable
+            name="isDualMode"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibleIf="@{!rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            app:visibleIf="@{!isScreenInLandscape}"
             tools:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -48,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_customize_body_container"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibleIf="@{rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            app:visibleIf="@{isScreenInLandscape}"
             tools:visibility="visible"/>
 
         <RadioGroup
@@ -93,7 +97,7 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/product_customize_place_order_button"
-            visibleIf="@{!rotationViewModel.isDualMode()}"
+            visibleIf="@{!isDualMode}"
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:layout_marginBottom="@dimen/normal_margin"
