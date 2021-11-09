@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.SurfaceDuoNavigation
+import androidx.navigation.FoldableNavigation
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
@@ -71,7 +71,7 @@ class LaunchActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        SurfaceDuoNavigation.findNavController(this, R.id.launch_nav_host_fragment).let {
+        FoldableNavigation.findNavController(this, R.id.launch_nav_host_fragment).let {
             navigator.bind(it)
         }
         if (rotationViewModel.isDualMode.value != true && isSurfaceDuoDevice()) {

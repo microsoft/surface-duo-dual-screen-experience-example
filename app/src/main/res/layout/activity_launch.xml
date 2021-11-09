@@ -10,7 +10,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/launch_nav_host_fragment"
-    android:name="androidx.navigation.fragment.SurfaceDuoNavHostFragment"
+    android:name="androidx.navigation.fragment.FoldableNavHostFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
