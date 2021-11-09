@@ -24,7 +24,7 @@ ext {
     ]
 
     kotlinDependencies = [
-            kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
     ]
 
     navigationVersion = '2.3.5'
@@ -47,16 +47,20 @@ ext {
     ktxFragmentVersion = '1.3.6'
     roomVersion = '2.3.0'
     webkitVersion = '1.4.0'
+    windowManagerVersion = '1.0.0-beta02'
+    lifecycleRuntimeKtxVersion = "2.4.0-rc01"
 
     androidxDependencies = [
-            appCompat           : "androidx.appcompat:appcompat:$appCompatVersion",
-            constraintLayout    : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            ktxCore             : "androidx.core:core-ktx:$ktxCoreVersion",
-            ktxFragment         : "androidx.fragment:fragment-ktx:$ktxFragmentVersion",
-            room                : "androidx.room:room-runtime:$roomVersion",
-            roomCompiler        : "androidx.room:room-compiler:$roomVersion",
-            roomKtx             : "androidx.room:room-ktx:$roomVersion",
-            webkit              : "androidx.webkit:webkit:$webkitVersion",
+            appCompat          : "androidx.appcompat:appcompat:$appCompatVersion",
+            constraintLayout   : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            ktxCore            : "androidx.core:core-ktx:$ktxCoreVersion",
+            ktxFragment        : "androidx.fragment:fragment-ktx:$ktxFragmentVersion",
+            room               : "androidx.room:room-runtime:$roomVersion",
+            roomCompiler       : "androidx.room:room-compiler:$roomVersion",
+            roomKtx            : "androidx.room:room-ktx:$roomVersion",
+            webkit             : "androidx.webkit:webkit:$webkitVersion",
+            windowManager      : "androidx.window:window-java:$windowManagerVersion",
+            lifecycleRuntimeKtx: "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion"
     ]
 
     //Google dependencies
@@ -67,20 +71,20 @@ ext {
     mapsKtxVersion = '3.2.0'
 
     googleDependencies = [
-            material            : "com.google.android.material:material:$materialVersion",
-            gson                : "com.google.code.gson:gson:$gsonVersion",
-            hilt                : "com.google.dagger:hilt-android:$hiltVersion",
-            hiltCompiler        : "com.google.dagger:hilt-compiler:$hiltVersion",
-            maps                : "com.google.android.gms:play-services-maps:$mapsVersion",
-            mapsKtx             : "com.google.maps.android:maps-ktx:$mapsKtxVersion",
+            material    : "com.google.android.material:material:$materialVersion",
+            gson        : "com.google.code.gson:gson:$gsonVersion",
+            hilt        : "com.google.dagger:hilt-android:$hiltVersion",
+            hiltCompiler: "com.google.dagger:hilt-compiler:$hiltVersion",
+            maps        : "com.google.android.gms:play-services-maps:$mapsVersion",
+            mapsKtx     : "com.google.maps.android:maps-ktx:$mapsKtxVersion",
     ]
 
     //Microsoft dependencies version
     screenManagerWindowManagerVersion = config.dualScreenSdkVersion
     screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
     layoutsVersion = config.dualScreenSdkVersion
-    bottomNavBarVersion = "1.0.0-beta2"
-    recyclerViewVersion = "1.0.0-beta3"
+    bottomNavBarVersion = "1.0.0-beta3"
+    recyclerViewVersion = "1.0.0-beta4"
 
     bingMapsVersion = "1.2.0"
 
@@ -99,8 +103,8 @@ ext {
     lottieVersion = '4.2.0'
 
     uiDependencies = [
-            lottie: "com.airbnb.android:lottie:$lottieVersion",
-            glide: "com.github.bumptech.glide:glide:$glideVersion",
+            lottie                 : "com.airbnb.android:lottie:$lottieVersion",
+            glide                  : "com.github.bumptech.glide:glide:$glideVersion",
             glideAnnotationProcesor: "com.github.bumptech.glide:compiler:$glideVersion"
     ]
 
@@ -109,8 +113,8 @@ ext {
     archCoreTestingVersion = "2.1.0"
 
     testDependencies = [
-            junit       : "junit:junit:$junitVersion",
-            archTesting : "androidx.arch.core:core-testing:$archCoreTestingVersion"
+            junit      : "junit:junit:$junitVersion",
+            archTesting: "androidx.arch.core:core-testing:$archCoreTestingVersion"
     ]
 
     //Android test dependencies version
@@ -122,16 +126,16 @@ ext {
     coroutinesTestVersion = '1.5.0'
 
     instrumentationTestDependencies = [
-            junit               : "androidx.test.ext:junit:$junitInstrumentationVersion",
-            espressoCore        : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
-            espressoContrib     : "androidx.test.espresso:espresso-contrib:$espressoCoreVersion",
-            testRunner          : "androidx.test:runner:$testRunnerVersion",
-            testRules           : "androidx.test:rules:$testRulesVersion",
-            uiAutomator         : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",
-            roomTesting         : "androidx.room:room-testing:$roomVersion",
-            coroutinesTest      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion",
-            hiltTesting         : "com.google.dagger:hilt-android-testing:$hiltVersion",
-            hiltTestingCompiler : "com.google.dagger:hilt-android-compiler:$hiltVersion",
-            archTesting         : "androidx.arch.core:core-testing:$archCoreTestingVersion"
+            junit              : "androidx.test.ext:junit:$junitInstrumentationVersion",
+            espressoCore       : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            espressoContrib    : "androidx.test.espresso:espresso-contrib:$espressoCoreVersion",
+            testRunner         : "androidx.test:runner:$testRunnerVersion",
+            testRules          : "androidx.test:rules:$testRulesVersion",
+            uiAutomator        : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",
+            roomTesting        : "androidx.room:room-testing:$roomVersion",
+            coroutinesTest     : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion",
+            hiltTesting        : "com.google.dagger:hilt-android-testing:$hiltVersion",
+            hiltTestingCompiler: "com.google.dagger:hilt-android-compiler:$hiltVersion",
+            archTesting        : "androidx.arch.core:core-testing:$archCoreTestingVersion"
     ]
 }

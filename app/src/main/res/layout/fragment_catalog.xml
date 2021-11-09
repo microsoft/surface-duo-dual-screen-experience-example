@@ -11,7 +11,7 @@
 
     <data>
         <variable
-            name="isDualPortrait"
+            name="isDualLandscape"
             type="Boolean" />
     </data>
 
@@ -26,13 +26,13 @@
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            visibleIf="@{!isDualPortrait}" />
+            visibleIf="@{!isDualLandscape}" />
 
         <com.microsoft.device.samples.dualscreenexperience.presentation.util.VerticalViewPager
             android:id="@+id/vertical_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            visibleIf="@{isDualPortrait}"/>
+            visibleIf="@{isDualLandscape}"/>
 
     </FrameLayout>
 

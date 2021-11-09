@@ -8,18 +8,7 @@
 package com.microsoft.device.samples.dualscreenexperience
 
 import android.app.Application
-import com.microsoft.device.dualscreen.ScreenManagerProvider
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-open class DualScreenApplication : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        startDualScreenSDK()
-    }
-
-    private fun startDualScreenSDK() {
-        ScreenManagerProvider.init(this)
-    }
-}
+open class DualScreenApplication : Application()

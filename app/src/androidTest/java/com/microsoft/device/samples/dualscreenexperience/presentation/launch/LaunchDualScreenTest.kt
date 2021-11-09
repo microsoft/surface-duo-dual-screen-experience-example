@@ -8,7 +8,6 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 
 import androidx.test.rule.ActivityTestRule
-import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkMapFragment
 import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
 import com.microsoft.device.samples.dualscreenexperience.util.switchFromDualToSingleScreen
@@ -33,7 +32,6 @@ class LaunchDualScreenTest {
     @After
     fun resetOrientation() {
         unfreezeRotation()
-        ScreenManagerProvider.getScreenManager().clear()
     }
 
     @Test

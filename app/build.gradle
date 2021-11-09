@@ -99,6 +99,8 @@ dependencies {
     implementation androidxDependencies.ktxCore
     implementation androidxDependencies.ktxFragment
     implementation androidxDependencies.webkit
+    implementation androidxDependencies.lifecycleRuntimeKtx
+    implementation androidxDependencies.windowManager
 
     implementation androidxDependencies.room
     implementation androidxDependencies.roomKtx
@@ -119,10 +121,10 @@ dependencies {
     releaseImplementation googleDependencies.mapsKtx
     releaseEmulatorImplementation microsoftDependencies.bingMaps
 
-    implementation microsoftDependencies.bottomNavBar
-    implementation microsoftDependencies.layouts
-    implementation microsoftDependencies.screenManager
-    implementation microsoftDependencies.recyclerView
+//    implementation microsoftDependencies.bottomNavBar
+//    implementation microsoftDependencies.layouts
+//    implementation microsoftDependencies.screenManager
+//    implementation microsoftDependencies.recyclerView
 
     implementation uiDependencies.lottie
 

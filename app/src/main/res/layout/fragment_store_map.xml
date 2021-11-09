@@ -15,11 +15,7 @@
             type="Boolean" />
 
         <variable
-            name="rotationViewModel"
-            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
-
-        <variable
-            name="isScreenDual"
+            name="isDualPortrait"
             type="Boolean" />
     </data>
 
@@ -32,14 +28,14 @@
             android:id="@+id/no_internet_connection_single_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            app:isDualPortrait="@{isDualPortrait}"
             layout="@layout/no_internet_connection_single_mode" />
 
         <include
             android:id="@+id/no_internet_connection_dual_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
+            app:isDualPortrait="@{isDualPortrait}"
             layout="@layout/no_internet_connection_dual_mode" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

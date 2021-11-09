@@ -23,8 +23,8 @@
             type="com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel" />
 
         <variable
-            name="rotationViewModel"
-            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
+            name="isScreenInLandscape"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
             android:layout_width="@dimen/product_image_width"
             android:layout_height="@dimen/product_image_height"
             android:layout_marginEnd="@dimen/large_margin"
-            app:invisibleIf="@{rotationViewModel.isRotated(rotationViewModel.currentRotation)}"
+            app:invisibleIf="@{isScreenInLandscape}"
             app:layout_constraintBottom_toTopOf="@id/product_details_button_barrier_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_details_type_description"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_margin"
-            android:orientation="@{rotationViewModel.isRotated(rotationViewModel.currentRotation) ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL}"
+            android:orientation="@{isScreenInLandscape ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL}"
             app:layout_constraintBottom_toTopOf="@id/product_details_type_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_details_rating"

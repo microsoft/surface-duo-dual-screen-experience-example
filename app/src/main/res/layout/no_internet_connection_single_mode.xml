@@ -12,12 +12,12 @@
 
     <data>
         <variable
-            name="isDualPortraitMode"
+            name="isDualPortrait"
             type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        visibleIf="@{!isDualPortraitMode}"
+        visibleIf="@{!isDualPortrait}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray">
