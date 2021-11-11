@@ -21,8 +21,8 @@ import androidx.core.view.isGone
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.SurfaceDuoNavDestination
-import androidx.navigation.SurfaceDuoNavigation
+import androidx.navigation.FoldableNavDestination
+import androidx.navigation.FoldableNavigation
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
@@ -120,13 +120,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getMainNavController() =
-        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment)
+        FoldableNavigation.findNavController(this, R.id.nav_host_fragment)
 
     private fun showHideBottomNav(shouldHide: Boolean?) {
         binding.bottomNavView.isGone = (shouldHide == true)
     }
 
-    private fun resetDestinations(destination: SurfaceDuoNavDestination) {
+    private fun resetDestinations(destination: FoldableNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> storeViewModel.reset()
             R.id.fragment_product_list -> productViewModel.reset()
@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupDevModeByDestination(destination: SurfaceDuoNavDestination) {
+    private fun setupDevModeByDestination(destination: FoldableNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)

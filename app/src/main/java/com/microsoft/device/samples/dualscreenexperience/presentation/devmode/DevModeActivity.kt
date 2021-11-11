@@ -22,7 +22,7 @@ import androidx.core.view.doOnNextLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.SurfaceDuoNavigation
+import androidx.navigation.FoldableNavigation
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
@@ -100,7 +100,7 @@ class DevModeActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationGraph() {
-        SurfaceDuoNavigation.findNavController(this, R.id.devmode_nav_host_fragment).apply {
+        FoldableNavigation.findNavController(this, R.id.devmode_nav_host_fragment).apply {
             graph = navInflater.inflate(R.navigation.navigation_devmode_graph)
         }
     }
@@ -176,7 +176,7 @@ class DevModeActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        SurfaceDuoNavigation.findNavController(this, R.id.devmode_nav_host_fragment).let {
+        FoldableNavigation.findNavController(this, R.id.devmode_nav_host_fragment).let {
             navigator.bind(it)
         }
     }
