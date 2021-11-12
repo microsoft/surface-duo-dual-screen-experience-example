@@ -58,7 +58,7 @@ class DevControlFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDevControlBinding.inflate(inflater, container, false)
-        binding?.isDesignPaternPresent = (viewModel.designPattern != DevModeViewModel.DesignPattern.NONE)
+        binding?.isDesignPatternPresent = (viewModel.designPattern != DevModeViewModel.DesignPattern.NONE)
         return binding?.root
     }
 
