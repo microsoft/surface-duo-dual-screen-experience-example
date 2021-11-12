@@ -16,10 +16,10 @@
     </style>
 
     <style name="Launch.Button" parent="Customize.Button">
-        <item name="android:paddingStart">@dimen/largest_padding</item>
-        <item name="android:paddingEnd">@dimen/largest_padding</item>
-        <item name="android:paddingTop">@dimen/regular_padding</item>
-        <item name="android:paddingBottom">@dimen/regular_padding</item>
+        <item name="android:paddingStart">@dimen/xl_padding</item>
+        <item name="android:paddingEnd">@dimen/xl_padding</item>
+        <item name="android:paddingTop">@dimen/half_medium_padding</item>
+        <item name="android:paddingBottom">@dimen/half_medium_padding</item>
         <item name="android:text">@string/launch_button</item>
     </style>
 

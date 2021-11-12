@@ -33,14 +33,23 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/launch_description_text_view"
             style="@style/Paragraph.Gold.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:text="@string/launch_description"
-            app:layout_constraintBottom_toTopOf="@id/launch_description_image_view"
+            app:autoSizeMaxTextSize="@dimen/text_size_20"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/half_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/half_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/launch_description_image_view"
@@ -49,7 +58,7 @@
             app:layout_constraintBottom_toTopOf="@id/dual_launch_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_description_text_view"
+            app:layout_constraintTop_toBottomOf="@id/half_guideline"
             tools:src="@drawable/extended_canvas"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -57,12 +66,12 @@
             style="@style/Launch.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/xxl_margin"
             android:onClick="@{() -> launchListener.onClick(true)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:visibleIf="@{shouldDisplayButton}"/>
+            app:layout_constraintTop_toBottomOf="@id/launch_description_image_view"
+            app:visibleIf="@{shouldDisplayButton}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

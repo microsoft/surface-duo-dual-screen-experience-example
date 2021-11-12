@@ -6,7 +6,9 @@
   ~
   -->
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
 
         <variable
@@ -18,54 +20,128 @@
             type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/single_launch_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:paddingStart="@dimen/medium_padding"
-        android:paddingTop="@dimen/normal_padding"
-        android:paddingEnd="@dimen/medium_padding"
-        android:paddingBottom="@dimen/normal_padding">
+        android:paddingStart="@dimen/normal_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:paddingEnd="@dimen/normal_padding"
+        android:paddingBottom="@dimen/small_padding">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_dual_screen_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="dual_launch_title, dual_launch_image"
+            app:visibleIf="@{isDualScreen}"
+            tools:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dual_launch_title"
+            style="@style/App.Name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textAlignment="center"
+            app:autoSizeMaxTextSize="@dimen/text_size_40"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/dual_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/dual_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dual_launch_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/launcher_guitar_shop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dual_guideline"/>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_single_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="launch_title, launch_image, single_launch_description_text_view, single_launch_button"
+            app:visibleIf="@{!isDualScreen}"
+            tools:visibility="visible" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/launch_title"
             style="@style/App.Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:gravity="center"
+            android:maxLines="2"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@id/launch_image"
+            app:autoSizeMaxTextSize="@dimen/text_size_40"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/first_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/first_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/launch_image"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/launch_image_height"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/launcher_guitar_shop"
-            app:layout_constraintBottom_toTopOf="@id/single_launch_description_text_view"
+            app:layout_constraintBottom_toTopOf="@id/half_screen_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_title"/>
+            app:layout_constraintTop_toBottomOf="@id/first_guideline"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/half_screen_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/single_launch_description_text_view"
             style="@style/Paragraph.Gold.Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:gravity="center"
             android:text="@string/launch_description"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size_18"
-            app:layout_constraintBottom_toTopOf="@id/single_launch_button"
+            app:autoSizeMaxTextSize="@dimen/text_size_18"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/third_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/launch_image"
+            app:layout_constraintTop_toBottomOf="@id/half_screen_guideline"
+            app:layout_constraintVertical_chainStyle="packed"
             app:visibleIf="@{!isDualScreen}"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/third_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/single_launch_button"
@@ -76,7 +152,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/single_launch_description_text_view"
+            app:layout_constraintTop_toBottomOf="@id/third_guideline"
             app:visibleIf="@{!isDualScreen}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

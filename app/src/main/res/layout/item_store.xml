@@ -29,22 +29,32 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/item_store_image"
-            android:layout_width="@dimen/store_image_width"
-            android:layout_height="@dimen/store_image_height"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/store_horizontal_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:storeImage="@{store.image}"
             tools:background="@color/catalog_tools_image_background" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/store_horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/item_store_name"
             style="@style/Store.Name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/normal_margin"
             android:text="@{@string/store_title(store.name)}"
-            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/store_horizontal_guideline"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Someone's Guitar Shop" />
 
@@ -53,10 +63,11 @@
             style="@style/Store.Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/micro_margin"
             android:text="@{store.address}"
-            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/store_horizontal_guideline"
             app:layout_constraintTop_toBottomOf="@id/item_store_name"
             tools:text="1204 NE 36th St" />
 
@@ -65,9 +76,10 @@
             layout="@layout/store_rating_reviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/normal_margin"
-            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/store_horizontal_guideline"
             app:layout_constraintTop_toBottomOf="@id/item_store_address" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -75,11 +87,14 @@
             style="@style/Store.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
             android:onClick="@{() -> itemListener.onClick(store)}"
             android:text="@string/item_store_button_text"
-            app:layout_constraintStart_toEndOf="@id/item_store_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/store_horizontal_guideline"
             app:layout_constraintTop_toBottomOf="@id/store_rating_reviews" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
