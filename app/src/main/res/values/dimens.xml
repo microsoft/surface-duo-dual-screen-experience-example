@@ -64,27 +64,23 @@
 
     <dimen name="product_image_height">460dp</dimen>
     <dimen name="product_image_width">200dp</dimen>
-    <dimen name="product_shape_max_height">120dp</dimen>
 
-    <dimen name="info_container_size">150dp</dimen>
+    <dimen name="product_image_half_width">230dp</dimen>
+    <dimen name="product_image_half_height">100dp</dimen>
+
+    <dimen name="product_color_max_size">60dp</dimen>
+    <dimen name="product_shape_max_size">120dp</dimen>
+
+    <dimen name="order_item_margin">58dp</dimen>
+
+    <dimen name="info_container_size">120dp</dimen>
+    <dimen name="info_container_parent_size">248dp</dimen>
 
     <dimen name="team_link_button_width">84dp</dimen>
     <dimen name="team_link_button_height">78dp</dimen>
 
-    <!-- Portrait dimens -->
-
-    <dimen name="launch_single_button_top_margin">24dp</dimen>
-    <dimen name="launch_single_button_bottom_margin">72dp</dimen>
-
-    <!-- Single-mode dimens -->
-
-    <dimen name="launch_image_bottom_margin">0dp</dimen>
-    <dimen name="launch_image_height">220dp</dimen>
-
-    <dimen name="order_empty_image_height">192dp</dimen>
-    <dimen name="order_empty_message_size">18sp</dimen>
-
-    <dimen name="no_internet_image_size">260dp</dimen>
+    <dimen name="order_empty_image_height">164dp</dimen>
+    <dimen name="order_empty_message_size">16sp</dimen>
 
     <!--Catalog -->
 

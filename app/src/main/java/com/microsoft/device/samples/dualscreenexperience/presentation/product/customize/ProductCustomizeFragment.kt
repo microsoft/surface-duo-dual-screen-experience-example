@@ -15,6 +15,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.children
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -54,8 +57,6 @@ class ProductCustomizeFragment : Fragment() {
 
     private var binding: FragmentProductCustomizeBinding? = null
 
-    private var colorViewList: ArrayList<CustomizeCardView>? = null
-
     private lateinit var windowInfoRepository: WindowInfoRepository
 
     override fun onCreateView(
@@ -94,14 +95,8 @@ class ProductCustomizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initColorViewList()
-
         setupObservers()
         setupListeners()
-    }
-
-    private fun initColorViewList() {
-        colorViewList = arrayListOf()
     }
 
     override fun onResume() {
@@ -146,7 +141,8 @@ class ProductCustomizeFragment : Fragment() {
                         it.colorList[0]
                     }.let { newColor ->
                         viewModel.selectedBodyColor.value = newColor
-                        addColorViews(binding?.productCustomizeColorContainer, it.colorList, newColor)
+
+                        resetColorViews(binding?.productCustomizeColorContainer, it.colorList, newColor)
                     }
                 }
             }
@@ -160,10 +156,12 @@ class ProductCustomizeFragment : Fragment() {
                 if (it != null && shape != null && guitarType != null) {
                     setCustomizeImageDrawable(it, shape, guitarType)
 
-                    colorViewList?.let { colorViews ->
-                        if (colorViews.isEmpty()) {
-                            addColorViews(binding?.productCustomizeColorContainer, shape.colorList, it)
-                        }
+                    val visibleColorCount =
+                        binding?.productCustomizeColorContainer?.children
+                            ?.filter { colorView -> colorView.isVisible }?.count()
+
+                    if (shape.colorList.size != visibleColorCount) {
+                        resetColorViews(binding?.productCustomizeColorContainer, shape.colorList, it)
                     }
                 }
             }
@@ -225,29 +223,44 @@ class ProductCustomizeFragment : Fragment() {
             context?.getString(getProductContentDescription(color, shape, guitarType))
     }
 
-    private fun addColorViews(parentView: ViewGroup?, colorList: List<ProductColor>, defaultSelected: ProductColor) {
-        parentView?.removeAllViews()
-        colorViewList?.clear()
-        for (color in colorList) {
-            val colorView = CustomizeCardView(
-                requireContext()
-            ).apply {
-                productColor = color
-                setOnClickListener {
-                    if (!isSelected) {
-                        select()
-                        viewModel.selectedBodyColor.value = color
-                        colorViewList?.filter { it.productColor != color }?.forEach { it.unselect() }
+    private fun resetColorViews(parentView: ViewGroup?, colorList: List<ProductColor>, defaultSelected: ProductColor) {
+        parentView?.post {
+            for (colorIndex in 1..5) {
+                val colorView = getColorView(colorIndex)
+                if (colorIndex > colorList.size) {
+                    colorView?.isInvisible = true
+                } else {
+                    colorView?.isVisible = true
+                    val currentColor = colorList[colorIndex - 1]
+                    colorView?.apply {
+                        productColor = currentColor
+                        setOnClickListener {
+                            if (!isSelected) {
+                                select()
+                                viewModel.selectedBodyColor.value = currentColor
+                                colorList.indices
+                                    .filter { colorIndex != it }
+                                    .forEach { getColorView(it)?.unselect() }
+                            }
+                        }
+                    }
+                    if (currentColor == defaultSelected) {
+                        colorView?.select()
                     }
                 }
             }
-            if (color == defaultSelected) {
-                colorView.select()
-            }
-            colorViewList?.add(colorView)
-            parentView?.addView(colorView)
         }
     }
+
+    private fun getColorView(index: Int) =
+        when (index) {
+            1 -> binding?.productCustomizeColor1
+            2 -> binding?.productCustomizeColor2
+            3 -> binding?.productCustomizeColor3
+            4 -> binding?.productCustomizeColor4
+            5 -> binding?.productCustomizeColor5
+            else -> null
+        }
 
     private fun onBodyShapeClicked(view: View) {
         if (view is CustomizeCardView && !view.isSelected) {
@@ -268,6 +281,5 @@ class ProductCustomizeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-        colorViewList = null
     }
 }

@@ -29,44 +29,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingStart="@dimen/normal_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:paddingEnd="@dimen/normal_padding"
         android:paddingBottom="@dimen/small_padding">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_customize_image"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/product_image_width"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            app:layout_constraintBottom_toTopOf="@id/product_customize_type_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="@dimen/normal_padding"
+            app:layout_constraintBottom_toTopOf="@id/product_customize_image_guideline"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/product_image_width"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:visibleIf="@{!isScreenInLandscape}"
+            tools:src="@drawable/orange_classic_guitar"
             tools:visibility="gone"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/product_customize_image_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/product_customize_image_top_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierAllowsGoneWidgets="false"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="product_customize_image" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/product_customize_image_landscape"
-            android:layout_width="@dimen/product_image_width"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/product_customize_body_container"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="@dimen/product_image_width"
             app:visibleIf="@{isScreenInLandscape}"
+            tools:src="@drawable/orange_classic_guitar"
             tools:visibility="visible"/>
 
         <RadioGroup
             android:id="@+id/product_customize_type_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/half_medium_padding"
             android:background="@drawable/toggle_default"
             android:checkedButton="@id/product_customize_type_bass"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_customize_image">
+            app:layout_constraintTop_toBottomOf="@id/product_customize_image_top_barrier"
+            app:layout_constraintVertical_bias="0.0">
 
             <RadioButton
                 android:id="@+id/product_customize_type_bass"
@@ -75,11 +98,12 @@
                 android:background="@drawable/toggle_widget_background"
                 android:button="@null"
                 android:paddingStart="@dimen/normal_padding"
-                android:paddingTop="@dimen/half_medium_padding"
+                android:paddingTop="@dimen/small_padding"
                 android:paddingEnd="@dimen/normal_padding"
-                android:paddingBottom="@dimen/half_medium_padding"
+                android:paddingBottom="@dimen/small_padding"
                 android:text="@string/product_customize_type_bass"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
 
             <RadioButton
                 android:id="@+id/product_customize_type_normal"
@@ -88,57 +112,132 @@
                 android:background="@drawable/toggle_widget_background"
                 android:button="@null"
                 android:paddingStart="@dimen/normal_padding"
-                android:paddingTop="@dimen/half_medium_padding"
+                android:paddingTop="@dimen/small_padding"
                 android:paddingEnd="@dimen/normal_padding"
-                android:paddingBottom="@dimen/half_medium_padding"
+                android:paddingBottom="@dimen/small_padding"
                 android:text="@string/product_customize_type_normal"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_12" />
         </RadioGroup>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/product_customize_place_order_button"
-            visibleIf="@{!isDualMode}"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="@dimen/normal_margin"
+            invisibleIf="@{isDualMode}"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
-            app:layout_constraintStart_toEndOf="@id/product_customize_type_toggle"
             app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
-            app:layout_constraintTop_toBottomOf="@id/product_customize_image"
+            app:layout_constraintStart_toEndOf="@id/product_customize_type_toggle"
+            app:layout_constraintTop_toBottomOf="@id/product_customize_image_top_barrier"
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/add_to_order_animation"
-            tools:background="@drawable/rounded_rectangle_button"/>
+            tools:background="@drawable/rounded_rectangle_button"
+            tools:visibility="visible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/product_customize_color_title"
             style="@style/GoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:text="@string/product_customize_color_title"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_customize_type_toggle"/>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/product_customize_color_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/normal_padding"
-            android:paddingTop="@dimen/small_padding"
-            android:paddingEnd="@dimen/normal_padding"
-            android:paddingBottom="@dimen/normal_padding"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:paddingEnd="@dimen/small_margin"
             app:layout_constraintBottom_toTopOf="@id/product_customize_body_title"
+            app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
+            app:layout_constraintHeight_min="40dp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_customize_color_title"/>
+            app:layout_constraintTop_toBottomOf="@id/product_customize_color_title">
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_color_1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_color_2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_color_max_size"
+                app:productColor="1"
+                tools:visibility="visible"/>
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_color_2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_color_3"
+                app:layout_constraintStart_toEndOf="@id/product_customize_color_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_color_max_size"
+                app:productColor="2"
+                tools:visibility="visible" />
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_color_3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_color_4"
+                app:layout_constraintStart_toEndOf="@id/product_customize_color_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_color_max_size"
+                app:productColor="3"
+                tools:visibility="visible" />
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_color_4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/product_customize_color_5"
+                app:layout_constraintStart_toEndOf="@id/product_customize_color_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_color_max_size"
+                app:productColor="4"
+                tools:visibility="visible" />
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
+                android:id="@+id/product_customize_color_5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/product_customize_color_4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_color_max_size"
+                app:productColor="5"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/product_customize_body_title"
             style="@style/GoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:text="@string/product_customize_body_title"
             app:layout_constraintBottom_toTopOf="@id/product_customize_body_container"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,21 +246,25 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/product_customize_body_container"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/normal_margin"
-            android:paddingTop="@dimen/small_padding"
-            android:paddingEnd="@dimen/normal_margin"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:paddingEnd="@dimen/small_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
+            app:layout_constraintHeight_min="40dp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_customize_body_title">
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/product_customize_body_2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:productType="1"/>
@@ -169,8 +272,9 @@
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/product_customize_body_3"
                 app:layout_constraintStart_toEndOf="@id/product_customize_body_1"
                 app:layout_constraintTop_toTopOf="parent"
@@ -179,8 +283,9 @@
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/product_customize_body_4"
                 app:layout_constraintStart_toEndOf="@id/product_customize_body_2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -189,8 +294,9 @@
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
                 android:id="@+id/product_customize_body_4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/product_customize_body_3"
                 app:layout_constraintTop_toTopOf="parent"
