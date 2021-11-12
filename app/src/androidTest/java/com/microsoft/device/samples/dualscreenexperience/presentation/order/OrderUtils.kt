@@ -33,6 +33,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.se
 import com.microsoft.device.samples.dualscreenexperience.util.atRecyclerAdapterPosition
 import com.microsoft.device.samples.dualscreenexperience.util.clickChildViewWithId
 import com.microsoft.device.samples.dualscreenexperience.util.forceClick
+import com.microsoft.device.samples.dualscreenexperience.util.scrollRecyclerViewTo
 import com.microsoft.device.samples.dualscreenexperience.util.scrollRecyclerViewToEnd
 import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.CoreMatchers.not
@@ -44,7 +45,10 @@ fun navigateToOrdersSection() {
 }
 
 fun checkEmptyPage() {
+    onView(withId(R.id.order_items)).perform(scrollRecyclerViewTo(R.id.order_empty_container))
     onView(withId(R.id.order_empty_image)).check(matches(isDisplayed()))
+
+    onView(withId(R.id.order_items)).perform(scrollRecyclerViewTo(R.id.order_empty_container))
     onView(withId(R.id.order_empty_message)).check(matches(isDisplayed()))
 }
 

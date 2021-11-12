@@ -16,6 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isClickable
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
+import com.microsoft.device.dualscreen.layouts.locationOnScreen
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 
@@ -45,6 +46,21 @@ fun forceClick() = object : ViewAction {
     }
 }
 
+fun scrollRecyclerViewTo(viewId: Int) = object : ViewAction {
+    override fun getConstraints(): Matcher<View>? =
+        allOf(isAssignableFrom(RecyclerView::class.java), isDisplayed())
+
+    override fun getDescription(): String = "Scroll RecyclerView to specific view with ID"
+
+    override fun perform(uiController: UiController?, view: View?) {
+        val recyclerView = view as RecyclerView
+        val viewToReach = view.findViewById<View>(viewId)
+        val position = recyclerView.getChildAdapterPosition(viewToReach)
+        recyclerView.scrollToPosition(position)
+        uiController?.loopMainThreadUntilIdle()
+    }
+}
+
 fun scrollRecyclerViewToEnd() = object : ViewAction {
     override fun getConstraints(): Matcher<View>? =
         allOf(isAssignableFrom(RecyclerView::class.java), isDisplayed())
@@ -69,7 +85,11 @@ fun scrollNestedScrollViewTo(viewId: Int) = object : ViewAction {
     override fun perform(uiController: UiController?, view: View?) {
         val scrollView = view as NestedScrollView
         val viewToReach = view.findViewById<View>(viewId)
-        scrollView.scrollTo(0, viewToReach.top)
+        if (viewToReach.parent == scrollView || viewToReach.parent.parent == scrollView) {
+            scrollView.scrollTo(0, viewToReach.top)
+        } else {
+            scrollView.scrollTo(0, viewToReach.locationOnScreen.y)
+        }
         uiController?.loopMainThreadUntilIdle()
     }
 }

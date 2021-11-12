@@ -12,8 +12,6 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.swipeLeft
-import androidx.test.espresso.action.ViewActions.swipeRight
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
@@ -33,6 +31,8 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Stor
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.util.atRecyclerAdapterPosition
 import com.microsoft.device.samples.dualscreenexperience.util.clickChildViewWithId
+import com.microsoft.device.samples.dualscreenexperience.util.isSurfaceDuoDevice
+import com.microsoft.device.samples.dualscreenexperience.util.scrollNestedScrollViewTo
 import com.microsoft.device.samples.dualscreenexperience.util.withToolbarTitle
 import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.core.AllOf.allOf
@@ -89,17 +89,19 @@ fun checkListFragment(cityName: String, position: Int, store: Store) {
 }
 
 fun checkListFragmentInEmptyState() {
-    moveMap()
-    onView(withId(R.id.store_list_empty_image)).check(matches(isDisplayed()))
-    onView(withId(R.id.store_list_empty_message)).check(
-        matches(
-            allOf(
-                isDisplayed(),
-                withText(R.string.store_list_empty_message)
+    if (isSurfaceDuoDevice()) {
+        moveMap()
+        onView(withId(R.id.store_list_empty_image)).check(matches(isDisplayed()))
+        onView(withId(R.id.store_list_empty_message)).check(
+            matches(
+                allOf(
+                    isDisplayed(),
+                    withText(R.string.store_list_empty_message)
+                )
             )
         )
-    )
-    resetMap()
+        resetMap()
+    }
 }
 
 fun moveMap() {
@@ -141,6 +143,8 @@ fun checkDetailsFragment(store: Store) {
 }
 
 fun checkSelectedBeforeListStoreDetailsFragment(store: Store) {
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_name))
+
     onView(withId(R.id.store_details_name)).check(
         matches(
             allOf(
@@ -167,6 +171,13 @@ fun checkSelectedBeforeListStoreDetailsFragment(store: Store) {
 }
 
 fun checkDetailsAbout(store: Store) {
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_about_image_1))
+
+    onView(withId(R.id.store_details_about_image_1)).check(matches(isDisplayed()))
+    onView(withId(R.id.store_details_about_image_2)).check(matches(isDisplayed()))
+
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_about_description))
+
     onView(withId(R.id.store_details_about_description)).check(
         matches(
             allOf(
@@ -182,14 +193,18 @@ fun checkDetailsAbout(store: Store) {
 }
 
 fun moveToContactTab() {
-    onView(withId(R.id.store_details_view_pager)).perform(swipeLeft())
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_tab_layout))
+    onView(withText(R.string.store_details_contact_tab)).perform(click())
 }
 
 fun moveToAboutTab() {
-    onView(withId(R.id.store_details_view_pager)).perform(swipeRight())
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_tab_layout))
+    onView(withText(R.string.store_details_about_tab)).perform(click())
 }
 
 fun checkDetailsContact(store: Store) {
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_contact_address_text))
+
     onView(withId(R.id.store_details_contact_address_text)).check(
         matches(
             allOf(
@@ -198,6 +213,8 @@ fun checkDetailsContact(store: Store) {
             )
         )
     )
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_contact_city_text))
+
     onView(withId(R.id.store_details_contact_city_text)).check(
         matches(
             allOf(
@@ -206,6 +223,8 @@ fun checkDetailsContact(store: Store) {
             )
         )
     )
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_contact_info_phone))
+
     onView(withId(R.id.store_details_contact_info_phone)).check(
         matches(
             allOf(
@@ -214,6 +233,8 @@ fun checkDetailsContact(store: Store) {
             )
         )
     )
+    onView(withId(R.id.store_details_scroll)).perform(scrollNestedScrollViewTo(R.id.store_details_contact_info_email))
+
     onView(withId(R.id.store_details_contact_info_email)).check(
         matches(
             allOf(
