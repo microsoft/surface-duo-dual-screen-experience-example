@@ -5,40 +5,61 @@
   ~ Licensed under the MIT License.
   ~
   -->
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/gray">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/order_empty_image"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/order_empty_image_height"
-        android:src="@drawable/ic_empty_order"
-        app:layout_constraintBottom_toTopOf="@id/order_empty_message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+    <data>
+        <variable
+            name="isSingleOnPage"
+            type="Boolean" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/order_empty_message"
-        style="@style/Store.Name"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/order_empty_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginTop="@dimen/large_margin"
-        android:layout_marginEnd="@dimen/large_margin"
-        android:layout_marginBottom="@dimen/medium_margin"
-        android:gravity="center"
-        android:text="@string/order_empty_message"
-        android:textAlignment="center"
-        android:textSize="@dimen/order_empty_message_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/order_empty_image" />
+        android:background="@color/gray">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/order_empty_space"
+            visibleIf="@{isSingleOnPage}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/medium_margin"
+            app:layout_constraintBottom_toTopOf="@id/order_empty_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/order_empty_image"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/order_empty_image_height"
+            android:src="@drawable/ic_empty_order"
+            app:layout_constraintBottom_toTopOf="@id/order_empty_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/order_empty_message"
+            style="@style/Store.Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:gravity="center"
+            android:text="@string/order_empty_message"
+            android:textAlignment="center"
+            android:textSize="@dimen/order_empty_message_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_empty_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

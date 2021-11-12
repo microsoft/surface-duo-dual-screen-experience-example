@@ -33,41 +33,61 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="@dimen/large_padding">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingBottom="@dimen/normal_padding">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/product_name"
                 style="@style/GoldText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/normal_margin"
                 android:text="@{product.name}"
                 android:textSize="@dimen/text_size_14"
-                app:layout_constraintBottom_toTopOf="@id/product_image"
-                app:layout_constraintStart_toStartOf="@id/product_image"
-                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints"
                 tools:text="EG - 29387 Wood" />
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
                 android:id="@+id/product_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/normal_margin"
-                app:layout_constraintBottom_toBottomOf="@id/product_name"
-                app:layout_constraintStart_toEndOf="@id/product_name"
-                app:layout_constraintTop_toTopOf="@id/product_name"
                 app:ratingValue="@{product.rating}"
+                tools:ignore="MissingConstraints"
                 tools:ratingValue="3.5" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/product_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/medium_padding"
+                android:paddingEnd="@dimen/normal_padding"
+                app:constraint_referenced_ids="product_name, product_rating"
+                app:flow_horizontalBias="0.0"
+                app:flow_horizontalGap="@dimen/small_margin"
+                app:flow_horizontalStyle="packed"
+                app:flow_verticalGap="@dimen/small_margin"
+                app:flow_verticalStyle="packed"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintBottom_toTopOf="@id/product_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/product_image"
-                android:layout_width="230dp"
-                android:layout_height="100dp"
-                android:layout_marginBottom="@dimen/micro_margin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_padding"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:adjustViewBounds="true"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/product_add_button"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/product_name"/>
+                app:layout_constraintTop_toBottomOf="@id/product_header"
+                app:layout_constraintWidth_max="@dimen/product_image_half_width"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/product_add_button"
@@ -77,8 +97,9 @@
                 android:layout_marginEnd="@dimen/normal_margin"
                 android:onClick="@{() -> itemListener.onClick(product)}"
                 android:text="@string/order_recommendations_button"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/product_image"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintTop_toTopOf="@id/product_image"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
