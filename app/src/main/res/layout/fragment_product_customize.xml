@@ -267,6 +267,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_shape_max_size"
                 app:productType="1"/>
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
@@ -278,6 +279,7 @@
                 app:layout_constraintEnd_toStartOf="@id/product_customize_body_3"
                 app:layout_constraintStart_toEndOf="@id/product_customize_body_1"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_shape_max_size"
                 app:productType="2" />
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
@@ -289,6 +291,7 @@
                 app:layout_constraintEnd_toStartOf="@id/product_customize_body_4"
                 app:layout_constraintStart_toEndOf="@id/product_customize_body_2"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_shape_max_size"
                 app:productType="3" />
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
@@ -300,6 +303,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/product_customize_body_3"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/product_shape_max_size"
                 app:productType="4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
