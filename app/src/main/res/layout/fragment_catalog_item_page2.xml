@@ -30,6 +30,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/catalog_margin_small"
+            android:fadeScrollbars="true"
+            android:scrollbarThumbVertical="@color/gold"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toTopOf="@id/pages"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,9 +64,11 @@
                     android:layout_marginTop="@dimen/catalog_margin_normal"
                     android:maxHeight="@dimen/catalog_max_image_height"
                     app:assetImage="@{catalogItem.firstPicture}"
+                    app:layout_constraintBottom_toTopOf="@id/barrier1"
                     app:layout_constraintEnd_toStartOf="@id/text_second"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_first"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:background="@color/catalog_tools_image_background"
                     tools:minHeight="@dimen/catalog_max_image_height" />
 
@@ -76,16 +81,18 @@
                     android:layout_marginTop="@dimen/catalog_margin_normal"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:text="@{catalogItem.secondaryDescription}"
+                    app:layout_constraintBottom_toTopOf="@id/barrier1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/image_first"
-                    app:layout_constraintTop_toBottomOf="@id/text_first" />
+                    app:layout_constraintTop_toBottomOf="@id/text_first"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/barrier1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="image_first,text_second" />
+                    app:constraint_referenced_ids="image_first, text_second" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_third"
