@@ -28,7 +28,6 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.isInLandscape
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -127,7 +126,7 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
     private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         binding?.isDualLandscape = windowLayoutInfo.isInDualMode() && windowLayoutInfo.isFoldingFeatureVertical() == false
         catalogAdapter?.showTwoPages = windowLayoutInfo.isInDualMode() && windowLayoutInfo.isFoldingFeatureVertical() == true
-        viewModel.isScrollingEnabled.value = !windowLayoutInfo.isInDualMode() && !requireActivity().isInLandscape()
+        viewModel.isScrollingEnabled.value = !(windowLayoutInfo.isInDualMode() && !windowLayoutInfo.isFoldingFeatureVertical())
 
         setupViewPager()
     }

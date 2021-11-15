@@ -15,6 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.util.forceClick
+import com.microsoft.device.samples.dualscreenexperience.util.scrollNestedScrollViewTo
 import org.hamcrest.core.AllOf.allOf
 
 fun checkToolbarDevItem() {
@@ -65,6 +66,8 @@ fun checkDevModeControl(hasDesignPattern: Boolean) {
         onView(withId(R.id.dev_control_design_patterns)).check(matches(isDisplayed()))
     }
     onView(withId(R.id.dev_control_code)).check(matches(isDisplayed()))
+
+    onView(withId(R.id.dev_mode_scroll)).perform(scrollNestedScrollViewTo(R.id.dev_control_sdk))
     onView(withId(R.id.dev_control_sdk)).check(matches(isDisplayed()))
 }
 

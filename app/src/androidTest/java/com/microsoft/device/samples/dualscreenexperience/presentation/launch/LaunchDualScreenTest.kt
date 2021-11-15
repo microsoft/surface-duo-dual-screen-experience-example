@@ -9,6 +9,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 
 import androidx.test.rule.ActivityTestRule
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkMapFragment
+import com.microsoft.device.samples.dualscreenexperience.util.isSurfaceDuoDevice
 import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
 import com.microsoft.device.samples.dualscreenexperience.util.switchFromDualToSingleScreen
 import com.microsoft.device.samples.dualscreenexperience.util.switchFromSingleToDualScreen
@@ -84,8 +85,13 @@ class LaunchDualScreenTest {
 
     @Test
     fun spanMain() {
-        checkSingleLaunchButton()
-        clickSingleLaunchButton()
+        if (isSurfaceDuoDevice()) {
+            checkSingleLaunchButton()
+            clickSingleLaunchButton()
+        } else {
+            checkDualLaunchButton()
+            clickDualLaunchButton()
+        }
 
         checkMapFragment()
         switchFromSingleToDualScreen()

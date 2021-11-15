@@ -15,10 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:focusable="true"
         android:clickable="true"
-        android:paddingStart="@dimen/large_padding"
-        android:paddingEnd="@dimen/large_padding">
+        android:focusable="true"
+        android:paddingStart="@dimen/regular_padding"
+        android:paddingEnd="@dimen/regular_padding">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list"

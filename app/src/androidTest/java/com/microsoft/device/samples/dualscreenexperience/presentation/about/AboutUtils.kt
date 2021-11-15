@@ -28,8 +28,6 @@ fun checkAboutInSingleScreenMode() {
     checkAboutSectionInSingleScreen()
     checkLinksSection()
 
-    scrollToTerms()
-
     checkTermsLicensesSection()
 
     scrollToLicenses()
@@ -88,6 +86,7 @@ fun checkLinksSection() {
 }
 
 fun checkTermsLicensesSection() {
+    onView(withId(R.id.licenses_scroll_container)).perform(scrollNestedScrollViewTo(R.id.licenses_title))
     onView(withId(R.id.licenses_title)).check(matches(isDisplayed()))
     onView(withId(R.id.license_terms_title)).check(matches(isDisplayed()))
 }
@@ -95,10 +94,6 @@ fun checkTermsLicensesSection() {
 fun checkLicensesSection() {
     onView(withId(R.id.license_terms_other_title)).check(matches(isDisplayed()))
     onView(withId(R.id.license_recycler_view)).check(matches(isDisplayed()))
-}
-
-fun scrollToTerms() {
-    onView(withId(R.id.licenses_scroll_container)).perform(scrollNestedScrollViewTo(R.id.licenses_title))
 }
 
 fun scrollToLicenses() {

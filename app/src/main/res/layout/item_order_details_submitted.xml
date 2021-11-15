@@ -27,8 +27,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/large_padding"
-        android:paddingEnd="@dimen/large_padding"
+        android:paddingStart="@dimen/medium_padding"
+        android:paddingEnd="@dimen/medium_padding"
         tools:background="@color/gray">
 
         <androidx.appcompat.widget.AppCompatTextView

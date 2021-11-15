@@ -21,7 +21,9 @@
         android:background="@color/gray"
         android:clickable="true"
         android:focusable="true"
+        android:paddingStart="@dimen/medium_padding"
         android:paddingTop="@dimen/normal_padding"
+        android:paddingEnd="@dimen/medium_padding"
         android:paddingBottom="@dimen/normal_padding">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -29,9 +31,10 @@
             style="@style/GoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/xl_padding"
             android:text="@string/order_recommendations_title"
             app:layout_constraintBottom_toTopOf="@id/order_recommendations_item_first"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -40,9 +43,7 @@
             layout="@layout/item_product_recommendations"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/xl_padding"
             android:layout_marginTop="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/xl_padding"
             android:layout_marginBottom="@dimen/normal_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +55,7 @@
             visibleIf="@{itemsToShow >= 2}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/xl_padding"
             android:layout_marginTop="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/xl_padding"
             android:layout_marginBottom="@dimen/normal_margin"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,9 +69,7 @@
             visibleIf="@{itemsToShow >= 3}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/xl_padding"
             android:layout_marginTop="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/xl_padding"
             android:layout_marginBottom="@dimen/medium_margin"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

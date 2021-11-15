@@ -9,12 +9,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable name="store"
+        <variable
+            name="store"
             type="com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/store_rating_reviews_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@color/gray">

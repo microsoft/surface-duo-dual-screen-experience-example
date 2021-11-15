@@ -17,10 +17,7 @@
     <dimen name="medium_button_radius">8dp</dimen>
 
     <dimen name="icon_size">10dp</dimen>
-    <dimen name="store_image_height">172dp</dimen>
-    <dimen name="store_image_width">197dp</dimen>
 
-    <dimen name="largest_padding">80dp</dimen>
     <dimen name="xxl_padding">72dp</dimen>
     <dimen name="xl_padding">48dp</dimen>
     <dimen name="large_padding">36dp</dimen>
@@ -55,7 +52,10 @@
 
     <dimen name="bottom_nav_border_size">1dp</dimen>
 
+    <dimen name="text_size_40">40sp</dimen>
+    <dimen name="text_size_36">36sp</dimen>
     <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
@@ -63,27 +63,24 @@
 
     <dimen name="product_image_height">460dp</dimen>
     <dimen name="product_image_width">200dp</dimen>
-    <dimen name="product_shape_max_height">120dp</dimen>
+    <dimen name="product_item_height">400dp</dimen>
 
-    <dimen name="info_container_size">150dp</dimen>
+    <dimen name="product_image_half_width">230dp</dimen>
+    <dimen name="product_image_half_height">100dp</dimen>
+
+    <dimen name="product_color_max_size">60dp</dimen>
+    <dimen name="product_shape_max_size">120dp</dimen>
+
+    <dimen name="order_item_margin">58dp</dimen>
+
+    <dimen name="info_container_size">120dp</dimen>
+    <dimen name="info_container_parent_size">248dp</dimen>
 
     <dimen name="team_link_button_width">84dp</dimen>
     <dimen name="team_link_button_height">78dp</dimen>
 
-    <!-- Portrait dimens -->
-
-    <dimen name="launch_single_button_top_margin">24dp</dimen>
-    <dimen name="launch_single_button_bottom_margin">72dp</dimen>
-
-    <!-- Single-mode dimens -->
-
-    <dimen name="launch_image_bottom_margin">0dp</dimen>
-    <dimen name="launch_image_height">220dp</dimen>
-
-    <dimen name="order_empty_image_height">192dp</dimen>
-    <dimen name="order_empty_message_size">18sp</dimen>
-
-    <dimen name="no_internet_image_size">260dp</dimen>
+    <dimen name="order_empty_image_height">164dp</dimen>
+    <dimen name="order_empty_message_size">16sp</dimen>
 
     <!--Catalog -->
 

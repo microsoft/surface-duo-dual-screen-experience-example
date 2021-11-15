@@ -18,7 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/gray"
         android:paddingStart="@dimen/small_padding"
         android:paddingTop="@dimen/normal_padding"
@@ -28,8 +28,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/store_details_about_image_1"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/normal_margin"
+            android:adjustViewBounds="true"
             android:src="@drawable/about_store_1"
             app:layout_constraintBottom_toTopOf="@id/store_details_about_images_barrier"
             app:layout_constraintEnd_toStartOf="@id/store_details_about_image_2"
@@ -39,7 +40,8 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/store_details_about_image_2"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:src="@drawable/about_store_2"
             app:layout_constraintBottom_toTopOf="@id/store_details_about_images_barrier"
             app:layout_constraintEnd_toEndOf="parent"

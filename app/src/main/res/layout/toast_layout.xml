@@ -18,10 +18,10 @@
         style="@style/Store.TabText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/normal_padding"
-        android:paddingBottom="@dimen/normal_padding"
         android:paddingStart="@dimen/medium_padding"
+        android:paddingTop="@dimen/normal_padding"
         android:paddingEnd="@dimen/medium_padding"
+        android:paddingBottom="@dimen/normal_padding"
         android:text="@string/order_success_message" />
 
 </FrameLayout>

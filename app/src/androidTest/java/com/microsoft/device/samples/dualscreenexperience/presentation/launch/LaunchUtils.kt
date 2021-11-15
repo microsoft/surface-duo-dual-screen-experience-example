@@ -26,7 +26,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 
 fun checkLaunchInSingleMode() {
-    checkTitleFragment()
+    checkSingleTitleFragment()
     checkSingleLaunchButton()
     checkSingleDescriptionText()
     checkSingleLaunchButton()
@@ -35,12 +35,12 @@ fun checkLaunchInSingleMode() {
 
 fun checkLaunchInDualMode() {
     checkTutorialNotShowing()
-    checkTitleFragment()
+    checkDualTitleFragment()
     checkDescriptionFragment()
     checkDualLaunchButton()
 }
 
-fun checkTitleFragment() {
+fun checkSingleTitleFragment() {
     onView(withId(R.id.launch_title)).check(
         matches(
             allOf(
@@ -50,6 +50,18 @@ fun checkTitleFragment() {
         )
     )
     onView(withId(R.id.launch_image)).check(matches(isDisplayed()))
+}
+
+fun checkDualTitleFragment() {
+    onView(withId(R.id.dual_launch_title)).check(
+        matches(
+            allOf(
+                isDisplayed(),
+                withText(R.string.app_name)
+            )
+        )
+    )
+    onView(withId(R.id.dual_launch_image)).check(matches(isDisplayed()))
 }
 
 fun checkDescriptionFragment() {
