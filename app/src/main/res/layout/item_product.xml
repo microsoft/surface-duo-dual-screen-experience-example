@@ -25,7 +25,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/product_item"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="@dimen/product_item_height"
         android:layout_marginBottom="@dimen/medium_margin"
         android:onClick="@{() -> itemListener.onClick(product)}">
 

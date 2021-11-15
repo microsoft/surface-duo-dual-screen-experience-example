@@ -63,6 +63,7 @@
 
     <dimen name="product_image_height">460dp</dimen>
     <dimen name="product_image_width">200dp</dimen>
+    <dimen name="product_item_height">400dp</dimen>
 
     <dimen name="product_image_half_width">230dp</dimen>
     <dimen name="product_image_half_height">100dp</dimen>
