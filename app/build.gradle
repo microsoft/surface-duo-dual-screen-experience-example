@@ -106,7 +106,6 @@ dependencies {
     implementation androidxDependencies.roomKtx
     kapt androidxDependencies.roomCompiler
 
-    implementation navigationDependencies.runtimeKtx
     implementation navigationDependencies.fragmentKtx
     implementation navigationDependencies.uiKtx
 
@@ -121,10 +120,8 @@ dependencies {
     releaseImplementation googleDependencies.mapsKtx
     releaseEmulatorImplementation microsoftDependencies.bingMaps
 
-//    implementation microsoftDependencies.bottomNavBar
-//    implementation microsoftDependencies.layouts
-//    implementation microsoftDependencies.screenManager
-//    implementation microsoftDependencies.recyclerView
+    implementation microsoftDependencies.bottomNavBar
+    implementation microsoftDependencies.recyclerView
 
     implementation uiDependencies.lottie
 
