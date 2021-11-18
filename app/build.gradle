@@ -90,8 +90,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-
     implementation kotlinDependencies.kotlinStdlib
 
     implementation androidxDependencies.appCompat

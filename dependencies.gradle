@@ -7,7 +7,7 @@
 
 ext {
     gradlePluginVersion = "7.0.3"
-    kotlinVersion = '1.5.31'
+    kotlinVersion = '1.6.0'
     compileSdkVersion = 31
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
@@ -20,18 +20,16 @@ ext {
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
             testInstrumentationRunner: "com.microsoft.device.samples.dualscreenexperience.HiltJUnitRunner",
-            dualScreenSdkVersion     : "1.0.0-beta4",
     ]
 
     kotlinDependencies = [
             kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
     ]
 
-    navigationVersion = '1.0.0-alpa1-test01'
+    navigationVersion = '1.0.0-alpha1'
 
     navigationDependencies = [
             fragmentKtx   : "com.microsoft.device.dualscreen:navigation-fragment-ktx:$navigationVersion",
-            testing       : "com.microsoft.device.dualscreen:navigation-testing:$navigationVersion",
             uiKtx         : "com.microsoft.device.dualscreen:navigation-ui-ktx:$navigationVersion",
             safeArgsPlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     ]
@@ -76,9 +74,6 @@ ext {
     ]
 
     //Microsoft dependencies version
-    screenManagerWindowManagerVersion = config.dualScreenSdkVersion
-    screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
-    layoutsVersion = config.dualScreenSdkVersion
     bottomNavBarVersion = "1.0.0-beta3"
     recyclerViewVersion = "1.0.0-beta4"
 
@@ -86,9 +81,6 @@ ext {
 
     microsoftDependencies = [
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
-            screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
-            screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
-            layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",
     ]
