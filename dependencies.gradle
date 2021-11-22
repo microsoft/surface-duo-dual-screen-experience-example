@@ -7,36 +7,30 @@
 
 ext {
     gradlePluginVersion = "7.0.3"
-    kotlinVersion = '1.5.31'
+    kotlinVersion = '1.6.0'
     compileSdkVersion = 31
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
     minSdkVersion = 22
-    versionCode = 1
-    versionName = "1.0"
+    versionCode = 5
+    versionName = "1.0.0.4"
     applicationId = "com.microsoft.device.samples.dualscreenexperience"
 
     config = [
             gradlePlugin             : "com.android.tools.build:gradle:$gradlePluginVersion",
             kotlinGradlePlugin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
             testInstrumentationRunner: "com.microsoft.device.samples.dualscreenexperience.HiltJUnitRunner",
-            dualScreenSdkVersion     : "1.0.0-beta4",
     ]
 
     kotlinDependencies = [
             kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
     ]
 
-    navigationVersion = '2.3.5'
+    navigationVersion = '1.0.0-alpha1'
 
     navigationDependencies = [
-            runtime       : "androidx.navigation:navigation-runtime:$navigationVersion",
-            runtimeKtx    : "androidx.navigation:navigation-runtime-ktx:$navigationVersion",
-            fragment      : "androidx.navigation:navigation-fragment:$navigationVersion",
-            fragmentKtx   : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
-            testing       : "androidx.navigation:navigation-testing:$navigationVersion",
-            ui            : "androidx.navigation:navigation-ui:$navigationVersion",
-            uiKtx         : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
+            fragmentKtx   : "com.microsoft.device.dualscreen:navigation-fragment-ktx:$navigationVersion",
+            uiKtx         : "com.microsoft.device.dualscreen:navigation-ui-ktx:$navigationVersion",
             safeArgsPlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     ]
 
@@ -80,9 +74,6 @@ ext {
     ]
 
     //Microsoft dependencies version
-    screenManagerWindowManagerVersion = config.dualScreenSdkVersion
-    screenManagerDisplayMaskVersion = config.dualScreenSdkVersion
-    layoutsVersion = config.dualScreenSdkVersion
     bottomNavBarVersion = "1.0.0-beta3"
     recyclerViewVersion = "1.0.0-beta4"
 
@@ -90,9 +81,6 @@ ext {
 
     microsoftDependencies = [
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
-            screenManagerWindowManager: "com.microsoft.device.dualscreen:screenmanager-windowmanager:$screenManagerWindowManagerVersion",
-            screenManagerDisplayMask  : "com.microsoft.device.dualscreen:screenmanager-displaymask:$screenManagerDisplayMaskVersion",
-            layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",
     ]

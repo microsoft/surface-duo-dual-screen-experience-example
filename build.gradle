@@ -31,9 +31,6 @@ allprojects {
         maven {
             url "https://microsoftmaps.jfrog.io/artifactory/Maven/"
         }
-        flatDir {
-            dirs 'libs'
-        }
     }
     apply from: "$rootDir/ktlint.gradle"
 }
