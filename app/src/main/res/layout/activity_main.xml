@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.SurfaceDuoNavHostFragment"
+        android:name="androidx.navigation.fragment.FoldableNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:navGraph="@navigation/navigation_main_graph"/>
 
-    <com.microsoft.device.dualscreen.bottomnavigation.SurfaceDuoBottomNavigationView
+    <com.microsoft.device.dualscreen.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

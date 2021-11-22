@@ -7,23 +7,50 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.devmode
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.microsoft.device.dualscreen.ScreenInfo
-import com.microsoft.device.dualscreen.ScreenInfoListener
-import com.microsoft.device.dualscreen.ScreenManagerProvider
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentDevControlBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class DevControlFragment : Fragment(), ScreenInfoListener {
+class DevControlFragment : Fragment() {
     private var binding: FragmentDevControlBinding? = null
 
     private val viewModel: DevModeViewModel by activityViewModels()
     private val rotationViewModel: RotationViewModel by activityViewModels()
+
+    private lateinit var windowInfoRepository: WindowInfoRepository
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        observeWindowLayoutInfo(context as AppCompatActivity)
+    }
+
+    private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
+        windowInfoRepository = activity.windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onScreenInfoChanged(it)
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +58,7 @@ class DevControlFragment : Fragment(), ScreenInfoListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDevControlBinding.inflate(inflater, container, false)
-        binding?.isDesignPaternPresent = (viewModel.designPattern != DevModeViewModel.DesignPattern.NONE)
+        binding?.isDesignPatternPresent = (viewModel.designPattern != DevModeViewModel.DesignPattern.NONE)
         return binding?.root
     }
 
@@ -58,18 +85,8 @@ class DevControlFragment : Fragment(), ScreenInfoListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
-    }
-
-    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        if (screenInfo.isDualMode()) {
+    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode()) {
             if (!viewModel.isNavigationAtContent()) {
                 viewModel.navigateToContent()
             }

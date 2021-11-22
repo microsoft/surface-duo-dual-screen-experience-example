@@ -10,27 +10,41 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.SurfaceDuoNavigation
-import com.microsoft.device.dualscreen.ScreenInfo
-import com.microsoft.device.dualscreen.ScreenInfoListener
-import com.microsoft.device.dualscreen.ScreenManagerProvider
-import com.microsoft.device.dualscreen.isSurfaceDuoDevice
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.FoldableNavigation
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchViewModel.Companion.SHOULD_NOT_SHOW
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isInLandscape
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSurfaceDuoDevice
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloonType
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LaunchActivity : AppCompatActivity(), ScreenInfoListener {
+class LaunchActivity : AppCompatActivity() {
 
     private val viewModel: LaunchViewModel by viewModels()
+    private val rotationViewModel: RotationViewModel by viewModels()
     private val tutorialViewModel: TutorialViewModel by viewModels()
 
-    @Inject lateinit var navigator: LaunchNavigator
-    @Inject lateinit var tutorial: TutorialBalloon
+    @Inject
+    lateinit var navigator: LaunchNavigator
+    @Inject
+    lateinit var tutorial: TutorialBalloon
+
+    private lateinit var windowInfoRepository: WindowInfoRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,32 +53,43 @@ class LaunchActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun setupObservers() {
+        observeWindowLayoutInfo()
         viewModel.shouldShowTutorial.observe(this, { handleTutorial(it) })
+    }
+
+    private fun observeWindowLayoutInfo() {
+        windowInfoRepository = windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onScreenInfoChanged(it)
+                }
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
-        SurfaceDuoNavigation.findNavController(this, R.id.launch_nav_host_fragment).let {
+        FoldableNavigation.findNavController(this, R.id.launch_nav_host_fragment).let {
             navigator.bind(it)
+        }
+        if (rotationViewModel.isDualMode.value != true && isSurfaceDuoDevice()) {
+            viewModel.triggerShouldShowTutorial(isInLandscape())
         }
     }
 
     override fun onPause() {
         super.onPause()
-        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         dismissTutorialBalloon()
         navigator.unbind()
     }
 
-    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        viewModel.isDualMode.value = screenInfo.isDualMode()
-        if (screenInfo.isDualMode()) {
+    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        if (windowLayoutInfo.isInDualMode()) {
             tutorialViewModel.onDualMode()
             dismissTutorial()
-        } else if (isSurfaceDuoDevice()) {
-            viewModel.triggerShouldShowTutorial(screenInfo.getScreenRotation())
         }
     }
 

@@ -250,6 +250,7 @@ class OrderListAdapter(
                 }
                 binding.orderEmptyMessage.textSize = EMPTY_MESSAGE_TEXT_SIZE
             }
+            binding.isSingleOnPage = isSingleOnPage
         }
     }
 

@@ -7,13 +7,13 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.devmode
 
-import androidx.navigation.SurfaceDuoNavController
+import androidx.navigation.FoldableNavController
 import com.microsoft.device.samples.dualscreenexperience.R
 
 class DevModeNavigator {
-    private var navController: SurfaceDuoNavController? = null
+    private var navController: FoldableNavController? = null
 
-    fun bind(navController: SurfaceDuoNavController) {
+    fun bind(navController: FoldableNavController) {
         this.navController = navController
     }
 

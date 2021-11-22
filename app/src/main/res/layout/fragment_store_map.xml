@@ -7,7 +7,8 @@
   -->
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -15,11 +16,7 @@
             type="Boolean" />
 
         <variable
-            name="rotationViewModel"
-            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel" />
-
-        <variable
-            name="isScreenDual"
+            name="isDualPortrait"
             type="Boolean" />
     </data>
 
@@ -30,24 +27,25 @@
 
         <include
             android:id="@+id/no_internet_connection_single_mode"
+            layout="@layout/no_internet_connection_single_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
-            layout="@layout/no_internet_connection_single_mode" />
+            app:isDualPortrait="@{isDualPortrait}" />
 
         <include
             android:id="@+id/no_internet_connection_dual_mode"
+            layout="@layout/no_internet_connection_dual_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:isDualPortraitMode="@{isScreenDual &amp;&amp; rotationViewModel.isDualPortraitMode(rotationViewModel.currentRotation)}"
-            layout="@layout/no_internet_connection_dual_mode" />
+            app:isDualPortrait="@{isDualPortrait}" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/store_map_layout"
+            invisibleIf="@{!isConnected}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            invisibleIf="@{!isConnected}">
+            tools:visibility="gone">
 
             <FrameLayout
                 android:id="@+id/map_container"

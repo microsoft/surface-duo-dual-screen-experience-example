@@ -7,8 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation
 
-import androidx.navigation.SurfaceDuoNavController
-import androidx.navigation.SurfaceDuoNavOptions
+import androidx.navigation.FoldableNavController
+import androidx.navigation.FoldableNavOptions
 import com.microsoft.device.dualscreen.navigation.LaunchScreen
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.CatalogNavigator
@@ -17,9 +17,9 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.Pr
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreNavigator
 
 class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderNavigator {
-    private var navController: SurfaceDuoNavController? = null
+    private var navController: FoldableNavController? = null
 
-    fun bind(navController: SurfaceDuoNavController) {
+    fun bind(navController: FoldableNavController) {
         this.navController = navController
     }
 
@@ -35,7 +35,7 @@ class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderN
     }
 
     override fun navigateToStores() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
+        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_stores_graph, null, navOptions)
     }
 
@@ -56,12 +56,12 @@ class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderN
     }
 
     override fun navigateToCatalog() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
+        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_catalog_graph, null, navOptions)
     }
 
     override fun navigateToProducts() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
         navController?.navigate(R.id.navigation_products_graph, null, navOptions)
     }
 
@@ -74,7 +74,7 @@ class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderN
     }
 
     override fun navigateToOrders() {
-        val navOptions = SurfaceDuoNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
+        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_orders_graph, null, navOptions)
     }
 

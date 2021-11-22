@@ -19,34 +19,46 @@ import android.view.ViewAnimationUtils.createCircularReveal
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnNextLayout
-import androidx.navigation.SurfaceDuoNavigation
-import com.microsoft.device.dualscreen.ScreenInfo
-import com.microsoft.device.dualscreen.ScreenInfoListener
-import com.microsoft.device.dualscreen.ScreenManagerProvider
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.FoldableNavigation
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityDevModeBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.max
 
 @AndroidEntryPoint
-class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
+class DevModeActivity : AppCompatActivity() {
 
     private val rotationViewModel: RotationViewModel by viewModels()
     private val viewModel: DevModeViewModel by viewModels()
 
-    @Inject lateinit var navigator: DevModeNavigator
+    @Inject
+    lateinit var navigator: DevModeNavigator
     private lateinit var binding: ActivityDevModeBinding
 
     private var revealX: Int = 0
     private var revealY: Int = 0
 
+    private lateinit var windowInfoRepository: WindowInfoRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDevModeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        observeWindowLayoutInfo()
         setupToolbar()
 
         extractIntentUrlExtras(intent)
@@ -58,6 +70,17 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
 
             binding.devRootLayout.doOnNextLayout {
                 revealActivity(revealX, revealY)
+            }
+        }
+    }
+
+    private fun observeWindowLayoutInfo() {
+        windowInfoRepository = windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onScreenInfoChanged(it)
+                }
             }
         }
     }
@@ -77,7 +100,7 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun setupNavigationGraph() {
-        SurfaceDuoNavigation.findNavController(this, R.id.devmode_nav_host_fragment).apply {
+        FoldableNavigation.findNavController(this, R.id.devmode_nav_host_fragment).apply {
             graph = navInflater.inflate(R.navigation.navigation_devmode_graph)
         }
     }
@@ -152,23 +175,21 @@ class DevModeActivity : AppCompatActivity(), ScreenInfoListener {
 
     override fun onResume() {
         super.onResume()
-        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
-        SurfaceDuoNavigation.findNavController(this, R.id.devmode_nav_host_fragment).let {
+        FoldableNavigation.findNavController(this, R.id.devmode_nav_host_fragment).let {
             navigator.bind(it)
         }
     }
 
     override fun onPause() {
         super.onPause()
-        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
 
         navigator.unbind()
     }
 
-    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        rotationViewModel.isDualMode.value = screenInfo.isDualMode()
-        rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
+    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
     }
 
     companion object {

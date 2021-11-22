@@ -7,15 +7,23 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.product.details
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowLayoutInfo
 import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentProductDetailsBinding
@@ -26,8 +34,12 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.ut
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isFragmentInLandscape
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductDetailsFragment : Fragment() {
@@ -38,6 +50,8 @@ class ProductDetailsFragment : Fragment() {
 
     private var binding: FragmentProductDetailsBinding? = null
 
+    private lateinit var windowInfoRepository: WindowInfoRepository
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +59,7 @@ class ProductDetailsFragment : Fragment() {
     ): View? {
         binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
         binding?.viewModel = viewModel
-        binding?.rotationViewModel = rotationViewModel
+        binding?.isScreenInLandscape = false
         binding?.lifecycleOwner = this
         return binding?.root
     }
@@ -57,6 +71,26 @@ class ProductDetailsFragment : Fragment() {
         setupObservers()
         setupCustomizeObservers()
         setupListeners()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        observeWindowLayoutInfo(context as AppCompatActivity)
+    }
+
+    private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
+        windowInfoRepository = activity.windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onWindowLayoutInfoChanged(it)
+                }
+            }
+        }
+    }
+
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        binding?.isScreenInLandscape = requireActivity().isFragmentInLandscape(windowLayoutInfo)
     }
 
     override fun onResume() {

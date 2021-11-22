@@ -11,7 +11,6 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.rule.ActivityTestRule
-import com.microsoft.device.dualscreen.ScreenManagerProvider
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.data.AppDatabase
 import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderDao
@@ -83,7 +82,6 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
     @After
     fun resetOrientation() {
         unfreezeRotation()
-        ScreenManagerProvider.getScreenManager().clear()
     }
 
     @Test

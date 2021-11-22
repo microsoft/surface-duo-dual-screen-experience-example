@@ -11,12 +11,12 @@
 
     <data>
         <variable
-            name="isDualPortraitMode"
+            name="isDualPortrait"
             type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        visibleIf="@{isDualPortraitMode}"
+        visibleIf="@{isDualPortrait}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray">
@@ -30,8 +30,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/no_internet_connection_image_dual"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="@dimen/medium_padding"
             android:src="@drawable/ic_internet"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,25 +42,36 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/no_internet_connection_title"
             style="@style/NoInternet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
-            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal|bottom"
+            android:paddingStart="@dimen/normal_padding"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingEnd="@dimen/normal_padding"
+            android:paddingBottom="@dimen/small_padding"
             android:text="@string/no_internet_connection_title"
-            android:textSize="36sp"
+            app:autoSizeMaxTextSize="@dimen/text_size_36"
+            app:autoSizeMinTextSize="@dimen/text_size_20"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/no_internet_connection_description"
             app:layout_constraintEnd_toStartOf="@id/guideline_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/no_internet_connection_description"
             style="@style/NoInternet"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal|top"
+            android:paddingStart="@dimen/normal_padding"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingEnd="@dimen/normal_padding"
+            android:paddingBottom="@dimen/small_padding"
             android:text="@string/no_internet_connection_description"
+            app:autoSizeMaxTextSize="@dimen/text_size_16"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/no_internet_connection_title"
             app:layout_constraintStart_toStartOf="@id/no_internet_connection_title"

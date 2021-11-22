@@ -18,12 +18,17 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation
 import androidx.core.view.isGone
-import androidx.navigation.SurfaceDuoNavDestination
-import androidx.navigation.SurfaceDuoNavigation
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.FoldableNavDestination
+import androidx.navigation.FoldableNavigation
+import androidx.window.layout.WindowInfoRepository
+import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowLayoutInfo
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.microsoft.device.dualscreen.ScreenInfo
-import com.microsoft.device.dualscreen.ScreenInfoListener
-import com.microsoft.device.dualscreen.ScreenManagerProvider
+import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityMainBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutActivity
@@ -47,13 +52,19 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutor
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloonType
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), ScreenInfoListener {
+class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var navigator: MainNavigator
-    @Inject lateinit var tutorial: TutorialBalloon
+    @Inject
+    lateinit var navigator: MainNavigator
+
+    @Inject
+    lateinit var tutorial: TutorialBalloon
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
     private val rotationViewModel: RotationViewModel by viewModels()
@@ -69,17 +80,30 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     private var devModeTextView: TextView? = null
 
+    private lateinit var windowInfoRepository: WindowInfoRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        observeWindowLayoutInfo()
         setupToolbar()
         setupBottomNavigation()
     }
 
+    private fun observeWindowLayoutInfo() {
+        windowInfoRepository = windowInfoRepository()
+        lifecycleScope.launch(Dispatchers.Main) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                windowInfoRepository.windowLayoutInfo.collect {
+                    onScreenInfoChanged(it)
+                }
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        ScreenManagerProvider.getScreenManager().addScreenInfoListener(this)
 
         getMainNavController().let {
             navigator.bind(it)
@@ -96,13 +120,13 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
     }
 
     private fun getMainNavController() =
-        SurfaceDuoNavigation.findNavController(this, R.id.nav_host_fragment)
+        FoldableNavigation.findNavController(this, R.id.nav_host_fragment)
 
     private fun showHideBottomNav(shouldHide: Boolean?) {
         binding.bottomNavView.isGone = (shouldHide == true)
     }
 
-    private fun resetDestinations(destination: SurfaceDuoNavDestination) {
+    private fun resetDestinations(destination: FoldableNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> storeViewModel.reset()
             R.id.fragment_product_list -> productViewModel.reset()
@@ -112,7 +136,6 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
 
     override fun onPause() {
         super.onPause()
-        ScreenManagerProvider.getScreenManager().removeScreenInfoListener(this)
         navigator.unbind()
         tutorial.hide()
     }
@@ -160,14 +183,13 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         super.onBackPressed()
     }
 
-    override fun onScreenInfoChanged(screenInfo: ScreenInfo) {
-        if (screenInfo.isDualMode() != rotationViewModel.isDualMode.value) {
+    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode() != rotationViewModel.isDualMode.value) {
             invalidateOptionsMenu()
         }
-        rotationViewModel.currentRotation.value = screenInfo.getScreenRotation()
-        rotationViewModel.isDualMode.value = screenInfo.isDualMode()
-        rotationViewModel.screenInfo.value = screenInfo
-        if (screenInfo.isDualMode()) {
+        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
+        if (windowLayoutInfo.isInDualMode()) {
             tutorialViewModel.onDualMode()
         }
     }
@@ -204,7 +226,7 @@ class MainActivity : AppCompatActivity(), ScreenInfoListener {
         }
     }
 
-    private fun setupDevModeByDestination(destination: SurfaceDuoNavDestination) {
+    private fun setupDevModeByDestination(destination: FoldableNavDestination) {
         when (destination.id) {
             R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
             R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)

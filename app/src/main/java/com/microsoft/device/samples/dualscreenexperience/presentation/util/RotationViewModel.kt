@@ -7,21 +7,14 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.util
 
-import android.view.Surface
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.microsoft.device.dualscreen.ScreenInfo
 
 class RotationViewModel : ViewModel() {
     var isDualMode = MutableLiveData(false)
-    var currentRotation = MutableLiveData(Surface.ROTATION_0)
-    var screenInfo = MutableLiveData<ScreenInfo?>(null)
+    var isFoldingFeatureVertical = MutableLiveData<Boolean?>(null)
 
-    fun isRotated(rotation: Int?) =
-        (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270)
-
-    fun isDualPortraitMode(rotation: Int?) =
-        (rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) && isDualMode.value == true
+    fun isDualPortraitMode() = isDualMode.value == true && isFoldingFeatureVertical.value == true
 
     companion object {
         const val ROTATE_HORIZONTALLY = 90f
