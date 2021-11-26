@@ -23,6 +23,13 @@ fun View.getTopCenterPoint(): Point {
     return Point(point[0], point[1])
 }
 
+val View.locationInWindow: Point
+    get() {
+        val location = IntArray(2)
+        getLocationOnScreen(location)
+        return Point(location[0], location[1])
+    }
+
 fun TextView.addClickableLink(textToLink: String, onClickListener: ClickableSpan) {
     val spannableString = SpannableStringBuilder(text)
     val clickableIndex = text.indexOf(textToLink)

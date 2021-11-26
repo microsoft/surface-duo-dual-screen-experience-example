@@ -10,7 +10,7 @@ package com.microsoft.device.samples.dualscreenexperience.domain.catalog.usecase
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.CatalogDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.catalog.model.CatalogItemEntity
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
-import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogViewType
+import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 
 class MockCatalogDataSource : CatalogDataSource {
     override suspend fun getAll(): List<CatalogItemEntity> = listOf(catalogItemEntity)
@@ -35,7 +35,7 @@ val catalogItemEntity = CatalogItemEntity(
 val catalogItem = CatalogItem(
     1,
     "Mock Catalog Item",
-    CatalogViewType.Layout1,
+    CatalogPage.Page1,
     "description 1",
     "description 2",
     "description 3",

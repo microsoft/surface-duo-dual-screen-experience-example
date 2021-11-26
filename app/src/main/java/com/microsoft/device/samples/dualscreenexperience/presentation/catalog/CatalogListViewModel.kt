@@ -22,8 +22,8 @@ class CatalogListViewModel @Inject constructor(
     private val getCatalogListUseCase: GetCatalogListUseCase
 ) : ViewModel(), DataListProvider<CatalogItem> {
     var catalogItemList = MutableLiveData<List<CatalogItem>?>(null)
-    var isScrollingEnabled = MutableLiveData(false)
     var catalogItemPosition = MutableLiveData(0)
+    var showTwoPages = MutableLiveData(false)
 
     init {
         viewModelScope.launch {

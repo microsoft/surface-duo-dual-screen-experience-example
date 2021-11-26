@@ -15,7 +15,7 @@ import kotlinx.parcelize.Parcelize
 data class CatalogItem(
     val itemId: Long,
     val name: String,
-    val viewType: CatalogViewType,
+    val viewType: CatalogPage,
     val primaryDescription: String,
     val secondaryDescription: String?,
     val thirdDescription: String?,
@@ -30,7 +30,7 @@ fun CatalogItemEntity.toCatalogItem() =
     CatalogItem(
         itemId = this.itemId,
         name = this.name,
-        viewType = CatalogViewType.get(this.viewType),
+        viewType = CatalogPage.get(this.viewType),
         primaryDescription = this.primaryDescription,
         secondaryDescription = this.secondaryDescription,
         thirdDescription = this.thirdDescription,
@@ -41,30 +41,16 @@ fun CatalogItemEntity.toCatalogItem() =
         thirdPicture = this.thirdPicture
     )
 
-enum class CatalogViewType(var typeId: Int) {
-
-    // Layout with Table Of Contents
-    Layout1(1),
-
-    // Layout with image-text, long text, two images
-    Layout2(2),
-
-    // Layout with two groups of image-text, mirrored
-    Layout3(3),
-
-    // Layout with two images, long text
-    Layout4(4),
-
-    // Layout with text, one small image, one large image and another text
-    Layout5(5),
-
-    // Layout with text, one large image and one long text
-    Layout6(6),
-
-    // Layout with two groups of image-text
-    Layout7(7);
+enum class CatalogPage {
+    Page1,
+    Page2,
+    Page3,
+    Page4,
+    Page5,
+    Page6,
+    Page7;
 
     companion object {
-        fun get(typeId: Int?) = values().first { it.typeId == typeId }
+        fun get(typeId: Int?) = values().first { it.ordinal + 1 == typeId }
     }
 }
