@@ -50,7 +50,7 @@ class ProductListFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -83,7 +83,7 @@ class ProductListFragment : Fragment() {
         appCompatActivity?.changeToolbarTitle(getString(R.string.nav_products_title))
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         if (windowLayoutInfo.isInDualMode() && viewModel.selectedProduct.value == null) {
             viewModel.navigateToDetails()
         }

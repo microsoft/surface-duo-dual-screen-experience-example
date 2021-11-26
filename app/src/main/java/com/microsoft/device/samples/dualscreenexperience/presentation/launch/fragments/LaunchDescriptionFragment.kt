@@ -17,12 +17,12 @@ import androidx.fragment.app.activityViewModels
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentLaunchDescriptionBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 
 class LaunchDescriptionFragment : Fragment() {
 
     private val viewModel: LaunchViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private var dualPatternsAnimation: AnimationDrawable? = null
     private var binding: FragmentLaunchDescriptionBinding? = null
@@ -34,7 +34,7 @@ class LaunchDescriptionFragment : Fragment() {
     ): View? {
         binding = FragmentLaunchDescriptionBinding.inflate(inflater, container, false)
         binding?.launchListener = viewModel
-        rotationViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.shouldDisplayButton = it })
+        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.shouldDisplayButton = it })
         return binding?.root
     }
 

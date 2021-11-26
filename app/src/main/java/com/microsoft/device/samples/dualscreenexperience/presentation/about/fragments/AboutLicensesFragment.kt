@@ -20,7 +20,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutLicensesBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.OPEN_IN_APP
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.addClickableLink
 
 class AboutLicensesFragment : Fragment() {
@@ -28,7 +28,7 @@ class AboutLicensesFragment : Fragment() {
     private var binding: FragmentAboutLicensesBinding? = null
 
     private val viewModel: AboutViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,7 @@ class AboutLicensesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAboutLicensesBinding.inflate(inflater, container, false)
-        binding?.isDualMode = rotationViewModel.isDualMode.value
+        binding?.isDualMode = layoutInfoViewModel.isDualMode.value
         binding?.linksItems?.itemClickListener = viewModel.linkClickListener
         binding?.noticeClickListener = viewModel.noticeClickListener
         binding?.itemClickListener = viewModel.linkClickListener
@@ -58,7 +58,7 @@ class AboutLicensesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        rotationViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualMode = it })
+        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualMode = it })
         viewModel.linkToOpen.observe(
             viewLifecycleOwner,
             {

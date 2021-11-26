@@ -23,7 +23,7 @@ import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepositor
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentDevControlBinding
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ class DevControlFragment : Fragment() {
     private var binding: FragmentDevControlBinding? = null
 
     private val viewModel: DevModeViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private lateinit var windowInfoRepository: WindowInfoRepository
 
@@ -46,7 +46,7 @@ class DevControlFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -80,12 +80,12 @@ class DevControlFragment : Fragment() {
     }
 
     private fun openContentFragmentIfSingleScreenMode() {
-        if (rotationViewModel.isDualMode.value != true && !viewModel.isNavigationAtContent()) {
+        if (layoutInfoViewModel.isDualMode.value != true && !viewModel.isNavigationAtContent()) {
             viewModel.navigateToContent()
         }
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         if (windowLayoutInfo.isInDualMode()) {
             if (!viewModel.isNavigationAtContent()) {
                 viewModel.navigateToContent()

@@ -26,11 +26,11 @@ import androidx.navigation.FoldableNavigation
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
-import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
+import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityDevModeBinding
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +42,7 @@ import kotlin.math.max
 @AndroidEntryPoint
 class DevModeActivity : AppCompatActivity() {
 
-    private val rotationViewModel: RotationViewModel by viewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by viewModels()
     private val viewModel: DevModeViewModel by viewModels()
 
     @Inject
@@ -79,7 +79,7 @@ class DevModeActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -150,7 +150,7 @@ class DevModeActivity : AppCompatActivity() {
         (max(binding.devRootLayout.width, binding.devRootLayout.height) * RADIUS_MULTIPLIER).toFloat()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (rotationViewModel.isDualMode.value == true) {
+        if (layoutInfoViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.dev_mode_menu, menu)
             menu?.findItem(R.id.menu_main_user_mode)?.actionView?.setOnClickListener {
                 unRevealActivity(it)
@@ -161,7 +161,7 @@ class DevModeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when {
-            rotationViewModel.isDualMode.value == true || navigator.isNavigationAtStart() ->
+            layoutInfoViewModel.isDualMode.value == true || navigator.isNavigationAtStart() ->
                 supportFinishAfterTransition()
             else -> super.onBackPressed()
         }
@@ -187,9 +187,9 @@ class DevModeActivity : AppCompatActivity() {
         navigator.unbind()
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
-        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()
     }
 
     companion object {

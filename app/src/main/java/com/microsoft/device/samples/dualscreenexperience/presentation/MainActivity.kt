@@ -27,7 +27,7 @@ import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
+import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityMainBinding
@@ -46,7 +46,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.De
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloonType
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var tutorial: TutorialBalloon
 
     private val tutorialViewModel: TutorialViewModel by viewModels()
-    private val rotationViewModel: RotationViewModel by viewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by viewModels()
     private val devViewModel: DevModeViewModel by viewModels()
 
     private val productViewModel: ProductViewModel by viewModels()
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -107,11 +107,11 @@ class MainActivity : AppCompatActivity() {
 
         getMainNavController().let {
             navigator.bind(it)
-            it.addOnDestinationChangedListener { _, surfaceDuoNavDestination, arguments ->
+            it.addOnDestinationChangedListener { _, foldableNavDestination, arguments ->
                 showHideBottomNav(arguments?.getBoolean(HIDE_BOTTOM_BAR_KEY, false))
 
-                resetDestinations(surfaceDuoNavDestination)
-                setupDevModeByDestination(surfaceDuoNavDestination)
+                resetDestinations(foldableNavDestination)
+                setupDevModeByDestination(foldableNavDestination)
             }
         }
         binding.bottomNavView.arrangeButtons(BOTTOM_NAV_ITEM_COUNT, 0)
@@ -183,12 +183,12 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        if (windowLayoutInfo.isInDualMode() != rotationViewModel.isDualMode.value) {
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode() != layoutInfoViewModel.isDualMode.value) {
             invalidateOptionsMenu()
         }
-        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
-        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
+        layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()
         if (windowLayoutInfo.isInDualMode()) {
             tutorialViewModel.onDualMode()
         }
@@ -258,7 +258,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (rotationViewModel.isDualMode.value == true) {
+        if (layoutInfoViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.main_menu, menu)
             menu?.findItem(R.id.menu_main_dev_mode)?.actionView?.apply {
                 setOnClickListener {

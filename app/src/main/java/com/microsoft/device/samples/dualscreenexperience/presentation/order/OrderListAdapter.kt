@@ -28,8 +28,8 @@ import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Pr
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.DataListHandler
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.QuantityDataListHandler
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasMoreThanOneItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasSingleItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasSizeEven
@@ -277,7 +277,7 @@ class OrderListAdapter(
                 ContextCompat.getDrawable(
                     itemView.context,
                     getProductDrawable(productModel.color, productModel.bodyShape, productModel.guitarType)
-                )?.toBitmap()?.rotate(RotationViewModel.ROTATE_HORIZONTALLY)
+                )?.toBitmap()?.rotate(LayoutInfoViewModel.ROTATE_HORIZONTALLY)
             )
 
             product = productModel

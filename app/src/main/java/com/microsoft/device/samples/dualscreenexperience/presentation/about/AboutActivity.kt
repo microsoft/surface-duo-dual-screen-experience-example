@@ -17,11 +17,11 @@ import androidx.navigation.FoldableNavigation
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
-import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
+import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityAboutBinding
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -36,7 +36,7 @@ class AboutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAboutBinding
 
-    private val rotationViewModel: RotationViewModel by viewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by viewModels()
 
     private lateinit var windowInfoRepository: WindowInfoRepository
 
@@ -53,7 +53,7 @@ class AboutActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -93,8 +93,8 @@ class AboutActivity : AppCompatActivity() {
         }
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        rotationViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
-        rotationViewModel.isFoldingFeatureVertical.value = windowLayoutInfo.isFoldingFeatureVertical()
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
+        layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()
     }
 }
