@@ -42,10 +42,6 @@
     <dimen name="card_radius">8dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
 
-    <dimen name="star_rating_height">4dp</dimen>
-    <dimen name="customize_card_elevation">8dp</dimen>
-    <dimen name="customize_circle_size">30dp</dimen>
-
     <dimen name="tab_indicator_height">3dp</dimen>
     <dimen name="tab_indicator_radius">5dp</dimen>
     <dimen name="tab_indicator_margin">10dp</dimen>
@@ -61,6 +57,15 @@
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
 
+    <dimen name="team_link_button_width">84dp</dimen>
+    <dimen name="team_link_button_height">78dp</dimen>
+
+    <!-- Product -->
+
+    <dimen name="star_rating_height">4dp</dimen>
+    <dimen name="customize_card_elevation">8dp</dimen>
+    <dimen name="customize_circle_size">30dp</dimen>
+
     <dimen name="product_image_height">460dp</dimen>
     <dimen name="product_image_width">200dp</dimen>
     <dimen name="product_item_height">400dp</dimen>
@@ -71,18 +76,17 @@
     <dimen name="product_color_max_size">60dp</dimen>
     <dimen name="product_shape_max_size">120dp</dimen>
 
-    <dimen name="order_item_margin">58dp</dimen>
-
     <dimen name="info_container_size">120dp</dimen>
     <dimen name="info_container_parent_size">248dp</dimen>
 
-    <dimen name="team_link_button_width">84dp</dimen>
-    <dimen name="team_link_button_height">78dp</dimen>
+    <!-- Order -->
+
+    <dimen name="order_item_margin">58dp</dimen>
 
     <dimen name="order_empty_image_height">164dp</dimen>
     <dimen name="order_empty_message_size">16sp</dimen>
 
-    <!--Catalog -->
+    <!-- Catalog -->
 
     <dimen name="catalog_margin_small">8dp</dimen>
     <dimen name="catalog_margin_normal">16dp</dimen>
@@ -90,5 +94,8 @@
     <dimen name="catalog_margin_very_large">40dp</dimen>
     <dimen name="catalog_horizontal_margin">36dp</dimen>
     <dimen name="catalog_top_margin">20dp</dimen>
-    <dimen name="catalog_max_image_height">200dp</dimen>
+    <dimen name="catalog_double_max_image_height">500dp</dimen>
+    <dimen name="catalog_max_image_height">250dp</dimen>
+    <dimen name="catalog_min_image_height">150dp</dimen>
+    <dimen name="catalog_base_min_image_height">100dp</dimen>
 </resources>

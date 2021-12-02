@@ -84,7 +84,6 @@ ext {
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",
     ]
-    microsoftDependencies["screenManager"] = microsoftDependencies.screenManagerWindowManager
 
     //UI dependencies
     glideVersion = "4.12.0"

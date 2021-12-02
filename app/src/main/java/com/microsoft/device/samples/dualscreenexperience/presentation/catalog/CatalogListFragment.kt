@@ -22,12 +22,15 @@ import androidx.viewpager.widget.ViewPager
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasExpandedWindowLayoutSize
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isFoldOrSmallHinge
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -54,7 +57,7 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -86,12 +89,6 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
             currentItem = viewModel.catalogItemPosition.value ?: 0
             addOnPageChangeListener(this@CatalogListFragment)
         }
-
-        binding?.verticalPager?.apply {
-            adapter = catalogAdapter
-            currentItem = viewModel.catalogItemPosition.value ?: 0
-            addOnPageChangeListener(this@CatalogListFragment)
-        }
     }
 
     private fun setupObservers() {
@@ -99,11 +96,6 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
         viewModel.catalogItemPosition.observe(
             viewLifecycleOwner,
             { newPageNumber ->
-                binding?.verticalPager?.apply {
-                    if (currentItem != newPageNumber) {
-                        setCurrentItem(newPageNumber, true)
-                    }
-                }
                 binding?.pager?.apply {
                     if (currentItem != newPageNumber) {
                         setCurrentItem(newPageNumber, true)
@@ -123,10 +115,14 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
         appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        binding?.isDualLandscape = windowLayoutInfo.isInDualMode() && windowLayoutInfo.isFoldingFeatureVertical() == false
-        catalogAdapter?.showTwoPages = windowLayoutInfo.isInDualMode() && windowLayoutInfo.isFoldingFeatureVertical() == true
-        viewModel.isScrollingEnabled.value = !(windowLayoutInfo.isInDualMode() && !windowLayoutInfo.isFoldingFeatureVertical())
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        val isLargeScreenOrHasHinge = activity?.hasExpandedWindowLayoutSize() == true ||
+            windowLayoutInfo.getFoldingFeature()?.isFoldOrSmallHinge() == false
+
+        catalogAdapter?.showTwoPages = windowLayoutInfo.isInDualMode() &&
+            windowLayoutInfo.isFoldingFeatureVertical() &&
+            isLargeScreenOrHasHinge
+        viewModel.showTwoPages.value = catalogAdapter?.showTwoPages ?: false
 
         setupViewPager()
     }

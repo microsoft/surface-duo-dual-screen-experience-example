@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.microsoft.device.samples.dualscreenexperience.presentation.util.LockableNestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/catalog_item_scroll_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -39,6 +39,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catalog_item2_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -56,36 +57,42 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:id="@+id/catalog_flow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/catalog_horizontal_margin"
+                    android:paddingEnd="@dimen/catalog_horizontal_margin"
+                    app:constraint_referenced_ids="image_first, text_second"
+                    app:flow_horizontalGap="@dimen/small_margin"
+                    app:flow_horizontalStyle="packed"
+                    app:flow_verticalGap="@dimen/small_margin"
+                    app:flow_verticalStyle="packed"
+                    app:flow_wrapMode="chain"
+                    app:layout_constraintBottom_toTopOf="@id/text_third"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_first"/>
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_first"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/catalog_horizontal_margin"
-                    android:layout_marginTop="@dimen/catalog_margin_normal"
-                    android:maxHeight="@dimen/catalog_max_image_height"
+                    android:layout_height="0dp"
                     app:assetImage="@{catalogItem.firstPicture}"
-                    app:layout_constraintBottom_toTopOf="@id/barrier1"
-                    app:layout_constraintEnd_toStartOf="@id/text_second"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_first"
-                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintHeight_max="@dimen/catalog_max_image_height"
+                    app:layout_constraintHeight_min="@dimen/catalog_min_image_height"
                     tools:background="@color/catalog_tools_image_background"
-                    tools:minHeight="@dimen/catalog_max_image_height" />
+                    tools:ignore="MissingConstraints"
+                    tools:minHeight="@dimen/catalog_max_image_height"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_second"
                     style="@style/Catalog.Description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/catalog_margin_normal"
-                    android:layout_marginTop="@dimen/catalog_margin_normal"
-                    android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:layout_marginTop="@dimen/small_margin"
                     android:text="@{catalogItem.secondaryDescription}"
-                    app:layout_constraintBottom_toTopOf="@id/barrier1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/image_first"
-                    app:layout_constraintTop_toBottomOf="@id/text_first"
-                    app:layout_constraintVertical_bias="0.0" />
+                    tools:ignore="MissingConstraints"/>
 
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/barrier1"
@@ -110,13 +117,16 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_second"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
-                    android:layout_marginTop="@dimen/catalog_margin_large"
+                    android:layout_marginTop="@dimen/catalog_margin_small"
                     android:layout_marginEnd="@dimen/catalog_margin_small"
+                    android:adjustViewBounds="true"
                     app:assetImage="@{catalogItem.secondPicture}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/image_third"
+                    app:layout_constraintHeight_max="@dimen/catalog_max_image_height"
+                    app:layout_constraintHeight_min="@dimen/catalog_min_image_height"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_third"
                     tools:background="@color/catalog_tools_image_background"
@@ -125,21 +135,32 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image_third"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginStart="@dimen/catalog_margin_small"
-                    android:layout_marginTop="@dimen/catalog_margin_large"
+                    android:layout_marginTop="@dimen/catalog_margin_small"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
+                    android:adjustViewBounds="true"
                     app:assetImage="@{catalogItem.thirdPicture}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_max="@dimen/catalog_max_image_height"
+                    app:layout_constraintHeight_min="@dimen/catalog_min_image_height"
                     app:layout_constraintStart_toEndOf="@+id/image_second"
                     app:layout_constraintTop_toBottomOf="@+id/text_third"
                     tools:background="@color/catalog_tools_image_background"
                     tools:minHeight="@dimen/catalog_max_image_height" />
 
+                <View
+                    android:id="@+id/horizontal_fold"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/black"
+                    android:visibility="gone"
+                    tools:ignore="MissingConstraints" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.microsoft.device.samples.dualscreenexperience.presentation.util.LockableNestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pages"

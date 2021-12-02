@@ -31,7 +31,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.Pr
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.customize.ProductCustomizeViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isFragmentInLandscape
@@ -46,7 +46,7 @@ class ProductDetailsFragment : Fragment() {
 
     private val viewModel: ProductViewModel by activityViewModels()
     private val customizeViewModel: ProductCustomizeViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private var binding: FragmentProductDetailsBinding? = null
 
@@ -95,7 +95,7 @@ class ProductDetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (rotationViewModel.isDualMode.value == false) {
+        if (layoutInfoViewModel.isDualMode.value == false) {
             setupToolbar()
         } else {
             appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
@@ -178,7 +178,7 @@ class ProductDetailsFragment : Fragment() {
                     initSelectedProductImage()
                     binding?.isInCustomizeMode = false
 
-                    if (rotationViewModel.isDualMode.value == true) {
+                    if (layoutInfoViewModel.isDualMode.value == true) {
                         appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
                     } else {
                         setupToolbar()

@@ -31,8 +31,8 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapM
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MarkerType
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Store
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.NetworkConnectionLiveData
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
@@ -48,7 +48,7 @@ class StoreMapFragment : Fragment() {
     @Inject lateinit var mapController: MapController
 
     private val viewModel: StoreViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private lateinit var mapView: FrameLayout
 
@@ -111,7 +111,7 @@ class StoreMapFragment : Fragment() {
 
     private fun onWindowLayoutInfoChanged() {
         binding?.isDualPortrait =
-            rotationViewModel.isDualPortraitMode() && viewModel.isNavigationAtStart()
+            layoutInfoViewModel.isDualPortraitMode() && viewModel.isNavigationAtStart()
     }
 
     private fun setupMapAvailabilityMessage() {
@@ -203,7 +203,7 @@ class StoreMapFragment : Fragment() {
 
     private fun shouldEnableAnimations() =
         !TEST_MODE_ENABLED &&
-            rotationViewModel.isDualMode.value == true &&
+            layoutInfoViewModel.isDualMode.value == true &&
             !mapController.isZoomEqualTo(mapView, selectZoomLevel())
 
     private fun addMarkersToMap(markers: List<MapMarkerModel>) {

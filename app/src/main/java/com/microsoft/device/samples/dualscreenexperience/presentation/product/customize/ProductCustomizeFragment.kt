@@ -36,8 +36,8 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.Pr
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.CustomizeCardView
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel.Companion.ROTATE_HORIZONTALLY
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel.Companion.ROTATE_HORIZONTALLY
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isFragmentInLandscape
@@ -53,7 +53,7 @@ class ProductCustomizeFragment : Fragment() {
 
     private val productViewModel: ProductViewModel by activityViewModels()
     private val viewModel: ProductCustomizeViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private var binding: FragmentProductCustomizeBinding? = null
 
@@ -66,7 +66,7 @@ class ProductCustomizeFragment : Fragment() {
     ): View? {
         binding = FragmentProductCustomizeBinding.inflate(inflater, container, false)
         binding?.viewModel = viewModel
-        binding?.isDualMode = rotationViewModel.isDualMode.value
+        binding?.isDualMode = layoutInfoViewModel.isDualMode.value
         binding?.isScreenInLandscape = false
         binding?.lifecycleOwner = this
         return binding?.root

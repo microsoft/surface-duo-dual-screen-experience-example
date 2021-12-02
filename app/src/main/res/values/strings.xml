@@ -10,7 +10,7 @@
 
     <!-- Launcher -->
 
-    <string name="launch_description">A mock application experience that showcases the benefits of various design patterns for dual-screen foldable devices in a mobile, on-the-go scenario. Developers and designers can use this app as a conversation starter for their own explorations.</string>
+    <string name="launch_description">A mock application experience that showcases the benefits of various design patterns for foldable devices in a mobile, on-the-go scenario. Developers and designers can use this app as a conversation starter for their own explorations.</string>
     <string name="launch_button">Launch</string>
     <string name="tutorial_launch_text">Drag the app across the hinge to span the app</string>
 
@@ -50,7 +50,7 @@
     <string name="product_details_frets_description">Medium-Jumbo</string>
 
     <string name="product_details_type_title">Electric Guitar</string>
-    <string name="product_details_type_description">Expect your %1$s Guitar to be delivered in the </string>
+    <string name="product_details_type_description">Expect %1$s Guitar to be delivered in the </string>
     <string name="product_details_type_description_bold">next %1$d business days.</string>
 
     <string name="product_details_customize_button">Customize</string>
@@ -116,7 +116,7 @@
     <string name="toolbar_dev_mode">Dev Mode</string>
     <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
     <string name="toolbar_user_mode">User Mode</string>
-    <string name="dev_mode_sdk_components">Dual-screen SDKs used in this screen</string>
+    <string name="dev_mode_sdk_components">Surface Duo SDK used in this screen</string>
     <string name="dev_mode_code">Code used to achieve this screen\n\n(Actual code is not open-sourced yet)</string>
     <string name="dev_mode_design_pattern">Design Pattern used on this screen</string>
     <string name="dev_mode_title">Developer Mode</string>

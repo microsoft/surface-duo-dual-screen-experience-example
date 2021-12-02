@@ -50,7 +50,7 @@ class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -88,7 +88,7 @@ class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
         )
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         if (!viewModel.isNavigationAtLicenses()) {
             viewModel.navigateToLicenses()
         }

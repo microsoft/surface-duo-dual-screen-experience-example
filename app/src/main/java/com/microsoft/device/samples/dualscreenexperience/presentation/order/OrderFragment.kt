@@ -27,7 +27,7 @@ import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationA
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentOrderBinding
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.RotationViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
@@ -41,7 +41,7 @@ class OrderFragment : Fragment() {
 
     private val orderViewModel: OrderViewModel by activityViewModels()
     private val recommendationViewModel: OrderRecommendationsViewModel by activityViewModels()
-    private val rotationViewModel: RotationViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private var orderAdapter: OrderListAdapter? = null
 
@@ -59,7 +59,7 @@ class OrderFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onScreenInfoChanged(it)
+                    onWindowLayoutInfoChanged(it)
                 }
             }
         }
@@ -125,8 +125,8 @@ class OrderFragment : Fragment() {
             orderClickListener = orderViewModel,
             quantityDataListHandler = orderViewModel.quantityDataListHandler,
             recommendationsHandler = recommendationViewModel.orderDataHandler,
-            isDualMode = rotationViewModel.isDualMode.value == true,
-            isDualPortrait = rotationViewModel.isDualPortraitMode()
+            isDualMode = layoutInfoViewModel.isDualMode.value == true,
+            isDualPortrait = layoutInfoViewModel.isDualPortraitMode()
         )
 
         binding?.orderItems?.adapter = orderAdapter
@@ -146,13 +146,13 @@ class OrderFragment : Fragment() {
         changeToolbarTitle()
     }
 
-    private fun onScreenInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         setupRecyclerView(windowLayoutInfo)
 
         recommendationViewModel.refreshRecommendationList()
         updateAdapter(
             windowLayoutInfo.isInDualMode(),
-            rotationViewModel.isDualPortraitMode()
+            layoutInfoViewModel.isDualPortraitMode()
         )
     }
 
