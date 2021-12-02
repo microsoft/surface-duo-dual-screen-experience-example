@@ -65,8 +65,10 @@ fun Activity.isFragmentWidthSmall(
     } else {
         getWindowRect().width()
     }?.let {
-        it.toFloat() <= 1200f
+        it.toFloat() <= WIDTH_PX_BREAKPOINT
     } ?: false
+
+const val WIDTH_PX_BREAKPOINT = 1200f
 
 val Activity.widthWindowLayoutSize: WindowLayoutSize
     get() {
