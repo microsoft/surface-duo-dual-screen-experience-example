@@ -74,15 +74,14 @@ class DevModeViewModel @Inject constructor(
         }
     }
 
-    // TODO: Change URLs after repository is open-sourced
     enum class AppScreen(var path: String) {
-        STORES_MAP("ExtendCanvas/src/main/java/com/microsoft/device/display/samples/extendcanvas/ExtendedCanvasActivity.kt"),
-        STORES_LIST("DualView/src/main/java/com/microsoft/device/display/samples/dualview/DualViewActivity.kt"),
-        STORES_DETAILS("IntentToSecondScreen/src/main/java/com/microsoft/device/display/samples/intentsecondscreen/IntentToSecondScreenFirstActivity.kt"),
-        PRODUCTS_CATALOG("TwoPage/src/main/java/com/microsoft/device/display/samples/twopage/TwoPageActivity.kt"),
-        PRODUCTS_LIST_DETAILS("ListDetail/src/main/java/com/microsoft/device/display/samples/listdetail/ListDetailsActivity.kt"),
-        PRODUCTS_CUSTOMIZE("CompanionPane/src/main/java/com/microsoft/device/display/samples/companionpane/CompanionPaneActivity.kt"),
-        ORDERS("Qualifiers/src/main/java/com/microsoft/device/display/samples/qualifiers/QualifiersActivity.kt");
+        STORES_MAP("store/map/StoreMapFragment.kt"),
+        STORES_LIST("store/list/StoreListFragment.kt"),
+        STORES_DETAILS("store/details/StoreDetailsFragment.kt"),
+        CATALOG("catalog/CatalogListFragment.kt"),
+        PRODUCTS_LIST_DETAILS("product/details/ProductDetailsFragment.kt"),
+        PRODUCTS_CUSTOMIZE("product/customize/ProductCustomizeFragment.kt"),
+        ORDER("order/OrderFragment.kt");
 
         fun buildUrl() = "$APP_BASE_URL/$path"
 
@@ -95,6 +94,6 @@ class DevModeViewModel @Inject constructor(
         const val DESIGN_PATTERN_BASE_URL = "https://docs.microsoft.com/dual-screen/design"
         const val SDK_BASE_URL = "https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library"
         const val LANGUAGE_TAB = "?tabs=kotlin"
-        const val APP_BASE_URL = "https://github.com/microsoft/surface-duo-sdk-samples-kotlin/blob/main"
+        const val APP_BASE_URL = "https://github.com/microsoft/surface-duo-dual-screen-experience-example/blob/main/app/src/main/java/com/microsoft/device/samples/dualscreenexperience/presentation/"
     }
 }
