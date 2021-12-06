@@ -20,7 +20,6 @@ import com.microsoft.device.samples.dualscreenexperience.databinding.ItemOrderDe
 import com.microsoft.device.samples.dualscreenexperience.databinding.ItemOrderDetailsSubmittedBinding
 import com.microsoft.device.samples.dualscreenexperience.databinding.ItemProductRecommendationsBinding
 import com.microsoft.device.samples.dualscreenexperience.databinding.OrderEmptyBinding
-import com.microsoft.device.samples.dualscreenexperience.databinding.OrderHeaderBinding
 import com.microsoft.device.samples.dualscreenexperience.databinding.OrderRecommendationsBinding
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
@@ -32,7 +31,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.Layou
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.QuantityDataListHandler
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasMoreThanOneItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasSingleItem
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasSizeEven
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.rotate
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
@@ -60,10 +58,6 @@ class OrderListAdapter(
                     OrderRecommendationsBinding.inflate(layoutInflater, parent, false),
                     recommendationsHandler
                 )
-            TYPE_HEADER, TYPE_HEADER_SPACE ->
-                OrderHeaderViewHolder(
-                    OrderHeaderBinding.inflate(layoutInflater, parent, false)
-                )
             TYPE_DETAILS, TYPE_DETAILS_SPACE ->
                 OrderDetailsViewHolder(
                     ItemOrderDetailsBinding.inflate(layoutInflater, parent, false),
@@ -87,18 +81,13 @@ class OrderListAdapter(
                 (holder as OrderEmptyViewHolder).bind(isDualPortrait)
             TYPE_RECOMMENDATIONS ->
                 (holder as OrderRecommendationsViewHolder).bind(getNumberOfRecommendedItems())
-            TYPE_HEADER ->
-                (holder as OrderHeaderViewHolder).bind(true)
-            TYPE_HEADER_SPACE ->
-                (holder as OrderHeaderViewHolder).bind(false)
             TYPE_DETAILS_SUBMITTED ->
                 (holder as OrderDetailsSubmittedViewHolder).bind(true)
             TYPE_DETAILS ->
                 (holder as OrderDetailsViewHolder).bind(
                     true,
                     getOrderItemCount(),
-                    getTotalPrice(),
-                    getOrderItemList().hasMoreThanOneItem() && isDualPortrait
+                    getTotalPrice()
                 )
             TYPE_DETAILS_SPACE ->
                 (holder as OrderDetailsViewHolder).bind(false)
@@ -115,11 +104,9 @@ class OrderListAdapter(
         when {
             position == POSITION_EMPTY_STATE && shouldShowEmptyState() -> TYPE_EMPTY
             position == getRecommendationsPosition() -> TYPE_RECOMMENDATIONS
-            position == POSITION_HEADER && shouldShowHeader() -> TYPE_HEADER
-            position == POSITION_HEADER_SPACE && shouldShowHeaderSpace() -> TYPE_HEADER_SPACE
             position == POSITION_DETAILS_SUBMITTED && shouldShowDetailsSubmitted() -> TYPE_DETAILS_SUBMITTED
-            position == getDetailsPosition() -> TYPE_DETAILS
-            position == getDetailsSpacePosition() -> TYPE_DETAILS_SPACE
+            position == POSITION_DETAILS && shouldShowDetails() -> TYPE_DETAILS
+            position == POSITION_DETAILS_SPACE && shouldShowDetailsSpace() -> TYPE_DETAILS_SPACE
             else -> TYPE_ITEM
         }
 
@@ -129,10 +116,10 @@ class OrderListAdapter(
     private fun getItemCountBeforeOrderItems(): Int {
         var nonOrderItems = 0
 
-        if (shouldShowHeader()) {
+        if (shouldShowDetails()) {
             nonOrderItems += 1
         }
-        if (shouldShowHeaderSpace()) {
+        if (shouldShowDetailsSpace()) {
             nonOrderItems += 1
         }
         if (shouldShowDetailsSubmitted()) {
@@ -149,15 +136,9 @@ class OrderListAdapter(
     private fun getItemCountAfterOrderItems(): Int {
         var nonOrderItems = 0
         getRecommendationsPosition()?.let {
-            if (it == POSITION_RECOMMENDATIONS_ONE_ITEM || it == POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED) {
+            if (it == POSITION_RECOMMENDATIONS_ONE_ITEM) {
                 nonOrderItems += 1
             }
-        }
-        if (shouldShowDetails()) {
-            nonOrderItems += 1
-        }
-        if (shouldShowDetailsSpace()) {
-            nonOrderItems += 1
         }
         if (shouldShowEmptyState()) {
             nonOrderItems += 1
@@ -177,11 +158,7 @@ class OrderListAdapter(
     private fun getRecommendationsPosition() =
         if (shouldShowRecommendations()) {
             if (getOrderItemList().hasSingleItem() && !isDualPortrait) {
-                if (isEditEnabled) {
-                    POSITION_RECOMMENDATIONS_ONE_ITEM
-                } else {
-                    POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED
-                }
+                POSITION_RECOMMENDATIONS_ONE_ITEM
             } else {
                 POSITION_RECOMMENDATIONS
             }
@@ -192,34 +169,11 @@ class OrderListAdapter(
     private fun shouldShowRecommendations() =
         getOrderItemList().isNullOrEmpty() || getOrderItemList().hasSingleItem()
 
-    private fun getDetailsPosition(): Int? =
-        if (shouldShowDetails()) {
-            if (getRecommendationsPosition() == POSITION_RECOMMENDATIONS_ONE_ITEM) {
-                itemCount - 2
-            } else {
-                itemCount - 1
-            }
-        } else {
-            null
-        }
-
-    private fun shouldShowHeader() = !getOrderItemList().isNullOrEmpty() && isEditEnabled
-
-    private fun shouldShowHeaderSpace() = isDualPortrait && getOrderItemList().hasMoreThanOneItem()
-
     private fun shouldShowDetails() = !getOrderItemList().isNullOrEmpty() && isEditEnabled
 
-    private fun shouldShowDetailsSpace() =
-        shouldShowDetails() && isDualPortrait && (getOrderItemList().hasSizeEven() || getOrderItemList().hasSingleItem())
+    private fun shouldShowDetailsSpace() = isDualPortrait && getOrderItemList().hasMoreThanOneItem()
 
     private fun shouldShowDetailsSubmitted() = !isEditEnabled
-
-    private fun getDetailsSpacePosition(): Int? =
-        if (shouldShowDetails() && shouldShowDetailsSpace()) {
-            getDetailsPosition()?.minus(1)
-        } else {
-            null
-        }
 
     fun refreshItems() {
         notifyDataSetChanged()
@@ -276,7 +230,7 @@ class OrderListAdapter(
             productImage.setImageBitmap(
                 ContextCompat.getDrawable(
                     itemView.context,
-                    getProductDrawable(productModel.color, productModel.bodyShape, productModel.guitarType)
+                    getProductDrawable(productModel.color, productModel.bodyShape)
                 )?.toBitmap()?.rotate(LayoutInfoViewModel.ROTATE_HORIZONTALLY)
             )
 
@@ -285,28 +239,18 @@ class OrderListAdapter(
         }
     }
 
-    class OrderHeaderViewHolder(
-        private val binding: OrderHeaderBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(shouldShow: Boolean) {
-            binding.root.isInvisible = !shouldShow
-        }
-    }
-
     class OrderDetailsViewHolder(
         private val binding: ItemOrderDetailsBinding,
         private val itemClickListener: ItemClickListener<Boolean>?
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(shouldShow: Boolean, itemCount: Int? = null, totalPrice: Float? = null, shouldDisplaySpace: Boolean = false) {
+        fun bind(shouldShow: Boolean, itemCount: Int? = null, totalPrice: Float? = null) {
             if (shouldShow) {
                 binding.itemListener = itemClickListener
                 binding.itemCount = itemCount
                 binding.price = totalPrice
             }
             binding.root.isInvisible = !shouldShow
-            binding.shouldDisplaySpace = shouldDisplaySpace
         }
     }
 
@@ -342,19 +286,16 @@ class OrderListAdapter(
         const val TYPE_EMPTY = -1
         const val TYPE_RECOMMENDATIONS = -2
         const val TYPE_DETAILS_SUBMITTED = -3
-        const val TYPE_HEADER = 1
-        const val TYPE_HEADER_SPACE = 2
+        const val TYPE_DETAILS = 1
+        const val TYPE_DETAILS_SPACE = 2
         const val TYPE_ITEM = 3
-        const val TYPE_DETAILS = 4
-        const val TYPE_DETAILS_SPACE = 5
 
         const val POSITION_EMPTY_STATE = 0
-        const val POSITION_HEADER = 0
-        const val POSITION_HEADER_SPACE = 1
+        const val POSITION_DETAILS = 0
+        const val POSITION_DETAILS_SPACE = 1
         const val POSITION_DETAILS_SUBMITTED = 0
         const val POSITION_RECOMMENDATIONS = 1
-        const val POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED = 2
-        const val POSITION_RECOMMENDATIONS_ONE_ITEM = 3
+        const val POSITION_RECOMMENDATIONS_ONE_ITEM = 2
 
         const val RECOMMENDATIONS_SIZE_ONE = 1
         const val RECOMMENDATIONS_SIZE_TWO = 2
