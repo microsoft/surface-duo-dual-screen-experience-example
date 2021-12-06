@@ -82,25 +82,22 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/license_terms_title"
-                style="@style/License.Title"
+                style="@style/License.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> noticeClickListener.onClick(true)}"
                 android:paddingTop="@dimen/normal_padding"
                 android:paddingBottom="@dimen/normal_padding"
-                android:text="@string/about_licenses_terms_title"
-                android:textAllCaps="true"
-                android:textColor="@color/white"/>
+                android:text="@string/about_licenses_terms_title"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/license_terms_other_title"
-                style="@style/License.Title"
+                style="@style/Store.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/normal_padding"
                 android:text="@string/about_licenses_terms_other_title"
-                android:textAllCaps="true"
-                android:textColor="@color/white"/>
+                android:textSize="@dimen/text_size_18"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/license_recycler_view"
