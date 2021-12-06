@@ -18,6 +18,5 @@ val productEntity = ProductEntity(
     21,
     3,
     2,
-    5,
-    0
+    5
 )

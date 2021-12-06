@@ -263,7 +263,7 @@ fun clickOnListItemAtPosition(position: Int) {
     onView(withId(R.id.store_list)).perform(
         actionOnItemAtPosition<RecyclerView.ViewHolder>(
             position,
-            clickChildViewWithId(R.id.item_store_view_button)
+            clickChildViewWithId(R.id.item_store)
         )
     )
 }

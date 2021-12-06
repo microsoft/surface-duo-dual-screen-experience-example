@@ -14,14 +14,12 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
-import androidx.test.espresso.matcher.ViewMatchers.isChecked
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isSelected
 import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.microsoft.device.samples.dualscreenexperience.R
-import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -173,62 +171,38 @@ fun selectColor(color: ProductColor?) {
     onView(withContentDescription(color?.toString())).perform(forceClick())
 }
 
-fun checkGuitarTypeSelected(guitarType: GuitarType?) {
-    getGuitarTypeViewId(guitarType)?.let {
-        onView(withId(it)).check(matches(isChecked()))
-    }
-}
-
-fun selectGuitarType(guitarType: GuitarType?) {
-    getGuitarTypeViewId(guitarType)?.let {
-        onView(withId(it)).perform(forceClick())
-    }
-}
-
-fun getGuitarTypeViewId(guitarType: GuitarType?) =
-    when (guitarType) {
-        GuitarType.BASS -> R.id.product_customize_type_bass
-        GuitarType.NORMAL -> R.id.product_customize_type_normal
-        else -> null
-    }
-
 fun checkCustomizeImagePortraitContent(
     color: ProductColor?,
-    shape: ProductType?,
-    guitarType: GuitarType? = GuitarType.BASS
+    shape: ProductType?
 ) {
-    checkCustomizeImageContent(withId(R.id.product_customize_image), color, shape, guitarType)
+    checkCustomizeImageContent(withId(R.id.product_customize_image), color, shape)
 }
 
 fun checkCustomizeImageLandscapeContent(
     color: ProductColor?,
-    shape: ProductType?,
-    guitarType: GuitarType? = GuitarType.BASS
+    shape: ProductType?
 ) {
-    checkCustomizeImageContent(withId(R.id.product_customize_image_landscape), color, shape, guitarType)
+    checkCustomizeImageContent(withId(R.id.product_customize_image_landscape), color, shape)
 }
 
 fun checkCustomizeDetailsImageContent(
     color: ProductColor?,
-    shape: ProductType?,
-    guitarType: GuitarType? = GuitarType.BASS
+    shape: ProductType?
 ) {
-    checkCustomizeImageContent(withId(R.id.product_details_image), color, shape, guitarType)
+    checkCustomizeImageContent(withId(R.id.product_details_image), color, shape)
 }
 
 fun checkCustomizeImageContent(
     parentMatcher: Matcher<View>,
     color: ProductColor?,
-    shape: ProductType?,
-    guitarType: GuitarType?
+    shape: ProductType?
 ) {
     onView(parentMatcher).check(
         matches(
             allOf(
                 isDisplayed(),
                 withContentDescription(containsString(shape?.toString()?.replace('_', ' ')?.lowercase())),
-                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.lowercase())),
-                withContentDescription(containsString(guitarType?.toString()?.lowercase()))
+                withContentDescription(containsString(color?.toString()?.replace('_', ' ')?.lowercase()))
             )
         )
     )
@@ -247,8 +221,7 @@ val product = Product(
     21,
     5,
     ProductType.CLASSIC,
-    ProductColor.ORANGE,
-    GuitarType.BASS
+    ProductColor.ORANGE
 )
 
 const val PRODUCT_FIRST_POSITION = 0

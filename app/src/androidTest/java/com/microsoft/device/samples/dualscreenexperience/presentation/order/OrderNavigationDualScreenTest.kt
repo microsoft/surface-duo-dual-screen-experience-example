@@ -25,7 +25,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.op
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.openUserMode
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM
-import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_THREE
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.goBack
@@ -185,7 +184,6 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         addItemToOrderAndRemove(
             itemPosition = DUAL_PORTRAIT_ORDER_ITEM_POS,
-            orderDetailsPosition = DUAL_PORTRAIT_ORDER_DETAILS_POS,
             recommendationsPosition = POSITION_RECOMMENDATIONS,
             emptyRecommendationsSize = RECOMMENDATIONS_SIZE_THREE,
             oneItemRecommendationsSize = RECOMMENDATIONS_SIZE_TWO,
@@ -200,7 +198,6 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         addItemToOrderAndRemove(
             itemPosition = DUAL_LANDSCAPE_ORDER_ITEM_POS,
-            orderDetailsPosition = ORDER_DETAILS_POS,
             recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM,
             emptyRecommendationsSize = RECOMMENDATIONS_SIZE_THREE,
             oneItemRecommendationsSize = RECOMMENDATIONS_SIZE_TWO,
@@ -214,7 +211,6 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         addItemToOrderAndSubmit(
             itemPosition = DUAL_PORTRAIT_ORDER_ITEM_POS,
-            orderDetailsPosition = DUAL_PORTRAIT_ORDER_DETAILS_POS,
             recommendationsPosition = POSITION_RECOMMENDATIONS,
             emptyRecommendationsSize = RECOMMENDATIONS_SIZE_THREE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
@@ -229,8 +225,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         addItemToOrderAndSubmit(
             itemPosition = DUAL_LANDSCAPE_ORDER_ITEM_POS,
-            orderDetailsPosition = ORDER_DETAILS_POS,
-            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM,
             emptyRecommendationsSize = RECOMMENDATIONS_SIZE_THREE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
             submittedOrderLiveData = activityRule.activity.getSubmittedOrderLiveData()
@@ -243,7 +238,6 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = DUAL_PORTRAIT_ORDER_ITEM_POS,
-            orderDetailsPosition = DUAL_PORTRAIT_ORDER_DETAILS_POS,
             recommendationsPosition = POSITION_RECOMMENDATIONS,
             emptyRecommendationsSize = RECOMMENDATIONS_SIZE_THREE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
@@ -258,8 +252,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = DUAL_LANDSCAPE_ORDER_ITEM_POS,
-            orderDetailsPosition = ORDER_DETAILS_POS,
-            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM_SUBMITTED,
+            recommendationsPosition = POSITION_RECOMMENDATIONS_ONE_ITEM,
             emptyRecommendationsSize = RECOMMENDATIONS_SIZE_THREE,
             itemLiveData = activityRule.activity.getItemListLiveData(),
             submittedOrderLiveData = activityRule.activity.getSubmittedOrderLiveData()
