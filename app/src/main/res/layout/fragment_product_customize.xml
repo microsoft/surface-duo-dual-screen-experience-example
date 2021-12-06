@@ -40,14 +40,13 @@
             android:id="@+id/product_customize_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingBottom="@dimen/normal_padding"
             app:layout_constraintBottom_toTopOf="@id/product_customize_image_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="@dimen/product_image_width"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:visibleIf="@{!isScreenInLandscape}"
-            tools:src="@drawable/orange_classic_guitar"
+            tools:src="@drawable/orange_classic_guitar_normal"
             tools:visibility="gone"/>
 
         <androidx.constraintlayout.widget.Guideline
@@ -75,61 +74,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="@dimen/product_image_width"
             app:visibleIf="@{isScreenInLandscape}"
-            tools:src="@drawable/orange_classic_guitar"
+            tools:src="@drawable/orange_classic_guitar_normal"
             tools:visibility="visible"/>
-
-        <RadioGroup
-            android:id="@+id/product_customize_type_toggle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/half_medium_padding"
-            android:background="@drawable/toggle_default"
-            android:checkedButton="@id/product_customize_type_bass"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_customize_image_top_barrier"
-            app:layout_constraintVertical_bias="0.0">
-
-            <RadioButton
-                android:id="@+id/product_customize_type_bass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_widget_background"
-                android:button="@null"
-                android:paddingStart="@dimen/normal_padding"
-                android:paddingTop="@dimen/small_padding"
-                android:paddingEnd="@dimen/normal_padding"
-                android:paddingBottom="@dimen/small_padding"
-                android:text="@string/product_customize_type_bass"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_12" />
-
-            <RadioButton
-                android:id="@+id/product_customize_type_normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_widget_background"
-                android:button="@null"
-                android:paddingStart="@dimen/normal_padding"
-                android:paddingTop="@dimen/small_padding"
-                android:paddingEnd="@dimen/normal_padding"
-                android:paddingBottom="@dimen/small_padding"
-                android:text="@string/product_customize_type_normal"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_12" />
-        </RadioGroup>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/product_customize_place_order_button"
-            invisibleIf="@{isDualMode}"
+            visibleIf="@{!isDualMode}"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
             app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
-            app:layout_constraintStart_toEndOf="@id/product_customize_type_toggle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_customize_image_top_barrier"
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/add_to_order_animation"
@@ -141,10 +97,11 @@
             style="@style/GoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="@{isDualMode ? @dimen/half_medium_padding : @dimen/zero_padding}"
             android:text="@string/product_customize_color_title"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_container"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_customize_type_toggle"/>
+            app:layout_constraintTop_toBottomOf="@id/product_customize_place_order_button"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/product_customize_color_container"

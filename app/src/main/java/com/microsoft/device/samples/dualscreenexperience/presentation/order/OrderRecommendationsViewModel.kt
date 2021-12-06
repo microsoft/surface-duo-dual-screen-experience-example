@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.AddItemToOrderUseCase
-import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.usecases.GetProductsUseCase
@@ -60,8 +59,7 @@ class OrderRecommendationsViewModel @Inject constructor(
                 for (index in 0 until size) {
                     products[Random.nextInt(0, products.size)].copy(
                         bodyShape = shuffledShapes[index],
-                        color = shuffledShapes[index].colorList[Random.nextInt(0, shuffledShapes[index].colorList.size)],
-                        guitarType = GuitarType.get(Random.nextInt(0, GuitarType.values().size))
+                        color = shuffledShapes[index].colorList[Random.nextInt(0, shuffledShapes[index].colorList.size)]
                     ).also {
                         add(it)
                     }

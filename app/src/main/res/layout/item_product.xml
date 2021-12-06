@@ -63,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:productImage="@{product}"
-            tools:src="@drawable/orange_classic_guitar"/>
+            tools:src="@drawable/orange_classic_guitar_normal"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_product_details"

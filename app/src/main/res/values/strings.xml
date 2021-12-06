@@ -17,7 +17,7 @@
     <!-- Main -->
 
     <string name="nav_stores_title">Stores</string>
-    <string name="nav_catalog_title">New Guitars and Bass Guitars</string>
+    <string name="nav_catalog_title">New Guitars</string>
     <string name="nav_products_title">Product Details and Customization</string>
     <string name="nav_order_title">Order</string>
 
@@ -55,32 +55,19 @@
 
     <string name="product_details_customize_button">Customize</string>
 
-    <string name="product_customize_type_bass">Bass</string>
-    <string name="product_customize_type_normal">Normal</string>
     <string name="product_customize_color_title">Color</string>
     <string name="product_customize_body_title">Body</string>
 
-    <string name="product_rock_dark_red_bass">Guitar of type dark red rock bass</string>
     <string name="product_rock_dark_red_normal">Guitar of type dark red rock normal</string>
-    <string name="product_rock_gray_bass">Guitar of type gray rock bass</string>
     <string name="product_rock_gray_normal">Guitar of type gray rock normal</string>
-    <string name="product_classic_blue_bass">Guitar of type blue classic bass</string>
     <string name="product_classic_blue_normal">Guitar of type blue classic normal</string>
-    <string name="product_classic_yellow_bass">Guitar of type yellow classic bass</string>
     <string name="product_classic_yellow_normal">Guitar of type yellow classic normal</string>
-    <string name="product_classic_white_bass">Guitar of type white classic bass</string>
     <string name="product_classic_white_normal">Guitar of type white classic normal</string>
-    <string name="product_classic_orange_bass">Guitar of type orange classic bass</string>
     <string name="product_classic_orange_normal">Guitar of type orange classic normal</string>
-    <string name="product_classic_aqua_bass">Guitar of type aqua classic bass</string>
     <string name="product_classic_aqua_normal">Guitar of type aqua classic normal</string>
-    <string name="product_electric_light_gray_bass">Guitar of type light gray electric bass</string>
     <string name="product_electric_light_gray_normal">Guitar of type light gray electric normal</string>
-    <string name="product_electric_mustard_bass">Guitar of type mustard electric bass</string>
     <string name="product_electric_mustard_normal">Guitar of type mustard electric normal</string>
-    <string name="product_electric_white_bass">Guitar of type white electric bass</string>
     <string name="product_electric_white_normal">Guitar of type white electric normal</string>
-    <string name="product_hardrock_red_bass">Guitar of type red hardrock bass</string>
     <string name="product_hardrock_red_normal">Guitar of type red hardrock normal</string>
 
     <!-- Catalog -->

@@ -52,7 +52,7 @@
             app:layout_constraintWidth_max="@dimen/product_image_width"
             app:productImage="@{viewModel.selectedProduct}"
             app:visibleIf="@{!isScreenInLandscape}"
-            tools:src="@drawable/orange_classic_guitar"
+            tools:src="@drawable/orange_classic_guitar_normal"
             tools:visibility="visible"/>
 
         <androidx.appcompat.widget.AppCompatTextView

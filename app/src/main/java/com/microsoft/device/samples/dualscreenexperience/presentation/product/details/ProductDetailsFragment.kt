@@ -127,7 +127,7 @@ class ProductDetailsFragment : Fragment() {
                 setImageDrawable(
                     ContextCompat.getDrawable(
                         requireContext(),
-                        getProductDrawable(it.color, it.bodyShape, it.guitarType)
+                        getProductDrawable(it.color, it.bodyShape)
                     )
                 )
             }
@@ -193,28 +193,12 @@ class ProductDetailsFragment : Fragment() {
             viewLifecycleOwner,
             {
                 val shape = customizeViewModel.selectedBodyShape.value
-                val guitarType = customizeViewModel.selectedGuitarType.value
-                if (it != null && shape != null && guitarType != null) {
+                if (it != null && shape != null) {
                     binding?.productDetailsImage?.setImageDrawable(
-                        ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape, guitarType))
+                        ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape))
                     )
                     binding?.productDetailsImage?.contentDescription =
-                        context?.getString(getProductContentDescription(it, shape, guitarType))
-                }
-            }
-        )
-
-        customizeViewModel.selectedGuitarType.observe(
-            viewLifecycleOwner,
-            {
-                val color = customizeViewModel.selectedBodyColor.value
-                val shape = customizeViewModel.selectedBodyShape.value
-                if (it != null && color != null && shape != null) {
-                    binding?.productDetailsImage?.setImageDrawable(
-                        ContextCompat.getDrawable(requireContext(), getProductDrawable(color, shape, it))
-                    )
-                    binding?.productDetailsImage?.contentDescription =
-                        context?.getString(getProductContentDescription(color, shape, it))
+                        context?.getString(getProductContentDescription(it, shape))
                 }
             }
         )
