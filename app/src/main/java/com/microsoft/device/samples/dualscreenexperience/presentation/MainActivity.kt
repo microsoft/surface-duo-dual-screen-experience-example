@@ -185,6 +185,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         if (windowLayoutInfo.isInDualMode() != layoutInfoViewModel.isDualMode.value) {
+            tutorial.hide()
             invalidateOptionsMenu()
         }
         layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
