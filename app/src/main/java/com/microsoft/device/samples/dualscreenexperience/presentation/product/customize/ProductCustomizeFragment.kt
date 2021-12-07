@@ -202,21 +202,21 @@ class ProductCustomizeFragment : Fragment() {
 
     private fun resetColorViews(parentView: ViewGroup?, colorList: List<ProductColor>, defaultSelected: ProductColor) {
         parentView?.post {
-            for (colorIndex in 1..5) {
-                val colorView = getColorView(colorIndex)
-                if (colorIndex > colorList.size) {
+            for (colorViewIndex in 0..4) {
+                val colorView = getColorView(colorViewIndex)
+                if (colorViewIndex > colorList.lastIndex) {
                     colorView?.isInvisible = true
                 } else {
                     colorView?.isVisible = true
-                    val currentColor = colorList[colorIndex - 1]
+                    val currentColor = colorList[colorViewIndex]
                     colorView?.apply {
                         productColor = currentColor
-                        setOnClickListener {
+                        setOnClickListener { _ ->
                             if (!isSelected) {
                                 select()
                                 viewModel.selectedBodyColor.value = currentColor
                                 colorList.indices
-                                    .filter { colorIndex != it }
+                                    .filter { colorViewIndex != it }
                                     .forEach { getColorView(it)?.unselect() }
                             }
                         }
@@ -231,11 +231,11 @@ class ProductCustomizeFragment : Fragment() {
 
     private fun getColorView(index: Int) =
         when (index) {
-            1 -> binding?.productCustomizeColor1
-            2 -> binding?.productCustomizeColor2
-            3 -> binding?.productCustomizeColor3
-            4 -> binding?.productCustomizeColor4
-            5 -> binding?.productCustomizeColor5
+            0 -> binding?.productCustomizeColor1
+            1 -> binding?.productCustomizeColor2
+            2 -> binding?.productCustomizeColor3
+            3 -> binding?.productCustomizeColor4
+            4 -> binding?.productCustomizeColor5
             else -> null
         }
 
