@@ -35,7 +35,7 @@
             android:id="@+id/order_date"
             style="@style/Store.Name"
             orderDate="@{timestamp}"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_16"
             app:layout_constraintEnd_toStartOf="@id/order_id"
@@ -47,9 +47,11 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/order_id"
             style="@style/GoldText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:text="@{@string/order_id(id)}"
+            app:layout_constraintBottom_toTopOf="@id/order_amount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/order_date"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,9 +63,11 @@
             orderAmount="@{price}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/order_id"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/order_date"
+            app:layout_constraintTop_toBottomOf="@id/order_id"
             tools:text="Amount: $30,447"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

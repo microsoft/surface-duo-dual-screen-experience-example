@@ -157,6 +157,7 @@
             invisibleIf="@{isInCustomizeMode}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="@string/product_details_customize_button"
             app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
