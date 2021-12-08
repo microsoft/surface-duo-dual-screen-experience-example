@@ -52,6 +52,7 @@ android {
         }
 
         releaseEmulator {
+            applicationIdSuffix ".emulator"
             minifyEnabled true
             shrinkResources true
             debuggable false
