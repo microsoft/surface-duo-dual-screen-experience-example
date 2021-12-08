@@ -229,24 +229,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDevModeByDestination(destination: FoldableNavDestination) {
         when (destination.id) {
-            R.id.fragment_store_map -> setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS)
-            R.id.fragment_store_list -> setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW)
-            R.id.fragment_store_details -> setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL)
-            R.id.fragment_catalog -> setupDevMode(AppScreen.CATALOG, DesignPattern.TWO_PAGE)
-            R.id.fragment_product_list -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
-            R.id.fragment_product_details -> setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL)
-            R.id.fragment_product_customize -> setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE)
-            R.id.fragment_order -> setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
-            R.id.fragment_order_receipt -> setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
+            R.id.fragment_store_map ->
+                setupDevMode(AppScreen.STORES_MAP, DesignPattern.EXTENDED_CANVAS, SdkComponent.BOTTOM_NAVIGATION_VIEW)
+            R.id.fragment_store_list ->
+                setupDevMode(AppScreen.STORES_LIST, DesignPattern.DUAL_VIEW, SdkComponent.NAVIGATION)
+            R.id.fragment_store_details ->
+                setupDevMode(AppScreen.STORES_DETAILS, DesignPattern.LIST_DETAIL, SdkComponent.NAVIGATION)
+            R.id.fragment_catalog ->
+                setupDevMode(AppScreen.CATALOG, DesignPattern.TWO_PAGE, SdkComponent.BOTTOM_NAVIGATION_VIEW)
+            R.id.fragment_product_list ->
+                setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL, SdkComponent.BOTTOM_NAVIGATION_VIEW)
+            R.id.fragment_product_details ->
+                setupDevMode(AppScreen.PRODUCTS_LIST_DETAILS, DesignPattern.LIST_DETAIL, SdkComponent.BOTTOM_NAVIGATION_VIEW)
+            R.id.fragment_product_customize ->
+                setupDevMode(AppScreen.PRODUCTS_CUSTOMIZE, DesignPattern.COMPANION_PANE, SdkComponent.NAVIGATION)
+            R.id.fragment_order ->
+                setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
+            R.id.fragment_order_receipt ->
+                setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
         }
     }
 
-    private fun setupDevMode(appScreen: AppScreen, designPattern: DesignPattern, sdkComponent: SdkComponent? = null) {
+    private fun setupDevMode(appScreen: AppScreen, designPattern: DesignPattern, sdkComponent: SdkComponent) {
         devViewModel.appScreen = appScreen
         devViewModel.designPattern = designPattern
-        sdkComponent?.let {
-            devViewModel.sdkComponent = it
-        }
+        devViewModel.sdkComponent = sdkComponent
 
         if (designPattern != DesignPattern.NONE) {
             devModeTextView?.text = getString(R.string.toolbar_dev_mode_design_pattern, getString(designPattern.stringResId))
