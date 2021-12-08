@@ -26,7 +26,6 @@ open class BaseNavigationOrderTest {
 
     fun addItemToOrderAndRemove(
         itemPosition: Int,
-        orderDetailsPosition: Int,
         recommendationsPosition: Int,
         emptyRecommendationsSize: Int,
         oneItemRecommendationsSize: Int,
@@ -38,11 +37,10 @@ open class BaseNavigationOrderTest {
 
         itemLiveData.getOrAwaitValue()
 
-        checkOrderHeader()
+        checkOrderDetails()
         checkOrderItemList(itemPosition)
         checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
         scrollOrderToEnd()
-        checkOrderDetails(orderDetailsPosition)
         checkOrderRecommendationsPage(oneItemRecommendationsSize, recommendationsPosition)
 
         clickOnItemRemove(itemPosition)
@@ -54,7 +52,6 @@ open class BaseNavigationOrderTest {
 
     fun addItemToOrderAndSubmit(
         itemPosition: Int,
-        orderDetailsPosition: Int,
         recommendationsPosition: Int,
         emptyRecommendationsSize: Int,
         itemLiveData: LiveData<List<OrderItem>>,
@@ -66,12 +63,11 @@ open class BaseNavigationOrderTest {
 
         itemLiveData.getOrAwaitValue()
 
-        checkOrderHeader()
-        checkOrderDetails(orderDetailsPosition)
+        checkOrderDetails()
         checkOrderItemList(itemPosition)
         checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
 
-        clickOnSubmitOrderButton(orderDetailsPosition)
+        clickOnSubmitOrderButton()
 
         submittedOrderLiveData.getOrAwaitValue()
 
@@ -83,7 +79,6 @@ open class BaseNavigationOrderTest {
 
     fun addItemWithDifferentQuantitiesAndSubmit(
         itemPosition: Int,
-        orderDetailsPosition: Int,
         recommendationsPosition: Int,
         emptyRecommendationsSize: Int,
         itemLiveData: LiveData<List<OrderItem>>,
@@ -95,9 +90,8 @@ open class BaseNavigationOrderTest {
 
         itemLiveData.getOrAwaitValue()
 
-        checkOrderHeader()
+        checkOrderDetails()
         checkOrderItemList(itemPosition)
-        checkOrderDetails(orderDetailsPosition)
 
         checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
 
@@ -113,7 +107,7 @@ open class BaseNavigationOrderTest {
 
         checkOrderItemList(itemPosition)
 
-        clickOnSubmitOrderButton(orderDetailsPosition)
+        clickOnSubmitOrderButton()
 
         submittedOrderLiveData.getOrAwaitValue()
 

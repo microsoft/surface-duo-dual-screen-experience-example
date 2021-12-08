@@ -1,10 +1,15 @@
-<!--
-  ~
-  ~ Copyright (c) Microsoft Corporation. All rights reserved.
-  ~ Licensed under the MIT License.
-  ~
-  -->
-
 <resources>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">INSERT MAPS KEY HERE</string>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions here:
+
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        INSERT YOUR GOOGLE MAPS KEY HERE
+    </string>
 </resources>

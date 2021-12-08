@@ -6,11 +6,10 @@
       "price": 6495,
       "description": "Wood body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
       "rating": 3.1,
-      "fretsNumber": 21,
+      "fretsNumber": 22,
       "deliveryDays": 5,
       "typeId": 2,
-      "colorId": 6,
-      "guitarTypeId": 0
+      "colorId": 6
     },
     {
       "productId": 2,
@@ -18,11 +17,10 @@
       "price": 4323,
       "description": "Metal body with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
       "rating": 4.0,
-      "fretsNumber": 18,
+      "fretsNumber": 22,
       "deliveryDays": 2,
       "typeId": 1,
-      "colorId": 1,
-      "guitarTypeId": 0
+      "colorId": 1
     },
     {
       "productId": 3,
@@ -33,8 +31,7 @@
       "fretsNumber": 22,
       "deliveryDays": 7,
       "typeId": 3,
-      "colorId": 9,
-      "guitarTypeId": 0
+      "colorId": 9
     },
     {
       "productId": 4,
@@ -42,11 +39,10 @@
       "price": 5873,
       "description": "Standard with gloss finish, Three Player Series pickups, 9.5\"-radius fingerboard, 2-point tremolo bridge",
       "rating": 5.0,
-      "fretsNumber": 19,
+      "fretsNumber": 22,
       "deliveryDays": 3,
       "typeId": 4,
-      "colorId": 10,
-      "guitarTypeId": 0
+      "colorId": 10
     }
   ]
 }

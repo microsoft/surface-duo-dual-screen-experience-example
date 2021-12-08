@@ -18,6 +18,5 @@ data class OrderItemEntity(
     val price: Int,
     val typeId: Int,
     val colorId: Int,
-    val guitarTypeId: Int,
     var quantity: Int
 )

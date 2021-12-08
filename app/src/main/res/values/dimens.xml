@@ -28,6 +28,7 @@
     <dimen name="small_padding">8dp</dimen>
     <dimen name="micro_padding">4dp</dimen>
     <dimen name="nano_padding">2dp</dimen>
+    <dimen name="zero_padding">0dp</dimen>
 
     <dimen name="xxl_margin">72dp</dimen>
     <dimen name="xl_margin">48dp</dimen>

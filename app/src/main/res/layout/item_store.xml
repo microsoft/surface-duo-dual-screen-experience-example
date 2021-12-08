@@ -22,9 +22,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/normal_margin"
+        android:onClick="@{() -> itemListener.onClick(store)}"
         tools:background="@color/gray">
 
         <androidx.appcompat.widget.AppCompatImageView

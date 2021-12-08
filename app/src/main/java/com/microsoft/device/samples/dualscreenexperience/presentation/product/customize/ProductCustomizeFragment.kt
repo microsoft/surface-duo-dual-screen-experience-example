@@ -29,7 +29,6 @@ import androidx.window.layout.WindowLayoutInfo
 import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentProductCustomizeBinding
-import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
@@ -120,9 +119,6 @@ class ProductCustomizeFragment : Fragment() {
                     if (viewModel.selectedBodyShape.value == null) {
                         viewModel.selectedBodyShape.value = it.bodyShape
                     }
-                    if (viewModel.selectedGuitarType.value == null) {
-                        viewModel.selectedGuitarType.value = it.guitarType
-                    }
                     viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
                         getBodyShape(updatedBodyShape)?.select()
                     }
@@ -152,9 +148,8 @@ class ProductCustomizeFragment : Fragment() {
             viewLifecycleOwner,
             {
                 val shape = viewModel.selectedBodyShape.value
-                val guitarType = viewModel.selectedGuitarType.value
-                if (it != null && shape != null && guitarType != null) {
-                    setCustomizeImageDrawable(it, shape, guitarType)
+                if (it != null && shape != null) {
+                    setCustomizeImageDrawable(it, shape)
 
                     val visibleColorCount =
                         binding?.productCustomizeColorContainer?.children
@@ -163,17 +158,6 @@ class ProductCustomizeFragment : Fragment() {
                     if (shape.colorList.size != visibleColorCount) {
                         resetColorViews(binding?.productCustomizeColorContainer, shape.colorList, it)
                     }
-                }
-            }
-        )
-
-        viewModel.selectedGuitarType.observe(
-            viewLifecycleOwner,
-            {
-                val color = viewModel.selectedBodyColor.value
-                val shape = viewModel.selectedBodyShape.value
-                if (it != null && color != null && shape != null) {
-                    setCustomizeImageDrawable(color, shape, it)
                 }
             }
         )
@@ -193,53 +177,46 @@ class ProductCustomizeFragment : Fragment() {
                 }
             }
         }
-
-        binding?.productCustomizeTypeToggle?.setOnCheckedChangeListener { radioGroup, itemId ->
-            when (itemId) {
-                R.id.product_customize_type_bass -> viewModel.selectedGuitarType.value = GuitarType.BASS
-                R.id.product_customize_type_normal -> viewModel.selectedGuitarType.value = GuitarType.NORMAL
-            }
-        }
     }
 
-    private fun setCustomizeImageDrawable(color: ProductColor, shape: ProductType, guitarType: GuitarType) {
+    private fun setCustomizeImageDrawable(color: ProductColor, shape: ProductType) {
         binding?.productCustomizeImage?.setImageBitmap(
             ContextCompat.getDrawable(
                 requireContext(),
-                getProductDrawable(color, shape, guitarType)
+                getProductDrawable(color, shape)
             )?.toBitmap()?.rotate(ROTATE_HORIZONTALLY)
         )
         binding?.productCustomizeImage?.contentDescription =
-            context?.getString(getProductContentDescription(color, shape, guitarType))
+            context?.getString(getProductContentDescription(color, shape))
 
         binding?.productCustomizeImageLandscape?.setImageDrawable(
             ContextCompat.getDrawable(
                 requireContext(),
-                getProductDrawable(color, shape, guitarType)
+                getProductDrawable(color, shape)
             )
         )
 
         binding?.productCustomizeImageLandscape?.contentDescription =
-            context?.getString(getProductContentDescription(color, shape, guitarType))
+            context?.getString(getProductContentDescription(color, shape))
     }
 
     private fun resetColorViews(parentView: ViewGroup?, colorList: List<ProductColor>, defaultSelected: ProductColor) {
         parentView?.post {
-            for (colorIndex in 1..5) {
-                val colorView = getColorView(colorIndex)
-                if (colorIndex > colorList.size) {
+            for (colorViewIndex in 0..4) {
+                val colorView = getColorView(colorViewIndex)
+                if (colorViewIndex > colorList.lastIndex) {
                     colorView?.isInvisible = true
                 } else {
                     colorView?.isVisible = true
-                    val currentColor = colorList[colorIndex - 1]
+                    val currentColor = colorList[colorViewIndex]
                     colorView?.apply {
                         productColor = currentColor
-                        setOnClickListener {
+                        setOnClickListener { _ ->
                             if (!isSelected) {
                                 select()
                                 viewModel.selectedBodyColor.value = currentColor
                                 colorList.indices
-                                    .filter { colorIndex != it }
+                                    .filter { colorViewIndex != it }
                                     .forEach { getColorView(it)?.unselect() }
                             }
                         }
@@ -254,11 +231,11 @@ class ProductCustomizeFragment : Fragment() {
 
     private fun getColorView(index: Int) =
         when (index) {
-            1 -> binding?.productCustomizeColor1
-            2 -> binding?.productCustomizeColor2
-            3 -> binding?.productCustomizeColor3
-            4 -> binding?.productCustomizeColor4
-            5 -> binding?.productCustomizeColor5
+            0 -> binding?.productCustomizeColor1
+            1 -> binding?.productCustomizeColor2
+            2 -> binding?.productCustomizeColor3
+            3 -> binding?.productCustomizeColor4
+            4 -> binding?.productCustomizeColor5
             else -> null
         }
 

@@ -16,6 +16,5 @@ data class ProductEntity(
     val fretsNumber: Int,
     val deliveryDays: Int,
     val typeId: Int,
-    val colorId: Int,
-    val guitarTypeId: Int
+    val colorId: Int
 )

@@ -29,7 +29,7 @@
         android:onClick="@{() -> itemClickListener.onClick(item)}"
         android:paddingBottom="@dimen/small_padding"
         android:text="@{item.title}"
-        android:textSize="@dimen/text_size_14"
+        android:textColor="@{item.url != null ? @color/white : @color/license_gray}"
         tools:text="Kotlin"/>
 
 </layout>

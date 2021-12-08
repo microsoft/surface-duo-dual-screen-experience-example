@@ -20,8 +20,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
+import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_DETAILS
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_DETAILS_SUBMITTED
-import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.POSITION_HEADER
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_ONE
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_THREE
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
@@ -186,23 +186,11 @@ fun addProductToOrder(itemPosition: Int = 0, bodyShape: ProductType?, color: Pro
     clickOnPlaceOrderButton()
 }
 
-fun checkOrderHeader() {
+fun checkOrderDetails() {
     onView(withId(R.id.order_items)).check(
         matches(
             atRecyclerAdapterPosition(
-                POSITION_HEADER,
-                R.id.order_header,
-                isDisplayed()
-            )
-        )
-    )
-}
-
-fun checkOrderDetails(detailsPosition: Int) {
-    onView(withId(R.id.order_items)).check(
-        matches(
-            atRecyclerAdapterPosition(
-                detailsPosition,
+                POSITION_DETAILS,
                 R.id.total_title,
                 isDisplayed()
             )
@@ -211,7 +199,7 @@ fun checkOrderDetails(detailsPosition: Int) {
     onView(withId(R.id.order_items)).check(
         matches(
             atRecyclerAdapterPosition(
-                detailsPosition,
+                POSITION_DETAILS,
                 R.id.total_price,
                 isDisplayed()
             )
@@ -220,7 +208,7 @@ fun checkOrderDetails(detailsPosition: Int) {
     onView(withId(R.id.order_items)).check(
         matches(
             atRecyclerAdapterPosition(
-                detailsPosition,
+                POSITION_DETAILS,
                 R.id.submit_button,
                 isDisplayed()
             )
@@ -392,10 +380,10 @@ fun checkItemQuantity(position: Int, quantity: Int) {
     )
 }
 
-fun clickOnSubmitOrderButton(detailsPosition: Int) {
+fun clickOnSubmitOrderButton() {
     onView(withId(R.id.order_items)).perform(
         RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-            detailsPosition,
+            POSITION_DETAILS,
             clickChildViewWithId(R.id.submit_button)
         )
     )
@@ -458,9 +446,6 @@ fun checkOrderSubmittedDetails() {
         )
     )
 }
-
-const val ORDER_DETAILS_POS = 2
-const val DUAL_PORTRAIT_ORDER_DETAILS_POS = 4
 
 const val SINGLE_MODE_ORDER_ITEM_POS = 1
 const val DUAL_PORTRAIT_ORDER_ITEM_POS = 2

@@ -8,7 +8,6 @@
 package com.microsoft.device.samples.dualscreenexperience.domain.order.model
 
 import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderItemEntity
-import com.microsoft.device.samples.dualscreenexperience.domain.product.model.GuitarType
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -20,7 +19,6 @@ data class OrderItem(
     val price: Int,
     val bodyShape: ProductType,
     val color: ProductColor,
-    val guitarType: GuitarType,
     var quantity: Int,
 ) {
     constructor(entity: OrderItemEntity) :
@@ -31,7 +29,6 @@ data class OrderItem(
             entity.price,
             ProductType.get(entity.typeId),
             ProductColor.get(entity.colorId),
-            GuitarType.get(entity.guitarTypeId),
             entity.quantity
         )
 
@@ -41,7 +38,6 @@ data class OrderItem(
             price = product.price,
             bodyShape = product.bodyShape,
             color = product.color,
-            guitarType = product.guitarType,
             quantity = DEFAULT_QUANTITY
         )
 
@@ -52,7 +48,6 @@ data class OrderItem(
             price = price,
             typeId = bodyShape.bodyShapeId,
             colorId = color.colorId,
-            guitarTypeId = guitarType.typeId,
             quantity = quantity
         )
 
@@ -67,7 +62,6 @@ data class OrderItem(
         if (price != other.price) return false
         if (bodyShape != other.bodyShape) return false
         if (color != other.color) return false
-        if (guitarType != other.guitarType) return false
 
         return true
     }
@@ -78,7 +72,6 @@ data class OrderItem(
         result = 31 * result + price
         result = 31 * result + bodyShape.hashCode()
         result = 31 * result + color.hashCode()
-        result = 31 * result + guitarType.hashCode()
         return result
     }
 
