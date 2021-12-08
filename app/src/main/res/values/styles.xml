@@ -24,8 +24,8 @@
     </style>
 
     <style name="Customize.Button" parent="Store.Button">
-        <item name="android:paddingStart">@dimen/normal_padding</item>
-        <item name="android:paddingEnd">@dimen/normal_padding</item>
+        <item name="android:paddingStart">@dimen/half_medium_padding</item>
+        <item name="android:paddingEnd">@dimen/half_medium_padding</item>
         <item name="android:paddingTop">@dimen/half_medium_padding</item>
         <item name="android:paddingBottom">@dimen/half_medium_padding</item>
         <item name="android:textSize">@dimen/text_size_14</item>
