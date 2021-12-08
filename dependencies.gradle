@@ -75,7 +75,9 @@ ext {
 
     //Microsoft dependencies version
     bottomNavBarVersion = "1.0.0-beta3"
-    recyclerViewVersion = "1.0.0-beta4"
+    recyclerViewVersion = "1.0.0-beta5"
+    layoutsVersion = "1.0.0-beta7"
+    wmUtilsVersion = "1.0.0-beta3"
 
     bingMapsVersion = "1.2.0"
 
@@ -83,6 +85,8 @@ ext {
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",
+            layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
+            wmUtils                   : "com.microsoft.device.dualscreen:wm-utils:$wmUtilsVersion",
     ]
 
     //UI dependencies
