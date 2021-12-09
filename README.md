@@ -14,6 +14,12 @@ it implements and the [dual-screen controls](https://docs.microsoft.com/dual-scr
 
 ![Dual Screen Experience Example build](https://github.com/microsoft/surface-duo-dual-screen-experience-example/workflows/Dual%20Screen%20Experience%20Example%20build/badge.svg)
 
+## Install from Google Play Store
+
+If you want to try out the released version, you can find it here:
+
+[![Google Play Badge](google_play_badge.png)](https://aka.ms/DualScreenExperiencePlayStore)
+
 ## Getting Started
 
 To learn how to load your app on the Surface Duo emulator, see the [documentation](https://docs.microsoft.com/dual-screen/android), and follow [the blog](https://devblogs.microsoft.com/surface-duo).
@@ -27,12 +33,6 @@ To learn how to load your app on the Surface Duo emulator, see the [documentatio
 ![Order dual portrait](screenshots/dual_portrait_order.png)
 
 ![Developer Mode dual portrait](screenshots/dual_portrait_dev_mode.png)
-
-## Install from Google Play Store
-
-If you want to try out the released version, you can find it here:
-
-[![Google Play Badge](google_play_badge.png)](https://aka.ms/DualScreenExperiencePlayStore)
 
 ## Related links
 
