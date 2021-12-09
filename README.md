@@ -21,8 +21,11 @@ To learn how to load your app on the Surface Duo emulator, see the [documentatio
 ## Screenshots
 
 ![Catalog dual portrait](screenshots/dual_portrait_catalog.png)
+
 ![Product Customize dual portrait](screenshots/dual_portrait_product_customize.png)
+
 ![Order dual portrait](screenshots/dual_portrait_order.png)
+
 ![Developer Mode dual portrait](screenshots/dual_portrait_dev_mode.png)
 
 ## Install from Google Play Store
