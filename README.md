@@ -30,7 +30,9 @@ To learn how to load your app on the Surface Duo emulator, see the [documentatio
 
 ## Install from Google Play Store
 
-If you want to try out the released version, you can find it here: [![Google Play Badge](google_play_badge.png)](https://aka.ms/DualScreenExperiencePlayStore)
+If you want to try out the released version, you can find it here:
+
+[![Google Play Badge](google_play_badge.png)](https://aka.ms/DualScreenExperiencePlayStore)
 
 ## Related links
 
