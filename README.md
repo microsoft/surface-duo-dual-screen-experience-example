@@ -1,6 +1,16 @@
 # Dual Screen Experience Example
 
-This repo contains a sample Android application for Microsoft Surface Duo. It demonstrates [dual-screen controls](https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library/) and [user interface patterns](https://docs.microsoft.com/dual-screen/introduction#dual-screen-app-patterns).
+The application provides developers and designers with real world, working examples of how to make 
+use of the dual-screen/foldable form factor in different ways. It enables an end-to-end experience 
+using a prescribed user scenario, centered around the needs of a travelling salesperson who visits 
+various fictitious stores which are interested in buying the salespersons’ fictitious products. 
+It helps the salesperson select and navigate to multiple predetermined customer locations in a city, 
+assist the salespersons tasks in various ways during the visit to each potential client and create 
+a report of each visit.
+
+When spanned across the folding feature, a Developer Mode option appears in the toolbar which shows 
+more details regarding each screen - the code behind it, the [user interface patterns](https://docs.microsoft.com/dual-screen/introduction#dual-screen-app-patterns) 
+it implements and the [dual-screen controls](https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library/) it uses.
 
 ![Dual Screen Experience Example build](https://github.com/microsoft/surface-duo-dual-screen-experience-example/workflows/Dual%20Screen%20Experience%20Example%20build/badge.svg)
 
@@ -8,18 +18,29 @@ This repo contains a sample Android application for Microsoft Surface Duo. It de
 
 To learn how to load your app on the Surface Duo emulator, see the [documentation](https://docs.microsoft.com/dual-screen/android), and follow [the blog](https://devblogs.microsoft.com/surface-duo).
 
+## Screenshots
+
+![Catalog dual portrait](screenshots/dual_portrait_catalog.png)
+![Product Customize dual portrait](screenshots/dual_portrait_product_customize.png)
+![Order dual portrait](screenshots/dual_portrait_order.png)
+![Developer Mode dual portrait](screenshots/dual_portrait_dev_mode.png)
+
+## Install from Google Play Store
+
+If you want to try out the released version, you can find it [here](https://play.google.com/store/apps/details?id=com.microsoft.device.samples.dualscreenexperience)
+
 ## Related links
 
 - [SDK open-source code](https://github.com/microsoft/surface-duo-sdk)
 - [SDK samples (Kotlin)](https://github.com/microsoft/surface-duo-sdk-samples-kotlin)
 - [SDK samples (Java)](https://github.com/microsoft/surface-duo-sdk-samples)
 - [App samples](https://github.com/microsoft/surface-duo-app-samples)
+- [Jetpack Window Manager samples](https://github.com/microsoft/surface-duo-window-manager-samples)
 - [Jetpack Compose samples](https://github.com/microsoft/surface-duo-compose-samples)
 - [Unity samples](https://github.com/microsoft/surface-duo-sdk-unity-samples)
 - [Xamarin samples](https://github.com/microsoft/surface-duo-sdk-xamarin-samples)
 - [Flutter samples](https://github.com/microsoft/surface-duo-sdk-samples-flutter)
 - [React Native samples](https://github.com/microsoft/react-native-dualscreen)
-- Web samples are coming soon
 
 ## Contributing
 
@@ -40,6 +61,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft’s Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general). Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos are subject to those third-party’s policies.
 
 ## License
+
 Copyright (c) Microsoft Corporation.
 
 MIT License
