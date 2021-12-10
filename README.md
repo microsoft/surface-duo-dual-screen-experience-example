@@ -3,9 +3,9 @@
 The application provides developers and designers with real world, working examples of how to make 
 use of the dual-screen/foldable form factor in different ways. It enables an end-to-end experience 
 using a prescribed user scenario, centered around the needs of a travelling salesperson who visits 
-various fictitious stores which are interested in buying the salespersons’ fictitious products. 
+various fictitious stores which are interested in buying the salesperson’s fictitious products. 
 It helps the salesperson select and navigate to multiple predetermined customer locations in a city, 
-assist the salespersons tasks in various ways during the visit to each potential client and create 
+assist the salesperson's tasks in various ways during the visit to each potential client, and create 
 a report of each visit.
 
 When spanned across the folding feature, a Developer Mode option appears in the toolbar which shows 
