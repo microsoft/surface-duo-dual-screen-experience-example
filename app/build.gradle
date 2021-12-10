@@ -51,8 +51,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
-        releaseEmulator {
-            applicationIdSuffix ".emulator"
+        emulator {
+            applicationIdSuffix ".appEmulator"
             minifyEnabled true
             shrinkResources true
             debuggable false
@@ -117,7 +117,7 @@ dependencies {
     debugImplementation googleDependencies.mapsKtx
     releaseImplementation googleDependencies.maps
     releaseImplementation googleDependencies.mapsKtx
-    releaseEmulatorImplementation microsoftDependencies.bingMaps
+    emulatorImplementation microsoftDependencies.bingMaps
 
     implementation microsoftDependencies.bottomNavBar
     implementation microsoftDependencies.recyclerView
