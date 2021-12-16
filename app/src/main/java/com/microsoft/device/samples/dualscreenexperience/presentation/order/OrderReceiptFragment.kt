@@ -22,7 +22,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
-import com.microsoft.device.dualscreen.recyclerview.FoldableItemDecoration
+import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredItemDecoration
 import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredLayoutManager
 import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationAt
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
@@ -90,7 +90,7 @@ class OrderReceiptFragment : Fragment() {
     private fun setupRecyclerView(windowLayoutInfo: WindowLayoutInfo) {
         binding?.orderReceiptItems?.apply {
             layoutManager = FoldableStaggeredLayoutManager(context, windowLayoutInfo).get()
-            replaceItemDecorationAt(FoldableItemDecoration(windowLayoutInfo))
+            replaceItemDecorationAt(FoldableStaggeredItemDecoration(windowLayoutInfo))
         }
     }
 
