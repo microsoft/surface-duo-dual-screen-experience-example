@@ -27,6 +27,7 @@ import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationA
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentOrderBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkDialogFragment
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
@@ -110,6 +111,18 @@ class OrderFragment : Fragment() {
                 }
             }
         )
+        orderViewModel.showSignDialog.observe(
+            viewLifecycleOwner,
+            {
+                if (it && childFragmentManager.findFragmentByTag(InkDialogFragment.INK_FRAGMENT_TAG) == null) {
+                    showSignDialog()
+                }
+            }
+        )
+    }
+
+    private fun showSignDialog() {
+        InkDialogFragment().show(childFragmentManager, InkDialogFragment.INK_FRAGMENT_TAG)
     }
 
     private fun setupRecyclerView(windowLayoutInfo: WindowLayoutInfo) {

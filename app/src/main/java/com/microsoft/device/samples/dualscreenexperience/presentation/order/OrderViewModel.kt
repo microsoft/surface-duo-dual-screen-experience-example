@@ -8,6 +8,7 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.order
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
@@ -35,6 +36,7 @@ class OrderViewModel @Inject constructor(
     var itemList: LiveData<List<OrderItem>> = getOrderUseCase.get()
     var submittedOrder = SingleLiveEvent<Order?>(null)
     var showSuccessMessage = false
+    var showSignDialog = MutableLiveData(false)
 
     val quantityDataListHandler = object : QuantityDataListHandler<OrderItem> {
         override fun getDataList(): List<OrderItem>? = getOrderItemDataList()
@@ -59,11 +61,11 @@ class OrderViewModel @Inject constructor(
 
     override fun onClick(model: Boolean?) {
         if (model == true) {
-            submitOrder()
+            showSignDialog.value = true
         }
     }
 
-    private fun submitOrder() {
+    fun submitOrder() {
         viewModelScope.launch {
             submitOrderUseCase.submit()?.let {
                 submittedOrder.value = getOrderByIdUseCase.get(it)

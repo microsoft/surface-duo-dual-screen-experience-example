@@ -84,7 +84,7 @@
     <string name="order_recommendations_button">Add</string>
 
     <string name="order_total_title">Total %d items</string>
-    <string name="order_submit">Submit Order</string>
+    <string name="order_submit">Sign &amp; Confirm</string>
     <string name="order_date">Order Date: %s</string>
     <string name="order_id">Order ID: %s</string>
     <string name="order_amount">Amount: %s</string>
@@ -95,6 +95,10 @@
 
     <string name="order_success_message">Your order has been placed successfully!</string>
     <string name="tutorial_order_text">Check out more stores around you</string>
+
+    <string name="order_sign_cancel">Cancel</string>
+    <string name="order_sign_confirm">Confirm</string>
+    <string name="order_sign_error">Please sign before clicking Confirm</string>
 
     <!-- Developer Mode -->
 
