@@ -67,7 +67,17 @@ open class BaseNavigationOrderTest {
         checkOrderItemList(itemPosition)
         checkItemQuantity(itemPosition, DEFAULT_QUANTITY)
 
-        clickOnSubmitOrderButton()
+        clickOnSignOrderButton()
+
+        clickOnConfirmSignOrderButton()
+        checkSignOrderError()
+
+        signOrder()
+        clickOnResetSignOrderButton()
+        checkSignOrderError()
+
+        signOrder()
+        clickOnConfirmSignOrderButton()
 
         submittedOrderLiveData.getOrAwaitValue()
 
@@ -107,7 +117,9 @@ open class BaseNavigationOrderTest {
 
         checkOrderItemList(itemPosition)
 
-        clickOnSubmitOrderButton()
+        clickOnSignOrderButton()
+        signOrder()
+        clickOnConfirmSignOrderButton()
 
         submittedOrderLiveData.getOrAwaitValue()
 
