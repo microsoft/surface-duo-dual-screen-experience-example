@@ -87,6 +87,9 @@
     <dimen name="order_empty_image_height">164dp</dimen>
     <dimen name="order_empty_message_size">16sp</dimen>
 
+    <dimen name="color_circle_size">24dp</dimen>
+    <dimen name="color_stroke_size">3dp</dimen>
+
     <!-- Catalog -->
 
     <dimen name="catalog_margin_small">8dp</dimen>

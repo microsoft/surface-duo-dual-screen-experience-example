@@ -23,6 +23,11 @@
     <color name="gold">#DDCAB3</color>
     <color name="dark_blue">#2A3037</color>
 
+    <color name="ink_red">#FC547C</color>
+    <color name="ink_blue">#0581E4</color>
+    <color name="ink_white">#FCFFFFFF</color>
+    <color name="ink_color_selected">#7D786D</color>
+
     <color name="guitar_red_color">#D92D2A</color>
     <color name="guitar_blue_color">#1873B5</color>
     <color name="guitar_gray_color">#575347</color>

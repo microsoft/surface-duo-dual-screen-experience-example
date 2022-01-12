@@ -11,4 +11,7 @@
         <attr name="productColor" format="integer" />
         <attr name="productType" format="integer" />
     </declare-styleable>
+    <declare-styleable name="InkColorView">
+        <attr name="inkColor" format="integer" />
+    </declare-styleable>
 </resources>

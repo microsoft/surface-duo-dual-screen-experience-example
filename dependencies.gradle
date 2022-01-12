@@ -11,7 +11,7 @@ ext {
     compileSdkVersion = 31
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
-    minSdkVersion = 22
+    minSdkVersion = 23
     versionCode = 6
     versionName = "1.0.0.5"
     applicationId = "com.microsoft.device.samples.dualscreenexperience"
@@ -78,11 +78,13 @@ ext {
     recyclerViewVersion = "1.0.0-beta5"
     layoutsVersion = "1.0.0-beta7"
     wmUtilsVersion = "1.0.0-beta3"
+    inkVersion = "1.0.0-alpha4"
 
     bingMapsVersion = "1.2.0"
 
     microsoftDependencies = [
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
+            ink                       : "com.microsoft.device:ink:$inkVersion",
             bottomNavBar              : "com.microsoft.device.dualscreen:bottomnavigation:$bottomNavBarVersion",
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
