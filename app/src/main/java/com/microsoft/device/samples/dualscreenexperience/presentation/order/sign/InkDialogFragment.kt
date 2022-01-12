@@ -19,6 +19,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ImageView
+import android.widget.SimpleAdapter
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.DialogFragment
@@ -38,6 +41,16 @@ class InkDialogFragment : DialogFragment() {
 
     private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
     private val orderViewModel: OrderViewModel by activityViewModels()
+    private val inkViewModel: InkViewModel by activityViewModels()
+
+    private var inkStrokePopupWindow: ListPopupWindow? = null
+    private var inkStrokeMenuData = arrayListOf(
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_1)),
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_2)),
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_3)),
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_4)),
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_5))
+    )
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
@@ -87,7 +100,9 @@ class InkDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupObservers()
         setupBinding()
+        initInkParameters()
     }
 
     private fun setupBinding() {
@@ -100,6 +115,19 @@ class InkDialogFragment : DialogFragment() {
 
             buttonReset.setOnClickListener {
                 inkView.clearInk()
+            }
+
+            inkStrokeButton.setOnClickListener { showStrokeWidthMenu(it) }
+
+            getInkViewColorList().let { viewList ->
+                viewList.forEach { view ->
+                    view?.setOnClickListener {
+                        onInkColorViewClicked(view, viewList)
+                        view.inkColor?.let { newColor ->
+                            inkViewModel.selectedInkColor.value = newColor
+                        }
+                    }
+                }
             }
 
             buttonCancel.setOnClickListener {
@@ -145,6 +173,89 @@ class InkDialogFragment : DialogFragment() {
         }
     }
 
+    private fun setupObservers() {
+        inkViewModel.selectedInkColor.observe(
+            this,
+            {
+                it?.let { newColor ->
+                    binding?.inkView?.color = newColor
+                    getInkViewColorList().firstOrNull { viewColor ->
+                        viewColor?.inkColor == newColor
+                    }?.select()
+                }
+            }
+        )
+        inkViewModel.selectedStrokeWidth.observe(
+            this,
+            {
+                it?.let { newWidth ->
+                    binding?.inkView?.strokeWidth = newWidth
+                    binding?.inkView?.strokeWidthMax = newWidth
+                    inkStrokeMenuData[convertToStrokeMenuValue(newWidth)][INK_STROKE_ICON]?.let { resId ->
+                        binding?.inkStrokeButton?.setImageResource(resId)
+                    }
+                }
+            }
+        )
+    }
+
+    private fun initInkParameters() {
+        if (inkViewModel.selectedInkColor.isNotInitialized()) {
+            inkViewModel.selectedInkColor.value = binding?.inkColor2?.inkColor
+        }
+        if (inkViewModel.selectedStrokeWidth.isNotInitialized()) {
+            inkViewModel.selectedStrokeWidth.value = convertToInkStrokeValue(STROKE_VALUE_INIT_POS)
+        }
+    }
+
+    private fun getInkViewColorList() = listOf(
+        binding?.inkColor1,
+        binding?.inkColor2,
+        binding?.inkColor3,
+        binding?.inkColor4
+    )
+
+    private fun onInkColorViewClicked(
+        selectedView: InkColorView,
+        inkColorViewList: List<InkColorView?>
+    ) {
+        inkColorViewList.filter { it?.isSelected == true }.forEach { it?.unselect() }
+        selectedView.select()
+    }
+
+    private fun convertToInkStrokeValue(menuValue: Int) = menuValue * MENU_TO_STROKE_VALUE_RATIO
+
+    private fun convertToStrokeMenuValue(inkStrokeValue: Float) =
+        (inkStrokeValue / MENU_TO_STROKE_VALUE_RATIO).toInt()
+
+    private fun showStrokeWidthMenu(anchorView: View) {
+        if (inkStrokePopupWindow?.isShowing == true) {
+            inkStrokePopupWindow?.dismiss()
+            return
+        }
+
+        val adapter = SimpleAdapter(
+            requireContext(),
+            inkStrokeMenuData,
+            R.layout.ink_stroke_menu_item,
+            arrayOf(INK_STROKE_ICON),
+            intArrayOf(R.id.ink_menu_item_image)
+        )
+
+        inkStrokePopupWindow = ListPopupWindow(requireContext()).also {
+            it.anchorView = anchorView
+            it.setAdapter(adapter)
+            it.setOnItemClickListener { _, view, position, _ ->
+                inkViewModel.selectedStrokeWidth.value = convertToInkStrokeValue(position)
+                val icon = view.findViewById<ImageView>(R.id.ink_menu_item_image)
+                binding?.inkStrokeButton?.setImageDrawable(icon.drawable)
+                it.dismiss()
+            }
+            it.isModal = true
+            it.show()
+        }
+    }
+
     override fun onCancel(dialog: DialogInterface) {
         orderViewModel.showSignDialog.value = false
         super.onCancel(dialog)
@@ -152,6 +263,7 @@ class InkDialogFragment : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        inkStrokePopupWindow = null
         binding = null
     }
 

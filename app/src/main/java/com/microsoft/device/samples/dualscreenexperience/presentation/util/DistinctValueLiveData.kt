@@ -21,4 +21,6 @@ class DistinctValueLiveData<T>(initValue: T) : MutableLiveData<T>(initValue) {
             super.setValue(newValue)
         }
     }
+
+    fun isNotInitialized() = (value == null)
 }
