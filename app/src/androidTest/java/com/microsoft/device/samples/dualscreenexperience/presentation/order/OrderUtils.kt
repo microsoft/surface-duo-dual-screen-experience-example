@@ -10,6 +10,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.order
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
@@ -380,13 +381,29 @@ fun checkItemQuantity(position: Int, quantity: Int) {
     )
 }
 
-fun clickOnSubmitOrderButton() {
+fun clickOnSignOrderButton() {
     onView(withId(R.id.order_items)).perform(
         RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
             POSITION_DETAILS,
             clickChildViewWithId(R.id.submit_button)
         )
     )
+}
+
+fun signOrder() {
+    onView(withId(R.id.ink_view)).perform(click())
+}
+
+fun clickOnConfirmSignOrderButton() {
+    onView(withId(R.id.button_confirm)).perform(forceClick())
+}
+
+fun clickOnResetSignOrderButton() {
+    onView(withId(R.id.button_reset)).perform(forceClick())
+}
+
+fun checkSignOrderError() {
+    onView(withText(R.string.order_sign_error)).check(matches(isDisplayed()))
 }
 
 fun checkOrderSubmittedDetails() {

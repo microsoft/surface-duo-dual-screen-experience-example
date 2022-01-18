@@ -24,6 +24,7 @@
         <item name="colorAccent">@color/orange</item>
         <item name="colorSurface">@color/toast_color</item>
         <item name="colorOnSurface">@color/toast_color</item>
+        <item name="colorOnBackground">@color/gold</item>
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="lollipop">@color/gray</item>

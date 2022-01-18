@@ -16,12 +16,20 @@
     <color name="item_tint_gray">#6E6E6E</color>
     <color name="license_gray">#9A9A9A</color>
     <color name="toggle_gray">#2A3037</color>
+    <color name="ink_button_background">#3F4552</color>
 
     <color name="orange">#F6B63D</color>
     <color name="dark_orange">#B58937</color>
 
     <color name="gold">#DDCAB3</color>
+    <color name="transparent_gold">#716E69</color>
+    <color name="dark_gold">#5A5444</color>
     <color name="dark_blue">#2A3037</color>
+
+    <color name="ink_red">#FC547C</color>
+    <color name="ink_blue">#0581E4</color>
+    <color name="ink_white">#FCFFFFFF</color>
+    <color name="ink_color_selected">#7D786D</color>
 
     <color name="guitar_red_color">#D92D2A</color>
     <color name="guitar_blue_color">#1873B5</color>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ink_dialog_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/rounded_gray_dialog">
+
+        <com.microsoft.device.ink.InkView
+            android:id="@+id/ink_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:enable_pressure="true"
+            app:ink_color="@color/gold"
+            app:layout_constraintBottom_toTopOf="@id/button_cancel"
+            app:layout_constraintEnd_toStartOf="@id/ink_controls_barrier"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:max_stroke_width="15"
+            app:min_stroke_width="1"/>
+
+        <View
+            android:id="@+id/ink_view_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/large_margin"
+            android:background="@color/gold"
+            app:layout_constraintBottom_toTopOf="@id/button_cancel"
+            app:layout_constraintEnd_toStartOf="@id/ink_controls_barrier"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/button_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/small_margin"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintStart_toStartOf="@id/ink_view_line"
+            app:layout_constraintTop_toBottomOf="@id/ink_view_line"/>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/ink_controls_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="ink_stroke_button, ink_color_container" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ink_stroke_button"
+            android:layout_width="@dimen/stroke_menu_item_size"
+            android:layout_height="@dimen/stroke_menu_item_size"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/micro_margin"
+            android:background="@drawable/round_dark_gold"
+            app:layout_constraintBottom_toTopOf="@id/ink_color_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/ink_color_container"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:src="@drawable/ink_stroke_3" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ink_color_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_margin"
+            app:layout_constraintBottom_toTopOf="@id/button_confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ink_stroke_button">
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
+                android:id="@+id/ink_color_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:padding="@dimen/micro_padding"
+                app:inkColor="@color/ink_white"
+                app:layout_constraintBottom_toTopOf="@id/ink_color_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
+                android:id="@+id/ink_color_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:padding="@dimen/micro_padding"
+                app:inkColor="@color/orange"
+                app:layout_constraintBottom_toTopOf="@id/ink_color_3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ink_color_1"/>
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
+                android:id="@+id/ink_color_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:padding="@dimen/micro_padding"
+                app:inkColor="@color/ink_red"
+                app:layout_constraintBottom_toTopOf="@id/ink_color_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ink_color_2"/>
+
+            <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
+                android:id="@+id/ink_color_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/micro_margin"
+                android:padding="@dimen/micro_padding"
+                app:inkColor="@color/ink_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ink_color_3"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_cancel"
+            style="@style/NoInternet"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dialog_button_margin"
+            android:background="@drawable/rounded_bottom_left_button"
+            android:text="@string/order_sign_cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_confirm"
+            app:layout_constraintHeight_max="@dimen/dialog_button_height"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ink_view" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_confirm"
+            style="@style/NoInternet"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dialog_button_margin"
+            android:background="@drawable/rounded_bottom_right_button"
+            android:text="@string/order_sign_confirm"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/button_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="@dimen/dialog_button_height"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toEndOf="@id/button_cancel"
+            app:layout_constraintTop_toTopOf="@id/button_cancel"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/snackbar_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_margin"
+            app:layout_constraintBottom_toTopOf="@id/button_confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

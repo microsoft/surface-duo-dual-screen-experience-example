@@ -119,6 +119,7 @@ dependencies {
     releaseImplementation googleDependencies.mapsKtx
     emulatorImplementation microsoftDependencies.bingMaps
 
+    implementation microsoftDependencies.ink
     implementation microsoftDependencies.bottomNavBar
     implementation microsoftDependencies.recyclerView
     implementation microsoftDependencies.layouts

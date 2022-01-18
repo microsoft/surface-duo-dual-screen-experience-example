@@ -21,12 +21,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
 import androidx.window.layout.WindowLayoutInfo
-import com.microsoft.device.dualscreen.recyclerview.FoldableItemDecoration
+import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredItemDecoration
 import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredLayoutManager
 import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationAt
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentOrderBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkDialogFragment
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
@@ -110,12 +111,24 @@ class OrderFragment : Fragment() {
                 }
             }
         )
+        orderViewModel.showSignDialog.observe(
+            viewLifecycleOwner,
+            {
+                if (it && childFragmentManager.findFragmentByTag(InkDialogFragment.INK_FRAGMENT_TAG) == null) {
+                    showSignDialog()
+                }
+            }
+        )
+    }
+
+    private fun showSignDialog() {
+        InkDialogFragment().show(childFragmentManager, InkDialogFragment.INK_FRAGMENT_TAG)
     }
 
     private fun setupRecyclerView(windowLayoutInfo: WindowLayoutInfo) {
         binding?.orderItems?.apply {
             layoutManager = FoldableStaggeredLayoutManager(context, windowLayoutInfo).get()
-            replaceItemDecorationAt(FoldableItemDecoration(windowLayoutInfo))
+            replaceItemDecorationAt(FoldableStaggeredItemDecoration(windowLayoutInfo))
         }
     }
 
