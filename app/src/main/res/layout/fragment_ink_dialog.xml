@@ -35,10 +35,9 @@
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/large_margin"
             android:background="@color/gold"
-            app:layout_constraintBottom_toTopOf="@id/button_cancel"
+            app:layout_constraintBottom_toTopOf="@id/button_reset"
             app:layout_constraintEnd_toStartOf="@id/ink_controls_barrier"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.5" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -47,8 +46,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/small_margin"
             android:src="@drawable/ic_refresh"
-            app:layout_constraintStart_toStartOf="@id/ink_view_line"
-            app:layout_constraintTop_toBottomOf="@id/ink_view_line"/>
+            app:layout_constraintBottom_toBottomOf="@id/ink_color_container"
+            app:layout_constraintStart_toStartOf="@id/ink_view_line"/>
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/ink_controls_barrier"
