@@ -108,7 +108,9 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     private fun showTutorial(ordinal: Int) {
-        tutorial.show(window.decorView, TutorialBalloonType.values()[ordinal])
+        if (window != null && !isFinishing) {
+            tutorial.show(window.decorView, TutorialBalloonType.values()[ordinal])
+        }
     }
 
     private fun dismissTutorial() {
