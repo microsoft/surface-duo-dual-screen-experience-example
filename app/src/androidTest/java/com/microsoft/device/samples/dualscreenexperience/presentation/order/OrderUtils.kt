@@ -13,6 +13,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -391,11 +392,11 @@ fun clickOnSignOrderButton() {
 }
 
 fun signOrder() {
-    onView(withId(R.id.ink_view)).perform(click())
+    onView(withId(R.id.ink_view)).inRoot(isDialog()).perform(click())
 }
 
 fun clickOnConfirmSignOrderButton() {
-    onView(withId(R.id.button_confirm)).perform(forceClick())
+    onView(withId(R.id.button_confirm)).inRoot(isDialog()).perform(forceClick())
 }
 
 fun clickOnResetSignOrderButton() {
