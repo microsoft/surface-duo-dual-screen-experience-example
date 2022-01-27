@@ -5,8 +5,48 @@
   ~ Licensed under the MIT License.
   ~
   -->
-<WebView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dev_content_web_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="isLoading"
+            type="Boolean" />
+
+        <variable
+            name="isConnected"
+            type="Boolean" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/dev_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/dev_content_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:visibleIf="@{isConnected &amp;&amp; isLoading}"/>
+
+        <WebView
+            android:id="@+id/dev_content_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visibleIf="@{!isLoading &amp;&amp; isConnected}"/>
+
+        <include
+            android:id="@+id/dev_content_no_internet"
+            layout="@layout/no_internet_connection_single_mode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:containerBackground="@{@color/black}"
+            app:isDualPortrait="@{false}"
+            app:visibleIf="@{!isConnected}"/>
+
+    </FrameLayout>
+</layout>
