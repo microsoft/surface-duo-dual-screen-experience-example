@@ -30,6 +30,7 @@
             layout="@layout/no_internet_connection_single_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:containerBackground="@{@color/gray}"
             app:isDualPortrait="@{isDualPortrait}" />
 
         <include

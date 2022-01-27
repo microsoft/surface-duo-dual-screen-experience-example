@@ -14,13 +14,17 @@
         <variable
             name="isDualPortrait"
             type="Boolean" />
+
+        <variable
+            name="containerBackground"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         visibleIf="@{!isDualPortrait}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray">
+        android:background="@{containerBackground}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/no_internet_connection_image_single"
@@ -56,10 +60,17 @@
             app:autoSizeMaxTextSize="@dimen/text_size_36"
             app:autoSizeMinTextSize="@dimen/text_size_20"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@id/no_internet_connection_description"
+            app:layout_constraintBottom_toTopOf="@id/guideline_text_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/half_guideline_horizontal" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_text_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/no_internet_connection_description"

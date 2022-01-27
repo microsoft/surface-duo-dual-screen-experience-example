@@ -63,6 +63,7 @@ class StoreMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
+        binding?.isConnected = true
         onWindowLayoutInfoChanged()
 
         setupMapView(savedInstanceState)
@@ -131,13 +132,10 @@ class StoreMapFragment : Fragment() {
 
                 binding?.isConnected = false
             } else {
-                NetworkConnectionLiveData(context).observe(
-                    viewLifecycleOwner,
-                    { isConnected ->
-                        onWindowLayoutInfoChanged()
-                        binding?.isConnected = isConnected
-                    }
-                )
+                NetworkConnectionLiveData(it).observe(viewLifecycleOwner) { isConnected ->
+                    onWindowLayoutInfoChanged()
+                    binding?.isConnected = isConnected
+                }
             }
         }
     }
