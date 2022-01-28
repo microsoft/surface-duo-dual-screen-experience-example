@@ -45,8 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:containerBackground="@{@color/black}"
-            app:isDualPortrait="@{false}"
-            app:visibleIf="@{!isConnected}"/>
+            app:isConnected="@{isConnected}"
+            app:isDualPortrait="@{false}"/>
 
     </FrameLayout>
 </layout>

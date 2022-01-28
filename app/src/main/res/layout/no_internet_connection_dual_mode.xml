@@ -11,12 +11,16 @@
 
     <data>
         <variable
+            name="isConnected"
+            type="Boolean" />
+
+        <variable
             name="isDualPortrait"
             type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        visibleIf="@{isDualPortrait}"
+        visibleIf="@{!isConnected &amp;&amp; isDualPortrait}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray">
