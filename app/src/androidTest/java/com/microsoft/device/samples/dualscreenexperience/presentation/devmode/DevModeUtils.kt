@@ -72,7 +72,7 @@ fun checkDevModeControl(hasDesignPattern: Boolean) {
 }
 
 fun checkDevModeContent() {
-    onView(withId(R.id.dev_content_web_view)).check(matches(isDisplayed()))
+    onView(withId(R.id.dev_content_container)).check(matches(isDisplayed()))
 }
 
 fun clickDevModeDesignPatternsButton() {

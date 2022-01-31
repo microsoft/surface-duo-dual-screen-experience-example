@@ -136,5 +136,6 @@
     <string name="no_internet_connection_description">Try checking the network cables, modem, router or try re-connecting to WiFi and restarting the app.</string>
     <string name="no_google_services_title">Google Services unavailable</string>
     <string name="no_google_services_description">It seems like this application requires Google Services to visualize Maps and it isn’t supported on this device or emulator. Try using a different one to test all features.</string>
+    <string name="timeout_internet_connection_title">Slow Internet Connection</string>
 
 </resources>

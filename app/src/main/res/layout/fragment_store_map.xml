@@ -30,6 +30,8 @@
             layout="@layout/no_internet_connection_single_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:containerBackground="@{@color/gray}"
+            app:isConnected="@{isConnected}"
             app:isDualPortrait="@{isDualPortrait}" />
 
         <include
@@ -37,6 +39,7 @@
             layout="@layout/no_internet_connection_dual_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:isConnected="@{isConnected}"
             app:isDualPortrait="@{isDualPortrait}" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

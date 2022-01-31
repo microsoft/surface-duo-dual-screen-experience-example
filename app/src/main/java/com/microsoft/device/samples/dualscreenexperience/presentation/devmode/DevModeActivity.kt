@@ -188,6 +188,9 @@ class DevModeActivity : AppCompatActivity() {
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode() != layoutInfoViewModel.isDualMode.value) {
+            invalidateOptionsMenu()
+        }
         layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
         layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()
     }

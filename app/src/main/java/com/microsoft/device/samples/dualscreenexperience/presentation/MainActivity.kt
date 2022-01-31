@@ -208,7 +208,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showStoresTutorial() {
         val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_stores_graph)
-        tutorial.show(storeItem, TutorialBalloonType.STORES)
+        if (!isFinishing) {
+            tutorial.show(storeItem, TutorialBalloonType.STORES)
+        }
     }
 
     private fun hideStoresTutorial() {
@@ -221,7 +223,9 @@ class MainActivity : AppCompatActivity() {
     private fun showDeveloperModeTutorial(anchorView: View) {
         if (tutorialViewModel.shouldShowDeveloperModeTutorial()) {
             tutorial.hide()
-            tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+            if (!isFinishing) {
+                tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+            }
         } else {
             setupTutorialObserver()
         }
