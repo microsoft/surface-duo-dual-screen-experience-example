@@ -50,8 +50,8 @@ class DevContentFragment : Fragment() {
     }
 
     private fun setupNetworkObserver() {
-        NetworkConnectionLiveData(activity?.applicationContext).observe(viewLifecycleOwner) {
-            if (it) {
+        NetworkConnectionLiveData(activity?.applicationContext).observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
                 viewModel.webViewUrl.value?.let { urlValue ->
                     onWebViewStartedLoading()
                     binding?.devContentWebView?.post {
@@ -61,7 +61,7 @@ class DevContentFragment : Fragment() {
             } else {
                 binding?.devContentNoInternet?.noInternetConnectionTitle?.setText(R.string.no_internet_connection_title)
             }
-            binding?.isConnected = it
+            binding?.isConnected = isConnected
         }
     }
 
