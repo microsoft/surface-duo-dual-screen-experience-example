@@ -80,7 +80,7 @@ class ProductListFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        appCompatActivity?.changeToolbarTitle(getString(R.string.nav_products_title))
+        appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_products_title))
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

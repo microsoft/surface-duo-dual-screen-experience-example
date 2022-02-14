@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/fragment_launch_description"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.launch.fragments.LaunchDescriptionFragment"
-        android:label="LaunchDescriptionFragment"
+        android:label="Launch Description"
         tools:layout="@layout/fragment_launch_description">
 
         <action android:id="@+id/action_launch_description_to_main_activity"

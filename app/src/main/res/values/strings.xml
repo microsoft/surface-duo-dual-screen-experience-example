@@ -16,10 +16,21 @@
 
     <!-- Main -->
 
-    <string name="nav_stores_title">Stores</string>
-    <string name="nav_catalog_title">New Guitars</string>
-    <string name="nav_products_title">Product Details and Customization</string>
-    <string name="nav_order_title">Order</string>
+    <string name="nav_stores_title">Navigation Stores</string>
+    <string name="nav_catalog_title">Navigation Catalog</string>
+    <string name="nav_products_title">Navigation Products</string>
+    <string name="nav_order_title">Navigation Order</string>
+
+    <string name="toolbar_stores_title">Stores</string>
+    <string name="toolbar_catalog_title">New Guitars</string>
+    <string name="toolbar_products_title">Product Details and Customization</string>
+    <string name="toolbar_orders_title">Orders</string>
+    <string name="toolbar_orders_receipt_title">Order receipt</string>
+
+    <string name="toolbar_dev_mode">Dev Mode</string>
+    <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
+    <string name="toolbar_user_mode">User Mode</string>
+    <string name="toolbar_about">About</string>
 
     <!-- Stores -->
 
@@ -30,7 +41,6 @@
 
     <string name="store_title">%s Guitar Store</string>
     <string name="item_store_button_text">View</string>
-    <string name="toolbar_stores_title">Stores</string>
     <string name="store_list_empty_message">There are no stores in the area you are looking at. Please go back to your current location.</string>
 
     <string name="store_details_about_tab">About</string>
@@ -76,9 +86,6 @@
 
     <!-- Orders -->
 
-    <string name="toolbar_orders_title">Orders</string>
-    <string name="toolbar_orders_receipt_title">Order receipt</string>
-
     <string name="order_empty_message">There are no guitars in your cart. Please head to Products and select the items to view them in your cart.</string>
     <string name="order_recommendations_title">Recommendations</string>
     <string name="order_recommendations_button">Add</string>
@@ -103,9 +110,6 @@
     <!-- Developer Mode -->
 
     <string name="tutorial_developer_mode_text">Learn more about the design patterns and code</string>
-    <string name="toolbar_dev_mode">Dev Mode</string>
-    <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
-    <string name="toolbar_user_mode">User Mode</string>
     <string name="dev_mode_sdk_components">Surface Duo SDK used in this screen</string>
     <string name="dev_mode_code">Code used to achieve this screen</string>
     <string name="dev_mode_design_pattern">Design Pattern used on this screen</string>
@@ -119,7 +123,6 @@
 
     <!-- About -->
 
-    <string name="toolbar_about">About</string>
     <string name="about_team_title">About us</string>
     <string name="about_team_description">An Android application that showcases all the dual screen design patterns, SDKs and code snippets. Created by the Microsoft Foldables Developer Experience Team.</string>
     <string name="about_feedback_title">Feedback</string>

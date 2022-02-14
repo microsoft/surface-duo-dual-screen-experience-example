@@ -22,14 +22,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:theme="@style/Theme.App.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/about_nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-        app:theme="@style/Theme.App.ActionBar"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/about_nav_host_fragment"
         android:name="androidx.navigation.fragment.FoldableNavHostFragment"
         android:layout_width="match_parent"
