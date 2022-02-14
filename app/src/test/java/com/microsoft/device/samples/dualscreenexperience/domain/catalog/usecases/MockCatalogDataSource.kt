@@ -28,7 +28,10 @@ val catalogItemEntity = CatalogItemEntity(
     "description 4",
     "description 5",
     "image 1",
+    "image 1",
     "image 2",
+    "image 2",
+    "image 3",
     "image 3",
 )
 
@@ -42,6 +45,9 @@ val catalogItem = CatalogItem(
     "description 4",
     "description 5",
     "image 1",
+    "image 1",
     "image 2",
+    "image 2",
+    "image 3",
     "image 3"
 )

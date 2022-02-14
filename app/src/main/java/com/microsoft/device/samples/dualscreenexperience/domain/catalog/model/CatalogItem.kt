@@ -22,8 +22,11 @@ data class CatalogItem(
     val fourthDescription: String?,
     val fifthDescription: String?,
     val firstPicture: String?,
+    val firstPictureDescription: String?,
     val secondPicture: String?,
-    val thirdPicture: String?
+    val secondPictureDescription: String?,
+    val thirdPicture: String?,
+    val thirdPictureDescription: String?,
 ) : Parcelable
 
 fun CatalogItemEntity.toCatalogItem() =
@@ -37,8 +40,11 @@ fun CatalogItemEntity.toCatalogItem() =
         fourthDescription = this.fourthDescription,
         fifthDescription = this.fifthDescription,
         firstPicture = this.firstPicture,
+        firstPictureDescription = this.firstPictureDescription,
         secondPicture = this.secondPicture,
-        thirdPicture = this.thirdPicture
+        secondPictureDescription = this.secondPictureDescription,
+        thirdPicture = this.thirdPicture,
+        thirdPictureDescription = this.thirdPictureDescription
     )
 
 enum class CatalogPage {
