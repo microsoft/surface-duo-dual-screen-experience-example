@@ -58,13 +58,10 @@ class AboutLicensesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualMode = it })
-        viewModel.linkToOpen.observe(
-            viewLifecycleOwner,
-            {
-                it?.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
-            }
-        )
+        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner) { binding?.isDualMode = it }
+        viewModel.linkToOpen.observe(viewLifecycleOwner) {
+            it?.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
+        }
     }
 
     private fun setupDescriptionText() {

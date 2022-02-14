@@ -34,7 +34,9 @@ class LaunchDescriptionFragment : Fragment() {
     ): View? {
         binding = FragmentLaunchDescriptionBinding.inflate(inflater, container, false)
         binding?.launchListener = viewModel
-        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.shouldDisplayButton = it })
+        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner) { isDualMode ->
+            binding?.shouldDisplayButton = isDualMode
+        }
         return binding?.root
     }
 

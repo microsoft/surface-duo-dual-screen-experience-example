@@ -153,55 +153,46 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedProduct.observe(
-            viewLifecycleOwner,
-            {
-                val fretsNumber = it?.fretsNumber ?: 0
-                binding?.productDetailsFrets?.titleString =
-                    getString(R.string.product_details_frets_title, fretsNumber)
-                binding?.productDetailsTypeDescription?.text =
-                    SpannableStringBuilder()
-                        .append(getString(R.string.product_details_type_description, it?.name))
-                        .append(" ")
-                        .bold { append(getString(R.string.product_details_type_description_bold, it?.deliveryDays)) }
-            }
-        )
+        viewModel.selectedProduct.observe(viewLifecycleOwner) {
+            val fretsNumber = it?.fretsNumber ?: 0
+            binding?.productDetailsFrets?.titleString =
+                getString(R.string.product_details_frets_title, fretsNumber)
+            binding?.productDetailsTypeDescription?.text =
+                SpannableStringBuilder()
+                    .append(getString(R.string.product_details_type_description, it?.name))
+                    .append(" ")
+                    .bold { append(getString(R.string.product_details_type_description_bold, it?.deliveryDays)) }
+        }
 
-        viewModel.productList.observe(viewLifecycleOwner, { viewModel.selectFirstProduct() })
+        viewModel.productList.observe(viewLifecycleOwner) { viewModel.selectFirstProduct() }
     }
 
     private fun setupCustomizeObservers() {
-        customizeViewModel.customizedProduct.observe(
-            viewLifecycleOwner,
-            {
-                if (it == null) {
-                    initSelectedProductImage()
-                    binding?.isInCustomizeMode = false
+        customizeViewModel.customizedProduct.observe(viewLifecycleOwner) {
+            if (it == null) {
+                initSelectedProductImage()
+                binding?.isInCustomizeMode = false
 
-                    if (layoutInfoViewModel.isDualMode.value == true) {
-                        appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
-                    } else {
-                        setupToolbar()
-                    }
+                if (layoutInfoViewModel.isDualMode.value == true) {
+                    appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
                 } else {
-                    binding?.isInCustomizeMode = true
+                    setupToolbar()
                 }
+            } else {
+                binding?.isInCustomizeMode = true
             }
-        )
+        }
 
-        customizeViewModel.selectedBodyColor.observe(
-            viewLifecycleOwner,
-            {
-                val shape = customizeViewModel.selectedBodyShape.value
-                if (it != null && shape != null) {
-                    binding?.productDetailsImage?.setImageDrawable(
-                        ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape))
-                    )
-                    binding?.productDetailsImage?.contentDescription =
-                        context?.getString(getProductContentDescription(it, shape))
-                }
+        customizeViewModel.selectedBodyColor.observe(viewLifecycleOwner) {
+            val shape = customizeViewModel.selectedBodyShape.value
+            if (it != null && shape != null) {
+                binding?.productDetailsImage?.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(), getProductDrawable(it, shape))
+                )
+                binding?.productDetailsImage?.contentDescription =
+                    context?.getString(getProductContentDescription(it, shape))
             }
-        )
+        }
     }
 
     override fun onDestroyView() {

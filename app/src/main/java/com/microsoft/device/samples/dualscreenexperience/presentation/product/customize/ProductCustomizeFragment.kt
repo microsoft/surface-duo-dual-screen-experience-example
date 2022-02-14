@@ -112,55 +112,46 @@ class ProductCustomizeFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.customizedProduct.observe(
-            viewLifecycleOwner,
-            { product ->
-                product?.let {
-                    if (viewModel.selectedBodyShape.value == null) {
-                        viewModel.selectedBodyShape.value = it.bodyShape
-                    }
-                    viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
-                        getBodyShape(updatedBodyShape)?.select()
-                    }
+        viewModel.customizedProduct.observe(viewLifecycleOwner) { product ->
+            product?.let {
+                if (viewModel.selectedBodyShape.value == null) {
+                    viewModel.selectedBodyShape.value = it.bodyShape
+                }
+                viewModel.selectedBodyShape.value?.let { updatedBodyShape ->
+                    getBodyShape(updatedBodyShape)?.select()
                 }
             }
-        )
+        }
 
-        viewModel.selectedBodyShape.observe(
-            viewLifecycleOwner,
-            {
-                val selectedItem = viewModel.customizedProduct.value
-                if (it != null && selectedItem != null) {
-                    if (it == selectedItem.bodyShape) {
-                        selectedItem.color
-                    } else {
-                        it.colorList[0]
-                    }.let { newColor ->
-                        viewModel.selectedBodyColor.value = newColor
+        viewModel.selectedBodyShape.observe(viewLifecycleOwner) {
+            val selectedItem = viewModel.customizedProduct.value
+            if (it != null && selectedItem != null) {
+                if (it == selectedItem.bodyShape) {
+                    selectedItem.color
+                } else {
+                    it.colorList[0]
+                }.let { newColor ->
+                    viewModel.selectedBodyColor.value = newColor
 
-                        resetColorViews(binding?.productCustomizeColorContainer, it.colorList, newColor)
-                    }
+                    resetColorViews(binding?.productCustomizeColorContainer, it.colorList, newColor)
                 }
             }
-        )
+        }
 
-        viewModel.selectedBodyColor.observe(
-            viewLifecycleOwner,
-            {
-                val shape = viewModel.selectedBodyShape.value
-                if (it != null && shape != null) {
-                    setCustomizeImageDrawable(it, shape)
+        viewModel.selectedBodyColor.observe(viewLifecycleOwner) {
+            val shape = viewModel.selectedBodyShape.value
+            if (it != null && shape != null) {
+                setCustomizeImageDrawable(it, shape)
 
-                    val visibleColorCount =
-                        binding?.productCustomizeColorContainer?.children
-                            ?.filter { colorView -> colorView.isVisible }?.count()
+                val visibleColorCount =
+                    binding?.productCustomizeColorContainer?.children
+                        ?.filter { colorView -> colorView.isVisible }?.count()
 
-                    if (shape.colorList.size != visibleColorCount) {
-                        resetColorViews(binding?.productCustomizeColorContainer, shape.colorList, it)
-                    }
+                if (shape.colorList.size != visibleColorCount) {
+                    resetColorViews(binding?.productCustomizeColorContainer, shape.colorList, it)
                 }
             }
-        )
+        }
     }
 
     private fun setupListeners() {

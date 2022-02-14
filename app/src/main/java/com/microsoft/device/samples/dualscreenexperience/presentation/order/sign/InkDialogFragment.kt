@@ -174,29 +174,23 @@ class InkDialogFragment : DialogFragment() {
     }
 
     private fun setupObservers() {
-        inkViewModel.selectedInkColor.observe(
-            this,
-            {
-                it?.let { newColor ->
-                    binding?.inkView?.color = newColor
-                    getInkViewColorList().firstOrNull { viewColor ->
-                        viewColor?.inkColor == newColor
-                    }?.select()
+        inkViewModel.selectedInkColor.observe(this) {
+            it?.let { newColor ->
+                binding?.inkView?.color = newColor
+                getInkViewColorList().firstOrNull { viewColor ->
+                    viewColor?.inkColor == newColor
+                }?.select()
+            }
+        }
+        inkViewModel.selectedStrokeWidth.observe(this) {
+            it?.let { newWidth ->
+                binding?.inkView?.strokeWidth = newWidth
+                binding?.inkView?.strokeWidthMax = newWidth
+                inkStrokeMenuData[convertToStrokeMenuValue(newWidth)][INK_STROKE_ICON]?.let { resId ->
+                    binding?.inkStrokeButton?.setImageResource(resId)
                 }
             }
-        )
-        inkViewModel.selectedStrokeWidth.observe(
-            this,
-            {
-                it?.let { newWidth ->
-                    binding?.inkView?.strokeWidth = newWidth
-                    binding?.inkView?.strokeWidthMax = newWidth
-                    inkStrokeMenuData[convertToStrokeMenuValue(newWidth)][INK_STROKE_ICON]?.let { resId ->
-                        binding?.inkStrokeButton?.setImageResource(resId)
-                    }
-                }
-            }
-        )
+        }
     }
 
     private fun initInkParameters() {

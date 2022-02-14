@@ -92,17 +92,14 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
     }
 
     private fun setupObservers() {
-        viewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter?.refreshData() })
-        viewModel.catalogItemPosition.observe(
-            viewLifecycleOwner,
-            { newPageNumber ->
-                binding?.pager?.apply {
-                    if (currentItem != newPageNumber) {
-                        setCurrentItem(newPageNumber, true)
-                    }
+        viewModel.catalogItemList.observe(viewLifecycleOwner) { catalogAdapter?.refreshData() }
+        viewModel.catalogItemPosition.observe(viewLifecycleOwner) { newPageNumber ->
+            binding?.pager?.apply {
+                if (currentItem != newPageNumber) {
+                    setCurrentItem(newPageNumber, true)
                 }
             }
-        )
+        }
     }
 
     override fun onResume() {

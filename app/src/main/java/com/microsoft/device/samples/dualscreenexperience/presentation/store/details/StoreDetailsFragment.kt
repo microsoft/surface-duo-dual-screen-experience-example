@@ -40,7 +40,7 @@ class StoreDetailsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedStore.observe(viewLifecycleOwner, { setupToolbar(it?.name) })
+        viewModel.selectedStore.observe(viewLifecycleOwner) { setupToolbar(it?.name) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

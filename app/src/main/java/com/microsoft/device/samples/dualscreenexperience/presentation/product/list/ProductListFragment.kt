@@ -71,7 +71,7 @@ class ProductListFragment : Fragment() {
         val productAdapter = ProductAdapter(requireContext(), viewModel)
         binding?.productList?.adapter = productAdapter
 
-        viewModel.productList.observe(viewLifecycleOwner, { productAdapter.refreshData() })
+        viewModel.productList.observe(viewLifecycleOwner) { productAdapter.refreshData() }
     }
 
     override fun onResume() {

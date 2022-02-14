@@ -196,14 +196,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTutorialObserver() {
-        tutorialViewModel.showStoresTutorial.observe(
-            this,
-            {
-                if (it == true && tutorialViewModel.shouldShowStoresTutorial()) {
-                    showStoresTutorial()
-                }
+        tutorialViewModel.showStoresTutorial.observe(this) { isTutorialTriggered ->
+            if (isTutorialTriggered == true && tutorialViewModel.shouldShowStoresTutorial()) {
+                showStoresTutorial()
             }
-        )
+        }
     }
 
     private fun showStoresTutorial() {

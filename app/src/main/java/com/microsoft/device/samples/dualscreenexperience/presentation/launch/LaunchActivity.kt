@@ -54,7 +54,7 @@ class LaunchActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         observeWindowLayoutInfo()
-        viewModel.shouldShowTutorial.observe(this, { handleTutorial(it) })
+        viewModel.shouldShowTutorial.observe(this) { handleTutorial(it) }
     }
 
     private fun observeWindowLayoutInfo() {
