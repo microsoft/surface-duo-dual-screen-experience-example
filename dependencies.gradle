@@ -122,6 +122,7 @@ ext {
             junit              : "androidx.test.ext:junit:$junitInstrumentationVersion",
             espressoCore       : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
             espressoContrib    : "androidx.test.espresso:espresso-contrib:$espressoCoreVersion",
+            espressoAccessibility: "androidx.test.espresso:espresso-accessibility:$espressoCoreVersion",
             testRunner         : "androidx.test:runner:$testRunnerVersion",
             testRules          : "androidx.test:rules:$testRulesVersion",
             uiAutomator        : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",
