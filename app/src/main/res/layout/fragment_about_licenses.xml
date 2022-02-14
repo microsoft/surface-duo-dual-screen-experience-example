@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/about_single_screen_title"
                 style="@style/Store.Title"
                 visibleIf="@{!isDualMode}"
@@ -44,7 +44,7 @@
                 android:layout_marginTop="@dimen/medium_margin"
                 android:text="@string/about_team_title"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/about_single_screen_description"
                 style="@style/Store.Title"
                 visibleIf="@{!isDualMode}"
@@ -55,7 +55,7 @@
                 android:text="@string/about_team_description"
                 android:textSize="@dimen/text_size_12"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/links_title"
                 style="@style/Store.Title"
                 android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/large_margin"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/licenses_title"
                 style="@style/Store.Title"
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:text="@string/about_licenses_title"
                 android:textSize="@dimen/text_size_18"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/license_terms_title"
                 style="@style/License.Subtitle"
                 android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                 android:paddingBottom="@dimen/normal_padding"
                 android:text="@string/about_licenses_terms_title"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/license_terms_other_title"
                 style="@style/Store.Title"
                 android:layout_width="match_parent"
@@ -109,7 +109,7 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_license"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/feedback_single_screen_title"
                 style="@style/Store.Title"
                 visibleIf="@{!isDualMode}"
@@ -118,7 +118,7 @@
                 android:text="@string/about_feedback_title"
                 android:textSize="@dimen/text_size_18"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/feedback_single_screen_description"
                 style="@style/Store.Title"
                 visibleIf="@{!isDualMode}"

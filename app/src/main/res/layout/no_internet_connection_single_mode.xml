@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:background="@{containerBackground}">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/no_internet_connection_image_single"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -50,7 +50,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/no_internet_connection_title"
             style="@style/NoInternet"
             android:layout_width="0dp"
@@ -76,7 +76,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.7" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/no_internet_connection_description"
             style="@style/NoInternet"
             android:layout_width="0dp"

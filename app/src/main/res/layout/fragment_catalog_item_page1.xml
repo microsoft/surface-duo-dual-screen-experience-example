@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_first"
                     style="@style/Catalog.Description"
                     android:layout_width="0dp"
@@ -57,7 +57,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_second"
                     style="@style/Catalog.Description"
                     android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_first" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_third"
                     style="@style/Catalog.Description"
                     android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_second" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_fourth"
                     style="@style/Catalog.Description"
                     android:layout_width="match_parent"
@@ -105,7 +105,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_third" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_fifth"
                     style="@style/Catalog.Description"
                     android:layout_width="match_parent"
@@ -133,7 +133,7 @@
             android:visibility="gone"
             tools:ignore="MissingConstraints" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/pages"
             style="@style/Catalog.Description"
             android:layout_width="match_parent"

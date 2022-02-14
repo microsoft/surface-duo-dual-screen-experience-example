@@ -12,7 +12,7 @@
     android:background="@color/transparent_gold"
     android:gravity="center">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/ink_menu_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

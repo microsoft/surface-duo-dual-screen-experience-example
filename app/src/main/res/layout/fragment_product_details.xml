@@ -38,7 +38,7 @@
         android:paddingEnd="@dimen/normal_padding"
         android:paddingBottom="@dimen/small_padding">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/product_details_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -55,7 +55,7 @@
             tools:src="@drawable/orange_classic_guitar_normal"
             tools:visibility="visible"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_details_name"
             style="@style/Store.Name"
             android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_details_type_title"
             style="@style/Store.Name"
             android:layout_width="0dp"
@@ -130,7 +130,7 @@
             app:layout_constraintStart_toStartOf="@id/product_details_name"
             app:layout_constraintTop_toBottomOf="@id/product_details_info_containers"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_details_type_description"
             style="@style/GoldText"
             android:layout_width="0dp"
@@ -151,7 +151,7 @@
             app:barrierDirection="start"
             app:constraint_referenced_ids="product_details_image, product_details_customize_button" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/product_details_customize_button"
             style="@style/Customize.Button"
             invisibleIf="@{isInCustomizeMode}"

@@ -50,7 +50,7 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.5" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/image_first"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -67,7 +67,7 @@
                     tools:background="@color/catalog_tools_image_background"
                     tools:minHeight="@dimen/catalog_max_image_height" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_first"
                     style="@style/Catalog.Description"
                     android:layout_width="0dp"
@@ -88,7 +88,7 @@
                     app:barrierDirection="bottom"
                     app:constraint_referenced_ids="image_first,text_first" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_second"
                     style="@style/Catalog.Description"
                     android:layout_width="0dp"
@@ -101,7 +101,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/barrier1" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/image_second"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -131,7 +131,7 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/pages"
             style="@style/Catalog.Description"
             android:layout_width="match_parent"

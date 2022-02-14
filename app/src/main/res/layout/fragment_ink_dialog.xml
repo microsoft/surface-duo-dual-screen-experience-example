@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintWidth_percent="0.5" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageButton
             android:id="@+id/button_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             app:barrierDirection="start"
             app:constraint_referenced_ids="ink_stroke_button, ink_color_container" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <ImageButton
             android:id="@+id/ink_stroke_button"
             android:layout_width="@dimen/stroke_menu_item_size"
             android:layout_height="@dimen/stroke_menu_item_size"
@@ -129,7 +129,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/button_cancel"
             style="@style/NoInternet"
             android:layout_width="0dp"
@@ -146,7 +146,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ink_view" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/button_confirm"
             style="@style/NoInternet"
             android:layout_width="0dp"

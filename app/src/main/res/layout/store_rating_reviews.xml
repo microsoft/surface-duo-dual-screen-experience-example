@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         tools:background="@color/gray">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/item_store_star"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_store_rating"
             style="@style/Store.Rating"
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="4.6" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_store_reviews"
             style="@style/Store.Rating"
             android:layout_width="wrap_content"

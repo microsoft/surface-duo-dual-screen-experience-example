@@ -38,7 +38,7 @@
             app:visibleIf="@{isDualScreen}"
             tools:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/dual_launch_title"
             style="@style/App.Name"
             android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/dual_launch_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -79,7 +79,7 @@
             app:visibleIf="@{!isDualScreen}"
             tools:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/launch_title"
             style="@style/App.Name"
             android:layout_width="match_parent"
@@ -101,7 +101,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.15"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/launch_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -119,7 +119,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.6"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/single_launch_description_text_view"
             style="@style/Paragraph.Gold.Text"
             android:layout_width="match_parent"
@@ -143,7 +143,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.85"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/single_launch_button"
             style="@style/Launch.Button"
             android:layout_width="wrap_content"

@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="@id/product_name"
             app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/product_image"
             android:layout_width="@dimen/product_image_half_height"
             android:layout_height="@dimen/product_image_half_width"
@@ -59,7 +59,7 @@
             app:orderItemImage="@{item}"
             tools:src="@drawable/orange_classic_guitar_normal"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_name"
             style="@style/GoldText"
             android:layout_width="0dp"
@@ -78,7 +78,7 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="EG - 29387 Wood" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_price"
             style="@style/GoldText"
             android:layout_width="0dp"
@@ -95,7 +95,7 @@
             app:price="@{item.price}"
             tools:text="$6,495" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_quantity"
             style="@style/GoldText"
             android:layout_width="wrap_content"
@@ -111,7 +111,7 @@
             app:layout_constraintVertical_bias="1.0"
             tools:text="Qty 1" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <Button
             android:id="@+id/product_quantity_plus"
             style="@style/GoldText"
             visibleIf="@{isEditEnabled}"
@@ -131,7 +131,7 @@
             app:layout_constraintStart_toEndOf="@id/product_quantity"
             app:layout_constraintTop_toBottomOf="@id/product_price" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <Button
             android:id="@+id/product_quantity_minus"
             style="@style/GoldText"
             visibleIf="@{isEditEnabled}"
@@ -148,7 +148,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_quantity_plus" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageButton
             android:id="@+id/product_remove"
             visibleIf="@{isEditEnabled}"
             android:layout_width="wrap_content"

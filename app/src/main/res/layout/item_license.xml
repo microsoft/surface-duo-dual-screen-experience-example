@@ -21,7 +21,7 @@
             type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;License&gt;" />
     </data>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         style="@style/License.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

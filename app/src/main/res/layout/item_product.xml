@@ -52,7 +52,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.25" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/product_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -79,7 +79,7 @@
             app:layout_constraintStart_toEndOf="@id/product_vertical_guideline"
             app:layout_constraintTop_toBottomOf="@id/product_horizontal_guideline">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/product_name"
                 style="@style/GoldText"
                 android:layout_width="0dp"
@@ -106,7 +106,7 @@
                 app:ratingValue="@{product.rating}"
                 tools:ratingValue="3.5" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/product_price"
                 style="@style/GoldText"
                 android:layout_width="0dp"
@@ -128,7 +128,7 @@
                 app:barrierDirection="top"
                 app:constraint_referenced_ids="product_description" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/product_description"
                 style="@style/GoldText"
                 android:layout_width="match_parent"

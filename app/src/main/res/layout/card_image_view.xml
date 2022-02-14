@@ -11,7 +11,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:parentTag="androidx.cardview.widget.CardView">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/customize_card_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -37,7 +37,7 @@
             android:paddingTop="@dimen/small_padding"
             android:paddingBottom="@dimen/normal_padding">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/product_name"
                 style="@style/GoldText"
                 android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/product_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 app:layout_constraintTop_toBottomOf="@id/product_header"
                 app:layout_constraintWidth_max="@dimen/product_image_half_width"/>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/product_add_button"
                 style="@style/AddButton"
                 android:layout_width="wrap_content"

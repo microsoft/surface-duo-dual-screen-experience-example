@@ -29,7 +29,7 @@
         android:onClick="@{() -> itemListener.onClick(store)}"
         tools:background="@color/gray">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/item_store_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -48,7 +48,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.45" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_store_name"
             style="@style/Store.Name"
             android:layout_width="0dp"
@@ -60,7 +60,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Someone's Guitar Shop" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_store_address"
             style="@style/Store.Address"
             android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
             app:layout_constraintStart_toEndOf="@id/store_horizontal_guideline"
             app:layout_constraintTop_toBottomOf="@id/item_store_address" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/item_store_view_button"
             style="@style/Store.Button"
             android:layout_width="wrap_content"

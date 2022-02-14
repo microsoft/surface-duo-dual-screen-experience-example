@@ -29,7 +29,7 @@
         tools:layout_height="@dimen/info_container_size"
         tools:layout_width="@dimen/info_container_size">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_rounded_title"
             style="@style/Store.Name"
             android:layout_width="0dp"
@@ -45,7 +45,7 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="@string/product_details_pickup_title"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_rounded_description"
             style="@style/GoldText"
             android:layout_width="0dp"
