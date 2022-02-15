@@ -13,9 +13,11 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
+import java.lang.StringBuilder
 
 class CustomizeCardView @JvmOverloads constructor(
     context: Context,
@@ -78,7 +80,6 @@ class CustomizeCardView @JvmOverloads constructor(
                     (it as GradientDrawable).setColor(ContextCompat.getColor(context, getColorRes(color)))
                 }
             }
-            contentDescription = productColor.toString()
         }
         unselect()
     }
@@ -88,7 +89,6 @@ class CustomizeCardView @JvmOverloads constructor(
             findViewById<ImageView>(R.id.customize_card_item).apply {
                 setImageDrawable(ContextCompat.getDrawable(context, getTypeDrawable(it)))
             }
-            contentDescription = productType.toString()
         }
         unselect()
     }
@@ -97,12 +97,40 @@ class CustomizeCardView @JvmOverloads constructor(
         isSelected = false
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
         cardElevation = unselectedCardElevation
+        contentDescription = buildContentDescription()
     }
 
     fun select() {
         isSelected = true
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.dark_blue))
         cardElevation = selectedCardElevation
+        contentDescription = buildContentDescription()
+    }
+
+    private fun buildContentDescription(): String? {
+        val valueDescription = when {
+            productColor != null ->
+                productColor.toString().replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }
+            productType != null ->
+                productType.toString().replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }
+            else -> return null
+        }
+
+        val selectionDescription = if (isSelected) {
+            context.getString(R.string.accessibility_selected)
+        } else {
+            context.getString(R.string.accessibility_unselected)
+        }
+
+        val stateDescription = StringBuilder()
+            .append(valueDescription)
+            .append(" - ")
+            .append(selectionDescription)
+            .toString()
+
+        ViewCompat.setStateDescription(this, stateDescription)
+
+        return valueDescription
     }
 
     companion object {

@@ -82,6 +82,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/small_margin"
                 android:adjustViewBounds="true"
+                android:contentDescription="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/product_add_button"
                 app:layout_constraintHorizontal_bias="0.0"

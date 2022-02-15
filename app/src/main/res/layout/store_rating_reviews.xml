@@ -28,6 +28,7 @@
             android:layout_height="@dimen/icon_size"
             android:layout_marginStart="@dimen/micro_margin"
             android:baselineAlignBottom="true"
+            android:contentDescription="@string/store_accessibility_rating"
             android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

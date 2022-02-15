@@ -75,7 +75,10 @@ class StarRatingView @JvmOverloads constructor(
     private fun resetImageValue() {
         for (index in MIN_STARS until ratingValue.roundToInt()) {
             val imageId = getStarImageId(index)
-            findViewById<AppCompatImageView>(imageId).setImageResource(R.drawable.ic_star_full)
+            findViewById<AppCompatImageView>(imageId).apply {
+                setImageResource(R.drawable.ic_star_full)
+                contentDescription = context.getString(R.string.store_accessibility_rating)
+            }
         }
     }
 

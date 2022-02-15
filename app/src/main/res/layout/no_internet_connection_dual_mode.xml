@@ -36,6 +36,7 @@
             android:id="@+id/no_internet_connection_image_dual"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:padding="@dimen/medium_padding"
             android:src="@drawable/ic_internet"
             app:layout_constraintBottom_toBottomOf="parent"

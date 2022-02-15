@@ -34,6 +34,7 @@
             android:id="@+id/no_internet_connection_image_single"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:importantForAccessibility="no"
             android:padding="@dimen/medium_padding"
             android:src="@drawable/ic_internet"
             app:layout_constraintBottom_toTopOf="@id/half_guideline_horizontal"

@@ -14,6 +14,8 @@
     <string name="launch_button">Launch</string>
     <string name="tutorial_launch_text">Drag the app across the hinge to span the app</string>
 
+    <string name="launch_accessibility_patterns">Dual-screen design patterns</string>
+
     <!-- Main -->
 
     <string name="nav_stores_title">Navigation Stores</string>
@@ -51,6 +53,8 @@
     <string name="store_map_recenter">Re-center map</string>
     <string name="store_map_circle_touch_tutorial">Visit these stores today</string>
 
+    <string name="store_accessibility_rating">Rating:</string>
+
     <!-- Products -->
 
     <string name="product_details_pickup_title">Custom Alnico III</string>
@@ -80,6 +84,8 @@
     <string name="product_electric_white_normal">Guitar of type white electric normal</string>
     <string name="product_hardrock_red_normal">Guitar of type red hardrock normal</string>
 
+    <string name="product_accessibility_add_to_order">Add to Order</string>
+
     <!-- Catalog -->
 
     <string name="catalog_page_no">Page %1$d of %2$d</string>
@@ -107,6 +113,24 @@
     <string name="order_sign_confirm">Confirm</string>
     <string name="order_sign_error">Please sign before clicking Confirm</string>
 
+    <string name="order_accessibility_quantity_plus">Increase quantity</string>
+    <string name="order_accessibility_quantity_minus">Decrease quantity</string>
+    <string name="order_accessibility_remove">Remove</string>
+    <string name="order_accessibility_reset">Reset</string>
+
+    <string name="order_accessibility_ink_color_red">Ink color red</string>
+    <string name="order_accessibility_ink_color_white">Ink color white</string>
+    <string name="order_accessibility_ink_color_blue">Ink color blue</string>
+
+    <string name="order_accessibility_ink_stroke">Selected stroke width: %s</string>
+
+    <string name="order_ink_stroke_small">Small</string>
+    <string name="order_ink_stroke_medium">Medium</string>
+    <string name="order_ink_stroke_large">Large</string>
+
+    <string name="accessibility_selected">Selected</string>
+    <string name="accessibility_unselected">Unselected</string>
+
     <!-- Developer Mode -->
 
     <string name="tutorial_developer_mode_text">Learn more about the design patterns and code</string>
@@ -132,6 +156,15 @@
     <string name="about_licenses_title">Third Party Notices</string>
     <string name="about_licenses_terms_title">Software Notices</string>
     <string name="about_licenses_terms_other_title">Other Notices</string>
+
+    <string name="about_accessibility_docs">Microsoft Docs</string>
+    <string name="about_accessibility_github">Github</string>
+    <string name="about_accessibility_blog">Microsoft Blog</string>
+    <string name="about_accessibility_twitch">Twitch</string>
+    <string name="about_accessibility_figma">Figma</string>
+    <string name="about_accessibility_learn">Microsoft Learn</string>
+    <string name="about_accessibility_twitter">Twitter</string>
+    <string name="about_accessibility_youtube">Youtube</string>
 
     <!-- No Internet Connection -->
 

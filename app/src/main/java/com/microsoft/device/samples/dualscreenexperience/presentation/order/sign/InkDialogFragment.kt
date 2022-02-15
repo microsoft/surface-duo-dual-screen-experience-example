@@ -19,10 +19,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.SimpleAdapter
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -186,6 +188,11 @@ class InkDialogFragment : DialogFragment() {
                 binding?.inkView?.strokeWidthMax = newWidth
                 inkStrokeMenuData[convertToStrokeMenuValue(newWidth)][INK_STROKE_ICON]?.let { resId ->
                     binding?.inkStrokeButton?.setImageResource(resId)
+                    binding?.inkStrokeButton?.contentDescription =
+                        getString(
+                            R.string.order_accessibility_ink_stroke,
+                            getString(getInkStrokeDescriptionResFromDrawable(resId))
+                        )
                 }
             }
         }
@@ -233,6 +240,17 @@ class InkDialogFragment : DialogFragment() {
             intArrayOf(R.id.ink_menu_item_image)
         )
 
+        adapter.viewBinder = SimpleAdapter.ViewBinder { view, data, _ ->
+            (view as? ImageView)?.apply {
+                (data as? Int)?.let { drawableRes ->
+                    setImageDrawable(ContextCompat.getDrawable(view.context, drawableRes))
+                    contentDescription =
+                        view.context.getString(getInkStrokeDescriptionResFromDrawable(drawableRes))
+                }
+            }
+            true
+        }
+
         inkStrokePopupWindow = ListPopupWindow(requireContext()).also {
             it.anchorView = anchorView
             it.setAdapter(adapter)
@@ -243,10 +261,20 @@ class InkDialogFragment : DialogFragment() {
                 it.dismiss()
             }
             it.isModal = true
+            it.inputMethodMode = ListPopupWindow.INPUT_METHOD_NOT_NEEDED
+            it.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
             it.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.rectangle_gold_padding))
             it.show()
         }
     }
+
+    private fun getInkStrokeDescriptionResFromDrawable(drawableRes: Int): Int =
+        when (drawableRes) {
+            R.drawable.ink_stroke_1 -> R.string.order_ink_stroke_small
+            R.drawable.ink_stroke_2 -> R.string.order_ink_stroke_medium
+            R.drawable.ink_stroke_3 -> R.string.order_ink_stroke_large
+            else -> R.string.order_ink_stroke_large
+        }
 
     override fun onCancel(dialog: DialogInterface) {
         orderViewModel.showSignDialog.value = false
