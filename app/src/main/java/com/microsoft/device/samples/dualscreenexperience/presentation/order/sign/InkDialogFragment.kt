@@ -47,9 +47,7 @@ class InkDialogFragment : DialogFragment() {
     private var inkStrokeMenuData = arrayListOf(
         hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_1)),
         hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_2)),
-        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_3)),
-        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_4)),
-        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_5))
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_3))
     )
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -205,8 +203,7 @@ class InkDialogFragment : DialogFragment() {
     private fun getInkViewColorList() = listOf(
         binding?.inkColor1,
         binding?.inkColor2,
-        binding?.inkColor3,
-        binding?.inkColor4
+        binding?.inkColor3
     )
 
     private fun onInkColorViewClicked(
@@ -217,10 +214,10 @@ class InkDialogFragment : DialogFragment() {
         selectedView.select()
     }
 
-    private fun convertToInkStrokeValue(menuValue: Int) = menuValue * MENU_TO_STROKE_VALUE_RATIO
+    private fun convertToInkStrokeValue(menuValue: Int) = (menuValue.inc()) * MENU_TO_STROKE_VALUE_RATIO
 
     private fun convertToStrokeMenuValue(inkStrokeValue: Float) =
-        (inkStrokeValue / MENU_TO_STROKE_VALUE_RATIO).toInt()
+        (inkStrokeValue / MENU_TO_STROKE_VALUE_RATIO).toInt().dec()
 
     private fun showStrokeWidthMenu(anchorView: View) {
         if (inkStrokePopupWindow?.isShowing == true) {
@@ -246,6 +243,7 @@ class InkDialogFragment : DialogFragment() {
                 it.dismiss()
             }
             it.isModal = true
+            it.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.rectangle_gold_padding))
             it.show()
         }
     }
@@ -265,7 +263,7 @@ class InkDialogFragment : DialogFragment() {
         const val DIALOG_SIZE_WIDTH_PERCENTAGE = 0.7f
         const val DIALOG_SIZE_HEIGHT_PERCENTAGE = 0.8f
         const val MENU_TO_STROKE_VALUE_RATIO = 3f
-        const val STROKE_VALUE_INIT_POS = 2
+        const val STROKE_VALUE_INIT_POS = 1
         const val INK_FRAGMENT_TAG = "ink_dialog"
         const val INK_STROKE_ICON = "INK_STROKE_ICON"
     }

@@ -87,6 +87,7 @@
             android:text="@string/store_list_empty_message"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_18"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

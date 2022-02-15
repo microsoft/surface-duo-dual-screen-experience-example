@@ -52,7 +52,6 @@
         <include
             android:id="@+id/order_recommendations_item_second"
             layout="@layout/item_product_recommendations"
-            visibleIf="@{itemsToShow >= 2}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/medium_margin"
@@ -61,12 +60,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_recommendations_item_first"
+            app:visibleIf="@{itemsToShow >= 2}"
             tools:visibility="visible"/>
 
         <include
             android:id="@+id/order_recommendations_item_third"
             layout="@layout/item_product_recommendations"
-            visibleIf="@{itemsToShow >= 3}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/medium_margin"
@@ -75,6 +74,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_recommendations_item_second"
+            app:visibleIf="@{itemsToShow >= 3}"
             tools:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

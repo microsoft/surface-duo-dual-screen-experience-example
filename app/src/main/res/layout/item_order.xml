@@ -34,7 +34,7 @@
         android:layout_gravity="bottom"
         android:background="@color/gray"
         android:orientation="vertical"
-        android:paddingEnd="@dimen/medium_padding">
+        android:paddingEnd="@dimen/normal_padding">
 
         <View
             android:id="@+id/product_background"
@@ -42,7 +42,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/medium_margin"
             android:background="@drawable/rounded_rectangle_text"
-            app:layout_constraintBottom_toBottomOf="@id/product_quantity"
+            app:layout_constraintBottom_toBottomOf="@id/product_quantity_plus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/product_name"
             app:layout_constraintVertical_bias="1.0" />
@@ -53,7 +53,7 @@
             android:layout_height="@dimen/product_image_half_width"
             android:layout_marginStart="@dimen/order_item_margin"
             android:rotation="30"
-            app:layout_constraintBottom_toBottomOf="@id/product_quantity"
+            app:layout_constraintBottom_toBottomOf="@id/product_quantity_plus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:orderItemImage="@{item}"
@@ -64,9 +64,10 @@
             style="@style/GoldText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_margin"
-            android:gravity="bottom"
-            android:minLines="2"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
             android:text="@{item.name}"
             android:textSize="@dimen/text_size_16"
             app:layout_constraintBottom_toTopOf="@id/product_price"
@@ -83,7 +84,7 @@
             style="@style/GoldText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/product_quantity"
@@ -100,12 +101,11 @@
             style="@style/GoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_margin"
-            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/normal_margin"
             android:text="@{@string/order_quantity(item.quantity)}"
             android:textSize="@dimen/text_size_14"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/product_background"
             app:layout_constraintTop_toBottomOf="@id/product_price"
             app:layout_constraintVertical_bias="1.0"
@@ -113,53 +113,43 @@
 
         <Button
             android:id="@+id/product_quantity_plus"
-            style="@style/GoldText"
+            style="@style/Gold.Text.Button"
             visibleIf="@{isEditEnabled}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
-            android:background="@drawable/rounded_rectangle_text"
+            android:layout_width="@dimen/touch_target_size"
+            android:layout_height="@dimen/touch_target_size"
+            android:layout_marginStart="@dimen/normal_margin"
             android:onClick="@{(v) -> ViewKt.isVisible(v) ? quantityDataHandler.updateQuantity(item, item.quantity + 1) : void}"
-            android:paddingStart="@dimen/half_medium_padding"
-            android:paddingEnd="@dimen/half_medium_padding"
             android:text="@string/order_quantity_plus"
-            android:textSize="@dimen/text_size_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/product_quantity_minus"
-            app:layout_constraintStart_toEndOf="@id/product_quantity"
-            app:layout_constraintTop_toBottomOf="@id/product_price" />
+            app:layout_constraintStart_toEndOf="@id/product_background"
+            app:layout_constraintTop_toBottomOf="@id/product_quantity" />
 
         <Button
             android:id="@+id/product_quantity_minus"
-            style="@style/GoldText"
+            style="@style/Gold.Text.Button"
             visibleIf="@{isEditEnabled}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/micro_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
-            android:background="@drawable/rounded_rectangle_text"
+            android:layout_width="@dimen/touch_target_size"
+            android:layout_height="@dimen/touch_target_size"
             android:onClick="@{(v) -> ViewKt.isVisible(v) ? quantityDataHandler.updateQuantity(item, item.quantity - 1) : void}"
-            android:paddingStart="@dimen/half_medium_padding"
-            android:paddingEnd="@dimen/half_medium_padding"
             android:text="@string/order_quantity_minus"
-            android:textSize="@dimen/text_size_14"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/product_quantity_plus" />
+            app:layout_constraintStart_toEndOf="@id/product_quantity_plus"
+            app:layout_constraintTop_toBottomOf="@id/product_quantity" />
 
         <ImageButton
             android:id="@+id/product_remove"
             visibleIf="@{isEditEnabled}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/normal_margin"
+            android:layout_width="@dimen/touch_target_size"
+            android:layout_height="@dimen/touch_target_size"
+            android:background="@android:color/transparent"
             android:onClick="@{(v) -> ViewKt.isVisible(v) ? quantityDataHandler.updateQuantity(item, 0) : void}"
             android:src="@drawable/ic_trash"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/product_quantity_minus" />
+            app:layout_constraintStart_toEndOf="@id/product_quantity_minus"
+            app:layout_constraintTop_toBottomOf="@+id/product_quantity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

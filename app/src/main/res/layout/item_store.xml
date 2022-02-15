@@ -91,7 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_margin"
             android:layout_marginBottom="@dimen/normal_margin"
-            android:onClick="@{() -> itemListener.onClick(store)}"
             android:text="@string/item_store_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

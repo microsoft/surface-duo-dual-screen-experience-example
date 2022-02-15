@@ -7,15 +7,15 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/stroke_menu_item_size"
-    android:layout_height="@dimen/stroke_menu_item_size"
-    android:background="@color/transparent_gold"
-    android:gravity="center">
+    android:layout_width="@dimen/touch_target_size"
+    android:layout_height="@dimen/touch_target_size"
+    android:gravity="center"
+    tools:background="@drawable/rectangle_gold_padding">
 
     <ImageView
         android:id="@+id/ink_menu_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:src="@drawable/ink_stroke_5"/>
+        tools:src="@drawable/ink_stroke_1"/>
 </FrameLayout>

@@ -26,8 +26,8 @@
             app:layout_constraintEnd_toStartOf="@id/ink_controls_barrier"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:max_stroke_width="15"
-            app:min_stroke_width="1"/>
+            app:max_stroke_width="9"
+            app:min_stroke_width="3"/>
 
         <View
             android:id="@+id/ink_view_line"
@@ -42,9 +42,10 @@
 
         <ImageButton
             android:id="@+id/button_reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/small_margin"
+            android:layout_width="@dimen/touch_target_size"
+            android:layout_height="@dimen/touch_target_size"
+            android:background="@android:color/transparent"
+            android:paddingEnd="@dimen/normal_padding"
             android:src="@drawable/ic_refresh"
             app:layout_constraintBottom_toBottomOf="@id/ink_color_container"
             app:layout_constraintStart_toStartOf="@id/ink_view_line"/>
@@ -58,33 +59,32 @@
 
         <ImageButton
             android:id="@+id/ink_stroke_button"
-            android:layout_width="@dimen/stroke_menu_item_size"
-            android:layout_height="@dimen/stroke_menu_item_size"
-            android:layout_marginEnd="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/micro_margin"
+            android:layout_width="@dimen/touch_target_size"
+            android:layout_height="@dimen/touch_target_size"
+            android:layout_marginEnd="@dimen/micro_margin"
             android:background="@drawable/round_dark_gold"
+            android:paddingTop="@dimen/ink_stroke_padding_top"
             app:layout_constraintBottom_toTopOf="@id/ink_color_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/ink_color_container"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:src="@drawable/ink_stroke_3" />
+            tools:src="@drawable/ink_stroke_2" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ink_color_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/micro_margin"
             app:layout_constraintBottom_toTopOf="@id/button_confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ink_stroke_button">
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
                 android:id="@+id/ink_color_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/micro_margin"
-                android:padding="@dimen/micro_padding"
+                android:layout_width="@dimen/touch_target_size"
+                android:layout_height="@dimen/touch_target_size"
+                android:gravity="center"
                 app:inkColor="@color/ink_white"
                 app:layout_constraintBottom_toTopOf="@id/ink_color_2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,11 +93,10 @@
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
                 android:id="@+id/ink_color_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/micro_margin"
-                android:padding="@dimen/micro_padding"
-                app:inkColor="@color/orange"
+                android:layout_width="@dimen/touch_target_size"
+                android:layout_height="@dimen/touch_target_size"
+                android:gravity="center"
+                app:inkColor="@color/ink_red"
                 app:layout_constraintBottom_toTopOf="@id/ink_color_3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,27 +104,14 @@
 
             <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
                 android:id="@+id/ink_color_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/micro_margin"
-                android:padding="@dimen/micro_padding"
-                app:inkColor="@color/ink_red"
-                app:layout_constraintBottom_toTopOf="@id/ink_color_4"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ink_color_2"/>
-
-            <com.microsoft.device.samples.dualscreenexperience.presentation.order.sign.InkColorView
-                android:id="@+id/ink_color_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/micro_margin"
-                android:padding="@dimen/micro_padding"
+                android:layout_width="@dimen/touch_target_size"
+                android:layout_height="@dimen/touch_target_size"
+                android:gravity="center"
                 app:inkColor="@color/ink_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ink_color_3"/>
+                app:layout_constraintTop_toBottomOf="@id/ink_color_2"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,7 +127,7 @@
             android:textColor="@color/orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_confirm"
-            app:layout_constraintHeight_max="@dimen/dialog_button_height"
+            app:layout_constraintHeight_max="@dimen/touch_target_size"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ink_view" />
@@ -158,7 +144,7 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="@dimen/dialog_button_height"
+            app:layout_constraintHeight_max="@dimen/touch_target_size"
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintStart_toEndOf="@id/button_cancel"
             app:layout_constraintTop_toTopOf="@id/button_cancel"/>

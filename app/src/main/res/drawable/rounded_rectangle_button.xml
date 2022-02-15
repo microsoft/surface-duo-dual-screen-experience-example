@@ -6,17 +6,23 @@
   ~
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
-        <shape android:shape="rectangle">
-            <corners android:radius="@dimen/button_radius"/>
-            <solid android:color="@color/dark_orange"/>
-        </shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:top="@dimen/micro_padding"
+        android:bottom="@dimen/micro_padding">
+        <selector>
+            <item android:state_pressed="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/button_radius"/>
+                    <solid android:color="@color/dark_orange"/>
+                </shape>
+            </item>
+            <item android:state_pressed="false">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/button_radius" />
+                    <solid android:color="@color/orange" />
+                </shape>
+            </item>
+        </selector>
     </item>
-    <item android:state_pressed="false">
-        <shape android:shape="rectangle">
-            <corners android:radius="@dimen/button_radius" />
-            <solid android:color="@color/orange" />
-        </shape>
-    </item>
-</selector>
+</layer-list>

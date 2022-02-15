@@ -47,6 +47,7 @@
             android:maxLines="2"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_40"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/dual_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +89,7 @@
             android:maxLines="2"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_40"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/first_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -128,6 +130,7 @@
             android:text="@string/launch_description"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_18"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/third_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -151,8 +154,10 @@
             android:onClick="@{() -> launchListener.onClick(false)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/touch_target_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/third_guideline"
+            app:layout_constraintWidth_min="@dimen/quadruple_touch_target_size"
             app:visibleIf="@{!isDualScreen}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

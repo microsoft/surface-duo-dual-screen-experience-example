@@ -158,17 +158,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="@string/product_details_customize_button"
+            app:autoSizeMaxTextSize="@dimen/text_size_14"
             app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@id/product_details_type_description"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/touch_target_size"
             app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="@id/product_details_image"
             app:layout_constraintTop_toTopOf="@id/product_details_type_title"
             app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintWidth_max="150dp"
-            tools:visibility="invisible" />
+            app:layout_constraintWidth_max="@dimen/quadruple_touch_target_size"
+            app:layout_constraintWidth_min="@dimen/touch_target_size"
+            tools:visibility="visible" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/product_details_customize_place_order"
@@ -183,7 +185,7 @@
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/add_to_order_animation"
             tools:background="@drawable/rounded_rectangle_button"
-            tools:visibility="visible"/>
+            tools:visibility="invisible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
