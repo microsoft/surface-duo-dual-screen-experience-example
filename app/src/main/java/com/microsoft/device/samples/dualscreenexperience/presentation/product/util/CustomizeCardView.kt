@@ -109,10 +109,8 @@ class CustomizeCardView @JvmOverloads constructor(
 
     private fun buildContentDescription(): String? {
         val valueDescription = when {
-            productColor != null ->
-                productColor.toString().replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }
-            productType != null ->
-                productType.toString().replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }
+            productColor != null -> productColor.toString()
+            productType != null -> productType.toString()
             else -> return null
         }
 
