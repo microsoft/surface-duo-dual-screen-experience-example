@@ -45,6 +45,7 @@ class StarRatingView @JvmOverloads constructor(
                     id = getStarImageId(index)
                     setImageResource(R.drawable.ic_star_empty)
                     gravity = Gravity.CENTER_VERTICAL
+                    importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO
                 },
                 LayoutParams(heightView.dpToPx(context), heightView.dpToPx(context)).apply {
                     marginEnd = starMargin.dpToPx(context)
@@ -56,6 +57,7 @@ class StarRatingView @JvmOverloads constructor(
                 id = textViewId
                 text = ratingValue.toString()
                 textSize = heightView
+                contentDescription = context.getString(R.string.store_accessibility_rating, ratingValue.toString())
             },
             LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
                 marginStart = starMargin.dpToPx(context)
@@ -75,15 +77,15 @@ class StarRatingView @JvmOverloads constructor(
     private fun resetImageValue() {
         for (index in MIN_STARS until ratingValue.roundToInt()) {
             val imageId = getStarImageId(index)
-            findViewById<AppCompatImageView>(imageId).apply {
-                setImageResource(R.drawable.ic_star_full)
-                contentDescription = context.getString(R.string.store_accessibility_rating)
-            }
+            findViewById<AppCompatImageView>(imageId).setImageResource(R.drawable.ic_star_full)
         }
     }
 
     private fun resetTextValue() {
-        findViewById<TextView>(textViewId).text = ratingValue.toString()
+        findViewById<TextView>(textViewId).apply {
+            text = ratingValue.toString()
+            contentDescription = context.getString(R.string.store_accessibility_rating, ratingValue.toString())
+        }
     }
 
     private fun getStarImageId(index: Int) =
