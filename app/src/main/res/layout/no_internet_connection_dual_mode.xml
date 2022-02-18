@@ -32,10 +32,11 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/no_internet_connection_image_dual"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:padding="@dimen/medium_padding"
             android:src="@drawable/ic_internet"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +44,7 @@
             app:layout_constraintStart_toEndOf="@id/guideline_vertical"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/no_internet_connection_title"
             style="@style/NoInternet"
             android:layout_width="0dp"
@@ -62,7 +63,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/no_internet_connection_description"
             style="@style/NoInternet"
             android:layout_width="0dp"

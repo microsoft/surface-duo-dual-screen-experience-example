@@ -18,8 +18,11 @@
       "secondaryDescription": "A simple and elegant design. Our Delphinus guitar can be the perfect gift for someone who has never tried playing a guitar before. Its purpose is to be light and easy to use. This is one of the first solid-body guitars our engineers have been working on since our first days in the musical industry.",
       "thirdDescription": "Our first prototype was released to the public in 1995. Over the years we continuously updated the design and brought the latest manufacturing processes to its latest version.",
       "firstPicture": "catalog/catalog2/image1.png",
+      "firstPictureDescription": "Body of Delphinus Guitar",
       "secondPicture": "catalog/catalog2/image2.png",
-      "thirdPicture": "catalog/catalog2/image3.png"
+      "secondPictureDescription": "Fret board of Delphinus Guitar",
+      "thirdPicture": "catalog/catalog2/image3.png",
+      "thirdPictureDescription": "Head of Delphinus Guitar"
     },
     {
       "itemId": 3,
@@ -29,7 +32,9 @@
       "secondaryDescription": "Pegasus Guitar",
       "thirdDescription": "The Pegasus. The new and refreshed version of our older model, the Leo, has a more vibrant approach to its style. Our engineers intended the Pegasus to be a guitar that gives you energy, once you hold it in your hands. Starting from its colors, design and material choices, it was meant to be a guitar that pushes you and helps you find those amazing creative notes.",
       "firstPicture": "catalog/catalog3/image1.png",
-      "secondPicture": "catalog/catalog3/image2.png"
+      "firstPictureDescription": "Close-up of Delphinus Guitar body",
+      "secondPicture": "catalog/catalog3/image2.png",
+      "secondPictureDescription": "Body of Pegasus Guitar"
     },
     {
       "itemId": 4,
@@ -39,7 +44,9 @@
       "secondaryDescription": "Draco Guitar",
       "thirdDescription": "If we had only one word to describe Draco it would be: monumental.\n\nThis guitar is for sure only for professional guitarists whose sole purpose is to mark the music industry with their music. It is more than just a musical instrument; we see the Draco as being a bridge to create the perfect connection with people through sound waves.",
       "firstPicture": "catalog/catalog4/image1.png",
-      "secondPicture": "catalog/catalog4/image2.png"
+      "firstPictureDescription": "Lower part of Pegasus Guitar body",
+      "secondPicture": "catalog/catalog4/image2.png",
+      "secondPictureDescription": "Upper part of Pegasus Guitar body"
     },
     {
       "itemId": 5,
@@ -48,7 +55,9 @@
       "primaryDescription": "Being the best that our company can offer, the Draco is sold only in one color choice: Red.",
       "secondaryDescription": "It symbolizes the fire we all need to endure to become our best version and it is about our journey to help you achieve more in your path to greatness. It is the guitar for those people who are not afraid to take that unknown jump, the bold, the risk-takers, those people who use their passion to break any barrier in front of them.",
       "firstPicture": "catalog/catalog5/image1.png",
-      "secondPicture": "catalog/catalog5/image2.png"
+      "firstPictureDescription": "Close-up of Draco Guitar body",
+      "secondPicture": "catalog/catalog5/image2.png",
+      "secondPictureDescription": "Body of Draco Guitar"
     },
     {
       "itemId": 6,
@@ -56,7 +65,8 @@
       "viewType": 6,
       "primaryDescription": "Taurus Guitar",
       "secondaryDescription": "The Taurus is the limited-edition tribute guitar we built with multiple professionals from the music industry and with our extremely talented team of engineers.\n\nFrom our collection it is the guitar that stands out the most.\n\nWe are very proud to sell this model to guitar enthusiasts, and every model we deliver includes the same passion as the first one we created.",
-      "firstPicture": "catalog/catalog6/image1.png"
+      "firstPicture": "catalog/catalog6/image1.png",
+      "firstPictureDescription": "Body of Taurus Guitar"
     },
     {
       "itemId": 7,
@@ -65,7 +75,9 @@
       "primaryDescription": "Built with the most refined materials in the industry, we drew its lines so that it could be the perfect balance between ergonomics and style. We chose the colors, red and grey, as a tribute to two amazing guitarists that we had the pleasure to work with us for multiple years.",
       "secondaryDescription": "The Taurus is the guitar that is not just telling the story of all the guitars before it, but also the story of all our clients that used our products to express themselves through music.\n\nAfter going through all the guitar types from our Catalog, we would really like to know - which one is your favorite?",
       "firstPicture": "catalog/catalog7/image1.png",
-      "secondPicture": "catalog/catalog7/image2.png"
+      "firstPictureDescription": "Upper part of Taurus Guitar body",
+      "secondPicture": "catalog/catalog7/image2.png",
+      "secondPictureDescription": "Lower part of Taurus Guitar body"
     }
   ]
 }

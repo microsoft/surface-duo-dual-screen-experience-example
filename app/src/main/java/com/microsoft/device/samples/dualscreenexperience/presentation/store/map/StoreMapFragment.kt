@@ -149,34 +149,27 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedCity.observe(
-            viewLifecycleOwner,
-            {
-                onWindowLayoutInfoChanged()
-                viewModel.markersList.value?.let { newData ->
-                    addMarkersToMap(newData)
-                }
-                changeActionBarTitle(it, viewModel.selectedStore.value)
+        viewModel.selectedCity.observe(viewLifecycleOwner) {
+            onWindowLayoutInfoChanged()
+            viewModel.markersList.value?.let { newData ->
+                addMarkersToMap(newData)
             }
-        )
-        viewModel.markersCenter.observe(
-            viewLifecycleOwner,
-            { center -> center?.let { resetMap(center, selectZoomLevel()) } }
-        )
-        viewModel.selectedStore.observe(
-            viewLifecycleOwner,
-            {
-                onWindowLayoutInfoChanged()
-                changeActionBarTitle(viewModel.selectedCity.value, it)
-                mapController.unSelectAllMarkers(markerFactory)
-                it?.let { store ->
-                    mapController.selectMarker(
-                        store.name,
-                        markerFactory?.createBitmapWithText(store.name, true)
-                    )
-                }
+            changeActionBarTitle(it, viewModel.selectedStore.value)
+        }
+        viewModel.markersCenter.observe(viewLifecycleOwner) { center ->
+            center?.let { resetMap(center, selectZoomLevel()) }
+        }
+        viewModel.selectedStore.observe(viewLifecycleOwner) {
+            onWindowLayoutInfoChanged()
+            changeActionBarTitle(viewModel.selectedCity.value, it)
+            mapController.unSelectAllMarkers(markerFactory)
+            it?.let { store ->
+                mapController.selectMarker(
+                    store.name,
+                    markerFactory?.createBitmapWithText(store.name, true)
+                )
             }
-        )
+        }
     }
 
     private fun selectZoomLevel(): Float =

@@ -89,11 +89,11 @@
 
     <dimen name="dialog_max_size">540dp</dimen>
 
-    <dimen name="dialog_button_height">60dp</dimen>
     <dimen name="dialog_button_margin">1dp</dimen>
 
-    <dimen name="stroke_menu_item_size">30dp</dimen>
-    <dimen name="color_circle_size">24dp</dimen>
+    <dimen name="ink_stroke_padding_top">10dp</dimen>
+
+    <dimen name="color_circle_size">28dp</dimen>
     <dimen name="color_stroke_size">3dp</dimen>
 
     <!-- Catalog -->
@@ -108,4 +108,8 @@
     <dimen name="catalog_max_image_height">250dp</dimen>
     <dimen name="catalog_min_image_height">150dp</dimen>
     <dimen name="catalog_base_min_image_height">100dp</dimen>
+
+    <dimen name="touch_target_size">48dp</dimen>
+    <dimen name="double_touch_target_size">72dp</dimen>
+    <dimen name="quadruple_touch_target_size">144dp</dimen>
 </resources>

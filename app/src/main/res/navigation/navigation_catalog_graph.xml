@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/fragment_catalog"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.catalog.CatalogListFragment"
-        android:label="CatalogListFragment"
+        android:label="Catalog"
         tools:layout="@layout/fragment_catalog"/>
 
 </navigation>

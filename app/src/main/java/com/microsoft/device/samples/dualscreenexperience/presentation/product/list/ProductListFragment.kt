@@ -71,7 +71,7 @@ class ProductListFragment : Fragment() {
         val productAdapter = ProductAdapter(requireContext(), viewModel)
         binding?.productList?.adapter = productAdapter
 
-        viewModel.productList.observe(viewLifecycleOwner, { productAdapter.refreshData() })
+        viewModel.productList.observe(viewLifecycleOwner) { productAdapter.refreshData() }
     }
 
     override fun onResume() {
@@ -80,7 +80,7 @@ class ProductListFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        appCompatActivity?.changeToolbarTitle(getString(R.string.nav_products_title))
+        appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_products_title))
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

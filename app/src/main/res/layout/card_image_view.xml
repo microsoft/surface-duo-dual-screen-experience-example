@@ -11,11 +11,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:parentTag="androidx.cardview.widget.CardView">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/customize_card_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/half_medium_padding"
+        android:contentDescription="@null"
         tools:background="@drawable/circle_color"/>
 </merge>

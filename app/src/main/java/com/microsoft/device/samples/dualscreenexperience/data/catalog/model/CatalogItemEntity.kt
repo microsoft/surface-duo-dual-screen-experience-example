@@ -17,6 +17,9 @@ data class CatalogItemEntity(
     val fourthDescription: String?,
     val fifthDescription: String?,
     val firstPicture: String?,
-    val secondPicture: String,
-    val thirdPicture: String?
+    val firstPictureDescription: String?,
+    val secondPicture: String?,
+    val secondPictureDescription: String?,
+    val thirdPicture: String?,
+    val thirdPictureDescription: String?,
 )

@@ -25,19 +25,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:paddingStart="@dimen/large_padding"
-        android:paddingTop="@dimen/large_padding"
-        android:paddingEnd="@dimen/large_padding"
+        android:paddingStart="@dimen/normal_padding"
+        android:paddingTop="@dimen/normal_padding"
+        android:paddingEnd="@dimen/normal_padding"
         tools:context=".presentation.launch.fragments.LaunchDescriptionFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/launch_description_text_view"
             style="@style/Paragraph.Gold.Text"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:text="@string/launch_description"
             app:autoSizeMaxTextSize="@dimen/text_size_20"
+            app:autoSizeMinTextSize="@dimen/text_size_14"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/half_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,19 +50,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4"/>
+            app:layout_constraintGuide_percent="0.35"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/launch_description_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/launch_accessibility_patterns"
             app:layout_constraintBottom_toTopOf="@id/dual_launch_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/half_guideline"
-            tools:src="@drawable/extended_canvas"/>
+            tools:src="@drawable/extended_canvas" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/dual_launch_button"
             style="@style/Launch.Button"
             android:layout_width="wrap_content"
@@ -69,8 +71,10 @@
             android:onClick="@{() -> launchListener.onClick(true)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/touch_target_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/launch_description_image_view"
+            app:layout_constraintWidth_min="@dimen/quadruple_touch_target_size"
             app:visibleIf="@{shouldDisplayButton}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

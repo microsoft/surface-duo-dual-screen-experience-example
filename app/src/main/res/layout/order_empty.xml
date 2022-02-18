@@ -33,17 +33,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/order_empty_image"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/order_empty_image_height"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_empty_order"
             app:layout_constraintBottom_toTopOf="@id/order_empty_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/order_empty_message"
             style="@style/Store.Name"
             android:layout_width="match_parent"

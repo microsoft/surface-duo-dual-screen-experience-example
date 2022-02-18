@@ -36,10 +36,11 @@
         android:paddingEnd="@dimen/normal_padding"
         android:paddingBottom="@dimen/small_padding">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/product_customize_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:contentDescription="@null"
             app:layout_constraintBottom_toTopOf="@id/product_customize_image_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_max="@dimen/product_image_width"
@@ -64,11 +65,12 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="product_customize_image" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/product_customize_image_landscape"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
+            android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -82,6 +84,7 @@
             visibleIf="@{!isDualMode}"
             android:layout_width="150dp"
             android:layout_height="70dp"
+            android:contentDescription="@string/product_accessibility_add_to_order"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_title"
             app:layout_constraintEnd_toStartOf="@id/product_customize_image_landscape"
             app:layout_constraintHorizontal_bias="0.0"
@@ -92,7 +95,7 @@
             tools:background="@drawable/rounded_rectangle_button"
             tools:visibility="visible"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_customize_color_title"
             style="@style/GoldText"
             android:layout_width="wrap_content"
@@ -190,7 +193,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_customize_body_title"
             style="@style/GoldText"
             android:layout_width="wrap_content"

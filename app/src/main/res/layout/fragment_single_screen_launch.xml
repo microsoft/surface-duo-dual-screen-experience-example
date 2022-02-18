@@ -38,7 +38,7 @@
             app:visibleIf="@{isDualScreen}"
             tools:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/dual_launch_title"
             style="@style/App.Name"
             android:layout_width="match_parent"
@@ -47,6 +47,7 @@
             android:maxLines="2"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_40"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/dual_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +61,11 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.3"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/dual_launch_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:importantForAccessibility="no"
             android:scaleType="fitCenter"
             android:src="@drawable/launcher_guitar_shop"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +81,7 @@
             app:visibleIf="@{!isDualScreen}"
             tools:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/launch_title"
             style="@style/App.Name"
             android:layout_width="match_parent"
@@ -88,6 +90,7 @@
             android:maxLines="2"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_40"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/first_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,10 +104,11 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.15"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/launch_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:importantForAccessibility="no"
             android:scaleType="fitCenter"
             android:src="@drawable/launcher_guitar_shop"
             app:layout_constraintBottom_toTopOf="@id/half_screen_guideline"
@@ -119,7 +123,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.6"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/single_launch_description_text_view"
             style="@style/Paragraph.Gold.Text"
             android:layout_width="match_parent"
@@ -128,6 +132,7 @@
             android:text="@string/launch_description"
             android:textAlignment="center"
             app:autoSizeMaxTextSize="@dimen/text_size_18"
+            app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@id/third_guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +148,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.85"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/single_launch_button"
             style="@style/Launch.Button"
             android:layout_width="wrap_content"
@@ -151,8 +156,10 @@
             android:onClick="@{() -> launchListener.onClick(false)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/touch_target_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/third_guideline"
+            app:layout_constraintWidth_min="@dimen/quadruple_touch_target_size"
             app:visibleIf="@{!isDualScreen}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

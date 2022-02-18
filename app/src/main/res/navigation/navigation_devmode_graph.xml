@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/fragment_dev_control"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevControlFragment"
-        android:label="DevControlFragment"
+        android:label="Developer Mode Control"
         tools:layout="@layout/fragment_dev_control">
 
         <action android:id="@+id/action_dev_control_to_content"
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/fragment_dev_content"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevContentFragment"
-        android:label="DevContentFragment"
+        android:label="Developer Mode Content"
         tools:layout="@layout/fragment_dev_content" />
 
 </navigation>

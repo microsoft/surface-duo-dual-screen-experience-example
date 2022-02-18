@@ -45,7 +45,7 @@
                 android:paddingStart="@dimen/normal_padding"
                 android:paddingEnd="@dimen/normal_padding">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/store_details_contact_address_label"
                     style="@style/GoldText"
                     android:layout_width="0dp"
@@ -54,7 +54,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/store_details_contact_address_text"
                     style="@style/GoldText"
                     android:layout_width="0dp"
@@ -65,7 +65,7 @@
                     app:layout_constraintTop_toBottomOf="@id/store_details_contact_address_label"
                     tools:text="124 NE 36th St," />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/store_details_contact_city_text"
                     style="@style/GoldText"
                     android:layout_width="0dp"
@@ -98,7 +98,7 @@
                 android:paddingStart="@dimen/normal_padding"
                 android:paddingEnd="@dimen/normal_padding">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/store_details_contact_info_label"
                     style="@style/GoldText"
                     android:layout_width="0dp"
@@ -107,7 +107,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/store_details_contact_info_phone"
                     style="@style/GoldText"
                     android:layout_width="0dp"
@@ -118,7 +118,7 @@
                     app:layout_constraintTop_toBottomOf="@id/store_details_contact_info_label"
                     tools:text="(206)-473-3864" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/store_details_contact_info_email"
                     style="@style/GoldText"
                     android:layout_width="0dp"

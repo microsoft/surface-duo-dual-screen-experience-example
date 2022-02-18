@@ -92,17 +92,14 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
     }
 
     private fun setupObservers() {
-        viewModel.catalogItemList.observe(viewLifecycleOwner, { catalogAdapter?.refreshData() })
-        viewModel.catalogItemPosition.observe(
-            viewLifecycleOwner,
-            { newPageNumber ->
-                binding?.pager?.apply {
-                    if (currentItem != newPageNumber) {
-                        setCurrentItem(newPageNumber, true)
-                    }
+        viewModel.catalogItemList.observe(viewLifecycleOwner) { catalogAdapter?.refreshData() }
+        viewModel.catalogItemPosition.observe(viewLifecycleOwner) { newPageNumber ->
+            binding?.pager?.apply {
+                if (currentItem != newPageNumber) {
+                    setCurrentItem(newPageNumber, true)
                 }
             }
-        )
+        }
     }
 
     override fun onResume() {
@@ -111,7 +108,7 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
     }
 
     private fun setupToolbar() {
-        appCompatActivity?.changeToolbarTitle(getString(R.string.nav_catalog_title))
+        appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_catalog_title))
         appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
     }
 

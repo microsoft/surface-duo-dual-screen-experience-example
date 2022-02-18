@@ -22,30 +22,32 @@
         android:layout_height="match_parent"
         tools:background="@color/gray">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/item_store_star"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:layout_marginStart="@dimen/micro_margin"
             android:baselineAlignBottom="true"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_store_rating"
             style="@style/Store.Rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/micro_margin"
+            android:contentDescription="@{@string/store_accessibility_rating(String.valueOf(store.rating))}"
             android:text="@{String.valueOf(store.rating)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_store_star"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="4.6" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_store_reviews"
             style="@style/Store.Rating"
             android:layout_width="wrap_content"

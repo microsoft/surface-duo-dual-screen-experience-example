@@ -21,13 +21,14 @@
             type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;License&gt;" />
     </data>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
         style="@style/License.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:onClick="@{() -> itemClickListener.onClick(item)}"
-        android:paddingBottom="@dimen/small_padding"
+        android:paddingTop="@{item.url != null ? @dimen/half_medium_padding : @dimen/micro_padding}"
+        android:paddingBottom="@{item.url != null ? @dimen/half_medium_padding : @dimen/micro_padding}"
         android:text="@{item.title}"
         android:textColor="@{item.url != null ? @color/white : @color/license_gray}"
         tools:text="Kotlin"/>

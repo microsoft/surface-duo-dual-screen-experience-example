@@ -22,12 +22,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:theme="@style/Theme.App.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/devmode_nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-        app:theme="@style/Theme.App.ActionBar"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
 
     <fragment
         android:id="@+id/devmode_nav_host_fragment"

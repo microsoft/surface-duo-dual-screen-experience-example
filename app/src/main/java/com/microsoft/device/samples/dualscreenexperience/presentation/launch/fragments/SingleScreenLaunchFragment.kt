@@ -70,7 +70,7 @@ class SingleScreenLaunchFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualScreen = it })
+        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner) { binding?.isDualScreen = it }
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

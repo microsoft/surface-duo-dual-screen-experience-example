@@ -40,7 +40,7 @@ class StoreDetailsFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedStore.observe(viewLifecycleOwner, { setupToolbar(it?.name) })
+        viewModel.selectedStore.observe(viewLifecycleOwner) { setupToolbar(it?.name) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,6 +63,11 @@ class StoreDetailsFragment : Fragment() {
                     else -> R.string.store_details_about_tab
                 }
                 tab.text = resources.getString(textId)
+
+                if (position != 1) {
+                    tab.contentDescription =
+                        resources.getString(R.string.store_accessibility_details_about)
+                }
             }.attach()
         }
     }

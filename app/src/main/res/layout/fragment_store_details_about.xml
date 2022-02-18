@@ -25,23 +25,25 @@
         android:paddingEnd="@dimen/small_padding"
         android:paddingBottom="@dimen/normal_padding">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/store_details_about_image_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/normal_margin"
             android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
             android:src="@drawable/about_store_1"
             app:layout_constraintBottom_toTopOf="@id/store_details_about_images_barrier"
             app:layout_constraintEnd_toStartOf="@id/store_details_about_image_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/store_details_about_image_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
             android:src="@drawable/about_store_2"
             app:layout_constraintBottom_toTopOf="@id/store_details_about_images_barrier"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +57,7 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="store_details_about_image_1, store_details_about_image_2" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/store_details_about_description"
             style="@style/Paragraph.Text"
             android:layout_width="0dp"
