@@ -46,7 +46,7 @@
 
                 <TextView
                     android:id="@+id/text_first"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
@@ -60,7 +60,7 @@
 
                 <TextView
                     android:id="@+id/text_second"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
@@ -71,14 +71,13 @@
                     android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.secondaryDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_first" />
 
                 <TextView
                     android:id="@+id/text_third"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
@@ -88,14 +87,13 @@
                     android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.thirdDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_second" />
 
                 <TextView
                     android:id="@+id/text_fourth"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
@@ -105,14 +103,13 @@
                     android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.fourthDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_third" />
 
                 <TextView
                     android:id="@+id/text_fifth"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
@@ -122,7 +119,6 @@
                     android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.fifthDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_fourth" />
