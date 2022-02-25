@@ -142,6 +142,12 @@
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
+    <style name="Catalog.TableOfContents" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
     <style name="Catalog.Description" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_size_12</item>
