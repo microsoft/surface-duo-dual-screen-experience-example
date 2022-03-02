@@ -146,3 +146,37 @@ dependencies {
 
     kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
 }
+
+allprojects {
+    configurations {
+        debugImplementationDependenciesMetadata {
+            resolutionStrategy.activateDependencyLocking()
+        }
+        releaseImplementationDependenciesMetadata {
+            resolutionStrategy.activateDependencyLocking()
+        }
+        emulatorImplementationDependenciesMetadata {
+            resolutionStrategy.activateDependencyLocking()
+        }
+    }
+
+    // Run with the "gradlew resolveAndLockAll --write-locks" command
+    task resolveAndLockAll {
+        doFirst {
+            assert gradle.startParameter.writeDependencyLocks
+        }
+        doLast {
+            configurations {
+                debugImplementationDependenciesMetadata {
+                    it.resolve()
+                }
+                releaseImplementationDependenciesMetadata {
+                    it.resolve()
+                }
+                emulatorImplementationDependenciesMetadata {
+                    it.resolve()
+                }
+            }
+        }
+    }
+}
