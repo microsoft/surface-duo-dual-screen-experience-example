@@ -19,17 +19,20 @@ import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewAssetLoader.AssetsPathHandler
 import androidx.webkit.WebViewFeature
-import com.microsoft.device.samples.dualscreenexperience.config.LicensesConfig
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutNoticesBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.ASSETS_PATH
 
 class AboutNoticesFragment : Fragment() {
 
     private var binding: FragmentAboutNoticesBinding? = null
+
+    private val viewModel: AboutViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +47,7 @@ class AboutNoticesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupWebView(view.context)
+        setupObservers()
     }
 
     private fun setupWebView(context: Context) {
@@ -56,12 +60,7 @@ class AboutNoticesFragment : Fragment() {
                 override fun shouldInterceptRequest(
                     view: WebView,
                     request: WebResourceRequest
-                ): WebResourceResponse? {
-                    if (request.url.toString() == LicensesConfig.softwareNoticesFilePath) {
-                        return assetLoader.shouldInterceptRequest(request.url)
-                    }
-                    return null
-                }
+                ): WebResourceResponse? = assetLoader.shouldInterceptRequest(request.url)
 
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
@@ -78,8 +77,12 @@ class AboutNoticesFragment : Fragment() {
 
             settings.allowFileAccess = false
             settings.allowContentAccess = false
+        }
+    }
 
-            binding?.noticeWebView?.loadUrl(LicensesConfig.softwareNoticesFilePath)
+    private fun setupObservers() {
+        viewModel.linkToOpen.observe(viewLifecycleOwner) {
+            binding?.noticeWebView?.loadUrl(it)
         }
     }
 

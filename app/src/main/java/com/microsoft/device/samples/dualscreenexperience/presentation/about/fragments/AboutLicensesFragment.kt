@@ -17,9 +17,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.microsoft.device.samples.dualscreenexperience.R
+import com.microsoft.device.samples.dualscreenexperience.config.LicensesConfig
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutLicensesBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.OPEN_IN_APP
+import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.ASSETS_PATH
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.addClickableLink
 
@@ -37,31 +38,36 @@ class AboutLicensesFragment : Fragment() {
     ): View? {
         binding = FragmentAboutLicensesBinding.inflate(inflater, container, false)
         binding?.isDualMode = layoutInfoViewModel.isDualMode.value
-        binding?.linksItems?.itemClickListener = viewModel.linkClickListener
-        binding?.noticeClickListener = viewModel.noticeClickListener
-        binding?.itemClickListener = viewModel.linkClickListener
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdapter()
         setupObservers()
-        setupDescriptionText()
-    }
-
-    private fun setupAdapter() {
-        binding?.licenseRecyclerView?.adapter =
-            LicenseListAdapter(requireContext(), viewModel.licenseListHandler)
-        binding?.licenseRecyclerView?.setHasFixedSize(true)
+        setupListeners()
     }
 
     private fun setupObservers() {
         layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner) { binding?.isDualMode = it }
-        viewModel.linkToOpen.observe(viewLifecycleOwner) {
-            it?.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
+    }
+
+    private fun setupListeners() {
+        binding?.licensePrivacyTitle?.setOnClickListener {
+            onNoticeClicked(LicensesConfig.PRIVACY_URL)
         }
+        binding?.licenseTermsTitle?.setOnClickListener {
+            onNoticeClicked(LicensesConfig.SOFTWARE_LICENSES_PATH)
+        }
+        binding?.licenseTermsOtherTitle?.setOnClickListener {
+            onNoticeClicked(LicensesConfig.OTHER_NOTICES_PATH)
+        }
+        setupDescriptionText()
+    }
+
+    private fun onNoticeClicked(noticeUrl: String) {
+        noticeUrl.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
+        viewModel.linkToOpen.value = noticeUrl
     }
 
     private fun setupDescriptionText() {
@@ -78,7 +84,7 @@ class AboutLicensesFragment : Fragment() {
     }
 
     private fun openUrl(url: String) {
-        if (url == OPEN_IN_APP) {
+        if (url.contains(ASSETS_PATH)) {
             viewModel.navigateToNotices()
         } else {
             startActivity(
