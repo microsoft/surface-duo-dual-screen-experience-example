@@ -8,6 +8,10 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.store
 
 import androidx.test.rule.ActivityTestRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
+import com.microsoft.device.dualscreen.testing.spanFromStart
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.checkAboutInDualScreenMode
@@ -19,9 +23,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.na
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.openDevModeInDualMode
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.openUserMode
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.goBack
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromSingleToDualScreen
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -33,6 +34,7 @@ import org.junit.rules.RuleChain
 class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -40,20 +42,20 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
     fun openMapInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         openMapInSingleMode()
     }
 
     @Test
     fun openMapInDualPortraitMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         openMapInSingleMode()
 
@@ -62,7 +64,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openAboutInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         openMapInSingleMode()
 
@@ -79,8 +81,8 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openAboutInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         openMapInSingleMode()
 
@@ -97,7 +99,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openDevModeInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         openMapInSingleMode()
 
@@ -113,8 +115,8 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openDevModeInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         openMapInSingleMode()
 
@@ -137,7 +139,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openDetailsFromMapInDualPortraitMode() {
-        setOrientationRight()
+        device.setOrientationRight()
         openDetailsFromMapInDualMode()
 
         checkToolbarDevItem()
@@ -152,7 +154,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openListFromDetailsInDualPortraitMode() {
-        setOrientationRight()
+        device.setOrientationRight()
         openListFromDetailsInDualMode()
 
         checkToolbarDevItem()
@@ -162,7 +164,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
     fun spanDetailsFromMap() {
         clickOnMapMarker(storeWithoutCity.name)
 
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
         checkMapFragment()
         checkDetailsFragment(storeWithoutCity)
 
@@ -181,7 +183,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openListFromMapInDualPortraitMode() {
-        setOrientationRight()
+        device.setOrientationRight()
         openListFromMapInDualMode()
 
         checkToolbarDevItem()
@@ -191,10 +193,10 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
     fun spanListFromMap() {
         clickOnMapMarker(cityRedmond.name)
 
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
         checkMapFragment()
         checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
-        checkListFragmentInEmptyState()
+        checkListFragmentInEmptyState(device)
 
         navigateUp()
         checkMapFragment()
@@ -211,7 +213,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openDetailsFromListInDualPortraitMode() {
-        setOrientationRight()
+        device.setOrientationRight()
         openDetailsFromListInDualMode()
 
         checkToolbarDevItem()
@@ -222,7 +224,7 @@ class StoreNavigationDualScreenTest : BaseStoreNavigationTest() {
         clickOnMapMarker(cityRedmond.name)
         clickOnListItemAtPosition(STORE_FIRST_POSITION)
 
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
         checkMapFragment()
         checkDetailsFragment(firstStore)
 

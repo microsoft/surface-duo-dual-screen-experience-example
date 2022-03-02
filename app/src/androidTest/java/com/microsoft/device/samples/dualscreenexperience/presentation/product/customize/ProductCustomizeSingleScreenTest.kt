@@ -8,6 +8,9 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.product.customize
 
 import androidx.test.rule.ActivityTestRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
@@ -27,9 +30,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.na
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.product
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.selectColor
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.selectShape
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationNatural
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -41,6 +41,7 @@ import org.junit.rules.RuleChain
 class ProductCustomizeSingleScreenTest {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -48,7 +49,7 @@ class ProductCustomizeSingleScreenTest {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
@@ -69,7 +70,7 @@ class ProductCustomizeSingleScreenTest {
 
     @Test
     fun checkCustomizeInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         navigateToProductsSection()
         clickOnListItemAtPosition(PRODUCT_FIRST_POSITION)
@@ -101,7 +102,7 @@ class ProductCustomizeSingleScreenTest {
         checkColorSelected(ProductColor.AQUA)
         checkCustomizeImagePortraitContent(ProductColor.AQUA, product.bodyShape)
 
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.AQUA)
@@ -113,7 +114,7 @@ class ProductCustomizeSingleScreenTest {
         checkColorSelected(ProductColor.WHITE)
         checkCustomizeImageLandscapeContent(ProductColor.WHITE, product.bodyShape)
 
-        setOrientationNatural()
+        device.setOrientationNatural()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.WHITE)
@@ -136,7 +137,7 @@ class ProductCustomizeSingleScreenTest {
         checkColorSelected(ProductColor.LIGHT_GRAY)
         checkCustomizeImagePortraitContent(ProductColor.LIGHT_GRAY, ProductType.ELECTRIC)
 
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkShapeSelected(ProductType.ELECTRIC)
         checkColorSelected(ProductColor.LIGHT_GRAY)
@@ -148,7 +149,7 @@ class ProductCustomizeSingleScreenTest {
         checkColorSelected(ProductColor.DARK_RED)
         checkCustomizeImageLandscapeContent(ProductColor.DARK_RED, ProductType.ROCK)
 
-        setOrientationNatural()
+        device.setOrientationNatural()
 
         checkShapeSelected(ProductType.ROCK)
         checkColorSelected(ProductColor.DARK_RED)

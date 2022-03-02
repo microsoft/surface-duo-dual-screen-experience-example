@@ -8,12 +8,13 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 
 import androidx.test.rule.ActivityTestRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.isSurfaceDuo
+import com.microsoft.device.dualscreen.testing.resetOrientation
+import com.microsoft.device.dualscreen.testing.spanFromStart
+import com.microsoft.device.dualscreen.testing.unspanToStart
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkMapFragment
-import com.microsoft.device.samples.dualscreenexperience.util.isSurfaceDuoDevice
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromDualToSingleScreen
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromSingleToDualScreen
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -25,6 +26,7 @@ import org.junit.rules.RuleChain
 class LaunchDualScreenTest {
 
     private val activityRule = ActivityTestRule(LaunchActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -32,33 +34,33 @@ class LaunchDualScreenTest {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
     fun openLaunchInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         checkLaunchInDualMode()
 
-        switchFromDualToSingleScreen()
+        device.unspanToStart()
         checkTutorialNotShowing()
     }
 
     @Test
     fun openLaunchInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         checkLaunchInDualMode()
 
-        switchFromDualToSingleScreen()
+        device.unspanToStart()
         checkTutorialNotShowing()
     }
 
     @Test
     fun openMainInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         checkDualLaunchButton()
         clickDualLaunchButton()
@@ -71,8 +73,8 @@ class LaunchDualScreenTest {
 
     @Test
     fun openMainInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         checkDualLaunchButton()
         clickDualLaunchButton()
@@ -85,7 +87,7 @@ class LaunchDualScreenTest {
 
     @Test
     fun spanMain() {
-        if (isSurfaceDuoDevice()) {
+        if (device.isSurfaceDuo()) {
             checkSingleLaunchButton()
             clickSingleLaunchButton()
         } else {
@@ -94,7 +96,7 @@ class LaunchDualScreenTest {
         }
 
         checkMapFragment()
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
         goBack()
 
         checkLaunchInDualMode()

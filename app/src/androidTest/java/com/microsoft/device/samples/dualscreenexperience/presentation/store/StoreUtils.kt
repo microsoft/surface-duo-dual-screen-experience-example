@@ -23,6 +23,7 @@ import androidx.test.uiautomator.By.descContains
 import androidx.test.uiautomator.By.textContains
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
+import com.microsoft.device.dualscreen.testing.isSurfaceDuo
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.data.store.cityEntity
 import com.microsoft.device.samples.dualscreenexperience.data.store.storeEntity
@@ -31,7 +32,6 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Stor
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.util.atRecyclerAdapterPosition
 import com.microsoft.device.samples.dualscreenexperience.util.clickChildViewWithId
-import com.microsoft.device.samples.dualscreenexperience.util.isSurfaceDuoDevice
 import com.microsoft.device.samples.dualscreenexperience.util.scrollNestedScrollViewTo
 import com.microsoft.device.samples.dualscreenexperience.util.withToolbarTitle
 import org.hamcrest.CoreMatchers.containsString
@@ -88,8 +88,8 @@ fun checkListFragment(cityName: String, position: Int, store: Store) {
     checkToolbar(R.string.toolbar_stores_title)
 }
 
-fun checkListFragmentInEmptyState() {
-    if (isSurfaceDuoDevice()) {
+fun checkListFragmentInEmptyState(device: UiDevice) {
+    if (device.isSurfaceDuo()) {
         moveMap()
         onView(withId(R.id.store_list_empty_image)).check(matches(isDisplayed()))
         onView(withId(R.id.store_list_empty_message)).check(

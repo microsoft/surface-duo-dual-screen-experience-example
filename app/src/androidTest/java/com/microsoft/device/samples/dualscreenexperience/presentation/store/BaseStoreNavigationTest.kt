@@ -7,11 +7,15 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.store
 
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.spanFromStart
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.navigateUp
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromSingleToDualScreen
 
 open class BaseStoreNavigationTest {
+
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     fun openMapInSingleMode() {
         checkMapFragment()
@@ -28,7 +32,7 @@ open class BaseStoreNavigationTest {
     }
 
     fun openDetailsFromMapInDualMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         clickOnMapMarker(storeWithoutCity.name)
         checkMapFragment()
@@ -49,12 +53,12 @@ open class BaseStoreNavigationTest {
     }
 
     fun openListFromMapInDualMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         clickOnMapMarker(cityRedmond.name)
         checkMapFragment()
         checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
-        checkListFragmentInEmptyState()
+        checkListFragmentInEmptyState(device)
 
         navigateUp()
         checkMapFragment()
@@ -62,7 +66,7 @@ open class BaseStoreNavigationTest {
     }
 
     fun openListFromDetailsInDualMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         clickOnMapMarker(storeWithoutCity.name)
         checkMapFragment()
@@ -71,7 +75,7 @@ open class BaseStoreNavigationTest {
         clickOnMapMarker(cityRedmond.name)
         checkMapFragment()
         checkListFragment(cityRedmond.name, STORE_FIRST_POSITION, firstStore)
-        checkListFragmentInEmptyState()
+        checkListFragmentInEmptyState(device)
 
         navigateUp()
         checkMapFragment()
@@ -95,7 +99,7 @@ open class BaseStoreNavigationTest {
     }
 
     fun openDetailsFromListInDualMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         clickOnMapMarker(cityRedmond.name)
         clickOnListItemAtPosition(STORE_FIRST_POSITION)

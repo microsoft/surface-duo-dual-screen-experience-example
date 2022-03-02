@@ -10,7 +10,11 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.order
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
+import com.microsoft.device.dualscreen.testing.spanFromStart
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.data.AppDatabase
 import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderDao
@@ -29,9 +33,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.order.Orde
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_TWO
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.goBack
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkToolbar
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromSingleToDualScreen
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,6 +51,7 @@ import javax.inject.Singleton
 @HiltAndroidTest
 class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -80,27 +82,27 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
     fun openEmptyOrderInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
     }
 
     @Test
     fun openEmptyOrderInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
     }
 
     @Test
     fun openAboutInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
 
@@ -120,8 +122,8 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun openAboutInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
 
@@ -141,7 +143,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun openDevModeInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
 
@@ -160,8 +162,8 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun openDevModeInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_THREE)
 
@@ -180,7 +182,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemToOrderAndRemoveInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         addItemToOrderAndRemove(
             itemPosition = DUAL_PORTRAIT_ORDER_ITEM_POS,
@@ -193,8 +195,8 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemToOrderAndRemoveInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         addItemToOrderAndRemove(
             itemPosition = DUAL_LANDSCAPE_ORDER_ITEM_POS,
@@ -207,7 +209,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemToOrderAndSubmitInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         addItemToOrderAndSubmit(
             itemPosition = DUAL_PORTRAIT_ORDER_ITEM_POS,
@@ -220,8 +222,8 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemToOrderAndSubmitInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         addItemToOrderAndSubmit(
             itemPosition = DUAL_LANDSCAPE_ORDER_ITEM_POS,
@@ -234,7 +236,7 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemWithDifferentQuantitiesAndSubmitInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = DUAL_PORTRAIT_ORDER_ITEM_POS,
@@ -247,8 +249,8 @@ class OrderNavigationDualScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemWithDifferentQuantitiesAndSubmitInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = DUAL_LANDSCAPE_ORDER_ITEM_POS,
