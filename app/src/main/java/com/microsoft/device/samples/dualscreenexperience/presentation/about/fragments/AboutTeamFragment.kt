@@ -23,7 +23,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoRepository
 import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
-import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutTeamBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
@@ -50,7 +49,7 @@ class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged(it)
+                    onWindowLayoutInfoChanged()
                 }
             }
         }
@@ -88,8 +87,8 @@ class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
         )
     }
 
-    private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        if (!viewModel.isNavigationAtLicenses()) {
+    private fun onWindowLayoutInfoChanged() {
+        if (viewModel.isNavigationAtStart()) {
             viewModel.navigateToLicenses()
         }
     }
