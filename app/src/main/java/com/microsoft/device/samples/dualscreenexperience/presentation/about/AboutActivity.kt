@@ -51,7 +51,7 @@ class AboutActivity : AppCompatActivity() {
     private fun observeWindowLayoutInfo() {
         windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }
