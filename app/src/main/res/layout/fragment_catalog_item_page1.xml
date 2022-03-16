@@ -24,7 +24,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/catalog_item1_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:background="@color/gray">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/catalog_item_scroll_view"
@@ -43,9 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_first"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
@@ -57,66 +58,67 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_second"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
                     android:layout_marginTop="@dimen/catalog_top_margin"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:ellipsize="middle"
+                    android:paddingTop="@dimen/normal_padding"
+                    android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.secondaryDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_first" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_third"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
-                    android:layout_marginTop="@dimen/catalog_top_margin"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:ellipsize="middle"
+                    android:paddingTop="@dimen/normal_padding"
+                    android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.thirdDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_second" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_fourth"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
-                    android:layout_marginTop="@dimen/catalog_top_margin"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:ellipsize="middle"
+                    android:paddingTop="@dimen/normal_padding"
+                    android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.fourthDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_third" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/text_fifth"
-                    style="@style/Catalog.Description"
+                    style="@style/Catalog.TableOfContents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/catalog_horizontal_margin"
-                    android:layout_marginTop="@dimen/catalog_top_margin"
                     android:layout_marginEnd="@dimen/catalog_horizontal_margin"
                     android:ellipsize="middle"
+                    android:paddingTop="@dimen/normal_padding"
+                    android:paddingBottom="@dimen/normal_padding"
                     android:singleLine="true"
                     android:text="@{catalogItem.fifthDescription}"
-                    android:textSize="@dimen/text_size_16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_fourth" />
@@ -133,7 +135,7 @@
             android:visibility="gone"
             tools:ignore="MissingConstraints" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/pages"
             style="@style/Catalog.Description"
             android:layout_width="match_parent"

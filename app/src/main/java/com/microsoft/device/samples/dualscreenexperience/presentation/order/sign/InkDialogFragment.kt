@@ -19,10 +19,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.SimpleAdapter
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -47,9 +49,7 @@ class InkDialogFragment : DialogFragment() {
     private var inkStrokeMenuData = arrayListOf(
         hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_1)),
         hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_2)),
-        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_3)),
-        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_4)),
-        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_5))
+        hashMapOf(Pair(INK_STROKE_ICON, R.drawable.ink_stroke_3))
     )
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -174,29 +174,28 @@ class InkDialogFragment : DialogFragment() {
     }
 
     private fun setupObservers() {
-        inkViewModel.selectedInkColor.observe(
-            this,
-            {
-                it?.let { newColor ->
-                    binding?.inkView?.color = newColor
-                    getInkViewColorList().firstOrNull { viewColor ->
-                        viewColor?.inkColor == newColor
-                    }?.select()
+        inkViewModel.selectedInkColor.observe(this) {
+            it?.let { newColor ->
+                binding?.inkView?.color = newColor
+                getInkViewColorList().firstOrNull { viewColor ->
+                    viewColor?.inkColor == newColor
+                }?.select()
+            }
+        }
+        inkViewModel.selectedStrokeWidth.observe(this) {
+            it?.let { newWidth ->
+                binding?.inkView?.strokeWidth = newWidth
+                binding?.inkView?.strokeWidthMax = newWidth
+                inkStrokeMenuData[convertToStrokeMenuValue(newWidth)][INK_STROKE_ICON]?.let { resId ->
+                    binding?.inkStrokeButton?.setImageResource(resId)
+                    binding?.inkStrokeButton?.contentDescription =
+                        getString(
+                            R.string.order_accessibility_ink_stroke,
+                            getString(getInkStrokeDescriptionResFromDrawable(resId))
+                        )
                 }
             }
-        )
-        inkViewModel.selectedStrokeWidth.observe(
-            this,
-            {
-                it?.let { newWidth ->
-                    binding?.inkView?.strokeWidth = newWidth
-                    binding?.inkView?.strokeWidthMax = newWidth
-                    inkStrokeMenuData[convertToStrokeMenuValue(newWidth)][INK_STROKE_ICON]?.let { resId ->
-                        binding?.inkStrokeButton?.setImageResource(resId)
-                    }
-                }
-            }
-        )
+        }
     }
 
     private fun initInkParameters() {
@@ -211,8 +210,7 @@ class InkDialogFragment : DialogFragment() {
     private fun getInkViewColorList() = listOf(
         binding?.inkColor1,
         binding?.inkColor2,
-        binding?.inkColor3,
-        binding?.inkColor4
+        binding?.inkColor3
     )
 
     private fun onInkColorViewClicked(
@@ -223,10 +221,10 @@ class InkDialogFragment : DialogFragment() {
         selectedView.select()
     }
 
-    private fun convertToInkStrokeValue(menuValue: Int) = menuValue * MENU_TO_STROKE_VALUE_RATIO
+    private fun convertToInkStrokeValue(menuValue: Int) = (menuValue.inc()) * MENU_TO_STROKE_VALUE_RATIO
 
     private fun convertToStrokeMenuValue(inkStrokeValue: Float) =
-        (inkStrokeValue / MENU_TO_STROKE_VALUE_RATIO).toInt()
+        (inkStrokeValue / MENU_TO_STROKE_VALUE_RATIO).toInt().dec()
 
     private fun showStrokeWidthMenu(anchorView: View) {
         if (inkStrokePopupWindow?.isShowing == true) {
@@ -242,6 +240,17 @@ class InkDialogFragment : DialogFragment() {
             intArrayOf(R.id.ink_menu_item_image)
         )
 
+        adapter.viewBinder = SimpleAdapter.ViewBinder { view, data, _ ->
+            (view as? ImageView)?.apply {
+                (data as? Int)?.let { drawableRes ->
+                    setImageDrawable(ContextCompat.getDrawable(view.context, drawableRes))
+                    contentDescription =
+                        view.context.getString(getInkStrokeDescriptionResFromDrawable(drawableRes))
+                }
+            }
+            true
+        }
+
         inkStrokePopupWindow = ListPopupWindow(requireContext()).also {
             it.anchorView = anchorView
             it.setAdapter(adapter)
@@ -252,9 +261,20 @@ class InkDialogFragment : DialogFragment() {
                 it.dismiss()
             }
             it.isModal = true
+            it.inputMethodMode = ListPopupWindow.INPUT_METHOD_NOT_NEEDED
+            it.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+            it.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.rectangle_gold_padding))
             it.show()
         }
     }
+
+    private fun getInkStrokeDescriptionResFromDrawable(drawableRes: Int): Int =
+        when (drawableRes) {
+            R.drawable.ink_stroke_1 -> R.string.order_ink_stroke_small
+            R.drawable.ink_stroke_2 -> R.string.order_ink_stroke_medium
+            R.drawable.ink_stroke_3 -> R.string.order_ink_stroke_large
+            else -> R.string.order_ink_stroke_large
+        }
 
     override fun onCancel(dialog: DialogInterface) {
         orderViewModel.showSignDialog.value = false
@@ -271,7 +291,7 @@ class InkDialogFragment : DialogFragment() {
         const val DIALOG_SIZE_WIDTH_PERCENTAGE = 0.7f
         const val DIALOG_SIZE_HEIGHT_PERCENTAGE = 0.8f
         const val MENU_TO_STROKE_VALUE_RATIO = 3f
-        const val STROKE_VALUE_INIT_POS = 2
+        const val STROKE_VALUE_INIT_POS = 1
         const val INK_FRAGMENT_TAG = "ink_dialog"
         const val INK_STROKE_ICON = "INK_STROKE_ICON"
     }

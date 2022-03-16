@@ -32,6 +32,8 @@ To learn how to load your app on the Surface Duo emulator, see the [documentatio
 
 ![Order dual portrait](screenshots/dual_portrait_order.png)
 
+![Order Ink dual portrait](screenshots/dual_portrait_order_ink.png)
+
 ![Developer Mode dual portrait](screenshots/dual_portrait_dev_mode.png)
 
 ## Related links

@@ -36,13 +36,10 @@ class StoreListFragment : Fragment() {
         val storeAdapter = StoreAdapter(requireContext(), viewModel)
         recyclerView.adapter = storeAdapter
 
-        viewModel.visibleStoresList.observe(
-            viewLifecycleOwner,
-            {
-                binding.isListEmpty = it.isNullOrEmpty()
-                storeAdapter.refreshData()
-            }
-        )
+        viewModel.visibleStoresList.observe(viewLifecycleOwner) {
+            binding.isListEmpty = it.isNullOrEmpty()
+            storeAdapter.refreshData()
+        }
 
         setupObservers()
 
@@ -50,14 +47,11 @@ class StoreListFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedStore.observe(
-            viewLifecycleOwner,
-            {
-                if (it == null && viewModel.selectedCity.value != null) {
-                    setupToolbar()
-                }
+        viewModel.selectedStore.observe(viewLifecycleOwner) {
+            if (it == null && viewModel.selectedCity.value != null) {
+                setupToolbar()
             }
-        )
+        }
     }
 
     override fun onResume() {

@@ -6,28 +6,18 @@
   ~
   -->
 
-<LinearLayout
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_mode_label"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:drawablePadding="@dimen/micro_padding"
     android:gravity="center"
-    android:orientation="horizontal"
-    tools:background="@color/black">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/user_mode_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/micro_margin"
-        android:src="@drawable/ic_user_mode"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/user_mode_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/small_padding"
-        android:text="@string/toolbar_user_mode"
-        android:textColor="@color/gold"/>
-
-</LinearLayout>
+    android:paddingStart="@dimen/small_padding"
+    android:paddingEnd="@dimen/small_padding"
+    android:text="@string/toolbar_user_mode"
+    android:textColor="@color/gold"
+    app:drawableStartCompat="@drawable/ic_user_mode"
+    tools:background="@color/black" />

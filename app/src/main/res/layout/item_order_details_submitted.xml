@@ -31,7 +31,7 @@
         android:paddingEnd="@dimen/medium_padding"
         tools:background="@color/gray">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/order_date"
             style="@style/Store.Name"
             orderDate="@{timestamp}"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Order Date: 02/21"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/order_id"
             style="@style/GoldText"
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Order ID: 436482"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/order_amount"
             style="@style/GoldText"
             orderAmount="@{price}"

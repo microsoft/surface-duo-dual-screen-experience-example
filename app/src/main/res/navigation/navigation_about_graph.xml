@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/fragment_about_team"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutTeamFragment"
-        android:label="AboutTeamFragment"
+        android:label="About Team"
         tools:layout="@layout/fragment_about_team">
 
         <action android:id="@+id/action_about_team_to_licenses"
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/fragment_about_licenses"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutLicensesFragment"
-        android:label="AboutLicensesFragment"
+        android:label="Licenses"
         tools:layout="@layout/fragment_about_licenses">
 
         <action android:id="@+id/action_about_licenses_to_notices"
@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/fragment_about_notices"
         android:name="com.microsoft.device.samples.dualscreenexperience.presentation.about.fragments.AboutNoticesFragment"
-        android:label="AboutNoticesFragment"
+        android:label="Notices"
         tools:layout="@layout/fragment_about_notices" />
 
 </navigation>

@@ -40,7 +40,7 @@ class CatalogNavigationDualScreenTest {
     fun checkAllCatalogItems() {
         navigateToCatalogSection()
 
-        checkToolbar(R.string.nav_catalog_title)
+        checkToolbar(R.string.toolbar_catalog_title)
 
         checkCatalogPageIsDisplayed(1)
 
@@ -62,7 +62,7 @@ class CatalogNavigationDualScreenTest {
         swipeCatalogViewPagerToTheLeft()
         checkCatalogPageIsDisplayed(7)
 
-        checkToolbar(R.string.nav_catalog_title)
+        checkToolbar(R.string.toolbar_catalog_title)
     }
 
     @Test

@@ -77,7 +77,7 @@ class DevModeActivity : AppCompatActivity() {
     private fun observeWindowLayoutInfo() {
         windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }
@@ -188,6 +188,9 @@ class DevModeActivity : AppCompatActivity() {
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode() != layoutInfoViewModel.isDualMode.value) {
+            invalidateOptionsMenu()
+        }
         layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
         layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()
     }

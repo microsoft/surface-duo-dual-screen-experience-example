@@ -19,7 +19,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
+import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentDevContentBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.NetworkConnectionLiveData
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RestrictedWebViewClient
 
 class DevContentFragment : Fragment() {
@@ -34,25 +36,41 @@ class DevContentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDevContentBinding.inflate(inflater, container, false)
+        binding?.isLoading = true
+        binding?.isConnected = true
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupNetworkObserver()
         setupWebView()
         setupObservers()
     }
 
-    private fun setupObservers() {
-        viewModel.webViewUrl.observe(
-            viewLifecycleOwner,
-            {
-                it?.let {
-                    binding?.devContentWebView?.loadUrl(it)
+    private fun setupNetworkObserver() {
+        NetworkConnectionLiveData(activity?.applicationContext).observe(viewLifecycleOwner) { isConnected ->
+            if (isConnected) {
+                viewModel.webViewUrl.value?.let { urlValue ->
+                    onWebViewStartedLoading()
+                    binding?.devContentWebView?.post {
+                        binding?.devContentWebView?.loadUrl(urlValue)
+                    }
                 }
+            } else {
+                binding?.devContentNoInternet?.noInternetConnectionTitle?.setText(R.string.no_internet_connection_title)
             }
-        )
+            binding?.isConnected = isConnected
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.webViewUrl.observe(viewLifecycleOwner) {
+            it?.let {
+                binding?.devContentWebView?.loadUrl(it)
+            }
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -63,7 +81,13 @@ class DevContentFragment : Fragment() {
             if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
             }
-            webViewClient = RestrictedWebViewClient(viewModel.acceptedHosts, ::openUrl)
+            webViewClient = RestrictedWebViewClient(
+                acceptedHosts = viewModel.acceptedHosts,
+                onAlienLinkClicked = ::openUrl,
+                onProgressStarted = ::onWebViewStartedLoading,
+                onProgressChanged = ::onWebViewFinishedLoading,
+                onTimeoutReceived = ::onTimeoutErrorReceived
+            )
         }
 
         selectFirstPage()
@@ -82,6 +106,19 @@ class DevContentFragment : Fragment() {
             Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
+    }
+
+    private fun onWebViewStartedLoading() {
+        binding?.isLoading = true
+    }
+
+    private fun onWebViewFinishedLoading() {
+        binding?.isLoading = false
+    }
+
+    private fun onTimeoutErrorReceived() {
+        binding?.isConnected = false
+        binding?.devContentNoInternet?.noInternetConnectionTitle?.setText(R.string.timeout_internet_connection_title)
     }
 
     override fun onDestroyView() {

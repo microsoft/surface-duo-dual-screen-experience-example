@@ -24,6 +24,7 @@ import com.microsoft.device.samples.dualscreenexperience.databinding.OrderRecomm
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
+import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.DataListHandler
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener
@@ -233,6 +234,9 @@ class OrderListAdapter(
                     getProductDrawable(productModel.color, productModel.bodyShape)
                 )?.toBitmap()?.rotate(LayoutInfoViewModel.ROTATE_HORIZONTALLY)
             )
+            productImage.contentDescription = productImage.context.getString(
+                getProductContentDescription(productModel.color, productModel.bodyShape)
+            )
 
             product = productModel
             itemListener = itemClickListener
@@ -276,6 +280,9 @@ class OrderListAdapter(
 
         fun bind(item: OrderItem, isEditEnabled: Boolean) {
             binding.item = item
+            binding.productImage.contentDescription = binding.root.context.getString(
+                getProductContentDescription(item.color, item.bodyShape)
+            )
             binding.isEditEnabled = isEditEnabled
             binding.quantityDataHandler = quantityDataListHandler
             binding.executePendingBindings()

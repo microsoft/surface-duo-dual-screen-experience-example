@@ -38,10 +38,11 @@
         android:paddingEnd="@dimen/normal_padding"
         android:paddingBottom="@dimen/small_padding">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/product_details_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@null"
             android:paddingStart="@dimen/small_padding"
             android:paddingBottom="@dimen/small_padding"
             app:layout_constraintBottom_toTopOf="@id/product_details_customize_button"
@@ -55,7 +56,7 @@
             tools:src="@drawable/orange_classic_guitar_normal"
             tools:visibility="visible"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_details_name"
             style="@style/Store.Name"
             android:layout_width="wrap_content"
@@ -118,7 +119,7 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_details_type_title"
             style="@style/Store.Name"
             android:layout_width="0dp"
@@ -130,7 +131,7 @@
             app:layout_constraintStart_toStartOf="@id/product_details_name"
             app:layout_constraintTop_toBottomOf="@id/product_details_info_containers"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/product_details_type_description"
             style="@style/GoldText"
             android:layout_width="0dp"
@@ -151,30 +152,33 @@
             app:barrierDirection="start"
             app:constraint_referenced_ids="product_details_image, product_details_customize_button" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/product_details_customize_button"
             style="@style/Customize.Button"
             invisibleIf="@{isInCustomizeMode}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="@string/product_details_customize_button"
+            app:autoSizeMaxTextSize="@dimen/text_size_14"
             app:autoSizeMinTextSize="@dimen/text_size_12"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@id/product_details_type_description"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/touch_target_size"
             app:layout_constraintHorizontal_bias="0.75"
             app:layout_constraintStart_toStartOf="@id/product_details_image"
             app:layout_constraintTop_toTopOf="@id/product_details_type_title"
             app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintWidth_max="150dp"
-            tools:visibility="invisible" />
+            app:layout_constraintWidth_max="@dimen/quadruple_touch_target_size"
+            app:layout_constraintWidth_min="@dimen/touch_target_size"
+            tools:visibility="visible" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/product_details_customize_place_order"
             visibleIf="@{isInCustomizeMode}"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:contentDescription="@string/product_accessibility_add_to_order"
             app:layout_constraintBottom_toBottomOf="@id/product_details_type_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/product_details_image_buttons"
@@ -183,7 +187,7 @@
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/add_to_order_animation"
             tools:background="@drawable/rounded_rectangle_button"
-            tools:visibility="visible"/>
+            tools:visibility="invisible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

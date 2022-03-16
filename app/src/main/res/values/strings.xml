@@ -14,12 +14,25 @@
     <string name="launch_button">Launch</string>
     <string name="tutorial_launch_text">Drag the app across the hinge to span the app</string>
 
+    <string name="launch_accessibility_patterns">Dual-screen design patterns</string>
+
     <!-- Main -->
 
-    <string name="nav_stores_title">Stores</string>
-    <string name="nav_catalog_title">New Guitars</string>
-    <string name="nav_products_title">Product Details and Customization</string>
-    <string name="nav_order_title">Order</string>
+    <string name="nav_stores_title">Navigation Stores</string>
+    <string name="nav_catalog_title">Navigation Catalog</string>
+    <string name="nav_products_title">Navigation Products</string>
+    <string name="nav_order_title">Navigation Order</string>
+
+    <string name="toolbar_stores_title">Stores</string>
+    <string name="toolbar_catalog_title">New Guitars</string>
+    <string name="toolbar_products_title">Product Details and Customization</string>
+    <string name="toolbar_orders_title">Orders</string>
+    <string name="toolbar_orders_receipt_title">Order receipt</string>
+
+    <string name="toolbar_dev_mode">Dev Mode</string>
+    <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
+    <string name="toolbar_user_mode">User Mode</string>
+    <string name="toolbar_about">About</string>
 
     <!-- Stores -->
 
@@ -30,7 +43,6 @@
 
     <string name="store_title">%s Guitar Store</string>
     <string name="item_store_button_text">View</string>
-    <string name="toolbar_stores_title">Stores</string>
     <string name="store_list_empty_message">There are no stores in the area you are looking at. Please go back to your current location.</string>
 
     <string name="store_details_about_tab">About</string>
@@ -40,6 +52,9 @@
     <string name="contact_info_label">Owner Contact Info:</string>
     <string name="store_map_recenter">Re-center map</string>
     <string name="store_map_circle_touch_tutorial">Visit these stores today</string>
+
+    <string name="store_accessibility_details_about">About Store</string>
+    <string name="store_accessibility_rating">Rating: %s</string>
 
     <!-- Products -->
 
@@ -70,14 +85,13 @@
     <string name="product_electric_white_normal">Guitar of type white electric normal</string>
     <string name="product_hardrock_red_normal">Guitar of type red hardrock normal</string>
 
+    <string name="product_accessibility_add_to_order">Add to Order</string>
+
     <!-- Catalog -->
 
     <string name="catalog_page_no">Page %1$d of %2$d</string>
 
     <!-- Orders -->
-
-    <string name="toolbar_orders_title">Orders</string>
-    <string name="toolbar_orders_receipt_title">Order receipt</string>
 
     <string name="order_empty_message">There are no guitars in your cart. Please head to Products and select the items to view them in your cart.</string>
     <string name="order_recommendations_title">Recommendations</string>
@@ -100,12 +114,27 @@
     <string name="order_sign_confirm">Confirm</string>
     <string name="order_sign_error">Please sign before clicking Confirm</string>
 
+    <string name="order_accessibility_quantity_plus">Increase quantity</string>
+    <string name="order_accessibility_quantity_minus">Decrease quantity</string>
+    <string name="order_accessibility_remove">Remove</string>
+    <string name="order_accessibility_reset">Reset</string>
+
+    <string name="order_accessibility_ink_color_red">Ink color red</string>
+    <string name="order_accessibility_ink_color_white">Ink color white</string>
+    <string name="order_accessibility_ink_color_blue">Ink color blue</string>
+
+    <string name="order_accessibility_ink_stroke">Current stroke width: %s</string>
+
+    <string name="order_ink_stroke_small">Small</string>
+    <string name="order_ink_stroke_medium">Medium</string>
+    <string name="order_ink_stroke_large">Large</string>
+
+    <string name="accessibility_selected">Selected</string>
+    <string name="accessibility_unselected">Unselected</string>
+
     <!-- Developer Mode -->
 
     <string name="tutorial_developer_mode_text">Learn more about the design patterns and code</string>
-    <string name="toolbar_dev_mode">Dev Mode</string>
-    <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
-    <string name="toolbar_user_mode">User Mode</string>
     <string name="dev_mode_sdk_components">Surface Duo SDK used in this screen</string>
     <string name="dev_mode_code">Code used to achieve this screen</string>
     <string name="dev_mode_design_pattern">Design Pattern used on this screen</string>
@@ -119,7 +148,6 @@
 
     <!-- About -->
 
-    <string name="toolbar_about">About</string>
     <string name="about_team_title">About us</string>
     <string name="about_team_description">An Android application that showcases all the dual screen design patterns, SDKs and code snippets. Created by the Microsoft Foldables Developer Experience Team.</string>
     <string name="about_feedback_title">Feedback</string>
@@ -130,11 +158,21 @@
     <string name="about_licenses_terms_title">Software Notices</string>
     <string name="about_licenses_terms_other_title">Other Notices</string>
 
+    <string name="about_accessibility_docs">Microsoft Docs</string>
+    <string name="about_accessibility_github">Github</string>
+    <string name="about_accessibility_blog">Microsoft Blog</string>
+    <string name="about_accessibility_twitch">Twitch</string>
+    <string name="about_accessibility_figma">Figma</string>
+    <string name="about_accessibility_learn">Microsoft Learn</string>
+    <string name="about_accessibility_twitter">Twitter</string>
+    <string name="about_accessibility_youtube">Youtube</string>
+
     <!-- No Internet Connection -->
 
     <string name="no_internet_connection_title">No Internet Connection</string>
     <string name="no_internet_connection_description">Try checking the network cables, modem, router or try re-connecting to WiFi and restarting the app.</string>
     <string name="no_google_services_title">Google Services unavailable</string>
     <string name="no_google_services_description">It seems like this application requires Google Services to visualize Maps and it isn’t supported on this device or emulator. Try using a different one to test all features.</string>
+    <string name="timeout_internet_connection_title">Slow Internet Connection</string>
 
 </resources>

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/large_padding">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/dev_control_title"
                     style="@style/Store.Title"
                     android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/dev_control_design_patterns"
                     style="@style/Store.Title"
                     visibleIf="@{isDesignPatternPresent}"
@@ -68,7 +68,7 @@
                     app:layout_constraintTop_toBottomOf="@id/dev_control_title"
                     app:layout_constraintVertical_chainStyle="spread_inside"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/dev_control_code"
                     style="@style/Store.Title"
                     android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dev_control_design_patterns"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/dev_control_sdk"
                     style="@style/Store.Title"
                     android:layout_width="match_parent"

@@ -19,12 +19,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:theme="@style/Theme.App.ActionBar"
         app:layout_constraintBottom_toTopOf="@id/nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-        app:theme="@style/Theme.App.ActionBar"
         app:titleTextAppearance="@style/Theme.App.ActionBar.Title"
         tools:title="@string/app_name"
         tools:visibility="visible" />

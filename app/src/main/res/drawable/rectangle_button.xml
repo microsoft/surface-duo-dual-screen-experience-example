@@ -6,11 +6,15 @@
   ~
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:left="@dimen/nano_padding"
+        android:right="@dimen/nano_padding"
+        android:bottom="@dimen/small_padding"
+        android:top="@dimen/small_padding">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/medium_button_radius" />
             <solid android:color="@color/orange" />
         </shape>
     </item>
-</selector>
+</layer-list>

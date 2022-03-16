@@ -67,6 +67,9 @@ enum class ProductType(var bodyShapeId: Int, var colorList: List<ProductColor>) 
         )
     );
 
+    override fun toString(): String =
+        super.toString().replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }
+
     companion object {
         fun get(bodyShapeId: Int?) = values().first { it.bodyShapeId == bodyShapeId }
     }
@@ -83,6 +86,9 @@ enum class ProductColor(var colorId: Int) {
     LIGHT_GRAY(8),
     MUSTARD(9),
     RED(10);
+
+    override fun toString(): String =
+        super.toString().replace('_', ' ').lowercase().replaceFirstChar { it.uppercase() }
 
     companion object {
         fun get(colorId: Int?) = values().first { it.colorId == colorId }

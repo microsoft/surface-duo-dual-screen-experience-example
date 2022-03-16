@@ -46,7 +46,7 @@ class SingleScreenLaunchFragment : Fragment() {
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
         windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }
@@ -70,7 +70,7 @@ class SingleScreenLaunchFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner, { binding?.isDualScreen = it })
+        layoutInfoViewModel.isDualMode.observe(viewLifecycleOwner) { binding?.isDualScreen = it }
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

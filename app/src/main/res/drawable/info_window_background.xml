@@ -5,8 +5,8 @@
   ~
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="207dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/toast_color" />
             <size
@@ -15,4 +15,4 @@
             <corners android:radius="@dimen/tutorial_balloon_radius" />
         </shape>
     </item>
-</selector>
+</layer-list>

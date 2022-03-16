@@ -54,13 +54,13 @@ class LaunchActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         observeWindowLayoutInfo()
-        viewModel.shouldShowTutorial.observe(this, { handleTutorial(it) })
+        viewModel.shouldShowTutorial.observe(this) { handleTutorial(it) }
     }
 
     private fun observeWindowLayoutInfo() {
         windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }
@@ -108,7 +108,9 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     private fun showTutorial(ordinal: Int) {
-        tutorial.show(window.decorView, TutorialBalloonType.values()[ordinal])
+        if (window != null && !isFinishing) {
+            tutorial.show(window.decorView, TutorialBalloonType.values()[ordinal])
+        }
     }
 
     private fun dismissTutorial() {

@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     private fun observeWindowLayoutInfo() {
         windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }
@@ -196,19 +196,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTutorialObserver() {
-        tutorialViewModel.showStoresTutorial.observe(
-            this,
-            {
-                if (it == true && tutorialViewModel.shouldShowStoresTutorial()) {
-                    showStoresTutorial()
-                }
+        tutorialViewModel.showStoresTutorial.observe(this) { isTutorialTriggered ->
+            if (isTutorialTriggered == true && tutorialViewModel.shouldShowStoresTutorial()) {
+                showStoresTutorial()
             }
-        )
+        }
     }
 
     private fun showStoresTutorial() {
         val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_stores_graph)
-        tutorial.show(storeItem, TutorialBalloonType.STORES)
+        if (!isFinishing) {
+            tutorial.show(storeItem, TutorialBalloonType.STORES)
+        }
     }
 
     private fun hideStoresTutorial() {
@@ -221,7 +220,9 @@ class MainActivity : AppCompatActivity() {
     private fun showDeveloperModeTutorial(anchorView: View) {
         if (tutorialViewModel.shouldShowDeveloperModeTutorial()) {
             tutorial.hide()
-            tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+            if (!isFinishing) {
+                tutorial.show(anchorView, TutorialBalloonType.DEVELOPER_MODE)
+            }
         } else {
             setupTutorialObserver()
         }

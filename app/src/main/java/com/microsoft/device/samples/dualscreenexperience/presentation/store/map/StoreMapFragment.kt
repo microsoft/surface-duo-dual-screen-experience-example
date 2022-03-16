@@ -63,6 +63,7 @@ class StoreMapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
+        binding?.isConnected = true
         onWindowLayoutInfoChanged()
 
         setupMapView(savedInstanceState)
@@ -101,7 +102,7 @@ class StoreMapFragment : Fragment() {
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
         windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged()
                 }
@@ -131,13 +132,10 @@ class StoreMapFragment : Fragment() {
 
                 binding?.isConnected = false
             } else {
-                NetworkConnectionLiveData(context).observe(
-                    viewLifecycleOwner,
-                    { isConnected ->
-                        onWindowLayoutInfoChanged()
-                        binding?.isConnected = isConnected
-                    }
-                )
+                NetworkConnectionLiveData(it).observe(viewLifecycleOwner) { isConnected ->
+                    onWindowLayoutInfoChanged()
+                    binding?.isConnected = isConnected
+                }
             }
         }
     }
@@ -151,34 +149,27 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.selectedCity.observe(
-            viewLifecycleOwner,
-            {
-                onWindowLayoutInfoChanged()
-                viewModel.markersList.value?.let { newData ->
-                    addMarkersToMap(newData)
-                }
-                changeActionBarTitle(it, viewModel.selectedStore.value)
+        viewModel.selectedCity.observe(viewLifecycleOwner) {
+            onWindowLayoutInfoChanged()
+            viewModel.markersList.value?.let { newData ->
+                addMarkersToMap(newData)
             }
-        )
-        viewModel.markersCenter.observe(
-            viewLifecycleOwner,
-            { center -> center?.let { resetMap(center, selectZoomLevel()) } }
-        )
-        viewModel.selectedStore.observe(
-            viewLifecycleOwner,
-            {
-                onWindowLayoutInfoChanged()
-                changeActionBarTitle(viewModel.selectedCity.value, it)
-                mapController.unSelectAllMarkers(markerFactory)
-                it?.let { store ->
-                    mapController.selectMarker(
-                        store.name,
-                        markerFactory?.createBitmapWithText(store.name, true)
-                    )
-                }
+            changeActionBarTitle(it, viewModel.selectedStore.value)
+        }
+        viewModel.markersCenter.observe(viewLifecycleOwner) { center ->
+            center?.let { resetMap(center, selectZoomLevel()) }
+        }
+        viewModel.selectedStore.observe(viewLifecycleOwner) {
+            onWindowLayoutInfoChanged()
+            changeActionBarTitle(viewModel.selectedCity.value, it)
+            mapController.unSelectAllMarkers(markerFactory)
+            it?.let { store ->
+                mapController.selectMarker(
+                    store.name,
+                    markerFactory?.createBitmapWithText(store.name, true)
+                )
             }
-        )
+        }
     }
 
     private fun selectZoomLevel(): Float =

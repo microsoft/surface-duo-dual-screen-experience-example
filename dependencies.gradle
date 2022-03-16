@@ -12,8 +12,8 @@ ext {
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
     minSdkVersion = 23
-    versionCode = 6
-    versionName = "1.0.0.5"
+    versionCode = 7
+    versionName = "1.0.0.6"
     applicationId = "com.microsoft.device.samples.dualscreenexperience"
 
     config = [
@@ -123,6 +123,7 @@ ext {
             junit              : "androidx.test.ext:junit:$junitInstrumentationVersion",
             espressoCore       : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
             espressoContrib    : "androidx.test.espresso:espresso-contrib:$espressoCoreVersion",
+            espressoAccessibility: "androidx.test.espresso:espresso-accessibility:$espressoCoreVersion",
             testRunner         : "androidx.test:runner:$testRunnerVersion",
             testRules          : "androidx.test:rules:$testRulesVersion",
             uiAutomator        : "androidx.test.uiautomator:uiautomator:$uiAutomatorVersion",

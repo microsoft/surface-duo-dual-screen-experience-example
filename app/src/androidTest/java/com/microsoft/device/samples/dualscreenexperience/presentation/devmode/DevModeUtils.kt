@@ -19,25 +19,11 @@ import com.microsoft.device.samples.dualscreenexperience.util.scrollNestedScroll
 import org.hamcrest.core.AllOf.allOf
 
 fun checkToolbarDevItem() {
-    onView(withId(R.id.toolbar)).check(
-        matches(
-            allOf(
-                hasDescendant(withId(R.id.dev_mode_action)),
-                hasDescendant(withId(R.id.dev_mode_label))
-            )
-        )
-    )
+    onView(withId(R.id.toolbar)).check(matches(allOf(hasDescendant(withId(R.id.dev_mode_label)))))
 }
 
 fun checkToolbarUserItem() {
-    onView(withId(R.id.toolbar)).check(
-        matches(
-            allOf(
-                hasDescendant(withId(R.id.user_mode_action)),
-                hasDescendant(withId(R.id.user_mode_label))
-            )
-        )
-    )
+    onView(withId(R.id.toolbar)).check(matches(allOf(hasDescendant(withId(R.id.user_mode_label)))))
 }
 
 fun navigateUp() {
@@ -45,11 +31,11 @@ fun navigateUp() {
 }
 
 fun openDevMode() {
-    onView(withId(R.id.menu_main_dev_mode)).perform(forceClick())
+    onView(withId(R.id.dev_mode_label)).perform(forceClick())
 }
 
 fun openUserMode() {
-    onView(withId(R.id.menu_main_user_mode)).perform(forceClick())
+    onView(withId(R.id.user_mode_label)).perform(forceClick())
 }
 
 fun openDevModeInDualMode(hasDesignPattern: Boolean = true) {
@@ -72,7 +58,7 @@ fun checkDevModeControl(hasDesignPattern: Boolean) {
 }
 
 fun checkDevModeContent() {
-    onView(withId(R.id.dev_content_web_view)).check(matches(isDisplayed()))
+    onView(withId(R.id.dev_content_container)).check(matches(isDisplayed()))
 }
 
 fun clickDevModeDesignPatternsButton() {

@@ -58,7 +58,7 @@ class OrderFragment : Fragment() {
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
         windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }
@@ -83,42 +83,30 @@ class OrderFragment : Fragment() {
     }
 
     private fun setupListObservers() {
-        orderViewModel.itemList.observe(
-            viewLifecycleOwner,
-            {
-                recommendationViewModel.refreshRecommendationList()
-                orderAdapter?.refreshItems()
-            }
-        )
+        orderViewModel.itemList.observe(viewLifecycleOwner) {
+            recommendationViewModel.refreshRecommendationList()
+            orderAdapter?.refreshItems()
+        }
 
-        recommendationViewModel.productList.observe(
-            viewLifecycleOwner,
-            {
-                recommendationViewModel.refreshRecommendationList()
-                orderAdapter?.refreshRecommendations()
-            }
-        )
+        recommendationViewModel.productList.observe(viewLifecycleOwner) {
+            recommendationViewModel.refreshRecommendationList()
+            orderAdapter?.refreshRecommendations()
+        }
     }
 
     private fun setupConfirmationObservers() {
-        orderViewModel.submittedOrder.observe(
-            viewLifecycleOwner,
-            {
-                if (it != null) {
-                    orderViewModel.navigateToReceipt()
-                } else {
-                    changeToolbarTitle()
-                }
+        orderViewModel.submittedOrder.observe(viewLifecycleOwner) {
+            if (it != null) {
+                orderViewModel.navigateToReceipt()
+            } else {
+                changeToolbarTitle()
             }
-        )
-        orderViewModel.showSignDialog.observe(
-            viewLifecycleOwner,
-            {
-                if (it && childFragmentManager.findFragmentByTag(InkDialogFragment.INK_FRAGMENT_TAG) == null) {
-                    showSignDialog()
-                }
+        }
+        orderViewModel.showSignDialog.observe(viewLifecycleOwner) {
+            if (it && childFragmentManager.findFragmentByTag(InkDialogFragment.INK_FRAGMENT_TAG) == null) {
+                showSignDialog()
             }
-        )
+        }
     }
 
     private fun showSignDialog() {
