@@ -8,8 +8,8 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 
 import android.content.Context
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.UiDevice
 import com.microsoft.device.dualscreen.testing.resetOrientation
 import com.microsoft.device.samples.dualscreenexperience.config.SharedPrefConfig.PREF_NAME
@@ -24,7 +24,7 @@ import org.junit.rules.RuleChain
 @HiltAndroidTest
 class LaunchSingleScreenTest {
 
-    private val activityRule = ActivityScenarioRule(LaunchActivity::class.java)
+    private val activityRule = ActivityTestRule(LaunchActivity::class.java)
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
