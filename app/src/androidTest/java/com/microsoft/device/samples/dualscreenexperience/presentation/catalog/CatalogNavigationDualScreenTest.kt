@@ -7,12 +7,13 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog
 
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkToolbar
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -24,6 +25,7 @@ import org.junit.rules.RuleChain
 class CatalogNavigationDualScreenTest {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -31,7 +33,7 @@ class CatalogNavigationDualScreenTest {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
@@ -66,7 +68,7 @@ class CatalogNavigationDualScreenTest {
     @Test
     fun checkAllCatalogItemsAfterRotation() {
         navigateToCatalogSection()
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkAllCatalogItems()
     }

@@ -10,10 +10,10 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
 import com.microsoft.device.samples.dualscreenexperience.config.SharedPrefConfig.PREF_NAME
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkMapFragment
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -25,6 +25,7 @@ import org.junit.rules.RuleChain
 class LaunchSingleScreenTest {
 
     private val activityRule = ActivityTestRule(LaunchActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -42,7 +43,7 @@ class LaunchSingleScreenTest {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
@@ -52,7 +53,7 @@ class LaunchSingleScreenTest {
 
     @Test
     fun openLaunchInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkLaunchInSingleMode()
     }
@@ -70,7 +71,7 @@ class LaunchSingleScreenTest {
 
     @Test
     fun openMainInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkSingleLaunchButton()
         clickSingleLaunchButton()

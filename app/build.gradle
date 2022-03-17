@@ -143,6 +143,7 @@ dependencies {
     androidTestImplementation instrumentationTestDependencies.coroutinesTest
     androidTestImplementation instrumentationTestDependencies.hiltTesting
     androidTestImplementation instrumentationTestDependencies.archTesting
+    androidTestImplementation instrumentationTestDependencies.kotlinTesting
 
     kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
 }
