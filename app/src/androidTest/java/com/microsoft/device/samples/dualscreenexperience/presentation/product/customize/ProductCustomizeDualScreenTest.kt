@@ -7,7 +7,12 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.product.customize
 
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
+import com.microsoft.device.dualscreen.testing.spanFromStart
+import com.microsoft.device.dualscreen.testing.unspanToStart
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
@@ -34,11 +39,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.na
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.product
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.selectColor
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.selectShape
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationNatural
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromDualToSingleScreen
-import com.microsoft.device.samples.dualscreenexperience.util.switchFromSingleToDualScreen
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -50,6 +50,7 @@ import org.junit.rules.RuleChain
 class ProductCustomizeDualScreenTest {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -57,12 +58,12 @@ class ProductCustomizeDualScreenTest {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
     fun checkCustomizeInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         navigateToProductsSection()
         clickOnCustomizeButton()
@@ -82,8 +83,8 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun checkCustomizeInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         navigateToProductsSection()
         clickOnCustomizeButton()
@@ -102,7 +103,7 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun openDevModeInDualPortraitMode() {
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         navigateToProductsSection()
         clickOnCustomizeButton()
@@ -141,8 +142,8 @@ class ProductCustomizeDualScreenTest {
 
     @Test
     fun openDevModeInDualLandscapeMode() {
-        switchFromSingleToDualScreen()
-        setOrientationRight()
+        device.spanFromStart()
+        device.setOrientationRight()
 
         navigateToProductsSection()
         clickOnCustomizeButton()
@@ -193,7 +194,7 @@ class ProductCustomizeDualScreenTest {
         checkColorSelected(ProductColor.BLUE)
         checkCustomizeImagePortraitContent(ProductColor.BLUE, product.bodyShape)
 
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.BLUE)
@@ -207,7 +208,7 @@ class ProductCustomizeDualScreenTest {
         checkCustomizeImagePortraitContent(ProductColor.AQUA, product.bodyShape)
         checkCustomizeDetailsImageContent(ProductColor.AQUA, product.bodyShape)
 
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.AQUA)
@@ -219,14 +220,14 @@ class ProductCustomizeDualScreenTest {
         checkColorSelected(ProductColor.WHITE)
         checkCustomizeImageLandscapeContent(ProductColor.WHITE, product.bodyShape)
 
-        setOrientationNatural()
+        device.setOrientationNatural()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.WHITE)
         checkCustomizeImagePortraitContent(ProductColor.WHITE, product.bodyShape)
         checkCustomizeDetailsImageContent(ProductColor.WHITE, product.bodyShape)
 
-        switchFromDualToSingleScreen()
+        device.unspanToStart()
 
         checkShapeSelected(product.bodyShape)
         checkColorSelected(ProductColor.WHITE)
@@ -249,7 +250,7 @@ class ProductCustomizeDualScreenTest {
         checkColorSelected(ProductColor.RED)
         checkCustomizeImagePortraitContent(ProductColor.RED, ProductType.HARDROCK)
 
-        switchFromSingleToDualScreen()
+        device.spanFromStart()
 
         checkShapeSelected(ProductType.HARDROCK)
         checkColorSelected(ProductColor.RED)
@@ -263,7 +264,7 @@ class ProductCustomizeDualScreenTest {
         checkCustomizeImagePortraitContent(ProductColor.LIGHT_GRAY, ProductType.ELECTRIC)
         checkCustomizeDetailsImageContent(ProductColor.LIGHT_GRAY, ProductType.ELECTRIC)
 
-        setOrientationRight()
+        device.setOrientationRight()
 
         checkShapeSelected(ProductType.ELECTRIC)
         checkColorSelected(ProductColor.LIGHT_GRAY)
@@ -275,14 +276,14 @@ class ProductCustomizeDualScreenTest {
         checkColorSelected(ProductColor.DARK_RED)
         checkCustomizeImageLandscapeContent(ProductColor.DARK_RED, ProductType.ROCK)
 
-        setOrientationNatural()
+        device.setOrientationNatural()
 
         checkShapeSelected(ProductType.ROCK)
         checkColorSelected(ProductColor.DARK_RED)
         checkCustomizeImagePortraitContent(ProductColor.DARK_RED, ProductType.ROCK)
         checkCustomizeDetailsImageContent(ProductColor.DARK_RED, ProductType.ROCK)
 
-        switchFromDualToSingleScreen()
+        device.unspanToStart()
 
         checkShapeSelected(ProductType.ROCK)
         checkColorSelected(ProductColor.DARK_RED)

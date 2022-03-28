@@ -58,7 +58,7 @@ class OrderFragment : Fragment() {
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
         windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged(it)
                 }

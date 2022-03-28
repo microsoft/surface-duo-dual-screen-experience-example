@@ -7,15 +7,16 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.store
 
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.checkAboutInSingleScreenMode
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.checkToolbarAbout
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.openAbout
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.goBack
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -27,6 +28,7 @@ import org.junit.rules.RuleChain
 class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -34,7 +36,7 @@ class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
@@ -44,7 +46,7 @@ class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openMapInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openMapInSingleMode()
     }
@@ -66,7 +68,7 @@ class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openAboutInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openMapInSingleMode()
 
@@ -88,7 +90,7 @@ class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openDetailsFromMapInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openDetailsFromMapInSingleMode()
     }
@@ -100,7 +102,7 @@ class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openListFromMapInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openListFromMapInSingleMode()
     }
@@ -112,7 +114,7 @@ class StoreNavigationSingleScreenTest : BaseStoreNavigationTest() {
 
     @Test
     fun openDetailsFromListInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openDetailsFromListInSingleMode()
     }

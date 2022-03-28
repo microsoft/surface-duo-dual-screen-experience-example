@@ -47,7 +47,7 @@ class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
         windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 windowInfoRepository.windowLayoutInfo.collect {
                     onWindowLayoutInfoChanged()
                 }

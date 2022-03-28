@@ -10,7 +10,10 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.order
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.uiautomator.UiDevice
+import com.microsoft.device.dualscreen.testing.resetOrientation
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.data.AppDatabase
 import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderDao
@@ -24,8 +27,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.order.Orde
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderListAdapter.Companion.RECOMMENDATIONS_SIZE_ONE
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.goBack
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.checkToolbar
-import com.microsoft.device.samples.dualscreenexperience.util.setOrientationRight
-import com.microsoft.device.samples.dualscreenexperience.util.unfreezeRotation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,6 +45,7 @@ import javax.inject.Singleton
 @HiltAndroidTest
 class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
     private val activityRule = ActivityTestRule(MainActivity::class.java)
+    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @get:Rule
     var ruleChain: RuleChain =
@@ -74,7 +76,7 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @After
     fun resetOrientation() {
-        unfreezeRotation()
+        device.resetOrientation()
     }
 
     @Test
@@ -84,7 +86,7 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun openEmptyOrderInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
     }
@@ -109,7 +111,7 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun openAboutInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         openEmptyOrders(recommendationsSize = RECOMMENDATIONS_SIZE_ONE)
 
@@ -140,7 +142,7 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemToOrderAndRemoveInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         addItemToOrderAndRemove(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
@@ -164,7 +166,7 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemToOrderAndSubmitInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         addItemToOrderAndSubmit(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,
@@ -188,7 +190,7 @@ class OrderNavigationSingleScreenTest : BaseNavigationOrderTest() {
 
     @Test
     fun addItemWithDifferentQuantitiesAndSubmitInLandscapeMode() {
-        setOrientationRight()
+        device.setOrientationRight()
 
         addItemWithDifferentQuantitiesAndSubmit(
             itemPosition = SINGLE_MODE_ORDER_ITEM_POS,

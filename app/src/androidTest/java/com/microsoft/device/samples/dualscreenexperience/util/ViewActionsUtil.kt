@@ -17,6 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isClickable
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import com.microsoft.device.dualscreen.layouts.locationOnScreen
+import com.microsoft.device.dualscreen.testing.ForceClick
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 
@@ -35,16 +36,7 @@ fun clickChildViewWithId(childId: Int) = object : ViewAction {
  * Seems that ViewActions.click() finds coordinates of the view on the screen, and then performs the tap on the coordinates.
  * Seems that changing the screen rotations affects these coordinates and ViewActions.click() throws exceptions.
  */
-fun forceClick() = object : ViewAction {
-    override fun getConstraints(): Matcher<View> = allOf(isClickable(), isEnabled())
-
-    override fun getDescription(): String = "force click"
-
-    override fun perform(uiController: UiController?, view: View?) {
-        view?.performClick()
-        uiController?.loopMainThreadUntilIdle()
-    }
-}
+fun forceClick() = ForceClick()
 
 fun scrollRecyclerViewTo(viewId: Int) = object : ViewAction {
     override fun getConstraints(): Matcher<View>? =
