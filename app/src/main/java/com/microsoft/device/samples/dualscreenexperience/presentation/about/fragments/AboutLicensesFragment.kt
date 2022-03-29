@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.config.LicensesConfig
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutLicensesBinding
@@ -57,12 +58,19 @@ class AboutLicensesFragment : Fragment() {
             onNoticeClicked(LicensesConfig.PRIVACY_URL)
         }
         binding?.licenseTermsTitle?.setOnClickListener {
-            onNoticeClicked(LicensesConfig.SOFTWARE_LICENSES_PATH)
+            onOssLicensesClicked()
         }
         binding?.licenseTermsOtherTitle?.setOnClickListener {
             onNoticeClicked(LicensesConfig.OTHER_NOTICES_PATH)
         }
         setupDescriptionText()
+    }
+
+    private fun onOssLicensesClicked() {
+        activity?.let {
+            OssLicensesMenuActivity.setActivityTitle(getString(R.string.about_licenses_terms_title))
+            startActivity(Intent(it, OssLicensesMenuActivity::class.java))
+        }
     }
 
     private fun onNoticeClicked(noticeUrl: String) {

@@ -24,8 +24,6 @@ class AboutViewModel @Inject constructor(
 
     fun isNavigationAtStart() = navigator.isNavigationAtStart()
 
-    fun isNavigationAtLicenses() = navigator.isNavigationAtLicenses()
-
     fun navigateUp() {
         linkToOpen.value = ""
         navigator.navigateUp()

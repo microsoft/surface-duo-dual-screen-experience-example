@@ -63,6 +63,8 @@ ext {
     hiltVersion = '2.39.1'
     mapsVersion = '17.0.1'
     mapsKtxVersion = '3.2.0'
+    ossLicensesVersion = '17.0.0'
+    ossLicensesPluginVersion = '0.10.5'
 
     googleDependencies = [
             material    : "com.google.android.material:material:$materialVersion",
@@ -71,6 +73,7 @@ ext {
             hiltCompiler: "com.google.dagger:hilt-compiler:$hiltVersion",
             maps        : "com.google.android.gms:play-services-maps:$mapsVersion",
             mapsKtx     : "com.google.maps.android:maps-ktx:$mapsKtxVersion",
+            ossLicenses : "com.google.android.gms:play-services-oss-licenses:$ossLicensesVersion"
     ]
 
     //Microsoft dependencies version
