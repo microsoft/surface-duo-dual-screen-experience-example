@@ -3,7 +3,7 @@ name: Feature request
 about: Suggest an idea for this project
 title: '[FEATURE]'
 labels: enhancement
-assignees: CesarValiente, CristianVerdes
+assignees: CesarValiente, bimiron, CristianVerdes
 
 ---
 
@@ -27,7 +27,6 @@ Please, think big so the feature can help other developers too. -->
 <!-- please add an `x` to where applies (e.g. [x]) -->
 - [ ] Yes
 - [ ] No
-
 
 <!-- 
 Credits: 

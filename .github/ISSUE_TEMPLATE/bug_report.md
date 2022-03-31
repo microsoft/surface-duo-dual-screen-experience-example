@@ -3,7 +3,7 @@ name: Bug report
 about: Create a bug report to help us improve
 title: "[BUG]"
 labels: bug
-assignees: CesarValiente, ancirja-m
+assignees: CesarValiente, bimiron
 
 ---
 
@@ -35,7 +35,6 @@ They can be taken by pressing the Volume Down and Power Button at the same time 
 - App version: <!-- e.g. 1.0.0 -->
 - Device/emulator version/model: <!-- e.g. Surface Duo v1, Surface Duo 2 emulator, Tablet XYZ, etc. -->
 - OS: <!-- e.g. 11 -->
-
 
 <!-- 
 Credits: 

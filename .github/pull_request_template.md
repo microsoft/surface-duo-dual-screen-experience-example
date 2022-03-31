@@ -35,8 +35,6 @@ Instructions: Please, fill the following sections with the information that is s
 - [ ] This PR refactor previous tests to cover the new code.
 - [ ] This PR is part of a set of PRs that build a bigger feature. If so, please, add here links to previously merged or open PRs.
 
-
-
 <!-- 
 Credits: 
 - [Cortinico](https://github.com/cortinico/kotlin-android-template/tree/main/.github)
