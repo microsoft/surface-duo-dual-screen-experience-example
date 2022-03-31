@@ -11,6 +11,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
+    id 'com.google.android.gms.oss-licenses-plugin'
 }
 
 apply from: 'secrets.gradle'
@@ -108,6 +109,7 @@ dependencies {
     implementation navigationDependencies.fragmentKtx
     implementation navigationDependencies.uiKtx
 
+    implementation googleDependencies.ossLicenses
     implementation googleDependencies.material
     implementation googleDependencies.gson
     implementation googleDependencies.hilt
@@ -146,4 +148,39 @@ dependencies {
     androidTestImplementation instrumentationTestDependencies.kotlinTesting
 
     kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
+}
+
+// Gradle lockfile needed for Component Governance check
+allprojects {
+    configurations {
+        debugImplementationDependenciesMetadata {
+            resolutionStrategy.activateDependencyLocking()
+        }
+        releaseImplementationDependenciesMetadata {
+            resolutionStrategy.activateDependencyLocking()
+        }
+        emulatorImplementationDependenciesMetadata {
+            resolutionStrategy.activateDependencyLocking()
+        }
+    }
+
+    // Run with the "gradlew resolveAndLockAll --write-locks" command
+    task resolveAndLockAll {
+        doFirst {
+            assert gradle.startParameter.writeDependencyLocks
+        }
+        doLast {
+            configurations {
+                debugImplementationDependenciesMetadata {
+                    it.resolve()
+                }
+                releaseImplementationDependenciesMetadata {
+                    it.resolve()
+                }
+                emulatorImplementationDependenciesMetadata {
+                    it.resolve()
+                }
+            }
+        }
+    }
 }

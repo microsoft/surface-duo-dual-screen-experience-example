@@ -5,20 +5,11 @@
   ~
   -->
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
     <data>
         <variable
             name="isDualMode"
             type="Boolean" />
-
-        <variable
-            name="noticeClickListener"
-            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;Boolean&gt;" />
-
-        <variable
-            name="itemClickListener"
-            type="com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener&lt;String&gt;" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -84,32 +75,31 @@
                 android:textSize="@dimen/text_size_18"/>
 
             <TextView
+                android:id="@+id/license_privacy_title"
+                style="@style/License.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/half_medium_padding"
+                android:paddingBottom="@dimen/half_medium_padding"
+                android:text="@string/about_licenses_privacy_title"/>
+
+            <TextView
                 android:id="@+id/license_terms_title"
                 style="@style/License.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> noticeClickListener.onClick(true)}"
                 android:paddingTop="@dimen/half_medium_padding"
                 android:paddingBottom="@dimen/half_medium_padding"
                 android:text="@string/about_licenses_terms_title"/>
 
             <TextView
                 android:id="@+id/license_terms_other_title"
-                style="@style/Store.Title"
+                style="@style/License.Subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/about_licenses_terms_other_title"
-                android:textSize="@dimen/text_size_18"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/license_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_license"/>
+                android:paddingTop="@dimen/half_medium_padding"
+                android:paddingBottom="@dimen/half_medium_padding"
+                android:text="@string/about_licenses_terms_other_title"/>
 
             <TextView
                 android:id="@+id/feedback_single_screen_title"
