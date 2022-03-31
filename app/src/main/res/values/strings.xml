@@ -155,7 +155,8 @@
     <string name="about_feedback_description_clickable">Github issue</string>
     <string name="about_resources_title">Resources &amp; links</string>
     <string name="about_licenses_title">Third Party Notices</string>
-    <string name="about_licenses_terms_title">Software Notices</string>
+    <string name="about_licenses_privacy_title">Microsoft Privacy Statement</string>
+    <string name="about_licenses_terms_title">Software Licenses</string>
     <string name="about_licenses_terms_other_title">Other Notices</string>
 
     <string name="about_accessibility_docs">Microsoft Docs</string>

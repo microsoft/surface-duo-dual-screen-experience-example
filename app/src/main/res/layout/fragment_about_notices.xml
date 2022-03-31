@@ -9,6 +9,4 @@
     android:id="@+id/notice_web_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/normal_margin"
-    android:layout_marginEnd="@dimen/normal_margin"
-    android:background="@color/gray"/>
+    android:background="@color/black"/>

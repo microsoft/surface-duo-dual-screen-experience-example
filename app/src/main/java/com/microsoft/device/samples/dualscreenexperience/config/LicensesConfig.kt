@@ -8,6 +8,6 @@
 package com.microsoft.device.samples.dualscreenexperience.config
 
 object LicensesConfig {
-    const val softwareNoticesFilePath = "https://appassets.androidplatform.net/assets/licenses/NOTICE.html"
-    const val licensesFileName = "licenses/licenses.json"
+    const val OTHER_NOTICES_PATH = "https://appassets.androidplatform.net/assets/licenses/OtherNotices.html"
+    const val PRIVACY_URL = "https://privacy.microsoft.com/en-US/privacystatement"
 }
