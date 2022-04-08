@@ -23,8 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.FoldableNavigation
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
@@ -52,8 +51,6 @@ class DevModeActivity : AppCompatActivity() {
     private var revealX: Int = 0
     private var revealY: Int = 0
 
-    private lateinit var windowInfoRepository: WindowInfoRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDevModeBinding.inflate(layoutInflater)
@@ -75,12 +72,13 @@ class DevModeActivity : AppCompatActivity() {
     }
 
     private fun observeWindowLayoutInfo() {
-        windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged(it)
-                }
+                WindowInfoTracker.getOrCreate(this@DevModeActivity)
+                    .windowLayoutInfo(this@DevModeActivity)
+                    .collect {
+                        onWindowLayoutInfoChanged(it)
+                    }
             }
         }
     }

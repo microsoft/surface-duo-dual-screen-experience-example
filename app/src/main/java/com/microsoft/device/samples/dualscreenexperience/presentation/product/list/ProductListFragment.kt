@@ -18,8 +18,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
@@ -38,20 +37,19 @@ class ProductListFragment : Fragment() {
     private val viewModel: ProductViewModel by activityViewModels()
     private var binding: FragmentProductListBinding? = null
 
-    private lateinit var windowInfoRepository: WindowInfoRepository
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         observeWindowLayoutInfo(context as AppCompatActivity)
     }
 
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
-        windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged(it)
-                }
+                WindowInfoTracker.getOrCreate(activity)
+                    .windowLayoutInfo(activity)
+                    .collect {
+                        onWindowLayoutInfoChanged(it)
+                    }
             }
         }
     }
