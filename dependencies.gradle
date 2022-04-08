@@ -82,6 +82,7 @@ ext {
     layoutsVersion = "1.0.0-beta9"
     wmUtilsVersion = "1.0.0-beta4"
     inkVersion = "1.0.0-alpha4"
+    snackbarVersion = "1.0.0-alpha1"
 
     bingMapsVersion = "1.2.0"
 
@@ -92,6 +93,7 @@ ext {
             recyclerView              : "com.microsoft.device.dualscreen:recyclerview:$recyclerViewVersion",
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
             wmUtils                   : "com.microsoft.device.dualscreen:wm-utils:$wmUtilsVersion",
+            snackbar                  : "com.microsoft.device.dualscreen:snackbar:$snackbarVersion",
     ]
 
     //UI dependencies

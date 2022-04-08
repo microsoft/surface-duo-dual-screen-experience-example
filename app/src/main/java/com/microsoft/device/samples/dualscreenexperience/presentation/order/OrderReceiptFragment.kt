@@ -12,8 +12,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -21,9 +21,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
+import com.google.android.material.snackbar.Snackbar
 import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredItemDecoration
 import com.microsoft.device.dualscreen.recyclerview.FoldableStaggeredLayoutManager
 import com.microsoft.device.dualscreen.recyclerview.utils.replaceItemDecorationAt
+import com.microsoft.device.dualscreen.snackbar.SnackbarPosition
+import com.microsoft.device.dualscreen.snackbar.show
 import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
@@ -82,7 +86,6 @@ class OrderReceiptFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupAdapter()
-        showTutorialIfNeeded()
         showSuccessMessageIfNeeded()
     }
 
@@ -145,22 +148,32 @@ class OrderReceiptFragment : Fragment() {
     }
 
     private fun showTutorialIfNeeded() {
-        tutorialViewModel.updateTutorial()
+        if (!isRemoving && activity?.isFinishing == false) {
+            tutorialViewModel.updateTutorial()
+        }
     }
 
     private fun showSuccessMessageIfNeeded() {
         if (orderViewModel.showSuccessMessage) {
-            activity?.let {
-                Toast(it).apply {
-                    view = layoutInflater.inflate(
-                        R.layout.toast_layout,
-                        it.findViewById(R.id.toast_container)
+            binding?.snackbarContainer?.let { snackbarContainer ->
+                snackbarContainer.doWhenIsReady {
+                    Snackbar.make(
+                        snackbarContainer.coordinatorLayout,
+                        getString(R.string.order_success_message),
+                        LENGTH_SHORT
                     )
-                    duration = Toast.LENGTH_SHORT
-                    show()
-                    orderViewModel.showSuccessMessage = false
+                        .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+                        .addCallback(object : Snackbar.Callback() {
+                            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                                super.onDismissed(transientBottomBar, event)
+                                transientBottomBar?.removeCallback(this)
+                                showTutorialIfNeeded()
+                            }
+                        })
+                        .show(snackbarContainer, SnackbarPosition.END)
                 }
             }
+            orderViewModel.showSuccessMessage = false
         }
     }
 

@@ -126,6 +126,7 @@ dependencies {
     implementation microsoftDependencies.recyclerView
     implementation microsoftDependencies.layouts
     implementation microsoftDependencies.wmUtils
+    implementation microsoftDependencies.snackbar
 
     implementation uiDependencies.lottie
 
