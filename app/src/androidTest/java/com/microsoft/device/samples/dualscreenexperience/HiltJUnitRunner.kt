@@ -15,6 +15,7 @@ import com.google.android.apps.common.testing.accessibility.framework.Accessibil
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig
 import dagger.hilt.android.testing.HiltTestApplication
 import org.hamcrest.core.AllOf.allOf
+import org.hamcrest.core.AnyOf.anyOf
 import org.hamcrest.Matchers.`is` as iz
 
 // A custom runner to set up the instrumented application class for tests.
@@ -30,8 +31,14 @@ class HiltJUnitRunner : AndroidJUnitRunner() {
             AccessibilityChecks.enable().apply {
                 setSuppressingResultMatcher(
                     allOf(
-                        // Currently the FoldableNavigationComponent adds fragments on top of each other
-                        matchesCheckNames(iz("DuplicateClickableBoundsCheck"))
+                        matchesCheckNames(
+                            anyOf(
+                                // debug - Google MapView has the same clickable bounds as 1 other item
+                                iz("DuplicateClickableBoundsCheck"),
+                                // emulator - Bing MapSurface may not have a label readable by screen readers
+                                iz("SpeakableTextPresentCheck")
+                            )
+                        )
                     )
                 )
             }
