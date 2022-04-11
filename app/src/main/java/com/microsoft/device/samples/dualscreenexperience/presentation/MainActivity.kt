@@ -23,8 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.FoldableNavDestination
 import androidx.navigation.FoldableNavigation
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
@@ -80,8 +79,6 @@ class MainActivity : AppCompatActivity() {
 
     private var devModeTextView: TextView? = null
 
-    private lateinit var windowInfoRepository: WindowInfoRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -92,12 +89,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeWindowLayoutInfo() {
-        windowInfoRepository = windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged(it)
-                }
+                WindowInfoTracker.getOrCreate(this@MainActivity)
+                    .windowLayoutInfo(this@MainActivity)
+                    .collect {
+                        onWindowLayoutInfoChanged(it)
+                    }
             }
         }
     }

@@ -163,9 +163,9 @@ fun checkSelectedBeforeListStoreDetailsFragment(store: Store) {
         )
     )
 
-    checkDetailsContact(store)
-    moveToAboutTab()
     checkDetailsAbout(store)
+    moveToContactTab()
+    checkDetailsContact(store)
 
     checkToolbar(R.string.store_title, store.name)
 }

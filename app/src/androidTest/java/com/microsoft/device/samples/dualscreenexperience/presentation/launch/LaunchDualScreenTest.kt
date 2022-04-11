@@ -72,6 +72,26 @@ class LaunchDualScreenTest {
     }
 
     @Test
+    fun openMainInDualPortraitModeWithRotations() {
+        device.spanFromStart()
+
+        checkDualLaunchButton()
+        clickDualLaunchButton()
+
+        checkMapFragment()
+
+        device.setOrientationRight()
+        checkMapFragment()
+
+        device.setOrientationNatural()
+        checkMapFragment()
+
+        goBack()
+
+        checkLaunchInDualMode()
+    }
+
+    @Test
     fun openMainInDualLandscapeMode() {
         device.spanFromStart()
         device.setOrientationRight()

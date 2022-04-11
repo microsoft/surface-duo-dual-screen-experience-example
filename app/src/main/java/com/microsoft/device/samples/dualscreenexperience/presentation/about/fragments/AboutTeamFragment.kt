@@ -21,8 +21,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutTeamBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
@@ -37,20 +36,19 @@ class AboutTeamFragment : Fragment(R.layout.fragment_about_team) {
 
     private val viewModel: AboutViewModel by activityViewModels()
 
-    private lateinit var windowInfoRepository: WindowInfoRepository
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         observeWindowLayoutInfo(context as AppCompatActivity)
     }
 
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
-        windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged()
-                }
+                WindowInfoTracker.getOrCreate(activity)
+                    .windowLayoutInfo(activity)
+                    .collect {
+                        onWindowLayoutInfoChanged()
+                    }
             }
         }
     }

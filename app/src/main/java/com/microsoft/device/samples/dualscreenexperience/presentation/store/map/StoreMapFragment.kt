@@ -20,8 +20,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.TEST_MODE_ENABLED
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.ZOOM_LEVEL_CITY
@@ -54,8 +53,6 @@ class StoreMapFragment : Fragment() {
 
     private var markerFactory: MapMarkerFactory? = null
     private var binding: FragmentStoreMapBinding? = null
-
-    private lateinit var windowInfoRepository: WindowInfoRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,12 +97,13 @@ class StoreMapFragment : Fragment() {
     }
 
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
-        windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged()
-                }
+                WindowInfoTracker.getOrCreate(activity)
+                    .windowLayoutInfo(activity)
+                    .collect {
+                        onWindowLayoutInfoChanged()
+                    }
             }
         }
     }
@@ -282,11 +280,6 @@ class StoreMapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mapController.onResume(mapView)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        mapController.onSaveInstanceState(mapView, outState)
     }
 
     override fun onPause() {

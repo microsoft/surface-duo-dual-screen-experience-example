@@ -21,8 +21,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.airbnb.lottie.LottieAnimationView
 import com.microsoft.device.samples.dualscreenexperience.R
@@ -49,8 +48,6 @@ class ProductDetailsFragment : Fragment() {
     private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private var binding: FragmentProductDetailsBinding? = null
-
-    private lateinit var windowInfoRepository: WindowInfoRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,12 +76,13 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
-        windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged(it)
-                }
+                WindowInfoTracker.getOrCreate(activity)
+                    .windowLayoutInfo(activity)
+                    .collect {
+                        onWindowLayoutInfoChanged(it)
+                    }
             }
         }
     }
@@ -97,7 +95,7 @@ class ProductDetailsFragment : Fragment() {
         super.onResume()
         if (layoutInfoViewModel.isDualMode.value == false) {
             setupToolbar()
-        } else {
+        } else if (customizeViewModel.customizedProduct.value == null) {
             appCompatActivity?.setupToolbar(isBackButtonEnabled = false) {}
         }
     }

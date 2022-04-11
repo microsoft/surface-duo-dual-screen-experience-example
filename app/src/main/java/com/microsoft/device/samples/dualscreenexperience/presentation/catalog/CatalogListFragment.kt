@@ -19,8 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewpager.widget.ViewPager
-import androidx.window.layout.WindowInfoRepository
-import androidx.window.layout.WindowInfoRepository.Companion.windowInfoRepository
+import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
@@ -45,20 +44,19 @@ class CatalogListFragment : Fragment(), ViewPager.OnPageChangeListener {
     private var binding: FragmentCatalogBinding? = null
     private var catalogAdapter: CatalogListAdapter? = null
 
-    private lateinit var windowInfoRepository: WindowInfoRepository
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         observeWindowLayoutInfo(context as AppCompatActivity)
     }
 
     private fun observeWindowLayoutInfo(activity: AppCompatActivity) {
-        windowInfoRepository = activity.windowInfoRepository()
         lifecycleScope.launch(Dispatchers.Main) {
             lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                windowInfoRepository.windowLayoutInfo.collect {
-                    onWindowLayoutInfoChanged(it)
-                }
+                WindowInfoTracker.getOrCreate(activity)
+                    .windowLayoutInfo(activity)
+                    .collect {
+                        onWindowLayoutInfoChanged(it)
+                    }
             }
         }
     }
