@@ -73,7 +73,8 @@
                     android:text="@{catalogItem.secondaryDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_first" />
+                    app:layout_constraintTop_toBottomOf="@id/text_first"
+                    app:pageContentDescription="@{catalogItem.secondaryDescription}" />
 
                 <TextView
                     android:id="@+id/text_third"
@@ -89,7 +90,8 @@
                     android:text="@{catalogItem.thirdDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_second" />
+                    app:layout_constraintTop_toBottomOf="@id/text_second"
+                    app:pageContentDescription="@{catalogItem.thirdDescription}" />
 
                 <TextView
                     android:id="@+id/text_fourth"
@@ -105,7 +107,8 @@
                     android:text="@{catalogItem.fourthDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_third" />
+                    app:layout_constraintTop_toBottomOf="@id/text_third"
+                    app:pageContentDescription="@{catalogItem.fourthDescription}" />
 
                 <TextView
                     android:id="@+id/text_fifth"
@@ -121,7 +124,8 @@
                     android:text="@{catalogItem.fifthDescription}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_fourth" />
+                    app:layout_constraintTop_toBottomOf="@id/text_fourth"
+                    app:pageContentDescription="@{catalogItem.fifthDescription}" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -20,6 +20,7 @@
             android:id="@+id/ink_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/order_accessibility_ink_view"
             app:enable_pressure="true"
             app:ink_color="@color/gold"
             app:layout_constraintBottom_toTopOf="@id/button_cancel"

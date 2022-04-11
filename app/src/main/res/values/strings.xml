@@ -90,6 +90,7 @@
     <!-- Catalog -->
 
     <string name="catalog_page_no">Page %1$d of %2$d</string>
+    <string name="catalog_toc_item_content_description">on page</string>
 
     <!-- Orders -->
 
@@ -118,6 +119,8 @@
     <string name="order_accessibility_quantity_minus">Decrease quantity</string>
     <string name="order_accessibility_remove">Remove</string>
     <string name="order_accessibility_reset">Reset</string>
+
+    <string name="order_accessibility_ink_view">Sign &amp; Confirm order</string>
 
     <string name="order_accessibility_ink_color_red">Ink color red</string>
     <string name="order_accessibility_ink_color_white">Ink color white</string>

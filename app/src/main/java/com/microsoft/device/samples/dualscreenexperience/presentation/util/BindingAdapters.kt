@@ -103,3 +103,15 @@ fun formatOrderDate(view: TextView, value: Long) {
 fun setValueToStarRatingView(view: StarRatingView, value: Float) {
     view.setValue(value)
 }
+
+/**
+ * For Table of contents items, removes the dots from the content description for better readability
+ */
+@BindingAdapter("pageContentDescription")
+fun setPageContentDescription(view: TextView, value: String) {
+    val titleIndex = value.indexOf('.')
+    val pageNumberIndex = value.lastIndexOf('.') + 1
+    val replacement = " " + view.context.getString(R.string.catalog_toc_item_content_description)
+
+    view.contentDescription = value.replaceRange(titleIndex, pageNumberIndex, replacement)
+}
