@@ -79,8 +79,13 @@ class LaunchDualScreenTest {
         clickDualLaunchButton()
 
         checkMapFragment()
+
         device.setOrientationRight()
+        checkMapFragment()
+
         device.setOrientationNatural()
+        checkMapFragment()
+
         goBack()
 
         checkLaunchInDualMode()
