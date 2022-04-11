@@ -129,9 +129,6 @@
     <string name="order_ink_stroke_medium">Medium</string>
     <string name="order_ink_stroke_large">Large</string>
 
-    <string name="accessibility_selected">Selected</string>
-    <string name="accessibility_unselected">Unselected</string>
-
     <!-- Developer Mode -->
 
     <string name="tutorial_developer_mode_text">Learn more about the design patterns and code</string>

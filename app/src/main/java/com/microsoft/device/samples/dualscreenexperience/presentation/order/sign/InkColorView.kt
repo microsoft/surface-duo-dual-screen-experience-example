@@ -12,7 +12,6 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.view.ViewCompat
 import com.microsoft.device.samples.dualscreenexperience.R
 
 class InkColorView @JvmOverloads constructor(
@@ -82,29 +81,13 @@ class InkColorView @JvmOverloads constructor(
         contentDescription = buildContentDescription()
     }
 
-    private fun buildContentDescription(): String? {
-        val colorName = when (inkColor) {
+    private fun buildContentDescription(): String? =
+        when (inkColor) {
             context.getColor(R.color.ink_white) -> context.getString(R.string.order_accessibility_ink_color_white)
             context.getColor(R.color.ink_red) -> context.getString(R.string.order_accessibility_ink_color_red)
             context.getColor(R.color.ink_blue) -> context.getString(R.string.order_accessibility_ink_color_blue)
-            else -> return null
+            else -> null
         }
-        val selectionDescription = if (isSelected) {
-            context.getString(R.string.accessibility_selected)
-        } else {
-            context.getString(R.string.accessibility_unselected)
-        }
-
-        val stateDescription = StringBuilder()
-            .append(colorName)
-            .append(" - ")
-            .append(selectionDescription)
-            .toString()
-
-        ViewCompat.setStateDescription(this, stateDescription)
-
-        return colorName
-    }
 
     private fun getBackgroundDrawable(color: Int, strokeSize: Int, strokeColor: Int) =
         GradientDrawable().also {
