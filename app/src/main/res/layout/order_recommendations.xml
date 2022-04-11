@@ -19,8 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/gray"
-        android:clickable="true"
-        android:focusable="true"
         android:paddingStart="@dimen/medium_padding"
         android:paddingTop="@dimen/normal_padding"
         android:paddingEnd="@dimen/medium_padding"

@@ -12,8 +12,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    android:clickable="true"
-    android:focusable="true"
     android:paddingTop="@dimen/normal_padding"
     android:paddingBottom="@dimen/normal_padding"
     app:layout_constraintBottom_toBottomOf="parent"
