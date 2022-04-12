@@ -56,6 +56,7 @@ class InkDialogFragment : DialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setTitle(R.string.order_accessibility_ink_view)
         return dialog
     }
 
