@@ -59,6 +59,7 @@
             style="@style/Store.Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@{@string/name_with_label(viewModel.selectedProduct.name)}"
             android:text="@{viewModel.selectedProduct.name}"
             android:textSize="@dimen/text_size_24"
             app:layout_constraintBottom_toTopOf="@id/product_details_rating"

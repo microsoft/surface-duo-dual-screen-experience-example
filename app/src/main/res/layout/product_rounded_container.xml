@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rounded_rectangle_text"
+        android:focusable="true"
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"
         tools:layout_height="@dimen/info_container_size"

@@ -12,6 +12,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -21,6 +23,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Orde
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.StoreImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
+import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -47,6 +50,9 @@ fun getProductImageRes(view: ImageView, product: Product?) {
     product?.let {
         getProductDrawable(it.color, it.bodyShape).let { resId ->
             view.setImageDrawable(ContextCompat.getDrawable(view.context, resId))
+        }
+        getProductContentDescription(it.color, it.bodyShape).let { contentDescId ->
+            view.contentDescription = view.context.getString(contentDescId)
         }
     }
 }
@@ -85,6 +91,7 @@ fun invisibleIf(view: View, shouldBeInvisible: Boolean?) {
 fun formatPrice(view: TextView, value: Float) {
     val priceString = "$" + value.addThousandsSeparator()
     view.text = priceString
+    view.contentDescription = view.context.getString(R.string.price_with_label, priceString)
 }
 
 @BindingAdapter("orderAmount")
@@ -114,4 +121,19 @@ fun setPageContentDescription(view: TextView, value: String) {
     val replacement = " " + view.context.getString(R.string.catalog_toc_item_content_description)
 
     view.contentDescription = value.replaceRange(titleIndex, pageNumberIndex, replacement)
+}
+
+/**
+ * Replaces accessibility services' click action label to something more specific
+ * E.g. TalkBack's default announcement for clickable items is "Double tap to activate" and this
+ * replaces the "activate" label.
+ */
+@BindingAdapter("clickActionLabel")
+fun replaceClickActionLabel(view: View, label: String?) {
+    ViewCompat.replaceAccessibilityAction(
+        view,
+        AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK,
+        label,
+        null
+    )
 }

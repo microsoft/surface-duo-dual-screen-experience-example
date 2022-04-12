@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/normal_margin"
         android:onClick="@{() -> itemListener.onClick(store)}"
+        app:clickActionLabel="@{@string/explore_details_action_label}"
         tools:background="@color/gray">
 
         <ImageView
@@ -55,6 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_margin"
+            android:contentDescription="@{@string/name_with_label(@string/store_title(store.name))}"
             android:text="@{@string/store_title(store.name)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/store_horizontal_guideline"
@@ -67,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/micro_margin"
+            android:contentDescription="@{@string/address_with_label(store.address)}"
             android:text="@{store.address}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/micro_margin"
-            android:contentDescription="@{@string/store_accessibility_rating(String.valueOf(store.rating))}"
+            android:contentDescription="@{@string/rating_with_label(String.valueOf(store.rating))}"
             android:text="@{String.valueOf(store.rating)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/item_store_star"

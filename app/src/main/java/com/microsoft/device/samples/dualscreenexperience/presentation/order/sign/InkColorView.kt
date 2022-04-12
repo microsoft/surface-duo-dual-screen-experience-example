@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.microsoft.device.samples.dualscreenexperience.R
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.replaceClickActionLabel
 
 class InkColorView @JvmOverloads constructor(
     context: Context,
@@ -63,20 +64,24 @@ class InkColorView @JvmOverloads constructor(
 
     fun unselect() {
         isSelected = false
+        isClickable = true
         findViewById<ImageView>(R.id.ink_color).apply {
             inkColor?.let {
                 background = getBackgroundDrawable(it, strokeSize, parentColor)
             }
+            replaceClickActionLabel(this@InkColorView, resources.getString(R.string.select_action_label))
         }
         contentDescription = buildContentDescription()
     }
 
     fun select() {
         isSelected = true
+        isClickable = false
         findViewById<ImageView>(R.id.ink_color).apply {
             inkColor?.let {
                 background = getBackgroundDrawable(it, strokeSize, strokeColor)
             }
+            replaceClickActionLabel(this@InkColorView, null)
         }
         contentDescription = buildContentDescription()
     }

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.replaceClickActionLabel
 
 class CustomizeCardView @JvmOverloads constructor(
     context: Context,
@@ -93,16 +94,20 @@ class CustomizeCardView @JvmOverloads constructor(
 
     fun unselect() {
         isSelected = false
+        isClickable = true
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
         cardElevation = unselectedCardElevation
         contentDescription = buildContentDescription()
+        replaceClickActionLabel(this, resources.getString(R.string.select_action_label))
     }
 
     fun select() {
         isSelected = true
+        isClickable = false
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.dark_blue))
         cardElevation = selectedCardElevation
         contentDescription = buildContentDescription()
+        replaceClickActionLabel(this, null)
     }
 
     private fun buildContentDescription(): String? =

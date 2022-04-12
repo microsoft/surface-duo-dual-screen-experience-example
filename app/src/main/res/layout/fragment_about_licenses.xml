@@ -5,7 +5,9 @@
   ~
   -->
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
         <variable
             name="isDualMode"
@@ -13,7 +15,6 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/licenses_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/half_medium_padding"
                 android:paddingBottom="@dimen/half_medium_padding"
-                android:text="@string/about_licenses_privacy_title"/>
+                android:text="@string/about_licenses_privacy_title"
+                app:clickActionLabel="@{@string/open_action_label}"/>
 
             <TextView
                 android:id="@+id/license_terms_title"
@@ -90,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/half_medium_padding"
                 android:paddingBottom="@dimen/half_medium_padding"
-                android:text="@string/about_licenses_terms_title"/>
+                android:text="@string/about_licenses_terms_title"
+                app:clickActionLabel="@{@string/open_action_label}"/>
 
             <TextView
                 android:id="@+id/license_terms_other_title"
@@ -99,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/half_medium_padding"
                 android:paddingBottom="@dimen/half_medium_padding"
-                android:text="@string/about_licenses_terms_other_title"/>
+                android:text="@string/about_licenses_terms_other_title"
+                app:clickActionLabel="@{@string/open_action_label}"/>
 
             <TextView
                 android:id="@+id/feedback_single_screen_title"

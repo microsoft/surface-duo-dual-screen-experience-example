@@ -67,6 +67,7 @@
             android:background="@drawable/round_dark_gold"
             android:contentDescription="@null"
             android:paddingTop="@dimen/ink_stroke_padding_top"
+            app:clickActionLabel="@{@string/change_action_label}"
             app:layout_constraintBottom_toTopOf="@id/ink_color_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/ink_color_container"
