@@ -9,7 +9,6 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.launch
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers.isPlatformPopup
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -133,7 +132,7 @@ fun clickSingleLaunchButton() {
 }
 
 fun clickDualLaunchButton() {
-    onView(withId(R.id.dual_launch_button)).perform(click())
+    onView(withId(R.id.dual_launch_button)).perform(forceClick())
 }
 
 fun goBack() {

@@ -27,12 +27,10 @@
 
     <TextView
         android:id="@+id/about_description"
-        style="@style/Store.Title"
+        style="@style/About.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lineSpacingMultiplier="1.6"
         android:text="@string/about_team_description"
-        android:textSize="@dimen/text_size_12"
         app:layout_constraintBottom_toTopOf="@id/about_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,13 +58,11 @@
 
     <TextView
         android:id="@+id/feedback_description"
-        style="@style/Store.Title"
+        style="@style/About.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/normal_margin"
-        android:lineSpacingMultiplier="1.6"
         android:text="@string/about_feedback_description"
-        android:textSize="@dimen/text_size_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -41,14 +41,12 @@
 
             <TextView
                 android:id="@+id/about_single_screen_description"
-                style="@style/Store.Title"
+                style="@style/About.Subtitle"
                 visibleIf="@{!isDualMode}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/large_margin"
-                android:lineSpacingMultiplier="1.6"
-                android:text="@string/about_team_description"
-                android:textSize="@dimen/text_size_12"/>
+                android:text="@string/about_team_description" />
 
             <TextView
                 android:id="@+id/links_title"
@@ -116,15 +114,13 @@
 
             <TextView
                 android:id="@+id/feedback_single_screen_description"
-                style="@style/Store.Title"
+                style="@style/About.Subtitle"
                 visibleIf="@{!isDualMode}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/normal_margin"
                 android:layout_marginBottom="@dimen/normal_margin"
-                android:lineSpacingMultiplier="1.6"
-                android:text="@string/about_feedback_description"
-                android:textSize="@dimen/text_size_12"/>
+                android:text="@string/about_feedback_description" />
 
         </LinearLayout>
 
