@@ -12,8 +12,8 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.view.ViewCompat
 import com.microsoft.device.samples.dualscreenexperience.R
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.replaceClickActionLabel
 
 class InkColorView @JvmOverloads constructor(
     context: Context,
@@ -64,47 +64,35 @@ class InkColorView @JvmOverloads constructor(
 
     fun unselect() {
         isSelected = false
+        isClickable = true
         findViewById<ImageView>(R.id.ink_color).apply {
             inkColor?.let {
                 background = getBackgroundDrawable(it, strokeSize, parentColor)
             }
+            replaceClickActionLabel(this@InkColorView, resources.getString(R.string.select_action_label))
         }
         contentDescription = buildContentDescription()
     }
 
     fun select() {
         isSelected = true
+        isClickable = false
         findViewById<ImageView>(R.id.ink_color).apply {
             inkColor?.let {
                 background = getBackgroundDrawable(it, strokeSize, strokeColor)
             }
+            replaceClickActionLabel(this@InkColorView, null)
         }
         contentDescription = buildContentDescription()
     }
 
-    private fun buildContentDescription(): String? {
-        val colorName = when (inkColor) {
+    private fun buildContentDescription(): String? =
+        when (inkColor) {
             context.getColor(R.color.ink_white) -> context.getString(R.string.order_accessibility_ink_color_white)
             context.getColor(R.color.ink_red) -> context.getString(R.string.order_accessibility_ink_color_red)
             context.getColor(R.color.ink_blue) -> context.getString(R.string.order_accessibility_ink_color_blue)
-            else -> return null
+            else -> null
         }
-        val selectionDescription = if (isSelected) {
-            context.getString(R.string.accessibility_selected)
-        } else {
-            context.getString(R.string.accessibility_unselected)
-        }
-
-        val stateDescription = StringBuilder()
-            .append(colorName)
-            .append(" - ")
-            .append(selectionDescription)
-            .toString()
-
-        ViewCompat.setStateDescription(this, stateDescription)
-
-        return colorName
-    }
 
     private fun getBackgroundDrawable(color: Int, strokeSize: Int, strokeColor: Int) =
         GradientDrawable().also {

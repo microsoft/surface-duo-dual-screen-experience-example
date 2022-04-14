@@ -19,9 +19,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:clickable="true"
-        android:focusable="true">
+        android:background="@color/black">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/dev_mode_scroll"
@@ -62,6 +60,7 @@
                     android:paddingBottom="@dimen/medium_padding"
                     android:text="@string/dev_mode_design_pattern"
                     android:textSize="@dimen/text_size_18"
+                    app:clickActionLabel="@{@string/open_action_label}"
                     app:layout_constraintBottom_toTopOf="@id/dev_control_code"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +80,7 @@
                     android:paddingBottom="@dimen/medium_padding"
                     android:text="@string/dev_mode_code"
                     android:textSize="@dimen/text_size_18"
+                    app:clickActionLabel="@{@string/open_action_label}"
                     app:layout_constraintBottom_toTopOf="@id/dev_control_sdk"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +98,7 @@
                     android:paddingBottom="@dimen/medium_padding"
                     android:text="@string/dev_mode_sdk_components"
                     android:textSize="@dimen/text_size_18"
+                    app:clickActionLabel="@{@string/open_action_label}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

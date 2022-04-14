@@ -29,8 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray"
-        android:clickable="true"
-        android:focusable="true"
         android:paddingStart="@dimen/normal_padding"
         android:paddingTop="@dimen/small_padding"
         android:paddingEnd="@dimen/normal_padding"
@@ -102,6 +100,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="@{isDualMode ? @dimen/half_medium_padding : @dimen/zero_padding}"
             android:text="@string/product_customize_color_title"
+            android:labelFor="@id/product_customize_color_container"
             app:layout_constraintBottom_toTopOf="@id/product_customize_color_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_customize_place_order_button"/>
@@ -199,6 +198,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_customize_body_title"
+            android:labelFor="@id/product_customize_body_container"
             app:layout_constraintBottom_toTopOf="@id/product_customize_body_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_customize_color_container"/>

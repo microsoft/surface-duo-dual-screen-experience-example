@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/micro_margin"
         android:layout_marginBottom="@dimen/normal_margin"
+        android:focusable="true"
         app:cardBackgroundColor="@color/dark_blue"
         app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="@dimen/card_elevation">
@@ -42,6 +43,7 @@
                 style="@style/GoldText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@{@string/name_with_label(product.name)}"
                 android:text="@{product.name}"
                 android:textSize="@dimen/text_size_14"
                 tools:ignore="MissingConstraints"

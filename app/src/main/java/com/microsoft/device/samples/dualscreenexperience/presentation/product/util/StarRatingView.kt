@@ -57,7 +57,7 @@ class StarRatingView @JvmOverloads constructor(
                 id = textViewId
                 text = ratingValue.toString()
                 textSize = heightView
-                contentDescription = context.getString(R.string.store_accessibility_rating, ratingValue.toString())
+                contentDescription = context.getString(R.string.rating_with_label, ratingValue.toString())
             },
             LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
                 marginStart = starMargin.dpToPx(context)
@@ -84,7 +84,7 @@ class StarRatingView @JvmOverloads constructor(
     private fun resetTextValue() {
         findViewById<TextView>(textViewId).apply {
             text = ratingValue.toString()
-            contentDescription = context.getString(R.string.store_accessibility_rating, ratingValue.toString())
+            contentDescription = context.getString(R.string.rating_with_label, ratingValue.toString())
         }
     }
 

@@ -40,6 +40,7 @@
             android:contentDescription="@string/about_accessibility_docs"
             android:onClick="@{() -> itemClickListener.onClick(@string/docs_url)}"
             android:src="@drawable/ic_ms_docs"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -50,6 +51,7 @@
             android:contentDescription="@string/about_accessibility_github"
             android:onClick="@{() -> itemClickListener.onClick(@string/github_url)}"
             android:src="@drawable/ic_github"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -60,6 +62,7 @@
             android:contentDescription="@string/about_accessibility_blog"
             android:onClick="@{() -> itemClickListener.onClick(@string/blog_url)}"
             android:src="@drawable/ic_blog"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -70,6 +73,7 @@
             android:contentDescription="@string/about_accessibility_twitch"
             android:onClick="@{() -> itemClickListener.onClick(@string/twitch_url)}"
             android:src="@drawable/ic_twitch"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -80,6 +84,7 @@
             android:contentDescription="@string/about_accessibility_figma"
             android:onClick="@{() -> itemClickListener.onClick(@string/figma_url)}"
             android:src="@drawable/ic_figma"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -90,6 +95,7 @@
             android:contentDescription="@string/about_accessibility_learn"
             android:onClick="@{() -> itemClickListener.onClick(@string/learn_url)}"
             android:src="@drawable/ic_ms_learn"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -100,6 +106,7 @@
             android:contentDescription="@string/about_accessibility_twitter"
             android:onClick="@{() -> itemClickListener.onClick(@string/twitter_url)}"
             android:src="@drawable/ic_twitter"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
         <ImageButton
@@ -110,6 +117,7 @@
             android:contentDescription="@string/about_accessibility_youtube"
             android:onClick="@{() -> itemClickListener.onClick(@string/youtube_url)}"
             android:src="@drawable/ic_youtube"
+            app:clickActionLabel="@{@string/open_action_label}"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

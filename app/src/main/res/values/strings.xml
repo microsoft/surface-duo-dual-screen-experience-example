@@ -54,7 +54,6 @@
     <string name="store_map_circle_touch_tutorial">Visit these stores today</string>
 
     <string name="store_accessibility_details_about">About Store</string>
-    <string name="store_accessibility_rating">Rating: %s</string>
 
     <!-- Products -->
 
@@ -90,6 +89,7 @@
     <!-- Catalog -->
 
     <string name="catalog_page_no">Page %1$d of %2$d</string>
+    <string name="catalog_toc_item_content_description">on page</string>
 
     <!-- Orders -->
 
@@ -119,6 +119,8 @@
     <string name="order_accessibility_remove">Remove</string>
     <string name="order_accessibility_reset">Reset</string>
 
+    <string name="order_accessibility_ink_view">Sign &amp; Confirm order</string>
+
     <string name="order_accessibility_ink_color_red">Ink color red</string>
     <string name="order_accessibility_ink_color_white">Ink color white</string>
     <string name="order_accessibility_ink_color_blue">Ink color blue</string>
@@ -128,9 +130,6 @@
     <string name="order_ink_stroke_small">Small</string>
     <string name="order_ink_stroke_medium">Medium</string>
     <string name="order_ink_stroke_large">Large</string>
-
-    <string name="accessibility_selected">Selected</string>
-    <string name="accessibility_unselected">Unselected</string>
 
     <!-- Developer Mode -->
 
@@ -175,5 +174,21 @@
     <string name="no_google_services_title">Google Services unavailable</string>
     <string name="no_google_services_description">It seems like this application requires Google Services to visualize Maps and it isn’t supported on this device or emulator. Try using a different one to test all features.</string>
     <string name="timeout_internet_connection_title">Slow Internet Connection</string>
+
+    <!-- Accessibility -->
+
+    <string name="catalog_action_label">go to page</string>
+    <string name="open_action_label">open</string>
+    <string name="select_action_label">select</string>
+    <string name="change_action_label">change</string>
+    <string name="explore_details_action_label">explore details</string>
+
+    <string name="rating_with_label">Rating: %s</string>
+    <string name="name_with_label">Name: %s</string>
+    <string name="price_with_label">Price: %s</string>
+    <string name="address_with_label">Address: %s</string>
+    <string name="phone_with_label">Phone Number: %s</string>
+    <string name="email_with_label">Email: %s</string>
+    <string name="quantity_with_label">Quantity: %s</string>
 
 </resources>

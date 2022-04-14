@@ -27,7 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/product_item_height"
         android:layout_marginBottom="@dimen/medium_margin"
-        android:onClick="@{() -> itemListener.onClick(product)}">
+        android:onClick="@{() -> itemListener.onClick(product)}"
+        app:clickActionLabel="@{@string/explore_details_action_label}">
 
         <View
             android:layout_width="0dp"
@@ -85,6 +86,7 @@
                 style="@style/GoldText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:contentDescription="@{@string/name_with_label(product.name)}"
                 android:text="@{product.name}"
                 app:layout_constraintBottom_toTopOf="@id/product_rating"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -13,11 +13,10 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
-import java.lang.StringBuilder
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.replaceClickActionLabel
 
 class CustomizeCardView @JvmOverloads constructor(
     context: Context,
@@ -95,41 +94,28 @@ class CustomizeCardView @JvmOverloads constructor(
 
     fun unselect() {
         isSelected = false
+        isClickable = true
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
         cardElevation = unselectedCardElevation
         contentDescription = buildContentDescription()
+        replaceClickActionLabel(this, resources.getString(R.string.select_action_label))
     }
 
     fun select() {
         isSelected = true
+        isClickable = false
         setCardBackgroundColor(ContextCompat.getColor(context, R.color.dark_blue))
         cardElevation = selectedCardElevation
         contentDescription = buildContentDescription()
+        replaceClickActionLabel(this, null)
     }
 
-    private fun buildContentDescription(): String? {
-        val valueDescription = when {
+    private fun buildContentDescription(): String? =
+        when {
             productColor != null -> productColor.toString()
             productType != null -> productType.toString()
-            else -> return null
+            else -> null
         }
-
-        val selectionDescription = if (isSelected) {
-            context.getString(R.string.accessibility_selected)
-        } else {
-            context.getString(R.string.accessibility_unselected)
-        }
-
-        val stateDescription = StringBuilder()
-            .append(valueDescription)
-            .append(" - ")
-            .append(selectionDescription)
-            .toString()
-
-        ViewCompat.setStateDescription(this, stateDescription)
-
-        return valueDescription
-    }
 
     companion object {
         const val NOT_INIT = -1
