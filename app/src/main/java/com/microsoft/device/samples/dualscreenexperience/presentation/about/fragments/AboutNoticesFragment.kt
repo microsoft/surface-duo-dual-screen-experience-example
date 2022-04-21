@@ -82,7 +82,7 @@ class AboutNoticesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.linkToOpen.observe(viewLifecycleOwner) {
+        viewModel.internalLinkToOpen.value?.let {
             binding?.noticeWebView?.loadUrl(it)
         }
     }
