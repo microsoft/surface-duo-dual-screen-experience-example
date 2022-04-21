@@ -38,6 +38,7 @@ class DevContentFragment : Fragment() {
         binding = FragmentDevContentBinding.inflate(inflater, container, false)
         binding?.isLoading = true
         binding?.isConnected = true
+        binding?.devContentNoInternet?.containerBackground = android.R.attr.colorBackgroundFloating
         return binding?.root
     }
 

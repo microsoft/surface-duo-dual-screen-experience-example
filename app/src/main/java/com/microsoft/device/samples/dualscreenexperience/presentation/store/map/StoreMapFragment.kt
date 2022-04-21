@@ -61,6 +61,7 @@ class StoreMapFragment : Fragment() {
     ): View? {
         binding = FragmentStoreMapBinding.inflate(inflater, container, false)
         binding?.isConnected = true
+        binding?.noInternetConnectionSingleMode?.containerBackground = android.R.attr.colorBackground
         onWindowLayoutInfoChanged()
 
         setupMapView(savedInstanceState)
