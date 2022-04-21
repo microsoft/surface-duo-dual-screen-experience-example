@@ -7,6 +7,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.util
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import androidx.window.layout.FoldingFeature
 import androidx.window.layout.WindowLayoutInfo
@@ -24,6 +25,13 @@ fun Context.isSurfaceDuoDevice(): Boolean {
     val feature = "com.microsoft.device.display.displaymask"
     return packageManager.hasSystemFeature(feature)
 }
+
+fun Context.isNightMode(): Boolean? =
+    when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_YES -> true
+        Configuration.UI_MODE_NIGHT_NO -> false
+        else -> null
+    }
 
 fun Activity.isInLandscape() =
     resources.configuration.orientation == ORIENTATION_LANDSCAPE
