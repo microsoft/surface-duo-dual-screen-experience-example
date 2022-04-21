@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import com.google.android.material.color.MaterialColors
 import com.microsoft.device.samples.dualscreenexperience.R
 
 class MapMarkerFactory(context: Context) {
@@ -31,6 +32,9 @@ class MapMarkerFactory(context: Context) {
         val container = if (isSelected) { selectedContainer } else { unselectedContainer }
         val textView = container.findViewById<TextView>(R.id.text_marker)
         textView.text = text
+        if (isSelected) {
+            textView.setTextColor(MaterialColors.getColor(textView, R.attr.colorBackgroundFloating))
+        }
 
         return createBitmapFromView(container)
     }

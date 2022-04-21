@@ -89,7 +89,7 @@
                 android:layout_width="@dimen/touch_target_size"
                 android:layout_height="@dimen/touch_target_size"
                 android:gravity="center"
-                app:inkColor="@color/ink_white"
+                app:inkColor="@color/ink_orange"
                 app:layout_constraintBottom_toTopOf="@id/ink_color_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

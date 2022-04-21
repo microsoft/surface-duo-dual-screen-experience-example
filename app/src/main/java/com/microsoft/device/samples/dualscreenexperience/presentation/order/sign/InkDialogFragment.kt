@@ -165,11 +165,6 @@ class InkDialogFragment : DialogFragment() {
             val layoutParams = CoordinatorLayout.LayoutParams(snackbar.view.layoutParams)
             layoutParams.gravity = Gravity.CENTER
             snackbar.view.layoutParams = layoutParams
-
-            context?.let { _ ->
-                snackbar.setBackgroundTint(requireContext().getColor(R.color.gold))
-                snackbar.setTextColor(requireContext().getColor(R.color.black))
-            }
             snackbar.show()
         }
     }

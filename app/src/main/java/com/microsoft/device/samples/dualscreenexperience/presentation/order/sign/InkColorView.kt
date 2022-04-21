@@ -89,7 +89,7 @@ class InkColorView @JvmOverloads constructor(
 
     private fun buildContentDescription(): String? =
         when (inkColor) {
-            context.getColor(R.color.ink_white) -> context.getString(R.string.order_accessibility_ink_color_white)
+            context.getColor(R.color.ink_orange) -> context.getString(R.string.order_accessibility_ink_color_orange)
             context.getColor(R.color.ink_red) -> context.getString(R.string.order_accessibility_ink_color_red)
             context.getColor(R.color.ink_blue) -> context.getString(R.string.order_accessibility_ink_color_blue)
             else -> null
