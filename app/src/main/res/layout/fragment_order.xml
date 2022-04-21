@@ -11,8 +11,6 @@
     android:id="@+id/order_items"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/normal_padding"
-    android:paddingBottom="@dimen/normal_padding"
     android:background="?android:attr/colorBackground"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

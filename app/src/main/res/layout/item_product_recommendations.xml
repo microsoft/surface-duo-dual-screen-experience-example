@@ -25,12 +25,11 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/micro_margin"
-        android:layout_marginBottom="@dimen/normal_margin"
         android:focusable="true"
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="@dimen/card_elevation">
+        app:cardElevation="@dimen/card_elevation"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

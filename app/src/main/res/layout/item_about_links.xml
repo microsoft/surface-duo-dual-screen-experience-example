@@ -18,6 +18,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/normal_padding"
         tools:background="?android:attr/colorBackgroundFloating">
 
         <androidx.constraintlayout.helper.widget.Flow

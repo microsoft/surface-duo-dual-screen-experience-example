@@ -34,6 +34,7 @@
         android:layout_gravity="bottom"
         android:background="?android:attr/colorBackground"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/small_padding"
         android:paddingEnd="@dimen/normal_padding">
 
         <View
