@@ -28,7 +28,7 @@
         android:layout_marginStart="@dimen/micro_margin"
         android:layout_marginBottom="@dimen/normal_margin"
         android:focusable="true"
-        app:cardBackgroundColor="@color/dark_blue"
+        app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="@dimen/card_elevation">
 

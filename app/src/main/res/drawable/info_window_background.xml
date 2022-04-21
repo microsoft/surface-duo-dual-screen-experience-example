@@ -8,7 +8,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:top="207dp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/toast_color" />
+            <solid android:color="@color/black" />
             <size
                 android:width="@dimen/tutorial_balloon_width"
                 android:height="40dp"/>

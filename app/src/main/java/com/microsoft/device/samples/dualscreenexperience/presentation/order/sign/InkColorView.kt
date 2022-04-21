@@ -12,6 +12,7 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
+import com.google.android.material.color.MaterialColors
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.replaceClickActionLabel
 
@@ -27,7 +28,7 @@ class InkColorView @JvmOverloads constructor(
             initColor()
         }
 
-    private val parentColor = context.getColor(R.color.toggle_gray)
+    private val parentColor = MaterialColors.getColor(this, R.attr.colorSurface)
 
     private val strokeColor = context.getColor(R.color.ink_color_selected)
     private val strokeSize = context.resources.getDimension(R.dimen.color_stroke_size).toInt()

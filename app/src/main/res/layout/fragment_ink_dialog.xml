@@ -14,14 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="@drawable/rounded_gray_dialog">
+        android:background="@drawable/dialog_background">
 
         <com.microsoft.device.ink.InkView
             android:id="@+id/ink_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:enable_pressure="true"
-            app:ink_color="@color/gold"
+            app:ink_color="@color/primary_gold"
             app:layout_constraintBottom_toTopOf="@id/button_cancel"
             app:layout_constraintEnd_toStartOf="@id/ink_controls_barrier"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/large_margin"
-            android:background="@color/gold"
+            android:background="?attr/colorOnBackground"
             app:layout_constraintBottom_toTopOf="@id/button_reset"
             app:layout_constraintEnd_toStartOf="@id/ink_controls_barrier"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:layout_width="@dimen/touch_target_size"
             android:layout_height="@dimen/touch_target_size"
             android:layout_marginEnd="@dimen/micro_margin"
-            android:background="@drawable/round_dark_gold"
+            android:background="@drawable/ink_selected_rectangle_background"
             android:contentDescription="@null"
             android:paddingTop="@dimen/ink_stroke_padding_top"
             app:clickActionLabel="@{@string/change_action_label}"
@@ -121,14 +121,12 @@
 
         <Button
             android:id="@+id/button_cancel"
-            style="@style/NoInternet"
+            style="@style/Dialog.Button.Negative"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/dialog_button_margin"
-            android:background="@drawable/rounded_bottom_left_button"
+            android:background="@drawable/dialog_negative_background"
             android:text="@string/order_sign_cancel"
-            android:textAllCaps="false"
-            android:textColor="@color/orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_confirm"
             app:layout_constraintHeight_max="@dimen/touch_target_size"
@@ -138,13 +136,12 @@
 
         <Button
             android:id="@+id/button_confirm"
-            style="@style/NoInternet"
+            style="@style/Dialog.Button.Positive"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/dialog_button_margin"
-            android:background="@drawable/rounded_bottom_right_button"
+            android:background="@drawable/dialog_positive_background"
             android:text="@string/order_sign_confirm"
-            android:textAllCaps="false"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"

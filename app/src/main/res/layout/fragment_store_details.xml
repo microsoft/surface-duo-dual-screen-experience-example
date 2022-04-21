@@ -19,7 +19,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
+        android:background="?android:attr/colorBackground"
         android:paddingStart="@dimen/medium_padding"
         android:paddingTop="@dimen/normal_padding"
         android:paddingEnd="@dimen/medium_padding">
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fadeScrollbars="true"
-            android:scrollbarThumbVertical="@color/gold"
+            android:scrollbarThumbVertical="@color/primary_gold"
             android:scrollbars="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,6 +72,7 @@
                     android:id="@+id/store_details_tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/store_details_review_ratings"
@@ -80,7 +81,8 @@
                     app:tabIndicatorColor="@color/orange"
                     app:tabIndicatorFullWidth="false"
                     app:tabIndicatorHeight="@dimen/tab_indicator_height"
-                    app:tabTextAppearance="@style/Store.TabText" />
+                    app:tabTextAppearance="@style/App.TabText"
+                    app:tabTextColor="?attr/colorOnSurface" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/store_details_view_pager"

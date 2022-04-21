@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/gray"
+        android:background="?android:attr/colorBackground"
         android:orientation="vertical"
         android:paddingEnd="@dimen/normal_padding">
 
@@ -41,7 +41,7 @@
             android:layout_width="@dimen/product_image_half_height"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/medium_margin"
-            android:background="@drawable/rounded_rectangle_text"
+            android:background="@drawable/rounded_rectangle_text_background"
             app:layout_constraintBottom_toBottomOf="@id/product_quantity_plus"
             app:layout_constraintHeight_min="@dimen/product_image_half_height"
             app:layout_constraintStart_toStartOf="parent"

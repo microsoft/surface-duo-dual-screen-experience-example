@@ -14,4 +14,13 @@
     <declare-styleable name="InkColorView">
         <attr name="inkColor" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="Theme">
+        <attr name="colorDarkSurface" format="reference|color" />
+
+        <attr name="inkStrokeBackgroundColor" format="reference|color" />
+        <attr name="inkStrokeOptionsBackgroundColor" format="reference|color" />
+
+        <attr name="dialogNegativeBackgroundColor" format="reference|color" />
+    </declare-styleable>
 </resources>

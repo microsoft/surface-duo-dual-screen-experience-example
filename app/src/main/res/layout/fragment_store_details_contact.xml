@@ -20,9 +20,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
-        android:paddingTop="@dimen/normal_padding"
-        android:paddingBottom="@dimen/small_padding">
+        android:background="?android:attr/colorBackground">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/store_details_contact_address_card"
@@ -30,7 +28,7 @@
             android:layout_height="@dimen/card_height"
             android:layout_marginEnd="@dimen/normal_margin"
             android:focusable="true"
-            app:cardBackgroundColor="@color/dark_blue"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="@dimen/card_radius"
             app:cardElevation="@dimen/card_elevation"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/card_height"
             android:focusable="true"
-            app:cardBackgroundColor="@color/dark_blue"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardCornerRadius="@dimen/card_radius"
             app:cardElevation="@dimen/card_elevation"
             app:layout_constraintBottom_toBottomOf="parent"

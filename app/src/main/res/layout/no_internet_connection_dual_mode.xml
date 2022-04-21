@@ -23,7 +23,7 @@
         visibleIf="@{!isConnected &amp;&amp; isDualPortrait}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray">
+        android:background="?android:attr/colorBackground">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_vertical"

@@ -14,7 +14,7 @@
         android:top="@dimen/half_medium_padding">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/medium_button_radius" />
-            <solid android:color="@color/dark_gold" />
+            <solid android:color="?attr/inkStrokeBackgroundColor" />
         </shape>
     </item>
 </layer-list>

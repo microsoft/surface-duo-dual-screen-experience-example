@@ -33,7 +33,7 @@
         android:paddingTop="@dimen/small_padding"
         android:paddingEnd="@dimen/medium_padding"
         android:paddingBottom="@dimen/small_padding"
-        tools:background="@color/gray">
+        tools:background="?android:attr/colorBackground">
 
         <TextView
             android:id="@+id/total_title"

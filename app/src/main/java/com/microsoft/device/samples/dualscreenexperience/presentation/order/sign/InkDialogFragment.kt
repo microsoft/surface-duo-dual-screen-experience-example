@@ -264,7 +264,7 @@ class InkDialogFragment : DialogFragment() {
             it.isModal = true
             it.inputMethodMode = ListPopupWindow.INPUT_METHOD_NOT_NEEDED
             it.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-            it.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.rectangle_gold_padding))
+            it.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ink_rectangle_background))
             it.show()
         }
     }

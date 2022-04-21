@@ -28,7 +28,7 @@
         android:layout_marginBottom="@dimen/normal_margin"
         android:onClick="@{() -> itemListener.onClick(store)}"
         app:clickActionLabel="@{@string/explore_details_action_label}"
-        tools:background="@color/gray">
+        tools:background="?android:attr/colorBackground">
 
         <ImageView
             android:id="@+id/item_store_image"

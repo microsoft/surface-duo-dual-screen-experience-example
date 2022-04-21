@@ -23,7 +23,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray">
+        android:background="?android:attr/colorBackground">
 
         <include
             android:id="@+id/no_internet_connection_single_mode"
@@ -54,7 +54,7 @@
                 android:id="@+id/map_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/gray" />
+                android:background="?android:attr/colorBackground" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/reset_fab"

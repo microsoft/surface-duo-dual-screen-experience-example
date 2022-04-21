@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/medium_padding"
         android:paddingEnd="@dimen/medium_padding"
-        tools:background="@color/gray">
+        tools:background="?android:attr/colorBackground">
 
         <TextView
             android:id="@+id/order_date"

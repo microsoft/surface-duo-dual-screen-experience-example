@@ -13,26 +13,23 @@
     android:id="@+id/dev_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="?android:attr/colorBackgroundFloating"
     tools:context=".presentation.devmode.DevModeActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Theme.App.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/devmode_nav_host_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <fragment
         android:id="@+id/devmode_nav_host_fragment"
         android:name="androidx.navigation.fragment.FoldableNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/gray"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

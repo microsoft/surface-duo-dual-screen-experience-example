@@ -14,7 +14,7 @@
         android:id="@+id/order_receipt_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
+        android:background="?android:attr/colorBackground"
         android:paddingTop="@dimen/normal_padding"
         android:paddingBottom="@dimen/normal_padding"
         app:layout_constraintBottom_toBottomOf="parent"

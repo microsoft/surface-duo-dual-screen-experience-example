@@ -6,6 +6,5 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:color="@color/gold" />
-    <item android:color="@color/item_tint_gray"  />
+    <item android:alpha="0.2" android:color="?attr/colorOnBackground"/>
 </selector>

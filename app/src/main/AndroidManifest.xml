@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.App">
+        android:theme="@style/Theme.App.DayNight">
 
         <activity android:name=".presentation.launch.LaunchActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -43,11 +43,11 @@
 
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:theme="@style/Theme.App.ActionBar.DayNight"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+            android:theme="@style/Theme.App.ActionBar.DayNight"
             android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 

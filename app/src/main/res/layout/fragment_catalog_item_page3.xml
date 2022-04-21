@@ -31,7 +31,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/catalog_margin_small"
             android:fadeScrollbars="true"
-            android:scrollbarThumbVertical="@color/gold"
+            android:scrollbarThumbVertical="@color/primary_gold"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toTopOf="@id/pages"
             app:layout_constraintEnd_toEndOf="parent"
