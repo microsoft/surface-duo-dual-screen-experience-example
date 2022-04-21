@@ -90,7 +90,7 @@ class GoogleMapController @Inject constructor() : MapController {
     }
 
     override fun setupMap(context: Context, mapView: FrameLayout) {
-        val mapStyle = if (context.isNightMode() == true) {
+        val mapStyle = if (context.isNightMode()) {
             R.raw.map_style
         } else {
             R.raw.map_style_light

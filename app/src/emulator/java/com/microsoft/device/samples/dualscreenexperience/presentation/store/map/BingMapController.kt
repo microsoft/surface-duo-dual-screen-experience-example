@@ -91,7 +91,7 @@ class BingMapController @Inject constructor() : MapController {
     }
 
     override fun setupMap(context: Context, mapView: FrameLayout) {
-        val mapStyle = if (context.isNightMode() == true) {
+        val mapStyle = if (context.isNightMode()) {
             MapStyleSheets.roadDark()
         } else {
             MapStyleSheets.roadCanvasLight()

@@ -72,7 +72,7 @@ class AboutNoticesFragment : Fragment() {
                 }
             }
 
-            if (context.isNightMode() == true && WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            if (context.isNightMode() && WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
             }
 

@@ -26,12 +26,8 @@ fun Context.isSurfaceDuoDevice(): Boolean {
     return packageManager.hasSystemFeature(feature)
 }
 
-fun Context.isNightMode(): Boolean? =
-    when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-        Configuration.UI_MODE_NIGHT_YES -> true
-        Configuration.UI_MODE_NIGHT_NO -> false
-        else -> null
-    }
+fun Context.isNightMode(): Boolean =
+    (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
 fun Activity.isInLandscape() =
     resources.configuration.orientation == ORIENTATION_LANDSCAPE
