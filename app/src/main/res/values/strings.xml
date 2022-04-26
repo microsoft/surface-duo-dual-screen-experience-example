@@ -122,7 +122,7 @@
     <string name="order_accessibility_ink_view">Sign &amp; Confirm order</string>
 
     <string name="order_accessibility_ink_color_red">Ink color red</string>
-    <string name="order_accessibility_ink_color_white">Ink color white</string>
+    <string name="order_accessibility_ink_color_orange">Ink color orange</string>
     <string name="order_accessibility_ink_color_blue">Ink color blue</string>
 
     <string name="order_accessibility_ink_stroke">Current stroke width: %s</string>

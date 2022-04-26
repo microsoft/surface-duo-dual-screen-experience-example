@@ -28,6 +28,7 @@ import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.LAT_IN
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.LNG_INIT
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.ZOOM_LEVEL_CITY
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapMarkerModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isNightMode
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -89,7 +90,12 @@ class GoogleMapController @Inject constructor() : MapController {
     }
 
     override fun setupMap(context: Context, mapView: FrameLayout) {
-        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style))
+        val mapStyle = if (context.isNightMode()) {
+            R.raw.map_style
+        } else {
+            R.raw.map_style_light
+        }
+        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, mapStyle))
         googleMap?.uiSettings?.apply {
             isScrollGesturesEnabled = true
             isCompassEnabled = false

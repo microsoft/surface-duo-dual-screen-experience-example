@@ -24,16 +24,16 @@
       android:pathData="M107.346,76L87,67.711V40.908M107.346,76L128,67.711V40.908M107.346,76V48.921M128,40.908L107.346,34L87,40.908M128,40.908L107.346,48.921M87,40.908L107.346,48.921"
       android:strokeWidth="3"
       android:fillColor="#00000000"
-      android:strokeColor="#2A3037"/>
+      android:strokeColor="?attr/colorDarkSurface"/>
   <path
       android:pathData="M92.467,57.8V53.6L100.083,56.712V58.112V60.912L98.814,60.394L96.275,59.356L92.467,57.8Z"
-      android:fillColor="#2A3037"/>
+      android:fillColor="?attr/colorDarkSurface"/>
   <path
       android:pathData="M19.5,36.5h36v36h-36z"
       android:strokeWidth="3"
       android:fillColor="#00000000"
-      android:strokeColor="#2A3037"/>
+      android:strokeColor="?attr/colorDarkSurface"/>
   <path
       android:pathData="M31,57V52H44V53.667V57H41.833H37.5H31Z"
-      android:fillColor="#2A3037"/>
+      android:fillColor="?attr/colorDarkSurface"/>
 </vector>

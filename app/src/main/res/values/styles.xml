@@ -9,19 +9,19 @@
 
     <style name="App.Name" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_40</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/dmsans_bold</item>
         <item name="android:textAlignment">center</item>
         <item name="android:text">@string/app_name</item>
     </style>
 
-    <style name="App.Button" parent="TextAppearance.AppCompat.Button">
+    <style name="App.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:minWidth">0dp</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/dmsans_bold</item>
-        <item name="android:background">@drawable/rounded_rectangle_button</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="cornerRadius">@dimen/button_radius</item>
     </style>
 
     <style name="Launch.Button" parent="App.Button">
@@ -37,10 +37,15 @@
         <item name="android:minWidth">0dp</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textSize">@dimen/text_size_20</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
-        <item name="android:background">@drawable/rounded_dark_blue_button</item>
+        <item name="android:background">@drawable/quantity_button_background</item>
+        <item name="materialThemeOverlay">@style/SurfaceButtonThemeOverlay</item>
+    </style>
+
+    <style name="SurfaceButtonThemeOverlay">
+        <item name="colorPrimary">?attr/colorSurface</item>
     </style>
 
     <style name="TutorialText" parent="TextAppearance.AppCompat.Title">
@@ -59,32 +64,32 @@
     </style>
 
     <style name="GoldText" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
     </style>
 
     <style name="Store.Title" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textSize">@dimen/text_size_24</item>
         <item name="android:fontFamily">@font/montserrat_bold</item>
     </style>
 
     <style name="Store.Name" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_18</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/dmsans_bold</item>
     </style>
 
     <style name="Store.Address" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_12</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
     </style>
 
     <style name="Store.Rating" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_12</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
     </style>
 
@@ -94,7 +99,7 @@
         <item name="android:paddingTop">@dimen/micro_padding</item>
         <item name="android:paddingBottom">@dimen/micro_padding</item>
         <item name="android:textSize">@dimen/text_size_12</item>
-        <item name="android:background">@drawable/rounded_rectangle_button_full</item>
+        <item name="android:background">@drawable/view_button_background</item>
     </style>
 
     <style name="Order.Button" parent="App.Button">
@@ -108,14 +113,10 @@
         <item name="android:fontFamily">@font/dmsans_regular</item>
     </style>
 
-    <style name="Store.TabText" parent="App.TabText">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
     <style name="Paragraph.Text" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:lineSpacingExtra">4sp</item>
@@ -124,7 +125,7 @@
     <style name="Paragraph.Gold.Text" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_20</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
@@ -137,26 +138,52 @@
     </style>
 
     <style name="License.Subtitle" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <style name="About.Subtitle" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:lineSpacingMultiplier">1.6</item>
     </style>
 
+    <style name="DevMode.Button" parent="App.Button">
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:paddingStart">@dimen/large_padding</item>
+        <item name="android:paddingLeft">@dimen/large_padding</item>
+        <item name="android:paddingEnd">@dimen/xxl_padding</item>
+        <item name="android:paddingRight">@dimen/xxl_padding</item>
+        <item name="android:paddingTop">@dimen/medium_padding</item>
+        <item name="android:paddingBottom">@dimen/medium_padding</item>
+        <item name="android:gravity">start</item>
+        <item name="cornerRadius">@dimen/small_button_radius</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="materialThemeOverlay">@style/SurfaceButtonThemeOverlay</item>
+    </style>
+
+    <style name="About.Button" parent="App.Button">
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="cornerRadius">@dimen/card_radius</item>
+        <item name="materialThemeOverlay">@style/SurfaceButtonThemeOverlay</item>
+    </style>
+
     <style name="Catalog.TableOfContents" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="Catalog.Description" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:lineSpacingExtra">5dp</item>
         <item name="android:fontFamily">@font/dmsans_regular</item>
@@ -164,7 +191,24 @@
 
     <style name="NoInternet" parent="TextAppearance.AppCompat.Title">
         <item name="android:textSize">@dimen/text_size_16</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">@font/dmsans_bold</item>
+    </style>
+
+    <style name="Dialog.Button.Negative" parent="App.Button">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">@font/dmsans_bold</item>
+        <item name="materialThemeOverlay">@style/DialogNegativeButtonThemeOverlay</item>
+    </style>
+
+    <style name="DialogNegativeButtonThemeOverlay">
+        <item name="colorPrimary">?attr/dialogNegativeBackgroundColor</item>
+    </style>
+
+    <style name="Dialog.Button.Positive" parent="App.Button">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/dmsans_bold</item>
     </style>
 </resources>

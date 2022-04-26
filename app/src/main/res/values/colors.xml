@@ -6,42 +6,48 @@
   ~
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="dark_white">#E7DFE8</color>
-    <color name="gray">#1F2228</color>
-    <color name="dark_gray">#222222</color>
-    <color name="medium_gray">#333333</color>
-    <color name="item_tint_gray">#6E6E6E</color>
-    <color name="license_gray">#9A9A9A</color>
-    <color name="toggle_gray">#2A3037</color>
-    <color name="ink_button_background">#3F4552</color>
+    <color name="tutorial_white">#E7DFE8</color>
+
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_gray">#1F2228</color>
 
     <color name="orange">#F6B63D</color>
-    <color name="dark_orange">#B58937</color>
+    <color name="map_circle_dark_orange" tools:ignore="UnusedResources">#BF8600</color>
+    <color name="map_circle_light_orange" tools:ignore="UnusedResources">#FEC94E</color>
 
-    <color name="gold">#DDCAB3</color>
-    <color name="transparent_gold">#716E69</color>
+    <color name="primary_gold">#DDCAB3</color>
+    <color name="primary_dark_gold">#4A2916</color>
+
     <color name="dark_gold">#5A5444</color>
-    <color name="dark_blue">#2A3037</color>
+    <color name="dark_gold_variant">#716E69</color>
+    <color name="light_gold">#E4D7C8</color>
+    <color name="light_gold_variant">#CFC0AF</color>
 
+    <color name="surface_dark_blue">#2A3037</color>
+    <color name="surface_light">#F2EEEB</color>
+
+    <color name="dialog_negative_button_dark_background">#3F4552</color>
+
+    <!-- Ink controls -->
+    <color name="ink_orange">@color/orange</color>
     <color name="ink_red">#FC547C</color>
     <color name="ink_blue">#0581E4</color>
-    <color name="ink_white">#FCFFFFFF</color>
     <color name="ink_color_selected">#7D786D</color>
 
+    <!-- Guitar customization colors -->
     <color name="guitar_red_color">#D92D2A</color>
     <color name="guitar_blue_color">#1873B5</color>
     <color name="guitar_gray_color">#575347</color>
     <color name="guitar_light_gray_color">#696666</color>
     <color name="guitar_yellow_color">#FFD336</color>
+    <color name="guitar_white_color">#DAE1E8</color>
     <color name="guitar_orange_color">#D66C01</color>
     <color name="guitar_mustard_color">#D6B44A</color>
     <color name="guitar_aqua_color">#87E2DD</color>
     <color name="guitar_dark_red_color">#BC0101</color>
-
-    <color name="toast_color">#141414</color>
 
     <color name="catalog_tools_image_background">@color/guitar_aqua_color</color>
 </resources>

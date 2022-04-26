@@ -23,6 +23,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentDevContentBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.NetworkConnectionLiveData
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RestrictedWebViewClient
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isNightMode
 
 class DevContentFragment : Fragment() {
 
@@ -38,6 +39,7 @@ class DevContentFragment : Fragment() {
         binding = FragmentDevContentBinding.inflate(inflater, container, false)
         binding?.isLoading = true
         binding?.isConnected = true
+        binding?.devContentNoInternet?.containerBackground = android.R.attr.colorBackgroundFloating
         return binding?.root
     }
 
@@ -78,7 +80,7 @@ class DevContentFragment : Fragment() {
         binding?.devContentWebView?.apply {
             settings.javaScriptEnabled = true
             setBackgroundColor(Color.TRANSPARENT)
-            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            if (context.isNightMode() && WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
             }
             webViewClient = RestrictedWebViewClient(

@@ -18,11 +18,11 @@
         android:id="@+id/licenses_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="?android:attr/colorBackgroundFloating"
         android:fadeScrollbars="true"
         android:paddingStart="@dimen/large_padding"
         android:paddingEnd="@dimen/large_padding"
-        android:scrollbarThumbVertical="@color/gold"
+        android:scrollbarThumbVertical="@color/primary_gold"
         android:scrollbars="vertical">
 
         <LinearLayout
@@ -69,7 +69,7 @@
                 style="@style/Store.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_padding"
                 android:text="@string/about_licenses_title"
                 android:textSize="@dimen/text_size_18"/>
 

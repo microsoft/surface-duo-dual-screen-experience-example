@@ -16,6 +16,7 @@ import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.LAT_IN
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.LNG_INIT
 import com.microsoft.device.samples.dualscreenexperience.config.MapConfig.ZOOM_LEVEL_CITY
 import com.microsoft.device.samples.dualscreenexperience.domain.store.model.MapMarkerModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isNightMode
 import com.microsoft.maps.Geopoint
 import com.microsoft.maps.MapAnimationKind
 import com.microsoft.maps.MapElementCollisionBehavior
@@ -90,9 +91,14 @@ class BingMapController @Inject constructor() : MapController {
     }
 
     override fun setupMap(context: Context, mapView: FrameLayout) {
+        val mapStyle = if (context.isNightMode()) {
+            MapStyleSheets.roadDark()
+        } else {
+            MapStyleSheets.roadCanvasLight()
+        }
         (mapView as? MapView)?.apply {
             mapProjection = MapProjection.WEB_MERCATOR
-            mapStyleSheet = MapStyleSheets.roadDark()
+            mapStyleSheet = mapStyle
             userInterfaceOptions.apply {
                 isZoomButtonsVisible = false
                 isZoomGestureEnabled = false

@@ -22,6 +22,7 @@ import com.microsoft.device.samples.dualscreenexperience.config.LicensesConfig
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutLicensesBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.ASSETS_PATH
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.ItemClickListener
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.addClickableLink
 
@@ -32,6 +33,12 @@ class AboutLicensesFragment : Fragment() {
     private val viewModel: AboutViewModel by activityViewModels()
     private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
+    private val itemClickListener = object : ItemClickListener<String> {
+        override fun onClick(model: String?) {
+            onLinkClicked(model)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +46,7 @@ class AboutLicensesFragment : Fragment() {
     ): View? {
         binding = FragmentAboutLicensesBinding.inflate(inflater, container, false)
         binding?.isDualMode = layoutInfoViewModel.isDualMode.value
+        binding?.linksItems?.itemClickListener = itemClickListener
         return binding?.root
     }
 
@@ -55,13 +63,14 @@ class AboutLicensesFragment : Fragment() {
 
     private fun setupListeners() {
         binding?.licensePrivacyTitle?.setOnClickListener {
-            onNoticeClicked(LicensesConfig.PRIVACY_URL)
+            onLinkClicked(LicensesConfig.PRIVACY_URL)
         }
         binding?.licenseTermsTitle?.setOnClickListener {
             onOssLicensesClicked()
         }
         binding?.licenseTermsOtherTitle?.setOnClickListener {
-            onNoticeClicked(LicensesConfig.OTHER_NOTICES_PATH)
+            onLinkClicked(LicensesConfig.OTHER_NOTICES_PATH)
+            viewModel.internalLinkToOpen.value = LicensesConfig.OTHER_NOTICES_PATH
         }
         setupDescriptionText()
     }
@@ -73,9 +82,8 @@ class AboutLicensesFragment : Fragment() {
         }
     }
 
-    private fun onNoticeClicked(noticeUrl: String) {
-        noticeUrl.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
-        viewModel.linkToOpen.value = noticeUrl
+    private fun onLinkClicked(linkUrl: String?) {
+        linkUrl?.takeIf { it.isNotBlank() }?.let { url -> openUrl(url) }
     }
 
     private fun setupDescriptionText() {

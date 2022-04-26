@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -162,7 +161,6 @@ class OrderReceiptFragment : Fragment() {
                         getString(R.string.order_success_message),
                         LENGTH_SHORT
                     )
-                        .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
                         .addCallback(object : Snackbar.Callback() {
                             override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                                 super.onDismissed(transientBottomBar, event)

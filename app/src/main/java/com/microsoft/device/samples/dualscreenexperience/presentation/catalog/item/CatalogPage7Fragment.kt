@@ -177,7 +177,7 @@ class CatalogPage7Fragment : Fragment() {
                 R.id.horizontal_fold, ConstraintSet.TOP, foldingMargin
             )
 
-            set.setVisibility(R.id.horizontal_fold, View.VISIBLE)
+            set.setVisibility(R.id.horizontal_fold, View.INVISIBLE)
             set.applyTo(constraintLayout)
         }
     }

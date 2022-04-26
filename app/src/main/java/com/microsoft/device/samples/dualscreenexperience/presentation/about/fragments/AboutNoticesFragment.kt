@@ -27,6 +27,7 @@ import androidx.webkit.WebViewFeature
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentAboutNoticesBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutViewModel.Companion.ASSETS_PATH
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isNightMode
 
 class AboutNoticesFragment : Fragment() {
 
@@ -71,7 +72,7 @@ class AboutNoticesFragment : Fragment() {
                 }
             }
 
-            if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            if (context.isNightMode() && WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
             }
 
@@ -81,7 +82,7 @@ class AboutNoticesFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.linkToOpen.observe(viewLifecycleOwner) {
+        viewModel.internalLinkToOpen.value?.let {
             binding?.noticeWebView?.loadUrl(it)
         }
     }

@@ -30,7 +30,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
+        android:background="?android:attr/colorBackground"
         android:paddingStart="@dimen/large_padding"
         android:paddingTop="@dimen/small_padding"
         android:paddingEnd="@dimen/normal_padding"
@@ -185,7 +185,6 @@
             app:layout_constraintWidth_max="200dp"
             app:lottie_autoPlay="false"
             app:lottie_rawRes="@raw/add_to_order_animation"
-            tools:background="@drawable/rounded_rectangle_button"
             tools:visibility="invisible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

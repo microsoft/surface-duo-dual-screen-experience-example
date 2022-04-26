@@ -18,6 +18,6 @@
     android:paddingStart="@dimen/small_padding"
     android:paddingEnd="@dimen/small_padding"
     android:text="@string/toolbar_dev_mode"
-    android:textColor="@color/gold"
+    android:textColor="?attr/colorOnBackground"
     app:drawableStartCompat="@drawable/ic_dev_mode"
-    tools:background="@color/black" />
+    tools:background="?attr/colorOnPrimary" />

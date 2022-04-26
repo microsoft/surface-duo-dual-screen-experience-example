@@ -14,7 +14,7 @@
         android:top="@dimen/half_medium_padding">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/card_radius" />
-            <solid android:color="@color/dark_blue" />
+            <solid android:color="?attr/colorSurface" />
         </shape>
     </item>
 </layer-list>

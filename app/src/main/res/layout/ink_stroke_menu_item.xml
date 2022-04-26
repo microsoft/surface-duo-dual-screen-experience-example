@@ -10,7 +10,7 @@
     android:layout_width="@dimen/touch_target_size"
     android:layout_height="@dimen/touch_target_size"
     android:gravity="center"
-    tools:background="@drawable/rectangle_gold_padding">
+    tools:background="@drawable/ink_rectangle_background">
 
     <ImageView
         android:id="@+id/ink_menu_item_image"

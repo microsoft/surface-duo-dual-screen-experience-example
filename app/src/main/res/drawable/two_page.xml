@@ -17,10 +17,10 @@
       android:strokeColor="#786B5A"/>
   <path
       android:pathData="M12,9L64,9A3,3 0,0 1,67 12L67,88A3,3 0,0 1,64 91L12,91A3,3 0,0 1,9 88L9,12A3,3 0,0 1,12 9z"
-      android:fillColor="#2A3037"/>
+      android:fillColor="?attr/colorDarkSurface"/>
   <path
       android:pathData="M82,9L137,9A3,3 0,0 1,140 12L140,88A3,3 0,0 1,137 91L82,91A3,3 0,0 1,79 88L79,12A3,3 0,0 1,82 9z"
-      android:fillColor="#2A3037"/>
+      android:fillColor="?attr/colorDarkSurface"/>
   <path
       android:pathData="M73.181,0V100"
       android:strokeWidth="3"

@@ -7,8 +7,8 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.about
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class AboutViewModel @Inject constructor(
     private val navigator: AboutNavigator
 ) : ViewModel() {
-    var linkToOpen = MutableLiveData("")
+    var internalLinkToOpen = SingleLiveEvent("")
 
     fun navigateToLicenses() {
         navigator.navigateToLicenses()
@@ -25,7 +25,7 @@ class AboutViewModel @Inject constructor(
     fun isNavigationAtStart() = navigator.isNavigationAtStart()
 
     fun navigateUp() {
-        linkToOpen.value = ""
+        internalLinkToOpen.value = ""
         navigator.navigateUp()
     }
 

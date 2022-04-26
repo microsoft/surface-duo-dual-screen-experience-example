@@ -20,7 +20,7 @@
         android:id="@+id/store_rating_reviews_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/gray">
+        tools:background="?android:attr/colorBackground">
 
         <ImageView
             android:id="@+id/item_store_star"

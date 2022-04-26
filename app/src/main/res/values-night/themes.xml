@@ -1,0 +1,67 @@
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<resources>
+    <style name="Theme.App.DayNight" parent="Theme.App.Dark" />
+    <style name="Theme.App.ActionBar.DayNight" parent="Theme.App.ActionBar.Dark" />
+
+    <!-- Base application theme. -->
+    <style name="Theme.App.Dark" parent="Theme.App">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/primary_gold</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorAccent">?colorPrimary</item>
+        <item name="colorOnSecondary">@color/background_gray</item>
+        <item name="android:textColorSecondary">@color/primary_gold</item>
+
+        <!-- Background color. -->
+        <item name="android:colorBackground">@color/background_gray</item>
+        <item name="android:colorBackgroundFloating">@color/black</item>
+        <item name="colorOnBackground">@color/primary_gold</item>
+
+        <!-- Surface color. -->
+        <item name="colorSurface">@color/surface_dark_blue</item>
+        <item name="colorDarkSurface">@color/surface_dark_blue</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- Widgets color. -->
+        <item name="inkStrokeBackgroundColor">@color/dark_gold</item>
+        <item name="inkStrokeOptionsBackgroundColor">@color/dark_gold_variant</item>
+
+        <item name="dialogNegativeBackgroundColor">@color/dialog_negative_button_dark_background</item>
+    </style>
+
+    <!-- Needed for external OssLicensesMenuActivity and OssLicensesActivity -->
+    <style name="Theme.App.ActionBar.Dark" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/primary_gold</item>
+        <item name="android:textColorPrimary">@color/primary_gold</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorAccent">?colorPrimary</item>
+        <item name="colorOnSecondary">@color/primary_gold</item>
+        <item name="android:textColorSecondary">@color/primary_gold</item>
+
+        <!-- Background color. -->
+        <item name="android:colorBackground">@color/black</item>
+        <item name="android:colorBackgroundFloating">@color/black</item>
+        <item name="colorOnBackground">@color/primary_gold</item>
+
+        <!-- Surface color. -->
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/primary_gold</item>
+
+        <!-- Widgets color. -->
+        <item name="actionBarStyle">@style/Widget.App.ActionBar</item>
+    </style>
+</resources>

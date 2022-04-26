@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import com.google.android.material.color.MaterialColors
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductColor
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.ProductType
@@ -95,7 +96,7 @@ class CustomizeCardView @JvmOverloads constructor(
     fun unselect() {
         isSelected = false
         isClickable = true
-        setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray))
+        setCardBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent))
         cardElevation = unselectedCardElevation
         contentDescription = buildContentDescription()
         replaceClickActionLabel(this, resources.getString(R.string.select_action_label))
@@ -104,7 +105,7 @@ class CustomizeCardView @JvmOverloads constructor(
     fun select() {
         isSelected = true
         isClickable = false
-        setCardBackgroundColor(ContextCompat.getColor(context, R.color.dark_blue))
+        setCardBackgroundColor(MaterialColors.getColor(this, R.attr.colorSurface))
         cardElevation = selectedCardElevation
         contentDescription = buildContentDescription()
         replaceClickActionLabel(this, null)

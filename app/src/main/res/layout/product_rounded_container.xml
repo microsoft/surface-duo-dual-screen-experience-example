@@ -23,7 +23,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rounded_rectangle_text"
+        android:background="@drawable/rounded_rectangle_text_background"
         android:focusable="true"
         android:paddingStart="@dimen/small_padding"
         android:paddingEnd="@dimen/small_padding"

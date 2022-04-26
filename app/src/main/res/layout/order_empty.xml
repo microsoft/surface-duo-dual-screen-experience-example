@@ -20,7 +20,8 @@
         android:id="@+id/order_empty_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray">
+        android:background="?android:attr/colorBackground"
+        android:paddingTop="@dimen/normal_padding">
 
         <View
             android:id="@+id/order_empty_space"

@@ -49,7 +49,7 @@ fun getColorRes(productColor: ProductColor): Int =
         ProductColor.GRAY -> R.color.guitar_gray_color
         ProductColor.BLUE -> R.color.guitar_blue_color
         ProductColor.YELLOW -> R.color.guitar_yellow_color
-        ProductColor.WHITE -> R.color.white
+        ProductColor.WHITE -> R.color.guitar_white_color
         ProductColor.ORANGE -> R.color.guitar_orange_color
         ProductColor.AQUA -> R.color.guitar_aqua_color
         ProductColor.LIGHT_GRAY -> R.color.guitar_light_gray_color

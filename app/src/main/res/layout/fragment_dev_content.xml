@@ -23,7 +23,7 @@
         android:id="@+id/dev_content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="?android:attr/colorBackgroundFloating">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/dev_content_progress"
@@ -44,7 +44,6 @@
             layout="@layout/no_internet_connection_single_mode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:containerBackground="@{@color/black}"
             app:isConnected="@{isConnected}"
             app:isDualPortrait="@{false}"/>
 
