@@ -26,11 +26,11 @@ ext {
             kotlinStdlib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
     ]
 
-    navigationVersion = '1.0.0-alpha3'
+    navigationVersion = '2.3.5'
 
     navigationDependencies = [
-            fragmentKtx   : "com.microsoft.device.dualscreen:navigation-fragment-ktx:$navigationVersion",
-            uiKtx         : "com.microsoft.device.dualscreen:navigation-ui-ktx:$navigationVersion",
+            fragmentKtx   : "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            uiKtx         : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
             safeArgsPlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     ]
 

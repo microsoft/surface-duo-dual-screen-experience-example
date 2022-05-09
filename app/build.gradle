@@ -54,12 +54,13 @@ android {
 
         emulator {
             applicationIdSuffix ".appEmulator"
-            minifyEnabled true
-            shrinkResources true
-            debuggable false
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             buildConfigField "String", "BING_MAPS_KEY", "\"$bingMapsKey\""
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -92,6 +93,7 @@ android {
 }
 
 dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     implementation kotlinDependencies.kotlinStdlib
 
     implementation androidxDependencies.appCompat
@@ -122,11 +124,11 @@ dependencies {
     emulatorImplementation microsoftDependencies.bingMaps
 
     implementation microsoftDependencies.ink
-    implementation microsoftDependencies.bottomNavBar
-    implementation microsoftDependencies.recyclerView
-    implementation microsoftDependencies.layouts
-    implementation microsoftDependencies.wmUtils
-    implementation microsoftDependencies.snackbar
+//    implementation microsoftDependencies.bottomNavBar
+//    implementation microsoftDependencies.recyclerView
+//    implementation microsoftDependencies.layouts
+//    implementation microsoftDependencies.wmUtils
+//    implementation microsoftDependencies.snackbar
 
     implementation uiDependencies.lottie
 
