@@ -16,8 +16,8 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.isClickable
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
-import com.microsoft.device.dualscreen.layouts.locationOnScreen
 import com.microsoft.device.dualscreen.testing.ForceClick
+import com.microsoft.device.dualscreen.utils.wm.locationOnScreen
 import org.hamcrest.Matcher
 import org.hamcrest.core.AllOf.allOf
 

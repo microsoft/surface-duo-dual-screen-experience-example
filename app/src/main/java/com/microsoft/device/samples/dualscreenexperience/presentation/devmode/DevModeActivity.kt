@@ -17,7 +17,6 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewAnimationUtils.createCircularReveal
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnNextLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -29,6 +28,7 @@ import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityDevModeBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.BaseActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +39,7 @@ import javax.inject.Inject
 import kotlin.math.max
 
 @AndroidEntryPoint
-class DevModeActivity : AppCompatActivity() {
+class DevModeActivity : BaseActivity() {
 
     private val layoutInfoViewModel: LayoutInfoViewModel by viewModels()
     private val viewModel: DevModeViewModel by viewModels()

@@ -89,7 +89,7 @@ android {
     }
 
     // This is the default but added it explicitly so we can change it more easily
-    testBuildType "debug"
+    testBuildType "emulator"
 }
 
 dependencies {

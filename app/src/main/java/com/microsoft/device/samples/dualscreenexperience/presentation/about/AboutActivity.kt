@@ -9,7 +9,6 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.about
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,6 +19,7 @@ import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.ActivityAboutBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.BaseActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : BaseActivity() {
 
     @Inject
     lateinit var navigator: AboutNavigator
