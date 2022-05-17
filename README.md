@@ -31,20 +31,30 @@ To learn how to load apps on the Surface Duo emulator, see the [documentation](h
 
 ## Screenshots
 
-<img src="screenshots/dual_portrait_catalog_light.png" width=49% />
-<img src="screenshots/dual_portrait_catalog.png" width=49% />
+<p align="center">
+        <img src="screenshots/dual_portrait_catalog_light.png" width=49% />
+        <img src="screenshots/dual_portrait_catalog.png" width=49% />
+</p>
 
-<img src="screenshots/dual_portrait_product_customize_light.png" width=49% />
-<img src="screenshots/dual_portrait_product_customize.png" width=49% />
+<p align="center">
+    <img src="screenshots/dual_portrait_product_customize_light.png" width=49% />
+    <img src="screenshots/dual_portrait_product_customize.png" width=49% />
+</p>
 
-<img src="screenshots/dual_portrait_order_light.png" width=49% />
-<img src="screenshots/dual_portrait_order.png" width=49% />
+<p align="center">
+    <img src="screenshots/dual_portrait_order_light.png" width=49% />
+    <img src="screenshots/dual_portrait_order.png" width=49% />
+</p>
 
-<img src="screenshots/dual_portrait_order_ink_light.png" width="406" />
-<img src="screenshots/dual_portrait_order_ink.png" width="406" />
+<p align="center">
+    <img src="screenshots/dual_portrait_order_ink_light.png" width=49% />
+    <img src="screenshots/dual_portrait_order_ink.png" width=49% />
+</p>
 
-<img src="screenshots/dual_portrait_dev_mode_light.png" width="406" />
-<img src="screenshots/dual_portrait_dev_mode.png" width="406" />
+<p align="center">
+    <img src="screenshots/dual_portrait_dev_mode_light.png" width=49% />
+    <img src="screenshots/dual_portrait_dev_mode.png" width=49% />
+</p>
 
 ## Social links
 
