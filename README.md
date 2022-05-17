@@ -12,6 +12,11 @@ When spanned across the folding feature, a Developer Mode option appears in the 
 more details regarding each screen - the code behind it, the [user interface patterns](https://docs.microsoft.com/dual-screen/introduction#dual-screen-app-patterns) 
 it implements and the [dual-screen controls](https://docs.microsoft.com/dual-screen/android/api-reference/dualscreen-library/) it uses.
 
+The application is built using the [Foldable Navigation Component](https://docs.microsoft.com/en-us/dual-screen/android/api-reference/dualscreen-library/navigation-component/), 
+[BottomNavigationView](https://docs.microsoft.com/en-us/dual-screen/android/api-reference/dualscreen-library/bottomnavigation/surfaceduo-bottomnavigationview), 
+[RecyclerView](https://docs.microsoft.com/en-us/dual-screen/android/api-reference/dualscreen-library/recyclerview/), [Ink SDK](https://docs.microsoft.com/en-us/dual-screen/android/platform/pen-ink-sdk), 
+[SnackbarContainer](https://docs.microsoft.com/en-us/dual-screen/android/api-reference/dualscreen-library/snackbar), [Testing Kit](https://docs.microsoft.com/en-us/dual-screen/android/test-kit/?tabs=views).
+
 ![Dual Screen Experience Example build](https://github.com/microsoft/surface-duo-dual-screen-experience-example/workflows/Dual%20Screen%20Experience%20Example%20build/badge.svg)
 
 ## Install from Google Play Store
@@ -22,34 +27,32 @@ If you want to try out the released version, you can find it here:
 
 ## Getting Started
 
-To learn how to load your app on the Surface Duo emulator, see the [documentation](https://docs.microsoft.com/dual-screen/android), and follow [the blog](https://devblogs.microsoft.com/surface-duo).
+To learn how to load apps on the Surface Duo emulator, see the [documentation](https://docs.microsoft.com/en-us/dual-screen/android/emulator/), and follow [the blog](https://devblogs.microsoft.com/surface-duo).
 
 ## Screenshots
 
-:::row:::
 ![Catalog dual portrait light theme](screenshots/dual_portrait_catalog_light.png)
 ![Catalog dual portrait dark theme](screenshots/dual_portrait_catalog.png)
-:::row-end:::
 
-:::row:::
 ![Product Customize dual portrait light theme](screenshots/dual_portrait_product_customize_light.png)
 ![Product Customize dual portrait dark theme](screenshots/dual_portrait_product_customize.png)
-:::row-end:::
 
-:::row:::
 ![Order dual portrait light theme](screenshots/dual_portrait_order_light.png)
 ![Order dual portrait dark theme](screenshots/dual_portrait_order.png)
-:::row-end:::
 
-:::row:::
 ![Order Ink dual portrait light theme](screenshots/dual_portrait_order_ink_light.png)
 ![Order Ink dual portrait dark theme](screenshots/dual_portrait_order_ink.png)
-:::row-end:::
 
-:::row:::
 ![Developer Mode dual portrait light theme](screenshots/dual_portrait_dev_mode_light.png)
 ![Developer Mode dual portrait dark theme](screenshots/dual_portrait_dev_mode.png)
-:::row-end:::
+
+## Social links
+
+| Blog post | Video |
+|---|---|
+| [Dual-screen reference app](https://devblogs.microsoft.com/surface-duo/dual-screen-reference-app/) | [Twitch #48: Dual Screen Experience sample app](https://www.youtube.com/watch?v=OQuBpejOuA8) |
+| [Dual-screen app design walkthrough](https://devblogs.microsoft.com/surface-duo/dual-screen-app-design-walkthrough/) | [Twitch #56: Dual screen app design walkthrough](https://www.youtube.com/watch?v=r7JzIfzEWfM) |
+| [Accessibility in a dual-screen application](https://devblogs.microsoft.com/surface-duo/accessibility-dual-screen/) | [Twitch : Accessibility on dual-screen apps](https://www.twitch.tv/videos/1476733690) |
 
 ## Related links
 
@@ -58,6 +61,7 @@ To learn how to load your app on the Surface Duo emulator, see the [documentatio
 - [SDK samples (Java)](https://github.com/microsoft/surface-duo-sdk-samples)
 - [App samples](https://github.com/microsoft/surface-duo-app-samples)
 - [Jetpack Window Manager samples](https://github.com/microsoft/surface-duo-window-manager-samples)
+- [Jetpack Compose SDK](https://github.com/microsoft/surface-duo-compose-sdk/)
 - [Jetpack Compose samples](https://github.com/microsoft/surface-duo-compose-samples)
 - [Unity samples](https://github.com/microsoft/surface-duo-sdk-unity-samples)
 - [Xamarin samples](https://github.com/microsoft/surface-duo-sdk-xamarin-samples)
