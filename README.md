@@ -31,20 +31,20 @@ To learn how to load apps on the Surface Duo emulator, see the [documentation](h
 
 ## Screenshots
 
-![Catalog dual portrait light theme](screenshots/dual_portrait_catalog_light.png)
-![Catalog dual portrait dark theme](screenshots/dual_portrait_catalog.png)
+<img src="screenshots/dual_portrait_catalog_light.png" width=49% />
+<img src="screenshots/dual_portrait_catalog.png" width=49% />
 
-![Product Customize dual portrait light theme](screenshots/dual_portrait_product_customize_light.png)
-![Product Customize dual portrait dark theme](screenshots/dual_portrait_product_customize.png)
+<img src="screenshots/dual_portrait_product_customize_light.png" width=49% />
+<img src="screenshots/dual_portrait_product_customize.png" width=49% />
 
-![Order dual portrait light theme](screenshots/dual_portrait_order_light.png)
-![Order dual portrait dark theme](screenshots/dual_portrait_order.png)
+<img src="screenshots/dual_portrait_order_light.png" width=49% />
+<img src="screenshots/dual_portrait_order.png" width=49% />
 
-![Order Ink dual portrait light theme](screenshots/dual_portrait_order_ink_light.png)
-![Order Ink dual portrait dark theme](screenshots/dual_portrait_order_ink.png)
+<img src="screenshots/dual_portrait_order_ink_light.png" width="406" />
+<img src="screenshots/dual_portrait_order_ink.png" width="406" />
 
-![Developer Mode dual portrait light theme](screenshots/dual_portrait_dev_mode_light.png)
-![Developer Mode dual portrait dark theme](screenshots/dual_portrait_dev_mode.png)
+<img src="screenshots/dual_portrait_dev_mode_light.png" width="406" />
+<img src="screenshots/dual_portrait_dev_mode.png" width="406" />
 
 ## Social links
 
