@@ -68,5 +68,9 @@ private fun setupPages(
         .width(pageTextWidth)
         .fillMaxHeight()
         .clipToBounds() else Modifier.fillMaxSize()
-    return listOf<@Composable () -> Unit>()
+    return listOf<@Composable () -> Unit>(
+        {
+            CatalogFirstPage(modifier = modifier, catalogList = catalogList)
+        }
+    )
 }
