@@ -1,5 +1,6 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,6 +9,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
@@ -17,12 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import coil.compose.rememberAsyncImagePainter
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
 const val SECOND_PAGE_TITLE_TEXT_ID = "secondPageTitle"
@@ -49,7 +54,12 @@ fun CatalogSecondPage(
     ConstraintLayout(constraintSet) {
         SecondPageContent(
             modifier
-                .padding(bottom = dimensionResource(id = R.dimen.catalog_margin_normal))
+                .padding(
+                    bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
+                    top = if (isFeatureHorizontal)
+                        dimensionResource(id = R.dimen.catalog_margin_normal) else
+                        dimensionResource(id = R.dimen.zero_padding)
+                )
                 .verticalScroll(rememberScrollState())
                 .layoutId(SECOND_PAGE_CONTENT_ID),
             secondPageConstraintSet,
@@ -168,13 +178,11 @@ private fun SecondPageContent(
             Image(
                 modifier = Modifier
                     .padding(start = dimensionResource(id = R.dimen.catalog_image_margin_start))
-                    .background(
-                        color = colorResource(id = R.color.catalog_tools_image_background),
-                        shape = MaterialTheme.shapes.small
-                    )
+                    .clip(MaterialTheme.shapes.small)
+                    .clipToBounds()
                     .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
                     .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
-                painter = painterResource(id = R.drawable.ic_star),
+                painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.firstPicture)),
                 contentDescription = catalogItem.firstPictureDescription
             )
 
@@ -211,13 +219,11 @@ private fun SecondPageContent(
             modifier = Modifier
                 .layoutId(SECOND_PAGE_FIRST_ROW_IMAGE_ID)
                 .padding(start = dimensionResource(id = R.dimen.catalog_image_margin_start))
-                .background(
-                    color = colorResource(id = R.color.catalog_tools_image_background),
-                    shape = MaterialTheme.shapes.small
-                )
+                .clip(MaterialTheme.shapes.small)
+                .clipToBounds()
                 .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
                 .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
-            painter = painterResource(id = R.drawable.ic_star),
+            painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.secondPicture)),
             contentDescription = catalogItem.firstPictureDescription
         )
 
@@ -225,13 +231,11 @@ private fun SecondPageContent(
             modifier = Modifier
                 .layoutId(SECOND_PAGE_SECOND_ROW_IMAGE_ID)
                 .padding(end = dimensionResource(id = R.dimen.catalog_image_margin_end))
-                .background(
-                    color = colorResource(id = R.color.catalog_tools_image_background),
-                    shape = MaterialTheme.shapes.small
-                )
+                .clip(MaterialTheme.shapes.small)
+                .clipToBounds()
                 .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
                 .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
-            painter = painterResource(id = R.drawable.ic_star),
+            painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.thirdPicture)),
             contentDescription = catalogItem.firstPictureDescription
         )
     }

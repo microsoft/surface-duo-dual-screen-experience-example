@@ -116,11 +116,13 @@ ext {
     //UI dependencies
     glideVersion = "4.12.0"
     lottieVersion = '4.2.0'
+    coilVersion = "2.1.0"
 
     uiDependencies = [
             lottie                 : "com.airbnb.android:lottie:$lottieVersion",
             glide                  : "com.github.bumptech.glide:glide:$glideVersion",
-            glideAnnotationProcesor: "com.github.bumptech.glide:compiler:$glideVersion"
+            glideAnnotationProcesor: "com.github.bumptech.glide:compiler:$glideVersion",
+            coil                   : "io.coil-kt:coil-compose:$coilVersion"
     ]
 
     //Test dependencies version

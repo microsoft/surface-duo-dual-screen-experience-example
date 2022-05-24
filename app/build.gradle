@@ -147,6 +147,7 @@ dependencies {
 
     implementation uiDependencies.glide
     kapt uiDependencies.glideAnnotationProcesor
+    implementation uiDependencies.coil
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.archTesting
@@ -162,6 +163,7 @@ dependencies {
     androidTestImplementation instrumentationTestDependencies.hiltTesting
     androidTestImplementation instrumentationTestDependencies.archTesting
     androidTestImplementation instrumentationTestDependencies.kotlinTesting
+
 
     kaptAndroidTest instrumentationTestDependencies.hiltTestingCompiler
 }
