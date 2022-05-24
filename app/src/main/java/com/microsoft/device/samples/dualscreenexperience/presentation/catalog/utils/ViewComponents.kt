@@ -30,10 +30,11 @@ fun BottomPageNumber(modifier: Modifier = Modifier, text: String) {
 fun TextDescription(
     modifier: Modifier = Modifier,
     text: String,
-    fontSize: TextUnit = fontDimensionResource(id = R.dimen.text_size_12)
+    fontSize: TextUnit = fontDimensionResource(id = R.dimen.text_size_12),
+    contentDescription: String
 ) {
     Text(
-        modifier = modifier,
+        modifier = modifier.contentDescription(contentDescription),
         text = text,
         style = TextStyle(
             color = MaterialTheme.colors.onSurface,

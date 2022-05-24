@@ -71,6 +71,13 @@ private fun setupPages(
     return listOf<@Composable () -> Unit>(
         {
             CatalogFirstPage(modifier = modifier, catalogList = catalogList)
+        },
+        {
+            CatalogSecondPage(
+                modifier = modifier,
+                catalogList = catalogList,
+                isFeatureHorizontal = isFeatureHorizontal
+            )
         }
     )
 }

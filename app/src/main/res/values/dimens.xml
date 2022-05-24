@@ -108,6 +108,9 @@
     <dimen name="catalog_double_max_image_height">500dp</dimen>
     <dimen name="catalog_max_image_height">250dp</dimen>
     <dimen name="catalog_min_image_height">150dp</dimen>
+    <dimen name="catalog_min_image_width">200dp</dimen>
+    <dimen name="catalog_image_margin_start">52dp</dimen>
+    <dimen name="catalog_image_margin_end">52dp</dimen>
     <dimen name="catalog_base_min_image_height">100dp</dimen>
 
     <dimen name="touch_target_size">48dp</dimen>
