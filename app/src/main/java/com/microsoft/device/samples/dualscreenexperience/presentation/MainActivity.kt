@@ -142,8 +142,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
     }
 
-
-
     private fun setupBottomNavigation() {
         binding.bottomNavView.setOnItemSelectedListener { item ->
             when (item.itemId) {
