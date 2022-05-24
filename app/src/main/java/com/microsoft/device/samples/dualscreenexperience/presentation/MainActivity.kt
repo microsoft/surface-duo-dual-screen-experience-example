@@ -142,6 +142,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
     }
 
+
+
     private fun setupBottomNavigation() {
         binding.bottomNavView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -264,10 +266,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (layoutInfoViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.main_menu, menu)
-            menu?.findItem(R.id.menu_main_dev_mode)?.actionView?.apply {
+            menu.findItem(R.id.menu_main_dev_mode)?.actionView?.apply {
                 setOnClickListener {
                     onDevModeClicked(it)
                 }
