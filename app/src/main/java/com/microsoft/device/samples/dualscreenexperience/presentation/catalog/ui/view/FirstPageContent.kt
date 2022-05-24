@@ -29,12 +29,12 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ut
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
 const val TABLE_OF_CONTENTS_ID = "tableOfContents"
-const val BOTTOM_PAGE_NUMBER_ID = "bottomPageNumber"
-const val FIRST_TEXT_ID = "firstText"
-const val SECOND_TEXT_ID = "secondText"
-const val THIRD_TEXT_ID = "thirdText"
-const val FOURTH_TEXT_ID = "fourthText"
-const val FIFTH_TEXT_ID = "fifthText"
+const val FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID = "firstPageBottomPageNumber"
+const val FIRST_PAGE_FIRST_TEXT_ID = "firstText"
+const val FIRST_PAGE_SECOND_TEXT_ID = "secondText"
+const val FIRST_PAGE_THIRD_TEXT_ID = "thirdText"
+const val FIRST_PAGE_FOURTH_TEXT_ID = "fourthText"
+const val FIRST_PAGE_FIFTH_TEXT_ID = "fifthText"
 
 @Composable
 fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogItem>) {
@@ -58,7 +58,7 @@ fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogIte
                     end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                     bottom = dimensionResource(id = R.dimen.catalog_margin_small)
                 )
-                .layoutId(BOTTOM_PAGE_NUMBER_ID),
+                .layoutId(FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID),
             text = stringResource(
                 id = R.string.catalog_page_no,
                 CatalogPage.Page1.ordinal + 1,
@@ -71,7 +71,7 @@ fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogIte
 @Composable
 private fun getMainConstraintSet() = ConstraintSet {
     val contentRef = createRefFor(TABLE_OF_CONTENTS_ID)
-    val bottomPageNumberRef = createRefFor(BOTTOM_PAGE_NUMBER_ID)
+    val bottomPageNumberRef = createRefFor(FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID)
 
     constrain(contentRef) {
         linkTo(start = parent.start, end = parent.end)
@@ -86,11 +86,11 @@ private fun getMainConstraintSet() = ConstraintSet {
 
 @Composable
 private fun getConstraintSetForTableOfContents() = ConstraintSet {
-    val firstTextRef = createRefFor(FIRST_TEXT_ID)
-    val secondTextRef = createRefFor(SECOND_TEXT_ID)
-    val thirdTextRef = createRefFor(THIRD_TEXT_ID)
-    val fourthTextRef = createRefFor(FOURTH_TEXT_ID)
-    val fifthTextRef = createRefFor(FIFTH_TEXT_ID)
+    val firstTextRef = createRefFor(FIRST_PAGE_FIRST_TEXT_ID)
+    val secondTextRef = createRefFor(FIRST_PAGE_SECOND_TEXT_ID)
+    val thirdTextRef = createRefFor(FIRST_PAGE_THIRD_TEXT_ID)
+    val fourthTextRef = createRefFor(FIRST_PAGE_FOURTH_TEXT_ID)
+    val fifthTextRef = createRefFor(FIRST_PAGE_FIFTH_TEXT_ID)
 
     constrain(firstTextRef) {
         start.linkTo(parent.start)
@@ -137,7 +137,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                     top = dimensionResource(id = R.dimen.catalog_margin_very_large),
                     end = dimensionResource(id = R.dimen.catalog_horizontal_margin)
                 )
-                .layoutId(FIRST_TEXT_ID),
+                .layoutId(FIRST_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
             style = TextStyle(
                 color = MaterialTheme.colors.onSurface,
@@ -156,7 +156,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                     )
                 )
                 .padding(top = dimensionResource(id = R.dimen.catalog_margin_normal))
-                .layoutId(SECOND_TEXT_ID),
+                .layoutId(FIRST_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             destinationPage = 2,
             onItemClick = { }
@@ -170,7 +170,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                         stringResource(id = R.string.catalog_toc_item_content_description)
                     )
                 )
-                .layoutId(THIRD_TEXT_ID),
+                .layoutId(FIRST_PAGE_THIRD_TEXT_ID),
             text = catalogItem.thirdDescription ?: "",
             destinationPage = 3,
             onItemClick = { }
@@ -184,7 +184,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                         stringResource(id = R.string.catalog_toc_item_content_description)
                     )
                 )
-                .layoutId(FOURTH_TEXT_ID),
+                .layoutId(FIRST_PAGE_FOURTH_TEXT_ID),
             text = catalogItem.fourthDescription ?: "",
             destinationPage = 4,
             onItemClick = { }
@@ -198,7 +198,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                         stringResource(id = R.string.catalog_toc_item_content_description)
                     )
                 )
-                .layoutId(FIFTH_TEXT_ID),
+                .layoutId(FIRST_PAGE_FIFTH_TEXT_ID),
             text = catalogItem.fifthDescription ?: "",
             destinationPage = 5,
             onItemClick = { }
