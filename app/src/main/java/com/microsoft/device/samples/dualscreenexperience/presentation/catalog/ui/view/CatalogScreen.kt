@@ -1,3 +1,10 @@
+/*
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
+ */
+
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -74,6 +81,13 @@ private fun setupPages(
         },
         {
             CatalogSecondPage(
+                modifier = modifier,
+                catalogList = catalogList,
+                isFeatureHorizontal = isFeatureHorizontal
+            )
+        },
+        {
+            CatalogThirdPage(
                 modifier = modifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal

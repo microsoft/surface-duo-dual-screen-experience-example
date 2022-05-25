@@ -1,3 +1,10 @@
+/*
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
+ */
+
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
 import androidx.compose.foundation.clickable
@@ -203,7 +210,6 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
             destinationPage = 5,
             onItemClick = { }
         )
-
     }
 }
 

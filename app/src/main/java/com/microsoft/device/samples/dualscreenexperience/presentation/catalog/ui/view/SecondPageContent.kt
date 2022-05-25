@@ -1,7 +1,18 @@
+/*
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
+ */
+
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -97,7 +108,7 @@ private fun getMainConstraintSet() = ConstraintSet {
 }
 
 @Composable
-private fun getConstraintSetForSecondPage(isDualLandscape: Boolean) = ConstraintSet {
+private fun getConstraintSetForSecondPage(isFeatureHorizontal: Boolean) = ConstraintSet {
     val titleRef = createRefFor(SECOND_PAGE_TITLE_TEXT_ID)
     val firstRowRef = createRefFor(SECOND_PAGE_FIRST_ROW_ID)
     val thirdTextRef = createRefFor(SECOND_PAGE_THIRD_TEXT_ID)
@@ -113,14 +124,14 @@ private fun getConstraintSetForSecondPage(isDualLandscape: Boolean) = Constraint
     constrain(firstRowRef) {
         linkTo(start = parent.start, end = parent.end)
         top.linkTo(titleRef.bottom, 8.dp)
-        if (isDualLandscape) {
+        if (isFeatureHorizontal) {
             bottom.linkTo(horizontalGuideline)
         }
     }
 
     constrain(thirdTextRef) {
         linkTo(start = parent.start, end = parent.end)
-        if (isDualLandscape) {
+        if (isFeatureHorizontal) {
             top.linkTo(horizontalGuideline)
         } else {
             top.linkTo(firstRowRef.bottom)
@@ -236,5 +247,3 @@ private fun SecondPageContent(
         )
     }
 }
-
-
