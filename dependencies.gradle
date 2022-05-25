@@ -43,10 +43,6 @@ ext {
     webkitVersion = '1.4.0'
     windowManagerVersion = '1.0.0'
     lifecycleRuntimeKtxVersion = "2.4.0-rc01"
-    composeUiVersion = '1.1.1'
-    composeViewModelVersion = '2.4.1'
-    activityComposeVersion = "1.4.0"
-    constraintLayoutComposeVersion = "1.0.0-beta02"
 
 
     androidxDependencies = [
@@ -60,6 +56,15 @@ ext {
             webkit                       : "androidx.webkit:webkit:$webkitVersion",
             windowManager                : "androidx.window:window-java:$windowManagerVersion",
             lifecycleRuntimeKtx          : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion",
+    ]
+
+    //Jetpack compose dependencies versions
+    composeUiVersion = "1.1.1"
+    composeViewModelVersion = '2.4.1'
+    activityComposeVersion = "1.4.0"
+    constraintLayoutComposeVersion = "1.0.0-beta02"
+
+    composeDependencies = [
             composeUi                    : "androidx.compose.ui:ui:$composeUiVersion",
             composeTooling               : "androidx.compose.ui:ui-tooling:$composeUiVersion",
             composeFoundation            : "androidx.compose.foundation:foundation:$composeUiVersion",

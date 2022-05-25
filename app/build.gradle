@@ -106,15 +106,6 @@ dependencies {
     implementation androidxDependencies.webkit
     implementation androidxDependencies.lifecycleRuntimeKtx
     implementation androidxDependencies.windowManager
-    implementation androidxDependencies.composeUi
-    implementation androidxDependencies.composeTooling
-    implementation androidxDependencies.composeFoundation
-    implementation androidxDependencies.composeMaterial
-    implementation androidxDependencies.composeMaterialIcons
-    implementation androidxDependencies.composeMaterialIconsExtended
-    implementation androidxDependencies.composeViewModel
-    implementation androidxDependencies.composeLiveData
-    implementation androidxDependencies.constraintlayoutCompose
 
     implementation androidxDependencies.room
     implementation androidxDependencies.roomKtx
@@ -122,6 +113,16 @@ dependencies {
 
     implementation navigationDependencies.fragmentKtx
     implementation navigationDependencies.uiKtx
+
+    implementation composeDependencies.composeUi
+    implementation composeDependencies.composeTooling
+    implementation composeDependencies.composeFoundation
+    implementation composeDependencies.composeMaterial
+    implementation composeDependencies.composeMaterialIcons
+    implementation composeDependencies.composeMaterialIconsExtended
+    implementation composeDependencies.composeViewModel
+    implementation composeDependencies.composeLiveData
+    implementation composeDependencies.constraintlayoutCompose
 
     implementation googleDependencies.ossLicenses
     implementation googleDependencies.material
