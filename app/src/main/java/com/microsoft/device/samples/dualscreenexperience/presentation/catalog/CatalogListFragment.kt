@@ -51,7 +51,8 @@ class CatalogListFragment : Fragment() {
                             windowState.pane2SizeDp.width,
                             windowState.isDualPortrait(),
                             windowState.foldSizeDp,
-                            isFeatureFoldHorizontal
+                            isFeatureFoldHorizontal,
+                            windowState.isSinglePortrait()
                         )
                     }
                 }

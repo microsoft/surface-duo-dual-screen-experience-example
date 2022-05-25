@@ -1,6 +1,8 @@
 /*
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License.
+ *
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License.
+ *
  */
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils
@@ -15,7 +17,6 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -109,7 +110,7 @@ class PagerState(
     }
 
     override fun toString(): String = "PagerState{minPage=$minPage, maxPage=$maxPage, " +
-            "currentPage=$currentPage, currentPageOffset=$currentPageOffset}"
+        "currentPage=$currentPage, currentPageOffset=$currentPageOffset}"
 }
 
 @Immutable

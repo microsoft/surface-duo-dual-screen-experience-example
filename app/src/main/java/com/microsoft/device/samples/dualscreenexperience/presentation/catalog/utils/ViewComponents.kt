@@ -38,11 +38,13 @@ fun TextDescription(
     modifier: Modifier = Modifier,
     text: String,
     fontSize: TextUnit = fontDimensionResource(id = R.dimen.text_size_12),
+    lineHeight: TextUnit = fontDimensionResource(id = R.dimen.text_size_20),
     contentDescription: String
 ) {
     Text(
         modifier = modifier.contentDescription(contentDescription),
         text = text,
+        lineHeight = lineHeight,
         style = TextStyle(
             color = MaterialTheme.colors.onSurface,
             fontSize = fontSize,
