@@ -79,7 +79,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.1.1'
+        kotlinCompilerExtensionVersion rootProject.ext.composeUiVersion
     }
 
     configurations.all {
