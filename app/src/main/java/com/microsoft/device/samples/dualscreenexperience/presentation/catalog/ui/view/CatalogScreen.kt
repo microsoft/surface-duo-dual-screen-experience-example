@@ -119,5 +119,12 @@ private fun setupPages(
                 isFeatureHorizontal = isFeatureHorizontal
             )
         },
+        {
+            CatalogSeventhPage(
+                modifier = modifier,
+                catalogList = catalogList,
+                isFeatureHorizontal = isFeatureHorizontal
+            )
+        },
     )
 }

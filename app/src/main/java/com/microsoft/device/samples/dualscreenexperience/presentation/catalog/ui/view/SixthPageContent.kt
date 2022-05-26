@@ -31,6 +31,8 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ut
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
+const val SIXTH_PAGE_CONTENT_ID = "sixthPageContent"
+const val SIXTH_PAGE_BOTTOM_PAGE_NUMBER_ID = "sixthPageBottomPageNumber"
 const val SIXTH_PAGE_FIRST_TEXT_ID = "sixthPageFirstText"
 const val SIXTH_PAGE_FIRST_IMAGE_ID = "sixthPageFirstImage"
 const val SIXTH_PAGE_SECOND_TEXT_ID = "sixthPageSecondText"
@@ -44,7 +46,7 @@ fun CatalogSixthPage(
     val catalogItem = catalogList[CatalogPage.Page6.ordinal]
 
     val constraintSet = getMainConstraintSet()
-    val fourthPageConstraintSet = getConstraintSetForSixthPage(isFeatureHorizontal)
+    val sixthPageConstraintSet = getConstraintSetForSixthPage(isFeatureHorizontal)
 
     ConstraintLayout(constraintSet) {
         SixthPageContent(
@@ -58,14 +60,14 @@ fun CatalogSixthPage(
 
                 )
                 .verticalScroll(rememberScrollState())
-                .layoutId(FOURTH_PAGE_CONTENT_ID),
-            fourthPageConstraintSet,
+                .layoutId(SIXTH_PAGE_CONTENT_ID),
+            sixthPageConstraintSet,
             catalogItem,
             isFeatureHorizontal
         )
 
         BottomPageNumber(
-            modifier = Modifier.layoutId(FOURTH_PAGE_BOTTOM_PAGE_NUMBER_ID),
+            modifier = Modifier.layoutId(SIXTH_PAGE_BOTTOM_PAGE_NUMBER_ID),
             text = stringResource(
                 id = R.string.catalog_page_no,
                 CatalogPage.Page6.ordinal + 1,
@@ -76,10 +78,10 @@ fun CatalogSixthPage(
 }
 
 private fun getMainConstraintSet() = ConstraintSet {
-    val fourthPageRef = createRefFor(FOURTH_PAGE_CONTENT_ID)
-    val bottomPageNumber = createRefFor(FOURTH_PAGE_BOTTOM_PAGE_NUMBER_ID)
+    val sixthPageRef = createRefFor(SIXTH_PAGE_CONTENT_ID)
+    val bottomPageNumber = createRefFor(SIXTH_PAGE_BOTTOM_PAGE_NUMBER_ID)
 
-    constrain(fourthPageRef) {
+    constrain(sixthPageRef) {
         linkTo(start = parent.start, end = parent.end)
         linkTo(top = parent.top, bottom = bottomPageNumber.top)
     }
@@ -96,18 +98,19 @@ private fun getConstraintSetForSixthPage(isFeatureHorizontal: Boolean) = Constra
     val secondTextRef = createRefFor(SIXTH_PAGE_SECOND_TEXT_ID)
 
     val horizontalGuideline = createGuidelineFromTop(0.5f)
+    val topMargin = 20.dp
 
     constrain(firstTextRef) {
         start.linkTo(parent.start)
-        top.linkTo(parent.top, 20.dp)
+        top.linkTo(parent.top, topMargin)
     }
 
     constrain(firstImageRef) {
         linkTo(start = parent.start, end = parent.end)
         if (isFeatureHorizontal) {
-            linkTo(top = firstTextRef.bottom, bottom = horizontalGuideline, topMargin = 20.dp)
+            linkTo(top = firstTextRef.bottom, bottom = horizontalGuideline, topMargin = topMargin)
         } else {
-            top.linkTo(firstTextRef.bottom, margin = 20.dp)
+            top.linkTo(firstTextRef.bottom, margin = topMargin)
         }
         width = Dimension.wrapContent
     }
@@ -115,9 +118,9 @@ private fun getConstraintSetForSixthPage(isFeatureHorizontal: Boolean) = Constra
     constrain(secondTextRef) {
         linkTo(start = parent.start, end = parent.end)
         if (isFeatureHorizontal) {
-            top.linkTo(horizontalGuideline, margin = 20.dp)
+            top.linkTo(horizontalGuideline, margin = topMargin)
         } else {
-            top.linkTo(firstImageRef.bottom, margin = 20.dp)
+            top.linkTo(firstImageRef.bottom, margin = topMargin)
         }
     }
 }
