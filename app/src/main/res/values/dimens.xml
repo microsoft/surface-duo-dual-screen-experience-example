@@ -107,6 +107,8 @@
     <dimen name="catalog_top_margin">20dp</dimen>
     <dimen name="catalog_double_max_image_height">500dp</dimen>
     <dimen name="catalog_max_image_height">250dp</dimen>
+    <dimen name="catalog_max_image_height_dual_landscape">300dp</dimen>
+    <dimen name="catalog_page_padding">26dp</dimen>
     <dimen name="catalog_min_image_height">150dp</dimen>
     <dimen name="catalog_min_image_width">200dp</dimen>
     <dimen name="catalog_image_margin_start">52dp</dimen>
