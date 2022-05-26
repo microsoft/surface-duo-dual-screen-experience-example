@@ -45,7 +45,6 @@ class CatalogListFragment : Fragment() {
                     if (windowState != null) {
                         val isFeatureFoldHorizontal =
                             windowState.hasFold && windowState.foldIsHorizontal
-
                         Catalog(
                             windowState.pane1SizeDp.width,
                             windowState.pane2SizeDp.width,

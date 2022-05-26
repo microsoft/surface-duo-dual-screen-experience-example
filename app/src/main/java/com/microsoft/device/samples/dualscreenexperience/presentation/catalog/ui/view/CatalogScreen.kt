@@ -45,7 +45,7 @@ fun Catalog(
 
     val pages = setupPages(
         pageTextWidth, pagePadding,
-        catalogList.value ?: listOf(), isFeatureHorizontal, isSinglePortrait
+        catalogList.value ?: listOf(), isFeatureHorizontal, isSinglePortrait, isDualScreen
     )
     PageViews(pages, isDualScreen)
 }
@@ -70,7 +70,8 @@ private fun setupPages(
     pagePadding: Dp = 0.dp,
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean,
-    isSinglePortrait: Boolean
+    isSinglePortrait: Boolean,
+    isDualScreen: Boolean
 ): List<@Composable () -> Unit> {
     val modifier = if (pageTextWidth.value != 0f) Modifier
         .padding(end = pagePadding)
@@ -95,6 +96,28 @@ private fun setupPages(
                 isFeatureHorizontal = isFeatureHorizontal,
                 isSinglePortrait = isSinglePortrait
             )
-        }
+        },
+        {
+            CatalogFourthPage(
+                modifier = modifier,
+                catalogList = catalogList,
+                isFeatureHorizontal = isFeatureHorizontal
+            )
+        },
+        {
+            CatalogFifthPage(
+                modifier = modifier,
+                catalogList = catalogList,
+                isFeatureHorizontal = isFeatureHorizontal,
+                isDualScreen = isDualScreen
+            )
+        },
+        {
+            CatalogSixthPage(
+                modifier = modifier,
+                catalogList = catalogList,
+                isFeatureHorizontal = isFeatureHorizontal
+            )
+        },
     )
 }
