@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.structuralEqualityPolicy
@@ -111,6 +112,28 @@ class PagerState(
 
     override fun toString(): String = "PagerState{minPage=$minPage, maxPage=$maxPage, " +
         "currentPage=$currentPage, currentPageOffset=$currentPageOffset}"
+}
+
+val PagerStateSaver = run {
+    val currentPageKey = "currentPage"
+    val minPageKey = "minPage"
+    val maxPageKey = "maxPage"
+    mapSaver(
+        save = {
+            mapOf(
+                currentPageKey to it.currentPage,
+                minPageKey to it.minPage,
+                maxPageKey to it.maxPage
+            )
+        },
+        restore = {
+            PagerState(
+                it[currentPageKey] as Int,
+                it[minPageKey] as Int,
+                it[maxPageKey] as Int
+            )
+        }
+    )
 }
 
 @Immutable

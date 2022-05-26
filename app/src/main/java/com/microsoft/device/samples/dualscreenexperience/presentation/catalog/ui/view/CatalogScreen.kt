@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.Dp
@@ -23,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.CatalogListViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PagerState
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PagerStateSaver
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.ViewPager
 import kotlin.math.abs
 
@@ -53,12 +56,20 @@ fun Catalog(
 @Composable
 fun PageViews(pages: List<@Composable () -> Unit>, isDualScreen: Boolean) {
     val maxPage = (pages.size - 1).coerceAtLeast(0)
-    val pagerState: PagerState =
-        remember { PagerState(currentPage = 0, minPage = 0, maxPage = maxPage) }
-    pagerState.isDualMode = isDualScreen
+    val pagerState: MutableState<PagerState> =
+        rememberSaveable(stateSaver = PagerStateSaver) {
+            mutableStateOf(
+                PagerState(
+                    currentPage = 0,
+                    minPage = 0,
+                    maxPage = maxPage
+                )
+            )
+        }
+    pagerState.value.isDualMode = isDualScreen
 
     ViewPager(
-        state = pagerState,
+        state = pagerState.value,
         modifier = Modifier.fillMaxSize()
     ) {
         pages[page]()
