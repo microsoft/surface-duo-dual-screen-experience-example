@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -49,7 +50,8 @@ fun TextDescription(
     text: String,
     fontSize: TextUnit = fontDimensionResource(id = R.dimen.text_size_12),
     lineHeight: TextUnit = fontDimensionResource(id = R.dimen.text_size_20),
-    contentDescription: String
+    contentDescription: String,
+    textAlign: TextAlign = TextAlign.Start
 ) {
     Text(
         modifier = modifier.contentDescription(contentDescription),
@@ -64,12 +66,18 @@ fun TextDescription(
 }
 
 @Composable
-fun GuitarImage(modifier: Modifier = Modifier, painter: Painter, contentDescription: String?) {
+fun GuitarImage(
+    modifier: Modifier = Modifier,
+    painter: Painter,
+    contentDescription: String?,
+    contentScale: ContentScale = ContentScale.None
+) {
     Image(
         modifier = modifier
             .clip(MaterialTheme.shapes.small)
             .clipToBounds(),
         painter = painter,
-        contentDescription = contentDescription
+        contentDescription = contentDescription,
+        contentScale = contentScale
     )
 }
