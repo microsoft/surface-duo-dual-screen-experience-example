@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -15,11 +14,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -32,6 +28,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -176,11 +173,10 @@ private fun SecondPageContent(
                 .layoutId(SECOND_PAGE_FIRST_ROW_ID),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
+
+            GuitarImage(
                 modifier = Modifier
                     .padding(start = dimensionResource(id = R.dimen.catalog_image_margin_start))
-                    .clip(MaterialTheme.shapes.small)
-                    .clipToBounds()
                     .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
                     .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
                 painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.firstPicture)),
@@ -216,24 +212,20 @@ private fun SecondPageContent(
             contentDescription = catalogItem.thirdDescription ?: ""
         )
 
-        Image(
+        GuitarImage(
             modifier = Modifier
                 .layoutId(SECOND_PAGE_FIRST_ROW_IMAGE_ID)
                 .padding(start = dimensionResource(id = R.dimen.catalog_image_margin_start))
-                .clip(MaterialTheme.shapes.small)
-                .clipToBounds()
                 .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
                 .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
             painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.secondPicture)),
             contentDescription = catalogItem.firstPictureDescription
         )
 
-        Image(
+        GuitarImage(
             modifier = Modifier
                 .layoutId(SECOND_PAGE_SECOND_ROW_IMAGE_ID)
                 .padding(end = dimensionResource(id = R.dimen.catalog_image_margin_end))
-                .clip(MaterialTheme.shapes.small)
-                .clipToBounds()
                 .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
                 .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
             painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.thirdPicture)),

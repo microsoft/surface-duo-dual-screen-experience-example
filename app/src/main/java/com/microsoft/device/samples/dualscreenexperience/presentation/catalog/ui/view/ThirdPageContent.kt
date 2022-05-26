@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,11 +15,8 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -32,6 +28,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -136,24 +133,19 @@ fun ThirdPageContent(
             modifier = Modifier
                 .padding(
                     top = dimensionResource(id = R.dimen.catalog_top_margin),
-                    start = if (isSinglePortrait)
-                        dimensionResource(id = R.dimen.zero_padding) else
-                        dimensionResource(id = R.dimen.small_margin),
-                    end = dimensionResource(id = R.dimen.small_margin)
+                    start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
+                    end = dimensionResource(id = R.dimen.normal_margin)
                 )
                 .layoutId(THIRD_PAGE_FIRST_ROW_ID),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
+
+            GuitarImage(
                 modifier = Modifier
                     .padding(
-                        horizontal = if (isSinglePortrait)
-                            dimensionResource(id = R.dimen.catalog_margin_large) else
-                            dimensionResource(id = R.dimen.catalog_horizontal_margin)
+                        horizontal = dimensionResource(id = R.dimen.catalog_horizontal_margin)
                     )
                     .weight(ROW_WEIGHT)
-                    .clip(MaterialTheme.shapes.small)
-                    .clipToBounds()
                     .requiredWidth(
                         if (isSinglePortrait)
                             dimensionResource(id = R.dimen.catalog_max_image_height) else
@@ -172,11 +164,9 @@ fun ThirdPageContent(
                 modifier = Modifier
                     .padding(
                         top = dimensionResource(id = R.dimen.normal_margin),
-                        start = if (isSinglePortrait)
-                            dimensionResource(id = R.dimen.zero_padding) else
-                            dimensionResource(id = R.dimen.catalog_horizontal_margin),
+                        start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                         end = if (isSinglePortrait)
-                            dimensionResource(id = R.dimen.small_margin) else
+                            dimensionResource(id = R.dimen.normal_margin) else
                             dimensionResource(id = R.dimen.catalog_horizontal_margin)
                     )
                     .weight(ROW_WEIGHT),
@@ -190,9 +180,7 @@ fun ThirdPageContent(
 
         Row(
             modifier = Modifier
-                .padding(
-                    end = dimensionResource(id = R.dimen.normal_margin)
-                )
+                .padding(end = dimensionResource(id = R.dimen.normal_margin))
                 .layoutId(THIRD_PAGE_SECOND_ROW_ID),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -219,7 +207,7 @@ fun ThirdPageContent(
                 )
             }
 
-            Image(
+            GuitarImage(
                 modifier = Modifier
                     .padding(
                         start = dimensionResource(id = R.dimen.catalog_horizontal_margin),

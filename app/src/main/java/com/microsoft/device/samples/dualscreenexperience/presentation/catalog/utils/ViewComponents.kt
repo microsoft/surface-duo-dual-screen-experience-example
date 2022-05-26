@@ -7,11 +7,15 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -31,7 +35,7 @@ fun BottomPageNumber(modifier: Modifier = Modifier, text: String) {
             fontSize = fontDimensionResource(id = R.dimen.text_size_12),
             textAlign = TextAlign.Start
         ),
-        modifier = modifier .padding(
+        modifier = modifier.padding(
             start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
             end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
             bottom = dimensionResource(id = R.dimen.catalog_margin_small)
@@ -56,5 +60,16 @@ fun TextDescription(
             fontSize = fontSize,
             fontFamily = FontFamily(Font(R.font.dmsans_regular))
         )
+    )
+}
+
+@Composable
+fun GuitarImage(modifier: Modifier = Modifier, painter: Painter, contentDescription: String?) {
+    Image(
+        modifier = modifier
+            .clip(MaterialTheme.shapes.small)
+            .clipToBounds(),
+        painter = painter,
+        contentDescription = contentDescription
     )
 }
