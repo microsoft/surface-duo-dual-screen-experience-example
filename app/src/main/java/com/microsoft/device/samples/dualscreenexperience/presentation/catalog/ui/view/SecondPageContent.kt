@@ -75,13 +75,7 @@ fun CatalogSecondPage(
         )
 
         BottomPageNumber(
-            modifier = Modifier
-                .padding(
-                    start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
-                    end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
-                    bottom = dimensionResource(id = R.dimen.catalog_margin_small)
-                )
-                .layoutId(SECOND_PAGE_BOTTOM_PAGE_NUMBER_ID),
+            modifier = Modifier.layoutId(SECOND_PAGE_BOTTOM_PAGE_NUMBER_ID),
             text = stringResource(
                 id = R.string.catalog_page_no,
                 CatalogPage.Page2.ordinal + 1,

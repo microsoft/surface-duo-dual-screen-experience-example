@@ -59,13 +59,7 @@ fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogIte
         )
 
         BottomPageNumber(
-            modifier = Modifier
-                .padding(
-                    start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
-                    end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
-                    bottom = dimensionResource(id = R.dimen.catalog_margin_small)
-                )
-                .layoutId(FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID),
+            modifier = Modifier.layoutId(FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID),
             text = stringResource(
                 id = R.string.catalog_page_no,
                 CatalogPage.Page1.ordinal + 1,
