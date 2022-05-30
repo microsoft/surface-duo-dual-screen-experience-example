@@ -80,6 +80,11 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion rootProject.ext.composeUiVersion
+
+        lintOptions {
+            disable "DaggerKotlinIssueDetector"
+        }
+
     }
 
     configurations.all {
