@@ -8,6 +8,8 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -17,13 +19,64 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import com.microsoft.device.samples.dualscreenexperience.R
+
+const val CONTENT_ID = "tableOfContents"
+const val BOTTOM_PAGE_NUMBER_ID = "bottomPageNumber"
+
+@Composable
+fun PageLayout(
+    modifier: Modifier = Modifier,
+    pageNumber: Int,
+    maxPageNumber: Int,
+    content: @Composable () -> Unit
+) {
+    val constraintSet = getMainConstraintSet()
+
+    ConstraintLayout(constraintSet = constraintSet, modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(bottom = dimensionResource(id = R.dimen.catalog_margin_normal))
+                .layoutId(CONTENT_ID)
+        ) {
+            content()
+        }
+
+        BottomPageNumber(
+            modifier = Modifier.layoutId(BOTTOM_PAGE_NUMBER_ID),
+            text = stringResource(
+                id = R.string.catalog_page_no, pageNumber, maxPageNumber
+            )
+        )
+    }
+}
+
+@Composable
+private fun getMainConstraintSet() = ConstraintSet {
+    val contentRef = createRefFor(CONTENT_ID)
+    val bottomPageNumberRef = createRefFor(BOTTOM_PAGE_NUMBER_ID)
+
+    constrain(contentRef) {
+        linkTo(start = parent.start, end = parent.end)
+        linkTo(top = parent.top, bottom = bottomPageNumberRef.top)
+    }
+
+    constrain(bottomPageNumberRef) {
+        start.linkTo(parent.start)
+        bottom.linkTo(parent.bottom)
+    }
+}
 
 @Composable
 fun BottomPageNumber(modifier: Modifier = Modifier, text: String) {

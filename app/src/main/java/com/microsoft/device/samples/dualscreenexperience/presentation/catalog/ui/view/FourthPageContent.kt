@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
@@ -24,15 +23,13 @@ import coil.compose.rememberAsyncImagePainter
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PageLayout
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
-const val FOURTH_PAGE_CONTENT_ID = "fourthPageContent"
-const val FOURTH_PAGE_BOTTOM_PAGE_NUMBER_ID = "fourthPageBottomPageNumber"
 const val FOURTH_PAGE_FIRST_IMAGE_ID = "fourthPageFirstImage"
 const val FOURTH_PAGE_SECOND_IMAGE_ID = "fourthPageSecondImage"
 const val FOURTH_PAGE_FIRST_TEXT_ID = "fourthPageFirstText"
@@ -45,52 +42,31 @@ fun CatalogFourthPage(
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean = false
 ) {
-    val catalogItem = catalogList[CatalogPage.Page4.ordinal]
+    val pageNumberOrdinal = CatalogPage.Page4.ordinal
+    val catalogItem = catalogList[pageNumberOrdinal]
 
-    val constraintSet = getMainConstraintSet()
     val fourthPageConstraintSet = getConstraintSetForFourthPage(isFeatureHorizontal)
 
-    ConstraintLayout(constraintSet) {
+    PageLayout(
+        modifier,
+        pageNumberOrdinal + 1,
+        catalogList.sizeOrZero()
+    ) {
         FourthPageContent(
             modifier
                 .padding(
                     start = if (isFeatureHorizontal)
                         dimensionResource(id = R.dimen.catalog_page_padding) else
                         dimensionResource(id = R.dimen.zero_padding),
-                    bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
-                    top = if (isFeatureHorizontal) dimensionResource(id = R.dimen.catalog_margin_normal) else
+                    top = if (isFeatureHorizontal)
+                        dimensionResource(id = R.dimen.catalog_margin_normal) else
                         dimensionResource(id = R.dimen.zero_padding)
                 )
-                .verticalScroll(rememberScrollState())
-                .layoutId(FOURTH_PAGE_CONTENT_ID),
+                .verticalScroll(rememberScrollState()),
             fourthPageConstraintSet,
             catalogItem,
             isFeatureHorizontal
         )
-
-        BottomPageNumber(
-            modifier = Modifier.layoutId(FOURTH_PAGE_BOTTOM_PAGE_NUMBER_ID),
-            text = stringResource(
-                id = R.string.catalog_page_no,
-                CatalogPage.Page4.ordinal + 1,
-                catalogList.sizeOrZero()
-            )
-        )
-    }
-}
-
-private fun getMainConstraintSet() = ConstraintSet {
-    val fourthPageRef = createRefFor(FOURTH_PAGE_CONTENT_ID)
-    val bottomPageNumber = createRefFor(FOURTH_PAGE_BOTTOM_PAGE_NUMBER_ID)
-
-    constrain(fourthPageRef) {
-        linkTo(start = parent.start, end = parent.end)
-        linkTo(top = parent.top, bottom = bottomPageNumber.top)
-    }
-
-    constrain(bottomPageNumber) {
-        start.linkTo(parent.start)
-        bottom.linkTo(parent.bottom)
     }
 }
 

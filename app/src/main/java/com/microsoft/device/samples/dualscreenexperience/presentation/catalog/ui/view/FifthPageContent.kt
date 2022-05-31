@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
@@ -25,15 +24,13 @@ import coil.compose.rememberAsyncImagePainter
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PageLayout
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
-const val FIFTH_PAGE_CONTENT_ID = "fifthPageContent"
-const val FIFTH_PAGE_BOTTOM_PAGE_NUMBER_ID = "fifthPageBottomPageNumber"
 const val FIFTH_PAGE_FIRST_TEXT_ID = "fifthPageFirstText"
 const val FIFTH_PAGE_FIRST_IMAGE_ID = "fifthPageFirstImage"
 const val FIFTH_PAGE_SECOND_IMAGE_ID = "fifthPageSecondImage"
@@ -46,53 +43,31 @@ fun CatalogFifthPage(
     isFeatureHorizontal: Boolean = false,
     isDualScreen: Boolean
 ) {
-    val catalogItem = catalogList[CatalogPage.Page5.ordinal]
+    val pageNumberOrdinal = CatalogPage.Page5.ordinal
+    val catalogItem = catalogList[pageNumberOrdinal]
 
-    val constraintSet = getMainConstraintSet()
     val fourthPageConstraintSet =
         getConstraintSetForFifthPage(isFeatureHorizontal, isDualScreen)
 
-    ConstraintLayout(constraintSet) {
+    PageLayout(
+        modifier,
+        pageNumberOrdinal + 1,
+        catalogList.sizeOrZero()
+    ) {
         FifthPageContent(
             modifier
                 .padding(
                     start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                     end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
-                    bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
-                    top = if (isFeatureHorizontal) dimensionResource(id = R.dimen.catalog_margin_normal) else
+                    top = if (isFeatureHorizontal)
+                        dimensionResource(id = R.dimen.catalog_margin_normal) else
                         dimensionResource(id = R.dimen.zero_padding),
-
                 )
-                .verticalScroll(rememberScrollState())
-                .layoutId(FOURTH_PAGE_CONTENT_ID),
+                .verticalScroll(rememberScrollState()),
             fourthPageConstraintSet,
             catalogItem,
             isFeatureHorizontal
         )
-
-        BottomPageNumber(
-            modifier = Modifier.layoutId(FIFTH_PAGE_BOTTOM_PAGE_NUMBER_ID),
-            text = stringResource(
-                id = R.string.catalog_page_no,
-                CatalogPage.Page5.ordinal + 1,
-                catalogList.sizeOrZero()
-            )
-        )
-    }
-}
-
-private fun getMainConstraintSet() = ConstraintSet {
-    val fifthPageRef = createRefFor(FIFTH_PAGE_CONTENT_ID)
-    val bottomPageNumber = createRefFor(FIFTH_PAGE_BOTTOM_PAGE_NUMBER_ID)
-
-    constrain(fifthPageRef) {
-        linkTo(start = parent.start, end = parent.end)
-        linkTo(top = parent.top, bottom = bottomPageNumber.top)
-    }
-
-    constrain(bottomPageNumber) {
-        start.linkTo(parent.start)
-        bottom.linkTo(parent.bottom)
     }
 }
 

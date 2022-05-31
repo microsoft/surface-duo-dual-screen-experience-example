@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -27,7 +26,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PageLayout
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
@@ -35,8 +34,6 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.getIm
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
 const val SECOND_PAGE_TITLE_TEXT_ID = "secondPageTitle"
-const val SECOND_PAGE_CONTENT_ID = "secondPageContent"
-const val SECOND_PAGE_BOTTOM_PAGE_NUMBER_ID = "secondPageBottomPageNumber"
 const val SECOND_PAGE_FIRST_ROW_ID = "secondPageFirstRow"
 const val SECOND_PAGE_THIRD_TEXT_ID = "secondPageThirdText"
 const val SECOND_PAGE_FIRST_ROW_IMAGE_ID = "secondPageFirstRowImage"
@@ -50,51 +47,29 @@ fun CatalogSecondPage(
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean = false
 ) {
-    val catalogItem = catalogList[CatalogPage.Page2.ordinal]
+    val pageNumberOrdinal = CatalogPage.Page2.ordinal
+    val catalogItem = catalogList[pageNumberOrdinal]
 
-    val constraintSet = getMainConstraintSet()
     val secondPageConstraintSet = getConstraintSetForSecondPage(isFeatureHorizontal)
 
-    ConstraintLayout(constraintSet) {
+    PageLayout(
+        modifier,
+        pageNumberOrdinal + 1,
+        catalogList.sizeOrZero()
+    ) {
         SecondPageContent(
-            modifier
+            modifier = modifier
                 .padding(
                     bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
                     top = if (isFeatureHorizontal)
                         dimensionResource(id = R.dimen.catalog_margin_normal) else
                         dimensionResource(id = R.dimen.zero_padding)
                 )
-                .verticalScroll(rememberScrollState())
-                .layoutId(SECOND_PAGE_CONTENT_ID),
-            secondPageConstraintSet,
-            catalogItem,
-            isFeatureHorizontal
+                .verticalScroll(rememberScrollState()),
+            constraintSet = secondPageConstraintSet,
+            catalogItem = catalogItem,
+            isFeatureHorizontal = isFeatureHorizontal
         )
-
-        BottomPageNumber(
-            modifier = Modifier.layoutId(SECOND_PAGE_BOTTOM_PAGE_NUMBER_ID),
-            text = stringResource(
-                id = R.string.catalog_page_no,
-                CatalogPage.Page2.ordinal + 1,
-                catalogList.sizeOrZero()
-            )
-        )
-    }
-}
-
-@Composable
-private fun getMainConstraintSet() = ConstraintSet {
-    val secondPageRef = createRefFor(SECOND_PAGE_CONTENT_ID)
-    val bottomPageNumber = createRefFor(SECOND_PAGE_BOTTOM_PAGE_NUMBER_ID)
-
-    constrain(secondPageRef) {
-        linkTo(start = parent.start, end = parent.end)
-        linkTo(top = parent.top, bottom = bottomPageNumber.top)
-    }
-
-    constrain(bottomPageNumber) {
-        start.linkTo(parent.start)
-        bottom.linkTo(parent.bottom)
     }
 }
 

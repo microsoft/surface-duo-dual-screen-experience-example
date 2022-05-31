@@ -26,12 +26,10 @@ import androidx.constraintlayout.compose.ConstraintSet
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PageLayout
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.contentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
-const val TABLE_OF_CONTENTS_ID = "tableOfContents"
-const val FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID = "firstPageBottomPageNumber"
 const val FIRST_PAGE_FIRST_TEXT_ID = "firstText"
 const val FIRST_PAGE_SECOND_TEXT_ID = "secondText"
 const val FIRST_PAGE_THIRD_TEXT_ID = "thirdText"
@@ -40,43 +38,18 @@ const val FIRST_PAGE_FIFTH_TEXT_ID = "fifthText"
 
 @Composable
 fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogItem>) {
-    val catalogItem = catalogList[CatalogPage.Page1.ordinal]
+    val pageNumberOrdinal = CatalogPage.Page1.ordinal
+    val catalogItem = catalogList[pageNumberOrdinal]
 
-    val constraintSet = getMainConstraintSet()
-
-    ConstraintLayout(constraintSet = constraintSet, modifier = modifier) {
+    PageLayout(
+        modifier,
+        pageNumberOrdinal + 1,
+        catalogList.sizeOrZero()
+    ) {
         TableOfContents(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(bottom = dimensionResource(id = R.dimen.catalog_margin_normal))
-                .layoutId(TABLE_OF_CONTENTS_ID),
+            modifier = Modifier.fillMaxHeight(),
             catalogItem = catalogItem
         )
-
-        BottomPageNumber(
-            modifier = Modifier.layoutId(FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID),
-            text = stringResource(
-                id = R.string.catalog_page_no,
-                CatalogPage.Page1.ordinal + 1,
-                catalogList.sizeOrZero()
-            )
-        )
-    }
-}
-
-@Composable
-private fun getMainConstraintSet() = ConstraintSet {
-    val contentRef = createRefFor(TABLE_OF_CONTENTS_ID)
-    val bottomPageNumberRef = createRefFor(FIRST_PAGE_BOTTOM_PAGE_NUMBER_ID)
-
-    constrain(contentRef) {
-        linkTo(start = parent.start, end = parent.end)
-        linkTo(top = parent.top, bottom = bottomPageNumberRef.top)
-    }
-
-    constrain(bottomPageNumberRef) {
-        start.linkTo(parent.start)
-        bottom.linkTo(parent.bottom)
     }
 }
 

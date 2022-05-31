@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
@@ -26,15 +25,13 @@ import coil.compose.rememberAsyncImagePainter
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PageLayout
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
-const val SEVENTH_PAGE_CONTENT_ID = "seventhPageContent"
-const val SEVENTH_PAGE_BOTTOM_PAGE_NUMBER_ID = "seventhPageBottomPageNumber"
 const val SEVENTH_PAGE_FIRST_ROW_ID = "seventhPageFirstRow"
 const val SEVENTH_PAGE_SECOND_ROW_ID = "seventhPageSecondRow"
 
@@ -44,52 +41,30 @@ fun CatalogSeventhPage(
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean = false
 ) {
-    val catalogItem = catalogList[CatalogPage.Page7.ordinal]
+    val pageNumberOrdinal = CatalogPage.Page7.ordinal
+    val catalogItem = catalogList[pageNumberOrdinal]
 
-    val constraintSet = getMainConstraintSet()
     val seventhPageConstraintSet = getConstraintSetForSeventhPage(isFeatureHorizontal)
 
-    ConstraintLayout(constraintSet) {
+    PageLayout(
+        modifier,
+        pageNumberOrdinal + 1,
+        catalogList.sizeOrZero()
+    ) {
         SeventhPageContent(
             modifier
                 .padding(
                     start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                     end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
-                    bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
                     top = if (isFeatureHorizontal)
                         dimensionResource(id = R.dimen.catalog_margin_normal) else
                         dimensionResource(id = R.dimen.zero_padding)
                 )
-                .verticalScroll(rememberScrollState())
-                .layoutId(SEVENTH_PAGE_CONTENT_ID),
+                .verticalScroll(rememberScrollState()),
             seventhPageConstraintSet,
             catalogItem,
             isFeatureHorizontal
         )
-
-        BottomPageNumber(
-            modifier = Modifier.layoutId(SEVENTH_PAGE_BOTTOM_PAGE_NUMBER_ID),
-            text = stringResource(
-                id = R.string.catalog_page_no,
-                CatalogPage.Page7.ordinal + 1,
-                catalogList.sizeOrZero()
-            )
-        )
-    }
-}
-
-private fun getMainConstraintSet() = ConstraintSet {
-    val seventhPageRef = createRefFor(SEVENTH_PAGE_CONTENT_ID)
-    val bottomPageNumber = createRefFor(SEVENTH_PAGE_BOTTOM_PAGE_NUMBER_ID)
-
-    constrain(seventhPageRef) {
-        linkTo(start = parent.start, end = parent.end)
-        linkTo(top = parent.top, bottom = bottomPageNumber.top)
-    }
-
-    constrain(bottomPageNumber) {
-        start.linkTo(parent.start)
-        bottom.linkTo(parent.bottom)
     }
 }
 
