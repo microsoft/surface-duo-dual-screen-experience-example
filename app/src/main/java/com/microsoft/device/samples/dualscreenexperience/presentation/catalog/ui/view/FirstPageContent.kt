@@ -19,12 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.microsoft.device.samples.dualscreenexperience.R
@@ -32,7 +28,6 @@ import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.Ca
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.contentDescription
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
 
 const val TABLE_OF_CONTENTS_ID = "tableOfContents"
@@ -140,12 +135,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                 )
                 .layoutId(FIRST_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
-            style = TextStyle(
-                color = MaterialTheme.colors.onSurface,
-                fontFamily = FontFamily(Font(R.font.roboto)),
-                fontSize = fontDimensionResource(id = R.dimen.text_size_18),
-                textAlign = TextAlign.Start
-            )
+            style = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.onSurface)
         )
 
         ContentTextItem(
@@ -225,12 +215,9 @@ fun ContentTextItem(
         text = text,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
-        style = TextStyle(
+        style = MaterialTheme.typography.body1.copy(
             color = MaterialTheme.colors.onSurface,
-            fontFamily = FontFamily(Font(R.font.dmsans_regular)),
-            lineHeight = 5.sp,
-            fontSize = fontDimensionResource(id = R.dimen.text_size_16),
-            textAlign = TextAlign.Start,
+            textAlign = TextAlign.Start
         )
     )
 }

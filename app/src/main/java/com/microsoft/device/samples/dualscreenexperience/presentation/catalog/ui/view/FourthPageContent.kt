@@ -25,7 +25,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -134,7 +134,7 @@ fun FourthPageContent(
         constraintSet = constraintSet,
         modifier = modifier
     ) {
-        GuitarImage(
+        RoundedImage(
             modifier = Modifier
                 .padding(top = dimensionResource(id = R.dimen.catalog_top_margin))
                 .layoutId(FOURTH_PAGE_FIRST_IMAGE_ID)
@@ -152,7 +152,7 @@ fun FourthPageContent(
             contentDescription = catalogItem.firstPictureDescription
         )
 
-        GuitarImage(
+        RoundedImage(
             modifier = Modifier
                 .padding(top = dimensionResource(id = R.dimen.catalog_top_margin))
                 .layoutId(FOURTH_PAGE_SECOND_IMAGE_ID)
@@ -197,8 +197,8 @@ fun FourthPageContent(
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
-                fontDimensionResource(id = R.dimen.text_size_20)
+                fontDimensionResource(id = R.dimen.text_size_20) else
+                fontDimensionResource(id = R.dimen.text_size_16)
         )
 
         TextDescription(

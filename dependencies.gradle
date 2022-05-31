@@ -63,6 +63,7 @@ ext {
     composeViewModelVersion = '2.4.1'
     activityComposeVersion = "1.4.0"
     constraintLayoutComposeVersion = "1.0.0-beta02"
+    coilVersion = "2.1.0"
 
     composeDependencies = [
             composeUi                    : "androidx.compose.ui:ui:$composeUiVersion",
@@ -74,7 +75,8 @@ ext {
             composeViewModel             : "androidx.lifecycle:lifecycle-viewmodel-compose:$composeViewModelVersion",
             composeLiveData              : "androidx.compose.runtime:runtime-livedata:$composeUiVersion",
             activityCompose              : "androidx.activity:activity-compose:$activityComposeVersion",
-            constraintlayoutCompose      : "androidx.constraintlayout:constraintlayout-compose:$constraintLayoutComposeVersion"
+            constraintlayoutCompose      : "androidx.constraintlayout:constraintlayout-compose:$constraintLayoutComposeVersion",
+            coil                         : "io.coil-kt:coil-compose:$coilVersion"
     ]
 
     //Google dependencies
@@ -121,13 +123,11 @@ ext {
     //UI dependencies
     glideVersion = "4.12.0"
     lottieVersion = '4.2.0'
-    coilVersion = "2.1.0"
 
     uiDependencies = [
             lottie                 : "com.airbnb.android:lottie:$lottieVersion",
             glide                  : "com.github.bumptech.glide:glide:$glideVersion",
             glideAnnotationProcesor: "com.github.bumptech.glide:compiler:$glideVersion",
-            coil                   : "io.coil-kt:coil-compose:$coilVersion"
     ]
 
     //Test dependencies version

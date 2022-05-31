@@ -26,7 +26,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -167,7 +167,7 @@ fun FifthPageContent(
                 fontDimensionResource(id = R.dimen.text_size_12)
         )
 
-        GuitarImage(
+        RoundedImage(
             modifier = Modifier
                 .layoutId(FIFTH_PAGE_FIRST_IMAGE_ID)
                 .heightIn(
@@ -179,7 +179,7 @@ fun FifthPageContent(
             contentScale = ContentScale.FillBounds
         )
 
-        GuitarImage(
+        RoundedImage(
             modifier = Modifier
                 .heightIn(
                     min = dimensionResource(id = R.dimen.catalog_min_image_height),

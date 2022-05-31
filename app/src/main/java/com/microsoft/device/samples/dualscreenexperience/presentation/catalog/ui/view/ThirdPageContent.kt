@@ -28,7 +28,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -140,7 +140,7 @@ fun ThirdPageContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            GuitarImage(
+            RoundedImage(
                 modifier = Modifier
                     .padding(
                         horizontal = dimensionResource(id = R.dimen.catalog_horizontal_margin)
@@ -202,12 +202,14 @@ fun ThirdPageContent(
                     ),
                     text = catalogItem.thirdDescription ?: "",
                     contentDescription = catalogItem.thirdDescription ?: "",
-                    fontSize = fontDimensionResource(id = R.dimen.text_size_12)
+                    fontSize = if (isFeatureHorizontal)
+                        fontDimensionResource(id = R.dimen.text_size_16) else
+                        fontDimensionResource(id = R.dimen.text_size_12)
 
                 )
             }
 
-            GuitarImage(
+            RoundedImage(
                 modifier = Modifier
                     .padding(
                         start = dimensionResource(id = R.dimen.catalog_horizontal_margin),

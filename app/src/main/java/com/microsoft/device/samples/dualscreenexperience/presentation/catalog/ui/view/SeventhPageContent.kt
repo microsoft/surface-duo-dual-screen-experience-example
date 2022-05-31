@@ -27,7 +27,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -137,7 +137,7 @@ fun SeventhPageContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            GuitarImage(
+            RoundedImage(
                 modifier = Modifier
                     .padding(top = dimensionResource(id = R.dimen.catalog_top_margin))
                     .weight(1f)
@@ -176,7 +176,7 @@ fun SeventhPageContent(
                     fontDimensionResource(id = R.dimen.text_size_12)
             )
 
-            GuitarImage(
+            RoundedImage(
                 modifier = Modifier
                     .weight(1f)
                     .heightIn(

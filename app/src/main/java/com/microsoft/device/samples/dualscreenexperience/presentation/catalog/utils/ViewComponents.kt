@@ -32,7 +32,7 @@ fun BottomPageNumber(modifier: Modifier = Modifier, text: String) {
         style = TextStyle(
             color = MaterialTheme.colors.onSurface,
             fontFamily = FontFamily(Font(R.font.dmsans_regular)),
-            lineHeight = fontDimensionResource(id = R.dimen.text_size_5),
+            lineHeight = fontDimensionResource(id = R.dimen.text_size_4),
             fontSize = fontDimensionResource(id = R.dimen.text_size_12),
             textAlign = TextAlign.Start
         ),
@@ -57,6 +57,7 @@ fun TextDescription(
         modifier = modifier.contentDescription(contentDescription),
         text = text,
         lineHeight = lineHeight,
+        textAlign = textAlign,
         style = TextStyle(
             color = MaterialTheme.colors.onSurface,
             fontSize = fontSize,
@@ -66,7 +67,7 @@ fun TextDescription(
 }
 
 @Composable
-fun GuitarImage(
+fun RoundedImage(
     modifier: Modifier = Modifier,
     painter: Painter,
     contentDescription: String?,

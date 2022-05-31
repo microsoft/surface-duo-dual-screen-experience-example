@@ -28,7 +28,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.BottomPageNumber
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.GuitarImage
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.RoundedImage
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.TextDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.fontDimensionResource
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getImageUri
@@ -174,7 +174,7 @@ private fun SecondPageContent(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            GuitarImage(
+            RoundedImage(
                 modifier = Modifier
                     .padding(start = dimensionResource(id = R.dimen.catalog_image_margin_start))
                     .requiredWidth(dimensionResource(id = R.dimen.catalog_min_image_width))
@@ -212,7 +212,7 @@ private fun SecondPageContent(
             contentDescription = catalogItem.thirdDescription ?: ""
         )
 
-        GuitarImage(
+        RoundedImage(
             modifier = Modifier
                 .layoutId(SECOND_PAGE_FIRST_ROW_IMAGE_ID)
                 .padding(start = dimensionResource(id = R.dimen.catalog_image_margin_start))
@@ -222,7 +222,7 @@ private fun SecondPageContent(
             contentDescription = catalogItem.firstPictureDescription
         )
 
-        GuitarImage(
+        RoundedImage(
             modifier = Modifier
                 .layoutId(SECOND_PAGE_SECOND_ROW_IMAGE_ID)
                 .padding(end = dimensionResource(id = R.dimen.catalog_image_margin_end))

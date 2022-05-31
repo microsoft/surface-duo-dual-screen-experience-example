@@ -123,6 +123,7 @@ dependencies {
     implementation composeDependencies.composeViewModel
     implementation composeDependencies.composeLiveData
     implementation composeDependencies.constraintlayoutCompose
+    implementation composeDependencies.coil
 
     implementation googleDependencies.ossLicenses
     implementation googleDependencies.material
@@ -148,7 +149,6 @@ dependencies {
 
     implementation uiDependencies.glide
     kapt uiDependencies.glideAnnotationProcesor
-    implementation uiDependencies.coil
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.archTesting

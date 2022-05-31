@@ -57,7 +57,7 @@
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
-    <dimen name="text_size_5">5sp</dimen>
+    <dimen name="text_size_4">4sp</dimen>
 
     <dimen name="team_link_button_width">84dp</dimen>
     <dimen name="team_link_button_height">78dp</dimen>
