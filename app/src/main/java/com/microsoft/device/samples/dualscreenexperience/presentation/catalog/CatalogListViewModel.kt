@@ -7,6 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,12 +24,27 @@ class CatalogListViewModel @Inject constructor(
 ) : ViewModel(), DataListProvider<CatalogItem> {
     var catalogItemList = MutableLiveData<List<CatalogItem>?>(null)
     var catalogItemPosition = MutableLiveData(0)
-    var showTwoPages = MutableLiveData(false)
+
+    private val _showTwoPages = MutableLiveData(false)
+    val showTwoPages: LiveData<Boolean>
+        get() = _showTwoPages
+
+    private val _showSmallWindowWidthLayout = MutableLiveData(false)
+    val showSmallWindowWidthLayout: LiveData<Boolean>
+        get() = _showSmallWindowWidthLayout
 
     init {
         viewModelScope.launch {
             catalogItemList.value = getCatalogListUseCase.getAll()
         }
+    }
+
+    fun updateShowTwoPages(showTwoPages: Boolean) {
+        _showTwoPages.value = showTwoPages
+    }
+
+    fun updateShowSmallWindowWidthLayout(showSmallWindowWidthLayout: Boolean) {
+        _showSmallWindowWidthLayout.value = showSmallWindowWidthLayout
     }
 
     override fun getDataList(): List<CatalogItem>? = catalogItemList.value

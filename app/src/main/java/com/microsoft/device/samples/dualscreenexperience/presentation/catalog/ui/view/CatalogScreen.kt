@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -21,9 +20,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.CatalogListViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PagerState
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PagerStateSaver
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.ViewPager
@@ -37,9 +34,11 @@ fun Catalog(
     foldSizeDp: Dp,
     isFeatureHorizontal: Boolean,
     isSinglePortrait: Boolean,
-    viewModel: CatalogListViewModel = viewModel()
+    showTwoPages: Boolean,
+    showSmallWindowWidthLayout: Boolean,
+    catalogList: List<CatalogItem>
 ) {
-    val catalogList = viewModel.catalogItemList.observeAsState()
+
     // Calculate page text width based on the smallest pane width
     val pageTextWidth = min(pane1WidthDp, pane2WidthDp)
 
@@ -47,14 +46,20 @@ fun Catalog(
     val pagePadding = abs(pane1WidthDp.value - pane2WidthDp.value).dp + foldSizeDp
 
     val pages = setupPages(
-        pageTextWidth, pagePadding,
-        catalogList.value ?: listOf(), isFeatureHorizontal, isSinglePortrait, isDualScreen
+        pageTextWidth,
+        pagePadding,
+        catalogList,
+        isFeatureHorizontal,
+        isSinglePortrait,
+        isDualScreen,
+        showTwoPages,
+        showSmallWindowWidthLayout
     )
-    PageViews(pages, isDualScreen)
+    PageViews(pages, isDualScreen, showTwoPages)
 }
 
 @Composable
-fun PageViews(pages: List<@Composable () -> Unit>, isDualScreen: Boolean) {
+fun PageViews(pages: List<@Composable () -> Unit>, isDualScreen: Boolean, showTwoPages: Boolean) {
     val maxPage = (pages.size - 1).coerceAtLeast(0)
     val pagerState: MutableState<PagerState> =
         rememberSaveable(stateSaver = PagerStateSaver) {
@@ -66,7 +71,7 @@ fun PageViews(pages: List<@Composable () -> Unit>, isDualScreen: Boolean) {
                 )
             )
         }
-    pagerState.value.isDualMode = isDualScreen
+    pagerState.value.isDualMode = isDualScreen && showTwoPages
 
     ViewPager(
         state = pagerState.value,
@@ -82,9 +87,11 @@ private fun setupPages(
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean,
     isSinglePortrait: Boolean,
-    isDualScreen: Boolean
+    isDualScreen: Boolean,
+    showTwoPages: Boolean,
+    showSmallWindowWidthLayout: Boolean
 ): List<@Composable () -> Unit> {
-    val modifier = if (pageTextWidth.value != 0f) Modifier
+    val modifier = if (pageTextWidth.value != 0f && showTwoPages) Modifier
         .padding(end = pagePadding)
         .width(pageTextWidth)
         .fillMaxHeight()
@@ -97,7 +104,9 @@ private fun setupPages(
             CatalogSecondPage(
                 modifier = modifier,
                 catalogList = catalogList,
-                isFeatureHorizontal = isFeatureHorizontal
+                isFeatureHorizontal = isFeatureHorizontal,
+                showTwoPages = showTwoPages,
+                isSmallWindowWidth = showSmallWindowWidthLayout
             )
         },
         {
