@@ -36,6 +36,7 @@ fun Catalog(
     isSinglePortrait: Boolean,
     showTwoPages: Boolean,
     showSmallWindowWidthLayout: Boolean,
+    isFoldStateHalfOpened: Boolean,
     catalogList: List<CatalogItem>
 ) {
 
@@ -53,7 +54,8 @@ fun Catalog(
         isSinglePortrait,
         isDualScreen,
         showTwoPages,
-        showSmallWindowWidthLayout
+        showSmallWindowWidthLayout,
+        isFoldStateHalfOpened
     )
     PageViews(pages, isDualScreen, showTwoPages)
 }
@@ -89,7 +91,8 @@ private fun setupPages(
     isSinglePortrait: Boolean,
     isDualScreen: Boolean,
     showTwoPages: Boolean,
-    showSmallWindowWidthLayout: Boolean
+    showSmallWindowWidthLayout: Boolean,
+    isFoldStateHalfOpened: Boolean
 ): List<@Composable () -> Unit> {
     val modifier = if (pageTextWidth.value != 0f && showTwoPages) Modifier
         .padding(end = pagePadding)
@@ -114,7 +117,10 @@ private fun setupPages(
                 modifier = modifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
-                isSinglePortrait = isSinglePortrait
+                isSinglePortrait = isSinglePortrait,
+                showTwoPages = showTwoPages,
+                isSmallWindowWidth = showSmallWindowWidthLayout,
+                isFoldStateHalfOpened = isFoldStateHalfOpened
             )
         },
         {

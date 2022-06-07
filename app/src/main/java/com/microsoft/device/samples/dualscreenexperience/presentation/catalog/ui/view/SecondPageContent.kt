@@ -68,7 +68,6 @@ fun CatalogSecondPage(
         SecondPageContent(
             modifier = modifier
                 .padding(
-                    bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
                     top = if (isFeatureHorizontal)
                         dimensionResource(id = R.dimen.catalog_margin_normal) else
                         dimensionResource(id = R.dimen.zero_padding)

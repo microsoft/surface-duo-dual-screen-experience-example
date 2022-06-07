@@ -25,6 +25,7 @@ import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.getFoldingFeature
 import com.microsoft.device.dualscreen.utils.wm.isFoldingFeatureVertical
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
+import com.microsoft.device.dualscreen.windowstate.FoldState
 import com.microsoft.device.dualscreen.windowstate.rememberWindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogBinding
@@ -80,6 +81,8 @@ class CatalogListFragment : Fragment() {
                     if (windowState != null) {
                         val isFeatureFoldHorizontal =
                             windowState.hasFold && windowState.foldIsHorizontal
+                        val isFoldStateHalfOpened = windowState.foldState == FoldState.HALF_OPENED
+
                         Catalog(
                             pane1WidthDp = windowState.pane1SizeDp.width,
                             pane2WidthDp = windowState.pane2SizeDp.width,
@@ -90,6 +93,7 @@ class CatalogListFragment : Fragment() {
                             showTwoPages = viewModel.showTwoPages.observeAsState().value ?: false,
                             showSmallWindowWidthLayout =
                                 viewModel.showSmallWindowWidthLayout.observeAsState().value ?: false,
+                            isFoldStateHalfOpened = isFoldStateHalfOpened,
                             catalogList =
                                 viewModel.catalogItemList.observeAsState().value ?: listOf()
                         )
