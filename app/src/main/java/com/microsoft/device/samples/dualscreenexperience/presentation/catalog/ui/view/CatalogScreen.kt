@@ -52,7 +52,6 @@ fun Catalog(
         catalogList,
         isFeatureHorizontal,
         isSinglePortrait,
-        isDualScreen,
         showTwoPages,
         showSmallWindowWidthLayout,
         isFoldStateHalfOpened
@@ -89,7 +88,7 @@ private fun setupPages(
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean,
     isSinglePortrait: Boolean,
-    isDualScreen: Boolean,
+
     showTwoPages: Boolean,
     showSmallWindowWidthLayout: Boolean,
     isFoldStateHalfOpened: Boolean
@@ -135,7 +134,8 @@ private fun setupPages(
                 modifier = modifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
-                isDualScreen = isDualScreen
+                isSinglePortrait = isSinglePortrait,
+                isSmallWindowWidth = showSmallWindowWidthLayout
             )
         },
         {

@@ -9,6 +9,8 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.u
 
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -41,13 +43,13 @@ fun CatalogFifthPage(
     modifier: Modifier = Modifier,
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean = false,
-    isDualScreen: Boolean
+    isSinglePortrait: Boolean,
+    isSmallWindowWidth: Boolean = false,
 ) {
     val pageNumberOrdinal = CatalogPage.Page5.ordinal
     val catalogItem = catalogList[pageNumberOrdinal]
 
-    val fourthPageConstraintSet =
-        getConstraintSetForFifthPage(isFeatureHorizontal, isDualScreen)
+    val fourthPageConstraintSet = getConstraintSetForFifthPage(isFeatureHorizontal)
 
     PageLayout(
         modifier,
@@ -55,7 +57,7 @@ fun CatalogFifthPage(
         catalogList.sizeOrZero()
     ) {
         FifthPageContent(
-            modifier
+            modifier = modifier
                 .padding(
                     start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                     end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
@@ -64,16 +66,17 @@ fun CatalogFifthPage(
                         dimensionResource(id = R.dimen.zero_padding),
                 )
                 .verticalScroll(rememberScrollState()),
-            fourthPageConstraintSet,
-            catalogItem,
-            isFeatureHorizontal
+            constraintSet = fourthPageConstraintSet,
+            catalogItem = catalogItem,
+            isFeatureHorizontal = isFeatureHorizontal,
+            isSinglePortrait = isSinglePortrait,
+            isSmallWindowWidth = isSmallWindowWidth
         )
     }
 }
 
 private fun getConstraintSetForFifthPage(
-    isFeatureHorizontal: Boolean,
-    isDualScreen: Boolean
+    isFeatureHorizontal: Boolean
 ) =
     ConstraintSet {
         val firstTextRef = createRefFor(FIFTH_PAGE_FIRST_TEXT_ID)
@@ -83,38 +86,44 @@ private fun getConstraintSetForFifthPage(
         val verticalGuideline = createGuidelineFromStart(0.5f)
         val horizontalGuideline = createGuidelineFromTop(0.5f)
 
+        val topMargin = 20.dp
+        val verticalMargin = 16.dp
+
         constrain(firstTextRef) {
             start.linkTo(parent.start)
-            top.linkTo(parent.top, 20.dp)
+            top.linkTo(parent.top, topMargin)
         }
 
         constrain(firstImageRef) {
             start.linkTo(parent.start)
             end.linkTo(verticalGuideline)
-            top.linkTo(firstTextRef.bottom, 20.dp)
             if (isFeatureHorizontal) {
                 bottom.linkTo(horizontalGuideline)
+                top.linkTo(firstTextRef.bottom)
+            } else {
+                top.linkTo(firstTextRef.bottom, topMargin)
             }
         }
 
         constrain(secondImageRef) {
             if (isFeatureHorizontal) {
-                top.linkTo(parent.top)
+                top.linkTo(firstTextRef.bottom)
                 bottom.linkTo(horizontalGuideline)
             } else {
                 top.linkTo(firstImageRef.top)
             }
             start.linkTo(verticalGuideline)
             end.linkTo(parent.end)
+            height = Dimension.fillToConstraints
         }
 
         constrain(secondTextRef) {
             if (isFeatureHorizontal) {
-                top.linkTo(horizontalGuideline, margin = 16.dp)
+                top.linkTo(horizontalGuideline, margin = verticalMargin)
                 linkTo(start = parent.start, end = parent.end)
             } else {
                 linkTo(start = firstTextRef.start, end = secondImageRef.start)
-                top.linkTo(firstImageRef.bottom, margin = if (isDualScreen) 8.dp else 16.dp)
+                top.linkTo(firstImageRef.bottom, margin = verticalMargin)
             }
             width = Dimension.fillToConstraints
         }
@@ -125,7 +134,9 @@ fun FifthPageContent(
     modifier: Modifier,
     constraintSet: ConstraintSet,
     catalogItem: CatalogItem,
-    isFeatureHorizontal: Boolean
+    isFeatureHorizontal: Boolean,
+    isSinglePortrait: Boolean,
+    isSmallWindowWidth: Boolean
 ) {
     ConstraintLayout(
         constraintSet = constraintSet,
@@ -145,9 +156,15 @@ fun FifthPageContent(
         RoundedImage(
             modifier = Modifier
                 .layoutId(FIFTH_PAGE_FIRST_IMAGE_ID)
-                .heightIn(
-                    min = dimensionResource(id = R.dimen.catalog_min_image_height),
-                    max = dimensionResource(id = R.dimen.catalog_max_image_height)
+                .requiredWidth(
+                    if (isSinglePortrait && isSmallWindowWidth)
+                        dimensionResource(id = R.dimen.catalog_small_screen_min_image_width) else
+                        dimensionResource(id = R.dimen.catalog_min_image_width)
+                )
+                .requiredHeight(
+                    if (isSinglePortrait && isSmallWindowWidth)
+                        dimensionResource(id = R.dimen.catalog_base_min_image_height) else
+                        dimensionResource(id = R.dimen.catalog_min_image_height)
                 ),
             painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.firstPicture)),
             contentDescription = catalogItem.firstPictureDescription,
@@ -156,11 +173,21 @@ fun FifthPageContent(
 
         RoundedImage(
             modifier = Modifier
-                .heightIn(
-                    min = dimensionResource(id = R.dimen.catalog_min_image_height),
-                    max = dimensionResource(id = R.dimen.catalog_double_max_image_height)
+                .layoutId(FIFTH_PAGE_SECOND_IMAGE_ID)
+                .padding(
+                  /*  bottom = if (isFeatureHorizontal)
+                        dimensionResource(id = R.dimen.small_margin) else
+                        dimensionResource(id = R.dimen.zero_padding)*/
                 )
-                .layoutId(FIFTH_PAGE_SECOND_IMAGE_ID),
+                .requiredWidth(
+                    if (isSinglePortrait && isSmallWindowWidth)
+                        dimensionResource(id = R.dimen.catalog_small_screen_min_image_width) else
+                        dimensionResource(id = R.dimen.catalog_min_image_width)
+                )
+                .heightIn(
+                    min = dimensionResource(id = R.dimen.catalog_medium_image_height),
+                    max = dimensionResource(id = R.dimen.catalog_double_max_image_height)
+                ),
             painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.secondPicture)),
             contentDescription = catalogItem.secondaryDescription,
             contentScale = ContentScale.FillBounds
@@ -168,7 +195,11 @@ fun FifthPageContent(
 
         TextDescription(
             modifier = Modifier
-                .padding(end = dimensionResource(id = R.dimen.catalog_horizontal_margin))
+                .padding(
+                    end = if (isSinglePortrait && isSmallWindowWidth)
+                        dimensionResource(id = R.dimen.small_margin) else
+                        dimensionResource(id = R.dimen.catalog_horizontal_margin)
+                )
                 .layoutId(FIFTH_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
