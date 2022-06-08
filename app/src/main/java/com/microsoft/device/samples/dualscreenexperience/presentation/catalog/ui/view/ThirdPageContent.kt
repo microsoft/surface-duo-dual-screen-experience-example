@@ -109,13 +109,7 @@ private fun getConstraintSetForThirdPage(isFeatureHorizontal: Boolean) = Constra
 
     constrain(secondRowRef) {
         linkTo(start = parent.start, end = parent.end)
-        top.linkTo(
-            if (isFeatureHorizontal) horizontalGuideline else firstRowRef.bottom,
-            if (isFeatureHorizontal) 0.dp else topMargin
-        )
-        if (isFeatureHorizontal) {
-            bottom.linkTo(parent.bottom)
-        }
+        top.linkTo(if (isFeatureHorizontal) horizontalGuideline else firstRowRef.bottom, topMargin)
     }
 }
 

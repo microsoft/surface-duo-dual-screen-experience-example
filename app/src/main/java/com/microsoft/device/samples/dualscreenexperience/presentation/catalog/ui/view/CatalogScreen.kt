@@ -149,7 +149,9 @@ private fun setupPages(
             CatalogSeventhPage(
                 modifier = modifier,
                 catalogList = catalogList,
-                isFeatureHorizontal = isFeatureHorizontal
+                isFeatureHorizontal = isFeatureHorizontal,
+                isSinglePortrait = isSinglePortrait,
+                isSmallWindowWidth = showSmallWindowWidthLayout
             )
         },
     )
