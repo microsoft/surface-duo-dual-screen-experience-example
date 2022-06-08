@@ -33,8 +33,11 @@ import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
- * This is a modified version of the "Pager" from the Compose JetCaster official sample
+ * This is a modified version of the "Pager" from the Compose JetCaster official sample under Apache License v2
+ * Source code:
  * https://github.com/android/compose-samples/blob/main/Jetcaster/app/src/main/java/com/example/jetcaster/util/Pager.kt
+ * License:
+ * https://www.apache.org/licenses/LICENSE-2.0
  */
 
 class PagerState(
@@ -121,7 +124,7 @@ class PagerState(
 
     companion object {
         /**
-         * Default implementation for [PagerState]
+         * Default [Saver] implementation for [PagerState]
          */
         val Saver = run {
             val currentPageKey = "currentPage"
