@@ -7,7 +7,6 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
@@ -19,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
@@ -226,7 +224,7 @@ fun SeventhPageContentSmallWidth(
 ) {
     ConstraintLayout(
         constraintSet = constraintSet,
-        modifier = modifier.background(Color.Red)
+        modifier = modifier
     ) {
         RoundedImage(
             modifier = Modifier
