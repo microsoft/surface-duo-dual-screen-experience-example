@@ -37,7 +37,7 @@ const val FIRST_PAGE_FOURTH_TEXT_ID = "fourthText"
 const val FIRST_PAGE_FIFTH_TEXT_ID = "fifthText"
 
 @Composable
-fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogItem>) {
+fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogItem>, onItemClick: (Int) -> Unit) {
     val pageNumberOrdinal = CatalogPage.Page1.ordinal
     val catalogItem = catalogList[pageNumberOrdinal]
 
@@ -48,7 +48,8 @@ fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogIte
     ) {
         TableOfContents(
             modifier = Modifier.fillMaxHeight(),
-            catalogItem = catalogItem
+            catalogItem = catalogItem,
+            onItemClick = onItemClick
         )
     }
 }
@@ -92,7 +93,7 @@ private fun getConstraintSetForTableOfContents() = ConstraintSet {
 }
 
 @Composable
-fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
+fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onItemClick: (Int) -> Unit) {
     val constraintSet = getConstraintSetForTableOfContents()
 
     ConstraintLayout(
@@ -123,7 +124,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                 .layoutId(FIRST_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             destinationPage = 2,
-            onItemClick = { }
+            onItemClick = onItemClick
         )
 
         ContentTextItem(
@@ -137,7 +138,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                 .layoutId(FIRST_PAGE_THIRD_TEXT_ID),
             text = catalogItem.thirdDescription ?: "",
             destinationPage = 3,
-            onItemClick = { }
+            onItemClick = onItemClick
         )
 
         ContentTextItem(
@@ -151,7 +152,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                 .layoutId(FIRST_PAGE_FOURTH_TEXT_ID),
             text = catalogItem.fourthDescription ?: "",
             destinationPage = 4,
-            onItemClick = { }
+            onItemClick = onItemClick
         )
 
         ContentTextItem(
@@ -165,7 +166,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem) {
                 .layoutId(FIRST_PAGE_FIFTH_TEXT_ID),
             text = catalogItem.fifthDescription ?: "",
             destinationPage = 5,
-            onItemClick = { }
+            onItemClick = onItemClick
         )
     }
 }

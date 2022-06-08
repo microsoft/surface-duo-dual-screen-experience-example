@@ -7,6 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils
 
+import androidx.annotation.IntRange
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
@@ -76,6 +77,11 @@ class PagerState(
         selectionState = SelectionState.Selected
     }
 
+    suspend fun selectPageNumber(pageNumber: Int) {
+        currentPage = pageNumber
+        snapToOffset(0f)
+    }
+
     private var _currentPageOffset = Animatable(0f).apply {
         updateBounds(-1f, 1f)
     }
@@ -112,27 +118,45 @@ class PagerState(
 
     override fun toString(): String = "PagerState{minPage=$minPage, maxPage=$maxPage, " +
         "currentPage=$currentPage, currentPageOffset=$currentPageOffset}"
-}
 
-val PagerStateSaver = run {
-    val currentPageKey = "currentPage"
-    val minPageKey = "minPage"
-    val maxPageKey = "maxPage"
-    mapSaver(
-        save = {
-            mapOf(
-                currentPageKey to it.currentPage,
-                minPageKey to it.minPage,
-                maxPageKey to it.maxPage
-            )
-        },
-        restore = {
-            PagerState(
-                it[currentPageKey] as Int,
-                it[minPageKey] as Int,
-                it[maxPageKey] as Int
+    companion object {
+        /**
+         * Default implementation for [PagerState]
+         */
+        val Saver = run {
+            val currentPageKey = "currentPage"
+            val minPageKey = "minPage"
+            val maxPageKey = "maxPage"
+            mapSaver(
+                save = {
+                    mapOf(
+                        currentPageKey to it.currentPage,
+                        minPageKey to it.minPage,
+                        maxPageKey to it.maxPage
+                    )
+                },
+                restore = {
+                    PagerState(
+                        it[currentPageKey] as Int,
+                        it[minPageKey] as Int,
+                        it[maxPageKey] as Int
+                    )
+                }
             )
         }
+    }
+}
+
+@Composable
+fun rememberViewPagerState(
+    @IntRange(from = 0) currentPage: Int = 0,
+    @IntRange(from = 0) minPage: Int = 0,
+    @IntRange(from = 0) maxPage: Int = 0
+): PagerState = rememberSaveable(saver = PagerState.Saver) {
+    PagerState(
+        currentPage = currentPage,
+        minPage = minPage,
+        maxPage = maxPage
     )
 }
 
