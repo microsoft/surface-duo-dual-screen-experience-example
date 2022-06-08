@@ -123,7 +123,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onI
                 .padding(top = dimensionResource(id = R.dimen.catalog_margin_normal))
                 .layoutId(FIRST_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
-            destinationPage = 2,
+            destinationPage = CatalogPage.Page2.ordinal + 1,
             onItemClick = onItemClick
         )
 
@@ -137,7 +137,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onI
                 )
                 .layoutId(FIRST_PAGE_THIRD_TEXT_ID),
             text = catalogItem.thirdDescription ?: "",
-            destinationPage = 3,
+            destinationPage = CatalogPage.Page3.ordinal + 1,
             onItemClick = onItemClick
         )
 
@@ -151,7 +151,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onI
                 )
                 .layoutId(FIRST_PAGE_FOURTH_TEXT_ID),
             text = catalogItem.fourthDescription ?: "",
-            destinationPage = 4,
+            destinationPage = CatalogPage.Page4.ordinal + 1,
             onItemClick = onItemClick
         )
 
@@ -165,7 +165,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onI
                 )
                 .layoutId(FIRST_PAGE_FIFTH_TEXT_ID),
             text = catalogItem.fifthDescription ?: "",
-            destinationPage = 5,
+            destinationPage = CatalogPage.Page5.ordinal + 1,
             onItemClick = onItemClick
         )
     }
