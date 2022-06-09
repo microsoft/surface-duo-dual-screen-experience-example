@@ -8,6 +8,7 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -37,7 +38,11 @@ const val FIRST_PAGE_FOURTH_TEXT_ID = "fourthText"
 const val FIRST_PAGE_FIFTH_TEXT_ID = "fifthText"
 
 @Composable
-fun CatalogFirstPage(modifier: Modifier = Modifier, catalogList: List<CatalogItem>, onItemClick: (Int) -> Unit) {
+fun CatalogFirstPage(
+    modifier: Modifier = Modifier,
+    catalogList: List<CatalogItem>,
+    onItemClick: (Int) -> Unit
+) {
     val pageNumberOrdinal = CatalogPage.Page1.ordinal
     val catalogItem = catalogList[pageNumberOrdinal]
 
@@ -93,7 +98,11 @@ private fun getConstraintSetForTableOfContents() = ConstraintSet {
 }
 
 @Composable
-fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onItemClick: (Int) -> Unit) {
+fun TableOfContents(
+    modifier: Modifier = Modifier,
+    catalogItem: CatalogItem,
+    onItemClick: (Int) -> Unit
+) {
     val constraintSet = getConstraintSetForTableOfContents()
 
     ConstraintLayout(
@@ -165,7 +174,7 @@ fun TableOfContents(modifier: Modifier = Modifier, catalogItem: CatalogItem, onI
                 )
                 .layoutId(FIRST_PAGE_FIFTH_TEXT_ID),
             text = catalogItem.fifthDescription ?: "",
-            destinationPage = CatalogPage.Page5.ordinal + 1,
+            destinationPage = CatalogPage.Page6.ordinal + 1,
             onItemClick = onItemClick
         )
     }
@@ -178,22 +187,27 @@ fun ContentTextItem(
     destinationPage: Int,
     onItemClick: (Int) -> Unit,
 ) {
-    Text(
+    Row(
         modifier = modifier
             .padding(
                 vertical = dimensionResource(id = R.dimen.catalog_margin_small),
                 horizontal = dimensionResource(id = R.dimen.catalog_horizontal_margin)
             )
             .wrapContentWidth()
-            .clickable { onItemClick(destinationPage) },
-        text = text,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-        style = MaterialTheme.typography.body1.copy(
-            color = MaterialTheme.colors.onSurface,
-            textAlign = TextAlign.Start
+            .clickable { onItemClick(destinationPage - 1) },
+    ) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = text,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.body1.copy(
+                color = MaterialTheme.colors.onSurface,
+                textAlign = TextAlign.Start
+            )
         )
-    )
+        Text(text = destinationPage.toString())
+    }
 }
 
 fun getPageContentDescription(value: String, replacement: String): String {
