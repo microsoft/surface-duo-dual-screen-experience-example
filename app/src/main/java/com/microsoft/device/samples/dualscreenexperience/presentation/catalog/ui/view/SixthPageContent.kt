@@ -52,15 +52,16 @@ fun CatalogSixthPage(
     ) {
         SixthPageContent(
             modifier
+                .verticalScroll(rememberScrollState())
                 .padding(
                     start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                     end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                     bottom = dimensionResource(id = R.dimen.catalog_margin_normal),
                     top = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_margin_normal) else
+                        dimensionResource(id = R.dimen.catalog_margin_normal)
+                    else
                         dimensionResource(id = R.dimen.zero_padding),
-                )
-                .verticalScroll(rememberScrollState()),
+                ),
             sixthPageConstraintSet,
             catalogItem,
             isFeatureHorizontal
@@ -117,7 +118,8 @@ fun SixthPageContent(
             text = catalogItem.primaryDescription,
             contentDescription = catalogItem.primaryDescription,
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_20) else
+                fontDimensionResource(id = R.dimen.text_size_20)
+            else
                 fontDimensionResource(id = R.dimen.text_size_16)
         )
 
@@ -137,7 +139,8 @@ fun SixthPageContent(
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
+                fontDimensionResource(id = R.dimen.text_size_16)
+            else
                 fontDimensionResource(id = R.dimen.text_size_12)
         )
     }

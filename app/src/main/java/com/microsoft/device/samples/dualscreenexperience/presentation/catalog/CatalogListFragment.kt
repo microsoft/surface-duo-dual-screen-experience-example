@@ -1,8 +1,7 @@
 /*
  *
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License.
- *
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
  */
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog
@@ -86,7 +85,6 @@ class CatalogListFragment : Fragment() {
                         Catalog(
                             pane1WidthDp = windowState.pane1SizeDp.width,
                             pane2WidthDp = windowState.pane2SizeDp.width,
-                            isDualScreen = windowState.isDualPortrait(),
                             foldSizeDp = windowState.foldSizeDp,
                             isFeatureHorizontal = isFeatureFoldHorizontal,
                             isSinglePortrait = windowState.isSinglePortrait(),

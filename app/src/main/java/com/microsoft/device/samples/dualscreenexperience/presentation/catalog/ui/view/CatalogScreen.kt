@@ -29,7 +29,6 @@ import kotlin.math.abs
 fun Catalog(
     pane1WidthDp: Dp,
     pane2WidthDp: Dp,
-    isDualScreen: Boolean,
     foldSizeDp: Dp,
     isFeatureHorizontal: Boolean,
     isSinglePortrait: Boolean,
@@ -62,19 +61,18 @@ fun Catalog(
             pagerState.selectPageNumber(destinationPage)
         }
     }
-    PageViews(pagerState, pages, isDualScreen, showTwoPages)
+    PageViews(pagerState, pages, showTwoPages)
 }
 
 @Composable
 fun PageViews(
     pagerState: PagerState = rememberViewPagerState(),
     pages: List<@Composable () -> Unit>,
-    isDualScreen: Boolean,
     showTwoPages: Boolean
 ) {
     val maxPage = (pages.size - 1).coerceAtLeast(0)
 
-    pagerState.isDualMode = isDualScreen && showTwoPages
+    pagerState.isDualMode = showTwoPages
     pagerState.maxPage = maxPage
 
     ViewPager(
@@ -129,7 +127,8 @@ private fun setupPages(
             CatalogFourthPage(
                 modifier = modifier,
                 catalogList = catalogList,
-                isFeatureHorizontal = isFeatureHorizontal
+                isFeatureHorizontal = isFeatureHorizontal,
+                showTwoPages = showTwoPages
             )
         },
         {
@@ -137,8 +136,8 @@ private fun setupPages(
                 modifier = modifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
-                isSinglePortrait = isSinglePortrait,
-                isSmallWindowWidth = showSmallWindowWidthLayout
+                isSmallWindowWidth = showSmallWindowWidthLayout,
+                showTwoPages = showTwoPages
             )
         },
         {
@@ -153,8 +152,8 @@ private fun setupPages(
                 modifier = modifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
-                isSinglePortrait = isSinglePortrait,
-                isSmallWindowWidth = showSmallWindowWidthLayout
+                isSmallWindowWidth = showSmallWindowWidthLayout,
+                showTwoPages = showTwoPages
             )
         },
     )

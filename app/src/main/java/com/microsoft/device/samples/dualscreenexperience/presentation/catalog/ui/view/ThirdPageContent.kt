@@ -63,9 +63,10 @@ fun CatalogThirdPage(
         pageNumberOrdinal + 1,
         catalogList.sizeOrZero()
     ) {
-        val contentModifier = modifier
-            .padding(top = dimensionResource(id = R.dimen.catalog_margin_normal))
-            .verticalScroll(rememberScrollState())
+        val contentModifier =
+            modifier
+                .verticalScroll(rememberScrollState())
+                .padding(top = dimensionResource(id = R.dimen.catalog_margin_normal))
         if (isSmallWindowWidth) {
             ThirdPageSmallWindowWidthContent(
                 modifier = contentModifier,
@@ -193,14 +194,16 @@ fun ThirdPageContent(
                         if ((isFeatureHorizontal && !showTwoPages) ||
                             isSinglePortrait || (isFoldStateHalfOpened && !showTwoPages)
                         )
-                            dimensionResource(id = R.dimen.catalog_max_image_height) else
+                            dimensionResource(id = R.dimen.catalog_max_image_height)
+                        else
                             dimensionResource(id = R.dimen.catalog_min_image_width)
                     )
                     .requiredHeight(
                         if ((isFeatureHorizontal && !showTwoPages) ||
                             isSinglePortrait || (isFoldStateHalfOpened && !showTwoPages)
                         )
-                            dimensionResource(id = R.dimen.catalog_medium_image_height) else
+                            dimensionResource(id = R.dimen.catalog_medium_image_height)
+                        else
                             dimensionResource(id = R.dimen.catalog_min_image_height)
                     ),
                 painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.firstPicture)),
@@ -217,7 +220,8 @@ fun ThirdPageContent(
                     .weight(ROW_WEIGHT),
                 text = catalogItem.primaryDescription,
                 fontSize = if (isFeatureHorizontal)
-                    fontDimensionResource(id = R.dimen.text_size_16) else
+                    fontDimensionResource(id = R.dimen.text_size_16)
+                else
                     fontDimensionResource(id = R.dimen.text_size_12),
                 contentDescription = catalogItem.primaryDescription
             )
@@ -238,7 +242,8 @@ fun ThirdPageContent(
                     text = catalogItem.secondaryDescription ?: "",
                     contentDescription = catalogItem.secondaryDescription ?: "",
                     fontSize = if (isFeatureHorizontal)
-                        fontDimensionResource(id = R.dimen.text_size_20) else
+                        fontDimensionResource(id = R.dimen.text_size_20)
+                    else
                         fontDimensionResource(id = R.dimen.text_size_16)
                 )
                 TextDescription(
@@ -248,7 +253,8 @@ fun ThirdPageContent(
                     text = catalogItem.thirdDescription ?: "",
                     contentDescription = catalogItem.thirdDescription ?: "",
                     fontSize = if (isFeatureHorizontal)
-                        fontDimensionResource(id = R.dimen.text_size_16) else
+                        fontDimensionResource(id = R.dimen.text_size_16)
+                    else
                         fontDimensionResource(id = R.dimen.text_size_12)
                 )
             }
@@ -261,14 +267,16 @@ fun ThirdPageContent(
                         if ((isFeatureHorizontal && !showTwoPages) ||
                             isSinglePortrait || (isFoldStateHalfOpened && !showTwoPages)
                         )
-                            dimensionResource(id = R.dimen.catalog_max_image_height) else
+                            dimensionResource(id = R.dimen.catalog_max_image_height)
+                        else
                             dimensionResource(id = R.dimen.catalog_min_image_width)
                     )
                     .requiredHeight(
                         if ((isFeatureHorizontal && !showTwoPages) ||
                             isSinglePortrait || (isFoldStateHalfOpened && !showTwoPages)
                         )
-                            dimensionResource(id = R.dimen.catalog_medium_image_height) else
+                            dimensionResource(id = R.dimen.catalog_medium_image_height)
+                        else
                             dimensionResource(id = R.dimen.catalog_min_image_height)
                     )
                     .heightIn(

@@ -57,7 +57,8 @@ fun CatalogSecondPage(
     val catalogItem = catalogList[pageNumberOrdinal]
 
     val secondPageConstraintSet = if (isSmallWindowWidth)
-        getConstraintSetForSmallWindowWidth() else
+        getConstraintSetForSmallWindowWidth()
+    else
         getConstraintSetForSecondPage(isFeatureHorizontal)
 
     PageLayout(
@@ -67,12 +68,13 @@ fun CatalogSecondPage(
     ) {
         SecondPageContent(
             modifier = modifier
+                .verticalScroll(rememberScrollState())
                 .padding(
                     top = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_margin_normal) else
+                        dimensionResource(id = R.dimen.catalog_margin_normal)
+                    else
                         dimensionResource(id = R.dimen.zero_padding)
-                )
-                .verticalScroll(rememberScrollState()),
+                ),
             constraintSet = secondPageConstraintSet,
             catalogItem = catalogItem,
             isFeatureHorizontal = isFeatureHorizontal,
@@ -209,7 +211,8 @@ private fun SecondPageContent(
             modifier = Modifier.layoutId(SECOND_PAGE_TITLE_TEXT_ID),
             text = catalogItem.primaryDescription,
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_20) else
+                fontDimensionResource(id = R.dimen.text_size_20)
+            else
                 fontDimensionResource(id = R.dimen.text_size_16),
             contentDescription = catalogItem.primaryDescription
         )
@@ -222,7 +225,8 @@ private fun SecondPageContent(
 
                 text = catalogItem.secondaryDescription ?: "",
                 fontSize = if (isFeatureHorizontal)
-                    fontDimensionResource(id = R.dimen.text_size_16) else
+                    fontDimensionResource(id = R.dimen.text_size_16)
+                else
                     fontDimensionResource(id = R.dimen.text_size_12),
                 contentDescription = catalogItem.secondaryDescription ?: ""
             )
@@ -261,7 +265,8 @@ private fun SecondPageContent(
                     ),
                     text = catalogItem.secondaryDescription ?: "",
                     fontSize = if (isFeatureHorizontal)
-                        fontDimensionResource(id = R.dimen.text_size_16) else
+                        fontDimensionResource(id = R.dimen.text_size_16)
+                    else
                         fontDimensionResource(id = R.dimen.text_size_12),
                     contentDescription = catalogItem.secondaryDescription ?: ""
                 )
@@ -278,7 +283,8 @@ private fun SecondPageContent(
                 ),
             text = catalogItem.thirdDescription ?: "",
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
+                fontDimensionResource(id = R.dimen.text_size_16)
+            else
                 fontDimensionResource(id = R.dimen.text_size_12),
             contentDescription = catalogItem.thirdDescription ?: ""
         )
@@ -288,12 +294,14 @@ private fun SecondPageContent(
                 .layoutId(SECOND_PAGE_FIRST_ROW_IMAGE_ID)
                 .padding(
                     start = if (isSmallWindowWidth && !showTwoPages)
-                        dimensionResource(id = R.dimen.zero_padding) else
+                        dimensionResource(id = R.dimen.zero_padding)
+                    else
                         dimensionResource(id = R.dimen.catalog_image_margin_start)
                 )
                 .requiredWidth(
                     if (isSmallWindowWidth && !showTwoPages)
-                        dimensionResource(id = R.dimen.catalog_small_screen_min_image_width) else
+                        dimensionResource(id = R.dimen.catalog_small_screen_min_image_width)
+                    else
                         dimensionResource(id = R.dimen.catalog_min_image_width)
                 )
                 .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),
@@ -306,12 +314,14 @@ private fun SecondPageContent(
                 .layoutId(SECOND_PAGE_SECOND_ROW_IMAGE_ID)
                 .padding(
                     end = if (isSmallWindowWidth && !showTwoPages)
-                        dimensionResource(id = R.dimen.zero_padding) else
+                        dimensionResource(id = R.dimen.zero_padding)
+                    else
                         dimensionResource(id = R.dimen.catalog_image_margin_end)
                 )
                 .requiredWidth(
                     if (isSmallWindowWidth && !showTwoPages)
-                        dimensionResource(id = R.dimen.catalog_small_screen_min_image_width) else
+                        dimensionResource(id = R.dimen.catalog_small_screen_min_image_width)
+                    else
                         dimensionResource(id = R.dimen.catalog_min_image_width)
                 )
                 .requiredHeight(dimensionResource(id = R.dimen.catalog_min_image_height)),

@@ -7,12 +7,11 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,13 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogItem
 import com.microsoft.device.samples.dualscreenexperience.domain.catalog.model.CatalogPage
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.ContentTextItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.PageLayout
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.contentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.sizeOrZero
@@ -52,7 +50,9 @@ fun CatalogFirstPage(
         catalogList.sizeOrZero()
     ) {
         TableOfContents(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier
+                .fillMaxHeight()
+                .verticalScroll(rememberScrollState()),
             catalogItem = catalogItem,
             onItemClick = onItemClick
         )
@@ -129,7 +129,6 @@ fun TableOfContents(
                         stringResource(id = R.string.catalog_toc_item_content_description)
                     )
                 )
-                .padding(top = dimensionResource(id = R.dimen.catalog_margin_normal))
                 .layoutId(FIRST_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             destinationPage = CatalogPage.Page2.ordinal + 1,
@@ -177,36 +176,6 @@ fun TableOfContents(
             destinationPage = CatalogPage.Page6.ordinal + 1,
             onItemClick = onItemClick
         )
-    }
-}
-
-@Composable
-fun ContentTextItem(
-    modifier: Modifier = Modifier,
-    text: String,
-    destinationPage: Int,
-    onItemClick: (Int) -> Unit,
-) {
-    Row(
-        modifier = modifier
-            .padding(
-                vertical = dimensionResource(id = R.dimen.catalog_margin_small),
-                horizontal = dimensionResource(id = R.dimen.catalog_horizontal_margin)
-            )
-            .wrapContentWidth()
-            .clickable { onItemClick(destinationPage - 1) },
-    ) {
-        Text(
-            modifier = Modifier.weight(1f),
-            text = text,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.body1.copy(
-                color = MaterialTheme.colors.onSurface,
-                textAlign = TextAlign.Start
-            )
-        )
-        Text(text = destinationPage.toString())
     }
 }
 

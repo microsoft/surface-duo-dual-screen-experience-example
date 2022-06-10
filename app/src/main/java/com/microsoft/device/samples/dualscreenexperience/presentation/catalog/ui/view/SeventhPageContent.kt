@@ -47,8 +47,8 @@ fun CatalogSeventhPage(
     modifier: Modifier = Modifier,
     catalogList: List<CatalogItem>,
     isFeatureHorizontal: Boolean = false,
-    isSinglePortrait: Boolean = false,
     isSmallWindowWidth: Boolean = false,
+    showTwoPages: Boolean = false
 ) {
     val pageNumberOrdinal = CatalogPage.Page7.ordinal
     val catalogItem = catalogList[pageNumberOrdinal]
@@ -58,17 +58,18 @@ fun CatalogSeventhPage(
         pageNumberOrdinal + 1,
         catalogList.sizeOrZero()
     ) {
-        if (isSmallWindowWidth && isSinglePortrait) {
+        if (isSmallWindowWidth && !showTwoPages) {
             SeventhPageContentSmallWidth(
                 modifier
+                    .verticalScroll(rememberScrollState())
                     .padding(
                         start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                         end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                         top = if (isFeatureHorizontal)
-                            dimensionResource(id = R.dimen.catalog_margin_normal) else
+                            dimensionResource(id = R.dimen.catalog_margin_normal)
+                        else
                             dimensionResource(id = R.dimen.zero_padding)
-                    )
-                    .verticalScroll(rememberScrollState()),
+                    ),
                 getConstraintSetForSmallWindowWidth(),
                 catalogItem,
                 isFeatureHorizontal
@@ -76,14 +77,15 @@ fun CatalogSeventhPage(
         } else {
             SeventhPageContent(
                 modifier
+                    .verticalScroll(rememberScrollState())
                     .padding(
                         start = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                         end = dimensionResource(id = R.dimen.catalog_horizontal_margin),
                         top = if (isFeatureHorizontal)
-                            dimensionResource(id = R.dimen.catalog_margin_normal) else
+                            dimensionResource(id = R.dimen.catalog_margin_normal)
+                        else
                             dimensionResource(id = R.dimen.zero_padding)
-                    )
-                    .verticalScroll(rememberScrollState()),
+                    ),
                 getConstraintSetForSeventhPage(isFeatureHorizontal),
                 catalogItem,
                 isFeatureHorizontal
@@ -150,7 +152,8 @@ fun SeventhPageContent(
                     .weight(1f),
                 text = catalogItem.primaryDescription,
                 fontSize = if (isFeatureHorizontal)
-                    fontDimensionResource(id = R.dimen.text_size_16) else
+                    fontDimensionResource(id = R.dimen.text_size_16)
+                else
                     fontDimensionResource(id = R.dimen.text_size_12),
                 contentDescription = catalogItem.primaryDescription
             )
@@ -167,7 +170,8 @@ fun SeventhPageContent(
                 text = catalogItem.secondaryDescription ?: "",
                 contentDescription = catalogItem.secondaryDescription ?: "",
                 fontSize = if (isFeatureHorizontal)
-                    fontDimensionResource(id = R.dimen.text_size_16) else
+                    fontDimensionResource(id = R.dimen.text_size_16)
+                else
                     fontDimensionResource(id = R.dimen.text_size_12)
             )
 
@@ -244,7 +248,8 @@ fun SeventhPageContentSmallWidth(
             modifier = Modifier.layoutId(SEVENTH_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
+                fontDimensionResource(id = R.dimen.text_size_16)
+            else
                 fontDimensionResource(id = R.dimen.text_size_12),
             contentDescription = catalogItem.primaryDescription
         )
@@ -268,7 +273,8 @@ fun SeventhPageContentSmallWidth(
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
             fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
+                fontDimensionResource(id = R.dimen.text_size_16)
+            else
                 fontDimensionResource(id = R.dimen.text_size_12)
         )
     }

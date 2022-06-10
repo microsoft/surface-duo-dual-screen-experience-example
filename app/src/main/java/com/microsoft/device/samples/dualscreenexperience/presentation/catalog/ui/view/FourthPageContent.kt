@@ -40,7 +40,8 @@ const val FOURTH_PAGE_THIRD_TEXT_ID = "fourthPageThirdText"
 fun CatalogFourthPage(
     modifier: Modifier = Modifier,
     catalogList: List<CatalogItem>,
-    isFeatureHorizontal: Boolean = false
+    isFeatureHorizontal: Boolean = false,
+    showTwoPages: Boolean = false
 ) {
     val pageNumberOrdinal = CatalogPage.Page4.ordinal
     val catalogItem = catalogList[pageNumberOrdinal]
@@ -54,18 +55,21 @@ fun CatalogFourthPage(
     ) {
         FourthPageContent(
             modifier
+                .verticalScroll(rememberScrollState())
                 .padding(
-                    start = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_page_padding) else
+                    start = if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_page_padding)
+                    else
                         dimensionResource(id = R.dimen.zero_padding),
-                    top = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_margin_normal) else
+                    top = if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_margin_normal)
+                    else
                         dimensionResource(id = R.dimen.zero_padding)
-                )
-                .verticalScroll(rememberScrollState()),
+                ),
             fourthPageConstraintSet,
             catalogItem,
-            isFeatureHorizontal
+            isFeatureHorizontal,
+            showTwoPages
         )
     }
 }
@@ -96,7 +100,22 @@ private fun getConstraintSetForFourthPage(isFeatureHorizontal: Boolean) = Constr
         top.linkTo(secondTextRef.bottom)
     }
 
-    createHorizontalChain(firstImageRef, secondImageRef, chainStyle = ChainStyle.Spread)
+    constrain(firstImageRef) {
+        top.linkTo(parent.top)
+        start.linkTo(secondTextRef.start)
+    }
+
+    constrain(secondImageRef) {
+        start.linkTo(firstImageRef.start)
+        top.linkTo(firstImageRef.top)
+        end.linkTo(secondTextRef.end)
+    }
+
+    createHorizontalChain(
+        firstImageRef,
+        secondImageRef,
+        chainStyle = ChainStyle.Spread
+    )
 }
 
 @Composable
@@ -104,7 +123,8 @@ fun FourthPageContent(
     modifier: Modifier,
     constraintSet: ConstraintSet,
     catalogItem: CatalogItem,
-    isFeatureHorizontal: Boolean
+    isFeatureHorizontal: Boolean,
+    showTwoPages: Boolean
 ) {
     ConstraintLayout(
         constraintSet = constraintSet,
@@ -115,13 +135,15 @@ fun FourthPageContent(
                 .padding(top = dimensionResource(id = R.dimen.catalog_top_margin))
                 .layoutId(FOURTH_PAGE_FIRST_IMAGE_ID)
                 .requiredWidth(
-                    if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_max_image_height_dual_landscape) else
+                    if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_max_image_height_dual_landscape)
+                    else
                         dimensionResource(id = R.dimen.catalog_min_image_height)
                 )
                 .requiredHeight(
-                    if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_max_image_height) else
+                    if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_max_image_height)
+                    else
                         dimensionResource(id = R.dimen.catalog_min_image_height)
                 ),
             painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.firstPicture)),
@@ -130,16 +152,24 @@ fun FourthPageContent(
 
         RoundedImage(
             modifier = Modifier
-                .padding(top = dimensionResource(id = R.dimen.catalog_top_margin))
+                .padding(
+                    top = dimensionResource(id = R.dimen.catalog_top_margin),
+                    end = if (showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_margin_large)
+                    else
+                        dimensionResource(id = R.dimen.zero_padding)
+                )
                 .layoutId(FOURTH_PAGE_SECOND_IMAGE_ID)
                 .requiredWidth(
-                    if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_max_image_height_dual_landscape) else
+                    if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_max_image_height_dual_landscape)
+                    else
                         dimensionResource(id = R.dimen.catalog_min_image_height)
                 )
                 .requiredHeight(
-                    if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.catalog_max_image_height) else
+                    if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.catalog_max_image_height)
+                    else
                         dimensionResource(id = R.dimen.catalog_min_image_height)
                 ),
             painter = rememberAsyncImagePainter(model = getImageUri(catalogItem.secondPicture)),
@@ -149,15 +179,17 @@ fun FourthPageContent(
         TextDescription(
             modifier = Modifier
                 .padding(
-                    horizontal = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.zero_padding) else
+                    horizontal = if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.zero_padding)
+                    else
                         dimensionResource(id = R.dimen.medium_margin)
                 )
                 .layoutId(FOURTH_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
             contentDescription = catalogItem.primaryDescription,
-            fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
+            fontSize = if (isFeatureHorizontal && showTwoPages)
+                fontDimensionResource(id = R.dimen.text_size_16)
+            else
                 fontDimensionResource(id = R.dimen.text_size_12)
         )
 
@@ -165,15 +197,17 @@ fun FourthPageContent(
             modifier = Modifier
                 .padding(
                     top = dimensionResource(id = R.dimen.catalog_top_margin),
-                    start = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.zero_padding) else
+                    start = if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.zero_padding)
+                    else
                         dimensionResource(id = R.dimen.medium_margin)
                 )
                 .layoutId(FOURTH_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
-            fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_20) else
+            fontSize = if (isFeatureHorizontal && showTwoPages)
+                fontDimensionResource(id = R.dimen.text_size_20)
+            else
                 fontDimensionResource(id = R.dimen.text_size_16)
         )
 
@@ -181,15 +215,17 @@ fun FourthPageContent(
             modifier = Modifier
                 .padding(
                     top = dimensionResource(id = R.dimen.catalog_top_margin),
-                    start = if (isFeatureHorizontal)
-                        dimensionResource(id = R.dimen.zero_padding) else
+                    start = if (isFeatureHorizontal && showTwoPages)
+                        dimensionResource(id = R.dimen.zero_padding)
+                    else
                         dimensionResource(id = R.dimen.medium_margin)
                 )
                 .layoutId(FOURTH_PAGE_THIRD_TEXT_ID),
             text = catalogItem.thirdDescription ?: "",
             contentDescription = catalogItem.thirdDescription ?: "",
-            fontSize = if (isFeatureHorizontal)
-                fontDimensionResource(id = R.dimen.text_size_16) else
+            fontSize = if (isFeatureHorizontal && showTwoPages)
+                fontDimensionResource(id = R.dimen.text_size_16)
+            else
                 fontDimensionResource(id = R.dimen.text_size_12)
         )
     }
