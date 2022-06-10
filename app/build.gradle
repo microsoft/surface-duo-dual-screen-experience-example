@@ -115,7 +115,7 @@ dependencies {
     implementation navigationDependencies.uiKtx
 
     implementation composeDependencies.composeUi
-    implementation composeDependencies.composeTooling
+    debugImplementation  composeDependencies.composeTooling
     implementation composeDependencies.composeFoundation
     implementation composeDependencies.composeMaterial
     implementation composeDependencies.composeMaterialIcons
