@@ -24,6 +24,12 @@ val DMSans = FontFamily(
 val Roboto = FontFamily(Font(R.font.roboto, FontWeight.Normal))
 
 val Typography = Typography(
+    h3 = TextStyle(
+        fontFamily = DMSans,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        lineHeight = 28.sp,
+    ),
     h6 = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Normal,
@@ -36,5 +42,11 @@ val Typography = Typography(
         lineHeight = 24.sp,
         fontSize = 16.sp,
         letterSpacing = 0.sp
+    ),
+    body2 = TextStyle(
+        fontFamily = DMSans,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        lineHeight = 36.sp
     ),
 )

@@ -34,6 +34,9 @@ android {
                 arguments += ["room.incremental": "true"]
             }
         }
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -94,6 +97,12 @@ android {
 
     // This is the default but added it explicitly so we can change it more easily
     testBuildType "debug"
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
