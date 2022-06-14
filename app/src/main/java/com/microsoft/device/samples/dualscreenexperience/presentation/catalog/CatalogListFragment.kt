@@ -28,8 +28,8 @@ import com.microsoft.device.dualscreen.windowstate.FoldState
 import com.microsoft.device.dualscreen.windowstate.rememberWindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogBinding
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.theme.CatalogTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view.Catalog
+import com.microsoft.device.samples.dualscreenexperience.presentation.theme.CatalogTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasExpandedWindowLayoutSize

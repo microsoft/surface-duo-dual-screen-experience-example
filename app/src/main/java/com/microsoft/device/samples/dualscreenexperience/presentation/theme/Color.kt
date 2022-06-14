@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.theme
+package com.microsoft.device.samples.dualscreenexperience.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
