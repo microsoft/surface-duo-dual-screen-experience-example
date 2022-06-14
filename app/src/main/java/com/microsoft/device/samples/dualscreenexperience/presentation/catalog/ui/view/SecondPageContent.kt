@@ -210,7 +210,7 @@ private fun SecondPageContent(
         TextDescription(
             modifier = Modifier.layoutId(SECOND_PAGE_TITLE_TEXT_ID),
             text = catalogItem.primaryDescription,
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_20)
             else
                 fontDimensionResource(id = R.dimen.text_size_16),
@@ -224,7 +224,7 @@ private fun SecondPageContent(
                     .padding(horizontal = dimensionResource(id = R.dimen.catalog_horizontal_margin)),
 
                 text = catalogItem.secondaryDescription ?: "",
-                fontSize = if (isFeatureHorizontal)
+                fontSize = if (isFeatureHorizontal && showTwoPages)
                     fontDimensionResource(id = R.dimen.text_size_16)
                 else
                     fontDimensionResource(id = R.dimen.text_size_12),
@@ -264,7 +264,7 @@ private fun SecondPageContent(
                         end = dimensionResource(id = R.dimen.catalog_horizontal_margin)
                     ),
                     text = catalogItem.secondaryDescription ?: "",
-                    fontSize = if (isFeatureHorizontal)
+                    fontSize = if (isFeatureHorizontal && showTwoPages)
                         fontDimensionResource(id = R.dimen.text_size_16)
                     else
                         fontDimensionResource(id = R.dimen.text_size_12),
@@ -282,7 +282,7 @@ private fun SecondPageContent(
                     top = dimensionResource(id = R.dimen.catalog_margin_large)
                 ),
             text = catalogItem.thirdDescription ?: "",
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_16)
             else
                 fontDimensionResource(id = R.dimen.text_size_12),

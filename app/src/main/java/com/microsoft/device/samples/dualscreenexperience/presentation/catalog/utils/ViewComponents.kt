@@ -168,6 +168,10 @@ fun ContentTextItem(
             color = color,
             textAlign = textAlign
         )
-        Text(text = destinationPage.toString(), color = color)
+        Text(
+            text = destinationPage.toString(),
+            style = MaterialTheme.typography.body1,
+            color = color
+        )
     }
 }

@@ -38,7 +38,8 @@ const val SIXTH_PAGE_SECOND_TEXT_ID = "sixthPageSecondText"
 fun CatalogSixthPage(
     modifier: Modifier = Modifier,
     catalogList: List<CatalogItem>,
-    isFeatureHorizontal: Boolean = false
+    isFeatureHorizontal: Boolean = false,
+    showTwoPages: Boolean = false
 ) {
     val pageNumberOrdinal = CatalogPage.Page6.ordinal
     val catalogItem = catalogList[pageNumberOrdinal]
@@ -64,7 +65,8 @@ fun CatalogSixthPage(
                 ),
             sixthPageConstraintSet,
             catalogItem,
-            isFeatureHorizontal
+            isFeatureHorizontal,
+            showTwoPages
         )
     }
 }
@@ -107,7 +109,8 @@ fun SixthPageContent(
     modifier: Modifier,
     constraintSet: ConstraintSet,
     catalogItem: CatalogItem,
-    isFeatureHorizontal: Boolean
+    isFeatureHorizontal: Boolean,
+    showTwoPages: Boolean
 ) {
     ConstraintLayout(
         constraintSet = constraintSet,
@@ -117,7 +120,7 @@ fun SixthPageContent(
             modifier = Modifier.layoutId(SIXTH_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
             contentDescription = catalogItem.primaryDescription,
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_20)
             else
                 fontDimensionResource(id = R.dimen.text_size_16)
@@ -138,7 +141,7 @@ fun SixthPageContent(
             modifier = Modifier.layoutId(SIXTH_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_16)
             else
                 fontDimensionResource(id = R.dimen.text_size_12)

@@ -159,7 +159,7 @@ fun FifthPageContent(
             modifier = Modifier.layoutId(FIFTH_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
             contentDescription = catalogItem.primaryDescription,
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_16)
             else
                 fontDimensionResource(id = R.dimen.text_size_12)
@@ -220,7 +220,7 @@ fun FifthPageContent(
                 .layoutId(FIFTH_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_16)
             else
                 fontDimensionResource(id = R.dimen.text_size_12)

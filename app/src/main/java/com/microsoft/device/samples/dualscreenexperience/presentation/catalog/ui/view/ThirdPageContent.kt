@@ -219,7 +219,7 @@ fun ThirdPageContent(
                     )
                     .weight(ROW_WEIGHT),
                 text = catalogItem.primaryDescription,
-                fontSize = if (isFeatureHorizontal)
+                fontSize = if (isFeatureHorizontal && showTwoPages)
                     fontDimensionResource(id = R.dimen.text_size_16)
                 else
                     fontDimensionResource(id = R.dimen.text_size_12),
@@ -241,7 +241,7 @@ fun ThirdPageContent(
                 TextDescription(
                     text = catalogItem.secondaryDescription ?: "",
                     contentDescription = catalogItem.secondaryDescription ?: "",
-                    fontSize = if (isFeatureHorizontal)
+                    fontSize = if (isFeatureHorizontal && showTwoPages)
                         fontDimensionResource(id = R.dimen.text_size_20)
                     else
                         fontDimensionResource(id = R.dimen.text_size_16)
@@ -252,7 +252,7 @@ fun ThirdPageContent(
                     ),
                     text = catalogItem.thirdDescription ?: "",
                     contentDescription = catalogItem.thirdDescription ?: "",
-                    fontSize = if (isFeatureHorizontal)
+                    fontSize = if (isFeatureHorizontal && showTwoPages)
                         fontDimensionResource(id = R.dimen.text_size_16)
                     else
                         fontDimensionResource(id = R.dimen.text_size_12)

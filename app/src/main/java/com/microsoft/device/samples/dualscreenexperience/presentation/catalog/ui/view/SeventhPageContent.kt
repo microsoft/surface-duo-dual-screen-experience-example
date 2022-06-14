@@ -72,7 +72,8 @@ fun CatalogSeventhPage(
                     ),
                 getConstraintSetForSmallWindowWidth(),
                 catalogItem,
-                isFeatureHorizontal
+                isFeatureHorizontal,
+                showTwoPages
             )
         } else {
             SeventhPageContent(
@@ -88,7 +89,8 @@ fun CatalogSeventhPage(
                     ),
                 getConstraintSetForSeventhPage(isFeatureHorizontal),
                 catalogItem,
-                isFeatureHorizontal
+                isFeatureHorizontal,
+                showTwoPages
             )
         }
     }
@@ -120,7 +122,8 @@ fun SeventhPageContent(
     modifier: Modifier,
     constraintSet: ConstraintSet,
     catalogItem: CatalogItem,
-    isFeatureHorizontal: Boolean
+    isFeatureHorizontal: Boolean,
+    showTwoPages: Boolean
 ) {
     ConstraintLayout(
         constraintSet = constraintSet,
@@ -151,7 +154,7 @@ fun SeventhPageContent(
                     .padding(top = dimensionResource(id = R.dimen.normal_margin))
                     .weight(1f),
                 text = catalogItem.primaryDescription,
-                fontSize = if (isFeatureHorizontal)
+                fontSize = if (isFeatureHorizontal && showTwoPages)
                     fontDimensionResource(id = R.dimen.text_size_16)
                 else
                     fontDimensionResource(id = R.dimen.text_size_12),
@@ -169,7 +172,7 @@ fun SeventhPageContent(
                 modifier = Modifier.weight(1f),
                 text = catalogItem.secondaryDescription ?: "",
                 contentDescription = catalogItem.secondaryDescription ?: "",
-                fontSize = if (isFeatureHorizontal)
+                fontSize = if (isFeatureHorizontal && showTwoPages)
                     fontDimensionResource(id = R.dimen.text_size_16)
                 else
                     fontDimensionResource(id = R.dimen.text_size_12)
@@ -224,7 +227,8 @@ fun SeventhPageContentSmallWidth(
     modifier: Modifier,
     constraintSet: ConstraintSet,
     catalogItem: CatalogItem,
-    isFeatureHorizontal: Boolean
+    isFeatureHorizontal: Boolean,
+    showTwoPages: Boolean
 ) {
     ConstraintLayout(
         constraintSet = constraintSet,
@@ -247,7 +251,7 @@ fun SeventhPageContentSmallWidth(
         TextDescription(
             modifier = Modifier.layoutId(SEVENTH_PAGE_FIRST_TEXT_ID),
             text = catalogItem.primaryDescription,
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_16)
             else
                 fontDimensionResource(id = R.dimen.text_size_12),
@@ -272,7 +276,7 @@ fun SeventhPageContentSmallWidth(
             modifier = Modifier.layoutId(SEVENTH_PAGE_SECOND_TEXT_ID),
             text = catalogItem.secondaryDescription ?: "",
             contentDescription = catalogItem.secondaryDescription ?: "",
-            fontSize = if (isFeatureHorizontal)
+            fontSize = if (isFeatureHorizontal && showTwoPages)
                 fontDimensionResource(id = R.dimen.text_size_16)
             else
                 fontDimensionResource(id = R.dimen.text_size_12)

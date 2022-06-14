@@ -58,7 +58,11 @@ class PagerState(
         get() = _maxPage
         set(value) {
             _maxPage = value.coerceAtLeast(_minPage)
-            _currentPage = _currentPage.coerceIn(_minPage, maxPage)
+            _currentPage = if (isDualMode && _currentPage == _maxPage) {
+                _currentPage.coerceIn(_minPage - 1, _maxPage - 1)
+            } else {
+                _currentPage.coerceIn(_minPage, _maxPage)
+            }
         }
 
     private var _currentPage by mutableStateOf(currentPage.coerceIn(minPage, maxPage))
