@@ -147,10 +147,10 @@ class DevModeActivity : AppCompatActivity() {
     private fun getFinalRadius() =
         (max(binding.devRootLayout.width, binding.devRootLayout.height) * RADIUS_MULTIPLIER).toFloat()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (layoutInfoViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.dev_mode_menu, menu)
-            menu?.findItem(R.id.menu_main_user_mode)?.actionView?.setOnClickListener {
+            menu.findItem(R.id.menu_main_user_mode)?.actionView?.setOnClickListener {
                 unRevealActivity(it)
             }
         }

@@ -6,8 +6,8 @@
  */
 
 ext {
-    gradlePluginVersion = "7.0.3"
-    kotlinVersion = '1.6.0'
+    gradlePluginVersion = '7.2.0'
+    kotlinVersion = '1.6.10'
     compileSdkVersion = 31
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
@@ -35,7 +35,7 @@ ext {
     ]
 
     //AndroidX versions
-    appCompatVersion = '1.3.1'
+    appCompatVersion = '1.4.1'
     constraintLayoutVersion = '2.1.1'
     ktxCoreVersion = '1.6.0'
     ktxFragmentVersion = '1.3.6'
@@ -44,23 +44,45 @@ ext {
     windowManagerVersion = '1.0.0'
     lifecycleRuntimeKtxVersion = "2.4.0-rc01"
 
+
     androidxDependencies = [
-            appCompat          : "androidx.appcompat:appcompat:$appCompatVersion",
-            constraintLayout   : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            ktxCore            : "androidx.core:core-ktx:$ktxCoreVersion",
-            ktxFragment        : "androidx.fragment:fragment-ktx:$ktxFragmentVersion",
-            room               : "androidx.room:room-runtime:$roomVersion",
-            roomCompiler       : "androidx.room:room-compiler:$roomVersion",
-            roomKtx            : "androidx.room:room-ktx:$roomVersion",
-            webkit             : "androidx.webkit:webkit:$webkitVersion",
-            windowManager      : "androidx.window:window-java:$windowManagerVersion",
-            lifecycleRuntimeKtx: "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion"
+            appCompat                    : "androidx.appcompat:appcompat:$appCompatVersion",
+            constraintLayout             : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            ktxCore                      : "androidx.core:core-ktx:$ktxCoreVersion",
+            ktxFragment                  : "androidx.fragment:fragment-ktx:$ktxFragmentVersion",
+            room                         : "androidx.room:room-runtime:$roomVersion",
+            roomCompiler                 : "androidx.room:room-compiler:$roomVersion",
+            roomKtx                      : "androidx.room:room-ktx:$roomVersion",
+            webkit                       : "androidx.webkit:webkit:$webkitVersion",
+            windowManager                : "androidx.window:window-java:$windowManagerVersion",
+            lifecycleRuntimeKtx          : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion",
+    ]
+
+    //Jetpack compose dependencies versions
+    composeUiVersion = "1.1.1"
+    composeViewModelVersion = '2.4.1'
+    activityComposeVersion = "1.4.0"
+    constraintLayoutComposeVersion = "1.0.0"
+    coilVersion = "2.1.0"
+
+    composeDependencies = [
+            composeUi                    : "androidx.compose.ui:ui:$composeUiVersion",
+            composeTooling               : "androidx.compose.ui:ui-tooling:$composeUiVersion",
+            composeFoundation            : "androidx.compose.foundation:foundation:$composeUiVersion",
+            composeMaterial              : "androidx.compose.material:material:$composeUiVersion",
+            composeMaterialIcons         : "androidx.compose.material:material-icons-core:$composeUiVersion",
+            composeMaterialIconsExtended : "androidx.compose.material:material-icons-extended:$composeUiVersion",
+            composeViewModel             : "androidx.lifecycle:lifecycle-viewmodel-compose:$composeViewModelVersion",
+            composeLiveData              : "androidx.compose.runtime:runtime-livedata:$composeUiVersion",
+            activityCompose              : "androidx.activity:activity-compose:$activityComposeVersion",
+            constraintlayoutCompose      : "androidx.constraintlayout:constraintlayout-compose:$constraintLayoutComposeVersion",
+            coil                         : "io.coil-kt:coil-compose:$coilVersion"
     ]
 
     //Google dependencies
     materialVersion = '1.4.0'
     gsonVersion = '2.9.0'
-    hiltVersion = '2.39.1'
+    hiltVersion = '2.42'
     mapsVersion = '17.0.1'
     mapsKtxVersion = '3.2.0'
     ossLicensesVersion = '17.0.0'
@@ -85,6 +107,7 @@ ext {
     snackbarVersion = "1.0.0-alpha1"
 
     bingMapsVersion = "1.2.0"
+    windowStateVersion = "1.0.0-alpha04"
 
     microsoftDependencies = [
             bingMaps                  : "com.microsoft.maps:maps-sdk:$bingMapsVersion",
@@ -94,6 +117,7 @@ ext {
             layouts                   : "com.microsoft.device.dualscreen:layouts:$layoutsVersion",
             wmUtils                   : "com.microsoft.device.dualscreen:wm-utils:$wmUtilsVersion",
             snackbar                  : "com.microsoft.device.dualscreen:snackbar:$snackbarVersion",
+            windowState               : "com.microsoft.device.dualscreen:windowstate:$windowStateVersion",
     ]
 
     //UI dependencies
@@ -103,7 +127,7 @@ ext {
     uiDependencies = [
             lottie                 : "com.airbnb.android:lottie:$lottieVersion",
             glide                  : "com.github.bumptech.glide:glide:$glideVersion",
-            glideAnnotationProcesor: "com.github.bumptech.glide:compiler:$glideVersion"
+            glideAnnotationProcesor: "com.github.bumptech.glide:compiler:$glideVersion",
     ]
 
     //Test dependencies version

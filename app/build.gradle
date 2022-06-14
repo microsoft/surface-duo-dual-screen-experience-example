@@ -75,6 +75,11 @@ android {
     buildFeatures {
         dataBinding true
         viewBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.composeUiVersion
     }
 
     configurations.all {
@@ -109,6 +114,17 @@ dependencies {
     implementation navigationDependencies.fragmentKtx
     implementation navigationDependencies.uiKtx
 
+    implementation composeDependencies.composeUi
+    debugImplementation  composeDependencies.composeTooling
+    implementation composeDependencies.composeFoundation
+    implementation composeDependencies.composeMaterial
+    implementation composeDependencies.composeMaterialIcons
+    implementation composeDependencies.composeMaterialIconsExtended
+    implementation composeDependencies.composeViewModel
+    implementation composeDependencies.composeLiveData
+    implementation composeDependencies.constraintlayoutCompose
+    implementation composeDependencies.coil
+
     implementation googleDependencies.ossLicenses
     implementation googleDependencies.material
     implementation googleDependencies.gson
@@ -127,6 +143,7 @@ dependencies {
     implementation microsoftDependencies.layouts
     implementation microsoftDependencies.wmUtils
     implementation microsoftDependencies.snackbar
+    implementation microsoftDependencies.windowState
 
     implementation uiDependencies.lottie
 

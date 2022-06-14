@@ -264,10 +264,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (layoutInfoViewModel.isDualMode.value == true) {
             menuInflater.inflate(R.menu.main_menu, menu)
-            menu?.findItem(R.id.menu_main_dev_mode)?.actionView?.apply {
+            menu.findItem(R.id.menu_main_dev_mode)?.actionView?.apply {
                 setOnClickListener {
                     onDevModeClicked(it)
                 }

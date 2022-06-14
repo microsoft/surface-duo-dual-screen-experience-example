@@ -57,6 +57,7 @@
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_4">4sp</dimen>
 
     <dimen name="team_link_button_width">84dp</dimen>
     <dimen name="team_link_button_height">78dp</dimen>
@@ -106,7 +107,15 @@
     <dimen name="catalog_top_margin">20dp</dimen>
     <dimen name="catalog_double_max_image_height">500dp</dimen>
     <dimen name="catalog_max_image_height">250dp</dimen>
+    <dimen name="catalog_max_image_height_dual_landscape">300dp</dimen>
+    <dimen name="catalog_page_padding">26dp</dimen>
     <dimen name="catalog_min_image_height">150dp</dimen>
+    <dimen name="catalog_min_image_width">200dp</dimen>
+    <dimen name="catalog_medium_image_height">200dp</dimen>
+    <dimen name="catalog_max_image_width">250dp</dimen>
+    <dimen name="catalog_small_screen_min_image_width">150dp</dimen>
+    <dimen name="catalog_image_margin_start">52dp</dimen>
+    <dimen name="catalog_image_margin_end">52dp</dimen>
     <dimen name="catalog_base_min_image_height">100dp</dimen>
 
     <dimen name="touch_target_size">48dp</dimen>
