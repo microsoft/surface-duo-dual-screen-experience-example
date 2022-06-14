@@ -62,7 +62,7 @@ ext {
     composeUiVersion = "1.1.1"
     composeViewModelVersion = '2.4.1'
     activityComposeVersion = "1.4.0"
-    constraintLayoutComposeVersion = "1.0.0-beta02"
+    constraintLayoutComposeVersion = "1.0.0"
     coilVersion = "2.1.0"
 
     composeDependencies = [
