@@ -1,11 +1,11 @@
 /*
  *
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License.
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License.
  *
  */
 
-package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.view
+package com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
