@@ -29,7 +29,7 @@ import com.microsoft.device.dualscreen.windowstate.rememberWindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentCatalogBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ui.Catalog
-import com.microsoft.device.samples.dualscreenexperience.presentation.theme.CatalogTheme
+import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasExpandedWindowLayoutSize
@@ -75,7 +75,7 @@ class CatalogListFragment : Fragment() {
             // is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                CatalogTheme {
+                DualScreenExperienceTheme {
                     val windowState = appCompatActivity?.rememberWindowState()
                     if (windowState != null) {
                         val isFeatureFoldHorizontal =

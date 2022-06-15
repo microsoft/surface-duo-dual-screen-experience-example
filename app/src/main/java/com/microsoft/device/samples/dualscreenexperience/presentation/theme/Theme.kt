@@ -14,19 +14,25 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Orange,
+    secondary = FocusBlueGray,
+    background = BackgroundGray,
+    surface = SurfaceDarkBlue,
+    onSecondary = BackgroundGray,
+    onBackground = PrimaryGold,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Orange,
+    secondary = FocusLightOrange,
+    background = BackgroundLight,
+    surface = SurfaceLight,
+    onPrimary = PrimaryDarkGold,
+    onBackground = PrimaryDarkGold,
 )
 
 @Composable
-fun CatalogTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun DualScreenExperienceTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
