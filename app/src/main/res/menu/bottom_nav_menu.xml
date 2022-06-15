@@ -22,4 +22,8 @@
     <item android:id="@+id/navigation_orders_graph"
         android:icon="@drawable/ic_cart"
         android:title="@string/nav_order_title" />
+
+    <item android:id="@+id/navigation_history_graph"
+        android:icon="@drawable/ic_history"
+        android:title="@string/nav_history_title" />
 </menu>

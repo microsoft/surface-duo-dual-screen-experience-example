@@ -12,11 +12,12 @@ import androidx.navigation.FoldableNavOptions
 import com.microsoft.device.dualscreen.navigation.LaunchScreen
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.CatalogNavigator
+import com.microsoft.device.samples.dualscreenexperience.presentation.history.HistoryNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreNavigator
 
-class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderNavigator {
+class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderNavigator, HistoryNavigator {
     private var navController: FoldableNavController? = null
 
     fun bind(navController: FoldableNavController) {
@@ -80,5 +81,14 @@ class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderN
 
     override fun navigateToOrderReceipt() {
         navController?.navigate(R.id.action_order_to_receipt)
+    }
+
+    override fun navigateToHistory() {
+        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        navController?.navigate(R.id.navigation_history_graph, null, navOptions)
+    }
+
+    override fun navigateToHistoryDetails() {
+        navController?.navigate(R.id.action_history_list_to_details)
     }
 }

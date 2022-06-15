@@ -160,6 +160,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_orders_graph -> {
                     navigator.navigateToOrders()
                 }
+                R.id.navigation_history_graph -> {
+                    navigator.navigateToHistory()
+                    hideStoresTutorial()
+                }
             }
             true
         }
@@ -325,6 +329,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val HIDE_BOTTOM_BAR_KEY = "hideBottomNav"
-        const val BOTTOM_NAV_ITEM_COUNT = 4
+        const val BOTTOM_NAV_ITEM_COUNT = 5
     }
 }

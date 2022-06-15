@@ -22,12 +22,15 @@
     <string name="nav_catalog_title">Navigation Catalog</string>
     <string name="nav_products_title">Navigation Products</string>
     <string name="nav_order_title">Navigation Order</string>
+    <string name="nav_history_title">Navigation History</string>
 
     <string name="toolbar_stores_title">Stores</string>
     <string name="toolbar_catalog_title">New Guitars</string>
     <string name="toolbar_products_title">Product Details and Customization</string>
     <string name="toolbar_orders_title">Orders</string>
-    <string name="toolbar_orders_receipt_title">Order receipt</string>
+    <string name="toolbar_orders_receipt_title">Order Receipt</string>
+    <string name="toolbar_history_title">Order History</string>
+    <string name="toolbar_history_details_title">Order Details</string>
 
     <string name="toolbar_dev_mode">Dev Mode</string>
     <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
