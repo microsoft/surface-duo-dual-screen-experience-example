@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
@@ -24,6 +25,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.ut
 import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.rememberViewPagerState
 import kotlinx.coroutines.launch
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 @Composable
 fun Catalog(
@@ -47,7 +49,22 @@ fun Catalog(
 
     val pagerState = rememberViewPagerState()
 
+    val modifier = Modifier.graphicsLayer {
+        val pageOffset =
+            pagerState.calculateCurrentOffsetForPage(pagerState.currentPage).absoluteValue
+
+        lerp(
+            start = if (showTwoPages) 0.90f else 0.80f,
+            stop = 1f,
+            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+        ).also { scale ->
+            scaleX = scale
+            scaleY = scale
+        }
+    }
+
     val pages = setupPages(
+        modifier,
         pageTextWidth,
         pagePadding,
         catalogList,
@@ -83,7 +100,12 @@ fun PageViews(
     }
 }
 
+fun lerp(start: Float, stop: Float, fraction: Float): Float {
+    return (1 - fraction) * start + fraction * stop
+}
+
 private fun setupPages(
+    modifier: Modifier = Modifier,
     pageTextWidth: Dp,
     pagePadding: Dp = 0.dp,
     catalogList: List<CatalogItem>,
@@ -94,18 +116,21 @@ private fun setupPages(
     isFoldStateHalfOpened: Boolean,
     onItemClick: (Int) -> Unit
 ): List<@Composable () -> Unit> {
-    val modifier = if (pageTextWidth.value != 0f && showTwoPages) Modifier
-        .padding(end = pagePadding)
-        .width(pageTextWidth)
-        .fillMaxHeight()
-        .clipToBounds() else Modifier.fillMaxSize()
+    val pageModifier = if (pageTextWidth.value != 0f && showTwoPages)
+        modifier
+            .padding(end = pagePadding)
+            .width(pageTextWidth)
+            .fillMaxHeight()
+            .clipToBounds()
+    else modifier.fillMaxSize()
+
     return listOf<@Composable () -> Unit>(
         {
-            CatalogFirstPage(modifier = modifier, catalogList = catalogList, onItemClick)
+            CatalogFirstPage(modifier = pageModifier, catalogList = catalogList, onItemClick)
         },
         {
             CatalogSecondPage(
-                modifier = modifier,
+                modifier = pageModifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
                 showTwoPages = showTwoPages,
@@ -114,7 +139,7 @@ private fun setupPages(
         },
         {
             CatalogThirdPage(
-                modifier = modifier,
+                modifier = pageModifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
                 isSinglePortrait = isSinglePortrait,
@@ -125,7 +150,7 @@ private fun setupPages(
         },
         {
             CatalogFourthPage(
-                modifier = modifier,
+                modifier = pageModifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
                 showTwoPages = showTwoPages
@@ -133,7 +158,7 @@ private fun setupPages(
         },
         {
             CatalogFifthPage(
-                modifier = modifier,
+                modifier = pageModifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
                 isSmallWindowWidth = showSmallWindowWidthLayout,
@@ -142,14 +167,14 @@ private fun setupPages(
         },
         {
             CatalogSixthPage(
-                modifier = modifier,
+                modifier = pageModifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal
             )
         },
         {
             CatalogSeventhPage(
-                modifier = modifier,
+                modifier = pageModifier,
                 catalogList = catalogList,
                 isFeatureHorizontal = isFeatureHorizontal,
                 isSmallWindowWidth = showSmallWindowWidthLayout,
