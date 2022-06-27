@@ -13,16 +13,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryDetailBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryDetailPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
@@ -32,6 +37,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HistoryDetailFragment : Fragment() {
+
+    private val viewModel: HistoryViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     private var binding: FragmentHistoryDetailBinding? = null
 
@@ -64,6 +72,10 @@ class HistoryDetailFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 DualScreenExperienceTheme {
+                    OrderHistoryDetailPage(
+                        order = viewModel.selectedOrder.observeAsState().value,
+                        showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value
+                    )
                 }
             }
         }
@@ -77,13 +89,19 @@ class HistoryDetailFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_history_details_title))
-        appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
-            // TODO: navigateUp and reset selected order details
+        if (layoutInfoViewModel.isDualMode.value == false) {
+            appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_history_details_title))
+            appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
+                viewModel.navigateUp()
+                viewModel.selectedOrder.value = null
+            }
         }
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode()) {
+            viewModel.selectFirstOrder()
+        }
     }
 
     override fun onDestroyView() {

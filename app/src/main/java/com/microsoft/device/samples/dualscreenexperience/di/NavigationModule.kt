@@ -10,6 +10,7 @@ package com.microsoft.device.samples.dualscreenexperience.di
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.about.AboutNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeNavigator
+import com.microsoft.device.samples.dualscreenexperience.presentation.history.HistoryNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.launch.LaunchNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderNavigator
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductNavigator
@@ -40,6 +41,9 @@ object NavigationModule {
 
     @Provides
     fun provideOrderNavigator(navigator: MainNavigator): OrderNavigator = navigator
+
+    @Provides
+    fun provideHistoryNavigator(navigator: MainNavigator): HistoryNavigator = navigator
 
     @Provides
     @Singleton

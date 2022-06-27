@@ -13,15 +13,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
+import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryListBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryListPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
@@ -33,6 +37,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HistoryListFragment : Fragment() {
 
+    private val viewModel: HistoryViewModel by activityViewModels()
     private var binding: FragmentHistoryListBinding? = null
 
     override fun onAttach(context: Context) {
@@ -64,6 +69,14 @@ class HistoryListFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 DualScreenExperienceTheme {
+                    OrderHistoryListPage(
+                        orders = viewModel.orderList.value,
+                        selectedOrder = viewModel.selectedOrder.observeAsState().value,
+                        updateOrder = { newOrder ->
+                            viewModel.selectedOrder.value = newOrder
+                            viewModel.navigateToDetails()
+                        }
+                    )
                 }
             }
         }
@@ -82,6 +95,9 @@ class HistoryListFragment : Fragment() {
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
+        if (windowLayoutInfo.isInDualMode()) {
+            viewModel.navigateToDetails()
+        }
     }
 
     override fun onDestroyView() {
