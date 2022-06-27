@@ -30,6 +30,11 @@ val Typography = Typography(
         fontSize = 20.sp,
         lineHeight = 28.sp,
     ),
+    h4 = TextStyle(
+        fontFamily = DMSans,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp
+    ),
     h6 = TextStyle(
         fontFamily = Roboto,
         fontWeight = FontWeight.Normal,
@@ -49,4 +54,9 @@ val Typography = Typography(
         fontSize = 18.sp,
         lineHeight = 36.sp
     ),
+    caption = TextStyle(
+        fontFamily = DMSans,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp
+    )
 )

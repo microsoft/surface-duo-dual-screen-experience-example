@@ -137,6 +137,7 @@
     <!-- Order History Mode -->
 
     <string name="order_history_empty_message">There are no order items in your order history. Please head to cart to make new orders.</string>
+    <string name="order_history_view">View</string>
 
     <!-- Developer Mode -->
 
