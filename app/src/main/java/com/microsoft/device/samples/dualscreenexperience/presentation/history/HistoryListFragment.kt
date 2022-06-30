@@ -70,7 +70,7 @@ class HistoryListFragment : Fragment() {
             setContent {
                 DualScreenExperienceTheme {
                     OrderHistoryListPage(
-                        orders = viewModel.orderList.value,
+                        orders = viewModel.orderList.observeAsState().value,
                         selectedOrder = viewModel.selectedOrder.observeAsState().value,
                         updateOrder = { newOrder ->
                             viewModel.selectedOrder.value = newOrder

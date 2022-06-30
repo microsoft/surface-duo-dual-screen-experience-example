@@ -43,4 +43,8 @@ interface OrderDao {
     @Transaction
     @Query("SELECT * FROM orders where isSubmitted == :submitted LIMIT 1")
     fun getOrderBySubmitted(submitted: Boolean): LiveData<OrderWithItems?>
+
+    @Transaction
+    @Query("SELECT * FROM orders where isSubmitted == 1")
+    fun getAllSubmittedOrders(): LiveData<List<OrderWithItems>>
 }
