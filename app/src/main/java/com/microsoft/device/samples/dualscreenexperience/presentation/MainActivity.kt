@@ -329,6 +329,8 @@ class MainActivity : AppCompatActivity() {
     @VisibleForTesting
     fun getSubmittedOrderLiveData() = orderViewModel.submittedOrder
 
+    fun getBottomNavViewHeight() = binding.bottomNavView.height
+
     companion object {
         const val HIDE_BOTTOM_BAR_KEY = "hideBottomNav"
         const val BOTTOM_NAV_ITEM_COUNT = 5

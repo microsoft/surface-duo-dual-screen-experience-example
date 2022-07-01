@@ -25,6 +25,7 @@ import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryDetailBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryDetailPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
@@ -74,7 +75,9 @@ class HistoryDetailFragment : Fragment() {
                 DualScreenExperienceTheme {
                     OrderHistoryDetailPage(
                         order = viewModel.selectedOrder.observeAsState().value,
-                        showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value
+                        showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value,
+                        topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
+                        bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0
                     )
                 }
             }

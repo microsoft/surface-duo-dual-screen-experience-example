@@ -49,10 +49,15 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.ut
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.addThousandsSeparator
 
 @Composable
-fun OrderHistoryDetailPage(order: Order?, showTwoPages: Boolean?) {
+fun OrderHistoryDetailPage(order: Order?, showTwoPages: Boolean?, topBarPadding: Int, bottomNavPadding: Int) {
     if (order == null || showTwoPages == null) {
         // REVISIT
         return
+    }
+
+    // Calculate padding for LazyColumn
+    val paddingValues = with(LocalDensity.current) {
+        PaddingValues(bottom = 20.dp + topBarPadding.toDp() + bottomNavPadding.toDp())
     }
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
@@ -63,7 +68,7 @@ fun OrderHistoryDetailPage(order: Order?, showTwoPages: Boolean?) {
         ) {
             OrderHeader(order, showTwoPages)
             Spacer(modifier = Modifier.height(22.dp))
-            OrderItems(order.items)
+            OrderItems(order.items, paddingValues)
         }
     }
 }
@@ -89,11 +94,10 @@ fun OrderHeader(order: Order, showTwoPages: Boolean) {
 }
 
 @Composable
-fun OrderItems(orderItems: MutableList<OrderItem>) {
+fun OrderItems(orderItems: MutableList<OrderItem>, paddingValues: PaddingValues) {
     LazyColumn(
         verticalArrangement = spacedBy(25.dp),
-        // REVISIT: investigate why content padding is necessary
-        contentPadding = PaddingValues(bottom = 200.dp)
+        contentPadding = paddingValues
     ) {
         orderItems.map { orderItem ->
             item {

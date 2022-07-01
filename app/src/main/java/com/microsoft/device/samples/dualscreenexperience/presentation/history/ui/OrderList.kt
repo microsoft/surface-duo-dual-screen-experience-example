@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -30,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -45,21 +47,38 @@ import java.util.Locale
 const val NUM_IMAGES_MAX = 3
 
 @Composable
-fun OrderHistoryListPage(orders: List<Order>?, selectedOrder: Order?, updateOrder: (Order) -> Unit) {
+fun OrderHistoryListPage(
+    orders: List<Order>?,
+    selectedOrder: Order?,
+    updateOrder: (Order) -> Unit,
+    topBarPadding: Int,
+    bottomNavPadding: Int
+) {
+    // Calculate padding for LazyColumn
+    val paddingValues = with(LocalDensity.current) {
+        PaddingValues(bottom = 20.dp + topBarPadding.toDp() + bottomNavPadding.toDp())
+    }
+
     if (orders.isNullOrEmpty())
         PlaceholderOrderHistory()
     else
-        OrderList(orders, selectedOrder, updateOrder)
+        OrderList(orders, selectedOrder, updateOrder, paddingValues)
 }
 
 @Composable
-fun OrderList(orders: List<Order>?, selectedOrder: Order?, updateOrder: (Order) -> Unit) {
+fun OrderList(
+    orders: List<Order>?,
+    selectedOrder: Order?,
+    updateOrder: (Order) -> Unit,
+    paddingValues: PaddingValues
+) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .fillMaxHeight(),
             verticalArrangement = spacedBy(12.dp),
+            contentPadding = paddingValues
         ) {
             orders?.map { order ->
                 item {

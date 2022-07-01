@@ -25,6 +25,7 @@ import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryListBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryListPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
@@ -75,7 +76,9 @@ class HistoryListFragment : Fragment() {
                         updateOrder = { newOrder ->
                             viewModel.selectedOrder.value = newOrder
                             viewModel.navigateToDetails()
-                        }
+                        },
+                        topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
+                        bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0
                     )
                 }
             }
