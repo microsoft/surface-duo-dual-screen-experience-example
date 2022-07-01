@@ -250,6 +250,8 @@ class MainActivity : AppCompatActivity() {
                 setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
             R.id.fragment_order_receipt ->
                 setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
+            R.id.fragment_history_list ->
+                setupDevMode(AppScreen.HISTORY_LIST_DETAILS, DesignPattern.LIST_DETAIL, SdkComponent.BOTTOM_NAVIGATION_VIEW)
         }
     }
 
