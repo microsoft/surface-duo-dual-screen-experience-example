@@ -12,7 +12,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.GetAllOrdersUseCase
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.DataListHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -20,7 +19,7 @@ import javax.inject.Inject
 class HistoryViewModel @Inject constructor(
     getAllOrdersUseCase: GetAllOrdersUseCase,
     private val navigator: HistoryNavigator
-) : ViewModel(), DataListHandler<Order> {
+) : ViewModel() {
     var orderList: LiveData<List<Order>> = getAllOrdersUseCase.get()
     var selectedOrder = MutableLiveData<Order?>(null)
 
@@ -28,9 +27,7 @@ class HistoryViewModel @Inject constructor(
         selectedOrder.value = null
     }
 
-    override fun getDataList(): List<Order>? = orderList.value
-
-    override fun onClick(model: Order?) {
+    fun onClick(model: Order?) {
         navigateToDetails()
         selectOrder(model)
     }
