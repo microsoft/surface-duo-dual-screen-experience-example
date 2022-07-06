@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -49,7 +50,13 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.ut
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.addThousandsSeparator
 
 @Composable
-fun OrderHistoryDetailPage(order: Order?, showTwoPages: Boolean?, topBarPadding: Int, bottomNavPadding: Int) {
+fun OrderHistoryDetailPage(
+    order: Order?,
+    showTwoPages: Boolean?,
+    topBarPadding: Int,
+    bottomNavPadding: Int,
+    isLandscape: Boolean
+) {
     if (order == null || showTwoPages == null) {
         // REVISIT
         return
@@ -60,11 +67,19 @@ fun OrderHistoryDetailPage(order: Order?, showTwoPages: Boolean?, topBarPadding:
         PaddingValues(bottom = 20.dp + topBarPadding.toDp() + bottomNavPadding.toDp())
     }
 
+    val columnModifier = if (isLandscape)
+        Modifier
+            .fillMaxWidth(0.915f)
+            .padding(top = 32.dp)
+            .fillMaxHeight()
+    else
+        Modifier
+            .fillMaxWidth(0.9f)
+            .fillMaxHeight()
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .fillMaxHeight(),
+            modifier = columnModifier,
         ) {
             OrderHeader(order, showTwoPages)
             Spacer(modifier = Modifier.height(22.dp))

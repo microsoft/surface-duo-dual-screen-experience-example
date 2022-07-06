@@ -23,6 +23,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
+import com.microsoft.device.dualscreen.windowstate.rememberWindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryListBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
@@ -69,6 +70,12 @@ class HistoryListFragment : Fragment() {
             // Dispose of the Composition when the view's LifecycleOwner is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
+                val windowState = activity?.rememberWindowState()
+                val isLandscape = when (windowState) {
+                    null -> false
+                    else -> windowState.isDualLandscape() || windowState.isSingleLandscape()
+                }
+
                 DualScreenExperienceTheme {
                     OrderHistoryListPage(
                         orders = viewModel.orderList.observeAsState().value,
@@ -78,7 +85,8 @@ class HistoryListFragment : Fragment() {
                             viewModel.navigateToDetails()
                         },
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
-                        bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0
+                        bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
+                        isLandscape = isLandscape
                     )
                 }
             }

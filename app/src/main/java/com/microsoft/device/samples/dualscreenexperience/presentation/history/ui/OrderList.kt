@@ -52,7 +52,8 @@ fun OrderHistoryListPage(
     selectedOrder: Order?,
     updateOrder: (Order) -> Unit,
     topBarPadding: Int,
-    bottomNavPadding: Int
+    bottomNavPadding: Int,
+    isLandscape: Boolean
 ) {
     // Calculate padding for LazyColumn
     val paddingValues = with(LocalDensity.current) {
@@ -62,7 +63,7 @@ fun OrderHistoryListPage(
     if (orders.isNullOrEmpty())
         PlaceholderOrderHistory()
     else
-        OrderList(orders, selectedOrder, updateOrder, paddingValues)
+        OrderList(orders, selectedOrder, updateOrder, paddingValues, isLandscape)
 }
 
 @Composable
@@ -70,7 +71,8 @@ fun OrderList(
     orders: List<Order>?,
     selectedOrder: Order?,
     updateOrder: (Order) -> Unit,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    isLandscape: Boolean
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyColumn(
@@ -82,7 +84,7 @@ fun OrderList(
         ) {
             orders?.map { order ->
                 item {
-                    OrderListItem(order, order == selectedOrder, updateOrder)
+                    OrderListItem(order, order == selectedOrder, updateOrder, isLandscape)
                 }
             }
         }
@@ -90,21 +92,22 @@ fun OrderList(
 }
 
 @Composable
-fun OrderListItem(order: Order, isSelected: Boolean, updateOrder: (Order) -> Unit) {
+fun OrderListItem(order: Order, isSelected: Boolean, updateOrder: (Order) -> Unit, isLandscape: Boolean) {
     Box {
         OrderItemBox(modifier = Modifier.align(Alignment.BottomCenter), isSelected) { updateOrder(order) }
-        OrderItemPreviewAndDetails(modifier = Modifier.align(Alignment.BottomCenter), order)
+        OrderItemPreviewAndDetails(modifier = Modifier.align(Alignment.BottomCenter), order, isLandscape)
     }
 }
 
 @Composable
-fun OrderItemPreviewAndDetails(modifier: Modifier = Modifier, order: Order) {
+fun OrderItemPreviewAndDetails(modifier: Modifier = Modifier, order: Order, isLandscape: Boolean) {
     Row(
         modifier = Modifier
-            .padding(20.dp)
+            .fillMaxWidth(if (isLandscape) 0.884f else 0.897f)
+            .padding(bottom = 16.dp)
             .then(modifier),
         verticalAlignment = Alignment.Bottom,
-        horizontalArrangement = spacedBy(40.dp)
+        horizontalArrangement = if (isLandscape) spacedBy(88.dp) else spacedBy(40.dp)
     ) {
         OrderItemPreview(order.items)
         OrderItemText(order)
