@@ -11,7 +11,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -21,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
@@ -34,6 +34,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
@@ -177,20 +178,22 @@ fun OrderItemBox(modifier: Modifier = Modifier, isSelected: Boolean, updateOrder
 fun RowScope.OrderItemPreview(orderItems: MutableList<OrderItem>) {
     val endIndex = if (orderItems.count() >= NUM_IMAGES_MAX) NUM_IMAGES_MAX else orderItems.count()
     val items = orderItems.subList(0, endIndex)
-    val alignments = listOf(Alignment.BottomStart, Alignment.BottomCenter, Alignment.BottomEnd)
+    val offsets = listOf((-40).dp, 0.dp, 40.dp)
 
-    Box(modifier = Modifier.weight(1f)) {
-        items.mapIndexed { index, orderItem -> PreviewImage(alignments[index], orderItem) }
+    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.BottomCenter) {
+        items.mapIndexed { index, orderItem ->
+            PreviewImage(offsets[index], orderItem)
+        }
     }
 }
 
 @Composable
-fun BoxScope.PreviewImage(alignment: Alignment, orderItem: OrderItem) {
+fun PreviewImage(xOffset: Dp, orderItem: OrderItem) {
     Image(
         modifier = Modifier
             .widthIn(min = 50.dp)
             .heightIn(max = 155.dp)
-            .align(alignment),
+            .offset(x = xOffset),
         painter = painterResource(id = getProductDrawable(orderItem.color, orderItem.bodyShape)),
         contentDescription = stringResource(id = getProductContentDescription(orderItem.color, orderItem.bodyShape))
     )
