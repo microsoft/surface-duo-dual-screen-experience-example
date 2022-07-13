@@ -47,7 +47,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Orde
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.addThousandsSeparator
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.toPriceString
 
 @Composable
 fun OrderHistoryDetailPage(
@@ -153,8 +153,7 @@ fun RowScope.OrderItemText(orderItem: OrderItem) {
             color = MaterialTheme.colors.onBackground
         )
         Text(
-            // REVISIT: extract common code from binding adapter formatPrice
-            text = "$" + orderItem.price.toFloat().addThousandsSeparator(),
+            text = orderItem.price.toFloat().toPriceString(),
             style = MaterialTheme.typography.caption,
             color = MaterialTheme.colors.onBackground
         )

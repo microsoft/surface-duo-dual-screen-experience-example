@@ -41,9 +41,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Orde
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.toDateString
 
 const val NUM_IMAGES_MAX = 3
 
@@ -117,7 +115,6 @@ fun OrderItemPreviewAndDetails(modifier: Modifier = Modifier, order: Order, isLa
 
 @Composable
 fun RowScope.OrderItemText(order: Order) {
-    // REVISIT: formatOrderDate extract common code
     Column(
         modifier = Modifier.weight(2f),
         verticalArrangement = spacedBy(12.dp)
@@ -132,10 +129,7 @@ fun RowScope.OrderItemText(order: Order) {
 fun OrderDate(modifier: Modifier = Modifier, orderTimestamp: Long) {
     Text(
         modifier = modifier,
-        text = stringResource(
-            R.string.order_date,
-            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(orderTimestamp))
-        ),
+        text = stringResource(R.string.order_date, orderTimestamp.toDateString()),
         style = MaterialTheme.typography.body2,
         color = MaterialTheme.colors.onBackground
     )

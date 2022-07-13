@@ -25,9 +25,6 @@ import com.microsoft.device.samples.dualscreenexperience.domain.store.model.Stor
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.StarRatingView
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 @BindingAdapter("storeImage")
 fun getStoreImageRes(view: ImageView, image: StoreImage?) {
@@ -89,20 +86,20 @@ fun invisibleIf(view: View, shouldBeInvisible: Boolean?) {
 
 @BindingAdapter("price")
 fun formatPrice(view: TextView, value: Float) {
-    val priceString = "$" + value.addThousandsSeparator()
+    val priceString = value.toPriceString()
     view.text = priceString
     view.contentDescription = view.context.getString(R.string.price_with_label, priceString)
 }
 
 @BindingAdapter("orderAmount")
 fun formatOrderAmount(view: TextView, value: Float) {
-    val priceString = "$" + value.addThousandsSeparator()
+    val priceString = value.toPriceString()
     view.text = view.context.getString(R.string.order_amount, priceString)
 }
 
 @BindingAdapter("orderDate")
 fun formatOrderDate(view: TextView, value: Long) {
-    val dateString = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(value))
+    val dateString = value.toDateString()
     view.text = view.context.getString(R.string.order_date, dateString)
 }
 

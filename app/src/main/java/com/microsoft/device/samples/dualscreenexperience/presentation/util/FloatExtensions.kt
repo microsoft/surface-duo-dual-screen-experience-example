@@ -24,3 +24,7 @@ fun Float.addThousandsSeparator(): String =
     (NumberFormat.getInstance(Locale.getDefault()) as DecimalFormat).apply {
         applyPattern("#,###")
     }.format(this)
+
+fun Float.toPriceString(): String {
+    return "$" + addThousandsSeparator()
+}
