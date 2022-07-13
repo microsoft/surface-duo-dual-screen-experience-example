@@ -11,13 +11,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
-import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.GetAllOrdersUseCase
+import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.GetAllSubmittedOrdersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
-    getAllOrdersUseCase: GetAllOrdersUseCase,
+    getAllOrdersUseCase: GetAllSubmittedOrdersUseCase,
     private val navigator: HistoryNavigator
 ) : ViewModel() {
     var orderList: LiveData<List<Order>> = getAllOrdersUseCase.get()

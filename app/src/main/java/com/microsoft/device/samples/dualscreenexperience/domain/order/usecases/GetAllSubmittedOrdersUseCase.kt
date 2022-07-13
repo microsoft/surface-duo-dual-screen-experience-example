@@ -13,7 +13,7 @@ import com.microsoft.device.samples.dualscreenexperience.data.order.OrderDataSou
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import javax.inject.Inject
 
-class GetAllOrdersUseCase @Inject constructor(private val orderRepository: OrderDataSource) {
+class GetAllSubmittedOrdersUseCase @Inject constructor(private val orderRepository: OrderDataSource) {
     fun get(): LiveData<List<Order>> = Transformations.map(orderRepository.getAllSubmittedOrders()) { orderWithItems ->
         orderWithItems.map { Order(it) }
     }
