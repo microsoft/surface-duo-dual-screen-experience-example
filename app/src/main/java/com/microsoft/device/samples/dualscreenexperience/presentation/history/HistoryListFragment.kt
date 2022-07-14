@@ -78,7 +78,7 @@ class HistoryListFragment : Fragment() {
 
                 DualScreenExperienceTheme {
                     OrderHistoryListPage(
-                        orders = viewModel.orderList.observeAsState().value,
+                        orders = viewModel.orderList.observeAsState().value?.reversed(),
                         selectedOrder = viewModel.selectedOrder.observeAsState().value,
                         updateOrder = { newOrder ->
                             viewModel.selectedOrder.value = newOrder
@@ -106,7 +106,7 @@ class HistoryListFragment : Fragment() {
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        if (windowLayoutInfo.isInDualMode()) {
+        if (windowLayoutInfo.isInDualMode() && viewModel.selectedOrder.value == null) {
             viewModel.navigateToDetails()
         }
     }
