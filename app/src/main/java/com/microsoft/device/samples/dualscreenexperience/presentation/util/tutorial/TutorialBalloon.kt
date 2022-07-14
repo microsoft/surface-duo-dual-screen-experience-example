@@ -71,16 +71,16 @@ class TutorialBalloon @Inject constructor(val context: Context) {
         TutorialModel(balloonType).apply {
             when (balloonType) {
                 TutorialBalloonType.LAUNCH_BOTTOM -> {
-                    backgroundDrawableIdRes = R.drawable.bottom_tutorial_balloon
+                    backgroundDrawableIdRes = R.drawable.bottom_left_tutorial_balloon
                     stringRes = R.string.tutorial_launch_text
                 }
                 TutorialBalloonType.LAUNCH_RIGHT -> {
                     backgroundDrawableIdRes = R.drawable.right_tutorial_balloon
                     stringRes = R.string.tutorial_launch_text
                 }
-                TutorialBalloonType.STORES -> {
-                    backgroundDrawableIdRes = R.drawable.bottom_tutorial_balloon
-                    stringRes = R.string.tutorial_order_text
+                TutorialBalloonType.HISTORY -> {
+                    backgroundDrawableIdRes = R.drawable.bottom_right_tutorial_balloon
+                    stringRes = R.string.tutorial_history_text
                 }
                 TutorialBalloonType.DEVELOPER_MODE -> {
                     backgroundDrawableIdRes = R.drawable.top_tutorial_balloon
@@ -107,7 +107,7 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                             setPadding(halfTipPadding, microPadding, halfTipPadding, tipPadding)
                         TutorialBalloonType.LAUNCH_RIGHT ->
                             setPadding(halfTipPadding, halfTipPadding, tipPadding, halfTipPadding)
-                        TutorialBalloonType.STORES ->
+                        TutorialBalloonType.HISTORY ->
                             setPadding(halfTipPadding, microPadding, halfTipPadding, tipPadding)
                         TutorialBalloonType.DEVELOPER_MODE ->
                             setPadding(halfTipPadding, tipPadding, halfTipPadding, halfTipPadding)
@@ -144,8 +144,8 @@ class TutorialBalloon @Inject constructor(val context: Context) {
                 xOffset = parent.width
                 yOffset = parent.height / 2 + ((tutorialContainer?.height ?: 0) / 2)
             }
-            TutorialBalloonType.STORES -> {
-                xOffset = parent.width / 2 - (tipHorizontalMargin + tipHeight / 2)
+            TutorialBalloonType.HISTORY -> {
+                xOffset -= (tutorialContainer?.width ?: 0) - (tipHorizontalMargin + parent.width / 2)
             }
             TutorialBalloonType.DEVELOPER_MODE -> {
                 xOffset = parent.width / 2 - (tutorialContainer?.width ?: 0) + (tipHorizontalMargin + tipHeight / 2)
@@ -176,6 +176,6 @@ private data class TutorialModel(
 enum class TutorialBalloonType {
     LAUNCH_BOTTOM,
     LAUNCH_RIGHT,
-    STORES,
+    HISTORY,
     DEVELOPER_MODE
 }

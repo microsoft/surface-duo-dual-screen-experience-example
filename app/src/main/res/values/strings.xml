@@ -111,7 +111,6 @@
     <string name="order_quantity_minus">-</string>
 
     <string name="order_success_message">Your order has been placed successfully!</string>
-    <string name="tutorial_order_text">Check out more stores around you</string>
 
     <string name="order_sign_cancel">Cancel</string>
     <string name="order_sign_confirm">Confirm</string>
@@ -138,6 +137,7 @@
 
     <string name="order_history_empty_message">There are no order items in your order history. Please head to cart to make new orders.</string>
     <string name="order_history_view">View</string>
+    <string name="tutorial_history_text">Check out your first order in the history page</string>
 
     <!-- Developer Mode -->
 

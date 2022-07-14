@@ -147,22 +147,22 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_stores_graph -> {
                     navigator.navigateToStores()
-                    hideStoresTutorial()
+                    hideHistoryTutorial()
                 }
                 R.id.navigation_catalog_graph -> {
                     navigator.navigateToCatalog()
-                    hideStoresTutorial()
+                    hideHistoryTutorial()
                 }
                 R.id.navigation_products_graph -> {
                     navigator.navigateToProducts()
-                    hideStoresTutorial()
+                    hideHistoryTutorial()
                 }
                 R.id.navigation_orders_graph -> {
                     navigator.navigateToOrders()
                 }
                 R.id.navigation_history_graph -> {
                     navigator.navigateToHistory()
-                    hideStoresTutorial()
+                    hideHistoryTutorial()
                 }
             }
             true
@@ -198,23 +198,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTutorialObserver() {
-        tutorialViewModel.showStoresTutorial.observe(this) { isTutorialTriggered ->
-            if (isTutorialTriggered == true && tutorialViewModel.shouldShowStoresTutorial()) {
-                showStoresTutorial()
+        tutorialViewModel.showHistoryTutorial.observe(this) { isTutorialTriggered ->
+            if (isTutorialTriggered == true && tutorialViewModel.shouldShowHistoryTutorial()) {
+                showHistoryTutorial()
             }
         }
     }
 
-    private fun showStoresTutorial() {
-        val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_stores_graph)
+    private fun showHistoryTutorial() {
+        val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_history_graph)
         if (!isFinishing) {
-            tutorial.show(storeItem, TutorialBalloonType.STORES)
+            tutorial.show(storeItem, TutorialBalloonType.HISTORY)
         }
     }
 
-    private fun hideStoresTutorial() {
-        tutorialViewModel.onStoresOpen()
-        if (tutorial.currentBalloonType == TutorialBalloonType.STORES) {
+    private fun hideHistoryTutorial() {
+        tutorialViewModel.onHistoryOpen()
+        if (tutorial.currentBalloonType == TutorialBalloonType.HISTORY) {
             tutorial.hide()
         }
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~ Copyright (c) Microsoft Corporation. All rights reserved.
+  ~ Licensed under the MIT License.
+  ~
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:bottom="@dimen/tutorial_tip_height">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/tutorial_white" />
+            <size
+                android:width="@dimen/tutorial_balloon_width"
+                android:height="40dp"/>
+            <corners android:radius="@dimen/tutorial_balloon_radius" />
+        </shape>
+    </item>
+
+    <item android:gravity="right|bottom"
+        android:right="@dimen/tutorial_tip_horizontal_margin">
+        <rotate
+            android:fromDegrees="45"
+            android:pivotX="135%"
+            android:toDegrees="45">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/tutorial_white" />
+                <size
+                    android:width="@dimen/tutorial_tip_height"
+                    android:height="@dimen/tutorial_tip_height"/>
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

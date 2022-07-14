@@ -34,18 +34,18 @@ class PreferenceManagerTest {
     fun shouldShowTutorialWhenValueIsDefault() {
         assertTrue(tutorialPrefManager.shouldShowLaunchTutorial())
         assertTrue(tutorialPrefManager.shouldShowDevModeTutorial())
-        assertTrue(tutorialPrefManager.shouldShowStoresTutorial())
+        assertTrue(tutorialPrefManager.shouldShowHistoryTutorial())
     }
 
     @Test
     fun shouldNotShowTutorialWhenValueIsSetToFalse() {
         tutorialPrefManager.setShowLaunchTutorial(false)
         tutorialPrefManager.setShowDevModeTutorial(false)
-        tutorialPrefManager.setShowStoresTutorial(false)
+        tutorialPrefManager.setShowHistoryTutorial(false)
 
         assertFalse(tutorialPrefManager.shouldShowLaunchTutorial())
         assertFalse(tutorialPrefManager.shouldShowDevModeTutorial())
-        assertFalse(tutorialPrefManager.shouldShowStoresTutorial())
+        assertFalse(tutorialPrefManager.shouldShowHistoryTutorial())
     }
 
     @Test
@@ -60,9 +60,9 @@ class PreferenceManagerTest {
         tutorialPrefManager.setShowDevModeTutorial(true)
         assertFalse(tutorialPrefManager.shouldShowDevModeTutorial())
 
-        assertTrue(tutorialPrefManager.shouldShowStoresTutorial())
-        tutorialPrefManager.setShowStoresTutorial(false)
-        tutorialPrefManager.setShowStoresTutorial(true)
-        assertFalse(tutorialPrefManager.shouldShowStoresTutorial())
+        assertTrue(tutorialPrefManager.shouldShowHistoryTutorial())
+        tutorialPrefManager.setShowHistoryTutorial(false)
+        tutorialPrefManager.setShowHistoryTutorial(true)
+        assertFalse(tutorialPrefManager.shouldShowHistoryTutorial())
     }
 }
