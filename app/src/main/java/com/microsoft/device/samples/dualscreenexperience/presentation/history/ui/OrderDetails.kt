@@ -55,10 +55,10 @@ fun OrderHistoryDetailPage(
     showTwoPages: Boolean?,
     topBarPadding: Int,
     bottomNavPadding: Int,
-    isLandscape: Boolean
+    isLandscape: Boolean,
+    isExpanded: Boolean
 ) {
     if (order == null || showTwoPages == null) {
-        // REVISIT
         return
     }
 
@@ -83,7 +83,7 @@ fun OrderHistoryDetailPage(
         ) {
             OrderHeader(order, showTwoPages)
             Spacer(modifier = Modifier.height(22.dp))
-            OrderItems(order.items, paddingValues)
+            OrderItems(order.items, paddingValues, isExpanded)
         }
     }
 }
@@ -109,44 +109,46 @@ fun OrderHeader(order: Order, showTwoPages: Boolean) {
 }
 
 @Composable
-fun OrderItems(orderItems: MutableList<OrderItem>, paddingValues: PaddingValues) {
+fun OrderItems(orderItems: MutableList<OrderItem>, paddingValues: PaddingValues, isExpanded: Boolean) {
     LazyColumn(
         verticalArrangement = spacedBy(25.dp),
         contentPadding = paddingValues
     ) {
         orderItems.map { orderItem ->
             item {
-                OrderItemPreview(orderItem = orderItem)
+                OrderItemPreview(orderItem = orderItem, isExpanded)
             }
         }
     }
 }
 
 @Composable
-fun OrderItemPreview(orderItem: OrderItem) {
+fun OrderItemPreview(orderItem: OrderItem, isExpanded: Boolean) {
     Box {
-        OrderItemDetails(orderItem = orderItem)
+        OrderItemDetails(orderItem = orderItem, isExpanded)
         OrderItemImage(orderItem = orderItem)
     }
 }
 
 @Composable
-fun BoxScope.OrderItemDetails(orderItem: OrderItem) {
+fun BoxScope.OrderItemDetails(orderItem: OrderItem, isExpanded: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxSize()
             .align(Alignment.BottomCenter),
         horizontalArrangement = spacedBy(41.dp)
     ) {
-        OrderItemBox()
-        OrderItemText(orderItem = orderItem)
-        OrderItemViewButton(orderItem = orderItem)
+        OrderItemBox(isExpanded)
+        OrderItemText(orderItem = orderItem, isExpanded)
+        OrderItemViewButton(orderItem = orderItem, isExpanded)
     }
 }
 
 @Composable
-fun RowScope.OrderItemText(orderItem: OrderItem) {
-    Column(modifier = Modifier.weight(5f), verticalArrangement = spacedBy(6.dp)) {
+fun RowScope.OrderItemText(orderItem: OrderItem, isExpanded: Boolean) {
+    val rowWeight = if (isExpanded) 7f else 5f
+
+    Column(modifier = Modifier.weight(rowWeight), verticalArrangement = spacedBy(6.dp)) {
         Text(
             text = orderItem.name,
             style = MaterialTheme.typography.body2,
@@ -166,10 +168,12 @@ fun RowScope.OrderItemText(orderItem: OrderItem) {
 }
 
 @Composable
-fun RowScope.OrderItemViewButton(orderItem: OrderItem) {
+fun RowScope.OrderItemViewButton(orderItem: OrderItem, isExpanded: Boolean) {
+    val rowWeight = if (isExpanded) 3f else 2f
+
     TextButton(
         modifier = Modifier
-            .weight(2f)
+            .weight(rowWeight)
             .align(Alignment.Bottom),
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(
@@ -187,8 +191,10 @@ fun RowScope.OrderItemViewButton(orderItem: OrderItem) {
 }
 
 @Composable
-fun RowScope.OrderItemBox() {
-    Box(modifier = Modifier.weight(3f)) {
+fun RowScope.OrderItemBox(isExpanded: Boolean) {
+    val rowWeight = if (isExpanded) 2f else 3f
+
+    Box(modifier = Modifier.weight(rowWeight)) {
         Surface(
             modifier = Modifier
                 .clip(MaterialTheme.shapes.medium)

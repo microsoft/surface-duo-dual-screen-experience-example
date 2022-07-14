@@ -23,6 +23,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
+import com.microsoft.device.dualscreen.windowstate.WindowSizeClass
 import com.microsoft.device.dualscreen.windowstate.rememberWindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryDetailBinding
@@ -74,9 +75,12 @@ class HistoryDetailFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 val windowState = activity?.rememberWindowState()
-                val isLandscape = when (windowState) {
-                    null -> false
-                    else -> windowState.isDualLandscape() || windowState.isSingleLandscape()
+                var isLandscape = false
+                var isExpanded = false
+                windowState?.let {
+                    isLandscape = it.isDualLandscape() || it.isSingleLandscape()
+                    isExpanded = layoutInfoViewModel.isDualMode.value == false &&
+                        it.widthSizeClass() == WindowSizeClass.EXPANDED
                 }
 
                 DualScreenExperienceTheme {
@@ -85,7 +89,8 @@ class HistoryDetailFragment : Fragment() {
                         showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value,
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
-                        isLandscape = isLandscape
+                        isLandscape = isLandscape,
+                        isExpanded = isExpanded
                     )
                 }
             }
