@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -29,6 +30,7 @@ import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHis
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryListPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.WIDTH_PX_BREAKPOINT
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
@@ -75,6 +77,7 @@ class HistoryListFragment : Fragment() {
                     null -> false
                     else -> windowState.isDualLandscape() || windowState.isSingleLandscape()
                 }
+                val isSmallWidth = windowState?.windowWidthDp?.let { with(LocalDensity.current) { it.toPx() } < WIDTH_PX_BREAKPOINT } ?: false
 
                 DualScreenExperienceTheme {
                     OrderHistoryListPage(
@@ -86,7 +89,8 @@ class HistoryListFragment : Fragment() {
                         },
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
-                        isLandscape = isLandscape
+                        isLandscape = isLandscape,
+                        isSmallWidth = isSmallWidth
                     )
                 }
             }

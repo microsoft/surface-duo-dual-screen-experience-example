@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -32,6 +33,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.WIDTH_PX_BREAKPOINT
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
@@ -84,6 +86,7 @@ class HistoryDetailFragment : Fragment() {
                     isExpanded = layoutInfoViewModel.isDualMode.value == false &&
                         it.widthSizeClass() == WindowSizeClass.EXPANDED
                 }
+                val isSmallWidth = windowState?.windowWidthDp?.let { with(LocalDensity.current) { it.toPx() } < WIDTH_PX_BREAKPOINT } ?: false
 
                 DualScreenExperienceTheme {
                     OrderHistoryDetailPage(
@@ -93,6 +96,7 @@ class HistoryDetailFragment : Fragment() {
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
                         isLandscape = isLandscape,
                         isExpanded = isExpanded,
+                        isSmallWidth = isSmallWidth,
                         getProductFromOrderItem = productViewModel::getProductFromOrderItem,
                         addToOrder = viewModel::addItemToOrder
                     )
@@ -120,7 +124,7 @@ class HistoryDetailFragment : Fragment() {
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         if (windowLayoutInfo.isInDualMode()) {
-            viewModel.selectFirstOrder()
+            viewModel.selectMostRecentOrder()
         }
     }
 

@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,9 +27,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -52,7 +56,8 @@ fun OrderHistoryListPage(
     updateOrder: (Order) -> Unit,
     topBarPadding: Int,
     bottomNavPadding: Int,
-    isLandscape: Boolean
+    isLandscape: Boolean,
+    isSmallWidth: Boolean
 ) {
     // Calculate padding for LazyColumn
     val paddingValues = with(LocalDensity.current) {
@@ -62,7 +67,7 @@ fun OrderHistoryListPage(
     if (orders.isNullOrEmpty())
         PlaceholderOrderHistory()
     else
-        OrderList(orders, selectedOrder, updateOrder, paddingValues, isLandscape)
+        OrderList(orders, selectedOrder, updateOrder, paddingValues, isLandscape, isSmallWidth)
 }
 
 @Composable
@@ -71,7 +76,8 @@ fun OrderList(
     selectedOrder: Order?,
     updateOrder: (Order) -> Unit,
     paddingValues: PaddingValues,
-    isLandscape: Boolean
+    isLandscape: Boolean,
+    isSmallWidth: Boolean
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         LazyColumn(
@@ -83,7 +89,7 @@ fun OrderList(
         ) {
             orders?.map { order ->
                 item {
-                    OrderListItem(order, order == selectedOrder, updateOrder, isLandscape)
+                    OrderListItem(order, order == selectedOrder, updateOrder, isLandscape, isSmallWidth)
                 }
             }
         }
@@ -91,90 +97,124 @@ fun OrderList(
 }
 
 @Composable
-fun OrderListItem(order: Order, isSelected: Boolean, updateOrder: (Order) -> Unit, isLandscape: Boolean) {
-    Box {
-        OrderItemBox(modifier = Modifier.align(Alignment.BottomCenter), isSelected) { updateOrder(order) }
-        OrderItemPreviewAndDetails(modifier = Modifier.align(Alignment.BottomCenter), order, isLandscape)
+fun OrderListItem(
+    order: Order,
+    isSelected: Boolean,
+    updateOrder: (Order) -> Unit,
+    isLandscape: Boolean,
+    isSmallWidth: Boolean
+) {
+    var orderItemTextHeight by remember { mutableStateOf(123.dp) }
+    val updateTextHeight = { newHeight: Dp ->
+        val newHeightWithPadding = newHeight + 32.dp
+        if (newHeightWithPadding > orderItemTextHeight)
+            orderItemTextHeight = newHeightWithPadding
+    }
+
+    Box(contentAlignment = Alignment.BottomCenter) {
+        OrderItemBox(isSelected, { updateOrder(order) }, orderItemTextHeight)
+        OrderItemPreviewAndDetails(order, isLandscape, isSmallWidth, updateTextHeight)
     }
 }
 
 @Composable
-fun OrderItemPreviewAndDetails(modifier: Modifier = Modifier, order: Order, isLandscape: Boolean) {
+fun OrderItemPreviewAndDetails(
+    order: Order,
+    isLandscape: Boolean,
+    isSmallWidth: Boolean,
+    updateTextHeight: (Dp) -> Unit
+) {
+    val previewWeight = 1f
+    val textWeight = if (isSmallWidth) 1.5f else 2f
+
     Row(
         modifier = Modifier
             .fillMaxWidth(if (isLandscape) 0.884f else 0.897f)
-            .padding(bottom = 16.dp)
-            .then(modifier),
+            .padding(bottom = 16.dp),
         verticalAlignment = Alignment.Bottom,
-        horizontalArrangement = if (isLandscape) spacedBy(88.dp) else spacedBy(40.dp)
+        horizontalArrangement = if (isSmallWidth || !isLandscape) spacedBy(40.dp) else spacedBy(88.dp)
     ) {
-        OrderItemPreview(order.items)
-        OrderItemText(order)
+        OrderItemPreview(Modifier.weight(previewWeight), order.items, isSmallWidth)
+        OrderItemText(Modifier.weight(textWeight), order, isSmallWidth, updateTextHeight)
     }
 }
 
 @Composable
-fun RowScope.OrderItemText(order: Order) {
+fun OrderItemText(
+    modifier: Modifier = Modifier,
+    order: Order,
+    isSmallWidth: Boolean,
+    updateTextHeight: (Dp) -> Unit
+) {
+    val density = LocalDensity.current
+
     Column(
-        modifier = Modifier.weight(2f),
+        modifier = modifier.onSizeChanged {
+            val heightDp = with(density) { it.height.toDp() }
+            updateTextHeight(heightDp)
+        },
         verticalArrangement = spacedBy(12.dp)
     ) {
-        OrderDate(orderTimestamp = order.orderTimestamp)
-        OrderId(orderId = order.orderId)
-        OrderAmount(orderPrice = order.totalPrice)
+        OrderDate(orderTimestamp = order.orderTimestamp, isSmallWidth = isSmallWidth)
+        OrderId(orderId = order.orderId, isSmallWidth = isSmallWidth)
+        OrderAmount(orderPrice = order.totalPrice, isSmallWidth = isSmallWidth)
     }
 }
 
 @Composable
-fun OrderDate(modifier: Modifier = Modifier, orderTimestamp: Long) {
+fun OrderDate(modifier: Modifier = Modifier, orderTimestamp: Long, isSmallWidth: Boolean) {
     Text(
         modifier = modifier,
         text = stringResource(R.string.order_date, orderTimestamp.toDateString()),
-        style = MaterialTheme.typography.body2,
+        style = if (isSmallWidth) MaterialTheme.typography.subtitle2 else MaterialTheme.typography.body2,
         color = MaterialTheme.colors.onBackground
     )
 }
 
 @Composable
-fun OrderId(modifier: Modifier = Modifier, orderId: Long?) {
+fun OrderId(modifier: Modifier = Modifier, orderId: Long?, isSmallWidth: Boolean) {
     Text(
         modifier = modifier,
         text = stringResource(R.string.order_id, orderId ?: ""),
-        style = MaterialTheme.typography.body2,
+        style = if (isSmallWidth) MaterialTheme.typography.subtitle2 else MaterialTheme.typography.body2,
         color = MaterialTheme.colors.onBackground
     )
 }
 
 @Composable
-fun OrderAmount(modifier: Modifier = Modifier, orderPrice: Int) {
+fun OrderAmount(modifier: Modifier = Modifier, orderPrice: Int, isSmallWidth: Boolean) {
     Text(
         modifier = modifier,
         text = stringResource(R.string.order_amount, orderPrice),
-        style = MaterialTheme.typography.body2,
+        style = if (isSmallWidth) MaterialTheme.typography.subtitle2 else MaterialTheme.typography.body2,
         color = MaterialTheme.colors.onBackground
     )
 }
 
 @Composable
-fun OrderItemBox(modifier: Modifier = Modifier, isSelected: Boolean, updateOrder: () -> Unit) {
+fun OrderItemBox(isSelected: Boolean, updateOrder: () -> Unit, minHeight: Dp) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(123.dp)
+            .heightIn(min = minHeight)
             .clip(MaterialTheme.shapes.medium)
-            .clickable { updateOrder() }
-            .then(modifier),
+            .clickable { updateOrder() },
         color = if (isSelected) MaterialTheme.colors.secondary else MaterialTheme.colors.surface
     ) {}
 }
 
 @Composable
-fun RowScope.OrderItemPreview(orderItems: MutableList<OrderItem>) {
+fun OrderItemPreview(modifier: Modifier = Modifier, orderItems: MutableList<OrderItem>, isSmallWidth: Boolean) {
     val endIndex = if (orderItems.count() >= NUM_IMAGES_MAX) NUM_IMAGES_MAX else orderItems.count()
     val items = orderItems.subList(0, endIndex)
-    val offsets = listOf((-40).dp, 0.dp, 40.dp)
+    val overlap = if (isSmallWidth) 30.dp else 37.dp
+    val offsets = when (items.size) {
+        2 -> listOf(-overlap / 2, overlap / 2)
+        3 -> listOf(-overlap, 0.dp, overlap)
+        else -> listOf(0.dp, 0.dp, 0.dp)
+    }
 
-    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.BottomCenter) {
+    Box(modifier = modifier, contentAlignment = Alignment.BottomCenter) {
         items.mapIndexed { index, orderItem ->
             PreviewImage(offsets[index], orderItem)
         }

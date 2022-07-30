@@ -57,7 +57,7 @@ val Typography = Typography(
         fontFamily = DMSans,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
-        lineHeight = 36.sp
+        lineHeight = 27.sp
     ),
     caption = TextStyle(
         fontFamily = DMSans,
@@ -69,5 +69,10 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         lineHeight = 20.sp,
         fontSize = 13.sp
+    ),
+    subtitle2 = TextStyle(
+        fontFamily = DMSans,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp
     )
 )
