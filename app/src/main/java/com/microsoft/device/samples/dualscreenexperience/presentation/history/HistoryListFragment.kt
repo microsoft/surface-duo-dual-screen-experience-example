@@ -108,6 +108,8 @@ class HistoryListFragment : Fragment() {
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
         if (windowLayoutInfo.isInDualMode() && viewModel.selectedOrder.value == null) {
             viewModel.navigateToDetails()
+        } else if (!windowLayoutInfo.isInDualMode() && viewModel.selectedOrder.value != null) {
+            viewModel.navigateToDetails()
         }
     }
 
