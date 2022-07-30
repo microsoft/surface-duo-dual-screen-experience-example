@@ -155,6 +155,7 @@ dependencies {
     implementation microsoftDependencies.windowState
 
     implementation uiDependencies.lottie
+    implementation uiDependencies.lottieCompose
 
     implementation uiDependencies.glide
     kapt uiDependencies.glideAnnotationProcesor

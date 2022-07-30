@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -33,10 +34,12 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
+import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.toPriceString
@@ -56,7 +60,9 @@ fun OrderHistoryDetailPage(
     topBarPadding: Int,
     bottomNavPadding: Int,
     isLandscape: Boolean,
-    isExpanded: Boolean
+    isExpanded: Boolean,
+    getProductFromOrderItem: (OrderItem) -> Product?,
+    addToOrder: (OrderItem) -> Unit
 ) {
     if (order == null || showTwoPages == null) {
         return
@@ -77,14 +83,21 @@ fun OrderHistoryDetailPage(
             .fillMaxWidth(0.9f)
             .fillMaxHeight()
 
+    var showDialog by remember { mutableStateOf(false) }
+    val updateShowDialog = { newValue: Boolean -> showDialog = newValue }
+    var selectedOrderItem: OrderItem? by remember { mutableStateOf(null) }
+    val updateOrderItem = { newItem: OrderItem -> selectedOrderItem = newItem }
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
         Column(
             modifier = columnModifier,
         ) {
             OrderHeader(order, showTwoPages)
             Spacer(modifier = Modifier.height(22.dp))
-            OrderItems(order.items, paddingValues, isExpanded)
+            OrderItems(order.items, paddingValues, isExpanded, updateShowDialog, updateOrderItem)
         }
+        if (showDialog)
+            AddToOrderDialog(selectedOrderItem, updateShowDialog, getProductFromOrderItem, addToOrder)
     }
 }
 
@@ -109,38 +122,60 @@ fun OrderHeader(order: Order, showTwoPages: Boolean) {
 }
 
 @Composable
-fun OrderItems(orderItems: MutableList<OrderItem>, paddingValues: PaddingValues, isExpanded: Boolean) {
+fun OrderItems(
+    orderItems: MutableList<OrderItem>,
+    paddingValues: PaddingValues,
+    isExpanded: Boolean,
+    updateShowDialog: (Boolean) -> Unit,
+    updateOrderItem: (OrderItem) -> Unit
+) {
     LazyColumn(
         verticalArrangement = spacedBy(25.dp),
         contentPadding = paddingValues
     ) {
         orderItems.map { orderItem ->
             item {
-                OrderItemPreview(orderItem = orderItem, isExpanded)
+                OrderItemPreview(orderItem, isExpanded, updateShowDialog, updateOrderItem)
             }
         }
     }
 }
 
 @Composable
-fun OrderItemPreview(orderItem: OrderItem, isExpanded: Boolean) {
+fun OrderItemPreview(
+    orderItem: OrderItem,
+    isExpanded: Boolean,
+    updateShowDialog: (Boolean) -> Unit,
+    updateOrderItem: (OrderItem) -> Unit
+) {
     Box {
-        OrderItemDetails(orderItem = orderItem, isExpanded)
+        OrderItemDetails(orderItem, isExpanded, updateShowDialog, updateOrderItem)
         OrderItemImage(orderItem = orderItem)
     }
 }
 
 @Composable
-fun BoxScope.OrderItemDetails(orderItem: OrderItem, isExpanded: Boolean) {
+fun BoxScope.OrderItemDetails(
+    orderItem: OrderItem,
+    isExpanded: Boolean,
+    updateShowDialog: (Boolean) -> Unit,
+    updateOrderItem: (OrderItem) -> Unit
+) {
     Row(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .height(IntrinsicSize.Max)
             .align(Alignment.BottomCenter),
         horizontalArrangement = spacedBy(41.dp)
     ) {
         OrderItemBox(isExpanded)
         OrderItemText(orderItem = orderItem, isExpanded)
-        OrderItemViewButton(orderItem = orderItem, isExpanded)
+        OrderItemViewButton(
+            onClick = {
+                updateShowDialog(true)
+                updateOrderItem(orderItem)
+            },
+        )
     }
 }
 
@@ -168,19 +203,42 @@ fun RowScope.OrderItemText(orderItem: OrderItem, isExpanded: Boolean) {
 }
 
 @Composable
-fun RowScope.OrderItemViewButton(orderItem: OrderItem, isExpanded: Boolean) {
-    val rowWeight = if (isExpanded) 3f else 2f
+fun RowScope.OrderItemBox(isExpanded: Boolean) {
+    val rowWeight = if (isExpanded) 2f else 3f
+
+    Surface(
+        modifier = Modifier
+            .sizeIn(maxWidth = 100.dp, maxHeight = 100.dp)
+            .aspectRatio(1f)
+            .weight(rowWeight)
+            .align(Alignment.Bottom),
+        shape = MaterialTheme.shapes.medium
+    ) { }
+}
+
+@Composable
+fun OrderItemImage(orderItem: OrderItem) {
+    Image(
+        modifier = Modifier.heightIn(max = 224.dp),
+        painter = painterResource(getProductDrawable(orderItem.color, orderItem.bodyShape)),
+        contentDescription = stringResource(getProductContentDescription(orderItem.color, orderItem.bodyShape))
+    )
+}
+
+@Composable
+fun RowScope.OrderItemViewButton(onClick: () -> Unit) {
+    val baseTextStyle = MaterialTheme.typography.caption
 
     TextButton(
         modifier = Modifier
-            .weight(rowWeight)
+            .weight(3f)
             .align(Alignment.Bottom),
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MaterialTheme.colors.primary,
             contentColor = MaterialTheme.colors.onPrimary
         ),
-        onClick = { /*TODO*/ }
+        onClick = { onClick() }
     ) {
         Text(
             text = stringResource(id = R.string.order_history_view),
@@ -188,36 +246,4 @@ fun RowScope.OrderItemViewButton(orderItem: OrderItem, isExpanded: Boolean) {
             fontWeight = FontWeight.Bold
         )
     }
-}
-
-@Composable
-fun RowScope.OrderItemBox(isExpanded: Boolean) {
-    val rowWeight = if (isExpanded) 2f else 3f
-
-    Box(modifier = Modifier.weight(rowWeight)) {
-        Surface(
-            modifier = Modifier
-                .clip(MaterialTheme.shapes.medium)
-                .sizeIn(maxWidth = 100.dp, maxHeight = 100.dp)
-                .aspectRatio(1f)
-        ) {}
-    }
-}
-
-@Composable
-fun OrderItemImage(orderItem: OrderItem) {
-    val translationX = with(LocalDensity.current) { 50.dp.roundToPx().toFloat() }
-
-    Image(
-        modifier = Modifier
-            .heightIn(max = 224.dp)
-            .graphicsLayer(rotationZ = 30f, translationX = translationX),
-        painter = painterResource(getProductDrawable(orderItem.color, orderItem.bodyShape)),
-        contentDescription = stringResource(
-            id = getProductContentDescription(
-                orderItem.color,
-                orderItem.bodyShape
-            )
-        )
-    )
 }

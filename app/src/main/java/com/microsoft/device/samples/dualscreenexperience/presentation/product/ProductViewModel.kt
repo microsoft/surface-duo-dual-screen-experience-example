@@ -10,6 +10,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.product
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
 import com.microsoft.device.samples.dualscreenexperience.domain.product.usecases.GetProductsUseCase
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.DataListHandler
@@ -62,5 +63,11 @@ class ProductViewModel @Inject constructor(
 
     private fun selectProduct(product: Product?) {
         selectedProduct.value = product
+    }
+
+    fun getProductFromOrderItem(orderItem: OrderItem): Product? {
+        return productList.value?.firstOrNull {
+            it.name == orderItem.name
+        }
     }
 }

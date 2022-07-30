@@ -10,14 +10,19 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.history
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
+import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
+import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.AddItemToOrderUseCase
 import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.GetAllSubmittedOrdersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     getAllOrdersUseCase: GetAllSubmittedOrdersUseCase,
+    private val addItemUseCase: AddItemToOrderUseCase,
     private val navigator: HistoryNavigator
 ) : ViewModel() {
     var orderList: LiveData<List<Order>> = getAllOrdersUseCase.get()
@@ -48,5 +53,11 @@ class HistoryViewModel @Inject constructor(
 
     private fun selectOrder(order: Order?) {
         selectedOrder.value = order
+    }
+
+    fun addItemToOrder(item: OrderItem) {
+        viewModelScope.launch {
+            addItemUseCase.addToOrder(item)
+        }
     }
 }

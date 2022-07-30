@@ -29,6 +29,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryDetailBinding
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryDetailPage
+import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
@@ -43,6 +44,7 @@ class HistoryDetailFragment : Fragment() {
 
     private val viewModel: HistoryViewModel by activityViewModels()
     private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
+    private val productViewModel: ProductViewModel by activityViewModels()
 
     private var binding: FragmentHistoryDetailBinding? = null
 
@@ -90,7 +92,9 @@ class HistoryDetailFragment : Fragment() {
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
                         isLandscape = isLandscape,
-                        isExpanded = isExpanded
+                        isExpanded = isExpanded,
+                        getProductFromOrderItem = productViewModel::getProductFromOrderItem,
+                        addToOrder = viewModel::addItemToOrder
                     )
                 }
             }
