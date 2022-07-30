@@ -45,9 +45,9 @@ class HistoryViewModel @Inject constructor(
         navigator.navigateToHistoryDetails()
     }
 
-    fun selectFirstOrder() {
+    fun selectMostRecentOrder() {
         orderList.value?.takeIf { it.isNotEmpty() && selectedOrder.value == null }?.let { list ->
-            selectOrder(list[0])
+            selectOrder(list[list.size - 1])
         }
     }
 
