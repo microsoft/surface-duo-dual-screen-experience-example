@@ -32,7 +32,7 @@ class HistoryViewModel @Inject constructor(
         selectedOrder.value = null
     }
 
-    fun onClick(model: Order?) {
+    fun onClick(model: Order) {
         navigateToDetails()
         selectOrder(model)
     }
@@ -51,13 +51,14 @@ class HistoryViewModel @Inject constructor(
         }
     }
 
-    private fun selectOrder(order: Order?) {
+    fun selectOrder(order: Order) {
         selectedOrder.value = order
     }
 
     fun addItemToOrder(item: OrderItem) {
         viewModelScope.launch {
-            addItemUseCase.addToOrder(item)
+            // Add copy of previous order item to new order
+            addItemUseCase.addToOrder(item.copy())
         }
     }
 }

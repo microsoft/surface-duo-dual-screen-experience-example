@@ -117,7 +117,7 @@ class HistoryDetailFragment : Fragment() {
             appCompatActivity?.changeToolbarTitle(getString(R.string.toolbar_history_details_title))
             appCompatActivity?.setupToolbar(isBackButtonEnabled = true, viewLifecycleOwner) {
                 viewModel.navigateUp()
-                viewModel.selectedOrder.value = null
+                viewModel.reset()
             }
         }
     }
