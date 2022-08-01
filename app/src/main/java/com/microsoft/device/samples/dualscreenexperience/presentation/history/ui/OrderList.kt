@@ -104,6 +104,7 @@ fun OrderListItem(
     isLandscape: Boolean,
     isSmallWidth: Boolean
 ) {
+    // Store height of order item text so the order item box is always large enough to contain the text
     var orderItemTextHeight by remember { mutableStateOf(123.dp) }
     val updateTextHeight = { newHeight: Dp ->
         val newHeightWithPadding = newHeight + 32.dp
@@ -208,6 +209,7 @@ fun OrderItemPreview(modifier: Modifier = Modifier, orderItems: MutableList<Orde
     val endIndex = if (orderItems.count() >= NUM_IMAGES_MAX) NUM_IMAGES_MAX else orderItems.count()
     val items = orderItems.subList(0, endIndex)
     val overlap = if (isSmallWidth) 30.dp else 37.dp
+    // Calculate guitar image offsets so the order item preview is always centered
     val offsets = when (items.size) {
         2 -> listOf(-overlap / 2, overlap / 2)
         3 -> listOf(-overlap, 0.dp, overlap)
