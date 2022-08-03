@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -24,7 +23,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.window.layout.WindowInfoTracker
 import androidx.window.layout.WindowLayoutInfo
 import com.microsoft.device.dualscreen.utils.wm.isInDualMode
-import com.microsoft.device.dualscreen.windowstate.WindowSizeClass
 import com.microsoft.device.dualscreen.windowstate.rememberWindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHistoryDetailBinding
@@ -33,9 +31,11 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
-import com.microsoft.device.samples.dualscreenexperience.presentation.util.WIDTH_PX_BREAKPOINT
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isExpanded
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isLandscape
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSmallWidth
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -79,14 +79,6 @@ class HistoryDetailFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 val windowState = activity?.rememberWindowState()
-                var isLandscape = false
-                var isExpanded = false
-                windowState?.let {
-                    isLandscape = it.isDualLandscape() || it.isSingleLandscape()
-                    isExpanded = layoutInfoViewModel.isDualMode.value == false &&
-                        it.widthSizeClass() == WindowSizeClass.EXPANDED
-                }
-                val isSmallWidth = windowState?.windowWidthDp?.let { with(LocalDensity.current) { it.toPx() } < WIDTH_PX_BREAKPOINT } ?: false
 
                 DualScreenExperienceTheme {
                     OrderHistoryDetailPage(
@@ -94,9 +86,9 @@ class HistoryDetailFragment : Fragment() {
                         showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value,
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
-                        isLandscape = isLandscape,
-                        isExpanded = isExpanded,
-                        isSmallWidth = isSmallWidth,
+                        isLandscape = windowState?.isLandscape() ?: false,
+                        isExpanded = windowState?.isExpanded() ?: false,
+                        isSmallWidth = windowState?.isSmallWidth() ?: false,
                         getProductFromOrderItem = productViewModel::getProductFromOrderItem,
                         addToOrder = viewModel::addItemToOrder
                     )
