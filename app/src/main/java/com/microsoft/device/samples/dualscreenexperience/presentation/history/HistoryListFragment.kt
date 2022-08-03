@@ -29,6 +29,7 @@ import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentHis
 import com.microsoft.device.samples.dualscreenexperience.presentation.MainActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.history.ui.OrderHistoryListPage
 import com.microsoft.device.samples.dualscreenexperience.presentation.theme.DualScreenExperienceTheme
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isLandscape
@@ -42,6 +43,7 @@ import kotlinx.coroutines.launch
 class HistoryListFragment : Fragment() {
 
     private val viewModel: HistoryViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
     private var binding: FragmentHistoryListBinding? = null
 
     override fun onAttach(context: Context) {
@@ -86,6 +88,8 @@ class HistoryListFragment : Fragment() {
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
                         isLandscape = windowState?.isLandscape() ?: false,
                         isSmallWidth = windowState?.isSmallWidth() ?: false,
+                        showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value,
+                        windowState = windowState
                     )
                 }
             }
@@ -105,7 +109,10 @@ class HistoryListFragment : Fragment() {
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {
-        if (windowLayoutInfo.isInDualMode() && viewModel.selectedOrder.value == null) {
+        if (windowLayoutInfo.isInDualMode() && viewModel.orderList.value?.isNotEmpty() == true &&
+            viewModel.selectedOrder.value == null
+        ) {
+            viewModel.selectMostRecentOrder()
             viewModel.navigateToDetails()
         } else if (!windowLayoutInfo.isInDualMode() && viewModel.selectedOrder.value != null) {
             viewModel.navigateToDetails()

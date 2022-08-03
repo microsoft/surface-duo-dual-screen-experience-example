@@ -84,7 +84,7 @@ class MainNavigator : StoreNavigator, CatalogNavigator, ProductNavigator, OrderN
     }
 
     override fun navigateToHistory() {
-        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.START).build()
+        val navOptions = FoldableNavOptions.Builder().setLaunchScreen(LaunchScreen.BOTH).build()
         navController?.navigate(R.id.navigation_history_graph, null, navOptions)
     }
 

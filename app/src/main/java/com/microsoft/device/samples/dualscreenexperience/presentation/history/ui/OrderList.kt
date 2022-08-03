@@ -40,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.microsoft.device.dualscreen.windowstate.WindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
@@ -57,15 +58,17 @@ fun OrderHistoryListPage(
     topBarPadding: Int,
     bottomNavPadding: Int,
     isLandscape: Boolean,
-    isSmallWidth: Boolean
+    isSmallWidth: Boolean,
+    showTwoPages: Boolean?,
+    windowState: WindowState?
 ) {
     // Calculate padding for LazyColumn
-    val paddingValues = with(LocalDensity.current) {
-        PaddingValues(bottom = 20.dp + topBarPadding.toDp() + bottomNavPadding.toDp())
-    }
+    val topBarPaddingDp = with(LocalDensity.current) { topBarPadding.toDp() }
+    val bottomNavPaddingDp = with(LocalDensity.current) { bottomNavPadding.toDp() }
+    val paddingValues = PaddingValues(bottom = 20.dp + topBarPaddingDp + bottomNavPaddingDp)
 
     if (orders.isNullOrEmpty())
-        PlaceholderOrderHistory()
+        PlaceholderOrderHistory(showTwoPages, windowState, topBarPaddingDp, bottomNavPaddingDp)
     else
         OrderList(orders, selectedOrder, updateOrder, paddingValues, isLandscape, isSmallWidth)
 }

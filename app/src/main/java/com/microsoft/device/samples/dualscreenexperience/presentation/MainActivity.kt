@@ -42,6 +42,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.De
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeViewModel.AppScreen
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeViewModel.DesignPattern
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeViewModel.SdkComponent
+import com.microsoft.device.samples.dualscreenexperience.presentation.history.HistoryViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     private val productViewModel: ProductViewModel by viewModels()
     private val storeViewModel: StoreViewModel by viewModels()
+    private val historyViewModel: HistoryViewModel by viewModels()
 
     @VisibleForTesting
     private val orderViewModel: OrderViewModel by viewModels()
@@ -129,6 +131,7 @@ class MainActivity : AppCompatActivity() {
             R.id.fragment_store_map -> storeViewModel.reset()
             R.id.fragment_product_list -> productViewModel.reset()
             R.id.fragment_order -> orderViewModel.reset()
+            R.id.fragment_history_list -> historyViewModel.reset()
         }
     }
 
@@ -147,15 +150,12 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_stores_graph -> {
                     navigator.navigateToStores()
-                    hideHistoryTutorial()
                 }
                 R.id.navigation_catalog_graph -> {
                     navigator.navigateToCatalog()
-                    hideHistoryTutorial()
                 }
                 R.id.navigation_products_graph -> {
                     navigator.navigateToProducts()
-                    hideHistoryTutorial()
                 }
                 R.id.navigation_orders_graph -> {
                     navigator.navigateToOrders()
