@@ -52,7 +52,6 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
-import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.contentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.toPriceString
@@ -170,12 +169,13 @@ fun OrderItemPreview(
     updateShowDialog: (Boolean) -> Unit,
     updateOrderItem: (OrderItem) -> Unit
 ) {
-    var boxWidth by remember { mutableStateOf(100) }
-    val updateBoxWidth = { newWidth: Int -> boxWidth = newWidth }
+    val initialSizePx = with(LocalDensity.current) { 100.dp.toPx() }
+    var boxWidthPx by remember { mutableStateOf(initialSizePx.toInt()) }
+    val updateBoxWidthPx = { newWidth: Int -> boxWidthPx = newWidth }
 
     Box {
-        OrderItemDetails(orderItem, isExpanded, isSmallWidth, updateBoxWidth, updateShowDialog, updateOrderItem)
-        OrderItemImage(orderItem = orderItem, boxWidthPx = boxWidth)
+        OrderItemDetails(orderItem, isExpanded, isSmallWidth, updateBoxWidthPx, updateShowDialog, updateOrderItem)
+        OrderItemImage(orderItem = orderItem, boxWidthPx = boxWidthPx)
     }
 }
 
@@ -184,7 +184,7 @@ fun BoxScope.OrderItemDetails(
     orderItem: OrderItem,
     isExpanded: Boolean,
     isSmallWidth: Boolean,
-    updateBoxWidth: (Int) -> Unit,
+    updateBoxWidthPx: (Int) -> Unit,
     updateShowDialog: (Boolean) -> Unit,
     updateOrderItem: (OrderItem) -> Unit
 ) {
@@ -195,7 +195,7 @@ fun BoxScope.OrderItemDetails(
             .align(Alignment.BottomCenter),
         horizontalArrangement = spacedBy(41.dp)
     ) {
-        OrderItemBox(isExpanded, updateBoxWidth)
+        OrderItemBox(isExpanded, updateBoxWidthPx)
         OrderItemText(orderItem, isExpanded, isSmallWidth)
         OrderItemViewButton(
             onClick = {
@@ -236,28 +236,29 @@ fun RowScope.OrderItemText(orderItem: OrderItem, isExpanded: Boolean, isSmallWid
 }
 
 @Composable
-fun RowScope.OrderItemBox(isExpanded: Boolean, updateBoxWidth: (Int) -> Unit) {
+fun RowScope.OrderItemBox(isExpanded: Boolean, updateBoxWidthPx: (Int) -> Unit) {
     val rowWeight = if (isExpanded) 2f else 3f
 
-    Surface(
+    Box(
         modifier = Modifier
-            .sizeIn(maxWidth = 100.dp, maxHeight = 100.dp)
-            .aspectRatio(1f)
-            // .fillMaxHeight()
-            .onSizeChanged { updateBoxWidth(it.width) }
             .weight(rowWeight)
             .align(Alignment.Bottom),
-        shape = MaterialTheme.shapes.medium
-    ) { }
+    ) {
+        Surface(
+            modifier = Modifier
+                .sizeIn(minWidth = 0.dp, minHeight = 0.dp, maxWidth = 100.dp, maxHeight = 100.dp)
+                .aspectRatio(1f)
+                .onSizeChanged { updateBoxWidthPx(it.width) }
+                .align(Alignment.BottomStart),
+            shape = MaterialTheme.shapes.medium
+        ) { }
+    }
 }
 
 @Composable
 fun OrderItemImage(orderItem: OrderItem, boxWidthPx: Int) {
-    val width = with(LocalDensity.current) { boxWidthPx.toDp() }.value
-
     Image(
         modifier = Modifier
-            .sizeIn(maxHeight = 224.dp, maxWidth = width.dp)
             .heightIn(max = 224.dp)
             .graphicsLayer(
                 rotationZ = 30f,
