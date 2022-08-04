@@ -56,6 +56,11 @@ To learn how to load apps on the Surface Duo emulator, see the [documentation](h
     <img src="screenshots/dual_portrait_dev_mode.png" width=49% />
 </p>
 
+<p align="center">
+    <img src="screenshots/dual_portrait_history_light.png" width=49% />
+    <img src="screenshots/dual_portrait_history.png" width=49% />
+</p>
+
 ## Social links
 
 | Blog post | Video |
