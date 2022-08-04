@@ -27,6 +27,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCo
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isExpanded
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isLandscape
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSmallHeight
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSmallWidth
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,7 +64,8 @@ class HistoryDetailFragment : Fragment() {
                         isExpanded = windowState?.isExpanded() ?: false,
                         isSmallWidth = windowState?.isSmallWidth() ?: false,
                         getProductFromOrderItem = productViewModel::getProductFromOrderItem,
-                        addToOrder = viewModel::addItemToOrder
+                        addToOrder = viewModel::addItemToOrder,
+                        isSmallHeight = windowState?.isSmallHeight() ?: false
                     )
                 }
             }

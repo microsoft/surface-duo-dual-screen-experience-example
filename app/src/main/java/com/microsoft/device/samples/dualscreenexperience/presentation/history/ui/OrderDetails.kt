@@ -52,6 +52,7 @@ import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Order
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.product.model.Product
+import com.microsoft.device.samples.dualscreenexperience.presentation.catalog.utils.contentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductContentDescription
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.util.getProductDrawable
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.toPriceString
@@ -66,7 +67,8 @@ fun OrderHistoryDetailPage(
     isExpanded: Boolean,
     isSmallWidth: Boolean,
     getProductFromOrderItem: (OrderItem) -> Product?,
-    addToOrder: (OrderItem) -> Unit
+    addToOrder: (OrderItem) -> Unit,
+    isSmallHeight: Boolean
 ) {
     if (order == null || showTwoPages == null) {
         return
@@ -101,7 +103,13 @@ fun OrderHistoryDetailPage(
             OrderItems(order.items, paddingValues, isExpanded, isSmallWidth, updateShowDialog, updateOrderItem)
         }
         if (showDialog)
-            AddToOrderDialog(selectedOrderItem, updateShowDialog, getProductFromOrderItem, addToOrder)
+            AddToOrderDialog(
+                selectedOrderItem,
+                updateShowDialog,
+                getProductFromOrderItem,
+                addToOrder,
+                isSmallHeight
+            )
     }
 }
 

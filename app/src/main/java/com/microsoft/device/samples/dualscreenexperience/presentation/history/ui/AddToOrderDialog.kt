@@ -20,11 +20,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -43,8 +46,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -66,7 +72,8 @@ fun AddToOrderDialog(
     selectedOrderItem: OrderItem?,
     updateShowDialog: (Boolean) -> Unit,
     getProductFromOrderItem: (OrderItem) -> Product?,
-    addToOrder: (OrderItem) -> Unit
+    addToOrder: (OrderItem) -> Unit,
+    isSmallHeight: Boolean
 ) {
     if (selectedOrderItem == null) {
         updateShowDialog(false)
@@ -88,14 +95,18 @@ fun AddToOrderDialog(
                 modifier = Modifier
                     .widthIn(max = 303.dp)
                     .background(MaterialTheme.colors.surface, bottomRoundShape)
-                    .padding(32.dp),
+                    .padding(horizontal = 32.dp, vertical = if (isSmallHeight) 15.dp else 32.dp),
                 verticalArrangement = spacedBy(8.dp)
             ) {
-                DialogOrderTitle(orderItem = selectedOrderItem)
+                DialogOrderTitle(orderItem = selectedOrderItem, isSmallHeight = isSmallHeight)
                 DialogOrderRating(orderItem = selectedOrderItem, getProductFromOrderItem = getProductFromOrderItem)
                 DialogOrderPrice(orderItem = selectedOrderItem)
-                DialogOrderDescription(orderItem = selectedOrderItem, getProductFromOrderItem = getProductFromOrderItem)
-                Spacer(Modifier.height(14.dp))
+                DialogOrderDescription(
+                    orderItem = selectedOrderItem,
+                    getProductFromOrderItem = getProductFromOrderItem,
+                    isSmallHeight = isSmallHeight
+                )
+                Spacer(Modifier.heightIn(min = 0.dp, max = 14.dp))
                 DialogButtons(orderItem = selectedOrderItem, addToOrder = addToOrder, updateShowDialog)
             }
         }
@@ -139,10 +150,12 @@ fun DialogOrderPreview(orderItem: OrderItem) {
 }
 
 @Composable
-fun DialogOrderTitle(orderItem: OrderItem) {
+fun DialogOrderTitle(orderItem: OrderItem, isSmallHeight: Boolean) {
+    val textStyle = if (isSmallHeight) MaterialTheme.typography.h2.copy(fontSize = 20.sp) else MaterialTheme.typography.h2
+
     Text(
         text = orderItem.name,
-        style = MaterialTheme.typography.h2,
+        style = textStyle,
         color = MaterialTheme.colors.onBackground
     )
 }
@@ -169,10 +182,25 @@ fun DialogOrderPrice(orderItem: OrderItem) {
 }
 
 @Composable
-fun DialogOrderDescription(orderItem: OrderItem, getProductFromOrderItem: (OrderItem) -> Product?) {
+fun DialogOrderDescription(
+    orderItem: OrderItem,
+    getProductFromOrderItem: (OrderItem) -> Product?,
+    isSmallHeight: Boolean
+) {
+    // Limit description to one line of scrollable text when dialog is shown with a small height
+    val textStyle = MaterialTheme.typography.subtitle1
+    val lineHeightDp = with(LocalDensity.current) { textStyle.lineHeight.toDp() }
+    val maxHeight = if (isSmallHeight) (2 * lineHeightDp.value).dp else Dp.Unspecified
+    val bottomPadding = if (isSmallHeight) lineHeightDp else 0.dp
+
     Text(
+        modifier = Modifier
+            .heightIn(max = maxHeight)
+            .padding(bottom = bottomPadding)
+            .verticalScroll(rememberScrollState()),
         text = getProductFromOrderItem(orderItem)?.description ?: "",
-        style = MaterialTheme.typography.subtitle1,
+        style = textStyle,
+        overflow = TextOverflow.Visible,
         color = MaterialTheme.colors.onBackground
     )
 }
