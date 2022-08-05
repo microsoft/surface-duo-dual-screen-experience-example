@@ -31,6 +31,8 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.order.sign
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnPause
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnResume
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -144,6 +146,12 @@ class OrderFragment : Fragment() {
         super.onResume()
         setupConfirmationObservers()
         changeToolbarTitle()
+        logOnResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        logOnPause()
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

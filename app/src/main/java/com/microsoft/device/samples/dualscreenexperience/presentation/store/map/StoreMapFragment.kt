@@ -34,6 +34,8 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.Layou
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.NetworkConnectionLiveData
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.appCompatActivity
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.changeToolbarTitle
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnPause
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnResume
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -281,11 +283,13 @@ class StoreMapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mapController.onResume(mapView)
+        logOnResume()
     }
 
     override fun onPause() {
         super.onPause()
         mapController.onPause(mapView)
+        logOnPause()
     }
 
     override fun onStop() {

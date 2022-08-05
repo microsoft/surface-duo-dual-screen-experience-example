@@ -35,6 +35,8 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.chang
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.hasExpandedWindowLayoutSize
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isFoldOrSmallHinge
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isFragmentWidthSmall
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnPause
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnResume
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -105,6 +107,12 @@ class CatalogListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setupToolbar()
+        logOnResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        logOnPause()
     }
 
     private fun setupToolbar() {

@@ -48,6 +48,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.product.Pr
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.getTopCenterPoint
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logFunctionCall
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloon
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialBalloonType
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.tutorial.TutorialViewModel
@@ -189,6 +190,9 @@ class MainActivity : AppCompatActivity() {
         if (windowLayoutInfo.isInDualMode() != layoutInfoViewModel.isDualMode.value) {
             tutorial.hide()
             invalidateOptionsMenu()
+
+            val change = if (windowLayoutInfo.isInDualMode()) "spanned" else "unspanned"
+            this.javaClass.logFunctionCall(change)
         }
         layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
         layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()

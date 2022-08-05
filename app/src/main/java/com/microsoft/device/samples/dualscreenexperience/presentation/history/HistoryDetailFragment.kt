@@ -29,6 +29,8 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.isExp
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isLandscape
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSmallHeight
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isSmallWidth
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnPause
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logOnResume
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.setupToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -77,6 +79,12 @@ class HistoryDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setupToolbar()
+        logOnResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        logOnPause()
     }
 
     private fun setupToolbar() {

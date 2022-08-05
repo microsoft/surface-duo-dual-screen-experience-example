@@ -15,6 +15,7 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.model.Orde
 import com.microsoft.device.samples.dualscreenexperience.domain.order.model.OrderItem
 import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.AddItemToOrderUseCase
 import com.microsoft.device.samples.dualscreenexperience.domain.order.usecases.GetAllSubmittedOrdersUseCase
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.logFunctionCall
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,6 +31,7 @@ class HistoryViewModel @Inject constructor(
 
     fun reset() {
         selectedOrder.value = null
+        this.javaClass.logFunctionCall("reset")
     }
 
     fun onClick(model: Order) {
