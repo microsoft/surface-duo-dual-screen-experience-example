@@ -7,6 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.presentation.history
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,6 +31,7 @@ class HistoryViewModel @Inject constructor(
 
     fun reset() {
         selectedOrder.value = null
+        Log.i("HISTORY_TEST", "HistoryViewModel reset")
     }
 
     fun onClick(model: Order) {

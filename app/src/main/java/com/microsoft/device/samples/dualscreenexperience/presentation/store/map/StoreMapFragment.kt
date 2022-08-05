@@ -9,6 +9,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.store.map
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -281,11 +282,13 @@ class StoreMapFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mapController.onResume(mapView)
+        Log.i("HISTORY_TEST", "StoreMapFragment: onResume")
     }
 
     override fun onPause() {
         super.onPause()
         mapController.onPause(mapView)
+        Log.i("HISTORY_TEST", "StoreMapFragment: onPause")
     }
 
     override fun onStop() {

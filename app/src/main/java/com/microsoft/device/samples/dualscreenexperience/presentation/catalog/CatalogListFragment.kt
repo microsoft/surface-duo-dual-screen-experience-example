@@ -8,6 +8,7 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.catalog
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,6 +106,12 @@ class CatalogListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setupToolbar()
+        Log.i("HISTORY_TEST", "CatalogListFragment: onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("HISTORY_TEST", "CatalogListFragment: onPause")
     }
 
     private fun setupToolbar() {
