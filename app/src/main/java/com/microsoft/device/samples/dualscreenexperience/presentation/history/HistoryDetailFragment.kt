@@ -8,7 +8,6 @@
 package com.microsoft.device.samples.dualscreenexperience.presentation.history
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,12 +77,6 @@ class HistoryDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setupToolbar()
-        Log.i("HISTORY_TEST", "HistoryDetailFragment: onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i("HISTORY_TEST", "HistoryDetailFragment: onPause")
     }
 
     private fun setupToolbar() {

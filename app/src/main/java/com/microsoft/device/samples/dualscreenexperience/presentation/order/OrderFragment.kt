@@ -9,7 +9,6 @@ package com.microsoft.device.samples.dualscreenexperience.presentation.order
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -145,12 +144,6 @@ class OrderFragment : Fragment() {
         super.onResume()
         setupConfirmationObservers()
         changeToolbarTitle()
-        Log.i("HISTORY_TEST", "OrderFragment: onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i("HISTORY_TEST", "OrderFragment: onPause")
     }
 
     private fun onWindowLayoutInfoChanged(windowLayoutInfo: WindowLayoutInfo) {

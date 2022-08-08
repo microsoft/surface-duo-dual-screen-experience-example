@@ -9,7 +9,6 @@ package com.microsoft.device.samples.dualscreenexperience.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -190,7 +189,6 @@ class MainActivity : AppCompatActivity() {
         if (windowLayoutInfo.isInDualMode() != layoutInfoViewModel.isDualMode.value) {
             tutorial.hide()
             invalidateOptionsMenu()
-            Log.i("HISTORY_TEST", "spanned")
         }
         layoutInfoViewModel.isDualMode.value = windowLayoutInfo.isInDualMode()
         layoutInfoViewModel.foldingFeature.value = windowLayoutInfo.getFoldingFeature()
