@@ -206,9 +206,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showHistoryTutorial() {
-        val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_history_graph)
+        val historyItem = findViewById<BottomNavigationItemView>(R.id.navigation_history_graph)
         if (!isFinishing) {
-            tutorial.show(storeItem, TutorialBalloonType.HISTORY)
+            tutorial.show(historyItem, TutorialBalloonType.HISTORY)
         }
     }
 

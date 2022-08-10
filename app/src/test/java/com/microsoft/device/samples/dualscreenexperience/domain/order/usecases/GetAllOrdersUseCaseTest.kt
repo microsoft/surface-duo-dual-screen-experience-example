@@ -15,10 +15,10 @@ import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.f
 import com.microsoft.device.samples.dualscreenexperience.domain.order.testutil.getOrAwaitValue
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert
-import org.hamcrest.core.Is
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.hamcrest.core.Is.`is` as iz
 
 class GetAllOrdersUseCaseTest {
 
@@ -38,7 +38,7 @@ class GetAllOrdersUseCaseTest {
     fun getEmptyListWhenNoOrders() = runBlocking {
         val resultValue = getAllOrdersUseCase.get().getOrAwaitValue()
 
-        MatcherAssert.assertThat(resultValue, Is.`is`(emptyList()))
+        MatcherAssert.assertThat(resultValue, iz(emptyList()))
     }
 
     @Test
@@ -49,7 +49,7 @@ class GetAllOrdersUseCaseTest {
 
         val resultValue = getAllOrdersUseCase.get().getOrAwaitValue()
 
-        MatcherAssert.assertThat(resultValue, Is.`is`(emptyList()))
+        MatcherAssert.assertThat(resultValue, iz(emptyList()))
     }
 
     @Test
@@ -60,6 +60,6 @@ class GetAllOrdersUseCaseTest {
 
         val resultValue = getAllOrdersUseCase.get().getOrAwaitValue()
 
-        MatcherAssert.assertThat(resultValue, Is.`is`(listOf(firstSubmittedOrder)))
+        MatcherAssert.assertThat(resultValue, iz(listOf(firstSubmittedOrder)))
     }
 }
