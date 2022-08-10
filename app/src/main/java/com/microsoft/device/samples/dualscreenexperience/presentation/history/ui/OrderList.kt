@@ -92,7 +92,7 @@ fun OrderList(
         ) {
             orders?.map { order ->
                 item {
-                    OrderListItem(order, order == selectedOrder, updateOrder, isLandscape, isSmallWidth)
+                    OrderCard(order, order == selectedOrder, updateOrder, isLandscape, isSmallWidth)
                 }
             }
         }
@@ -100,7 +100,7 @@ fun OrderList(
 }
 
 @Composable
-fun OrderListItem(
+fun OrderCard(
     order: Order,
     isSelected: Boolean,
     updateOrder: (Order) -> Unit,
@@ -116,13 +116,13 @@ fun OrderListItem(
     }
 
     Box(contentAlignment = Alignment.BottomCenter) {
-        OrderItemBox(isSelected, { updateOrder(order) }, orderItemTextHeight)
-        OrderItemPreviewAndDetails(order, isLandscape, isSmallWidth, updateTextHeight)
+        CardBackground(isSelected, { updateOrder(order) }, orderItemTextHeight)
+        OrderGraphicAndText(order, isLandscape, isSmallWidth, updateTextHeight)
     }
 }
 
 @Composable
-fun OrderItemPreviewAndDetails(
+fun OrderGraphicAndText(
     order: Order,
     isLandscape: Boolean,
     isSmallWidth: Boolean,
@@ -138,13 +138,13 @@ fun OrderItemPreviewAndDetails(
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = if (isSmallWidth || !isLandscape) spacedBy(40.dp) else spacedBy(88.dp)
     ) {
-        OrderItemPreview(Modifier.weight(previewWeight), order.items, isSmallWidth)
-        OrderItemText(Modifier.weight(textWeight), order, isSmallWidth, updateTextHeight)
+        OrderGraphic(Modifier.weight(previewWeight), order.items, isSmallWidth)
+        OrderText(Modifier.weight(textWeight), order, isSmallWidth, updateTextHeight)
     }
 }
 
 @Composable
-fun OrderItemText(
+fun OrderText(
     modifier: Modifier = Modifier,
     order: Order,
     isSmallWidth: Boolean,
@@ -196,7 +196,7 @@ fun OrderAmount(modifier: Modifier = Modifier, orderPrice: Int, isSmallWidth: Bo
 }
 
 @Composable
-fun OrderItemBox(isSelected: Boolean, updateOrder: () -> Unit, minHeight: Dp) {
+fun CardBackground(isSelected: Boolean, updateOrder: () -> Unit, minHeight: Dp) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -208,10 +208,11 @@ fun OrderItemBox(isSelected: Boolean, updateOrder: () -> Unit, minHeight: Dp) {
 }
 
 @Composable
-fun OrderItemPreview(modifier: Modifier = Modifier, orderItems: MutableList<OrderItem>, isSmallWidth: Boolean) {
+fun OrderGraphic(modifier: Modifier = Modifier, orderItems: MutableList<OrderItem>, isSmallWidth: Boolean) {
     val endIndex = if (orderItems.count() >= NUM_IMAGES_MAX) NUM_IMAGES_MAX else orderItems.count()
     val items = orderItems.subList(0, endIndex)
     val overlap = if (isSmallWidth) 30.dp else 37.dp
+
     // Calculate guitar image offsets so the order item preview is always centered
     val offsets = when (items.size) {
         2 -> listOf(-overlap / 2, overlap / 2)
@@ -221,13 +222,13 @@ fun OrderItemPreview(modifier: Modifier = Modifier, orderItems: MutableList<Orde
 
     Box(modifier = modifier, contentAlignment = Alignment.BottomCenter) {
         items.mapIndexed { index, orderItem ->
-            PreviewImage(offsets[index], orderItem)
+            OrderItemImage(offsets[index], orderItem)
         }
     }
 }
 
 @Composable
-fun PreviewImage(xOffset: Dp, orderItem: OrderItem) {
+fun OrderItemImage(xOffset: Dp, orderItem: OrderItem) {
     Image(
         modifier = Modifier
             .widthIn(min = 50.dp)

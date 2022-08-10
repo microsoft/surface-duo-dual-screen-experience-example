@@ -155,14 +155,14 @@ fun OrderItems(
     ) {
         orderItems.map { orderItem ->
             item {
-                OrderItemPreview(orderItem, isExpanded, isSmallWidth, updateShowDialog, updateOrderItem)
+                OrderItem(orderItem, isExpanded, isSmallWidth, updateShowDialog, updateOrderItem)
             }
         }
     }
 }
 
 @Composable
-fun OrderItemPreview(
+fun OrderItem(
     orderItem: OrderItem,
     isExpanded: Boolean,
     isSmallWidth: Boolean,
@@ -195,9 +195,9 @@ fun BoxScope.OrderItemDetails(
             .align(Alignment.BottomCenter),
         horizontalArrangement = spacedBy(41.dp)
     ) {
-        OrderItemBox(isExpanded, updateBoxWidthPx)
+        OrderItemImageBackground(isExpanded, updateBoxWidthPx)
         OrderItemText(orderItem, isExpanded, isSmallWidth)
-        OrderItemViewButton(
+        ViewButton(
             onClick = {
                 updateShowDialog(true)
                 updateOrderItem(orderItem)
@@ -236,7 +236,7 @@ fun RowScope.OrderItemText(orderItem: OrderItem, isExpanded: Boolean, isSmallWid
 }
 
 @Composable
-fun RowScope.OrderItemBox(isExpanded: Boolean, updateBoxWidthPx: (Int) -> Unit) {
+fun RowScope.OrderItemImageBackground(isExpanded: Boolean, updateBoxWidthPx: (Int) -> Unit) {
     val rowWeight = if (isExpanded) 2f else 3f
 
     Box(
@@ -270,7 +270,7 @@ fun OrderItemImage(orderItem: OrderItem, boxWidthPx: Int) {
 }
 
 @Composable
-fun RowScope.OrderItemViewButton(onClick: () -> Unit, isSmallWidth: Boolean) {
+fun RowScope.ViewButton(onClick: () -> Unit, isSmallWidth: Boolean) {
     val baseTextStyle = MaterialTheme.typography.caption
 
     TextButton(
