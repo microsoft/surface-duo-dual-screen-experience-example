@@ -88,7 +88,7 @@ class HistoryListFragment : Fragment() {
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
                         isLandscape = windowState?.isLandscape() ?: false,
                         isSmallWidth = windowState?.isSmallWidth() ?: false,
-                        showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value,
+                        isDualMode = layoutInfoViewModel.isDualMode.observeAsState().value,
                         windowState = windowState
                     )
                 }

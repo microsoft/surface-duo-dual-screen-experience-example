@@ -57,7 +57,7 @@ class HistoryDetailFragment : Fragment() {
                 DualScreenExperienceTheme {
                     OrderHistoryDetailPage(
                         order = viewModel.selectedOrder.observeAsState().value,
-                        showTwoPages = layoutInfoViewModel.isDualMode.observeAsState().value,
+                        isDualMode = layoutInfoViewModel.isDualMode.observeAsState().value,
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
                         isLandscape = windowState?.isLandscape() ?: false,

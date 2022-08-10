@@ -59,7 +59,7 @@ fun OrderHistoryListPage(
     bottomNavPadding: Int,
     isLandscape: Boolean,
     isSmallWidth: Boolean,
-    showTwoPages: Boolean?,
+    isDualMode: Boolean?,
     windowState: WindowState?
 ) {
     // Calculate padding for LazyColumn
@@ -68,7 +68,7 @@ fun OrderHistoryListPage(
     val paddingValues = PaddingValues(bottom = 20.dp + topBarPaddingDp + bottomNavPaddingDp)
 
     if (orders.isNullOrEmpty())
-        PlaceholderOrderHistory(showTwoPages, windowState, topBarPaddingDp, bottomNavPaddingDp)
+        PlaceholderOrderHistory(isDualMode, windowState, topBarPaddingDp, bottomNavPaddingDp)
     else
         OrderList(orders, selectedOrder, updateOrder, paddingValues, isLandscape, isSmallWidth)
 }

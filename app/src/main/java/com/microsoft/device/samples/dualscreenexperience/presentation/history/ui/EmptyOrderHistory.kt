@@ -32,8 +32,8 @@ import com.microsoft.device.dualscreen.windowstate.WindowState
 import com.microsoft.device.samples.dualscreenexperience.R
 
 @Composable
-fun PlaceholderOrderHistory(showTwoPages: Boolean?, windowState: WindowState?, topBarPaddingDp: Dp, bottomNavPaddingDp: Dp) {
-    if (showTwoPages == true) {
+fun PlaceholderOrderHistory(isDualMode: Boolean?, windowState: WindowState?, topBarPaddingDp: Dp, bottomNavPaddingDp: Dp) {
+    if (isDualMode == true) {
         PlaceholderTwoPane(windowState, topBarPaddingDp, bottomNavPaddingDp)
     } else {
         PlaceholderSinglePane()

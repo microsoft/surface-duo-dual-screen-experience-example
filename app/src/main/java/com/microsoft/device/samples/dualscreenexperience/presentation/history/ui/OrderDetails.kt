@@ -59,7 +59,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.util.toPri
 @Composable
 fun OrderHistoryDetailPage(
     order: Order?,
-    showTwoPages: Boolean?,
+    isDualMode: Boolean?,
     topBarPadding: Int,
     bottomNavPadding: Int,
     isLandscape: Boolean,
@@ -69,7 +69,7 @@ fun OrderHistoryDetailPage(
     addToOrder: (OrderItem) -> Unit,
     isSmallHeight: Boolean
 ) {
-    if (order == null || showTwoPages == null) {
+    if (order == null || isDualMode == null) {
         return
     }
 
@@ -97,7 +97,7 @@ fun OrderHistoryDetailPage(
         Column(
             modifier = columnModifier,
         ) {
-            OrderHeader(order, showTwoPages, isSmallWidth)
+            OrderHeader(order, isDualMode, isSmallWidth)
             Spacer(modifier = Modifier.height(22.dp))
             OrderItems(order.items, paddingValues, isExpanded, isSmallWidth, updateShowDialog, updateOrderItem)
         }
@@ -113,8 +113,8 @@ fun OrderHistoryDetailPage(
 }
 
 @Composable
-fun OrderHeader(order: Order, showTwoPages: Boolean, isSmallWidth: Boolean) {
-    if (showTwoPages) {
+fun OrderHeader(order: Order, isDualMode: Boolean, isSmallWidth: Boolean) {
+    if (isDualMode) {
         Text(
             text = stringResource(R.string.toolbar_history_details_title),
             style = MaterialTheme.typography.h4,
