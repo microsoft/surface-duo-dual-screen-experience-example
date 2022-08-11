@@ -81,8 +81,8 @@ class HistoryListFragment : Fragment() {
                         orders = viewModel.orderList.observeAsState().value?.reversed(),
                         selectedOrder = viewModel.selectedOrder.observeAsState().value,
                         updateOrder = { newOrder ->
-                            viewModel.selectOrder(newOrder)
                             viewModel.navigateToDetails()
+                            viewModel.selectOrder(newOrder)
                         },
                         topBarPadding = appCompatActivity?.supportActionBar?.height ?: 0,
                         bottomNavPadding = (activity as? MainActivity)?.getBottomNavViewHeight() ?: 0,
