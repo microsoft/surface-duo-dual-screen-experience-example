@@ -72,3 +72,7 @@ val orderWithItems = OrderWithItems(
     firstOrderEntity,
     mutableListOf(firstOrderItemEntity)
 )
+
+val firstSubmittedOrder = firstOrder.copy(isSubmitted = true)
+
+val firstSubmittedOrderEntity = firstOrderEntity.copy(isSubmitted = true)

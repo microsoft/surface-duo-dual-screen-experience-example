@@ -7,6 +7,7 @@
 
 package com.microsoft.device.samples.dualscreenexperience.data.order
 
+import androidx.lifecycle.LiveData
 import com.microsoft.device.samples.dualscreenexperience.data.order.local.OrderLocalDataSource
 import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderEntity
 import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderItemEntity
@@ -21,6 +22,8 @@ class OrderRepository @Inject constructor(
 
     override fun getOrderBySubmitted(submitted: Boolean) =
         localDataSource.getOrderBySubmitted(submitted)
+
+    override fun getAllSubmittedOrders(): LiveData<List<OrderWithItems>> = localDataSource.getAllSubmittedOrders()
 
     override suspend fun getAll(): List<OrderWithItems> = localDataSource.getAll()
 

@@ -22,12 +22,15 @@
     <string name="nav_catalog_title">Navigation Catalog</string>
     <string name="nav_products_title">Navigation Products</string>
     <string name="nav_order_title">Navigation Order</string>
+    <string name="nav_history_title">Navigation History</string>
 
     <string name="toolbar_stores_title">Stores</string>
     <string name="toolbar_catalog_title">New Guitars</string>
     <string name="toolbar_products_title">Product Details and Customization</string>
     <string name="toolbar_orders_title">Orders</string>
-    <string name="toolbar_orders_receipt_title">Order receipt</string>
+    <string name="toolbar_orders_receipt_title">Order Receipt</string>
+    <string name="toolbar_history_title">Order History</string>
+    <string name="toolbar_history_details_title">Order Details</string>
 
     <string name="toolbar_dev_mode">Dev Mode</string>
     <string name="toolbar_dev_mode_design_pattern">Dev Mode - %s</string>
@@ -108,7 +111,6 @@
     <string name="order_quantity_minus">-</string>
 
     <string name="order_success_message">Your order has been placed successfully!</string>
-    <string name="tutorial_order_text">Check out more stores around you</string>
 
     <string name="order_sign_cancel">Cancel</string>
     <string name="order_sign_confirm">Confirm</string>
@@ -130,6 +132,12 @@
     <string name="order_ink_stroke_small">Small</string>
     <string name="order_ink_stroke_medium">Medium</string>
     <string name="order_ink_stroke_large">Large</string>
+
+    <!-- Order History Mode -->
+
+    <string name="order_history_empty_message">There are no order items in your order history. Please head to cart to make new orders.</string>
+    <string name="order_history_view">View</string>
+    <string name="tutorial_history_text">Check out your first order in the history page</string>
 
     <!-- Developer Mode -->
 

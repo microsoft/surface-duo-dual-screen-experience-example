@@ -17,11 +17,11 @@ import javax.inject.Inject
 class TutorialViewModel @Inject constructor(
     private val tutorialPrefs: TutorialPreferences
 ) : ViewModel() {
-    var showStoresTutorial = MutableLiveData<Boolean?>(null)
+    var showHistoryTutorial = MutableLiveData<Boolean?>(null)
 
     fun updateTutorial() {
-        if (tutorialPrefs.shouldShowStoresTutorial()) {
-            showStoresTutorial.value = true
+        if (tutorialPrefs.shouldShowHistoryTutorial()) {
+            showHistoryTutorial.value = true
         }
     }
 
@@ -29,17 +29,17 @@ class TutorialViewModel @Inject constructor(
         tutorialPrefs.setShowLaunchTutorial(false)
     }
 
-    fun onStoresOpen() {
-        if (showStoresTutorial.value != null) {
-            tutorialPrefs.setShowStoresTutorial(false)
+    fun onHistoryOpen() {
+        if (showHistoryTutorial.value != null) {
+            tutorialPrefs.setShowHistoryTutorial(false)
         }
     }
-
-    fun shouldShowDeveloperModeTutorial() = tutorialPrefs.shouldShowDevModeTutorial()
-
-    fun shouldShowStoresTutorial() = tutorialPrefs.shouldShowStoresTutorial()
 
     fun onDeveloperModeOpen() {
         tutorialPrefs.setShowDevModeTutorial(false)
     }
+
+    fun shouldShowDeveloperModeTutorial() = tutorialPrefs.shouldShowDevModeTutorial()
+
+    fun shouldShowHistoryTutorial() = tutorialPrefs.shouldShowHistoryTutorial()
 }

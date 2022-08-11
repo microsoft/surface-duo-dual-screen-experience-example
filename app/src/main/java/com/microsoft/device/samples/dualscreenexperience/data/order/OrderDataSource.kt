@@ -14,6 +14,7 @@ import com.microsoft.device.samples.dualscreenexperience.data.order.model.OrderW
 
 interface OrderDataSource {
     fun getOrderBySubmitted(submitted: Boolean): LiveData<OrderWithItems?>
+    fun getAllSubmittedOrders(): LiveData<List<OrderWithItems>>
 
     suspend fun getAll(): List<OrderWithItems>
     suspend fun getById(orderId: Long): OrderWithItems?

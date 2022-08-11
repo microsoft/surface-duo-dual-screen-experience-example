@@ -15,5 +15,6 @@
     <include app:graph="@navigation/navigation_catalog_graph" />
     <include app:graph="@navigation/navigation_products_graph" />
     <include app:graph="@navigation/navigation_orders_graph" />
+    <include app:graph="@navigation/navigation_history_graph" />
 
 </navigation>

@@ -27,3 +27,5 @@ val firstOrderEntity = OrderEntity(
     4354,
     false
 )
+
+val firstSubmittedOrderEntity = firstOrderEntity.copy(isSubmitted = true)

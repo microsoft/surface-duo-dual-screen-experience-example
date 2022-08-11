@@ -32,6 +32,7 @@ class OrderRepositoryTest {
 
     private val orderWithItems = OrderWithItems(firstOrderEntity, mutableListOf(firstOrderItemEntity))
     private val orderWithoutItems = OrderWithItems(firstOrderEntity, mutableListOf())
+    private val submittedOrderWithoutItems = OrderWithItems(firstSubmittedOrderEntity, mutableListOf())
 
     private val context = InstrumentationRegistry.getInstrumentation().targetContext
     private lateinit var database: AppDatabase
@@ -91,5 +92,22 @@ class OrderRepositoryTest {
         result = orderRepo.getOrderBySubmitted(false).getOrAwaitValue()
 
         assertThat(result, iz(orderWithItems))
+    }
+
+    @Test
+    fun getAllSubmittedOrders() = runBlocking {
+        var result = orderRepo.getAllSubmittedOrders().getOrAwaitValue()
+
+        assertThat(result, iz(Matchers.empty()))
+
+        orderRepo.insert(firstOrderEntity)
+        result = orderRepo.getAllSubmittedOrders().getOrAwaitValue()
+
+        assertThat(result, iz(Matchers.empty()))
+
+        orderRepo.insert(firstSubmittedOrderEntity)
+        result = orderRepo.getAllSubmittedOrders().getOrAwaitValue()
+
+        assertThat(result, iz(listOf(submittedOrderWithoutItems)))
     }
 }

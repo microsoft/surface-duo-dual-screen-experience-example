@@ -42,6 +42,7 @@ import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.De
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeViewModel.AppScreen
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeViewModel.DesignPattern
 import com.microsoft.device.samples.dualscreenexperience.presentation.devmode.DevModeViewModel.SdkComponent
+import com.microsoft.device.samples.dualscreenexperience.presentation.history.HistoryViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.order.OrderViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.product.ProductViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.store.StoreViewModel
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     private val productViewModel: ProductViewModel by viewModels()
     private val storeViewModel: StoreViewModel by viewModels()
+    private val historyViewModel: HistoryViewModel by viewModels()
 
     @VisibleForTesting
     private val orderViewModel: OrderViewModel by viewModels()
@@ -129,6 +131,7 @@ class MainActivity : AppCompatActivity() {
             R.id.fragment_store_map -> storeViewModel.reset()
             R.id.fragment_product_list -> productViewModel.reset()
             R.id.fragment_order -> orderViewModel.reset()
+            R.id.fragment_history_list -> historyViewModel.reset()
         }
     }
 
@@ -147,18 +150,19 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_stores_graph -> {
                     navigator.navigateToStores()
-                    hideStoresTutorial()
                 }
                 R.id.navigation_catalog_graph -> {
                     navigator.navigateToCatalog()
-                    hideStoresTutorial()
                 }
                 R.id.navigation_products_graph -> {
                     navigator.navigateToProducts()
-                    hideStoresTutorial()
                 }
                 R.id.navigation_orders_graph -> {
                     navigator.navigateToOrders()
+                }
+                R.id.navigation_history_graph -> {
+                    navigator.navigateToHistory()
+                    hideHistoryTutorial()
                 }
             }
             true
@@ -194,23 +198,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTutorialObserver() {
-        tutorialViewModel.showStoresTutorial.observe(this) { isTutorialTriggered ->
-            if (isTutorialTriggered == true && tutorialViewModel.shouldShowStoresTutorial()) {
-                showStoresTutorial()
+        tutorialViewModel.showHistoryTutorial.observe(this) { isTutorialTriggered ->
+            if (isTutorialTriggered == true && tutorialViewModel.shouldShowHistoryTutorial()) {
+                showHistoryTutorial()
             }
         }
     }
 
-    private fun showStoresTutorial() {
-        val storeItem = findViewById<BottomNavigationItemView>(R.id.navigation_stores_graph)
+    private fun showHistoryTutorial() {
+        val historyItem = findViewById<BottomNavigationItemView>(R.id.navigation_history_graph)
         if (!isFinishing) {
-            tutorial.show(storeItem, TutorialBalloonType.STORES)
+            tutorial.show(historyItem, TutorialBalloonType.HISTORY)
         }
     }
 
-    private fun hideStoresTutorial() {
-        tutorialViewModel.onStoresOpen()
-        if (tutorial.currentBalloonType == TutorialBalloonType.STORES) {
+    private fun hideHistoryTutorial() {
+        tutorialViewModel.onHistoryOpen()
+        if (tutorial.currentBalloonType == TutorialBalloonType.HISTORY) {
             tutorial.hide()
         }
     }
@@ -246,6 +250,8 @@ class MainActivity : AppCompatActivity() {
                 setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
             R.id.fragment_order_receipt ->
                 setupDevMode(AppScreen.ORDER, DesignPattern.NONE, SdkComponent.RECYCLER_VIEW)
+            R.id.fragment_history_list ->
+                setupDevMode(AppScreen.HISTORY_LIST_DETAILS, DesignPattern.LIST_DETAIL, SdkComponent.BOTTOM_NAVIGATION_VIEW)
         }
     }
 
@@ -323,8 +329,10 @@ class MainActivity : AppCompatActivity() {
     @VisibleForTesting
     fun getSubmittedOrderLiveData() = orderViewModel.submittedOrder
 
+    fun getBottomNavViewHeight() = binding.bottomNavView.height
+
     companion object {
         const val HIDE_BOTTOM_BAR_KEY = "hideBottomNav"
-        const val BOTTOM_NAV_ITEM_COUNT = 4
+        const val BOTTOM_NAV_ITEM_COUNT = 5
     }
 }

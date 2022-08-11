@@ -32,12 +32,12 @@ class PreferenceManager @Inject constructor(
         }
     }
 
-    override fun shouldShowStoresTutorial() =
-        sharedPref.getBoolean(TutorialPrefType.STORES.toString(), true)
+    override fun shouldShowHistoryTutorial() =
+        sharedPref.getBoolean(TutorialPrefType.HISTORY.toString(), true)
 
-    override fun setShowStoresTutorial(value: Boolean) {
-        if (shouldShowStoresTutorial()) {
-            sharedPref.setValue(TutorialPrefType.STORES.toString(), value)
+    override fun setShowHistoryTutorial(value: Boolean) {
+        if (shouldShowHistoryTutorial()) {
+            sharedPref.setValue(TutorialPrefType.HISTORY.toString(), value)
         }
     }
 }

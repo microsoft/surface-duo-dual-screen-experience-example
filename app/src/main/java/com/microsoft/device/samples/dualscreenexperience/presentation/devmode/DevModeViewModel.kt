@@ -82,7 +82,8 @@ class DevModeViewModel @Inject constructor(
         CATALOG("catalog/CatalogListFragment.kt"),
         PRODUCTS_LIST_DETAILS("product/details/ProductDetailsFragment.kt"),
         PRODUCTS_CUSTOMIZE("product/customize/ProductCustomizeFragment.kt"),
-        ORDER("order/OrderFragment.kt");
+        ORDER("order/OrderFragment.kt"),
+        HISTORY_LIST_DETAILS("history/HistoryListFragment.kt");
 
         fun buildUrl() = "$APP_BASE_URL/$path"
 
