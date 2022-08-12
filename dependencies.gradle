@@ -12,8 +12,8 @@ ext {
     buildToolsVersion = '30.0.3'
     targetSdkVersion = compileSdkVersion
     minSdkVersion = 23
-    versionCode = 8
-    versionName = "1.0.7"
+    versionCode = 9
+    versionName = "1.0.8"
     applicationId = "com.microsoft.device.samples.dualscreenexperience"
 
     config = [
