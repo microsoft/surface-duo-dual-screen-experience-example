@@ -27,8 +27,6 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 
-private const val DEFAULT_FRACTION = 1
-
 @Composable
 fun Catalog(
     pane1WidthDp: Dp,
@@ -83,7 +81,8 @@ fun Catalog(
 }
 
 fun calculateLinearInterpolation(start: Float, stop: Float, fraction: Float): Float {
-    return (DEFAULT_FRACTION - fraction) * start + fraction * stop
+    val defaultFraction = 1
+    return (defaultFraction - fraction) * start + fraction * stop
 }
 
 @Composable
