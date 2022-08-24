@@ -123,6 +123,10 @@ class PagerState(
         selectPage()
     }
 
+    fun calculateCurrentOffsetForPage(page: Int): Float {
+        return (currentPage + currentPageOffset) - page
+    }
+
     override fun toString(): String = "PagerState{minPage=$minPage, maxPage=$maxPage, " +
         "currentPage=$currentPage, currentPageOffset=$currentPageOffset}"
 
