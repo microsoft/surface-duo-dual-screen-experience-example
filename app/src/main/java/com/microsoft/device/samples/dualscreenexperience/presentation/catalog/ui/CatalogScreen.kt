@@ -27,6 +27,8 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.absoluteValue
 
+private const val DEFAULT_FRACTION = 1
+
 @Composable
 fun Catalog(
     pane1WidthDp: Dp,
@@ -52,8 +54,7 @@ fun Catalog(
     val modifier = Modifier.graphicsLayer {
         val pageOffset =
             pagerState.calculateCurrentOffsetForPage(pagerState.currentPage).absoluteValue
-
-        lerp(
+        calculateLinearInterpolation(
             start = if (showTwoPages) 0.90f else 0.80f,
             stop = 1f,
             fraction = 1f - pageOffset.coerceIn(0f, 1f)
@@ -81,8 +82,8 @@ fun Catalog(
     PageViews(pagerState, pages, showTwoPages)
 }
 
-fun lerp(start: Float, stop: Float, fraction: Float): Float {
-    return (1 - fraction) * start + fraction * stop
+fun calculateLinearInterpolation(start: Float, stop: Float, fraction: Float): Float {
+    return (DEFAULT_FRACTION - fraction) * start + fraction * stop
 }
 
 @Composable
