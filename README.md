@@ -68,6 +68,7 @@ To learn how to load apps on the Surface Duo emulator, see the [documentation](h
 | [Dual-screen reference app](https://devblogs.microsoft.com/surface-duo/dual-screen-reference-app/) | [Twitch #48: Dual Screen Experience sample app](https://www.youtube.com/watch?v=OQuBpejOuA8) |
 | [Dual-screen app design walkthrough](https://devblogs.microsoft.com/surface-duo/dual-screen-app-design-walkthrough/) | [Twitch #56: Dual screen app design walkthrough](https://www.youtube.com/watch?v=r7JzIfzEWfM) |
 | [Accessibility in a dual-screen application](https://devblogs.microsoft.com/surface-duo/accessibility-dual-screen/) | [Twitch #69: Accessibility on dual screen apps](https://www.youtube.com/watch?v=D3o8nOmFVm8) |
+| [Dual-screen example adds Jetpack Compose to the experience](https://devblogs.microsoft.com/surface-duo/jetpack-compose-existing-app/) | [Twitch #86: Adding Jetpack Compose to existing apps](https://www.youtube.com/watch?v=9c7s0I6VcFU) |
 
 ## Related links
 
