@@ -85,7 +85,7 @@ ext {
     hiltVersion = '2.42'
     mapsVersion = '17.0.1'
     mapsKtxVersion = '3.2.0'
-    ossLicensesVersion = '17.0.0'
+    ossLicensesVersion = '17.0.1'
     ossLicensesPluginVersion = '0.10.5'
 
     googleDependencies = [
