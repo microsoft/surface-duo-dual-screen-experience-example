@@ -24,7 +24,10 @@ class DevModeViewModel @Inject constructor(
     var sdkComponent = SdkComponent.BOTTOM_NAVIGATION_VIEW
     var appScreen = AppScreen.STORES_MAP
 
-    var acceptedHosts = listOf("docs.microsoft.com")
+    var acceptedHosts = listOf(
+        "docs.microsoft.com",
+        "learn.microsoft.com"
+    )
 
     fun navigateToContent() {
         navigator.navigateToContent()
