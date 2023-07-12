@@ -21,6 +21,7 @@ import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.microsoft.device.samples.dualscreenexperience.R
 import com.microsoft.device.samples.dualscreenexperience.databinding.FragmentDevContentBinding
+import com.microsoft.device.samples.dualscreenexperience.presentation.util.LayoutInfoViewModel
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.NetworkConnectionLiveData
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.RestrictedWebViewClient
 import com.microsoft.device.samples.dualscreenexperience.presentation.util.isNightMode
@@ -30,6 +31,7 @@ class DevContentFragment : Fragment() {
     private var binding: FragmentDevContentBinding? = null
 
     private val viewModel: DevModeViewModel by activityViewModels()
+    private val layoutInfoViewModel: LayoutInfoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +81,7 @@ class DevContentFragment : Fragment() {
     private fun setupWebView() {
         binding?.devContentWebView?.apply {
             settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
             setBackgroundColor(Color.TRANSPARENT)
             if (context.isNightMode() && WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
@@ -92,7 +95,9 @@ class DevContentFragment : Fragment() {
             )
         }
 
-        selectFirstPage()
+        if (layoutInfoViewModel.isDualMode.value == true) {
+            selectFirstPage()
+        }
     }
 
     private fun selectFirstPage() {
