@@ -79,6 +79,7 @@ class DevContentFragment : Fragment() {
     private fun setupWebView() {
         binding?.devContentWebView?.apply {
             settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
             setBackgroundColor(Color.TRANSPARENT)
             if (context.isNightMode() && WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(settings, WebSettingsCompat.FORCE_DARK_ON)
